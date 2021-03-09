@@ -1,6 +1,8 @@
 package model;
 
-public class Greeting {
+import json.object.JsonResponse;
+
+public class Greeting extends JsonResponse {
 	private final int id;
 	private final String name;
 	public Greeting(int id, String name) {

@@ -18,6 +18,8 @@ import com.example.demoinitial.dao.AccountDAO;
 import com.example.demoinitial.entity.Account;
 import com.example.demoinitial.form.LoginForm;
 
+import json.object.JsonResponse;
+import json.object.JsonResponseNull;
 import model.Greeting;
 import response.AccountJson;
 
@@ -29,9 +31,9 @@ public class AuthorizationController {
 //	
 	@RequestMapping(value = "api/login" , method=RequestMethod.GET)
 	@ResponseBody
-	public AccountJson gLogin(WebSession session) {		
+	public JsonResponse gLogin(WebSession session) {		
 		Integer idAccount=(Integer)session.getAttribute(VariableConst.CURRENT_ID_ACCOUNT);	
-		if(idAccount==null)return new AccountJson();
+		if(idAccount==null)return new JsonResponseNull();
 		Account account=accountDAO.getAccount(idAccount);
 		
 		return account.toAccountJson();
@@ -46,19 +48,11 @@ public class AuthorizationController {
 //	
 	@RequestMapping(value = "api/login", method=RequestMethod.POST)
 	@ResponseBody
-	public AccountJson pLogin(WebSession session,@RequestBody  LoginForm form) {
+	public JsonResponse pLogin(WebSession session,@RequestBody  LoginForm form) {
 		System.out.println(form);
 		Account account=accountDAO.login(form.getUsername(), form.getPassword());
-		
+		if(account==null)return new JsonResponseNull();
 		session.getAttributes().put(VariableConst.CURRENT_ID_ACCOUNT,account.id);
-		if(form.isRememberMe()) {
-			List<Integer> historyId =(List<Integer>)session.getAttribute(VariableConst.LOGIN_HISTORY);
-			if(historyId==null) {
-				historyId =new ArrayList<Integer>();
-			}
-			historyId.add(account.id);
-			session.getAttributes().put(VariableConst.LOGIN_HISTORY,historyId);
-		}
 		return account.toAccountJson();
 	}
 	@RequestMapping(value = "api/account-history" , method=RequestMethod.GET)
@@ -76,7 +70,7 @@ public class AuthorizationController {
 	}
 	@RequestMapping(value = "/" , method=RequestMethod.GET)
 	@ResponseBody
-	public Greeting accountHistory() {
+	public JsonResponse accountHistory() {
 		return new Greeting(1, "Hoang");
 	}
 }

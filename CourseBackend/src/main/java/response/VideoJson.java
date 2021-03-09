@@ -1,6 +1,8 @@
 package response;
 
-public class VideoJson {
+import json.object.JsonResponse;
+
+public class VideoJson  extends JsonResponse {
 	private int id;
 	private String poster;
 	private String durations;//ms

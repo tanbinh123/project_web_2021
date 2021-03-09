@@ -1,8 +1,8 @@
 package response;
 
+import json.object.JsonResponse;
 
-
-public class AccountJson {
+public class AccountJson  extends JsonResponse {
 	private int id;
     private String username;
     private String password;
