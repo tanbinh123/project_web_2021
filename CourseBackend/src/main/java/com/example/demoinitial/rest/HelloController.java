@@ -8,7 +8,7 @@ import model.Greeting;
 
 @RestController
 public class HelloController {
-	@GetMapping(value="hello")
+	@GetMapping(value="greeting")
 	@ResponseBody
 	public Greeting hello(){
 		return new Greeting(1, "Hoang");

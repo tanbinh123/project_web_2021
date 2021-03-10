@@ -5,7 +5,7 @@ package com.example.demoinitial.rest;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,9 +17,10 @@ import com.example.demoinitial.config.consts.VariableConst;
 import com.example.demoinitial.dao.AccountDAO;
 import com.example.demoinitial.entity.Account;
 import com.example.demoinitial.form.LoginForm;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
-import json.object.JsonResponse;
-import json.object.JsonResponseNull;
+import json.object.ResponseMessageSuccess;
+import json.object.ResponseNull;
 import model.Greeting;
 import response.AccountJson;
 
@@ -28,32 +29,32 @@ import response.AccountJson;
 public class AuthorizationController {
 	@Autowired
 	AccountDAO accountDAO;
-//	
-	@RequestMapping(value = "api/login" , method=RequestMethod.GET)
+	
+	@RequestMapping(value = "api/login" , method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse gLogin(WebSession session) {		
-		Integer idAccount=(Integer)session.getAttribute(VariableConst.CURRENT_ID_ACCOUNT);	
-		if(idAccount==null)return new JsonResponseNull();
+	public String gLogin( WebSession session ) throws JsonProcessingException {		
+		Integer idAccount= (Integer)session.getAttribute(VariableConst.CURRENT_ID_ACCOUNT);	
+		if(idAccount==null)return new ResponseNull().toJsonString();
 		Account account=accountDAO.getAccount(idAccount);
 		
-		return account.toAccountJson();
+		return account.toAccountJson().toJsonString();
 	}
-	@RequestMapping(value = "api/logout" , method=RequestMethod.GET)
+	@RequestMapping(value = "api/logout" , method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public void gLogout(WebSession session) {		
+	public String gLogout(WebSession session) {		
 		session.getAttributes().remove(VariableConst.CURRENT_ID_ACCOUNT);
-	
+		return new ResponseMessageSuccess().toJsonString();
 	}
 //	
 //	
-	@RequestMapping(value = "api/login", method=RequestMethod.POST)
+	@RequestMapping(value = "api/login", method=RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse pLogin(WebSession session,@RequestBody  LoginForm form) {
+	public String pLogin(WebSession session,@RequestBody  LoginForm form) {
 		System.out.println(form);
 		Account account=accountDAO.login(form.getUsername(), form.getPassword());
-		if(account==null)return new JsonResponseNull();
+		if(account==null)return new ResponseNull().toJsonString();
 		session.getAttributes().put(VariableConst.CURRENT_ID_ACCOUNT,account.id);
-		return account.toAccountJson();
+		return account.toAccountJson().toJsonString();
 	}
 	@RequestMapping(value = "api/account-history" , method=RequestMethod.GET)
 	@ResponseBody
@@ -68,9 +69,6 @@ public class AuthorizationController {
 		
 		return historyAccount;
 	}
-	@RequestMapping(value = "/" , method=RequestMethod.GET)
-	@ResponseBody
-	public JsonResponse accountHistory() {
-		return new Greeting(1, "Hoang");
-	}
+	
+	
 }

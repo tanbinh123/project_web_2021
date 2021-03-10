@@ -37,7 +37,7 @@ public class Account {
 		accountJson.setLevel(this.level);
 		accountJson.setPassword(this.password);
 		accountJson.setUsername(this.username);
-		accountJson.setAvatar(FileProcess.encodeFileToBase64(this.avatar));
+		accountJson.setAvatar(FileProcess.SRC_IMAGE_BEFORE+FileProcess.encodeFileToBase64(this.avatar));
 		return accountJson;
 	}
 }

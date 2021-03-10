@@ -14,6 +14,7 @@ public class FileProcess {
 	public final static String PATH = "D:\\Github\\RESTfulAPI\\static-file";
 	public final static String VIDEO="\\video";
 	public final static String IMAGE="\\image";
+	public final static String SRC_IMAGE_BEFORE="data:image/png;base64,";
 	public final static String getFullPath(String pathRelative) {
 		return PATH + "\\" + pathRelative;
 	}

@@ -38,5 +38,6 @@ public class AccountJson  extends JsonResponse {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+	
     
 }
