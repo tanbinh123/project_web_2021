@@ -1,4 +1,3 @@
-import { Container, Grid } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,7 +14,9 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { useEffect, useRef, useState } from "react";
+import { colorBlack1 } from "../color/color";
 
+// css
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -81,12 +82,15 @@ const useStyles = makeStyles((theme) => ({
   customsAppBarTop: {
     boxShadow: "none",
     background: "transparent",
-    transitionDuration: "0.5s",
+    transition: "background-color .3s linear",
   },
   customsAppBarBottom: {
     boxShadow: "none",
-    background: "blue",
-    transitionDuration: "0.5s",
+    backgroundColor: colorBlack1,
+    transition: "background-color .3s linear",
+  },
+  logo: {
+    maxHeight: "40px",
   },
 }));
 
@@ -187,22 +191,12 @@ export default function Header() {
       </MenuItem>
     </Menu>
   );
-
+  //return
   return (
     <div className={classes.grow}>
       <AppBar className={classes[navRef.current]} position="fixed">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography>
+          <img src="/assets/images/logo2.png" className={classes.logo} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
