@@ -11,10 +11,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.example.demoinitial.jwt.model.User;
+import com.example.demoinitial.dao.AppRoleDAO;
+import com.example.demoinitial.entity.AppUser;
+
 
 
 @Component
@@ -50,10 +53,13 @@ public class JWTUtil {
 		return expiration.before(new Date());
 	}
 	
-	public String generateToken(User user) {
+	
+	@Autowired
+	private AppRoleDAO appRoleDAO;
+	public String generateToken(AppUser user) {
 		Map<String, Object> claims = new HashMap<>();
-		claims.put("role", user.getRoles());
-		return doGenerateToken(claims, user.getUsername());
+		claims.put("role", appRoleDAO.getRoleNames(user.getUserId()));
+		return doGenerateToken(claims, user.getUserName());
 	}
 
 	private String doGenerateToken(Map<String, Object> claims, String username) {
