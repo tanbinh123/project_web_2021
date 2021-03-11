@@ -23,7 +23,7 @@ public class TestController {
 		return g;
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/test", method = {RequestMethod.GET,RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String hello() {
 		Greeting g = new Greeting(1, "Hoang");
