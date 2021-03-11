@@ -1,5 +1,4 @@
-import { Drawer, Grid, MenuItem, Typography } from "@material-ui/core";
-import AppBar from "@material-ui/core/AppBar";
+import { Drawer, MenuItem } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -7,8 +6,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
+import { makeStyles } from "@material-ui/core/styles";
+import { Search } from "@material-ui/icons";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -16,67 +15,17 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
-import { colorBlack1, colorWhite1, colorWhite2 } from "../color/color";
-import InputSearchAppbar from "./components/InputSearch";
-import RightAppbar from "./components/RightAppbar";
+import { colorBlack1, colorWhite1, colorWhite2 } from "../../../color/color";
+import InputSearchAppbar from "../InputSearch";
+import InputSearchMobile from "../InputSearchMobile";
 
 // css
 const useStyles = makeStyles((theme) => ({
-  root: {},
-  logo: {
-    height: theme.spacing(5),
-    display: "block",
-  },
-  course: {
-    fontWeight: "600",
-    color: colorWhite1,
-    lineHeight: "3",
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-    },
-  },
   floatLeft: {
     float: "left",
   },
   floatRight: {
     float: "right",
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    margin: theme.spacing(0.7, 2, 0, 0),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "100%",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "30vh",
-    },
   },
   sectionDesktop: {
     display: "none",
@@ -115,8 +64,9 @@ const useStyles = makeStyles((theme) => ({
     background: colorWhite1,
   },
 }));
+RightAppbar.propTypes = {};
 
-export default function Header() {
+function RightAppbar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -242,43 +192,58 @@ export default function Header() {
             <ListItemText primary="Thông Báo" />
           </ListItem>
         </List>
+        <InputSearchAppbar />
       </div>
     </div>
   );
-
-  //return
   return (
-    <div className={classes.root}>
-      <AppBar
-        className={classNames(classes.customsAppbar, classes[navRef.current])}
-        position="fixed"
-      >
-        <Toolbar>
-          <Grid container>
-            <Grid item lg={1}></Grid>
-            <Grid item lg={2} md={3} sm={3} xs={3}>
-              <img src="/assets/images/logo2.png" className={classes.logo} />
-            </Grid>
-            <Grid item lg={3} md={3}>
-              <Typography className={classes.course}>KHÓA HỌC</Typography>
-            </Grid>
-            <Grid item lg={3} md={3} sm={6}>
-              <InputSearchAppbar />
-            </Grid>
-            <Grid
-              item
-              lg={2}
-              md={3}
-              sm={3}
-              xs={9}
-              className={classes.floatRight}
-            >
-              <RightAppbar />
-            </Grid>
-            <Grid item lg={1}></Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <>
+      <div className={classNames(classes.sectionDesktop, classes.floatRight)}>
+        <IconButton aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <IconButton aria-label="show 17 new notifications" color="inherit">
+          <Badge badgeContent={17} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <IconButton
+          edge="end"
+          aria-label="account of current user"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpen}
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+      </div>
+      <div className={classNames(classes.sectionMobile, classes.floatRight)}>
+        <InputSearchMobile />
+        <IconButton
+          aria-label="show more"
+          aria-controls={mobileMenuId}
+          aria-haspopup="true"
+          onClick={toggleDrawer("left", true)}
+          color="inherit"
+        >
+          <MenuIcon />
+        </IconButton>
+        <Drawer
+          classes={{ paper: classes.paper }}
+          anchor="left"
+          open={isDrawer["left"]}
+          onClose={toggleDrawer("left", false)}
+        >
+          {list("left")}
+        </Drawer>
+      </div>
+      {renderMobileMenu}
+      {renderMenu}
+    </>
   );
 }
+
+export default RightAppbar;

@@ -1,7 +1,6 @@
-import { CssBaseline, makeStyles } from "@material-ui/core";
+import { Container, CssBaseline, makeStyles } from "@material-ui/core";
 import React from "react";
 import RecipeReviewCard from "../../components/card";
-import Header from "../../components/header";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -28,9 +27,11 @@ function Home(props) {
       <div className={classes.bgHome}>
         <div className={classes.bgDark}></div>
       </div>
-      <div className="middle">
-        <RecipeReviewCard />
-      </div>
+      <Container maxWidth="lg">
+        <div className="middle">
+          <RecipeReviewCard />
+        </div>
+      </Container>
     </div>
   );
 }
