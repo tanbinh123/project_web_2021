@@ -21,12 +21,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import json.object.ResponseMessageSuccess;
 import json.object.ResponseNull;
-import model.Greeting;
 import response.AccountJson;
 
 
 @RestController
-public class AuthorizationController {
+public class AuthenticationController {
 	@Autowired
 	AccountDAO accountDAO;
 	
