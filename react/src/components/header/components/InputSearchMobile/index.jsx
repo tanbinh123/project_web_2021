@@ -73,6 +73,7 @@ function InputSearchMobile(props) {
         sizeSearch && classes.sizeSearch
       )}
       onClick={handleOnClickSearch}
+      onBlur={handleOnClickSearch}
     >
       <div className={classes.searchIcon}>
         <SearchIcon />

@@ -1,4 +1,4 @@
-import { Drawer, MenuItem } from "@material-ui/core";
+import { Button, Drawer, MenuItem } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -10,12 +10,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Search } from "@material-ui/icons";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
-import MenuIcon from "@material-ui/icons/Menu";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
+import Button1 from "../../../Button";
 import { colorBlack1, colorWhite1, colorWhite2 } from "../../../color/color";
+import CustomsDrawer from "../../../Drawer";
 import InputSearchAppbar from "../InputSearch";
 import InputSearchMobile from "../InputSearchMobile";
 
@@ -111,10 +112,10 @@ function RightAppbar(props) {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "left" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "bottom", horizontal: "center" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -163,43 +164,10 @@ function RightAppbar(props) {
       </MenuItem>
     </Menu>
   );
-  const [isDrawer, setIsDrawer] = useState({
-    left: false,
-  });
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setIsDrawer({ ...isDrawer, [anchor]: open });
-  };
-  const list = (anchor) => (
-    <div className="backgroundList" style={{ backgroundColor: colorBlack1 }}>
-      <div
-        className={classes.listDrawer}
-        role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-        onKeyDown={toggleDrawer(anchor, false)}
-      >
-        <List>
-          <ListItem>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Thông Báo" />
-          </ListItem>
-        </List>
-        <InputSearchAppbar />
-      </div>
-    </div>
-  );
   return (
     <>
       <div className={classNames(classes.sectionDesktop, classes.floatRight)}>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        {/* <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
@@ -218,27 +186,12 @@ function RightAppbar(props) {
           color="inherit"
         >
           <AccountCircle />
-        </IconButton>
+        </IconButton> */}
+        <Button1 title="Login" />
       </div>
       <div className={classNames(classes.sectionMobile, classes.floatRight)}>
         <InputSearchMobile />
-        <IconButton
-          aria-label="show more"
-          aria-controls={mobileMenuId}
-          aria-haspopup="true"
-          onClick={toggleDrawer("left", true)}
-          color="inherit"
-        >
-          <MenuIcon />
-        </IconButton>
-        <Drawer
-          classes={{ paper: classes.paper }}
-          anchor="left"
-          open={isDrawer["left"]}
-          onClose={toggleDrawer("left", false)}
-        >
-          {list("left")}
-        </Drawer>
+        <CustomsDrawer />
       </div>
       {renderMobileMenu}
       {renderMenu}
