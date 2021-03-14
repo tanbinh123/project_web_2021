@@ -1,23 +1,19 @@
-import { Button, Drawer, MenuItem } from "@material-ui/core";
+import { MenuItem } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
-import { Search } from "@material-ui/icons";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
+import { useRouteMatch } from "react-router";
+import { Link } from "react-router-dom";
 import Button1 from "../../../Button";
 import { colorBlack1, colorWhite1, colorWhite2 } from "../../../color/color";
 import CustomsDrawer from "../../../Drawer";
-import InputSearchAppbar from "../InputSearch";
 import InputSearchMobile from "../InputSearchMobile";
 
 // css
@@ -64,11 +60,21 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     background: colorWhite1,
   },
+  link: {
+    textDecoration: "none",
+  },
 }));
 RightAppbar.propTypes = {};
 
 function RightAppbar(props) {
   const classes = useStyles();
+
+  //
+  const url = useRouteMatch();
+  console.log(url);
+
+  //
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -164,6 +170,24 @@ function RightAppbar(props) {
       </MenuItem>
     </Menu>
   );
+  const [dataDrawer, setDataDrawer] = useState({
+    anchor: "left",
+    isOpen: false,
+  });
+
+  const toggleDrawer = (anchor, isOpen) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
+  };
+  function handleCloseDrawer(anchor, isOpen) {
+    setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
+  }
   return (
     <>
       <div className={classNames(classes.sectionDesktop, classes.floatRight)}>
@@ -187,11 +211,24 @@ function RightAppbar(props) {
         >
           <AccountCircle />
         </IconButton> */}
-        <Button1 title="Login" />
+        <Link to="/login" className={classes.link}>
+          <Button1 title="Login" />
+        </Link>
       </div>
       <div className={classNames(classes.sectionMobile, classes.floatRight)}>
         <InputSearchMobile />
-        <CustomsDrawer />
+        <IconButton
+          aria-label="show more"
+          aria-haspopup="true"
+          onClick={toggleDrawer("left", true)}
+          color="inherit"
+        >
+          <MenuIcon />
+        </IconButton>
+        <CustomsDrawer
+          dataDrawer={dataDrawer}
+          closeDrawer={handleCloseDrawer}
+        />
       </div>
       {renderMobileMenu}
       {renderMenu}

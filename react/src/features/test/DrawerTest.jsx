@@ -20,10 +20,8 @@ const useStyles = makeStyles({
 DrawerTest.propTypes = {};
 
 function DrawerTest(props) {
-  const { DrawerState } = props;
-  console.log("DrawerTest", DrawerState);
+  const { dataDrawer, closeDrawer } = props;
   const classes = useStyles();
-  const [stateDrawer, setStateDrawer] = React.useState(DrawerState);
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -31,8 +29,9 @@ function DrawerTest(props) {
     ) {
       return;
     }
-
-    setStateDrawer({ ...stateDrawer, [anchor]: open });
+    if (!closeDrawer) return;
+    console.log(open);
+    closeDrawer(anchor, open);
   };
   const list = (anchor) => (
     <div
@@ -68,13 +67,13 @@ function DrawerTest(props) {
   );
   return (
     <>
-      {/* <Drawer
-        anchor={anchor}
-        open={stateDrawer[anchor]}
-        onClose={toggleDrawer(anchor, false)}
+      <Drawer
+        anchor={dataDrawer.anchor}
+        open={dataDrawer.isOpen}
+        onClose={toggleDrawer(dataDrawer.anchor, !dataDrawer.isOpen)}
       >
-        {list(anchor)}
-      </Drawer> */}
+        {list(dataDrawer.anchor)}
+      </Drawer>
     </>
   );
 }

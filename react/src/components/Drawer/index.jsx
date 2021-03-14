@@ -1,30 +1,35 @@
-import { Drawer, IconButton } from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
+import MailIcon from "@material-ui/icons/Mail";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import React, { useState } from "react";
-import { colorBlack1, colorWhite1, colorWhite2 } from "../color/color";
-
-import MenuIcon from "@material-ui/icons/Menu";
-const useStyles = makeStyles((theme) => ({
-  listDrawer: {
-    width: 200,
-    backgroundColor: colorWhite2,
+import clsx from "clsx";
+import React from "react";
+import PropTypes from "prop-types";
+const useStyles = makeStyles({
+  list: {
+    width: 250,
   },
-  paper: {
-    background: colorWhite1,
+  fullList: {
+    width: "auto",
   },
-}));
-CustomsDrawer.propTypes = {};
+});
+CustomDrawer.propTypes = {
+  dataDrawer: PropTypes.object,
+  closeDrawer: PropTypes.func,
+};
+CustomDrawer.defaultProps = {
+  dataDrawer: {},
+  closeDrawer: null,
+};
 
-function CustomsDrawer(props) {
+function CustomDrawer(props) {
+  const { dataDrawer, closeDrawer } = props;
   const classes = useStyles();
-  const [isDrawer, setIsDrawer] = useState({
-    left: false,
-  });
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -32,48 +37,53 @@ function CustomsDrawer(props) {
     ) {
       return;
     }
-
-    setIsDrawer({ ...isDrawer, [anchor]: open });
+    if (!closeDrawer) return;
+    console.log(open);
+    closeDrawer(anchor, open);
   };
   const list = (anchor) => (
-    <div className="backgroundList" style={{ backgroundColor: colorBlack1 }}>
-      <div
-        className={classes.listDrawer}
-        role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-        onKeyDown={toggleDrawer(anchor, false)}
-      >
-        <List>
-          <ListItem>
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem button key={text}>
             <ListItemIcon>
-              <InboxIcon />
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
-            <ListItemText primary="Thông Báo" />
+            <ListItemText primary={text} />
           </ListItem>
-        </List>
-      </div>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
   return (
     <>
-      <IconButton
-        aria-label="show more"
-        aria-haspopup="true"
-        onClick={toggleDrawer("left", true)}
-        color="inherit"
-      >
-        <MenuIcon />
-      </IconButton>
       <Drawer
-        classes={{ paper: classes.paper }}
-        anchor="left"
-        open={isDrawer["left"]}
-        onClose={toggleDrawer("left", false)}
+        anchor={dataDrawer.anchor}
+        open={dataDrawer.isOpen}
+        onClose={toggleDrawer(dataDrawer.anchor, !dataDrawer.isOpen)}
       >
-        {list("left")}
+        {list(dataDrawer.anchor)}
       </Drawer>
     </>
   );
 }
 
-export default CustomsDrawer;
+export default CustomDrawer;

@@ -3,13 +3,10 @@ import React, { useState } from "react";
 import DrawerTest from "./DrawerTest";
 
 export default function TestFeatures() {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
+  const [dataDrawer, setDataDrawer] = useState({
+    anchor: "",
+    isOpen: false,
   });
-  const [openDrawer, setOpenDrawer] = useState({});
 
   const toggleDrawer = (anchor, isOpen) => (event) => {
     if (
@@ -19,16 +16,18 @@ export default function TestFeatures() {
       return;
     }
 
-    setState({ ...state, [anchor]: isOpen });
-    setOpenDrawer({ [anchor]: isOpen });
+    setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
   };
+  function handleCloseDrawer(anchor, isOpen) {
+    setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
+  }
 
   return (
     <div>
-      <Button onClick={toggleDrawer("left", true)}>left</Button>
-      {console.log(openDrawer["left"])}
-      {openDrawer["left"] && <DrawerTest DrawerState={openDrawer} />}
-      {console.log(openDrawer["left"])}
+      <Button onClick={toggleDrawer("left", true)}>top</Button>
+      {dataDrawer.isOpen && (
+        <DrawerTest dataDrawer={dataDrawer} closeDrawer={handleCloseDrawer} />
+      )}
     </div>
   );
 }
