@@ -2,7 +2,7 @@ package vn.edu.topedu.response;
 
 import vn.edu.topedu.response.model.AccountResponse;
 
-public class AuthResponse {
+public class SignUpResponse {
 	private String token;
 	private AccountResponse user;
 
@@ -17,7 +17,7 @@ public class AuthResponse {
 	/**
 	 * @param token
 	 */
-	public AuthResponse(String token) {
+	public SignUpResponse(String token) {
 		super();
 		this.token = token;
 	}
@@ -25,7 +25,7 @@ public class AuthResponse {
 	/**
 	 * 
 	 */
-	public AuthResponse() {
+	public SignUpResponse() {
 		super();
 	}
 
@@ -37,5 +37,6 @@ public class AuthResponse {
 		this.user = user;
 	}
 
+	
 
 }

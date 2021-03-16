@@ -9,7 +9,8 @@ import java.util.Base64;
 
 public class FileProcess {
 
-	public final static String PATH = "D:\\Github\\RESTfulAPI\\static-file";
+	//public final static String PATH = "D:\\Github\\RESTfulAPI\\static-file";
+	public final static String PATH = "static-file";
 	public final static String VIDEO="\\video";
 	public final static String IMAGE="\\image";
 	
