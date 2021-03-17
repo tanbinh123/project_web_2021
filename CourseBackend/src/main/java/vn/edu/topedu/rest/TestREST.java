@@ -28,7 +28,7 @@ public class TestREST {
 
 		return new ResponseMessageSuccess().toJsonString();
 	}
-	@RequestMapping(value = "/test/ok", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/test/ok/ok", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String ok() {
 

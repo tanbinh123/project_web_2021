@@ -3,9 +3,11 @@ package vn.edu.topedu.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
  
 @Entity
 @Table(name = "App_User", //
@@ -14,8 +16,9 @@ import javax.persistence.UniqueConstraint;
 public class AppUser {
  
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "User_Id", nullable = false)
+    
     private Long userId;
  
     @Column(name = "User_Name", length = 36, nullable = false)
@@ -25,11 +28,12 @@ public class AppUser {
     private String encrytedPassword;
  
     @Column(name = "Enabled", length = 1, nullable = false)
-    private boolean enabled;
-    @Column(name = "Delete", length = 1, nullable = false)
-    private boolean delete;
+    private Boolean enabled =true;
+    @Column(name = "Deleted", length = 1, nullable = false )
+   
+    private Boolean deleted =false;
     @Column(name = "Avatar", length = 255, nullable = false)
-    private String avater;
+    private String avater ="image/avatar/momo.webp";
     @Column(name = "Email", length = 255, nullable = false)
     private String email;
  
@@ -56,22 +60,15 @@ public class AppUser {
     public void setEncrytedPassword(String encrytedPassword) {
         this.encrytedPassword = encrytedPassword;
     }
- 
-    public boolean isEnabled() {
-        return enabled;
-    }
- 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-	public boolean isDelete() {
-		return delete;
+	public Boolean isEnabled() {
+		return enabled;
 	}
 
-	public void setDelete(boolean delete) {
-		this.delete = delete;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
+
+
 
 	public String getAvater() {
 		return avater;
@@ -88,6 +85,20 @@ public class AppUser {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	
+	
     
  
 }

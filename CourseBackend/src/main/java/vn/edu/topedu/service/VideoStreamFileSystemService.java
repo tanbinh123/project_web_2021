@@ -99,15 +99,7 @@ public class VideoStreamFileSystemService implements IVideoStreamService {
         }
     }
 
-    /**
-     * Get the filePath.
-     *
-     * @return String.
-     */
-    private String getFilePath() {
-        URL url = this.getClass().getResource(VIDEO);
-        return new File(url.getFile()).getAbsolutePath();
-    }
+   
 
     /**
      * Content length.
@@ -117,7 +109,7 @@ public class VideoStreamFileSystemService implements IVideoStreamService {
      */
     public Long getFileSize(String fileName) {
         return Optional.ofNullable(fileName)
-                .map(file -> Paths.get(getFilePath(), file))
+                .map(file -> Paths.get(FileProcess.PATH+FileProcess.VIDEO, file))
                 .map(this::sizeFromFile)
                 .orElse(0L);
     }
