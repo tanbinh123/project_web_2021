@@ -84,8 +84,14 @@ public class FileProcess {
 		Path path=Paths.get(PATH+"\\"+folderContain.replace("/", "\\"), filename);
 		return path;
 	}
-	public static Path getPathVideo(String filename) {
-		Path path=Paths.get(PATH+VIDEO, filename);
+	public static Path getPathVideo(String filePath) {
+		Path path=Paths.get(PATH+VIDEO, processSlash(filePath));
+//		Path path=Paths.get(PATH, filename);
+		return path;
+	}
+	public static Path getPathImage(String filePath) {
+		Path path=Paths.get(PATH+IMAGE, processSlash(filePath));
+
 		return path;
 	}
 	public static void main(String[] args) {
@@ -93,6 +99,9 @@ public class FileProcess {
 		File file=path.toFile();
 		System.out.println(path);
 		System.out.println(file.exists());
+	}
+	public static String processSlash(String str) {
+		return str.replace("/", "\\");
 	}
 
 }
