@@ -71,7 +71,6 @@ function RightAppbar(props) {
 
   //
   const url = useRouteMatch();
-  console.log(url);
 
   //
 
@@ -211,7 +210,7 @@ function RightAppbar(props) {
         >
           <AccountCircle />
         </IconButton> */}
-        <Link to="/login" className={classes.link}>
+        <Link to="/auth/login" className={classes.link}>
           <Button1 title="Login" />
         </Link>
       </div>

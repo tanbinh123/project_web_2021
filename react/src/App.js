@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "./components/header";
-import Home from "./features/home";
 import { Route, Switch } from "react-router-dom";
-import LoginFeatures from "./features/login";
+import Login from "./features/Auth/components/Login";
+import Register from "./features/Auth/components/Register";
+import Home from "./features/home";
 
 App.propTypes = {};
 
@@ -10,7 +10,8 @@ function App(props) {
   return (
     <div>
       <Switch>
-        <Route path="/login" component={LoginFeatures} exact />
+        <Route path="/auth/login" component={Login} />
+        <Route path="/auth/register" component={Register} />
         <Route path="/" component={Home} />
       </Switch>
 

@@ -7,16 +7,11 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   bgHome: {
     minHeight: "100vh",
-    backgroundImage: `url(${
-      process.env.PUBLIC_URL + "/assets/images/klee.jpg"
-    })`,
+    background:
+      'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("/assets/images/klee.jpg")',
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-  },
-  bgDark: {
-    minHeight: "100vh",
-    backgroundColor: "rgb(0,0,0,0.5)",
   },
 }));
 
@@ -26,9 +21,7 @@ function Home(props) {
     <div className={classes.root}>
       <Header />
       <CssBaseline />
-      <div className={classes.bgHome}>
-        <div className={classes.bgDark}></div>
-      </div>
+      <div className={classes.bgHome}></div>
       <Container maxWidth="lg">
         <div className="middle">
           <RecipeReviewCard />
