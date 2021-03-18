@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
 import Home from "./features/home";
+import GetDataRedux from "./features/test/GetDataRedux";
 
 App.propTypes = {};
 
@@ -17,6 +18,7 @@ function App(props) {
 
       {/* test zone */}
       {/* <TestFeatures /> */}
+      <GetDataRedux />
     </div>
   );
 }

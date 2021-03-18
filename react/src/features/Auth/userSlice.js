@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../../api/userApi";
+import StorageKeys from "../../constants/StorageKeys";
 
 export const register = createAsyncThunk("/register", async (payload) => {
   //call api
@@ -13,17 +14,23 @@ export const login = createAsyncThunk("/login", async (payload) => {
   //call api
   const data = await userApi.login(payload);
   // save to local storage
-  localStorage.setItem("access_token", data.token);
-  localStorage.setItem("account", JSON.stringify(data.user));
+  localStorage.setItem(StorageKeys.TOKEN, data.token);
+  localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
   return data.user;
 });
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    current: {},
-    setting: {},
+    current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
+    setting: {
+      sang: "2",
+    },
   },
-  reducers: {},
+  reducers: {
+    tang(values) {
+      values.setting.sang = 1;
+    },
+  },
   extraReducers: {
     //users/register
     [register.fulfilled]: (state, action) => {

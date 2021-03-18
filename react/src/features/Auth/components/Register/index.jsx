@@ -1,6 +1,7 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { register } from "../../userSlice";
 import RegisterForm from "../RegisterForm";
 
@@ -15,7 +16,6 @@ function Register(props) {
       console.log(values);
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
-      console.log("new user", user);
     } catch (error) {
       console.log(error);
     }
