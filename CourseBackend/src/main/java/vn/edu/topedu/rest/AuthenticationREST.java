@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,12 +42,12 @@ public class AuthenticationREST {
 	
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<Object> login(@RequestBody AuthRequest ar) {
+	public ResponseEntity<Object> login(@RequestBody AuthRequest ar, ServerHttpRequest serverHttpRequest) {
 		AppUser user = appUserDAO.findUserAccount(ar.getUsername());
 		if (passwordEncoder.encode(ar.getPassword()).equals(user.getEncrytedPassword())) {
 			AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(user));
 			AccountResponse account = new AccountResponse();
-			account.setAvatar(VariableConst.RESOURCE_BEFORE +user.getAvater());
+			account.setAvatar(String.format("%s://%s:%d/", serverHttpRequest.getURI().getScheme(),serverHttpRequest.getURI().getHost(),serverHttpRequest.getURI().getPort())+VariableConst.RESOURCE_BEFORE +user.getAvater());
 			//account.setAvatar(VariableConst.SRC_IMAGE_BEFORE + FileProcess.encodeFileToBase64(user.getAvater()));
 			account.setUsername(user.getUserName());
 			authResponse.setUser(account);
