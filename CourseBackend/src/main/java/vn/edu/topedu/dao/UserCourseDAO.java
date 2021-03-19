@@ -20,7 +20,7 @@ public class UserCourseDAO {
     @Autowired
     private EntityManager entityManager;
  
-    public List<Course> getRoleNames(Long userId) {
+    public List<Course> getOwerCourse(Long userId) {
         String sql = "Select uc.course from " + 
         		UserCourse.class.getName() + " uc " //
                 + " where uc.appUser.userId = :userId ";
@@ -29,5 +29,6 @@ public class UserCourseDAO {
         query.setParameter("userId", userId);
         return query.getResultList();
     }
+   
  
 }

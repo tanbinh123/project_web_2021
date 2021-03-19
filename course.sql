@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 18/03/2021 21:11:17
+ Date: 19/03/2021 16:11:01
 */
 
 SET NAMES utf8mb4;
@@ -48,13 +48,14 @@ CREATE TABLE `app_user`  (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`USER_ID`) USING BTREE,
   UNIQUE INDEX `APP_USER_UK`(`USER_NAME`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
 INSERT INTO `app_user` VALUES (1, 'admin', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 'image/default/momo.webp', b'0', 'hearterzouest99.999@gmail.com');
 INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 'image/default/momo.webp', b'0', 'hearterzouest99.999@gmail.com');
+INSERT INTO `app_user` VALUES (28, 'hello', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'1', 'image/avatar/momo.webp', b'0', 'test@gmail.com');
 
 -- ----------------------------
 -- Table structure for course
@@ -64,13 +65,18 @@ CREATE TABLE `course`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `poster` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `deleted` bit(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 'image/avatar/momo.webp', '');
+INSERT INTO `course` VALUES (1, 'image/avatar/momo.webp', 'test1', b'1');
+INSERT INTO `course` VALUES (2, 'image/avatar/momo.webp', '', b'0');
+INSERT INTO `course` VALUES (3, 'image/avatar/momo.webp', '', b'0');
+INSERT INTO `course` VALUES (4, 'image/avatar/momo.webp', '', b'0');
+INSERT INTO `course` VALUES (5, 'image/avatar/momo.webp', '', b'1');
 
 -- ----------------------------
 -- Table structure for test
@@ -98,8 +104,8 @@ CREATE TABLE `user_course`  (
   `user_id` bigint(20) NULL DEFAULT NULL,
   `course_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `course_id`(`course_id`) USING BTREE,
   UNIQUE INDEX `USER_COURSE_UK`(`user_id`, `course_id`) USING BTREE,
+  INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `user_course_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_course_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;

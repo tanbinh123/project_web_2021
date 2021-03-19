@@ -1,6 +1,5 @@
 package vn.edu.topedu.rest;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,7 @@ public class AuthenticationREST {
 			//account.setAvatar(VariableConst.SRC_IMAGE_BEFORE + FileProcess.encodeFileToBase64(user.getAvater()));
 			account.setUsername(user.getUserName());
 			authResponse.setUser(account);
-			List<Course> lstCourse = userCourseDAO.getRoleNames(user.getUserId());
+			List<Course> lstCourse = userCourseDAO.getOwerCourse(user.getUserId());
 			authResponse.setCourses(lstCourse);
 			//System.out.println(Arrays.toString(lstCourse.toArray()));
 			return ResponseEntity.ok(authResponse);
