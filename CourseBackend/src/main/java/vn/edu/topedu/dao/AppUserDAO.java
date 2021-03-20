@@ -16,11 +16,10 @@ public class AppUserDAO {
 
 	@Autowired
 	private EntityManager entityManager;
-	
-	  public AppUser findById(Long id) { 
-	        return this.entityManager.find(AppUser.class, id);
-	    }
-	 
+
+	public AppUser findById(Long id) {
+		return this.entityManager.find(AppUser.class, id);
+	}
 
 	public AppUser findUserAccount(String userName) {
 		try {
@@ -46,25 +45,31 @@ public class AppUserDAO {
 //        .executeUpdate();
 //        if(rs==1)return true; return false;
 //    }
-    public boolean insertUser(AppUser person) {
-    	
-    	
-    	int rs=entityManager.createNativeQuery("INSERT INTO app_user ( user_name, Encryted_Password,email) VALUES (?,?,?)")
-    			.setParameter(1, person.getUserName())
-    			.setParameter(2, person.getEncrytedPassword())
-    			.setParameter(3, person.getEmail())
-    			.executeUpdate();
-    	//System.out.println(rs);
-    	if(rs==1)return true; return false;
-    }
-	
-//	public void insertUser(AppUser user) {
+//	public boolean insertUser(AppUser person) {
 //
-//		
-//		
-//		entityManager.persist(user);
-//		
-//
+//		int rs = entityManager
+//				.createNativeQuery("INSERT INTO app_user ( user_name, Encryted_Password,email) VALUES (?,?,?)")
+//				.setParameter(1, person.getUserName()).setParameter(2, person.getEncrytedPassword())
+//				.setParameter(3, person.getEmail()).executeUpdate();
+//		// System.out.println(rs);
+//		if (rs == 1)
+//			return true;
+//		return false;
 //	}
+
+	public boolean insertUser(AppUser user) {
+		
+		
+		try {
+			entityManager.persist(user);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return false;
+		
+
+	}
 
 }

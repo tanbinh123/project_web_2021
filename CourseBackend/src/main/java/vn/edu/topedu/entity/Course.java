@@ -3,6 +3,7 @@ package vn.edu.topedu.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
  
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 public class Course {
      
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
  
@@ -20,6 +21,9 @@ public class Course {
     private String poster="image/avatar/momo.webp";
     @Column(name = "description", length = 255, nullable = false)
     private String description="";
+    
+    @Column(name = "Deleted", length = 1, nullable = false )
+    private Boolean deleted =false;
 	public Integer getId() {
 		return id;
 	}
@@ -38,10 +42,15 @@ public class Course {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@Override
-	public String toString() {
-		return "Course [id=" + id + ", poster=" + poster + ", description=" + description + "]";
+	public Boolean getDeleted() {
+		return deleted;
 	}
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+	
+	
+	
 	
     
  

@@ -53,6 +53,9 @@ public class WebSecurityConfig {
 				.pathMatchers("/login").permitAll()
 				.pathMatchers("/signup").permitAll()
 				.pathMatchers("/resource/**").permitAll()
+				.pathMatchers("/course/**").permitAll()
+				.pathMatchers("/mail/**").permitAll()
+//				.pathMatchers("/mail/**").denyAll()()
 				//.pathMatchers("/test/**").permitAll()
 				.anyExchange().authenticated()
 				
