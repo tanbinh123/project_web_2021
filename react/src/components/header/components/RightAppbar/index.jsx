@@ -1,19 +1,42 @@
-import { MenuItem } from "@material-ui/core";
+import {
+  Divider,
+  Avatar,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  MenuItem,
+  Typography,
+  Popover,
+} from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
+import { ArrowDropDown, Bookmark } from "@material-ui/icons";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import classNames from "classnames";
+import {
+  bindPopover,
+  bindTrigger,
+  usePopupState,
+} from "material-ui-popup-state/hooks";
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 import Button1 from "../../../Button";
-import { colorBlack1, colorWhite1, colorWhite2 } from "../../../color/color";
+import {
+  colorBlack1,
+  colorBlue1,
+  colorWhite1,
+  colorWhite2,
+} from "../../../color/color";
 import CustomsDrawer from "../../../Drawer";
+import { isEmpty } from "../../../tools/Tools";
 import InputSearchMobile from "../InputSearchMobile";
 
 // css
@@ -63,17 +86,55 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
+  avatar: {
+    backgroundColor: colorWhite1,
+
+    height: "35px",
+    width: "35px",
+
+    marginTop: "5px",
+  },
+  username: {
+    color: colorWhite1,
+    fontSize: ".875rem",
+    fontWeight: "600",
+    marginLeft: "10px",
+    lineHeight: "44px",
+  },
+  lineBorder: {
+    position: "relative",
+    marginLeft: "5px",
+    "&::before": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      top: "12px",
+      width: "1px",
+      height: "23px",
+      background: colorWhite2,
+    },
+  },
+  iconDropDown: {
+    fontSize: "35px",
+  },
+  buttons: {
+    padding: "7px",
+  },
 }));
 RightAppbar.propTypes = {};
 
 function RightAppbar(props) {
+  const user = useSelector((state) => state.user.current);
   const classes = useStyles();
 
   //
   const url = useRouteMatch();
 
   //
-
+  const popupState = usePopupState({
+    variant: "popover",
+    popupId: "demoPopover",
+  });
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -86,15 +147,6 @@ function RightAppbar(props) {
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
   };
   const navRef = useRef();
   const [navBackground, setNavBackground] = useState("customsAppBarTop");
@@ -113,21 +165,6 @@ function RightAppbar(props) {
       document.removeEventListener("scroll", handleScrollAppBar);
     };
   }, []);
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "bottom", horizontal: "center" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -187,32 +224,77 @@ function RightAppbar(props) {
   function handleCloseDrawer(anchor, isOpen) {
     setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
   }
+  const rightHadLogin = (
+    <>
+      <Avatar
+        className={classes.avatar}
+        alt={user.username}
+        src={process.env.REACT_APP_URL + user.avatar}
+      />
+      <span className={classes.username}>{user.username}</span>
+      <Box className={classes.lineBorder}></Box>
+      <IconButton color="inherit" className={classes.buttons}>
+        <Badge badgeContent={4} color="secondary">
+          <Bookmark />
+        </Badge>
+      </IconButton>
+      <IconButton color="inherit" className={classes.buttons}>
+        <Badge badgeContent={17} color="secondary">
+          <NotificationsIcon />
+        </Badge>
+      </IconButton>
+      <IconButton
+        className={classes.buttons}
+        color="inherit"
+        {...bindTrigger(popupState)}
+      >
+        <ArrowDropDown className={classes.iconDropDown} />
+      </IconButton>
+    </>
+  );
+  const popover = (
+    <Popover
+      {...bindPopover(popupState)}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+    >
+      <Box p={1}>
+        <List component="nav" aria-label="mailbox folders">
+          <ListItem button onClick={popupState.close}>
+            <ListItemText primary="Inbox" />
+          </ListItem>
+          <Divider />
+          <ListItem button divider>
+            <ListItemText primary="Drafts" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Trash" />
+          </ListItem>
+          <Divider light />
+          <ListItem button>
+            <ListItemText primary="Spam" />
+          </ListItem>
+        </List>
+      </Box>
+    </Popover>
+  );
+  const rightNotLogin = (
+    <>
+      <Link to="/auth/login" className={classes.link}>
+        <Button1 title="Login" />
+      </Link>
+    </>
+  );
   return (
     <>
       <div className={classNames(classes.sectionDesktop, classes.floatRight)}>
-        {/* <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <IconButton aria-label="show 17 new notifications" color="inherit">
-          <Badge badgeContent={17} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <IconButton
-          edge="end"
-          aria-label="account of current user"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpen}
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton> */}
-        <Link to="/auth/login" className={classes.link}>
-          <Button1 title="Login" />
-        </Link>
+        {isEmpty(user) ? rightNotLogin : rightHadLogin}
       </div>
       <div className={classNames(classes.sectionMobile, classes.floatRight)}>
         <InputSearchMobile />
@@ -230,7 +312,7 @@ function RightAppbar(props) {
         />
       </div>
       {renderMobileMenu}
-      {renderMenu}
+      {popover}
     </>
   );
 }

@@ -1,9 +1,10 @@
+import { Box } from "@material-ui/core";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
 import Home from "./features/home";
-import GetDataRedux from "./features/test/GetDataRedux";
+import PopoverPopupState from "./features/test/Popover";
 
 App.propTypes = {};
 
@@ -17,8 +18,10 @@ function App(props) {
       </Switch>
 
       {/* test zone */}
-      {/* <TestFeatures /> */}
-      <GetDataRedux />
+      {/* <Box style={{ textAlign: "center" }}>
+        {" "}
+        <PopoverPopupState title="Open" />
+      </Box> */}
     </div>
   );
 }

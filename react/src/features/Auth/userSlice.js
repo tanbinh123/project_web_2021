@@ -16,6 +16,7 @@ export const login = createAsyncThunk("/login", async (payload) => {
   // save to local storage
   localStorage.setItem(StorageKeys.TOKEN, data.token);
   localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
+  console.log("sang data", data);
   return data.user;
 });
 const userSlice = createSlice({
@@ -23,13 +24,13 @@ const userSlice = createSlice({
   initialState: {
     current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
     setting: {
-      sang: "2",
+      // sang: 2,
     },
   },
   reducers: {
-    tang(values) {
-      values.setting.sang = 1;
-    },
+    // tang(state, action) {
+    //   state.setting.sang += action.payload;
+    // },
   },
   extraReducers: {
     //users/register
@@ -42,4 +43,6 @@ const userSlice = createSlice({
   },
 });
 const { reducer } = userSlice;
+// const { actions } = userSlice;
+// export const { tang } = actions;
 export default reducer;

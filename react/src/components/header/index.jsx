@@ -137,7 +137,7 @@ export default function Header() {
             <Grid item lg={2} md={3} sm={3} xs={3}>
               <img src="/assets/images/logo2.png" className={classes.logo} />
             </Grid>
-            <Grid item lg={3} md={3}>
+            <Grid item lg={2} md={2}>
               <Typography className={classes.course}>KHÓA HỌC</Typography>
             </Grid>
             <Grid item lg={3} md={3} sm={6}>
@@ -145,8 +145,8 @@ export default function Header() {
             </Grid>
             <Grid
               item
-              lg={2}
-              md={3}
+              lg={3}
+              md={4}
               sm={3}
               xs={9}
               className={classes.floatRight}
