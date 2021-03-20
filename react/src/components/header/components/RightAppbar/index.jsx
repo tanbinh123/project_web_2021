@@ -13,7 +13,7 @@ import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
-import { ArrowDropDown, Bookmark } from "@material-ui/icons";
+import { ArrowDropDown, Bookmark, ExitToApp, Person } from "@material-ui/icons";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -25,9 +25,10 @@ import {
   usePopupState,
 } from "material-ui-popup-state/hooks";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
+import { logout } from "../../../../features/Auth/userSlice";
 import Button1 from "../../../Button";
 import {
   colorBlack1,
@@ -120,13 +121,22 @@ const useStyles = makeStyles((theme) => ({
   buttons: {
     padding: "7px",
   },
+  popover: {
+    background: colorBlack1,
+    color: colorWhite1,
+  },
+  avatarSmall: {
+    width: "20px",
+    height: "20px",
+    marginRight: "10px",
+  },
 }));
 RightAppbar.propTypes = {};
 
 function RightAppbar(props) {
   const user = useSelector((state) => state.user.current);
   const classes = useStyles();
-
+  const dispatch = useDispatch();
   //
   const url = useRouteMatch();
 
@@ -224,12 +234,16 @@ function RightAppbar(props) {
   function handleCloseDrawer(anchor, isOpen) {
     setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
   }
+  const handleLogOut = () => {
+    dispatch(logout());
+    popupState.close();
+  };
   const rightHadLogin = (
     <>
       <Avatar
         className={classes.avatar}
         alt={user.username}
-        src={process.env.REACT_APP_URL + user.avatar}
+        src={user.avatar}
       />
       <span className={classes.username}>{user.username}</span>
       <Box className={classes.lineBorder}></Box>
@@ -264,21 +278,17 @@ function RightAppbar(props) {
         horizontal: "center",
       }}
     >
-      <Box p={1}>
+      <Box className={classes.popover} p={1}>
         <List component="nav" aria-label="mailbox folders">
           <ListItem button onClick={popupState.close}>
-            <ListItemText primary="Inbox" />
+            <Avatar className={classes.avatarSmall}>
+              <Person fontSize="small" />
+            </Avatar>
+            <ListItemText primary="Cá Nhân" />
           </ListItem>
-          <Divider />
-          <ListItem button divider>
-            <ListItemText primary="Drafts" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Trash" />
-          </ListItem>
-          <Divider light />
-          <ListItem button>
-            <ListItemText primary="Spam" />
+          <ListItem button divider onClick={handleLogOut}>
+            <ExitToApp className={classes.avatarSmall} fontSize="small" />
+            <ListItemText primary="Đăng Xuất" />
           </ListItem>
         </List>
       </Box>

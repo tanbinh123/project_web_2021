@@ -28,9 +28,11 @@ const userSlice = createSlice({
     },
   },
   reducers: {
-    // tang(state, action) {
-    //   state.setting.sang += action.payload;
-    // },
+    logout(state, action) {
+      localStorage.removeItem(StorageKeys.TOKEN);
+      localStorage.removeItem(StorageKeys.USER);
+      state.current = {};
+    },
   },
   extraReducers: {
     //users/register
@@ -42,7 +44,6 @@ const userSlice = createSlice({
     },
   },
 });
-const { reducer } = userSlice;
-// const { actions } = userSlice;
-// export const { tang } = actions;
+const { reducer, actions } = userSlice;
+export const { logout } = actions;
 export default reducer;
