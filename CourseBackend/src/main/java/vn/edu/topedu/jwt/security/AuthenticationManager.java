@@ -12,10 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author ard333
- */
+
 @Component
 public class AuthenticationManager implements ReactiveAuthenticationManager {
 

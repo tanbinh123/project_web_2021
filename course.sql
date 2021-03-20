@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 19/03/2021 16:11:01
+ Date: 21/03/2021 00:23:24
 */
 
 SET NAMES utf8mb4;
@@ -47,13 +47,14 @@ CREATE TABLE `app_user`  (
   `deleted` bit(1) NULL DEFAULT b'0',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`USER_ID`) USING BTREE,
-  UNIQUE INDEX `APP_USER_UK`(`USER_NAME`) USING BTREE
+  UNIQUE INDEX `APP_USER_UK`(`USER_NAME`) USING BTREE,
+  UNIQUE INDEX `email_uq`(`email`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES (1, 'admin', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 'image/default/momo.webp', b'0', 'hearterzouest99.999@gmail.com');
+INSERT INTO `app_user` VALUES (1, 'admin', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 'image/default/momo.webp', b'0', 'tanhoang99.999@gmail.com');
 INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 'image/default/momo.webp', b'0', 'hearterzouest99.999@gmail.com');
 INSERT INTO `app_user` VALUES (28, 'hello', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'1', 'image/avatar/momo.webp', b'0', 'test@gmail.com');
 
@@ -77,6 +78,28 @@ INSERT INTO `course` VALUES (2, 'image/avatar/momo.webp', '', b'0');
 INSERT INTO `course` VALUES (3, 'image/avatar/momo.webp', '', b'0');
 INSERT INTO `course` VALUES (4, 'image/avatar/momo.webp', '', b'0');
 INSERT INTO `course` VALUES (5, 'image/avatar/momo.webp', '', b'1');
+
+-- ----------------------------
+-- Table structure for request_reset_password
+-- ----------------------------
+DROP TABLE IF EXISTS `request_reset_password`;
+CREATE TABLE `request_reset_password`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `time` datetime(0) NULL DEFAULT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  CONSTRAINT `request_reset_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of request_reset_password
+-- ----------------------------
+INSERT INTO `request_reset_password` VALUES (1, 1, '2021-03-20 22:58:47', '111');
+INSERT INTO `request_reset_password` VALUES (3, 2, '2021-03-20 16:49:43', 'b5da3f0328f91199fb13722455b41063');
+INSERT INTO `request_reset_password` VALUES (4, 2, '2021-03-20 16:53:28', '4db2fa9c54ffad8b759f2c005e90de9e');
+INSERT INTO `request_reset_password` VALUES (5, 2, '2021-03-20 17:00:15', 'a5c6b537e931e941dbfa8fcd1620db3f');
 
 -- ----------------------------
 -- Table structure for test
