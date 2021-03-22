@@ -4,6 +4,7 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { colorBlack1, colorWhite1, colorWhite2 } from "../color/color";
 import InputSearchAppbar from "./components/InputSearch";
 import RightAppbar from "./components/RightAppbar";
@@ -88,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
   },
   customsAppBarTop: {
-    background: "transparent",
+    background: "inherit",
     transition: "background-color .3s linear",
   },
   customsAppBarBottom: {
@@ -102,28 +103,36 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     background: colorWhite1,
   },
+  linkNone: {
+    textDecoration: "none",
+  },
 }));
 
 export default function Header() {
   const classes = useStyles();
+  const { location } = useHistory();
   const navRef = useRef();
   const [navBackground, setNavBackground] = useState("customsAppBarTop");
   navRef.current = navBackground;
   useEffect(() => {
-    function handleScrollAppBar() {
-      const isHeight = window.scrollY > 238;
-      if (isHeight) {
-        setNavBackground("customsAppBarBottom");
-      } else {
-        setNavBackground("customsAppBarTop");
+    if (location.pathname !== "/") {
+      setNavBackground("customsAppBarBottom");
+    } else {
+      function handleScrollAppBar() {
+        const isHeight = window.scrollY > 238;
+        if (isHeight) {
+          setNavBackground("customsAppBarBottom");
+        } else {
+          setNavBackground("customsAppBarTop");
+        }
       }
+      document.addEventListener("scroll", handleScrollAppBar);
+      return () => {
+        document.removeEventListener("scroll", handleScrollAppBar);
+      };
     }
-    document.addEventListener("scroll", handleScrollAppBar);
-    return () => {
-      document.removeEventListener("scroll", handleScrollAppBar);
-    };
   }, []);
-  
+
   //return
   return (
     <div className={classes.root}>
@@ -135,10 +144,14 @@ export default function Header() {
           <Grid container>
             <Grid item lg={1}></Grid>
             <Grid item lg={2} md={3} sm={3} xs={3}>
-              <img src="/assets/images/logo2.png" className={classes.logo} />
+              <Link to="/">
+                <img src="/assets/images/logo2.png" className={classes.logo} />
+              </Link>
             </Grid>
             <Grid item lg={2} md={2}>
-              <Typography className={classes.course}>KHÓA HỌC</Typography>
+              <Link to="/course" className={classes.linkNone}>
+                <Typography className={classes.course}>KHÓA HỌC</Typography>
+              </Link>
             </Grid>
             <Grid item lg={3} md={3} sm={6}>
               <InputSearchAppbar />

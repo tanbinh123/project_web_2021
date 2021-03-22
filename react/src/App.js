@@ -3,7 +3,9 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
+import CourseFeatures from "./features/Course";
 import Home from "./features/home";
+import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
 import PopoverPopupState from "./features/test/Popover";
 
 App.propTypes = {};
@@ -14,6 +16,8 @@ function App(props) {
       <Switch>
         <Route path="/auth/login" component={Login} />
         <Route path="/auth/register" component={Register} />
+        <Route path="/course" component={CourseFeatures} />
+        <Route path="/form-upload-one" component={UploadOneFile} />
         <Route path="/" component={Home} />
       </Switch>
 

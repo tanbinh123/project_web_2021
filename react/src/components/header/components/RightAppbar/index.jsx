@@ -26,7 +26,7 @@ import {
 } from "material-ui-popup-state/hooks";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouteMatch } from "react-router";
+import { useHistory, useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 import { logout } from "../../../../features/Auth/userSlice";
 import Button1 from "../../../Button";
@@ -137,6 +137,7 @@ function RightAppbar(props) {
   const user = useSelector((state) => state.user.current);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { push } = useHistory();
   //
   const url = useRouteMatch();
 
@@ -236,6 +237,7 @@ function RightAppbar(props) {
   }
   const handleLogOut = () => {
     dispatch(logout());
+    push("/");
     popupState.close();
   };
   const rightHadLogin = (
@@ -266,6 +268,7 @@ function RightAppbar(props) {
       </IconButton>
     </>
   );
+  //menu after login
   const popover = (
     <Popover
       {...bindPopover(popupState)}
@@ -289,6 +292,15 @@ function RightAppbar(props) {
           <ListItem button divider onClick={handleLogOut}>
             <ExitToApp className={classes.avatarSmall} fontSize="small" />
             <ListItemText primary="Đăng Xuất" />
+          </ListItem>
+          <ListItem button divider>
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              to="/form-upload-one"
+              className={classes.linkNone}
+            >
+              <ListItemText primary="FORM UPPLOAD ONE" />
+            </Link>
           </ListItem>
         </List>
       </Box>
