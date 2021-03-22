@@ -67,7 +67,7 @@ public class ForgetPasswordREST {
 	@ResponseBody
 	public ResponseEntity<Object> sendMailByEmail(
 			@RequestBody ForgetPasswordRequest forgetPasswordRequest) {
-		//System.out.println("Request: "+forgetPasswordRequest);
+		System.out.println("Request: "+forgetPasswordRequest);
 		String emailOrUsername=forgetPasswordRequest.getEmailOrUsername();	
 		AppUser appUser=appUserDAO.findUserByEmail(emailOrUsername);
 		RequestResetPassword requestResetPassword= new RequestResetPassword();
@@ -85,6 +85,7 @@ public class ForgetPasswordREST {
 				return ResponseEntity.ok(appUser.getUserName());
 				
 			} catch (Exception e) {
+				e.printStackTrace();
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not send mail");
 			}
 			
