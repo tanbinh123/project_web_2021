@@ -60,7 +60,7 @@ public class ForgetPasswordREST {
 			}
 			
 		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Username not exists.");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username not exists.");
 		
 	}
 	@PostMapping("/forgetpassword/email")
@@ -70,10 +70,10 @@ public class ForgetPasswordREST {
 		System.out.println("Request: "+forgetPasswordRequest);
 		String emailOrUsername=forgetPasswordRequest.getEmailOrUsername();	
 		AppUser appUser=appUserDAO.findUserByEmail(emailOrUsername);
-		RequestResetPassword requestResetPassword= new RequestResetPassword();
-		requestResetPassword.genderCode(appUser.getUserName());
-		requestResetPassword.setAppUser(appUser);
 		if(appUser!=null) {
+			RequestResetPassword requestResetPassword= new RequestResetPassword();
+			requestResetPassword.genderCode(appUser.getUserName());
+			requestResetPassword.setAppUser(appUser);
 			int id=requestResetPasswordDAO.insert(requestResetPassword);
 			if(id==0)return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Can't gender code.");;
 			String to= appUser.getEmail();
@@ -90,7 +90,7 @@ public class ForgetPasswordREST {
 			}
 			
 		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Username not exists.");		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email not exists.");		
 	}
 	@PostMapping("/forgetpassword/code")
 	@ResponseBody
@@ -99,6 +99,7 @@ public class ForgetPasswordREST {
 		String username=body.get("username").toString();
 		String code=body.get("code").toString();
 		RequestResetPassword rrp = requestResetPasswordDAO.getCourse(username);
+		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Code not corect.");
 		String trueCode=rrp.getCode();
 		if(code.equals(trueCode)) {
 			
@@ -113,10 +114,12 @@ public class ForgetPasswordREST {
 	@ResponseBody
 	public ResponseEntity<Object> changePassword(
 			@RequestBody Map<String,Object> body) {
+		System.out.println(body);
 		String username=body.get("username").toString();
 		String code=body.get("code").toString();
 		String password=body.get("password").toString();
 		RequestResetPassword rrp = requestResetPasswordDAO.getCourse(username);
+		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Code not corect.");		
 		String trueCode=rrp.getCode();
 		if(code.equals(trueCode)) {
 			AppUser user=appUserDAO.findUserAccount(username);
