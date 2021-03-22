@@ -1,5 +1,11 @@
-import { Container, Grid, makeStyles } from "@material-ui/core";
-import React from "react";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Grid,
+  makeStyles,
+} from "@material-ui/core";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ButtonSubmit from "../../../../components/Button/ButtonSubmit";
 import PasswordField from "../../../../components/PasswordField";
@@ -76,29 +82,36 @@ const useStyles = makeStyles((theme) => ({
       color: colorOrange1,
     },
   },
+  divCenter: {
+    textAlign: "center",
+    marginTop: "20px",
+  },
 }));
 //proptypes
-LoginForm.propTypes = {};
+FormForgotPassword.propTypes = {};
 
 //yup
 
 const schema = yup.object().shape({
-  username: yup.string().required("Vui lòng nhập username"),
-  password: yup.string().required("Vui lòng nhập password"),
+  emailOrUsername: yup
+    .string()
+    .required("Vui lòng nhập email")
+    .email("Vui lòng nhập đúng email"),
 });
 //function
-function LoginForm(props) {
-  const { onSubmit } = props;
+function FormForgotPassword(props) {
+  const { onSubmit, complete } = props;
   const classes = useStyles();
+  const [show, setShow] = useState(false);
   const form = useForm({
     defaultValues: {
-      username: "",
-      password: "",
+      emailOrUsername: "",
     },
     resolver: yupResolver(schema),
   });
 
   function handleOnSubmit(values) {
+    setShow(true);
     if (!onSubmit) return;
     onSubmit(values);
   }
@@ -108,20 +121,17 @@ function LoginForm(props) {
         className={classes.cssForm}
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
-        <span className={classes.title}>Login</span>
-        <InputText label="username" name="username" form={form} />
-        <PasswordField name="password" label="password" form={form} />
-        <Link to="/forgot-password" className={classes.text3}>
-          <span>Forgot Password ?</span>
-        </Link>
-        <ButtonSubmit title="login" />
-        <span className={classes.text1}>Do not have an account ?</span>
-        <Link to="/auth/register" className={classes.textDK}>
-          <span>Register</span>
+        <span className={classes.title}>Forgot Password</span>
+        <InputText label="Email" name="emailOrUsername" form={form} />
+        <Box className={classes.divCenter}>{show && <CircularProgress />}</Box>
+        <ButtonSubmit title="Submit" />
+        <span className={classes.text1}>Did you remember the account?</span>
+        <Link to="/auth/login" className={classes.textDK}>
+          <span>Login</span>
         </Link>
       </form>
     </div>
   );
 }
 
-export default LoginForm;
+export default FormForgotPassword;

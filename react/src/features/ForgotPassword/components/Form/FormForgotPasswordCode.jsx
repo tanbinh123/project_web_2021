@@ -12,6 +12,7 @@ import {
   colorBlack2,
   colorOrange1,
 } from "../../../../components/color/color";
+import InputTextDisable from "../../../../components/TextField/InputTextDisable";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,22 +79,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 //proptypes
-LoginForm.propTypes = {};
+FormForgotPasswordCode.propTypes = {};
 
 //yup
 
 const schema = yup.object().shape({
   username: yup.string().required("Vui lòng nhập username"),
-  password: yup.string().required("Vui lòng nhập password"),
+  code: yup.string().required("Vui lòng nhập code từ email"),
 });
 //function
-function LoginForm(props) {
-  const { onSubmit } = props;
+function FormForgotPasswordCode(props) {
+  const { onSubmit, data } = props;
   const classes = useStyles();
   const form = useForm({
     defaultValues: {
-      username: "",
-      password: "",
+      username: data.username,
+      code: "",
     },
     resolver: yupResolver(schema),
   });
@@ -108,20 +109,22 @@ function LoginForm(props) {
         className={classes.cssForm}
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
-        <span className={classes.title}>Login</span>
-        <InputText label="username" name="username" form={form} />
-        <PasswordField name="password" label="password" form={form} />
-        <Link to="/forgot-password" className={classes.text3}>
-          <span>Forgot Password ?</span>
-        </Link>
-        <ButtonSubmit title="login" />
-        <span className={classes.text1}>Do not have an account ?</span>
-        <Link to="/auth/register" className={classes.textDK}>
-          <span>Register</span>
+        <span className={classes.title}>Confirm Forgot Password</span>
+        <InputTextDisable
+          label="Username"
+          name="username"
+          data={data.username}
+          form={form}
+        />
+        <InputText label="Code" name="code" form={form} />
+        <ButtonSubmit title="Submit" />
+        <span className={classes.text1}>Did you remember the account?</span>
+        <Link to="/auth/login" className={classes.textDK}>
+          <span>Login</span>
         </Link>
       </form>
     </div>
   );
 }
 
-export default LoginForm;
+export default FormForgotPasswordCode;

@@ -12,6 +12,7 @@ import {
   colorBlack2,
   colorOrange1,
 } from "../../../../components/color/color";
+import InputTextHidden from "../../../../components/TextField/InputTextHidden";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,22 +79,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 //proptypes
-LoginForm.propTypes = {};
+FormForgotPasswordPass.propTypes = {};
 
 //yup
 
 const schema = yup.object().shape({
-  username: yup.string().required("Vui lòng nhập username"),
-  password: yup.string().required("Vui lòng nhập password"),
+  username: yup.string(),
+  code: yup.string(),
+  password: yup
+    .string()
+    .required("Vui lòng nhập password")
+    .min(3, "Vui lòng nhập hơn 3 kí tự"),
+  retypepassword: yup
+    .string()
+    .required("Vui lòng nhập password")
+    .oneOf([yup.ref("password")], "password không giống nhau"),
 });
 //function
-function LoginForm(props) {
-  const { onSubmit } = props;
+function FormForgotPasswordPass(props) {
+  const { onSubmit, data } = props;
   const classes = useStyles();
   const form = useForm({
     defaultValues: {
-      username: "",
+      username: data.username,
+      code: data.code,
       password: "",
+      retypepassword: "",
     },
     resolver: yupResolver(schema),
   });
@@ -108,20 +119,23 @@ function LoginForm(props) {
         className={classes.cssForm}
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
-        <span className={classes.title}>Login</span>
-        <InputText label="username" name="username" form={form} />
-        <PasswordField name="password" label="password" form={form} />
-        <Link to="/forgot-password" className={classes.text3}>
-          <span>Forgot Password ?</span>
-        </Link>
-        <ButtonSubmit title="login" />
-        <span className={classes.text1}>Do not have an account ?</span>
-        <Link to="/auth/register" className={classes.textDK}>
-          <span>Register</span>
+        <span className={classes.title}>Forgot Password</span>
+        <InputTextHidden value={data.username} name="username" form={form} />
+        <InputTextHidden value={data.code} name="code" form={form} />
+        <PasswordField label="Password" name="password" form={form} />
+        <PasswordField
+          label="Retype Password"
+          name="retypepassword"
+          form={form}
+        />
+        <ButtonSubmit title="Submit" />
+        <span className={classes.text1}>Did you remember the account?</span>
+        <Link to="/auth/login" className={classes.textDK}>
+          <span>Login</span>
         </Link>
       </form>
     </div>
   );
 }
 
-export default LoginForm;
+export default FormForgotPasswordPass;
