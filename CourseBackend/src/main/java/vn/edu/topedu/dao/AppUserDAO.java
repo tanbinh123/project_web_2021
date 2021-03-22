@@ -34,6 +34,19 @@ public class AppUserDAO {
 			return null;
 		}
 	}
+	public AppUser findUserByEmail(String email) {
+		try {
+			String sql = "Select e from " + AppUser.class.getName() + " e " //
+					+ " Where e.email = :email ";
+			
+			Query query = entityManager.createQuery(sql, AppUser.class);
+			query.setParameter("email", email);
+			
+			return (AppUser) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 
 //    public boolean insertUser(AppUser person) {
 //        
@@ -70,6 +83,20 @@ public class AppUserDAO {
 		return false;
 		
 
+	}
+	public boolean updateUser(AppUser user) {
+		
+		
+		try {
+			entityManager.merge(user);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return false;
+		
+		
 	}
 
 }
