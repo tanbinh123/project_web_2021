@@ -52,6 +52,7 @@ function ButtonUploadFW(props) {
   const handleOnChange = (e) => {
     if (!onChange) return;
     const file = e.target.files[0];
+    console.log(file);
     if (file) {
       onChange(file);
       setNewTitle(file.name);
@@ -64,7 +65,7 @@ function ButtonUploadFW(props) {
         onChange={handleOnChange}
         control={form.control}
         style={{ display: "none" }}
-        accept="image/*"
+        accept="video/*"
         id="contained-button-file"
         multiple
         name={name}

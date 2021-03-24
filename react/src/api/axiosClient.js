@@ -12,7 +12,7 @@ const axiosClient = axios.create({
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   function (config) {
-    console.log(config);
+    // console.log(config);
     // Do something before request is sent
     return config;
   },

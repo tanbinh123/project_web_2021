@@ -3,6 +3,7 @@ import {
   CircularProgress,
   Container,
   Grid,
+  LinearProgress,
   makeStyles,
 } from "@material-ui/core";
 import React, { useState } from "react";
@@ -100,9 +101,8 @@ const schema = yup.object().shape({
 });
 //function
 function FormForgotPassword(props) {
-  const { onSubmit, complete } = props;
+  const { onSubmit, showProcess } = props;
   const classes = useStyles();
-  const [show, setShow] = useState(false);
   const form = useForm({
     defaultValues: {
       emailOrUsername: "",
@@ -111,9 +111,9 @@ function FormForgotPassword(props) {
   });
 
   function handleOnSubmit(values) {
-    setShow(true);
+    const tmpShow = true;
     if (!onSubmit) return;
-    onSubmit(values);
+    onSubmit(values, tmpShow);
   }
   return (
     <div className={classes.root}>
@@ -123,12 +123,15 @@ function FormForgotPassword(props) {
       >
         <span className={classes.title}>Forgot Password</span>
         <InputText label="Email" name="emailOrUsername" form={form} />
-        <Box className={classes.divCenter}>{show && <CircularProgress />}</Box>
+
         <ButtonSubmit title="Submit" />
         <span className={classes.text1}>Did you remember the account?</span>
         <Link to="/auth/login" className={classes.textDK}>
           <span>Login</span>
         </Link>
+        <Box className={classes.divCenter}>
+          {showProcess && <LinearProgress />}
+        </Box>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Container, CssBaseline, makeStyles } from "@material-ui/core";
 import React from "react";
-import RecipeReviewCard from "../../components/card";
+import CardCourse from "../../components/card/CardCourse";
 import Header from "../../components/header";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,7 @@ function Home(props) {
       <div className={classes.bgHome}></div>
       <Container maxWidth="lg">
         <div className="middle">
-          <RecipeReviewCard />
+          <CardCourse />
         </div>
       </Container>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import {
@@ -8,12 +8,14 @@ import {
   colorWhite2,
 } from "../../components/color/color";
 import Header from "../../components/header";
+import courseApi from "../../api/courseApi";
+import RightCoures from "./components/RightCoures";
 
 CourseFeatures.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
     background: colorWhite1,
-    padding: "10px",
+    padding: "50px 0px 20px 0px",
   },
   left: {
     display: "block",
@@ -29,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 function CourseFeatures(props) {
   const classes = useStyles();
+  const [dataCourse, setDataCourse] = useState({});
+  useEffect(() => {
+    (async () => {
+      const data = await courseApi.getAll();
+      setDataCourse(data);
+    })();
+  }, []);
   return (
     <>
       <Header />
@@ -48,7 +57,9 @@ function CourseFeatures(props) {
               sm={12}
               xs={12}
             >
-              <Paper elevation={0}>right course</Paper>
+              <Paper elevation={0}>
+                <RightCoures dataCourse={dataCourse} />
+              </Paper>
             </Grid>
           </Grid>
         </Container>

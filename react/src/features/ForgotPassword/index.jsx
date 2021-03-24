@@ -12,6 +12,7 @@ function ForgotPassword(props) {
   const { path } = useRouteMatch();
   const { push } = useHistory();
   const { enqueueSnackbar } = useSnackbar();
+  const [showProcess, setShowProcess] = useState(false);
   const [step, setStep] = useState(1);
   const [data, setData] = useState({
     username: "",
@@ -25,9 +26,10 @@ function ForgotPassword(props) {
       push("/");
     }
   }, []);
-  const handleOnSubmit = async (values) => {
+  const handleOnSubmit = async (values, show) => {
+    setShowProcess(show);
     const tmpData = await userApi.forgotPassword(values);
-    console.log("ForgotPassword", tmpData);
+    // console.log("ForgotPassword", tmpData);
     if (!!!tmpData.status) {
       const tmpData2 = { ...data };
       tmpData2.username = tmpData;
@@ -35,6 +37,7 @@ function ForgotPassword(props) {
       // response data username
       setStep(2);
     } else {
+      setShowProcess(!show);
       enqueueSnackbar(tmpData.data, { variant: "error" });
     }
   };
@@ -66,7 +69,10 @@ function ForgotPassword(props) {
   return (
     <>
       {step === 1 ? (
-        <FormForgotPassword onSubmit={handleOnSubmit} />
+        <FormForgotPassword
+          onSubmit={handleOnSubmit}
+          showProcess={showProcess}
+        />
       ) : step === 2 ? (
         <FormForgotPasswordCode onSubmit={handleOnSubmitCode} data={data} />
       ) : (
