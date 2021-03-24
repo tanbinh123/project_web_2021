@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Container, Grid, makeStyles } from "@material-ui/core";
+import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import {
   colorBlack1,
   colorBlue1,
+  colorWhite1,
   colorWhite2,
 } from "../../components/color/color";
 import Header from "../../components/header";
@@ -11,18 +12,19 @@ import Header from "../../components/header";
 CourseFeatures.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "64px",
-    background: "#202020",
+    background: colorWhite1,
     padding: "10px",
   },
   left: {
-    width: "250px",
-    height: "1000px",
-    background: colorWhite2,
+    display: "block",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
-  right: {
-    flex: "1 1 auto",
-    background: colorBlue1,
+  right: {},
+  backgroundHeader: {
+    height: "64px",
+    background: colorBlack1,
   },
 }));
 function CourseFeatures(props) {
@@ -30,14 +32,23 @@ function CourseFeatures(props) {
   return (
     <>
       <Header />
+      <Box className={classes.backgroundHeader} />
       <Box className={classes.root}>
         <Container>
-          <Grid container>
-            <Grid item className={classes.left}>
-              left course
+          <Grid container spacing={2}>
+            <Grid item className={classes.left} xl={3} lg={3} md={3}>
+              <Paper elevation={0}>left course</Paper>
             </Grid>
-            <Grid item className={classes.right}>
-              right course
+            <Grid
+              item
+              className={classes.right}
+              xl={9}
+              lg={9}
+              md={9}
+              sm={12}
+              xs={12}
+            >
+              <Paper elevation={0}>right course</Paper>
             </Grid>
           </Grid>
         </Container>

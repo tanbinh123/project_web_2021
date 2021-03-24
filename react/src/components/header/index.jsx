@@ -88,13 +88,18 @@ const useStyles = makeStyles((theme) => ({
   customsAppbar: {
     boxShadow: "none",
   },
-  customsAppBarTop: {
+  customsAppBarHome: {
     background: "inherit",
+    transition: "background-color .3s linear",
+  },
+  customsAppBarTop: {
+    background: colorBlack1,
     transition: "background-color .3s linear",
   },
   customsAppBarBottom: {
     backgroundColor: colorBlack1,
     transition: "background-color .3s linear",
+    opacity: "0.95",
   },
   listDrawer: {
     width: 200,
@@ -116,14 +121,25 @@ export default function Header() {
   navRef.current = navBackground;
   useEffect(() => {
     if (location.pathname !== "/") {
-      setNavBackground("customsAppBarBottom");
-    } else {
       function handleScrollAppBar() {
-        const isHeight = window.scrollY > 238;
+        const isHeight = window.scrollY > 120;
         if (isHeight) {
           setNavBackground("customsAppBarBottom");
         } else {
           setNavBackground("customsAppBarTop");
+        }
+      }
+      document.addEventListener("scroll", handleScrollAppBar);
+      return () => {
+        document.removeEventListener("scroll", handleScrollAppBar);
+      };
+    } else {
+      function handleScrollAppBar() {
+        const isHeight = window.scrollY > 200;
+        if (isHeight) {
+          setNavBackground("customsAppBarBottom");
+        } else {
+          setNavBackground("customsAppBarHome");
         }
       }
       document.addEventListener("scroll", handleScrollAppBar);
