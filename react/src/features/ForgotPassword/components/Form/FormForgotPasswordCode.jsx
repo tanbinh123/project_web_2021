@@ -113,7 +113,7 @@ function FormForgotPasswordCode(props) {
         <InputTextDisable
           label="Username"
           name="username"
-          data={data.username}
+          value={data.username}
           form={form}
         />
         <InputText label="Code" name="code" form={form} />

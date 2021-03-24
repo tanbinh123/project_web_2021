@@ -8,15 +8,19 @@ const useStyles = makeStyles((theme) => ({
 InputTextDisable.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
+  form: PropTypes.object,
+  value: PropTypes.string,
 };
 InputTextDisable.defaultProps = {
-  name: PropTypes.string,
-  label: PropTypes.string,
+  name: "",
+  label: "",
+  form: {},
+  value: "",
 };
 
 function InputTextDisable(props) {
   const classes = useStyles();
-  const { name, label, form, data } = props;
+  const { name, label, form, value } = props;
   const { errors } = form;
   const hasError = errors[name];
   return (
@@ -31,7 +35,7 @@ function InputTextDisable(props) {
       fullWidth
       error={!!hasError}
       helperText={errors[name]?.message}
-      value={data}
+      value={value}
       disabled
     />
   );

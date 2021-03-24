@@ -8,10 +8,12 @@ const useStyles = makeStyles((theme) => ({
 InputText.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
+  form: PropTypes.object,
 };
 InputText.defaultProps = {
-  name: PropTypes.string,
-  label: PropTypes.string,
+  name: "",
+  label: "",
+  form: {},
 };
 
 function InputText(props) {

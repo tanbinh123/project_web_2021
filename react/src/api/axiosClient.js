@@ -1,17 +1,18 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "http://192.168.0.111:8080/",
-  // baseURL: "http://192.168.0.222:8080/",
+  // baseURL: "http://192.168.0.111:8080/",
+  baseURL: "http://192.168.0.222:8080/",
   headers: {
-    "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+    // "Content-Type": "applicatinon/json",
   },
 });
 //Interceptors
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   function (config) {
+    console.log(config);
     // Do something before request is sent
     return config;
   },

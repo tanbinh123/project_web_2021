@@ -8,6 +8,7 @@ import ForgotPassword from "./features/ForgotPassword";
 import FormForgotPasswordCode from "./features/ForgotPassword/components/Form/FormForgotPasswordCode";
 import Home from "./features/home";
 import NotFound404 from "./features/NotFound";
+import SimpleReactFileUpload from "./features/test/FormUpload/SimpleReactFileUpload";
 import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
 import PopoverPopupState from "./features/test/Popover";
 
@@ -21,6 +22,11 @@ function App(props) {
         <Route path="/auth/register" component={Register} exact />
         <Route path="/course" component={CourseFeatures} exact />
         <Route path="/form-upload-one" component={UploadOneFile} exact />
+        <Route
+          path="/form-upload-test"
+          component={SimpleReactFileUpload}
+          exact
+        />
         <Route path="/forgot-password" component={ForgotPassword} exact />
         <Route path="/" component={Home} exact />
         <Route path="/*" component={NotFound404} />

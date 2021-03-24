@@ -14,7 +14,7 @@ InputTextHidden.propTypes = {
 InputTextHidden.defaultProps = {
   name: "",
   label: "",
-  form: null,
+  form: {},
   value: "",
 };
 

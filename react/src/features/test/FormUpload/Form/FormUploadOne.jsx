@@ -1,5 +1,5 @@
 import { Button, Container, Grid, makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ButtonSubmit from "../../../../components/Button/ButtonSubmit";
 import PasswordField from "../../../../components/PasswordField";
@@ -87,18 +87,33 @@ const schema = yup.object().shape({});
 //function
 function FormUploadOne(props) {
   const { onSubmit } = props;
+  const [dataUpload, setDataUpload] = useState({
+    name: "",
+    file: null,
+  });
   const classes = useStyles();
   const form = useForm({
     defaultValues: {
-      title: "",
+      name: "",
       file: null,
     },
     resolver: yupResolver(schema),
   });
 
   function handleOnSubmit(values) {
+    const tmpName = values.name;
+    console.log("handleOnSubmit", tmpName);
     if (!onSubmit) return;
-    onSubmit(values);
+    const tmpDataUpload = { ...dataUpload };
+    tmpDataUpload.name = tmpName;
+    setDataUpload(tmpDataUpload);
+    onSubmit(tmpDataUpload);
+  }
+  function handleOnChange(data) {
+    console.log(data.name);
+    const tmpDataUpload = { ...dataUpload };
+    tmpDataUpload.file = data;
+    setDataUpload(tmpDataUpload);
   }
   return (
     <div className={classes.root}>
@@ -107,9 +122,14 @@ function FormUploadOne(props) {
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
         <span className={classes.title}>Form Upload</span>
-        <InputText name="title" label="Title" form={form} />
+        <InputText name="name" label="Title" form={form} />
 
-        <ButtonUploadFW title="Upload" name="file" form={form} />
+        <ButtonUploadFW
+          title="Upload"
+          name="file"
+          form={form}
+          onChange={handleOnChange}
+        />
         <ButtonSubmit title="Submit" />
       </form>
     </div>

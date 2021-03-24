@@ -7,6 +7,7 @@ import {
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { Controller } from "react-hook-form";
 const useStyles = makeStyles((theme) => ({
   CustomButton: {
     background: "linear-gradient(45deg, #3498db 30%, #3498db 90%)",
@@ -36,33 +37,39 @@ const useStyles = makeStyles((theme) => ({
 ButtonUploadFW.propTypes = {
   title: PropTypes.string,
   name: PropTypes.string,
+  form: PropTypes.object,
 };
 
 ButtonUploadFW.defaultProps = {
   title: "",
   name: "",
+  form: {},
 };
 function ButtonUploadFW(props) {
-  const { title, name } = props;
+  const { title, name, form, onChange } = props;
   const [newTitle, setNewTitle] = useState(title);
   const classes = useStyles();
   const handleOnChange = (e) => {
+    if (!onChange) return;
     const file = e.target.files[0];
     if (file) {
+      onChange(file);
       setNewTitle(file.name);
     }
   };
   return (
     <>
       <input
+        type="file"
+        onChange={handleOnChange}
+        control={form.control}
         style={{ display: "none" }}
         accept="image/*"
         id="contained-button-file"
         multiple
-        type="file"
         name={name}
-        onChange={handleOnChange}
       />
+
       <Button className={classes.CustomButton}>
         <label
           className={classes.CustomButton__label}
