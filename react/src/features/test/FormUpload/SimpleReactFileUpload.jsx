@@ -23,7 +23,7 @@ class SimpleReactFileUpload extends React.Component {
     this.setState({ file: e.target.files[0] });
   }
 
-  fileUpload(file) {
+  async fileUpload(file) {
     const url = "http://192.168.0.222:8080/test/upload/filepart";
     const formData = new FormData();
     formData.append("file", file);

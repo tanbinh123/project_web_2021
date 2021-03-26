@@ -1,4 +1,4 @@
-import axiosClient from "./axiosClient";
+import axiosClient from "./axiosClientFake";
 
 const courseApi = {
   getAll() {

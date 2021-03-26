@@ -4,7 +4,12 @@ import { Grid, makeStyles } from "@material-ui/core";
 import { colorBlack1 } from "../../../components/color/color";
 import CardCourse from "../../../components/card/CardCourse";
 
-RightCoures.propTypes = {};
+RightCoures.propTypes = {
+  dataCourse: PropTypes.array,
+};
+RightCoures.defaultProps = {
+  dataCourse: [],
+};
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: "20px",
@@ -13,27 +18,22 @@ const useStyles = makeStyles((theme) => ({
 function RightCoures(props) {
   const classes = useStyles();
   const { dataCourse } = props;
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item xl={4} lg={4} md={4} sm={6} xs={12}>
-          <CardCourse title="" description="" />
-        </Grid>
-        <Grid item xl={4} lg={4} md={4} sm={6} xs={12}>
-          <CardCourse />
-        </Grid>
-        <Grid item xl={4} lg={4} md={4} sm={6} xs={12}>
-          <CardCourse />
-        </Grid>
-        <Grid item xl={4} lg={4} md={4} sm={6} xs={12}>
-          <CardCourse />
-        </Grid>
-        <Grid item xl={4} lg={4} md={4} sm={6} xs={12}>
-          <CardCourse />
-        </Grid>
-        <Grid item xl={4} lg={4} md={4} sm={6} xs={12}>
-          <CardCourse />
-        </Grid>
+        {Array.from(dataCourse).map((x, index) => (
+          <Grid key={index} item xl={4} lg={4} md={6} sm={6} xs={12}>
+            <CardCourse
+              title={x.title}
+              description={x.description}
+              image={x.thumbnail}
+              avatar={x.imgAvatar}
+              nameAuthor={x.nameAuthor}
+              rateStar={x.rateStar}
+            />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );

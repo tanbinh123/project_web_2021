@@ -1,16 +1,13 @@
-import { Box } from "@material-ui/core";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
 import CourseFeatures from "./features/Course";
 import ForgotPassword from "./features/ForgotPassword";
-import FormForgotPasswordCode from "./features/ForgotPassword/components/Form/FormForgotPasswordCode";
 import Home from "./features/home";
 import NotFound404 from "./features/NotFound";
 import SimpleReactFileUpload from "./features/test/FormUpload/SimpleReactFileUpload";
 import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
-import PopoverPopupState from "./features/test/Popover";
 
 App.propTypes = {};
 

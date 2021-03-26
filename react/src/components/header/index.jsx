@@ -117,10 +117,11 @@ export default function Header() {
   const classes = useStyles();
   const { location } = useHistory();
   const navRef = useRef();
-  const [navBackground, setNavBackground] = useState("customsAppBarTop");
+  const [navBackground, setNavBackground] = useState("customsAppBarHome");
   navRef.current = navBackground;
   useEffect(() => {
     if (location.pathname !== "/") {
+      setNavBackground("customsAppBarTop");
       function handleScrollAppBar() {
         const isHeight = window.scrollY > 120;
         if (isHeight) {
@@ -135,7 +136,7 @@ export default function Header() {
       };
     } else {
       function handleScrollAppBar() {
-        const isHeight = window.scrollY > 200;
+        const isHeight = window.scrollY > 120;
         if (isHeight) {
           setNavBackground("customsAppBarBottom");
         } else {

@@ -19,22 +19,24 @@ const useStyles = makeStyles((theme) => ({
     border: 0,
     color: "white",
     height: 40,
-    padding: "0 30px",
+    // padding: "0 30px",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     borderRadius: "25px",
+
+    textTransform: "unset",
   },
 }));
-Button1.propTypes = {
+ButtonSmall.propTypes = {
   title: PropTypes.string,
 };
 
-Button1.defaultProps = {
+ButtonSmall.defaultProps = {
   title: "",
 };
-function Button1(props) {
+function ButtonSmall(props) {
   const { title } = props;
   const classes = useStyles();
   return <Button className={classes.CustomButton}>{title}</Button>;
 }
 
-export default Button1;
+export default ButtonSmall;

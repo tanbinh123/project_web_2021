@@ -8,7 +8,7 @@ import {
   colorWhite2,
 } from "../../components/color/color";
 import Header from "../../components/header";
-import courseApi from "../../api/courseApi";
+import courseApi from "../../api/courseApiFake";
 import RightCoures from "./components/RightCoures";
 
 CourseFeatures.propTypes = {};
@@ -31,13 +31,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 function CourseFeatures(props) {
   const classes = useStyles();
-  const [dataCourse, setDataCourse] = useState({});
+  const [dataCourse, setDataCourse] = useState([]);
+  const [filter, setFilter] = useState({
+    _page: 1,
+    _limit: 9,
+  });
   useEffect(() => {
     (async () => {
-      const data = await courseApi.getAll();
+      const data = await courseApi.testGetAll(filter);
       setDataCourse(data);
     })();
-  }, []);
+  }, [filter]);
   return (
     <>
       <Header />
