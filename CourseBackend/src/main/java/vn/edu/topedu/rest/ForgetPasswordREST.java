@@ -17,7 +17,9 @@ import vn.edu.topedu.email.EmailService;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.RequestResetPassword;
 import vn.edu.topedu.jwt.security.PBKDF2Encoder;
-import vn.edu.topedu.request.ForgetPasswordRequest;
+import vn.edu.topedu.request.ForgetPasswordByEmailRequest;
+import vn.edu.topedu.request.ForgetPasswordByUsernameRequest;
+import vn.edu.topedu.response.MessageResponse;
 @RestController
 public class ForgetPasswordREST {
 	@Autowired
@@ -36,9 +38,9 @@ public class ForgetPasswordREST {
 	@PostMapping("/forgetpassword/username")
 	@ResponseBody
 	public ResponseEntity<Object> sendMailByUsername(
-			@RequestBody ForgetPasswordRequest forgetPasswordRequest) {
+			@RequestBody ForgetPasswordByUsernameRequest forgetPasswordRequest) {
 		//System.out.println("Request: "+forgetPasswordRequest);
-		String emailOrUsername=forgetPasswordRequest.getEmailOrUsername();
+		String emailOrUsername=forgetPasswordRequest.getUsername();
 		
 		AppUser appUser=appUserDAO.findUserAccount(emailOrUsername);
 		RequestResetPassword requestResetPassword= new RequestResetPassword();
@@ -46,7 +48,7 @@ public class ForgetPasswordREST {
 		requestResetPassword.setAppUser(appUser);
 		if(appUser!=null) {
 			int id=requestResetPasswordDAO.insert(requestResetPassword);
-			if(id==0)return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Can't gender code.");;
+			if(id==0)return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Can't gender code.",""));;
 			String to= appUser.getEmail();
 			String subject= "Reset Password";
 			String text= "Code: "+requestResetPassword.getCode();
@@ -56,26 +58,26 @@ public class ForgetPasswordREST {
 				return ResponseEntity.ok().build();
 				
 			} catch (Exception e) {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not send mail");
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Not send mail",""));
 			}
 			
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username not exists.");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Username not exists.",""));
 		
 	}
 	@PostMapping("/forgetpassword/email")
 	@ResponseBody
 	public ResponseEntity<Object> sendMailByEmail(
-			@RequestBody ForgetPasswordRequest forgetPasswordRequest) {
+			@RequestBody ForgetPasswordByEmailRequest forgetPasswordRequest) {
 		System.out.println("Request: "+forgetPasswordRequest);
-		String emailOrUsername=forgetPasswordRequest.getEmailOrUsername();	
-		AppUser appUser=appUserDAO.findUserByEmail(emailOrUsername);
+		String email=forgetPasswordRequest.getEmail();	
+		AppUser appUser=appUserDAO.findUserByEmail(email);
 		if(appUser!=null) {
 			RequestResetPassword requestResetPassword= new RequestResetPassword();
 			requestResetPassword.genderCode(appUser.getUserName());
 			requestResetPassword.setAppUser(appUser);
 			int id=requestResetPasswordDAO.insert(requestResetPassword);
-			if(id==0)return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Can't gender code.");;
+			if(id==0)return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Can't gender code.",""));;
 			String to= appUser.getEmail();
 			String subject= "Reset Password";
 			String text= "Code: "+requestResetPassword.getCode();
@@ -86,11 +88,11 @@ public class ForgetPasswordREST {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not send mail");
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Not send mail",""));
 			}
 			
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email not exists.");		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Email not exists.",""));		
 	}
 	@PostMapping("/forgetpassword/code")
 	@ResponseBody
@@ -99,14 +101,14 @@ public class ForgetPasswordREST {
 		String username=body.get("username").toString();
 		String code=body.get("code").toString();
 		RequestResetPassword rrp = requestResetPasswordDAO.getCourse(username);
-		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Code not corect.");
+		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));
 		String trueCode=rrp.getCode();
 		if(code.equals(trueCode)) {
 			
 			return ResponseEntity.ok().build();
 		
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Code not corect.");		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
 	}
 	@Autowired
 	private PBKDF2Encoder passwordEncoder;
@@ -119,7 +121,7 @@ public class ForgetPasswordREST {
 		String code=body.get("code").toString();
 		String password=body.get("password").toString();
 		RequestResetPassword rrp = requestResetPasswordDAO.getCourse(username);
-		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Code not corect.");		
+		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
 		String trueCode=rrp.getCode();
 		if(code.equals(trueCode)) {
 			AppUser user=appUserDAO.findUserAccount(username);
@@ -128,7 +130,7 @@ public class ForgetPasswordREST {
 			return ResponseEntity.ok().build();
 			
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Code not corect.");		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
 	}
 	
 

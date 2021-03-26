@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import vn.edu.topedu.email.EmailService;
+import vn.edu.topedu.response.MessageResponse;
 @RestController
 public class MailREST {
 	@Autowired
@@ -27,7 +28,7 @@ public class MailREST {
 			emailService.sendSimpleMessage(to, subject, text, isBackground);
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not send mail");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Not send mail", ""));
 		}
 		
 	}

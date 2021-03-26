@@ -1,6 +1,8 @@
 package vn.edu.topedu.rest.test;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import json.object.ResponseMessageSuccess;
 import json.object.ResponseNull;
+import vn.edu.topedu.response.MessageResponse;
 
 @RestController
 public class TestREST {
@@ -28,6 +31,13 @@ public class TestREST {
 	public String test() {
 
 		return new ResponseMessageSuccess().toJsonString();
+	}
+	@RequestMapping(value = "/test/error", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity tesError() {
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Error", "Lỗi"));
+//		return ResponseEntity.ok(new MessageResponse("Error", "Lỗi"));
 	}
 
 	@RequestMapping(value = "/test/ok/ok", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
