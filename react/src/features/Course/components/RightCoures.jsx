@@ -31,6 +31,8 @@ function RightCoures(props) {
               avatar={x.imgAvatar}
               nameAuthor={x.nameAuthor}
               rateStar={x.rateStar}
+              bought={x.bought}
+              price={x.price}
             />
           </Grid>
         ))}

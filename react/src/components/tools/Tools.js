@@ -7,3 +7,11 @@ export function isEmpty(obj) {
 
   return JSON.stringify(obj) === JSON.stringify({});
 }
+export function convertVND(int) {
+  return int
+    .toLocaleString("vi-VI", {
+      style: "currency",
+      currency: "VND",
+    })
+    .replaceAll(".", ",");
+}

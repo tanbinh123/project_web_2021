@@ -10,6 +10,10 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import ButtonSmall from "../Button/ButtonSmall";
 import Rating from "@material-ui/lab/Rating";
+import { PeopleAlt } from "@material-ui/icons";
+import { colorBlack1, colorBlack2 } from "../color/color";
+import { Link } from "react-router-dom";
+import { convertVND } from "../tools/Tools";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
       boxShadow:
         "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 5px 9px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
     },
+    // height: 500,
   },
   CardActionArea: {
     "&:hover>img": {
@@ -27,7 +32,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   CardActionArea__Content: {
-    minHeight: 140,
+    minHeight: 200,
+  },
+  linkAuthor: {
+    textDecoration: "none",
   },
   avatar: {
     width: 35,
@@ -35,18 +43,46 @@ const useStyles = makeStyles((theme) => ({
     float: "left",
   },
   name: {
-    fontSize: 17,
+    fontSize: 18,
     marginLeft: 10,
-    lineHeight: "30px",
+    lineHeight: "35px",
+    fontWeight: 600,
+    color: colorBlack2,
   },
   money: {
-    fontSize: 20,
-    fontWeight: 600,
+    display: "flex",
+    height: "100%",
+    alignItems: "center",
+    "&>span": {
+      fontSize: 20,
+      fontWeight: 600,
+      color: "#e74c3c",
+    },
   },
   row: {
     display: "block",
   },
-  title: { fontSize: 22, fontWeight: 600 },
+  title: { fontSize: 22, fontWeight: 600, color: colorBlack2 },
+  button: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "flex-end",
+  },
+  bought: {
+    display: "flex",
+    justifyContent: "flex-end",
+    "&>span": {
+      display: "flex",
+    },
+    "& .icon": {
+      fontSize: 22,
+    },
+    "& .number": {
+      fontSize: 20,
+      marginLeft: 10,
+      color: colorBlack1,
+    },
+  },
 }));
 CardCourse.propTypes = {
   title: PropTypes.string,
@@ -54,6 +90,8 @@ CardCourse.propTypes = {
   image: PropTypes.string,
   avatar: PropTypes.string,
   nameAuthor: PropTypes.string,
+  bought: PropTypes.string,
+  price: PropTypes.string,
 };
 
 CardCourse.defaultProps = {
@@ -62,10 +100,21 @@ CardCourse.defaultProps = {
   image: "",
   avatar: "",
   nameAuthor: "",
+  bought: "",
+  price: "",
 };
 export default function CardCourse(props) {
   const classes = useStyles();
-  const { title, description, image, avatar, nameAuthor, rateStar } = props;
+  const {
+    title,
+    description,
+    image,
+    avatar,
+    nameAuthor,
+    rateStar,
+    bought,
+    price,
+  } = props;
   const [tmpDescription, setTmpDescription] = useState(description);
   useEffect(() => {
     (() => {
@@ -111,18 +160,32 @@ export default function CardCourse(props) {
       </CardActionArea>
       <CardActions>
         <Grid container spacing={2}>
-          <Grid item xl={12} lg={12}>
-            <Avatar src={avatar} className={classes.avatar}></Avatar>
-            <span className={classes.name}>{nameAuthor}</span>
+          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+            <Link className={classes.linkAuthor}>
+              <Avatar src={avatar} className={classes.avatar}></Avatar>
+              <span className={classes.name}>{nameAuthor}</span>
+            </Link>
           </Grid>
-          <Grid item xl={12} lg={12}>
+          <Grid item xl={9} lg={7} md={7} sm={7} xs={7}>
             <Rating name="read-only" value={rateStar} readOnly />
           </Grid>
-          <Grid item xl={9} lg={7}>
-            <span className={classes.money}>2,000,000 VNĐ</span>
+          <Grid item xl={3} lg={5} md={5} sm={5} xs={5}>
+            <div className={classes.bought}>
+              <span title="Người đã mua">
+                <PeopleAlt className="icon" />
+                <span className="number">{bought}</span>
+              </span>
+            </div>
           </Grid>
-          <Grid item xl={3} lg={5}>
-            <ButtonSmall title="Xem Thêm" />
+          <Grid item xl={9} lg={7} md={7} sm={7} xs={7}>
+            <div className={classes.money}>
+              <span>{convertVND(price)}</span>
+            </div>
+          </Grid>
+          <Grid item xl={3} lg={5} md={5} sm={5} xs={5}>
+            <div className={classes.button}>
+              <ButtonSmall title="Xem Thêm" />
+            </div>
           </Grid>
         </Grid>
       </CardActions>

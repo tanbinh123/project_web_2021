@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.css";
 import { Route, Switch } from "react-router-dom";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
@@ -8,7 +9,6 @@ import Home from "./features/home";
 import NotFound404 from "./features/NotFound";
 import SimpleReactFileUpload from "./features/test/FormUpload/SimpleReactFileUpload";
 import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
-
 App.propTypes = {};
 
 function App(props) {
