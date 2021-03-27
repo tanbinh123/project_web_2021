@@ -14,15 +14,15 @@ const userApi = {
     return axiosClient.get(url);
   },
   forgotPassword(data) {
-    const url = `/forgetpassword/email`;
+    const url = `/forgotpassword/email`;
     return axiosClient.post(url, data);
   },
   forgotPasswordCode(data) {
-    const url = `/forgetpassword/code`;
+    const url = `/forgotpassword/code`;
     return axiosClient.post(url, data);
   },
   forgotPasswordPass(data) {
-    const url = `/forgetpassword/change`;
+    const url = `/forgotpassword/change`;
     return axiosClient.post(url, data);
   },
 };

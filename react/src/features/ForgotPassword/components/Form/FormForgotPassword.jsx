@@ -105,7 +105,7 @@ function FormForgotPassword(props) {
   const classes = useStyles();
   const form = useForm({
     defaultValues: {
-      emailOrUsername: "",
+      email: "",
     },
     resolver: yupResolver(schema),
   });
@@ -122,7 +122,7 @@ function FormForgotPassword(props) {
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
         <span className={classes.title}>Forgot Password</span>
-        <InputText label="Email" name="emailOrUsername" form={form} />
+        <InputText label="Email" name="email" form={form} />
 
         <ButtonSubmit title="Submit" />
         <span className={classes.text1}>Did you remember the account?</span>

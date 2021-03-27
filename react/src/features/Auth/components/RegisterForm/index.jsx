@@ -52,12 +52,15 @@ const useStyles = makeStyles((theme) => ({
     margin: "50px 0 30px 0",
   },
   text1: {
+    fontSize: "18px",
     marginTop: "40px",
     display: "block",
     textAlign: "center",
     color: colorBlack1,
   },
   textDK: {
+    fontSize: "16px",
+    fontWeight: 600,
     display: "block",
     textAlign: "center",
     textDecoration: "none",

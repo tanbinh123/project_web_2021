@@ -52,12 +52,15 @@ const useStyles = makeStyles((theme) => ({
     margin: "50px 0 30px 0",
   },
   text1: {
+    fontSize: "18px",
     marginTop: "40px",
     display: "block",
     textAlign: "center",
     color: colorBlack1,
   },
   textDK: {
+    fontSize: "16px",
+    fontWeight: 600,
     display: "block",
     textAlign: "center",
     textDecoration: "none",
@@ -67,6 +70,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   text3: {
+    fontSize: "16px",
+    fontWeight: 600,
     margin: "10px 0px 10px 0px",
     display: "block",
     textAlign: "right",
@@ -109,8 +114,8 @@ function LoginForm(props) {
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
         <span className={classes.title}>Login</span>
-        <InputText label="username" name="username" form={form} />
-        <PasswordField name="password" label="password" form={form} />
+        <InputText label="Username" name="username" form={form} />
+        <PasswordField name="password" label="Password" form={form} />
         <Link to="/forgot-password" className={classes.text3}>
           <span>Forgot Password ?</span>
         </Link>
