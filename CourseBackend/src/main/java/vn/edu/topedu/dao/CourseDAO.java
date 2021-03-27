@@ -18,12 +18,13 @@ public class CourseDAO {
 	@Autowired
 	private EntityManager entityManager;
 
-	public List<Course> getListCourse(int pageIndex, int countsOnPage) {
+	public List<Course> getListCourse(int _page, int _limit) {
+		--_page;
 		String sql = "Select c from " + Course.class.getName() + " c " //
 				+ " where c.deleted=0 group by c.id order by c.id desc ";
 		Query query = this.entityManager.createQuery(sql, Course.class);
-		query.setFirstResult(pageIndex*countsOnPage);
-		query.setMaxResults(countsOnPage);
+		query.setFirstResult(_page*_limit);
+		query.setMaxResults(_limit);
 		return query.getResultList();
 	}
 

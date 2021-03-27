@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 27/03/2021 20:42:34
+ Date: 28/03/2021 02:21:33
 */
 
 SET NAMES utf8mb4;
@@ -70,19 +70,52 @@ CREATE TABLE `course`  (
   `deleted` bit(1) NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `price` decimal(10, 2) NULL DEFAULT NULL,
+  `price` decimal(10, 0) NULL DEFAULT NULL,
   `ratestar` double(1, 0) NULL DEFAULT NULL,
+  `bought` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 'image/avatar/momo.webp', 'Khóa học demo 1', b'0', 'Demo 1', '\"\"', 0.00, 0);
-INSERT INTO `course` VALUES (2, 'image/avatar/momo.webp', 'Khóa học demo 2', b'0', 'Demo 2', '\"\"', 0.00, 0);
-INSERT INTO `course` VALUES (3, 'image/avatar/momo.webp', 'Khóa học demo 3', b'0', 'Demo 3', '\"\"', 0.00, 0);
-INSERT INTO `course` VALUES (4, 'image/avatar/momo.webp', 'Khóa học demo 4', b'0', 'Demo 4', '\"\"', 0.00, 0);
-INSERT INTO `course` VALUES (5, 'image/avatar/momo.webp', 'Khóa học demo 5', b'0', 'Demo 5', '\"\"', 0.00, 0);
+INSERT INTO `course` VALUES (1, 'user/user/image/ganyu-h-1.png', 'Khóa học demo 1', b'0', 'Demo 1', 'Demo 1', 1000000, 4, 20);
+INSERT INTO `course` VALUES (2, 'user/user/image/ganyu-h-2.jpg', 'Khóa học demo 2', b'0', 'Demo 2', 'Demo 2', 2000000, 4, 15);
+INSERT INTO `course` VALUES (3, 'user/user/image/ganyu-h-3.png', 'Khóa học demo 3', b'0', 'Demo 3', 'Demo 3', 3000000, 4, 15);
+INSERT INTO `course` VALUES (4, 'user/user/image/ganyu-h-4.jpg', 'Khóa học demo 4', b'0', 'Demo 4', 'Demo 4', 4000000, 4, 15);
+INSERT INTO `course` VALUES (5, 'user/user/image/ganyu-h-5.jpg', 'Khóa học demo 5', b'0', 'Demo 5', 'Demo 5', 5000000, 4, 15);
+INSERT INTO `course` VALUES (6, 'user/user/image/ganyu-h-6.jpg', 'Khóa học demo 5', b'0', 'Demo 6', 'Demo 6', 6000000, 4, 15);
+INSERT INTO `course` VALUES (7, 'user/user/image/ganyu-h-7.jpg', 'Khóa học demo 5', b'0', 'Demo 7', 'Demo 7', 7000000, 4, 15);
+INSERT INTO `course` VALUES (8, 'user/user/image/ganyu-h-8.jpg', 'Khóa học demo 5', b'0', 'Demo 8', 'Demo 8', 8000000, 4, 15);
+INSERT INTO `course` VALUES (9, 'user/user/image/ganyu-h-9.jpg', 'Khóa học demo 5', b'0', 'Demo 9', 'Demo 9', 9000000, 5, 15);
+
+-- ----------------------------
+-- Table structure for ower_course
+-- ----------------------------
+DROP TABLE IF EXISTS `ower_course`;
+CREATE TABLE `ower_course`  (
+  `id` int(11) NOT NULL,
+  `user_id` bigint(20) NULL DEFAULT NULL,
+  `course_id` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `course_id_uq`(`course_id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  CONSTRAINT `ower_course_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `ower_course_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ower_course
+-- ----------------------------
+INSERT INTO `ower_course` VALUES (1, 1, 1);
+INSERT INTO `ower_course` VALUES (2, 1, 2);
+INSERT INTO `ower_course` VALUES (3, 1, 3);
+INSERT INTO `ower_course` VALUES (4, 1, 4);
+INSERT INTO `ower_course` VALUES (5, 1, 5);
+INSERT INTO `ower_course` VALUES (6, 1, 6);
+INSERT INTO `ower_course` VALUES (7, 1, 7);
+INSERT INTO `ower_course` VALUES (8, 1, 8);
+INSERT INTO `ower_course` VALUES (9, 1, 9);
 
 -- ----------------------------
 -- Table structure for request_reset_password
@@ -147,13 +180,20 @@ CREATE TABLE `user_course`  (
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `user_course_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_course_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_course
 -- ----------------------------
 INSERT INTO `user_course` VALUES (1, 1, 1);
-INSERT INTO `user_course` VALUES (2, 2, 1);
+INSERT INTO `user_course` VALUES (2, 1, 2);
+INSERT INTO `user_course` VALUES (3, 1, 3);
+INSERT INTO `user_course` VALUES (4, 1, 4);
+INSERT INTO `user_course` VALUES (5, 1, 5);
+INSERT INTO `user_course` VALUES (6, 1, 6);
+INSERT INTO `user_course` VALUES (7, 1, 7);
+INSERT INTO `user_course` VALUES (8, 1, 8);
+INSERT INTO `user_course` VALUES (9, 1, 9);
 
 -- ----------------------------
 -- Table structure for user_role
