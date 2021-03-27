@@ -21,6 +21,12 @@ public class Course {
     private String poster="image/avatar/momo.webp";
     @Column(name = "description", length = 255, nullable = false)
     private String description="";
+    @Column(name = "title", length = 255, nullable = false)
+    private String title="";
+    @Column(name = "price", length = 10, nullable = false)
+    private int price;
+    @Column(name = "ratestar", length = 10, nullable = false)
+    private double ratestar;
     
     @Column(name = "Deleted", length = 1, nullable = false )
     private Boolean deleted =false;

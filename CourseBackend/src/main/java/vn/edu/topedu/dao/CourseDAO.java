@@ -18,10 +18,12 @@ public class CourseDAO {
 	@Autowired
 	private EntityManager entityManager;
 
-	public List<Course> getListCourse() {
+	public List<Course> getListCourse(int pageIndex, int countsOnPage) {
 		String sql = "Select c from " + Course.class.getName() + " c " //
 				+ " where c.deleted=0 group by c.id order by c.id desc ";
 		Query query = this.entityManager.createQuery(sql, Course.class);
+		query.setFirstResult(pageIndex*countsOnPage);
+		query.setMaxResults(countsOnPage);
 		return query.getResultList();
 	}
 
@@ -32,6 +34,13 @@ public class CourseDAO {
 		query.setParameter("id", id);
 		return query.getResultList();
 	}
+//	public List<Course> getCourse(int id) {
+//		String sql = "Select c from " + Course.class.getName() + " c " //
+//				+ " where c.deleted=0 and c.id= :id group by c.id order by c.id desc ";
+//		Query query = this.entityManager.createQuery(sql, Course.class);
+//		query.setParameter("id", id);
+//		return query.getResultList();
+//	}
 
 	public int insertCourse(Course course) {
 		try {

@@ -1,16 +1,16 @@
 package vn.edu.topedu.request;
 
-public class ForgetPasswordByEmailRequest{
+public class ForgotPasswordByEmailRequest{
 	private String email;
 
 	
-	public ForgetPasswordByEmailRequest() {
+	public ForgotPasswordByEmailRequest() {
 		super();
 	}
 	
 
 	
-	public ForgetPasswordByEmailRequest(String email) {
+	public ForgotPasswordByEmailRequest(String email) {
 		super();
 		this.email = email;
 	}

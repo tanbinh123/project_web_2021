@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import vn.edu.topedu.dao.CourseDAO;
+import vn.edu.topedu.dao.UserCourseDAO;
 import vn.edu.topedu.entity.Course;
+import vn.edu.topedu.response.model.CourseResponse;
 
 
 @RestController
@@ -26,6 +29,8 @@ public class CourseREST {
 	
 	@Autowired
 	private CourseDAO courseDAO;
+	@Autowired
+	private UserCourseDAO userCourseDAO;
 
 	@PostMapping()
 	public ResponseEntity<Object> createCourse(@RequestBody Course course) {
@@ -41,13 +46,24 @@ public class CourseREST {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity<Object> list(ServerHttpRequest serverHttpRequest) {
-		List<Course> lstCourse = courseDAO.getListCourse();
+	public ResponseEntity<Object> list(ServerHttpRequest serverHttpRequest
+			, @RequestParam(defaultValue = "0") int pageIndex 
+			, @RequestParam(defaultValue = "10") int countsOnPage 
+			) {
+		System.out.println("pageIndex: "+pageIndex);
+		System.out.println("countsOnPage: "+countsOnPage);
+		
+		List<Course> lstCourse = courseDAO.getListCourse(pageIndex,countsOnPage);
 		return ResponseEntity.ok(lstCourse);
 	}
+//	@GetMapping(value = "/{id}")
+//	public ResponseEntity<Object> getCourse(@PathVariable Integer id,ServerHttpRequest serverHttpRequest) {
+//		List<Course> lstCourse = courseDAO.getCourse(id);
+//		return ResponseEntity.ok(lstCourse);
+//	}	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Object> getCourse(@PathVariable Integer id,ServerHttpRequest serverHttpRequest) {
-		List<Course> lstCourse = courseDAO.getCourse(id);
+		List<CourseResponse> lstCourse = userCourseDAO.getCourse(id);
 		return ResponseEntity.ok(lstCourse);
 	}	
 	@DeleteMapping("/{id}")
