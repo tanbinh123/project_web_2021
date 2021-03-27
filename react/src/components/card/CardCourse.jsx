@@ -67,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     width: "100%",
     justifyContent: "flex-end",
+    "& > a": {
+      textDecoration: "none",
+    },
   },
   bought: {
     display: "flex",
@@ -86,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 CardCourse.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
@@ -97,6 +101,7 @@ CardCourse.propTypes = {
 };
 
 CardCourse.defaultProps = {
+  id: "",
   title: "",
   description: "",
   image: "",
@@ -109,6 +114,7 @@ CardCourse.defaultProps = {
 export default function CardCourse(props) {
   const classes = useStyles();
   const {
+    id,
     title,
     description,
     image,
@@ -187,7 +193,9 @@ export default function CardCourse(props) {
           </Grid>
           <Grid item xl={3} lg={5} md={5} sm={5} xs={5}>
             <div className={classes.button}>
-              <ButtonSmall title="Xem Thêm" />
+              <Link to={`/course/${id}`}>
+                <ButtonSmall title="Xem Thêm" />
+              </Link>
             </div>
           </Grid>
         </Grid>

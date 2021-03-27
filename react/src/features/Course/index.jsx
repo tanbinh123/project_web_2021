@@ -11,7 +11,7 @@ function CourseFeatures(props) {
     <>
       <Switch>
         <Route path={`${path}`} component={ListCourse} exact />
-        <Route path={`${path}/:id`} component={CourseDetail} />
+        <Route path={`${path}/:idCourse`} component={CourseDetail} />
       </Switch>
     </>
   );

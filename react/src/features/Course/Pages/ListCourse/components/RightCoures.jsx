@@ -24,6 +24,7 @@ function RightCoures(props) {
         {Array.from(dataCourse).map((x, index) => (
           <Grid key={index} item xl={4} lg={4} md={6} sm={6} xs={12}>
             <CardCourse
+              id={x.id}
               title={x.title}
               description={x.description}
               image={x.thumbnail}
