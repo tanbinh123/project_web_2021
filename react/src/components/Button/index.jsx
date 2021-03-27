@@ -1,12 +1,6 @@
-import {
-  Button,
-  ThemeProvider,
-  createMuiTheme,
-  makeStyles,
-} from "@material-ui/core";
-import React, { useState } from "react";
+import { Button, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import React from "react";
 const useStyles = makeStyles((theme) => ({
   CustomButton: {
     // Some CSS

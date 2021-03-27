@@ -1,17 +1,16 @@
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import { useForm } from "react-hook-form";
-import ButtonSubmit from "../../../../components/Button/ButtonSubmit";
-import PasswordField from "../../../../components/PasswordField";
-import InputText from "../../../../components/TextField";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { Link } from "react-router-dom";
+import * as yup from "yup";
+import ButtonSubmit from "../../../../components/Button/ButtonSubmit";
 import {
   colorBlack1,
   colorBlack2,
   colorOrange1,
 } from "../../../../components/color/color";
+import InputText from "../../../../components/TextField";
 import InputTextDisable from "../../../../components/TextField/InputTextDisable";
 //css
 const useStyles = makeStyles((theme) => ({
@@ -33,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     top: "50%",
     transform: "translate(-50%, -50%)",
-    padding: "20px",
+    padding: "20px 40px 20px 40px",
     borderRadius: "10px",
-    width: "26%",
+    width: "27%",
+    height: "75%",
     [theme.breakpoints.only("xs")]: {
       width: "90%",
       height: "80%",
@@ -53,12 +53,15 @@ const useStyles = makeStyles((theme) => ({
     margin: "50px 0 30px 0",
   },
   text1: {
+    fontSize: "18px",
     marginTop: "40px",
     display: "block",
     textAlign: "center",
     color: colorBlack1,
   },
   textDK: {
+    fontSize: "16px",
+    fontWeight: 600,
     display: "block",
     textAlign: "center",
     textDecoration: "none",

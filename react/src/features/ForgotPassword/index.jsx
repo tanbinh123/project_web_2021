@@ -1,7 +1,7 @@
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, Route, useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import userApi from "../../api/userApi";
 import { isEmpty } from "../../components/tools/Tools";
 import FormForgotPassword from "./components/Form/FormForgotPassword";
@@ -9,7 +9,7 @@ import FormForgotPasswordCode from "./components/Form/FormForgotPasswordCode";
 import FormForgotPasswordPass from "./components/Form/FormForgotPasswordPass";
 
 function ForgotPassword(props) {
-  const { path } = useRouteMatch();
+  // const { path } = useRouteMatch();
   const { push } = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const [showProcess, setShowProcess] = useState(false);
@@ -25,20 +25,20 @@ function ForgotPassword(props) {
     if (!isEmpty(user)) {
       push("/");
     }
-  }, []);
+  });
   const handleOnSubmit = async (values, show) => {
     setShowProcess(show);
     const tmpData = await userApi.forgotPassword(values);
-    // console.log("ForgotPassword", tmpData);
+    console.log("ForgotPassword", tmpData);
     if (!!!tmpData.status) {
       const tmpData2 = { ...data };
-      tmpData2.username = tmpData;
+      tmpData2.username = tmpData.username;
       setData(tmpData2);
       // response data username
       setStep(2);
     } else {
       setShowProcess(!show);
-      enqueueSnackbar(tmpData.data, { variant: "error" });
+      enqueueSnackbar(tmpData.data.message.en, { variant: "error" });
     }
   };
   const handleOnSubmitCode = async (values) => {
@@ -51,7 +51,7 @@ function ForgotPassword(props) {
       // response data username
       setStep(3);
     } else {
-      enqueueSnackbar(tmpData.data, { variant: "error" });
+      enqueueSnackbar(tmpData.data.message.en, { variant: "error" });
     }
   };
   const handleOnSubmitPass = async (values) => {

@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 import { Route, Switch } from "react-router-dom";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
@@ -9,6 +8,7 @@ import Home from "./features/home";
 import NotFound404 from "./features/NotFound";
 import SimpleReactFileUpload from "./features/test/FormUpload/SimpleReactFileUpload";
 import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
+import "./index.css";
 App.propTypes = {};
 
 function App(props) {
@@ -17,7 +17,7 @@ function App(props) {
       <Switch>
         <Route path="/auth/login" component={Login} exact />
         <Route path="/auth/register" component={Register} exact />
-        <Route path="/course" component={CourseFeatures} exact />
+        <Route path="/course" component={CourseFeatures} />
         <Route path="/form-upload-one" component={UploadOneFile} exact />
         <Route
           path="/form-upload-test"

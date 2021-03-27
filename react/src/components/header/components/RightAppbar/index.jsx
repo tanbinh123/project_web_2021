@@ -1,12 +1,10 @@
 import {
-  Divider,
   Avatar,
   Box,
   List,
   ListItem,
   ListItemText,
   MenuItem,
-  Typography,
   Popover,
 } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
@@ -26,16 +24,11 @@ import {
 } from "material-ui-popup-state/hooks";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useRouteMatch } from "react-router";
+import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { logout } from "../../../../features/Auth/userSlice";
 import Button1 from "../../../Button";
-import {
-  colorBlack1,
-  colorBlue1,
-  colorWhite1,
-  colorWhite2,
-} from "../../../color/color";
+import { colorBlack1, colorWhite1, colorWhite2 } from "../../../color/color";
 import CustomsDrawer from "../../../Drawer";
 import { isEmpty } from "../../../tools/Tools";
 import InputSearchMobile from "../InputSearchMobile";
@@ -139,7 +132,7 @@ function RightAppbar(props) {
   const dispatch = useDispatch();
   const { push } = useHistory();
   //
-  const url = useRouteMatch();
+  // const url = useRouteMatch();
 
   //
   const popupState = usePopupState({
@@ -149,7 +142,7 @@ function RightAppbar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
+  // const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {

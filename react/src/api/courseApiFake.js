@@ -1,12 +1,12 @@
 import axiosClient from "./axiosClientFake";
 
-const courseApi = {
+const courseApiFake = {
   getAll() {
-    const url = "/course/list";
+    const url = "/courses";
     return axiosClient.get(url);
   },
   get(id) {
-    const url = `/course/${id}`;
+    const url = `/courses/${id}`;
     return axiosClient.get(url);
   },
   testGetAll(params) {
@@ -15,4 +15,4 @@ const courseApi = {
   },
 };
 
-export default courseApi;
+export default courseApiFake;

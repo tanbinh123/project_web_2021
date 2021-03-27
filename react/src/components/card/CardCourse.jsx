@@ -6,13 +6,13 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { PeopleAlt } from "@material-ui/icons";
+import Rating from "@material-ui/lab/Rating";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import ButtonSmall from "../Button/ButtonSmall";
-import Rating from "@material-ui/lab/Rating";
-import { PeopleAlt } from "@material-ui/icons";
-import { colorBlack1, colorBlack2 } from "../color/color";
 import { Link } from "react-router-dom";
+import ButtonSmall from "../Button/ButtonSmall";
+import { colorBlack1, colorBlack2 } from "../color/color";
 import { convertVND } from "../tools/Tools";
 
 const useStyles = makeStyles((theme) => ({
@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .icon": {
       fontSize: 22,
+      color: colorBlack1,
     },
     "& .number": {
       fontSize: 20,
@@ -90,8 +91,9 @@ CardCourse.propTypes = {
   image: PropTypes.string,
   avatar: PropTypes.string,
   nameAuthor: PropTypes.string,
-  bought: PropTypes.string,
-  price: PropTypes.string,
+  bought: PropTypes.number,
+  price: PropTypes.number,
+  rateStar: PropTypes.number,
 };
 
 CardCourse.defaultProps = {
@@ -100,8 +102,9 @@ CardCourse.defaultProps = {
   image: "",
   avatar: "",
   nameAuthor: "",
-  bought: "",
-  price: "",
+  bought: 0,
+  price: 0,
+  rateStar: 0,
 };
 export default function CardCourse(props) {
   const classes = useStyles();
@@ -122,7 +125,7 @@ export default function CardCourse(props) {
         setTmpDescription(description.slice(0, 140) + "...");
       }
     })();
-  }, []);
+  });
   function handleExpand() {
     if (tmpDescription.length < 144) {
       setTmpDescription(description);
@@ -161,7 +164,7 @@ export default function CardCourse(props) {
       <CardActions>
         <Grid container spacing={2}>
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-            <Link className={classes.linkAuthor}>
+            <Link to="/" className={classes.linkAuthor}>
               <Avatar src={avatar} className={classes.avatar}></Avatar>
               <span className={classes.name}>{nameAuthor}</span>
             </Link>

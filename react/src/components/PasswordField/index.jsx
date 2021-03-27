@@ -18,7 +18,7 @@ PasswordField.defaultProps = {
 };
 
 function PasswordField(props) {
-  const { name, label, form, disabled } = props;
+  const { name, label, form } = props;
   const { errors } = form;
   const hasError = errors[name];
   const [showPassword, setShowPassword] = useState(false);

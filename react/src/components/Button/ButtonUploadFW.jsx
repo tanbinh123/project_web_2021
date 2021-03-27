@@ -1,13 +1,6 @@
-import {
-  Button,
-  ThemeProvider,
-  createMuiTheme,
-  makeStyles,
-} from "@material-ui/core";
-import React, { useState } from "react";
+import { Button, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import { Controller } from "react-hook-form";
+import React, { useState } from "react";
 const useStyles = makeStyles((theme) => ({
   CustomButton: {
     background: "linear-gradient(45deg, #3498db 30%, #3498db 90%)",

@@ -1,7 +1,7 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { isEmpty } from "../../../../components/tools/Tools";
 import { register } from "../../userSlice";
 import RegisterForm from "../RegisterForm";

@@ -1,8 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Grid, makeStyles } from "@material-ui/core";
-import { colorBlack1 } from "../../../components/color/color";
-import CardCourse from "../../../components/card/CardCourse";
+import PropTypes from "prop-types";
+import React from "react";
+import CardCourse from "../../../../../components/card/CardCourse";
 
 RightCoures.propTypes = {
   dataCourse: PropTypes.array,
