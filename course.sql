@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 24/03/2021 21:48:27
+ Date: 27/03/2021 20:42:34
 */
 
 SET NAMES utf8mb4;
@@ -69,17 +69,20 @@ CREATE TABLE `course`  (
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `deleted` bit(1) NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `price` decimal(10, 2) NULL DEFAULT NULL,
+  `ratestar` double(1, 0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 'image/avatar/momo.webp', 'Khóa học demo 1', b'0', 'Demo 1');
-INSERT INTO `course` VALUES (2, 'image/avatar/momo.webp', 'Khóa học demo 2', b'0', 'Demo 2');
-INSERT INTO `course` VALUES (3, 'image/avatar/momo.webp', 'Khóa học demo 3', b'0', 'Demo 3');
-INSERT INTO `course` VALUES (4, 'image/avatar/momo.webp', 'Khóa học demo 4', b'0', 'Demo 4');
-INSERT INTO `course` VALUES (5, 'image/avatar/momo.webp', 'Khóa học demo 5', b'0', 'Demo 5');
+INSERT INTO `course` VALUES (1, 'image/avatar/momo.webp', 'Khóa học demo 1', b'0', 'Demo 1', '\"\"', 0.00, 0);
+INSERT INTO `course` VALUES (2, 'image/avatar/momo.webp', 'Khóa học demo 2', b'0', 'Demo 2', '\"\"', 0.00, 0);
+INSERT INTO `course` VALUES (3, 'image/avatar/momo.webp', 'Khóa học demo 3', b'0', 'Demo 3', '\"\"', 0.00, 0);
+INSERT INTO `course` VALUES (4, 'image/avatar/momo.webp', 'Khóa học demo 4', b'0', 'Demo 4', '\"\"', 0.00, 0);
+INSERT INTO `course` VALUES (5, 'image/avatar/momo.webp', 'Khóa học demo 5', b'0', 'Demo 5', '\"\"', 0.00, 0);
 
 -- ----------------------------
 -- Table structure for request_reset_password
@@ -93,7 +96,7 @@ CREATE TABLE `request_reset_password`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `request_reset_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of request_reset_password
@@ -107,6 +110,12 @@ INSERT INTO `request_reset_password` VALUES (41, 30, '2021-03-22 17:18:23', '662
 INSERT INTO `request_reset_password` VALUES (42, 30, '2021-03-22 17:18:47', 'da896c69d6709f61acbb79feec192542');
 INSERT INTO `request_reset_password` VALUES (43, 30, '2021-03-22 17:19:33', '5bcdf649b382467c0bf22c4f12827a0a');
 INSERT INTO `request_reset_password` VALUES (44, 30, '2021-03-22 17:20:45', '489ec2cafb3abeaef125d7c57b90bac1');
+INSERT INTO `request_reset_password` VALUES (45, 2, '2021-03-26 17:57:07', 'df3343279d56bcba1d03ebfcbfe0c93f');
+INSERT INTO `request_reset_password` VALUES (46, 2, '2021-03-26 17:57:50', '88bb9f9a77036eedb8ea5f2fe741ebd7');
+INSERT INTO `request_reset_password` VALUES (47, 2, '2021-03-26 17:59:46', 'e4cda8e22531b46cea059ef0f878246c');
+INSERT INTO `request_reset_password` VALUES (48, 2, '2021-03-27 12:06:44', 'c0906467d96609f1c95f31da9d7d18a2');
+INSERT INTO `request_reset_password` VALUES (49, 2, '2021-03-27 12:09:19', '443387710ddbf5c46dc7d30b5896eae0');
+INSERT INTO `request_reset_password` VALUES (50, 2, '2021-03-27 12:35:04', '98ec36e44a22ffd406c57759c294cb4d');
 
 -- ----------------------------
 -- Table structure for test
