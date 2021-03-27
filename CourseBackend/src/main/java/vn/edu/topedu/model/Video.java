@@ -1,7 +1,7 @@
 package vn.edu.topedu.model;
 
 import fileprocess.FileProcess;
-import vn.edu.topedu.response.model.CourseResponse;
+import vn.edu.topedu.response.model.VideoResponse;
 import vn.edu.topedu.utils.WebUtils;
 
 public class Video {
@@ -44,8 +44,8 @@ public class Video {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public CourseResponse toResponse(){
-		CourseResponse course= new CourseResponse();
+	public VideoResponse toResponse(){
+		VideoResponse course= new VideoResponse();
 		course.setId(this.id);
 		course.setDurations(WebUtils.miliSecondToDuration(this.durations));
 		course.setName(this.name);

@@ -17,25 +17,25 @@ import vn.edu.topedu.email.EmailService;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.RequestResetPassword;
 import vn.edu.topedu.jwt.security.PBKDF2Encoder;
-import vn.edu.topedu.request.ForgetPasswordByEmailRequest;
+import vn.edu.topedu.request.ForgotPasswordByEmailRequest;
 import vn.edu.topedu.request.ForgetPasswordByUsernameRequest;
 import vn.edu.topedu.response.MessageResponse;
 @RestController
-public class ForgetPasswordREST {
+public class ForgotPasswordREST {
 	@Autowired
 	private EmailService emailService;
 	@Autowired
 	private RequestResetPasswordDAO requestResetPasswordDAO;
 	@Autowired
 	private AppUserDAO appUserDAO;
-	@GetMapping("/forgetpassword")
+	@GetMapping("/forgotpassword")
 	@ResponseBody
 	public ResponseEntity<Object> get() {
 		RequestResetPassword rs=requestResetPasswordDAO.getCourse(Long.valueOf(1));
 		return ResponseEntity.ok(rs.getCode());
 		
 	}
-	@PostMapping("/forgetpassword/username")
+	@PostMapping("/forgotpassword/username")
 	@ResponseBody
 	public ResponseEntity<Object> sendMailByUsername(
 			@RequestBody ForgetPasswordByUsernameRequest forgetPasswordRequest) {
@@ -65,10 +65,10 @@ public class ForgetPasswordREST {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Username not exists.",""));
 		
 	}
-	@PostMapping("/forgetpassword/email")
+	@PostMapping("/forgotpassword/email")
 	@ResponseBody
 	public ResponseEntity<Object> sendMailByEmail(
-			@RequestBody ForgetPasswordByEmailRequest forgetPasswordRequest) {
+			@RequestBody ForgotPasswordByEmailRequest forgetPasswordRequest) {
 		System.out.println("Request: "+forgetPasswordRequest);
 		String email=forgetPasswordRequest.getEmail();	
 		AppUser appUser=appUserDAO.findUserByEmail(email);
@@ -84,7 +84,7 @@ public class ForgetPasswordREST {
 			boolean isBackground= false;	
 			try {
 				emailService.sendSimpleMessage(to, subject, text, isBackground);
-				return ResponseEntity.ok(appUser.getUserName());
+				return ResponseEntity.ok(new ForgotPasswordByEmailResponse(appUser.getUserName()));
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -94,7 +94,7 @@ public class ForgetPasswordREST {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Email not exists.",""));		
 	}
-	@PostMapping("/forgetpassword/code")
+	@PostMapping("/forgotpassword/code")
 	@ResponseBody
 	public ResponseEntity<Object> resetPassword(
 			@RequestBody Map<String,Object> body) {
@@ -112,7 +112,7 @@ public class ForgetPasswordREST {
 	}
 	@Autowired
 	private PBKDF2Encoder passwordEncoder;
-	@PostMapping("/forgetpassword/change")
+	@PostMapping("/forgotpassword/change")
 	@ResponseBody
 	public ResponseEntity<Object> changePassword(
 			@RequestBody Map<String,Object> body) {
@@ -131,6 +131,22 @@ public class ForgetPasswordREST {
 			
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
+	}
+	public class ForgotPasswordByEmailResponse{
+		private String username;
+
+		public ForgotPasswordByEmailResponse(String username) {
+			super();
+			this.username = username;
+		}
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
 	}
 	
 

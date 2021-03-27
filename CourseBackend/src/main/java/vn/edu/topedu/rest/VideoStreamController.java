@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Mono;
 import vn.edu.topedu.model.Video;
-import vn.edu.topedu.response.model.CourseResponse;
+import vn.edu.topedu.response.model.VideoResponse;
 import vn.edu.topedu.service.IVideoStreamService;
 
 @RestController
@@ -34,9 +34,9 @@ public class VideoStreamController {
 		return Mono.just(videoStreamService.prepareContent(fileName, fileType, httpRangeList));
 	}
 	@GetMapping("")
-	public List<CourseResponse> videos() {
+	public List<VideoResponse> videos() {
 		Video video=new Video(1,"image/mp4.jpg", 5000,"demo");
-		List<CourseResponse> videos= Arrays.asList(video.toResponse()
+		List<VideoResponse> videos= Arrays.asList(video.toResponse()
 				);
 		return videos;
 	}
