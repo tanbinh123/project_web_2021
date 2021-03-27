@@ -1,5 +1,7 @@
 package vn.edu.topedu.response.model;
 
+import org.springframework.http.server.reactive.ServerHttpRequest;
+
 public class CourseResponse {
 	private int id;
 	private String title;
@@ -8,10 +10,12 @@ public class CourseResponse {
     private String imgAvatar;
     private String nameAuthor;
     private double rateStar;
+    private int price;
+    private int bought;
     
 	
 	public CourseResponse(int id, String title, String description, String thumbnail, String imgAvatar,
-			String nameAuthor, double rateStar) {
+			String nameAuthor, double rateStar, int price,int bought) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -20,6 +24,8 @@ public class CourseResponse {
 		this.imgAvatar = imgAvatar;
 		this.nameAuthor = nameAuthor;
 		this.rateStar = rateStar;
+		this.price=price;
+		this.bought=bought;
 	}
 	public int getId() {
 		return id;
@@ -62,6 +68,22 @@ public class CourseResponse {
 	}
 	public void setRateStar(double rateStar) {
 		this.rateStar = rateStar;
+	}
+	public void updateResource(String before) {
+		this.imgAvatar=before+this.imgAvatar;
+		this.thumbnail=before+this.thumbnail;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getBought() {
+		return bought;
+	}
+	public void setBought(int bought) {
+		this.bought = bought;
 	}
 	
 	

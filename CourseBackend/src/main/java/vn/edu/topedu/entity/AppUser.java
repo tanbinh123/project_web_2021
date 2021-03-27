@@ -35,7 +35,7 @@ public class AppUser {
    
     private Boolean deleted =false;
     @Column(name = "Avatar", length = 255, nullable = false)
-    private String avater ="image/avatar/momo.webp";
+    private String avatar ="image/avatar/momo.webp";
     @Column(name = "Email", length = 255, nullable = false)
     private String email;
  
@@ -73,11 +73,11 @@ public class AppUser {
 
 
 	public String getAvater() {
-		return avater;
+		return avatar;
 	}
 
-	public void setAvater(String avater) {
-		this.avater = avater;
+	public void setAvater(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getEmail() {

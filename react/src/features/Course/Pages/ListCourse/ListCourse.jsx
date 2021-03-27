@@ -1,5 +1,6 @@
 import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import courseApi from "../../../../api/courseApi";
 import courseApiFake from "../../../../api/courseApiFake";
 import { colorBlack1, colorWhite1 } from "../../../../components/color/color";
 import Header from "../../../../components/header/index";
@@ -32,7 +33,9 @@ function ListCourse(props) {
   });
   useEffect(() => {
     (async () => {
-      const data = await courseApiFake.testGetAll(filter);
+      //const data = await courseApiFake.testGetAll(filter);
+      const data = await courseApi.getAll(filter);
+      console.log(data);
       setDataCourse(data);
     })();
   }, [filter]);

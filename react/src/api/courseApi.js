@@ -1,9 +1,9 @@
 import axiosClient from "./axiosClient";
 
 const courseApi = {
-  getAll() {
+  getAll(params) {
     const url = "/course/list";
-    return axiosClient.get(url);
+    return axiosClient.get(url,{params});
   },
   get(id) {
     const url = `/course/${id}`;

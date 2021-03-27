@@ -24,9 +24,11 @@ public class Course {
     @Column(name = "title", length = 255, nullable = false)
     private String title="";
     @Column(name = "price", length = 10, nullable = false)
-    private int price;
+    private int price=0;
+    @Column(name = "bought", length = 10, nullable = false)
+    private int bought=0;
     @Column(name = "ratestar", length = 10, nullable = false)
-    private double ratestar;
+    private double ratestar=0;
     
     @Column(name = "Deleted", length = 1, nullable = false )
     private Boolean deleted =false;
@@ -54,6 +56,31 @@ public class Course {
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getBought() {
+		return bought;
+	}
+	public void setBought(int bought) {
+		this.bought = bought;
+	}
+	public double getRatestar() {
+		return ratestar;
+	}
+	public void setRatestar(double ratestar) {
+		this.ratestar = ratestar;
+	}
+	
 	
 	
 	

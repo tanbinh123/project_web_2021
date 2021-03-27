@@ -30,4 +30,19 @@ public class ResourceController {
 		}
 		return new byte[0];
 	}
+	@RequestMapping(value = "/user/{username}/image/{fileName}", produces = MediaType.IMAGE_JPEG_VALUE)
+	public @ResponseBody byte[] getFile2(@PathVariable String fileName,@PathVariable String username) {
+		try {
+			Path path = FileProcess.getPath("user\\"+username+"\\img",fileName);
+			//System.out.println(path.toString());
+			InputStream in = Files.newInputStream(path);
+			byte[] targetArray = new byte[in.available()];
+			in.read(targetArray);
+			return targetArray;
+		} catch (IOException e) {
+			//e.printStackTrace();
+			System.out.println("Image not found");
+		}
+		return new byte[0];
+	}
 }
