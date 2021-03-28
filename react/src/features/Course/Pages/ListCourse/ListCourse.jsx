@@ -33,8 +33,8 @@ function ListCourse(props) {
   });
   useEffect(() => {
     (async () => {
-      //const data = await courseApiFake.testGetAll(filter);
-      const data = await courseApi.getAll(filter);
+      const data = await courseApiFake.testGetAll(filter);
+      // const data = await courseApi.getAll(filter);
       console.log(data);
       setDataCourse(data);
     })();

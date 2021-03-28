@@ -11,7 +11,7 @@ function generateCourses(number) {
       thumbnail: faker.image.technics(),
       imgAvatar: faker.image.people(),
       nameAuthor: faker.name.findName(),
-      rateStar: faker.random.number(5),
+      rateStar: Math.random() * 5,
       bought: faker.random.number(10000),
       price: faker.random.number(10000000),
       coursesDetail: [{}],

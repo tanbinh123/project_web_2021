@@ -1,18 +1,14 @@
-import { Avatar, Grid } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import { PeopleAlt } from "@material-ui/icons";
-import Rating from "@material-ui/lab/Rating";
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  AccessTime,
+  LibraryBooks,
+  PhoneAndroid,
+  PlayCircleFilled,
+  SentimentVerySatisfied,
+} from "@material-ui/icons";
+import React from "react";
 import ButtonSmall from "../Button/ButtonSmall";
-import { colorBlack1, colorBlack2, colorWhite1 } from "../color/color";
+import { colorBlack1 } from "../color/color";
 import { convertVND } from "../tools/Tools";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,8 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
     boxShadow: "0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%)",
     borderRadius: "4%",
-
-    height: 450,
   },
   image: {
     width: "calc(100% - 2px)",
@@ -49,12 +43,47 @@ const useStyles = makeStyles((theme) => ({
     userSelect: "none",
   },
   bgImage: {
-    backgroundImage: "url(../assets/images/qiqi.jpg)",
+    background:
+      "linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../assets/images/qiqi.jpg)",
     width: "100%",
     paddingTop: "56%",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "50% 50%",
     backgroundSize: "100% auto",
+  },
+  content: {
+    display: "flex",
+    flexFlow: "column nowrap",
+    "& ul": {
+      listStyle: "none",
+      marginTop: 20,
+      "& > li": {
+        display: "flex",
+        color: colorBlack1,
+        margin: "7px 0px",
+        "& > span": {
+          marginLeft: 7,
+        },
+      },
+    },
+  },
+  price: {
+    fontSize: "32px",
+    fontWeight: "normal",
+    color: "#f05123",
+    margin: " 0 auto",
+    opacity: " .8",
+    marginBottom: 20,
+  },
+  iconPlay: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 100,
+    height: 100,
+    color: "white",
+    cursor: "pointer",
   },
 }));
 CardCourseDetail.propTypes = {};
@@ -65,17 +94,31 @@ export default function CardCourseDetail(props) {
 
   return (
     <div className={classes.root}>
-      <div className={classes.image}>
+      <div className={classes.image} title="Xem giới thiệu khóa học">
         <div className={classes.bgImage}></div>
+        <PlayCircleFilled className={classes.iconPlay} />
       </div>
       <div className={classes.content}>
-        <p>{convertVND(2000000)}</p>
+        <p className={classes.price}>{convertVND(2000000)}</p>
         <ButtonSmall title="Đăng Kí Học" />
-        <p>Số lượng bài học</p>
-        <p>Thời Lượng</p>
-        <p>Truy cập được từ SmartPhone và PC</p>
-        <p>Trọn đời truy cập</p>
-        <p>Đảng bảo chất lượng</p>
+        <ul>
+          <li>
+            <LibraryBooks />
+            <span>Tổng số bài học {"0"}</span>
+          </li>
+          <li>
+            <AccessTime />
+            <span>Thời Lượng học ????</span>
+          </li>
+          <li>
+            <PhoneAndroid />
+            <span>Có thể học bằng SmartPhone</span>
+          </li>
+          <li>
+            <SentimentVerySatisfied />
+            <span>Trọn đời truy cập</span>
+          </li>
+        </ul>
       </div>
     </div>
   );
