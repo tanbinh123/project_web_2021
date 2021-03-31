@@ -8,3 +8,5 @@ export const colorWhite1 = "#ecf0f1";
 export const colorWhite2 = "#bdc3c7";
 export const colorOrange1 = "#f1c40f";
 export const colorOrange2 = "#f39c12";
+export const colorGray1 = "#95a5a6";
+export const colorGray2 = "#7f8c8d";

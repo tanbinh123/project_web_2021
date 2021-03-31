@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import {
   colorBlack2,
+  colorGray2,
   colorOrange2,
 } from "../../../../../components/color/color";
 
@@ -38,6 +39,26 @@ const LeftCDCSS = makeStyles(() => ({
           top: 0,
           left: 0,
           color: "#e67e22",
+        },
+      },
+    },
+  },
+  contentCourse: {
+    "&> h2": {
+      color: colorBlack2,
+      margin: "30px 0px 20px 0px",
+    },
+    "&> ul": {
+      listStyle: "none",
+      display: "flex",
+      flexFlow: "row wrap",
+      "&> li": {
+        fontSize: 16,
+        fontWeight: 400,
+        "&> svg": {
+          color: colorGray2,
+          fontSize: 10,
+          margin: "0 10px",
         },
       },
     },

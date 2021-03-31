@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import { CheckCircle } from "@material-ui/icons";
+import { CheckCircle, FiberManualRecord } from "@material-ui/icons";
 import React from "react";
 import IconBreadcrumbs from "../../../../../components/Breadcrumbs/Breadcrumbs";
 import SimpleAccordion from "../../../../../components/SimpleAccordion/SimpleAccordion";
@@ -44,6 +44,22 @@ function LeftCD(props) {
                 <CheckCircle />
                 <span>Hiểu hơn về cách internet và máy vi tính hoạt động</span>
               </li>
+            </ul>
+          </div>
+        </Grid>
+        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+          <div className={classes.contentCourse}>
+            <h2>Nội dung khóa học</h2>
+            <ul>
+              <li>? phần</li>
+              <li>
+                <FiberManualRecord />
+              </li>
+              <li>? bài học</li>
+              <li>
+                <FiberManualRecord />
+              </li>
+              <li>thời lượng ? giờ ? phút</li>
             </ul>
           </div>
           <SimpleAccordion />

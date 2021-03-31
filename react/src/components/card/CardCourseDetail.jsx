@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     position: "sticky",
     top: "82px",
-    marginLeft: "24px",
     marginBottom: "28px",
 
     background: "#f5f5f5",

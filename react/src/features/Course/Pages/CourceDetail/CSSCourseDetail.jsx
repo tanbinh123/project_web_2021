@@ -8,9 +8,6 @@ const CourseDetailCSS = makeStyles((theme) => ({
   },
   left: {
     display: "block",
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
   },
   right: {},
   backgroundHeader: {
