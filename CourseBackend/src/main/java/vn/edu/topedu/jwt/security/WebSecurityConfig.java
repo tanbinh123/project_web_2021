@@ -56,6 +56,7 @@ public class WebSecurityConfig {
 				.pathMatchers("/course/**").permitAll()
 				.pathMatchers("/forgotpassword/**").permitAll()
 				.pathMatchers("/pay/**").permitAll()
+				.pathMatchers("/").permitAll()
 				.pathMatchers("/mail/**").denyAll()
 //				.pathMatchers("/mail/**").permitAll()
 //				.pathMatchers("/test/**").permitAll()
