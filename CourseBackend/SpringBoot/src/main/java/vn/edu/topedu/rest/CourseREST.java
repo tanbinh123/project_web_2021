@@ -24,6 +24,7 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.UserCourseDAO;
 import vn.edu.topedu.entity.Course;
+import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.model.CourseResponse;
 
 
@@ -53,22 +54,23 @@ public class CourseREST implements IMyHost {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<Object> list(HttpServletRequest serverHttpRequest
-			, @RequestParam(defaultValue = "1") int _page 
-			, @RequestParam(defaultValue = "9") int _limit 
+			, @RequestParam(defaultValue = "-1") int _page 
+			, @RequestParam(defaultValue = "-1") int _limit 
 			, @RequestParam(defaultValue = "idaz") String sort 
 			) {
-		_page=(_page==0)?1:_page;
+		
 //		System.out.println("_page: "+_page);
 //		System.out.println("_limit: "+_limit);
 		//System.out.println("sort: "+sort);
-		
+		_page=(_page<=0)?1:_page;
 		List<CourseResponse> lstCourse = owerCourseDAO.getListCourse(_page, _limit, sort);
 		
 		for(CourseResponse c:lstCourse) {
 			c.updateResource(getUrlResource(serverHttpRequest));
 			
 		}
-		return ResponseEntity.ok(lstCourse);
+		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, 170);
+		return ResponseEntity.ok(pageResponse);
 	}
 //	@GetMapping(value = "/{id}")
 //	public ResponseEntity<Object> getCourse(@PathVariable Integer id,ServerHttpRequest serverHttpRequest) {

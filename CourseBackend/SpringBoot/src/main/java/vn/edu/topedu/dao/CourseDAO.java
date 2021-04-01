@@ -23,8 +23,13 @@ public class CourseDAO {
 		String sql = "Select c from " + Course.class.getName() + " c " //
 				+ " where c.deleted=0 group by c.id order by c.id desc ";
 		Query query = this.entityManager.createQuery(sql, Course.class);
+		
 		query.setFirstResult(_page*_limit);
-		query.setMaxResults(_limit);
+		if(_limit!=-1) {
+			System.out.println(_limit);
+			query.setMaxResults(_limit);
+			
+		}
 		return query.getResultList();
 	}
 

@@ -55,7 +55,7 @@ public class OwerCourseDAO {
 		sort = sort.toLowerCase();
 
 		String[] a = sort.split(",");
-		System.out.println(Arrays.toString(a));
+		//System.out.println(Arrays.toString(a));
 		boolean started= true;
 		for(String str:a) {	
 			
@@ -91,7 +91,11 @@ public class OwerCourseDAO {
 		Query query = this.entityManager.createQuery(sql, CourseResponse.class);
 
 		query.setFirstResult(_page * _limit);
-		query.setMaxResults(_limit);
+		if(_limit!=-1) {
+			
+			query.setMaxResults(_limit);
+			
+		}
 		return query.getResultList();
 	}
 

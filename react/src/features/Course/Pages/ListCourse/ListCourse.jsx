@@ -59,7 +59,8 @@ function ListCourse(props) {
   useEffect(() => {
     (async () => {
       try {
-        const { data, pagination } = await courseApiFake.testGetAll(filter);
+        // const { data, pagination } = await courseApiFake.testGetAll(filter);
+        const { data, pagination } = await courseApi.getAll(filter);
         // const data = await courseApi.getAll(filter);
         setDataCourse(data);
         setPagination(pagination);
