@@ -25,3 +25,30 @@
 7. Web được chạy tại
    > [localhost:3000](http://localhost:3000/)
 8. Thành Công
+
+- [x] Write the press release
+- [x] Update the website
+- [ ] Contact the media 
+
+[sang](https://google.com)
+
+```
+npm start
+dfsf
+fsf
+``` 
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+```mermaid
+graph TD
+    fa:fa-check-->fa:fa-coffee
+```
+
+![dog](https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*)
