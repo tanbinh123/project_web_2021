@@ -1,5 +1,10 @@
 import { makeStyles } from "@material-ui/core";
-import { colorBlack1, colorWhite1 } from "../../../../components/color/color";
+import {
+  colorBlack1,
+  colorBlack2,
+  colorOrange2,
+  colorWhite1,
+} from "../../../../components/color/color";
 
 const CourseDetailCSS = makeStyles((theme) => ({
   root: {
@@ -13,6 +18,18 @@ const CourseDetailCSS = makeStyles((theme) => ({
   backgroundHeader: {
     height: "64px",
     background: colorBlack1,
+  },
+  smallTitle: {
+    fontSize: 16,
+  },
+  iconClose: {
+    float: "right",
+    fontSize: 18,
+    color: colorBlack2,
+    cursor: "pointer",
+    "&:hover": {
+      color: colorOrange2,
+    },
   },
 }));
 export default CourseDetailCSS;

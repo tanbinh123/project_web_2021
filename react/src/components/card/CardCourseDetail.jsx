@@ -90,12 +90,20 @@ CardCourseDetail.propTypes = {};
 CardCourseDetail.defaultProps = {};
 export default function CardCourseDetail(props) {
   const classes = useStyles();
+  const { onClickOpenVideo } = props;
+  function handleOnClickOpenVideo() {
+    if (!onClickOpenVideo) return;
+    onClickOpenVideo();
+  }
 
   return (
     <div className={classes.root}>
       <div className={classes.image} title="Xem giới thiệu khóa học">
         <div className={classes.bgImage}></div>
-        <PlayCircleFilled className={classes.iconPlay} />
+        <PlayCircleFilled
+          className={classes.iconPlay}
+          onClick={handleOnClickOpenVideo}
+        />
       </div>
       <div className={classes.content}>
         <p className={classes.price}>{convertVND(2000000)}</p>

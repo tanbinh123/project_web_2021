@@ -131,7 +131,7 @@ export default function CardCourse(props) {
         setTmpDescription(description.slice(0, 140) + "...");
       }
     })();
-  });
+  }, []);
   function handleExpand() {
     if (tmpDescription.length < 144) {
       setTmpDescription(description);

@@ -1,10 +1,16 @@
 import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core";
+import { Pagination } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import courseApi from "../../../../api/courseApi";
 import courseApiFake from "../../../../api/courseApiFake";
-import { colorBlack1, colorWhite1 } from "../../../../components/color/color";
+import {
+  colorBlack1,
+  colorOrange2,
+  colorWhite1,
+} from "../../../../components/color/color";
 import Header from "../../../../components/header/index";
 import RightCoures from "./components/RightCoures";
+import SkeletonCourse from "./components/SkeletonCourse";
 
 ListCourse.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -23,22 +29,52 @@ const useStyles = makeStyles((theme) => ({
     height: "64px",
     background: colorBlack1,
   },
+  pagination: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    flex: "1 1 auto",
+    justifyContent: "center",
+    padding: "20px 0px 50px 0px",
+    "&> nav > ul> li> .MuiPaginationItem-textPrimary.Mui-selected": {
+      color: "#fff",
+      backgroundColor: colorOrange2,
+    },
+  },
 }));
 function ListCourse(props) {
   const classes = useStyles();
   const [dataCourse, setDataCourse] = useState([]);
-  const [filter, setFilter] = useState({
+  const [pagination, setPagination] = useState({
+    _page: 1,
+    _limit: 9,
+    _totalRows: 10,
+  });
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilters] = useState({
     _page: 1,
     _limit: 9,
   });
   useEffect(() => {
     (async () => {
-      const data = await courseApiFake.testGetAll(filter);
-      // const data = await courseApi.getAll(filter);
-      console.log(data);
-      setDataCourse(data);
+      try {
+        const { data, pagination } = await courseApiFake.testGetAll(filter);
+        // const data = await courseApi.getAll(filter);
+        setDataCourse(data);
+        setPagination(pagination);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
     })();
   }, [filter]);
+
+  function handlePageChange(e, page) {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      _page: page,
+    }));
+  }
+
   return (
     <>
       <Header />
@@ -59,7 +95,19 @@ function ListCourse(props) {
               xs={12}
             >
               <Paper elevation={0}>
-                <RightCoures dataCourse={dataCourse} />
+                {loading ? (
+                  <SkeletonCourse />
+                ) : (
+                  <RightCoures dataCourse={dataCourse} />
+                )}
+                <Box className={classes.pagination}>
+                  <Pagination
+                    color="primary"
+                    count={Math.ceil(pagination._totalRows / pagination._limit)}
+                    page={pagination._page}
+                    onChange={handlePageChange}
+                  ></Pagination>
+                </Box>
               </Paper>
             </Grid>
           </Grid>
