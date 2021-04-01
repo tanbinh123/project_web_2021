@@ -3,11 +3,13 @@ package vn.edu.topedu.rest;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,7 @@ import vn.edu.topedu.jwt.security.PBKDF2Encoder;
 import vn.edu.topedu.request.AuthRequest;
 import vn.edu.topedu.request.SignUpRequest;
 import vn.edu.topedu.response.AuthResponse;
+import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.response.SignUpResponse;
 import vn.edu.topedu.response.model.AccountResponse;
 
@@ -39,11 +42,14 @@ public class AuthenticationREST implements IMyHost {
 	@Autowired
 	private UserCourseDAO userCourseDAO;
 	
-
+	//@CrossOrigin(origins = "http://localhost:3000"/* ,"http://192.168.0.222:3000"} */)
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<Object> login(@RequestBody AuthRequest ar, HttpServletRequest serverHttpRequest) {
+	public ResponseEntity<Object> login(@RequestBody AuthRequest ar, HttpServletRequest serverHttpRequest, HttpServletResponse httpServletResponse) {
+//		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+		httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
+		//httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
 		AppUser user = appUserDAO.findUserAccount(ar.getUsername());
-		if (passwordEncoder.encode(ar.getPassword()).equals(user.getEncrytedPassword())) {
+		if (user!=null&&passwordEncoder.encode(ar.getPassword()).equals(user.getEncrytedPassword())) {
 			AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(user));
 			AccountResponse account = new AccountResponse();
 			account.setAvatar(getUrlResource(serverHttpRequest)+user.getAvater());
@@ -55,9 +61,9 @@ public class AuthenticationREST implements IMyHost {
 			//System.out.println(Arrays.toString(lstCourse.toArray()));
 			return ResponseEntity.ok(authResponse);
 		} else {
-			BodyBuilder rs = ResponseEntity.status(HttpStatus.UNAUTHORIZED);
+			MessageResponse messageResponse= new MessageResponse("User not exists.", "Tài khoản không hợp lệ.");
 			
-			return rs.build();
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(messageResponse);
 		}
 
 	}
@@ -90,10 +96,9 @@ public class AuthenticationREST implements IMyHost {
 		}
 		BodyBuilder rs2 = ResponseEntity.status(HttpStatus.BAD_REQUEST);
 		rs2.body("Email or username is unvalid.");
+		MessageResponse messageResponse= new MessageResponse("Email or username is unvalid.", "Tài khoản không hợp lệ.");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse);
 		
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email or username is unvalid.");
-		
-//		return new ResponseEntity("Eror", HttpStatus.BAD_REQUEST);
 
 	}
 
