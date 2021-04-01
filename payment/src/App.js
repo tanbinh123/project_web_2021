@@ -1,4 +1,4 @@
-import { Grid, makeStyles, Paper } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Blank from "./features/Blank";
