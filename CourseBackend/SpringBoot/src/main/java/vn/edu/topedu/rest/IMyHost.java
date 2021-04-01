@@ -1,12 +1,12 @@
 package vn.edu.topedu.rest;
 
-import org.springframework.http.server.reactive.ServerHttpRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import vn.edu.topedu.consts.VariableConst;
 
 public interface IMyHost {
-	public default String getUrlResource(ServerHttpRequest serverHttpRequest) {
-		return String.format("%s://%s:%d/", serverHttpRequest.getURI().getScheme(),serverHttpRequest.getURI().getHost(),serverHttpRequest.getURI().getPort())+VariableConst.RESOURCE_BEFORE;
+	public default String getUrlResource(HttpServletRequest httpServletRequest) {
+		return String.format("%s://%s:%d/", httpServletRequest.getScheme(),httpServletRequest.getServerName(),httpServletRequest.getServerPort())+VariableConst.RESOURCE_BEFORE;
 	}
 
 }

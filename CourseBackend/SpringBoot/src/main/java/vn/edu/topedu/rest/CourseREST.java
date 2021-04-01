@@ -2,10 +2,12 @@ package vn.edu.topedu.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,7 +52,7 @@ public class CourseREST implements IMyHost {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity<Object> list(ServerHttpRequest serverHttpRequest
+	public ResponseEntity<Object> list(HttpServletRequest serverHttpRequest
 			, @RequestParam(defaultValue = "1") int _page 
 			, @RequestParam(defaultValue = "9") int _limit 
 			, @RequestParam(defaultValue = "idaz") String sort 
@@ -74,7 +76,7 @@ public class CourseREST implements IMyHost {
 //		return ResponseEntity.ok(lstCourse);
 //	}	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Object> getCourse(@PathVariable Integer id,ServerHttpRequest serverHttpRequest) {
+	public ResponseEntity<Object> getCourse(@PathVariable Integer id,HttpServletRequest serverHttpRequest) {
 		CourseResponse course = owerCourseDAO.getCourse(id);
 		course.updateResource(getUrlResource(serverHttpRequest));
 		return ResponseEntity.ok(course);

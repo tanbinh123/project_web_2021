@@ -2,17 +2,17 @@ package vn.edu.topedu.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import vn.edu.topedu.consts.VariableConst;
 import vn.edu.topedu.dao.AppUserDAO;
 import vn.edu.topedu.dao.UserCourseDAO;
 import vn.edu.topedu.entity.AppUser;
@@ -41,7 +41,7 @@ public class AuthenticationREST implements IMyHost {
 	
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<Object> login(@RequestBody AuthRequest ar, ServerHttpRequest serverHttpRequest) {
+	public ResponseEntity<Object> login(@RequestBody AuthRequest ar, HttpServletRequest serverHttpRequest) {
 		AppUser user = appUserDAO.findUserAccount(ar.getUsername());
 		if (passwordEncoder.encode(ar.getPassword()).equals(user.getEncrytedPassword())) {
 			AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(user));
@@ -56,14 +56,14 @@ public class AuthenticationREST implements IMyHost {
 			return ResponseEntity.ok(authResponse);
 		} else {
 			BodyBuilder rs = ResponseEntity.status(HttpStatus.UNAUTHORIZED);
-			// rs.
+			
 			return rs.build();
 		}
 
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public ResponseEntity<Object> signup(ServerHttpRequest serverHttpRequest,@RequestBody SignUpRequest signUpRequest) {
+	public ResponseEntity<Object> signup(HttpServletRequest serverHttpRequest,@RequestBody SignUpRequest signUpRequest) {
 		System.out.println(signUpRequest);
 //		Test test = new Test();
 //		test.setName(true);
