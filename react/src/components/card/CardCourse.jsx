@@ -178,7 +178,7 @@ export default function CardCourse(props) {
           <Grid item xl={9} lg={7} md={7} sm={7} xs={7}>
             <Rating
               name="half-rating-read"
-              defaultValue={rateStar}
+              value={rateStar}
               precision={0.5}
               readOnly
             />

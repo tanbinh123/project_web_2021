@@ -1,5 +1,6 @@
 import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
+import { parse } from "query-string";
 import React, { useEffect, useState } from "react";
 import courseApi from "../../../../api/courseApi";
 import courseApiFake from "../../../../api/courseApiFake";
@@ -11,6 +12,7 @@ import {
 import Header from "../../../../components/header/index";
 import RightCoures from "./components/RightCoures";
 import SkeletonCourse from "./components/SkeletonCourse";
+import TabPrice from "./components/TabPrice";
 
 ListCourse.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +63,7 @@ function ListCourse(props) {
         // const data = await courseApi.getAll(filter);
         setDataCourse(data);
         setPagination(pagination);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -72,6 +75,14 @@ function ListCourse(props) {
     setFilters((prevFilters) => ({
       ...prevFilters,
       _page: page,
+    }));
+  }
+  function handleSortChange(values) {
+    const tmp = parse(values);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      _sort: tmp._sort,
+      _order: tmp._order,
     }));
   }
 
@@ -95,6 +106,7 @@ function ListCourse(props) {
               xs={12}
             >
               <Paper elevation={0}>
+                <TabPrice onChange={handleSortChange} />
                 {loading ? (
                   <SkeletonCourse />
                 ) : (
