@@ -6,7 +6,7 @@ import ListCourse from "./Pages/ListCourse/ListCourse";
 CourseFeatures.propTypes = {};
 function CourseFeatures(props) {
   const { path } = useRouteMatch();
-  console.log(path);
+  // console.log(path);
   return (
     <>
       <Switch>

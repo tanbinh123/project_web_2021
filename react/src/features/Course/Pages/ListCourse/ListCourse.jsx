@@ -1,7 +1,8 @@
 import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
-import { parse } from "query-string";
-import React, { useEffect, useState } from "react";
+import { parse, stringify } from "query-string";
+import React, { useEffect, useMemo, useState } from "react";
+import { useHistory, useLocation } from "react-router";
 import courseApi from "../../../../api/courseApi";
 import courseApiFake from "../../../../api/courseApiFake";
 import {
@@ -45,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 function ListCourse(props) {
   const classes = useStyles();
+  const history = useHistory();
+  const location = useLocation();
   const [dataCourse, setDataCourse] = useState([]);
   const [pagination, setPagination] = useState({
     _page: 1,
@@ -52,39 +55,68 @@ function ListCourse(props) {
     _totalRows: 10,
   });
   const [loading, setLoading] = useState(true);
-  const [filter, setFilters] = useState({
-    _page: 1,
-    _limit: 9,
-  });
+  // const [filters, setFilters] = useState({
+  //   _page: 1,
+  //   _limit: 9,
+  // });
+
+  const queryParams = useMemo(() => {
+    const params = parse(location.search);
+    return {
+      ...params,
+      _page: Number.parseInt(params._page) || 1,
+      _limit: Number.parseInt(params._limit) || 9,
+    };
+  }, [location.search]);
+
   useEffect(() => {
     (async () => {
       try {
-        // const { data, pagination } = await courseApiFake.testGetAll(filter);
-        const { data, pagination } = await courseApi.getAll(filter);
+        const { data, pagination } = await courseApiFake.testGetAll(
+          queryParams
+        );
+        // const { data, pagination } = await courseApi.getAll(filter);
         // const data = await courseApi.getAll(filter);
         setDataCourse(data);
         setPagination(pagination);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     })();
-  }, [filter]);
+  }, [queryParams]);
 
   function handlePageChange(e, page) {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
+    // setFilters((prevFilters) => ({
+    //   ...prevFilters,
+    //   _page: page,
+    // }));
+    const filters = {
+      ...queryParams,
       _page: page,
-    }));
+    };
+    history.push({
+      pathname: history.location.pathname,
+      search: stringify(filters),
+    });
   }
   function handleSortChange(values) {
     const tmp = parse(values);
-    setFilters((prevFilters) => ({
-      ...prevFilters,
+    // setFilters((prevFilters) => ({
+    //   ...prevFilters,
+    // _sort: tmp._sort,
+    // _order: tmp._order,
+    // }));
+    const filters = {
+      ...queryParams,
       _sort: tmp._sort,
       _order: tmp._order,
-    }));
+    };
+    history.push({
+      pathname: history.location.pathname,
+      search: stringify(filters),
+    });
   }
 
   return (
@@ -107,7 +139,7 @@ function ListCourse(props) {
               xs={12}
             >
               <Paper elevation={0}>
-                <TabPrice onChange={handleSortChange} />
+                <TabPrice onChange={handleSortChange} value={location.search} />
                 {loading ? (
                   <SkeletonCourse />
                 ) : (

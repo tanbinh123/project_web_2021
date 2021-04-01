@@ -127,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
 RightAppbar.propTypes = {};
 
 function RightAppbar(props) {
-  const user = useSelector((state) => state.user.current);
+  const user = useSelector((state) => state.user.current) || {};
   const classes = useStyles();
   const dispatch = useDispatch();
   const { push } = useHistory();

@@ -1,4 +1,5 @@
 import { unwrapResult } from "@reduxjs/toolkit";
+import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -9,9 +10,10 @@ import LoginForm from "../LoginForm";
 Login.propTypes = {};
 
 function Login(props) {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const { push } = useHistory();
-  const user = useSelector((state) => state.user.current);
+  const user = useSelector((state) => state.user.current) || {};
   // check redirect
   useEffect(() => {
     if (!isEmpty(user)) {
@@ -24,10 +26,17 @@ function Login(props) {
       const action = login(values);
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
-      console.log("Login Thành Công - Login success");
-      push("/");
+      console.log(!!user);
+      if (!!user) {
+        push("/");
+        // console.log(user);
+        // console.log("Login Thành Công - Login success");
+      } else {
+        enqueueSnackbar("Đăng nhập không thành công", { variant: "error" });
+      }
     } catch (error) {
       console.log(error);
+      enqueueSnackbar("Đăng nhập không thành công", { variant: "error" });
     }
   };
 
