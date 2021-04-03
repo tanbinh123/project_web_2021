@@ -54,12 +54,17 @@ InputSearchAppbar.propTypes = {};
 
 function InputSearchAppbar(props) {
   const classes = useStyles();
+  const handleOnChangSearch = (event) => {
+    console.log(event.target.value);
+  };
+
   return (
     <div className={classNames(classes.search, classes.showDesktop)}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
       <InputBase
+        onChange={handleOnChangSearch}
         placeholder="Search…"
         classes={{
           root: classes.inputRoot,

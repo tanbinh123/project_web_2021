@@ -11,6 +11,7 @@ import {
   colorWhite1,
 } from "../../../../components/color/color";
 import Header from "../../../../components/header/index";
+import LeftCourse from "./components/LeftCourse";
 import RightCoures from "./components/RightCoures";
 import SkeletonCourse from "./components/SkeletonCourse";
 import TabPrice from "./components/TabPrice";
@@ -66,6 +67,8 @@ function ListCourse(props) {
       ...params,
       _page: Number.parseInt(params._page) || 1,
       _limit: Number.parseInt(params._limit) || 9,
+      _sort: params._sort || "updateAt",
+      _order: params._order || "desc",
     };
   }, [location.search]);
 
@@ -127,7 +130,9 @@ function ListCourse(props) {
         <Container>
           <Grid container spacing={2}>
             <Grid item className={classes.left} xl={3} lg={3} md={3}>
-              <Paper elevation={0}>left course</Paper>
+              <Paper elevation={0}>
+                <LeftCourse />
+              </Paper>
             </Grid>
             <Grid
               item
