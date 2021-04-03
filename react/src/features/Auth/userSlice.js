@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useSnackbar } from "notistack";
 import userApi from "../../api/userApi";
 import StorageKeys from "../../constants/StorageKeys";
 

@@ -2,8 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import {
   colorBlack1,
   colorBlack2,
-  colorOrange2,
-  colorWhite1,
+  colorOrange2
 } from "../../../../components/color/color";
 
 const CourseDetailCSS = makeStyles((theme) => ({

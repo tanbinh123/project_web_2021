@@ -36,7 +36,7 @@ public class OwerCourseDAO {
 
 	public CourseResponse getCourse(int id) {
 		String sql = "Select new vn.edu.topedu.response.model.CourseResponse( "
-				+ "oc.course.id,oc.course.title, oc.course.description, oc.course.poster,oc.appUser.avatar, oc.appUser.userName,oc.course.ratestar,oc.course.price ,oc.course.bought "
+				+ "oc.course.id,oc.course.title, oc.course.description, oc.course.poster,oc.appUser.avatar, oc.appUser.userName,oc.course.ratestar,oc.course.price ,oc.course.bought,oc.course.updateAt "
 				+ ") from " + OwerCourse.class.getName() + " oc " //
 				+ " where oc.course.deleted=0 and oc.course.id= :id group by oc.course.id order by oc.course.id desc ";
 		Query query = this.entityManager.createQuery(sql, CourseResponse.class);

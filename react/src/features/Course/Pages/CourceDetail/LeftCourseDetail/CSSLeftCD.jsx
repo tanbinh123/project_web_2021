@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import {
   colorBlack2,
   colorGray2,
-  colorOrange2,
+ // colorOrange2,
 } from "../../../../../components/color/color";
 
 const LeftCDCSS = makeStyles(() => ({

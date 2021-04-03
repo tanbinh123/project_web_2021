@@ -1,6 +1,6 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useSnackbar } from "notistack";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { isEmpty } from "../../../../components/tools/Tools";
@@ -12,15 +12,15 @@ Register.propTypes = {};
 function Register(props) {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const { push } = useHistory();
+  const history = useHistory();
 
   // check redirect
   const user = useSelector((state) => state.user.current) || {};
-  useEffect(() => {
-    if (!isEmpty(user)) {
-      push("/");
-    }
-  }, []);
+
+  if (!isEmpty(user)) {
+    history.push("/");
+  }
+
   const handleOnSubmit = async (values) => {
     try {
       const action = register(values);
@@ -28,7 +28,7 @@ function Register(props) {
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
       if (!!user) {
-        push("/");
+        history.push("/");
         // console.log(user);
         // console.log("Login Thành Công - Login success");
       } else {

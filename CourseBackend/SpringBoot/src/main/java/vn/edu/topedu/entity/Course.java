@@ -8,11 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
  
 @Entity
 
 @Table(name = "Course")
-public class Course {
+public class Course extends AHasResource {
      
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,7 @@ public class Course {
     private Integer id;
  
     @Column(name = "poster", length = 255, nullable = false)
+    @JsonIgnore
     private String poster="image/avatar/momo.webp";
     @Column(name = "description", length = 255, nullable = false)
     private String description="";
@@ -89,6 +92,10 @@ public class Course {
 	}
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
+	}
+	
+	public String getThumbnail() {
+		return this.beforeResource+this.poster;
 	}
 	
 	

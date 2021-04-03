@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
-import RightCDCSS from "./CSSRightCD";
 import CardCourseDetail from "../../../../../components/card/CardCourseDetail";
+import RightCDCSS from "./CSSRightCD";
 
-RightCD.propTypes = {};
+//RightCD.propTypes = {};
 
 function RightCD(props) {
   const { onClickOpenVideo } = props;

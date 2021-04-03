@@ -33,12 +33,12 @@ public class CourseDAO {
 		return query.getResultList();
 	}
 
-	public List<Course> getCourse(int id) {
+	public Course getCourse(int id) {
 		String sql = "Select c from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 and c.id= :id group by c.id order by c.id desc ";
+				+ " where c.deleted=0 and c.id= :id ";
 		Query query = this.entityManager.createQuery(sql, Course.class);
 		query.setParameter("id", id);
-		return query.getResultList();
+		return (Course) query.getSingleResult();
 	}
 //	public List<Course> getCourse(int id) {
 //		String sql = "Select c from " + Course.class.getName() + " c " //

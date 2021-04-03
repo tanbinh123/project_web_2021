@@ -1,6 +1,6 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useSnackbar } from "notistack";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { isEmpty } from "../../../../components/tools/Tools";
@@ -15,11 +15,10 @@ function Login(props) {
   const { push } = useHistory();
   const user = useSelector((state) => state.user.current) || {};
   // check redirect
-  useEffect(() => {
-    if (!isEmpty(user)) {
-      push("/");
-    }
-  }, []);
+
+  if (!isEmpty(user)) {
+    push("/");
+  }
 
   const handleOnSubmit = async (values) => {
     try {
