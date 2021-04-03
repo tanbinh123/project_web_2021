@@ -41,6 +41,7 @@ public class AuthenticationREST implements IMyHost {
 	private AppUserDAO appUserDAO;
 	@Autowired
 	private UserCourseDAO userCourseDAO;
+	//private String url="/login"
 	
 	//@CrossOrigin(origins = "http://localhost:3000"/* ,"http://192.168.0.222:3000"} */)
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

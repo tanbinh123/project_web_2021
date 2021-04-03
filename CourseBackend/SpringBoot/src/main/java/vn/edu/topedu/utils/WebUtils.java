@@ -27,10 +27,10 @@ public class WebUtils {
 		String format=(started)?" %s %s ":",%s %s ";
 		
 		switch (key) {
-		case "az":
+		case "asc":
 			return String.format(format, field, "ASC");
 
-		case "za":
+		case "desc":
 			return String.format(format, field,"DESC");
 
 		default:

@@ -1,7 +1,6 @@
-import React from "react";
+import { Grid, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { Box, Grid, makeStyles } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+import React from "react";
 import CardCourseSkeleton from "../../../../../components/card/CardCourseSekeleton";
 
 SkeletonCourse.propTypes = {

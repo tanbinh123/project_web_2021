@@ -56,20 +56,20 @@ public class CourseREST implements IMyHost {
 	public ResponseEntity<Object> list(HttpServletRequest serverHttpRequest
 			, @RequestParam(defaultValue = "-1") int _page 
 			, @RequestParam(defaultValue = "-1") int _limit 
-			, @RequestParam(defaultValue = "idaz") String sort 
+			, @RequestParam(defaultValue = "id:asc") String _sort 
 			) {
 		
 //		System.out.println("_page: "+_page);
 //		System.out.println("_limit: "+_limit);
 		//System.out.println("sort: "+sort);
 		_page=(_page<=0)?1:_page;
-		List<CourseResponse> lstCourse = owerCourseDAO.getListCourse(_page, _limit, sort);
+		List<CourseResponse> lstCourse = owerCourseDAO.getListCourse(_page, _limit, _sort);
 		
 		for(CourseResponse c:lstCourse) {
 			c.updateResource(getUrlResource(serverHttpRequest));
 			
 		}
-		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, 170);
+		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, 170,_sort);
 		return ResponseEntity.ok(pageResponse);
 	}
 //	@GetMapping(value = "/{id}")

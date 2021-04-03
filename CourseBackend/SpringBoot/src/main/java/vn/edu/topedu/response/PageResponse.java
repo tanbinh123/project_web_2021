@@ -8,21 +8,23 @@ public class PageResponse {
 	private List<CourseResponse> data;
 	private Pagination pagination;
 	
-	public PageResponse(List<CourseResponse> lstCourse,int _limit, int _page, int _totalRows) {
+	public PageResponse(List<CourseResponse> lstCourse,int _limit, int _page, int _totalRows, String _sort) {
 		super();
 		this.data = lstCourse;
-		this.pagination = new Pagination(_limit, _page, _totalRows);
+		this.pagination = new Pagination(_limit, _page, _totalRows,_sort);
 	}
 
 	public class Pagination{
 		private int _limit;
 		private int _page;
 		private int _totalRows;
-		public Pagination(int _limit, int _page, int _totalRows) {
+		private String _sort;
+		public Pagination(int _limit, int _page, int _totalRows,String _sort) {
 			super();
 			this._limit = _limit;
 			this._page = _page;
 			this._totalRows = _totalRows;
+			this._sort=_sort;
 		}
 		public int get_limit() {
 			return _limit;
@@ -41,6 +43,12 @@ public class PageResponse {
 		}
 		public void set_totalRows(int _totalRows) {
 			this._totalRows = _totalRows;
+		}
+		public String get_sort() {
+			return _sort;
+		}
+		public void set_sort(String _sort) {
+			this._sort = _sort;
 		}
 		
 		

@@ -4,7 +4,6 @@ import { parse, stringify } from "query-string";
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import courseApi from "../../../../api/courseApi";
-import courseApiFake from "../../../../api/courseApiFake";
 import {
   colorBlack1,
   colorOrange2,
@@ -67,17 +66,19 @@ function ListCourse(props) {
       ...params,
       _page: Number.parseInt(params._page) || 1,
       _limit: Number.parseInt(params._limit) || 9,
-      _sort: params._sort || "updateAt",
-      _order: params._order || "desc",
+      // _sort: params._sort || "updateAt",
+      // _order: params._order || "desc",
+      _sort: params._sort || "updateAt:desc",
     };
   }, [location.search]);
 
   useEffect(() => {
     (async () => {
       try {
-        const { data, pagination } = await courseApiFake.testGetAll(
-          queryParams
-        );
+        // const { data, pagination } = await courseApiFake.testGetAll(
+        //   queryParams
+        // );
+        const { data, pagination } = await courseApi.getAll(queryParams);
         // const { data, pagination } = await courseApi.getAll(filter);
         // const data = await courseApi.getAll(filter);
         setDataCourse(data);
@@ -105,20 +106,17 @@ function ListCourse(props) {
     });
   }
   function handleSortChange(values) {
-    const tmp = parse(values);
-    // setFilters((prevFilters) => ({
-    //   ...prevFilters,
-    // _sort: tmp._sort,
-    // _order: tmp._order,
-    // }));
+    const sort = values;
+
     const filters = {
       ...queryParams,
-      _sort: tmp._sort,
-      _order: tmp._order,
+      _sort: sort,
+      _page: 1,
     };
+
     history.push({
       pathname: history.location.pathname,
-      search: stringify(filters),
+      search: stringify(filters, null, null, escape()),
     });
   }
 
