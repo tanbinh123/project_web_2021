@@ -17,7 +17,7 @@ public class Main {
 	@RequestMapping(value = "/")
 	@ResponseBody
 	public String hello() {
-		return "Hello World from Spring Reactive";
+		return "Hello World from Spring Boot Started Web";
 	}
 
 	

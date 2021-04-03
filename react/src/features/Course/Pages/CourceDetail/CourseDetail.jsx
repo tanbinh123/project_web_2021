@@ -1,27 +1,24 @@
 import {
   Box,
   Container,
-  DialogActions,
+  // DialogActions,
   DialogContent,
   DialogTitle,
   Grid,
-  makeStyles,
-  Paper,
+  //makeStyles,
+  Paper
 } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import { Close } from "@material-ui/icons";
 import React, { useState } from "react";
-import { useParams } from "react-router";
 import Header from "../../../../components/header/index";
 import CourseDetailCSS from "./CSSCourseDetail";
 import LeftCD from "./LeftCourseDetail/LeftCD";
 import RightCD from "./RightCourseDetail/RightCD";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import Typography from "@material-ui/core/Typography";
-import { Close } from "@material-ui/icons";
 
 function CourseDetail() {
   const classes = CourseDetailCSS();
-  const { idCourse } = useParams();
+ // const { idCourse } = useParams();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);

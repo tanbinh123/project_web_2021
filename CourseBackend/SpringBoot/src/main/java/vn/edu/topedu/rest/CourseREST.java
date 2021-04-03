@@ -72,15 +72,10 @@ public class CourseREST implements IMyHost {
 		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, 170,_sort);
 		return ResponseEntity.ok(pageResponse);
 	}
-//	@GetMapping(value = "/{id}")
-//	public ResponseEntity<Object> getCourse(@PathVariable Integer id,ServerHttpRequest serverHttpRequest) {
-//		List<Course> lstCourse = courseDAO.getCourse(id);
-//		return ResponseEntity.ok(lstCourse);
-//	}	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Object> getCourse(@PathVariable Integer id,HttpServletRequest serverHttpRequest) {
-		CourseResponse course = owerCourseDAO.getCourse(id);
-		course.updateResource(getUrlResource(serverHttpRequest));
+		Course course = courseDAO.getCourse(id);
+		course.setBeforeResource(getUrlResource(serverHttpRequest));
 		return ResponseEntity.ok(course);
 	}	
 	@DeleteMapping("/{id}")

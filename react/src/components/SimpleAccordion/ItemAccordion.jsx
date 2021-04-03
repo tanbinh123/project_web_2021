@@ -1,22 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Grid,
-  makeStyles,
-  Typography,
+  makeStyles
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   colorBlack1,
   colorBlack2,
-  colorGray2,
+
   colorOrange2,
-  colorWhite1,
+  colorWhite1
 } from "../color/color";
-import { Link } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   heading: {
     display: "flex",

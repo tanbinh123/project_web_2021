@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
-import { colorWhite1, colorWhite2 } from "../color/color";
 import ItemAccordion from "./ItemAccordion";
 
 const useStyles = makeStyles((theme) => ({
