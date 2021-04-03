@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import {
   FormControl,
   InputLabel,
@@ -7,12 +5,13 @@ import {
   MenuItem,
   Select,
   Tab,
-  Tabs,
+  Tabs
 } from "@material-ui/core";
 import { parse } from "query-string";
+import React, { useEffect, useState } from "react";
 import { colorOrange2 } from "../../../../../components/color/color";
 
-TabPrice.propTypes = {};
+//TabPrice.propTypes = {};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   formControl: {
-    display: "flex",
+    //display: "flex",
     justifyContent: "center",
     margin: "15px 20px 0px 20px",
 

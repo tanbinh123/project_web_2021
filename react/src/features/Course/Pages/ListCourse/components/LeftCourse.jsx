@@ -1,8 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core";
+import React from "react";
 
-LeftCourse.propTypes = {};
+//LeftCourse.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: "Open Sans, sans-serif",
