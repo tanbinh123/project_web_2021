@@ -103,23 +103,15 @@ function ListCourse(props) {
       search: stringify(filters),
     });
   }
-  function handleSortChange(values) {
-    console.log("values: "+values);
-    //const tmp = parse(values);
-    const sort= values;
-    console.log("sort: "+sort);
-    //console.log("tmp: "+tmp);
-    // setFilters((prevFilters) => ({
-    //   ...prevFilters,
-    // _sort: tmp._sort,
-    // _order: tmp._order,
-    // }));
+  function handleSortChange(values) {    
+    const sort= values;  
+  
     const filters = {
       ...queryParams,
-      //_sort: stringify(tmp),
       _sort: sort,
+      _page:1,
     };
-    //console.log(filters);
+    
    
     history.push({
       pathname: history.location.pathname,
