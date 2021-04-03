@@ -2,13 +2,14 @@ package vn.edu.topedu.response;
 
 import java.util.List;
 
-import vn.edu.topedu.response.model.CourseResponse;
+import vn.edu.topedu.entity.Course;
 
 public class PageResponse {
-	private List<CourseResponse> data;
+	
+	private List<Course> data;
 	private Pagination pagination;
 	
-	public PageResponse(List<CourseResponse> lstCourse,int _limit, int _page, int _totalRows, String _sort) {
+	public PageResponse(List<Course> lstCourse,int _limit, int _page, int _totalRows, String _sort) {
 		super();
 		this.data = lstCourse;
 		this.pagination = new Pagination(_limit, _page, _totalRows,_sort);
@@ -55,11 +56,11 @@ public class PageResponse {
 		
 	}
 
-	public List<CourseResponse> getData() {
+	public List<Course> getData() {
 		return data;
 	}
 
-	public void setData(List<CourseResponse> data) {
+	public void setData(List<Course> data) {
 		this.data = data;
 	}
 

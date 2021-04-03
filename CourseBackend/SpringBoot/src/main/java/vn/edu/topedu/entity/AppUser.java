@@ -49,7 +49,9 @@ public class AppUser implements UserDetails {
 	private String email;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
+	@JoinTable(name = "user_role", 
+	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
 	private List<AppRole> authorities;
 
 	public Long getUserId() {

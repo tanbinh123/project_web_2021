@@ -24,6 +24,7 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.UserCourseDAO;
 import vn.edu.topedu.entity.Course;
+import vn.edu.topedu.entity.DetailCourseEntity;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.model.CourseResponse;
 
@@ -58,15 +59,11 @@ public class CourseREST implements IMyHost {
 			, @RequestParam(defaultValue = "-1") int _limit 
 			, @RequestParam(defaultValue = "id:asc") String _sort 
 			) {
-		
-//		System.out.println("_page: "+_page);
-//		System.out.println("_limit: "+_limit);
-		//System.out.println("sort: "+sort);
 		_page=(_page<=0)?1:_page;
-		List<CourseResponse> lstCourse = owerCourseDAO.getListCourse(_page, _limit, _sort);
+		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort);
 		
-		for(CourseResponse c:lstCourse) {
-			c.updateResource(getUrlResource(serverHttpRequest));
+		for(Course c:lstCourse) {
+			c.setBeforeResource(getUrlResource(serverHttpRequest));
 			
 		}
 		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, 170,_sort);
@@ -74,7 +71,7 @@ public class CourseREST implements IMyHost {
 	}
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Object> getCourse(@PathVariable Integer id,HttpServletRequest serverHttpRequest) {
-		Course course = courseDAO.getCourse(id);
+		DetailCourseEntity course = courseDAO.getCourse(id);
 		course.setBeforeResource(getUrlResource(serverHttpRequest));
 		return ResponseEntity.ok(course);
 	}	

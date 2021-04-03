@@ -4,15 +4,17 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
  
 @Entity
-
 @Table(name = "Course")
 public class Course extends AHasResource {
      
@@ -21,10 +23,10 @@ public class Course extends AHasResource {
     @Column(name = "id", nullable = false)
     private Integer id;
  
-    @Column(name = "poster", length = 255, nullable = false)
+    @Column(name = "poster", length = 255)
     @JsonIgnore
     private String poster="image/avatar/momo.webp";
-    @Column(name = "description", length = 255, nullable = false)
+    @Column(name = "description", length = 255)
     private String description="";
     @Column(name = "title", length = 255, nullable = false)
     private String title="";
@@ -34,11 +36,17 @@ public class Course extends AHasResource {
     private int price=0;
     @Column(name = "bought", length = 10, nullable = false)
     private int bought=0;
-    @Column(name = "ratestar", length = 10, nullable = false)
-    private double ratestar=0;
-    
+    @Column(name = "rateStar", length = 10, nullable = false)
+    private double rateStar=0;
+    @JsonIgnore
     @Column(name = "Deleted", length = 1, nullable = false )
     private Boolean deleted =false;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "poster_id", nullable = false)
+    @JsonIgnore
+    private AppUser appUser;
+    
 	public Integer getId() {
 		return id;
 	}
@@ -81,11 +89,14 @@ public class Course extends AHasResource {
 	public void setBought(int bought) {
 		this.bought = bought;
 	}
-	public double getRatestar() {
-		return ratestar;
+//	public byte getRateStar() {
+//		return (byte)Math.round(rateStar);
+//	}
+	public double getRateStar() {
+		return rateStar;
 	}
-	public void setRatestar(double ratestar) {
-		this.ratestar = ratestar;
+	public void setRateStar(double rateStar) {
+		this.rateStar = rateStar;
 	}
 	public Date getUpdateAt() {
 		return updateAt;
@@ -96,6 +107,15 @@ public class Course extends AHasResource {
 	
 	public String getThumbnail() {
 		return this.beforeResource+this.poster;
+	}
+	
+	
+	public String getImgAvatar() {
+		return this.beforeResource+appUser.getAvater();
+	}
+	
+	public String getNameAuthor() {
+		return appUser.getUsername();
 	}
 	
 	
