@@ -1,5 +1,7 @@
 package vn.edu.topedu.entity;
  
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +25,8 @@ public class Course {
     private String description="";
     @Column(name = "title", length = 255, nullable = false)
     private String title="";
+    @Column(name = "update_at", nullable = false)
+    private Date updateAt=new Date();
     @Column(name = "price", length = 10, nullable = false)
     private int price=0;
     @Column(name = "bought", length = 10, nullable = false)
@@ -80,6 +84,13 @@ public class Course {
 	public void setRatestar(double ratestar) {
 		this.ratestar = ratestar;
 	}
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
+	
 	
 	
 	

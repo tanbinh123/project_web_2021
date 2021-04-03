@@ -48,7 +48,7 @@ public class OwerCourseDAO {
 	public List<CourseResponse> getListCourse(int _page, int _limit, String sort/* , String sort2 */) {
 		--_page;
 		String sql = "Select new vn.edu.topedu.response.model.CourseResponse( "
-				+ "oc.course.id,oc.course.title, oc.course.description, oc.course.poster,oc.appUser.avatar, oc.appUser.userName,oc.course.ratestar,oc.course.price,oc.course.bought "
+				+ "oc.course.id,oc.course.title, oc.course.description, oc.course.poster,oc.appUser.avatar, oc.appUser.userName,oc.course.ratestar,oc.course.price,oc.course.bought,oc.course.updateAt "
 				+ ") from " + OwerCourse.class.getName() + " oc " //
 				+ " where oc.course.deleted=0 group by oc.course.id  order by  ";
 		String sqlSort = "";
@@ -58,26 +58,31 @@ public class OwerCourseDAO {
 		//System.out.println(Arrays.toString(a));
 		boolean started= true;
 		for(String str:a) {	
+			int index=str.indexOf(':');
+//			System.out.println(str);
+//			System.out.println(index);
+			String _order= str.substring(index+1);
+			String tmpSort= str.substring(0,index);
+//			System.out.println(String.format("%s%s", _order, tmpSort));
+			switch (tmpSort) {
+			case "id":
+				sqlSort += WebUtils.sort(_order, "oc.course.id", started);
+				break;
 			
-			switch (str) {
-			case "idaz":
-				sqlSort += WebUtils.sort("az", "oc.course.id", started);
+			case "bought":
+				sqlSort += WebUtils.sort(_order, "oc.course.bought", started);
 				break;
-			case "idza":
-				sqlSort += WebUtils.sort("za", "oc.course.id", started);
+			
+			case "ratestar":
+				sqlSort += WebUtils.sort(_order, "oc.course.ratestar", started);
 				break;
-			case "boughtaz":
-				sqlSort += WebUtils.sort("az", "oc.course.bought", started);
+			case "price":
+				sqlSort += WebUtils.sort(_order, "oc.course.price", started);
 				break;
-			case "boughtza":
-				sqlSort += WebUtils.sort("za", "oc.course.bought", started);
+			case "updateat":
+				sqlSort += WebUtils.sort(_order, "oc.course.updateAt", started);
 				break;
-			case "ratestaraz":
-				sqlSort += WebUtils.sort("az", "oc.course.ratestar", started);
-				break;
-			case "ratestarza":
-				sqlSort += WebUtils.sort("za", "oc.course.ratestar", started);
-				break;
+			
 				
 			default:
 				break;

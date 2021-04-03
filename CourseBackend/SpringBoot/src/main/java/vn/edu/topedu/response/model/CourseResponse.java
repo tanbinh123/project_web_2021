@@ -1,5 +1,7 @@
 package vn.edu.topedu.response.model;
 
+import java.util.Date;
+
 import org.springframework.http.server.reactive.ServerHttpRequest;
 
 public class CourseResponse {
@@ -12,10 +14,11 @@ public class CourseResponse {
     private double rateStar;
     private int price;
     private int bought;
+    private Date updateAt;
     
 	
 	public CourseResponse(int id, String title, String description, String thumbnail, String imgAvatar,
-			String nameAuthor, double rateStar, int price,int bought) {
+			String nameAuthor, double rateStar, int price,int bought, Date updateAt) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -26,6 +29,7 @@ public class CourseResponse {
 		this.rateStar = rateStar;
 		this.price=price;
 		this.bought=bought;
+		this.updateAt=updateAt;
 	}
 	public int getId() {
 		return id;
@@ -85,6 +89,13 @@ public class CourseResponse {
 	public void setBought(int bought) {
 		this.bought = bought;
 	}
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
+	
 	
 	
     
