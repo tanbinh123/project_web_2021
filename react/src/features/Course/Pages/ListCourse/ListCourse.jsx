@@ -4,6 +4,7 @@ import { parse, stringify } from "query-string";
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import courseApi from "../../../../api/courseApi";
+import courseApiFake from "../../../../api/courseApiFake";
 import {
   colorBlack1,
   colorOrange2,
@@ -75,10 +76,9 @@ function ListCourse(props) {
   useEffect(() => {
     (async () => {
       try {
-        // const { data, pagination } = await courseApiFake.testGetAll(
-        //   queryParams
-        // );
-        const { data, pagination } = await courseApi.getAll(queryParams);
+        const { data, pagination } =
+          // (await courseApi.getAll(queryParams)) ||
+          await courseApiFake.testGetAll(queryParams);
         // const { data, pagination } = await courseApi.getAll(filter);
         // const data = await courseApi.getAll(filter);
         setDataCourse(data);

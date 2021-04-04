@@ -13,6 +13,10 @@ const courseApiFake = {
     const url = "/courses";
     return axiosClient.get(url, { params });
   },
+  search(params) {
+    const url = "/courses";
+    return axiosClient.get(url, { params });
+  },
 };
 
 export default courseApiFake;

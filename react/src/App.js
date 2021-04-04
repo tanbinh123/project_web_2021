@@ -8,6 +8,7 @@ import Home from "./features/home";
 import NotFound404 from "./features/NotFound";
 import SimpleReactFileUpload from "./features/test/FormUpload/SimpleReactFileUpload";
 import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
+import TestSearch from "./features/test/TestSearch";
 import "./index.css";
 App.propTypes = {};
 
@@ -26,6 +27,7 @@ function App(props) {
         />
         <Route path="/forgot-password" component={ForgotPassword} exact />
         <Route path="/" component={Home} exact />
+        <Route path="/testsearch" component={TestSearch} exact />
         <Route path="/*" component={NotFound404} />
         <Route path="/auth/*" component={NotFound404} />
       </Switch>
