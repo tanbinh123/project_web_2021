@@ -24,18 +24,17 @@ function Login(props) {
     try {
       const action = login(values);
       const resultAction = await dispatch(action);
-      const user = unwrapResult(resultAction);
-      console.log(!!user);
-      if (!!user) {
+      const response = unwrapResult(resultAction);
+      // console.log(response.data?.message);
+      if (!!!response.status) {
         push("/");
         // console.log(user);
         // console.log("Login Thành Công - Login success");
       } else {
-        enqueueSnackbar("Đăng nhập không thành công", { variant: "error" });
+        enqueueSnackbar(response.data.message.en, { variant: "error" });
       }
     } catch (error) {
       console.log(error);
-      enqueueSnackbar("Đăng nhập không thành công", { variant: "error" });
     }
   };
 

@@ -23,7 +23,7 @@ export const login = createAsyncThunk("/login", async (payload) => {
   }
   // save to local storage
 
-  return data.user;
+  return data;
 });
 const userSlice = createSlice({
   name: "user",
@@ -46,7 +46,7 @@ const userSlice = createSlice({
       state.current = action.payload;
     },
     [login.fulfilled]: (state, action) => {
-      state.current = action.payload;
+      state.current = action.payload.user;
     },
   },
 });
