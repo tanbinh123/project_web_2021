@@ -1,10 +1,10 @@
 package vn.edu.topedu.request;
 
-import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFileRequest {
 	private String name;
-	private FilePart file;
+	private MultipartFile file;
 	public String getName() {
 		return name;
 	}
@@ -12,10 +12,10 @@ public class UploadFileRequest {
 		this.name = name;
 	}
 	
-	public FilePart getFile() {
+	public MultipartFile getFile() {
 		return file;
 	}
-	public void setFile(FilePart file) {
+	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
 	/**
@@ -24,7 +24,7 @@ public class UploadFileRequest {
 	public UploadFileRequest() {
 		super();
 	}
-	public UploadFileRequest(String name, FilePart file) {
+	public UploadFileRequest(String name, MultipartFile file) {
 		super();
 		this.name = name;
 		this.file = file;

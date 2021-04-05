@@ -2,6 +2,7 @@ package vn.edu.topedu.entity;
  
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,9 +25,14 @@ public class Course extends AHasResource {
     @Column(name = "id", nullable = false)
     private Integer id;
  
-    @Column(name = "poster", length = 255)
+    
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "poster", referencedColumnName = "id")
     @JsonIgnore
-    private String poster="image/avatar/momo.webp";
+    private ResourceImage poster;
+    
+    
     @Column(name = "description", length = 255)
     private String description="";
     @Column(name = "title", length = 255, nullable = false)
@@ -53,12 +60,8 @@ public class Course extends AHasResource {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getPoster() {
-		return poster;
-	}
-	public void setPoster(String poster) {
-		this.poster = poster;
-	}
+	
+	
 	public String getDescription() {
 		return description;
 	}
@@ -106,7 +109,7 @@ public class Course extends AHasResource {
 	}
 	
 	public String getThumbnail() {
-		return this.beforeResource+this.poster;
+		return this.beforeResource+this.poster.getPath();
 	}
 	
 	

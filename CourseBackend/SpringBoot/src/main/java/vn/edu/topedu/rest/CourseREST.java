@@ -24,7 +24,7 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.UserCourseDAO;
 import vn.edu.topedu.entity.Course;
-import vn.edu.topedu.entity.DetailCourseEntity;
+import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.model.CourseResponse;
 

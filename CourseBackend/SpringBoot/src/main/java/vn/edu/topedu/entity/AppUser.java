@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -43,8 +44,12 @@ public class AppUser implements UserDetails {
 	@Column(name = "Deleted", length = 1, nullable = false)
 
 	private Boolean deleted = false;
-	@Column(name = "Avatar", length = 255, nullable = false)
-	private String avatar = "image/avatar/momo.webp";
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+    private ResourceImage avatar;
+	
+	
 	@Column(name = "Email", length = 255, nullable = false)
 	private String email;
 
@@ -83,12 +88,10 @@ public class AppUser implements UserDetails {
 	}
 
 	public String getAvater() {
-		return avatar;
+		return avatar.getPath();
 	}
 
-	public void setAvater(String avatar) {
-		this.avatar = avatar;
-	}
+	
 
 	public String getEmail() {
 		return email;

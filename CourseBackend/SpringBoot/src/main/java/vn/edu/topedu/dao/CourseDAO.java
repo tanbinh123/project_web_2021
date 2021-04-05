@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.Course;
-import vn.edu.topedu.entity.DetailCourseEntity;
 import vn.edu.topedu.entity.OwerCourse;
+import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
 import vn.edu.topedu.response.model.CourseResponse;
 import vn.edu.topedu.utils.WebUtils;
 
