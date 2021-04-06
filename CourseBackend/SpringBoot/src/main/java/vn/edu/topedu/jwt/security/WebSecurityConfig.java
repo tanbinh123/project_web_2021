@@ -40,7 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/**/*.css", "/**/*.js")
 				.permitAll().antMatchers("/login").permitAll().antMatchers("/signup").permitAll()
 				.antMatchers("/resource/**").permitAll().antMatchers("/course/**").permitAll()
-				.antMatchers("/forgotpassword/**").permitAll().antMatchers("/pay/**").permitAll().antMatchers("/")
+				.antMatchers("/forgotpassword/**").permitAll()
+				.antMatchers("/pay/**").permitAll()
+				.antMatchers("/test/**").permitAll()
+				.antMatchers("/")
 				.permitAll().antMatchers("/mail/**").denyAll().antMatchers("/auth/**").permitAll().anyRequest()
 				.authenticated().and()
 				.addFilterBefore(new TokenAuthenticationFilter(jwtUtil,appUserDAO), BasicAuthenticationFilter.class);

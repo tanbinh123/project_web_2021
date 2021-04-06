@@ -105,7 +105,7 @@ public class ForgotPasswordREST {
 		String trueCode=rrp.getCode();
 		if(code.equals(trueCode)) {
 			
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(new MessageResponse("Code valid.","Xác minh thành công."));
 		
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
@@ -127,7 +127,7 @@ public class ForgotPasswordREST {
 			AppUser user=appUserDAO.findUserAccount(username);
 			user.setEncrytedPassword(passwordEncoder.encode(password));
 			appUserDAO.updateUser(user);
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(new MessageResponse("Password change successful.","Thay đổi mật khẩu thành công."));
 			
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		

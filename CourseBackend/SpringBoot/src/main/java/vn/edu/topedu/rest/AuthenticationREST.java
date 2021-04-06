@@ -45,7 +45,7 @@ public class AuthenticationREST implements IMyHost {
 	
 	//@CrossOrigin(origins = "http://localhost:3000"/* ,"http://192.168.0.222:3000"} */)
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<Object> login(@RequestBody AuthRequest ar, HttpServletRequest serverHttpRequest, HttpServletResponse httpServletResponse) {
+	public ResponseEntity<Object> login(@RequestBody AuthRequest ar, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 //		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
 		httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
 		//httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
@@ -53,11 +53,14 @@ public class AuthenticationREST implements IMyHost {
 		if (user!=null&&passwordEncoder.encode(ar.getPassword()).equals(user.getEncrytedPassword())) {
 			AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(user));
 			AccountResponse account = new AccountResponse();
-			account.setAvatar(getUrlResource(serverHttpRequest)+user.getAvater());
+			account.setAvatar(getUrlResource(httpServletRequest)+user.getAvater());
 			//account.setAvatar(VariableConst.SRC_IMAGE_BEFORE + FileProcess.encodeFileToBase64(user.getAvater()));
 			account.setUsername(user.getUserName());
 			authResponse.setUser(account);
 			List<Course> lstCourse = userCourseDAO.getOwerCourse(user.getUserId());
+			for(Course c:lstCourse) {
+				c.setBeforeResource(this.getUrlResource(httpServletRequest));
+			}
 			authResponse.setCourses(lstCourse);
 			//System.out.println(Arrays.toString(lstCourse.toArray()));
 			return ResponseEntity.ok(authResponse);
