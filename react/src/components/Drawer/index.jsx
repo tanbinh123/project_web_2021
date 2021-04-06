@@ -10,6 +10,8 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import clsx from "clsx";
 import React from "react";
 import PropTypes from "prop-types";
+import { Person } from "@material-ui/icons";
+import InputSearchAppbar from "../header/components/InputSearch";
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -51,14 +53,12 @@ function CustomDrawer(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button>
+          <ListItemIcon>
+            <Person />
+          </ListItemIcon>
+          <ListItemText>Thanh Sang</ListItemText>
+        </ListItem>
       </List>
       <Divider />
       <List>

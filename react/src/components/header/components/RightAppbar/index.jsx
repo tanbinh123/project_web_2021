@@ -26,7 +26,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { logout } from "../../../../features/Auth/userSlice";
+import { useRecoilState } from "recoil";
+import { DataUser, removeLocalStorage } from "../../../../app/DataUser";
 import Button1 from "../../../Button";
 import { colorBlack1, colorWhite1, colorWhite2 } from "../../../color/color";
 import CustomsDrawer from "../../../Drawer";
@@ -127,9 +128,8 @@ const useStyles = makeStyles((theme) => ({
 RightAppbar.propTypes = {};
 
 function RightAppbar(props) {
-  const user = useSelector((state) => state.user.current) || {};
+  const [user, setUser] = useRecoilState(DataUser);
   const classes = useStyles();
-  const dispatch = useDispatch();
   const { push } = useHistory();
   //
   // const url = useRouteMatch();
@@ -229,7 +229,8 @@ function RightAppbar(props) {
     setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
   }
   const handleLogOut = () => {
-    dispatch(logout());
+    setUser({});
+    removeLocalStorage();
     push("/");
     popupState.close();
   };
@@ -321,7 +322,6 @@ function RightAppbar(props) {
         {isEmpty(user) ? rightNotLogin : rightHadLogin}
       </div>
       <div className={classNames(classes.sectionMobile, classes.floatRight)}>
-        <InputSearchMobile />
         <IconButton
           aria-label="show more"
           aria-haspopup="true"

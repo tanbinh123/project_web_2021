@@ -1,41 +1,33 @@
-import { unwrapResult } from "@reduxjs/toolkit";
 import { useSnackbar } from "notistack";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import userApi from "../../../../api/userApi";
+import { addLocalStorage, DataUser } from "../../../../app/DataUser";
 import { isEmpty } from "../../../../components/tools/Tools";
-import { login } from "../../userSlice";
 import LoginForm from "../LoginForm";
 
 Login.propTypes = {};
 
 function Login(props) {
   const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
   const { push } = useHistory();
-  const user = useSelector((state) => state.user.current) || {};
+  const [user, setUser] = useRecoilState(DataUser);
   // check redirect
 
-  if (!isEmpty(user)) {
-    push("/");
-  }
+  useEffect(() => {
+    if (!isEmpty(user)) {
+      push("/");
+    }
+  }, [user]);
 
   const handleOnSubmit = async (values) => {
-    try {
-      const action = login(values);
-      const resultAction = await dispatch(action);
-      const user = unwrapResult(resultAction);
-      console.log(!!user);
-      if (!!user) {
-        push("/");
-        // console.log(user);
-        // console.log("Login Thành Công - Login success");
-      } else {
-        enqueueSnackbar("Đăng nhập không thành công", { variant: "error" });
-      }
-    } catch (error) {
-      console.log(error);
-      enqueueSnackbar("Đăng nhập không thành công", { variant: "error" });
+    const data = await userApi.login(values);
+    if (!!!data.status) {
+      setUser(data.user);
+      addLocalStorage(data);
+    } else {
+      enqueueSnackbar(data.data.message.en, { variant: "error" });
     }
   };
 

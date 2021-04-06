@@ -1,8 +1,9 @@
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import userApi from "../../api/userApi";
+import { DataUser } from "../../app/DataUser";
 import { isEmpty } from "../../components/tools/Tools";
 import FormForgotPassword from "./components/Form/FormForgotPassword";
 import FormForgotPasswordCode from "./components/Form/FormForgotPasswordCode";
@@ -19,7 +20,7 @@ function ForgotPassword(props) {
     code: "",
     password: "",
   });
-  const user = useSelector((state) => state.user.current);
+  const [user, setUser] = useRecoilState(DataUser);
   // check redirect
   useEffect(() => {
     if (!isEmpty(user)) {

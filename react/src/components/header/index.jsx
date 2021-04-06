@@ -20,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
     color: colorWhite1,
     lineHeight: "3",
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block",
+    display: "block",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
     },
   },
   floatLeft: {
@@ -159,31 +159,32 @@ export default function Header() {
       >
         <Toolbar>
           <Grid container>
-            <Grid item lg={1}></Grid>
-            <Grid item lg={2} md={3} sm={3} xs={3}>
+            <Grid item xl={1} lg={1}></Grid>
+            <Grid item xl={2} lg={2} md={3} sm={3} xs={3}>
               <Link to="/">
                 <img src="/assets/images/logo2.png" className={classes.logo} />
               </Link>
             </Grid>
-            <Grid item lg={2} md={2}>
+            <Grid item xl={2} lg={2} md={2}>
               <Link to="/course" className={classes.linkNone}>
                 <Typography className={classes.course}>KHÓA HỌC</Typography>
               </Link>
             </Grid>
-            <Grid item lg={3} md={3} sm={6}>
+            <Grid item xl={3} lg={3} md={4} sm={6} xs={7}>
               <InputSearchAppbar />
             </Grid>
             <Grid
               item
+              xl={3}
               lg={3}
-              md={4}
+              md={3}
               sm={3}
-              xs={9}
+              xs={2}
               className={classes.floatRight}
             >
               <RightAppbar />
             </Grid>
-            <Grid item lg={1}></Grid>
+            <Grid item xl={1} lg={1}></Grid>
           </Grid>
         </Toolbar>
       </AppBar>
