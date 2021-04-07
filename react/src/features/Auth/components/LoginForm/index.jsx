@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from "@material-ui/core";
+import { KeyboardBackspace } from "@material-ui/icons";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import ButtonSubmit from "../../../../components/Button/ButtonSubmit";
 import {
@@ -94,6 +95,7 @@ const schema = yup.object().shape({
 //function
 function LoginForm(props) {
   const { onSubmit } = props;
+  const { push } = useHistory();
   const classes = useStyles();
   const form = useForm({
     defaultValues: {
@@ -113,6 +115,11 @@ function LoginForm(props) {
         className={classes.cssForm}
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
+        <KeyboardBackspace
+          onClick={() => {
+            push("/");
+          }}
+        />
         <span className={classes.title}>Login</span>
         <InputText label="Username" name="username" form={form} />
         <PasswordField name="password" label="Password" form={form} />

@@ -1,10 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { fade, InputAdornment, makeStyles, TextField } from "@material-ui/core";
+import { fade, makeStyles, TextField } from "@material-ui/core";
 import { SearchOutlined } from "@material-ui/icons";
-import { colorBlack1, colorWhite1, colorWhite2 } from "../color/color";
+import React from "react";
+import { colorWhite1, colorWhite2 } from "../color/color";
 
-InputSearch.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
@@ -39,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
       color: colorWhite1,
     },
     [theme.breakpoints.only("xs")]: {
-      display: "none",
+      display: "100%",
     },
     "& .MuiInput-underline:after": {
       borderBottom: "none",
@@ -59,18 +57,11 @@ const useStyles = makeStyles((theme) => ({
     color: colorWhite2,
     display: "inline-block",
     [theme.breakpoints.only("xs")]: {
-      display: "none",
-    },
-  },
-  iconMoblie: {
-    color: colorWhite1,
-    display: "none",
-    [theme.breakpoints.only("xs")]: {
-      display: "inline-block",
+      display: "flex",
     },
   },
 }));
-function InputSearch({ onChange, params, openSearch }) {
+function TextFieldSearchMobile({ onChange, params, openSearch }) {
   const classes = useStyles();
   const handleOnChange = (e) => {
     if (onChange) onChange(e.target.value);
@@ -86,12 +77,8 @@ function InputSearch({ onChange, params, openSearch }) {
         {...params}
         onChange={handleOnChange}
       />
-      <SearchOutlined
-        className={classes.iconMoblie}
-        onClick={handleOpenSearchMobie}
-      />
     </div>
   );
 }
 
-export default InputSearch;
+export default TextFieldSearchMobile;

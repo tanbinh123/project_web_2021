@@ -12,19 +12,19 @@ Login.propTypes = {};
 function Login(props) {
   const { enqueueSnackbar } = useSnackbar();
   const { push } = useHistory();
-  const [user, setUser] = useRecoilState(DataUser);
+  const [dataUser, setDataUser] = useRecoilState(DataUser);
   // check redirect
 
   useEffect(() => {
-    if (!isEmpty(user)) {
+    if (!isEmpty(dataUser.user)) {
       push("/");
     }
-  }, [user]);
+  }, [dataUser.user]);
 
   const handleOnSubmit = async (values) => {
     const data = await userApi.login(values);
     if (!!!data.status) {
-      setUser(data.user);
+      setDataUser({ ...dataUser, user: data.user });
       addLocalStorage(data);
     } else {
       enqueueSnackbar(data.data.message.en, { variant: "error" });

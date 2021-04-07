@@ -2,16 +2,47 @@ import { Grid, Typography } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
+import { KeyboardBackspace } from "@material-ui/icons";
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { colorBlack1, colorWhite1, colorWhite2 } from "../color/color";
 import InputSearchAppbar from "./components/InputSearch";
+import InputSearchAppbarMobile from "./components/InputSearchMobile";
 import RightAppbar from "./components/RightAppbar";
 
 // css
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    transition: "all 1s linear",
+    "& > div": {
+      display: "block",
+    },
+    "& > .searchMoblie": {
+      display: "none",
+    },
+  },
+  OpenSearchMenu: {
+    opacity: 1,
+    [theme.breakpoints.only("xs")]: {
+      "& > div": {
+        display: "none",
+      },
+      "& >.searchMoblie": {
+        display: "flex",
+        "&>.searchMoblie-div": {
+          display: "flex",
+          alignItems: "center",
+          flex: "1 1 auto",
+          "& > div": {
+            marginLeft: 20,
+            flexBasis: "80%",
+          },
+          "& > svg": { cursor: "pointer" },
+        },
+      },
+    },
+  },
   logo: {
     height: theme.spacing(5),
     display: "block",
@@ -117,6 +148,7 @@ export default function Header() {
   const classes = useStyles();
   const { location } = useHistory();
   const navRef = useRef();
+  const [isOpenSearchMB, setIsOpenSearchMB] = useState(false);
   const [navBackground, setNavBackground] = useState("customsAppBarHome");
   navRef.current = navBackground;
   useEffect(() => {
@@ -150,15 +182,25 @@ export default function Header() {
     }
   }, []);
 
+  const handleOpenSearch = () => {
+    setIsOpenSearchMB(!isOpenSearchMB);
+  };
+
   //return
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar
         className={classNames(classes.customsAppbar, classes[navRef.current])}
         position="fixed"
       >
         <Toolbar>
-          <Grid container>
+          <Grid
+            container
+            className={classNames(
+              classes.root,
+              isOpenSearchMB && classes.OpenSearchMenu
+            )}
+          >
             <Grid item xl={1} lg={1}></Grid>
             <Grid item xl={2} lg={2} md={3} sm={3} xs={3}>
               <Link to="/">
@@ -171,7 +213,7 @@ export default function Header() {
               </Link>
             </Grid>
             <Grid item xl={3} lg={3} md={4} sm={6} xs={7}>
-              <InputSearchAppbar />
+              <InputSearchAppbar openSearch={handleOpenSearch} />
             </Grid>
             <Grid
               item
@@ -185,6 +227,12 @@ export default function Header() {
               <RightAppbar />
             </Grid>
             <Grid item xl={1} lg={1}></Grid>
+            <Grid item xs={12} className="searchMoblie">
+              <div className="searchMoblie-div">
+                <KeyboardBackspace onClick={handleOpenSearch} />
+                <InputSearchAppbarMobile />
+              </div>
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>

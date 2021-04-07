@@ -3,7 +3,9 @@ import StorageKeys from "../constants/StorageKeys";
 
 export const DataUser = atom({
   key: "DataUser",
-  default: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
+  default: {
+    user: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
+  },
 });
 export const removeLocalStorage = () => {
   localStorage.removeItem(StorageKeys.TOKEN);

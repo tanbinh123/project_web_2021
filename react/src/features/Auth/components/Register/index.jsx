@@ -14,18 +14,17 @@ function Register(props) {
   const { push } = useHistory();
 
   // check redirect
-  const [user, setUser] = useRecoilState(DataUser);
-
+  const [dataUser, setDataUser] = useRecoilState(DataUser);
   useEffect(() => {
-    if (!isEmpty(user)) {
+    if (!isEmpty(dataUser.user)) {
       push("/");
     }
-  }, [user]);
+  }, [dataUser.user]);
 
   const handleOnSubmit = async (values) => {
     const data = await userApi.register(values);
     if (!!!data.status) {
-      setUser(data.user);
+      setDataUser({ ...dataUser, user: data.user });
       addLocalStorage(data);
     } else {
       enqueueSnackbar(data.data.message.en, { variant: "error" });

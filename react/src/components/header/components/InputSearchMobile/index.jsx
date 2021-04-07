@@ -1,92 +1,91 @@
-import InputBase from "@material-ui/core/InputBase";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
-import classNames from "classnames";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete, {
+  createFilterOptions,
+} from "@material-ui/lab/Autocomplete";
+import { useHistory } from "react-router";
+import courseApiFake from "../../../../api/courseApiFake";
+import TextFieldSearchMobile from "../../../TextField/TextFieldSearchMobile";
 
-// css
-const useStyles = makeStyles((theme) => ({
-  search: {
-    display: "none",
-    [theme.breakpoints.down("xs")]: {
-      display: "flex",
-      position: "relative",
-      borderRadius: theme.shape.borderRadius,
+const filter = createFilterOptions({
+  limit: 7,
+});
 
-      margin: theme.spacing(1, 1, 1, 0),
-      marginLeft: 0,
-      width: "40px",
+InputSearchAppbarMobile.propTypes = {};
 
-      transitionDuration: "0.3s",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 1),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    [theme.breakpoints.down("xs")]: {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-    },
-  },
-  showMobile: {
-    display: "none",
-    [theme.breakpoints.down("sm")]: {
-      display: "flex",
-    },
-  },
-  sizeSearch: {
-    width: "150px",
-    transitionDuration: "0.3s",
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:focus": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-  },
-}));
+function InputSearchAppbarMobile({ openSearch }) {
+  const [value, setValue] = React.useState(null);
+  const [dataSearch, setDataSearch] = useState([]);
+  const { push } = useHistory();
+  const [paramsSearch, setParamsSearch] = useState({
+    q: "wqeuyiwqyuhsdpjsapijdaspdnmasncixozpnc",
+  });
+  useEffect(() => {
+    (async () => {
+      const { data } = await courseApiFake.search(paramsSearch);
+      setDataSearch(data);
+    })();
+  }, [paramsSearch]);
+  const handleOnChange = (value) => {
+    setParamsSearch((pre) => ({
+      ...pre,
+      q: value,
+    }));
+  };
 
-InputSearchMobile.propTypes = {};
+  const handleOnpenSearch = () => {
+    if (openSearch) openSearch();
+  };
 
-function InputSearchMobile(props) {
-  const classes = useStyles();
-  const [sizeSearch, SetSizeSearch] = useState(false);
-  function handleOnClickSearch() {
-    SetSizeSearch(!sizeSearch);
-  }
   return (
-    <div
-      className={classNames(
-        classes.search,
-        classes.showDesktop,
-        sizeSearch && classes.sizeSearch
+    <Autocomplete
+      value={value}
+      onChange={(event, newValue) => {
+        console.log(newValue);
+        if (!!newValue.id) {
+          push(`/course/${newValue.id}`);
+        } else {
+          push(`/course?q=${newValue.inputValue || newValue}`);
+        }
+      }}
+      filterOptions={(options, params) => {
+        const filtered = filter(options, params);
+        // Suggest the creation of a new value
+        if (params.inputValue !== "") {
+          filtered.push({
+            inputValue: params.inputValue,
+            title: `Search "${params.inputValue}"`,
+          });
+        }
+        return filtered;
+      }}
+      //   selectOnFocus
+      //   clearOnBlur
+      handleHomeEndKeys
+      options={dataSearch}
+      getOptionLabel={(option) => {
+        // Value selected with enter, right from the input
+        if (typeof option === "string") {
+          return option;
+        }
+        // Add "xxx" option created dynamically
+        if (option.inputValue) {
+          return option.inputValue;
+        }
+        // Regular option
+        return option.title;
+      }}
+      renderOption={(option) => option.title}
+      freeSolo
+      renderInput={(params) => (
+        <TextFieldSearchMobile
+          onChange={handleOnChange}
+          params={params}
+          openSearch={handleOnpenSearch}
+        />
       )}
-      onClick={handleOnClickSearch}
-      onBlur={handleOnClickSearch}
-    >
-      <div className={classes.searchIcon}>
-        <SearchIcon />
-      </div>
-      <InputBase
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput,
-        }}
-        inputProps={{ "aria-label": "search" }}
-      />
-    </div>
+    />
   );
 }
 
-export default InputSearchMobile;
+export default InputSearchAppbarMobile;

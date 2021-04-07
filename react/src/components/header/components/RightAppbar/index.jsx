@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: "flex",
+    justifyContent: "flex-end",
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -128,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
 RightAppbar.propTypes = {};
 
 function RightAppbar(props) {
-  const [user, setUser] = useRecoilState(DataUser);
+  const [dataUser, setDataUser] = useRecoilState(DataUser);
   const classes = useStyles();
   const { push } = useHistory();
   //
@@ -229,7 +230,7 @@ function RightAppbar(props) {
     setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
   }
   const handleLogOut = () => {
-    setUser({});
+    setDataUser({ user: {} });
     removeLocalStorage();
     push("/");
     popupState.close();
@@ -238,10 +239,10 @@ function RightAppbar(props) {
     <>
       <Avatar
         className={classes.avatar}
-        alt={user.username}
-        src={user.avatar}
+        alt={dataUser.user.username}
+        src={dataUser.user.avatar}
       />
-      <span className={classes.username}>{user.username}</span>
+      <span className={classes.username}>{dataUser.user.username}</span>
       <Box className={classes.lineBorder}></Box>
       <IconButton color="inherit" className={classes.buttons}>
         <Badge badgeContent={4} color="secondary">
@@ -319,9 +320,9 @@ function RightAppbar(props) {
   return (
     <>
       <div className={classNames(classes.sectionDesktop, classes.floatRight)}>
-        {isEmpty(user) ? rightNotLogin : rightHadLogin}
+        {isEmpty(dataUser.user) ? rightNotLogin : rightHadLogin}
       </div>
-      <div className={classNames(classes.sectionMobile, classes.floatRight)}>
+      <div className={classNames(classes.sectionMobile)}>
         <IconButton
           aria-label="show more"
           aria-haspopup="true"

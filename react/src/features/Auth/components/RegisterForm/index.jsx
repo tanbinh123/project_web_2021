@@ -6,12 +6,13 @@ import PasswordField from "../../../../components/PasswordField";
 import InputText from "../../../../components/TextField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   colorBlack1,
   colorBlack2,
   colorOrange1,
 } from "../../../../components/color/color";
+import { KeyboardBackspace } from "@material-ui/icons";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,6 +107,7 @@ const schema = yup.object().shape({
 //function
 function LoginForm(props) {
   const { onSubmit } = props;
+  const { push } = useHistory();
   const classes = useStyles();
   const form = useForm({
     defaultValues: {
@@ -128,6 +130,11 @@ function LoginForm(props) {
           className={classes.cssForm}
           onSubmit={form.handleSubmit(handleOnSubmit)}
         >
+          <KeyboardBackspace
+            onClick={() => {
+              push("/");
+            }}
+          />
           <span className={classes.title}>Register</span>
           <InputText label="Username" name="username" form={form} />
           <InputText label="Email" name="email" form={form} />

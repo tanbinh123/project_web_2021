@@ -14,7 +14,7 @@ const filter = createFilterOptions({
 
 InputSearchAppbar.propTypes = {};
 
-function InputSearchAppbar(props) {
+function InputSearchAppbar({ openSearch }) {
   const [value, setValue] = React.useState(null);
   const [dataSearch, setDataSearch] = useState([]);
   const { push } = useHistory();
@@ -33,6 +33,11 @@ function InputSearchAppbar(props) {
       q: value,
     }));
   };
+
+  const handleOnpenSearch = () => {
+    if (openSearch) openSearch();
+  };
+
   return (
     <Autocomplete
       value={value}
@@ -58,7 +63,6 @@ function InputSearchAppbar(props) {
       //   selectOnFocus
       //   clearOnBlur
       handleHomeEndKeys
-      id="free-solo-with-text-demo"
       options={dataSearch}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
@@ -75,7 +79,11 @@ function InputSearchAppbar(props) {
       renderOption={(option) => option.title}
       freeSolo
       renderInput={(params) => (
-        <InputSearch onChange={handleOnChange} params={params} />
+        <InputSearch
+          onChange={handleOnChange}
+          params={params}
+          openSearch={handleOnpenSearch}
+        />
       )}
     />
   );
