@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.stereotype.Service;
 
+import static vn.edu.topedu.constants.ApplicationConstants.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -15,8 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
-
-import static constants.ApplicationConstants.*;
 
 //@Service
 public class VideoStreamFromClassPathService implements IVideoStreamService {

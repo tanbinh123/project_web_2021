@@ -1,12 +1,12 @@
 package vn.edu.topedu.service;
 
-import static constants.ApplicationConstants.ACCEPT_RANGES;
-import static constants.ApplicationConstants.BYTES;
-import static constants.ApplicationConstants.BYTE_RANGE;
-import static constants.ApplicationConstants.CONTENT_LENGTH;
-import static constants.ApplicationConstants.CONTENT_RANGE;
-import static constants.ApplicationConstants.CONTENT_TYPE;
-import static constants.ApplicationConstants.VIDEO_CONTENT;
+import static vn.edu.topedu.constants.ApplicationConstants.ACCEPT_RANGES;
+import static vn.edu.topedu.constants.ApplicationConstants.BYTES;
+import static vn.edu.topedu.constants.ApplicationConstants.BYTE_RANGE;
+import static vn.edu.topedu.constants.ApplicationConstants.CONTENT_LENGTH;
+import static vn.edu.topedu.constants.ApplicationConstants.CONTENT_RANGE;
+import static vn.edu.topedu.constants.ApplicationConstants.CONTENT_TYPE;
+import static vn.edu.topedu.constants.ApplicationConstants.VIDEO_CONTENT;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import fileprocess.FileProcess;
+import vn.edu.topedu.fileprocess.FileProcess;
 
 @Service
 public class VideoStreamFileSystemService implements IVideoStreamService {
@@ -88,7 +88,7 @@ public class VideoStreamFileSystemService implements IVideoStreamService {
      */
     public byte[] readByteRange(String filename, long start, long end) throws IOException {
         
-    	Path path = FileProcess.getPathVideo(filename);
+    	Path path = FileProcess.getPath(filename);
         try (InputStream inputStream = (Files.newInputStream(path));
              ByteArrayOutputStream bufferedOutputStream = new ByteArrayOutputStream()) {
             byte[] data = new byte[BYTE_RANGE];
@@ -113,7 +113,7 @@ public class VideoStreamFileSystemService implements IVideoStreamService {
      */
     public Long getFileSize(String fileName) {
         return Optional.ofNullable(fileName)
-                .map(file -> Paths.get(FileProcess.PATH+FileProcess.VIDEO, file))
+                .map(file -> Paths.get(FileProcess.PATH, file))
                 .map(this::sizeFromFile)
                 .orElse(0L);
     }

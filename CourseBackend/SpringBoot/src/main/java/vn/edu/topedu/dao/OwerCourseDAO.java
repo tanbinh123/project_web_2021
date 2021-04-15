@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import fileprocess.FileProcess;
 import vn.edu.topedu.entity.Course;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.UserCourse;
 import vn.edu.topedu.entity.UserRole;
+import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.response.model.CourseResponse;
 import vn.edu.topedu.utils.WebUtils;
 
