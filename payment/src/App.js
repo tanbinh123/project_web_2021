@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Blank from "./features/Blank";
 import PaymentFeatures from "./features/Payment";
 import "./index.css";
+
 App.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App(props) {
+
   const classes = useStyles();
   return (
     <div>
