@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fileprocess.FileProcess;
+import vn.edu.topedu.fileprocess.FileProcess;
 
 @RestController
 @RequestMapping("/resource")

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fileprocess.FileProcess;
+import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.video.MyResourceHttpRequestHandler;
 
 @RestController

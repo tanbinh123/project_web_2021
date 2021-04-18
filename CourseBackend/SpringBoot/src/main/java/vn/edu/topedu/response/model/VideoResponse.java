@@ -1,6 +1,6 @@
 package vn.edu.topedu.response.model;
 
-import json.object.JsonResponse;
+import vn.edu.topedu.json.object.JsonResponse;
 
 public class VideoResponse  extends JsonResponse {
 	private int id;

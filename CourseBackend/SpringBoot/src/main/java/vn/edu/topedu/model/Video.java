@@ -1,6 +1,6 @@
 package vn.edu.topedu.model;
 
-import fileprocess.FileProcess;
+import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.response.model.VideoResponse;
 import vn.edu.topedu.utils.WebUtils;
 

@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import vn.edu.topedu.consts.VariableConst;
  
 @Entity
 @Table(name = "Course")
@@ -109,7 +111,7 @@ public class Course extends AHasResource {
 	}
 	
 	public String getThumbnail() {
-		return this.beforeResource+this.poster.getPath();
+		return this.beforeResource+VariableConst.RESOURCE_BEFORE+this.poster.getPath();
 	}
 	
 	

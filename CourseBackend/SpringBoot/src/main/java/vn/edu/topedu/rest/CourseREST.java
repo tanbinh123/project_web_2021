@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fileprocess.FileProcess;
+import vn.edu.topedu.consts.VariableConst;
 import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.UserCourseDAO;
 import vn.edu.topedu.entity.Course;
 import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
+import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.model.CourseResponse;
 
@@ -63,7 +64,7 @@ public class CourseREST implements IMyHost {
 		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort);
 		
 		for(Course c:lstCourse) {
-			c.setBeforeResource(getUrlResource(serverHttpRequest));
+			c.setBeforeResource(getUrl(serverHttpRequest));
 			
 		}
 		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, 170,_sort);
@@ -72,7 +73,7 @@ public class CourseREST implements IMyHost {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Object> getCourse(@PathVariable Integer id,HttpServletRequest serverHttpRequest) {
 		DetailCourseEntity course = courseDAO.getCourse(id);
-		course.setBeforeResource(getUrlResource(serverHttpRequest));
+		course.setBeforeResource(getUrl(serverHttpRequest));
 		return ResponseEntity.ok(course);
 	}	
 	@DeleteMapping("/{id}")
