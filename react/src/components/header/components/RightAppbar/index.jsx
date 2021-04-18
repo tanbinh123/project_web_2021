@@ -125,6 +125,10 @@ const useStyles = makeStyles((theme) => ({
     height: "20px",
     marginRight: "10px",
   },
+  linkNone: {
+    textDecoration: "none",
+    color: "var(--colorWhite0)",
+  },
 }));
 RightAppbar.propTypes = {};
 
@@ -278,12 +282,14 @@ function RightAppbar(props) {
     >
       <Box className={classes.popover} p={1}>
         <List component="nav" aria-label="mailbox folders">
-          <ListItem button onClick={popupState.close}>
-            <Avatar className={classes.avatarSmall}>
-              <Person fontSize="small" />
-            </Avatar>
-            <ListItemText primary="Cá Nhân" />
-          </ListItem>
+          <Link to="/setting-account/info" className={classes.linkNone}>
+            <ListItem button onClick={popupState.close}>
+              <Avatar className={classes.avatarSmall}>
+                <Person fontSize="small" />
+              </Avatar>
+              <ListItemText primary="Cá Nhân" />
+            </ListItem>
+          </Link>
           <ListItem button divider onClick={handleLogOut}>
             <ExitToApp className={classes.avatarSmall} fontSize="small" />
             <ListItemText primary="Đăng Xuất" />

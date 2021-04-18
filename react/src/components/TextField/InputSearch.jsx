@@ -1,10 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { fade, InputAdornment, makeStyles, TextField } from "@material-ui/core";
+import { fade, makeStyles, TextField } from "@material-ui/core";
 import { SearchOutlined } from "@material-ui/icons";
-import { colorBlack1, colorWhite1, colorWhite2 } from "../color/color";
+import PropTypes from "prop-types";
+import React from "react";
+import { colorWhite1, colorWhite2 } from "../color/color";
 
-InputSearch.propTypes = {};
+InputSearch.propTypes = {
+  onChange: PropTypes.func,
+  params: PropTypes.object.isRequired,
+  openSearch: PropTypes.func,
+};
+InputSearch.defaultProps = {
+  onChange: null,
+  openSearch: null,
+};
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",

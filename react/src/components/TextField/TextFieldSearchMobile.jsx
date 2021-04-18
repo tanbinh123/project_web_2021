@@ -2,7 +2,15 @@ import { fade, makeStyles, TextField } from "@material-ui/core";
 import { SearchOutlined } from "@material-ui/icons";
 import React from "react";
 import { colorWhite1, colorWhite2 } from "../color/color";
+import PropTypes from "prop-types";
 
+TextFieldSearchMobile.propTypes = {
+  onChange: PropTypes.func,
+  params: PropTypes.object.isRequired,
+};
+TextFieldSearchMobile.defaultProps = {
+  onChange: null,
+};
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
@@ -61,13 +69,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function TextFieldSearchMobile({ onChange, params, openSearch }) {
+function TextFieldSearchMobile({ onChange, params }) {
   const classes = useStyles();
   const handleOnChange = (e) => {
     if (onChange) onChange(e.target.value);
-  };
-  const handleOpenSearchMobie = () => {
-    if (openSearch) openSearch();
   };
   return (
     <div className={classes.root}>

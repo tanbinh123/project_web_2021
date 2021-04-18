@@ -1,21 +1,19 @@
+import { Avatar } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
-import MailIcon from "@material-ui/icons/Mail";
+import { AccountCircle, ExitToApp } from "@material-ui/icons";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import clsx from "clsx";
-import React from "react";
 import PropTypes from "prop-types";
-import { AccountCircle, ExitToApp, Person } from "@material-ui/icons";
+import React from "react";
+import { useHistory } from "react-router";
 import { useRecoilState } from "recoil";
 import { DataUser, removeLocalStorage } from "../../app/DataUser";
 import { isEmpty } from "../tools/Tools";
-import { Avatar } from "@material-ui/core";
-import { useHistory } from "react-router";
 const useStyles = makeStyles({
   list: {
     width: 250,

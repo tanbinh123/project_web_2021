@@ -1,7 +1,7 @@
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import userApi from "../../api/userApi";
 import { DataUser } from "../../app/DataUser";
 import { isEmpty } from "../../components/tools/Tools";
@@ -20,10 +20,10 @@ function ForgotPassword(props) {
     code: "",
     password: "",
   });
-  const [user, setUser] = useRecoilState(DataUser);
+  const dataUser = useRecoilValue(DataUser);
   // check redirect
   useEffect(() => {
-    if (!isEmpty(user)) {
+    if (!isEmpty(dataUser.user)) {
       push("/");
     }
   });

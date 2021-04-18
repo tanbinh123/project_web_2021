@@ -6,7 +6,9 @@ import {
   DialogTitle,
   Grid,
   //makeStyles,
-  Paper
+  Paper,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import { Close } from "@material-ui/icons";
@@ -18,8 +20,10 @@ import RightCD from "./RightCourseDetail/RightCD";
 
 function CourseDetail() {
   const classes = CourseDetailCSS();
- // const { idCourse } = useParams();
+  // const { idCourse } = useParams();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
   }
@@ -60,6 +64,7 @@ function CourseDetail() {
         </Container>
       </Box>
       <Dialog
+        fullScreen={fullScreen}
         maxWidth="lg"
         onClose={handleToggleDialog}
         aria-labelledby="customized-dialog-title"
@@ -74,12 +79,14 @@ function CourseDetail() {
           Kiến thức cơ bản, cốt lõi dân IT cần học trước
         </DialogTitle>
         <DialogContent dividers>
-          <video autoplay={true} controls style={{ width: 852, height: 480 }}>
-            <source
-              src="https://r3---sn-oxuo5h-nboe.googlevideo.com/videoplayback?expire=1617206512&ei=kEhkYIaWNuiNz7sP6ZqtsA4&ip=119.17.249.20&id=o-AM_Sp-D5EKVXwy0ix8RxmXVjXFHaq_eQF1qrauLgDgNP&itag=136&aitags=133%2C134%2C135%2C136%2C137%2C160%2C242%2C243%2C244%2C247%2C248%2C278&source=youtube&requiressl=yes&mh=fG&mm=31%2C29&mn=sn-oxuo5h-nboe%2Csn-8pxuuxa-nbo6l&ms=au%2Crdu&mv=m&mvi=3&pl=24&initcwndbps=663750&vprv=1&mime=video%2Fmp4&ns=cT2_pxUgBQvgypuYBPNAyBcF&gir=yes&clen=34553943&dur=3657.052&lmt=1616298405991525&mt=1617184606&fvip=3&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5535432&n=COrYJJK4qxDQMpHOJa&sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhALHZuwvIvdkKHiO8p6ZBQ3N51S9VCTnhvqw5gw0HGBf8AiB6C4Q0yMCoexSRkHGW1d0L25Ub_eUzDMrzWTkmHiHhZw%3D%3D&sig=AOq0QJ8wRQIhAIzLC3a_Q0bBlXl9oDvQBiKVGsCZnYZRHcp2sxyYUDD7AiAgr9-D9yzkPaiNckB0aE4b5Q7Wa6iZ8jkxooKGLe8FWw%3D%3D"
-              type="video/mp4"
-            ></source>
-          </video>
+          <div className={classes.video}>
+            <video autoplay={true} className="video__play" controls>
+              <source
+                src="https://r3---sn-oxuo5h-nboe.googlevideo.com/videoplayback?expire=1617909570&ei=4gJvYNjJLZbcz7sPt4qt8As&ip=119.17.249.22&id=o-ACwmZlJjxe9Qoku3wc-A2gcTXiP80nsq7X-vvOOJYr6p&itag=135&aitags=133%2C134%2C135%2C136%2C137%2C160%2C242%2C243%2C244%2C247%2C248%2C278&source=youtube&requiressl=yes&mh=2r&mm=31%2C29&mn=sn-oxuo5h-nboe%2Csn-8pxuuxa-nboll&ms=au%2Crdu&mv=m&mvi=3&pl=24&initcwndbps=685000&vprv=1&mime=video%2Fmp4&ns=PGs5beXu0FpRhcfobTPpS0wF&gir=yes&clen=64170713&dur=2407.966&lmt=1607990411572174&mt=1617887825&fvip=6&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5432434&n=PeGze3GXRL3sFTvi&sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRAIgXfbyxKRX9V7f4nyr6p6xlK6Aw4nHVRhjU_pL0owsIxACIGm3N79ICNWRQtdBE8QgPETvqjEs3E0jWQon4hgfCjJ1&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhANXejJVovHvFw3Q5UNAFRi09r01zbFXSyKARr8cq4bZ1AiAviRDUu_MNRcsMOT2prQ4TNIUOBGLwM7YV8MCBqw2ICQ%3D%3D"
+                type="video/mp4"
+              ></source>
+            </video>
+          </div>
         </DialogContent>
       </Dialog>
     </>
