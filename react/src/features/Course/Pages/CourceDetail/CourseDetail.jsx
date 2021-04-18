@@ -6,7 +6,9 @@ import {
   DialogTitle,
   Grid,
   //makeStyles,
-  Paper
+  Paper,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import { Close } from "@material-ui/icons";
@@ -19,28 +21,28 @@ import RightCD from "./RightCourseDetail/RightCD";
 
 function CourseDetail(props) {
   const classes = CourseDetailCSS();
- // const { idCourse } = useParams();
+  // const { idCourse } = useParams();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
-  const [course,setCourse] = useState({});
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+  const [course, setCourse] = useState({});
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
   }
   useEffect(() => {
     (async () => {
       try {
-        var id=props.match.params.idCourse;
-        const res =
-           await courseApi.get(id);
-           console.log(res);
-           setCourse(res);
-           console.log(course);
+        var id = props.match.params.idCourse;
+        const res = await courseApi.get(id);
+        console.log(res);
+        setCourse(res);
+        console.log(course);
       } catch (error) {
         console.log(error);
       }
-      
     })();
   }, []);
-  
+
   return (
     <>
       <Header />
@@ -78,6 +80,7 @@ function CourseDetail(props) {
         </Container>
       </Box>
       <Dialog
+        fullScreen={fullScreen}
         maxWidth="lg"
         onClose={handleToggleDialog}
         aria-labelledby="customized-dialog-title"
@@ -92,12 +95,11 @@ function CourseDetail(props) {
           {course.title}
         </DialogTitle>
         <DialogContent dividers>
-          <video autoplay={true} controls style={{ width: 852, height: 480 }}>
-            <source
-              src={course.demo?.urlVideo}
-              type="video/mp4"
-            ></source>
-          </video>
+          <div className={classes.video}>
+            <video autoplay={true} className="video__play" controls>
+              <source src={course.demo?.urlVideo} type="video/mp4"></source>
+            </video>
+          </div>
         </DialogContent>
       </Dialog>
     </>

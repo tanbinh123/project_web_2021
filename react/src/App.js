@@ -1,10 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import "./cssreset.css";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
 import CourseFeatures from "./features/Course";
 import ForgotPassword from "./features/ForgotPassword";
 import Home from "./features/home";
+import InfomationFeature from "./features/Infomation/InfomationFeature";
 import NotFound404 from "./features/NotFound";
 import CssColor from "./features/test/CssColor";
 import SimpleReactFileUpload from "./features/test/FormUpload/SimpleReactFileUpload";
@@ -12,6 +14,7 @@ import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
 import SetValue from "./features/test/SetValue";
 import TestSearch from "./features/test/TestSearch";
 import "./index.css";
+
 App.propTypes = {};
 
 function App(props) {
@@ -21,12 +24,13 @@ function App(props) {
         <Route path="/auth/login" component={Login} exact />
         <Route path="/auth/register" component={Register} exact />
         <Route path="/course" component={CourseFeatures} />
+        <Route path="/setting-account" component={InfomationFeature} />
         <Route path="/form-upload-one" component={UploadOneFile} exact />
-        <Route
+        {/* <Route
           path="/form-upload-test"
           component={SimpleReactFileUpload}
           exact
-        />
+        /> */}
         <Route path="/forgot-password" component={ForgotPassword} exact />
         <Route path="/" component={Home} exact />
         <Route path="/testsearch" component={TestSearch} exact />

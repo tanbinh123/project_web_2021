@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import TextField from "@material-ui/core/TextField";
 import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import courseApiFake from "../../../../api/courseApiFake";
 import TextFieldSearchMobile from "../../../TextField/TextFieldSearchMobile";
@@ -14,7 +13,8 @@ const filter = createFilterOptions({
 InputSearchAppbarMobile.propTypes = {};
 
 function InputSearchAppbarMobile({ openSearch }) {
-  const [value, setValue] = React.useState(null);
+  const [value] = useState(null);
+  // const [value, setValue] = useState(null);
   const [dataSearch, setDataSearch] = useState([]);
   const { push } = useHistory();
   const [paramsSearch, setParamsSearch] = useState({

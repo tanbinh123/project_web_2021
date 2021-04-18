@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, LinearProgress, makeStyles } from "@material-ui/core";
+import { KeyboardBackspace } from "@material-ui/icons";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import ButtonSubmit from "../../../../components/Button/ButtonSubmit";
 import {
@@ -84,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginTop: "20px",
   },
+  iconback: {
+    cursor: "pointer",
+  },
 }));
 //proptypes
 FormForgotPassword.propTypes = {};
@@ -100,6 +104,7 @@ const schema = yup.object().shape({
 function FormForgotPassword(props) {
   const { onSubmit, showProcess } = props;
   const classes = useStyles();
+  const { push } = useHistory();
   const form = useForm({
     defaultValues: {
       email: "",
@@ -118,6 +123,12 @@ function FormForgotPassword(props) {
         className={classes.cssForm}
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
+        <KeyboardBackspace
+          className={classes.iconback}
+          onClick={() => {
+            push("/auth/login");
+          }}
+        />
         <span className={classes.title}>Forgot Password</span>
         <InputText label="Email" name="email" form={form} />
 

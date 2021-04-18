@@ -80,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
       color: colorOrange1,
     },
   },
+  iconback: {
+    cursor: "pointer",
+  },
 }));
 //proptypes
 LoginForm.propTypes = {};
@@ -131,6 +134,7 @@ function LoginForm(props) {
           onSubmit={form.handleSubmit(handleOnSubmit)}
         >
           <KeyboardBackspace
+            className={classes.iconback}
             onClick={() => {
               push("/");
             }}
