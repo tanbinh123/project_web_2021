@@ -3,18 +3,18 @@ import {
   AccordionDetails,
   AccordionSummary,
   Grid,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 import {
   colorBlack1,
   colorBlack2,
-
   colorOrange2,
-  colorWhite1
-} from "../color/color";
+  colorWhite1,
+} from "../../../../../components/color/color";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -70,9 +70,21 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-ItemAccordion.propTypes = {};
+ItemAccordion.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  lessons: PropTypes.array,
+};
+ItemAccordion.defaultProps = {
+  id: 0,
+  title: "",
+  lessons: [],
+};
 function ItemAccordion(props) {
+  const { url } = useRouteMatch();
+  const { id, title, lessons, indexLecture } = props;
   const classes = useStyles();
+
   return (
     <Accordion defaultExpanded={true}>
       <AccordionSummary
@@ -84,12 +96,10 @@ function ItemAccordion(props) {
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
           <div className={classes.heading}>
             <Grid item xl={8} lg={9} md={10} sm={10} xs={10}>
-              <span className="heading__title">
-                Phần 1: Phương pháp học tập
-              </span>
+              <span className="heading__title">Phần {title}</span>
             </Grid>
             <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>
-              <span className="heading__lesson">2 Bài</span>
+              <span className="heading__lesson">{lessons.length} Bài</span>
             </Grid>
             <Grid item xl={2} lg={1} md={1}>
               <span className="heading__time">30:30</span>
@@ -98,18 +108,16 @@ function ItemAccordion(props) {
         </Grid>
       </AccordionSummary>
       <AccordionDetails className={classes.AccordionDetails}>
-        <div className={classes.lesson}>
-          <Link to="/">
-            <span>1. 8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!</span>
-          </Link>
-          <span className="lesson__time">30:30</span>
-        </div>
-        <div className={classes.lesson}>
-          <Link to="/">
-            <span>1. 8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!</span>
-          </Link>
-          <span className="lesson__time">30:30</span>
-        </div>
+        {Array.from(lessons).map((item, index) => (
+          <div key={index} className={classes.lesson}>
+            <Link to={`${url}/lecture/${item.id}`}>
+              <span>
+                {indexLecture + index + 1}. {item.description}
+              </span>
+            </Link>
+            <span className="lesson__time">30:30</span>
+          </div>
+        ))}
       </AccordionDetails>
     </Accordion>
   );

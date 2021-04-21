@@ -30,6 +30,13 @@ const CourseDetailCSS = makeStyles((theme) => ({
       color: colorOrange2,
     },
   },
+  DialogCustom: {
+    fontFamily: "font-family: 'Open Sans', sans-serif;",
+  },
+  titleVideo: {
+    fontWeight: "600",
+    fontSize: "20px",
+  },
   video: {
     display: "flex",
     justifyContent: "center",

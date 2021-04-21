@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import {
   colorBlack2,
   colorGray2,
- // colorOrange2,
+  // colorOrange2,
 } from "../../../../../components/color/color";
 
 const LeftCDCSS = makeStyles(() => ({
@@ -33,6 +33,7 @@ const LeftCDCSS = makeStyles(() => ({
         flexBasis: "50%",
         padding: "0px 25px",
         position: "relative",
+        marginBottom: 10,
         "&> svg": {
           fontSize: 18,
           position: "absolute",

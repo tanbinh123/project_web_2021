@@ -2,12 +2,24 @@ import { Grid } from "@material-ui/core";
 import { CheckCircle, FiberManualRecord } from "@material-ui/icons";
 import React from "react";
 import IconBreadcrumbs from "../../../../../components/Breadcrumbs/Breadcrumbs";
-import SimpleAccordion from "../../../../../components/SimpleAccordion/SimpleAccordion";
+import SimpleAccordion from "../../components/SimpleAccordion/SimpleAccordion";
 import LeftCDCSS from "./CSSLeftCD";
+import PropTypes from "prop-types";
 
-LeftCD.propTypes = {};
-
+LeftCD.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  learning: PropTypes.array,
+  parts: PropTypes.array,
+};
+LeftCD.defaultProps = {
+  title: "",
+  description: "",
+  learning: [],
+  parts: [],
+};
 function LeftCD(props) {
+  const { title, description, learning, parts } = props;
   const classes = LeftCDCSS();
   return (
     <div className={classes.root}>
@@ -17,33 +29,17 @@ function LeftCD(props) {
         </Grid>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
           <div className={classes.introduce}>
-            <h1>Kiến thức cơ bản, cốt lõi dân IT cần học trước</h1>
-            <span>
-              Khóa học này sẽ giúp bạn nắm chắc tư tưởng cốt lõi của việc xây
-              dựng giao diện website responsive và áp dụng trong thực tế
-            </span>
+            <h1>{title}</h1>
+            <span>{description}</span>
             <h2>Bạn sẽ học được gì</h2>
+
             <ul>
-              <li>
-                <CheckCircle />
-                <span>Các kiến thức cơ bản, nền móng của ngành IT</span>
-              </li>
-              <li>
-                <CheckCircle />
-                <span>
-                  Các khái niệm, thuật ngữ cốt lõi khi triển khai ứng dụng
-                </span>
-              </li>
-              <li>
-                <CheckCircle />
-                <span>
-                  Các mô hình, kiến trúc cơ bản khi triển khai ứng dụng
-                </span>
-              </li>
-              <li>
-                <CheckCircle />
-                <span>Hiểu hơn về cách internet và máy vi tính hoạt động</span>
-              </li>
+              {Array.from(learning).map((item, index) => (
+                <li key={index}>
+                  <CheckCircle />
+                  <span>{item.learning}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </Grid>
@@ -51,18 +47,19 @@ function LeftCD(props) {
           <div className={classes.contentCourse}>
             <h2>Nội dung khóa học</h2>
             <ul>
-              <li>? phần</li>
+              <li>{parts.length} phần</li>
               <li>
                 <FiberManualRecord />
               </li>
-              <li>? bài học</li>
+              <li>10 bài học</li>
               <li>
                 <FiberManualRecord />
               </li>
               <li>thời lượng ? giờ ? phút</li>
             </ul>
           </div>
-          <SimpleAccordion />
+          {/* render list courses */}
+          <SimpleAccordion parts={parts} />
         </Grid>
       </Grid>
     </div>
