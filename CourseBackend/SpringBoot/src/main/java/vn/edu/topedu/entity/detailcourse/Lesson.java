@@ -1,5 +1,6 @@
 package vn.edu.topedu.entity.detailcourse;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,13 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "lesson")
-public class Lesson {
+public class Lesson  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
@@ -21,6 +23,9 @@ public class Lesson {
 	private Long id;
 	@Column(name = "description", nullable = false)
 	private String description;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "video_id", referencedColumnName = "id")
+	private VideoEntity video;
 	@ManyToOne
 	@JoinColumn(name = "part_id")
 	@JsonIgnore
@@ -49,6 +54,15 @@ public class Lesson {
 	public void setPart(Part part) {
 		this.part = part;
 	}
+
+	public VideoEntity getVideo() {
+		return video;
+	}
+
+	public void setVideo(VideoEntity video) {
+		this.video = video;
+	}
+	
 
 	
 

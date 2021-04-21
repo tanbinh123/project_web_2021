@@ -136,6 +136,7 @@ public class DetailCourseEntity extends AHasResource {
 	@Override
 	public void setBeforeResource(String beforeResource) {
 		this.demo.setBeforeResource(beforeResource);
+		this.parts.forEach(e->e.getLessons().forEach(x-> x.getVideo().setBeforeResource(beforeResource)));
 		super.setBeforeResource(beforeResource);
 	}
 

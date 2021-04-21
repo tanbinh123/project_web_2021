@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 16/04/2021 15:44:00
+ Date: 21/04/2021 20:22:09
 */
 
 SET NAMES utf8mb4;
@@ -282,21 +282,23 @@ CREATE TABLE `lesson`  (
   `part_id` int(11) NULL DEFAULT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `duration` bigint(20) NULL DEFAULT NULL,
-  `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+  `video_id` bigint(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `video_id`(`video_id`) USING BTREE,
+  CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson
 -- ----------------------------
-INSERT INTO `lesson` VALUES (1, 1, '8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 387, '8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!.mp4');
-INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập trình của Sơn Đặng', 1445, NULL);
-INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 1539, NULL);
-INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 695, NULL);
-INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, NULL);
-INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, NULL);
-INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, NULL);
-INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, NULL);
+INSERT INTO `lesson` VALUES (1, 1, '8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 387, 2);
+INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập trình của Sơn Đặng', 1445, 3);
+INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 1539, 4);
+INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 695, 5);
+INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, 5);
+INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 5);
+INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, 5);
+INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 5);
 
 -- ----------------------------
 -- Table structure for ower_course
@@ -520,7 +522,7 @@ CREATE TABLE `request_reset_password`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `request_reset_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of request_reset_password
@@ -543,6 +545,8 @@ INSERT INTO `request_reset_password` VALUES (50, 2, '2021-03-27 12:35:04', '98ec
 INSERT INTO `request_reset_password` VALUES (51, 2, '2021-04-01 16:11:47', '47b9f8a1a498405a378ed16b8c2292bf');
 INSERT INTO `request_reset_password` VALUES (52, 2, '2021-04-05 07:21:51', '8b6b88c3c50a96dce0691865c3b10e9f');
 INSERT INTO `request_reset_password` VALUES (53, 1, '2021-04-05 07:30:19', '59bdbbf9c9e6e544a6da294f01796edc');
+INSERT INTO `request_reset_password` VALUES (54, 1, '2021-04-18 13:04:26', '3932a6f62b4a7aa6064eb4cac8e64540');
+INSERT INTO `request_reset_password` VALUES (55, 1, '2021-04-18 13:37:45', '37709dcce7662e64329b53c5b33ed2e5');
 
 -- ----------------------------
 -- Table structure for resource_image
@@ -645,16 +649,20 @@ INSERT INTO `user_role` VALUES (3, 2, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `poster` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `duration` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES (1, 'user/admin/video/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', NULL, NULL);
+INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', NULL, NULL);
+INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', NULL, NULL);
+INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
