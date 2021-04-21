@@ -5,7 +5,7 @@ import {
   MenuItem,
   Select,
   Tab,
-  Tabs
+  Tabs,
 } from "@material-ui/core";
 import { parse } from "query-string";
 import React, { useEffect, useState } from "react";
@@ -51,35 +51,17 @@ function TabPrice(props) {
 
     setValues(tmpValue._sort || "updateAt:desc");
   }, [value]);
-
-  // function handleOnChangeValue(e, value) {
-  //   const tmpValue = e.target?.value || value;
-  //   let tmp;
-  //   switch (tmpValue) {
-  //     case "1":
-  //       tmp = "_sort=updateAt&_order=desc";
-  //       break;
-  //     case "2":
-  //       tmp = "_sort=bought&_order=desc";
-  //       break;
-  //     case "3":
-  //       tmp = "_sort=rateStar&_order=desc";
-  //       break;
-  //     case "4":
-  //       tmp = "_sort=price&_order=desc";
-  //       break;
-  //     case "5":
-  //       tmp = "_sort=price&_order=asc";
-  //       break;
-  //     default:
-  //       tmp = "_sort=updateAt&_order=desc";
-  //       break;
-  //   }
-  //   setValues(tmpValue);
   function handleOnChangeValue(e, value) {
     setValues(value);
     if (onChange) {
       onChange(value);
+    }
+  }
+  function handleOnChangeSelectValue(e) {
+    const tmpValue = e.target.value;
+    setValues(tmpValue);
+    if (onChange) {
+      onChange(tmpValue);
     }
   }
   return (
@@ -91,7 +73,7 @@ function TabPrice(props) {
           label="Sắp xếp"
           id="demo-simple-select-filled"
           value={values}
-          onChange={handleOnChangeValue}
+          onChange={handleOnChangeSelectValue}
         >
           <MenuItem value="updateAt:desc">Mới nhất</MenuItem>
           <MenuItem value="bought:desc">Phổ biến</MenuItem>
@@ -100,19 +82,6 @@ function TabPrice(props) {
           <MenuItem value="price:asc">Giá thấp</MenuItem>
         </Select>
       </FormControl>
-      {/* <Tabs
-        className={classes.customTab}
-        value={values}
-        indicatorColor="primary"
-        textColor="primary"
-        onChange={handleOnChangeValue}
-      >
-        <Tab label="Mới nhất" value="1" />
-        <Tab label="Phổ biến" value="2" />
-        <Tab label="Đánh giá cao" value="3" />
-        <Tab label="Giá cao" value="4" />
-        <Tab label="Giá thấp" value="5" />
-      </Tabs> */}
       <Tabs
         className={classes.customTab}
         value={values}

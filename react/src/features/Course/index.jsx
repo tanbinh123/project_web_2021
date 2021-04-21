@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import CourseDetail from "./Pages/CourceDetail/CourseDetail";
+import CourseDetailRouter from "./Pages/CourceDetail/CourseDetailRouter";
 import ListCourse from "./Pages/ListCourse/ListCourse";
 
 CourseFeatures.propTypes = {};
@@ -11,7 +11,7 @@ function CourseFeatures(props) {
     <>
       <Switch>
         <Route path={`${path}`} component={ListCourse} exact />
-        <Route path={`${path}/:idCourse`} component={CourseDetail} />
+        <Route path={`${path}/:idCourse`} component={CourseDetailRouter} />
       </Switch>
     </>
   );

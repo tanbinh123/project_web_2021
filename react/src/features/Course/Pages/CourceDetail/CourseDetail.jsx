@@ -13,30 +13,37 @@ import {
 import Dialog from "@material-ui/core/Dialog";
 import { Close } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
+import { Route, Switch, useParams, useRouteMatch } from "react-router";
 import courseApi from "../../../../api/courseApi";
 import Header from "../../../../components/header/index";
 import CourseDetailCSS from "./CSSCourseDetail";
+import Lecture from "./Lecture/Lecture";
 import LeftCD from "./LeftCourseDetail/LeftCD";
 import RightCD from "./RightCourseDetail/RightCD";
 
 function CourseDetail(props) {
   const classes = CourseDetailCSS();
-  // const { idCourse } = useParams();
+  const { idCourse } = useParams();
+  // console.log(idCourse);
+  const { url } = useRouteMatch();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
-  const [course, setCourse] = useState({});
+  const [course, setCourse] = useState({
+    title: "",
+  });
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
   }
+
   useEffect(() => {
     (async () => {
       try {
         var id = props.match.params.idCourse;
         const res = await courseApi.get(id);
-        console.log(res);
-        setCourse(res);
-        console.log(course);
+        // console.log(res);
+        setCourse(res || {});
+        // console.log("course", course);
       } catch (error) {
         console.log(error);
       }
@@ -60,7 +67,13 @@ function CourseDetail(props) {
               xs={12}
             >
               <Paper elevation={0}>
-                <LeftCD />
+                {/* --------------------- Left Data --------------------------- */}
+                <LeftCD
+                  title={course.title}
+                  description={course.description}
+                  learning={course.learning}
+                  parts={course.parts}
+                />
               </Paper>
             </Grid>
             <Grid
@@ -80,6 +93,7 @@ function CourseDetail(props) {
         </Container>
       </Box>
       <Dialog
+        className={classes.DialogCustom}
         fullScreen={fullScreen}
         maxWidth="lg"
         onClose={handleToggleDialog}
@@ -92,11 +106,11 @@ function CourseDetail(props) {
             <Close />
           </span>
           <br />
-          {course.title}
+          <span className={classes.titleVideo}>{course.title}</span>
         </DialogTitle>
         <DialogContent dividers>
           <div className={classes.video}>
-            <video autoplay={true} className="video__play" controls>
+            <video autoPlay muted loop className="video__play" controls>
               <source src={course.demo?.urlVideo} type="video/mp4"></source>
             </video>
           </div>
