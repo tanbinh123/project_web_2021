@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 21/04/2021 20:22:09
+ Date: 21/04/2021 21:16:39
 */
 
 SET NAMES utf8mb4;
@@ -295,10 +295,10 @@ INSERT INTO `lesson` VALUES (1, 1, '8 lời khuyên giúp học lập trình t�
 INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập trình của Sơn Đặng', 1445, 3);
 INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 1539, 4);
 INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 695, 5);
-INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, 5);
-INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 5);
-INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, 5);
-INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 5);
+INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, 6);
+INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 7);
+INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, 8);
+INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 9);
 
 -- ----------------------------
 -- Table structure for ower_course
@@ -654,7 +654,7 @@ CREATE TABLE `video`  (
   `poster` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `duration` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
@@ -664,5 +664,26 @@ INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp h
 INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', NULL, NULL);
 INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', NULL, NULL);
 INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', NULL, NULL);
+INSERT INTO `video` VALUES (6, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (8, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (12, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (13, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (14, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (15, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (16, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (17, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (18, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (19, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (20, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (21, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (22, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (23, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (24, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (25, 'user/admin/video/171/mp4/toystory', NULL, NULL);
+INSERT INTO `video` VALUES (26, 'user/admin/video/171/mp4/toystory', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
