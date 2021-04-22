@@ -27,3 +27,22 @@
   --colorBlack1: #34495e;
   --colorWhite1: #ecf0f1;
 } */
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--colorWhite0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--colorGray1);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--colorGray2);
+}

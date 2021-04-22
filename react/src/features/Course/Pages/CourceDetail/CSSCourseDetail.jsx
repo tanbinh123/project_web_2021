@@ -16,7 +16,6 @@ const CourseDetailCSS = makeStyles((theme) => ({
   right: {},
   backgroundHeader: {
     height: "64px",
-    background: colorBlack1,
   },
   smallTitle: {
     fontSize: 16,
@@ -24,10 +23,10 @@ const CourseDetailCSS = makeStyles((theme) => ({
   iconClose: {
     float: "right",
     fontSize: 18,
-    color: colorBlack2,
+    color: "var(--colorBlack2)",
     cursor: "pointer",
     "&:hover": {
-      color: colorOrange2,
+      color: "var(--colorOrange2)",
     },
   },
   DialogCustom: {

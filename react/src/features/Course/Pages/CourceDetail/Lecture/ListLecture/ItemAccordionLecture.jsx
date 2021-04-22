@@ -9,6 +9,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React, { useEffect } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import PropTypes from "prop-types";
+import "./IteamALecture.css";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     flex: "1 1 auto",
     justifyContent: "space-between",
     "& > div > .heading__title": {
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: 600,
       color: "var(--colorBlack2)",
     },
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   AccordionSummary: {
     background: "var(--colorWhite1)",
-    marginTop: 10,
+    // marginTop: 10,
   },
   AccordionDetails: {
     display: "flex",
@@ -49,6 +50,8 @@ const useStyles = makeStyles((theme) => ({
     background: "rgba(236, 240, 241,0.5)",
   },
   lesson: {
+    display: "flex",
+    justifyContent: "space-between",
     padding: "10px",
     // boxShadow: "0px 1px #7f8c8d",
     "& > a": {
@@ -65,17 +68,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-ItemAccordion.propTypes = {
+ItemAccordionLecture.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   lessons: PropTypes.array,
 };
-ItemAccordion.defaultProps = {
+ItemAccordionLecture.defaultProps = {
   id: 0,
   title: "",
   lessons: [],
 };
-function ItemAccordion(props) {
+function ItemAccordionLecture(props) {
   const { url } = useRouteMatch();
   const { id, title, lessons, indexLecture } = props;
   const classes = useStyles();
@@ -118,4 +121,4 @@ function ItemAccordion(props) {
   );
 }
 
-export default ItemAccordion;
+export default ItemAccordionLecture;

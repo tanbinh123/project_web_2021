@@ -41,7 +41,7 @@ function CourseDetail(props) {
       try {
         var id = props.match.params.idCourse;
         const res = await courseApi.get(id);
-        // console.log(res);
+        console.log(res);
         setCourse(res || {});
         // console.log("course", course);
       } catch (error) {

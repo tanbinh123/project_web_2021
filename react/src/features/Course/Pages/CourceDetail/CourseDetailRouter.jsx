@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+import NotFound404 from "../../../NotFound";
 import CourseDetail from "./CourseDetail";
 import Lecture from "./Lecture/Lecture";
 
@@ -12,6 +13,7 @@ function CourseDetailRouter(props) {
       <Switch>
         <Route path={`${path}`} component={CourseDetail} exact />
         <Route path={`${url}/lecture/:idLecture`} component={Lecture} exact />
+        <Route path={`${url}/lecture/*`} component={NotFound404} />
       </Switch>
     </>
   );
