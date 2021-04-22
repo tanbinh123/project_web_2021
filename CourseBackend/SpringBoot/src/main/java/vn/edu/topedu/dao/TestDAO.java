@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.Test;
 
 @Repository
@@ -21,6 +23,9 @@ public class TestDAO {
 		entityManager.persist(user);
 		
 
+	}
+	public Test findById(Long id) {
+		return this.entityManager.find(Test.class, id);
 	}
 
 }

@@ -1,5 +1,6 @@
 package vn.edu.topedu.rest.test;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +13,21 @@ import org.springframework.web.server.WebSession;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import vn.edu.topedu.dao.TestDAO;
 import vn.edu.topedu.json.object.ResponseMessageSuccess;
 import vn.edu.topedu.json.object.ResponseNull;
 import vn.edu.topedu.response.MessageResponse;
 
 @RestController
 public class TestREST {
+	@Autowired
+	TestDAO testDAO;
+	@RequestMapping(value = "/test/mysql", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> testMysql() {
 
+		return ResponseEntity.ok(testDAO.findById((long) 1));
+	}
 	@RequestMapping(value = "/test/null", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String isNull() {
