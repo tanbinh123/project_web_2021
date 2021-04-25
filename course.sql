@@ -11,11 +11,34 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 21/04/2021 21:16:39
+ Date: 25/04/2021 15:39:32
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for active_account
+-- ----------------------------
+DROP TABLE IF EXISTS `active_account`;
+CREATE TABLE `active_account`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `create_time` datetime(0) NULL DEFAULT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  CONSTRAINT `active_account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of active_account
+-- ----------------------------
+INSERT INTO `active_account` VALUES (57, 1, '2021-04-25 08:15:06', '85821a966c76aed4716e2d73999dadba');
+INSERT INTO `active_account` VALUES (58, 1, '2021-04-25 08:21:22', '4313c5ffb2d2672936915acda5586f3a');
+INSERT INTO `active_account` VALUES (59, 1, '2021-04-25 08:22:29', '712cd07ac9a60f169302cdc47a2aead1');
+INSERT INTO `active_account` VALUES (60, 1, '2021-04-25 08:24:17', '88a56861a9786aa7c251b57ba1d0e049');
+INSERT INTO `active_account` VALUES (61, 1, '2021-04-25 08:38:32', '22208667e5875ffe2f8ca4d1e6353695');
 
 -- ----------------------------
 -- Table structure for app_role
@@ -522,31 +545,7 @@ CREATE TABLE `request_reset_password`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `request_reset_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of request_reset_password
--- ----------------------------
-INSERT INTO `request_reset_password` VALUES (36, 30, '2021-03-22 16:49:11', '9bed089d4cc3afdc7cba517596a8d13c');
-INSERT INTO `request_reset_password` VALUES (37, 30, '2021-03-22 16:51:25', 'f80813504b422b783411d217dca27803');
-INSERT INTO `request_reset_password` VALUES (38, 30, '2021-03-22 16:55:13', '11570a4edb9ba7dd54a5961595d8344e');
-INSERT INTO `request_reset_password` VALUES (39, 30, '2021-03-22 17:07:24', '3dc25625fe095578b8c304012fa1dccd');
-INSERT INTO `request_reset_password` VALUES (40, 30, '2021-03-22 17:15:55', '73d765e7fdab569518b8cbd6ef997278');
-INSERT INTO `request_reset_password` VALUES (41, 30, '2021-03-22 17:18:23', '6625fdce8706796bb97aadf2935cecae');
-INSERT INTO `request_reset_password` VALUES (42, 30, '2021-03-22 17:18:47', 'da896c69d6709f61acbb79feec192542');
-INSERT INTO `request_reset_password` VALUES (43, 30, '2021-03-22 17:19:33', '5bcdf649b382467c0bf22c4f12827a0a');
-INSERT INTO `request_reset_password` VALUES (44, 30, '2021-03-22 17:20:45', '489ec2cafb3abeaef125d7c57b90bac1');
-INSERT INTO `request_reset_password` VALUES (45, 2, '2021-03-26 17:57:07', 'df3343279d56bcba1d03ebfcbfe0c93f');
-INSERT INTO `request_reset_password` VALUES (46, 2, '2021-03-26 17:57:50', '88bb9f9a77036eedb8ea5f2fe741ebd7');
-INSERT INTO `request_reset_password` VALUES (47, 2, '2021-03-26 17:59:46', 'e4cda8e22531b46cea059ef0f878246c');
-INSERT INTO `request_reset_password` VALUES (48, 2, '2021-03-27 12:06:44', 'c0906467d96609f1c95f31da9d7d18a2');
-INSERT INTO `request_reset_password` VALUES (49, 2, '2021-03-27 12:09:19', '443387710ddbf5c46dc7d30b5896eae0');
-INSERT INTO `request_reset_password` VALUES (50, 2, '2021-03-27 12:35:04', '98ec36e44a22ffd406c57759c294cb4d');
-INSERT INTO `request_reset_password` VALUES (51, 2, '2021-04-01 16:11:47', '47b9f8a1a498405a378ed16b8c2292bf');
-INSERT INTO `request_reset_password` VALUES (52, 2, '2021-04-05 07:21:51', '8b6b88c3c50a96dce0691865c3b10e9f');
-INSERT INTO `request_reset_password` VALUES (53, 1, '2021-04-05 07:30:19', '59bdbbf9c9e6e544a6da294f01796edc');
-INSERT INTO `request_reset_password` VALUES (54, 1, '2021-04-18 13:04:26', '3932a6f62b4a7aa6064eb4cac8e64540');
-INSERT INTO `request_reset_password` VALUES (55, 1, '2021-04-18 13:37:45', '37709dcce7662e64329b53c5b33ed2e5');
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for resource_image
@@ -591,8 +590,7 @@ CREATE TABLE `test`  (
 -- ----------------------------
 -- Records of test
 -- ----------------------------
-INSERT INTO `test` VALUES (12, NULL);
-INSERT INTO `test` VALUES (13, b'1');
+INSERT INTO `test` VALUES (1, b'1');
 
 -- ----------------------------
 -- Table structure for user_course

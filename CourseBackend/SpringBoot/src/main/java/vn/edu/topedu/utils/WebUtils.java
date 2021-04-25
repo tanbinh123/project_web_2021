@@ -5,6 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class WebUtils {
 	public static String miliSecondToDuration(long miliSecond) {
 		String dura = String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(miliSecond),
@@ -38,6 +40,9 @@ public class WebUtils {
 			return "";
 		}
 
+	}
+	public static String getUrl(HttpServletRequest httpServletRequest) {
+		return String.format("%s://%s:%d/", httpServletRequest.getScheme(),httpServletRequest.getServerName(),httpServletRequest.getServerPort());
 	}
 
 }
