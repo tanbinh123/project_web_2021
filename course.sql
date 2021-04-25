@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 25/04/2021 15:39:32
+ Date: 26/04/2021 01:39:16
 */
 
 SET NAMES utf8mb4;
@@ -532,6 +532,44 @@ INSERT INTO `part` VALUES (1, 171, 'Phương pháp học tập', 2, 1832000);
 INSERT INTO `part` VALUES (2, 171, 'Tư duy phát triển', 1, 1539000);
 INSERT INTO `part` VALUES (3, 171, 'Khái niệm kỹ thuật cần biết', 2, 1539000);
 INSERT INTO `part` VALUES (4, 171, 'Tham khảo thêm', 3, 1539000);
+
+-- ----------------------------
+-- Table structure for payment
+-- ----------------------------
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE `payment`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `create_time` datetime(0) NULL DEFAULT NULL,
+  `amount` decimal(65, 0) NULL DEFAULT NULL,
+  `ip_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `currcode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `transaction_Status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `url_pay` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of payment
+-- ----------------------------
+INSERT INTO `payment` VALUES (15, 1, '2021-04-25 17:36:20', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL);
+INSERT INTO `payment` VALUES (16, 1, '2021-04-25 17:49:53', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL);
+INSERT INTO `payment` VALUES (17, 1, '2021-04-25 18:34:14', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL);
+INSERT INTO `payment` VALUES (18, 1, '2021-04-25 18:36:48', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL);
+INSERT INTO `payment` VALUES (19, 1, '2021-04-25 18:37:30', 10000, '119.17.249.22', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_Command=pay&vnp_CreateDate=20210426013730&vnp_CurrCode=VND&vnp_IpAddr=119.17.249.22&vnp_Locale=vn&vnp_OrderInfo=Day+la+mieu+ta&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001&vnp_TmnCode=67LF6OWG&vnp_TxnRef=19&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=6ddfbc525227fcbdae4f938ed4716d9684af15a53e9e65088706f3f616455368');
+
+-- ----------------------------
+-- Table structure for queue_check_payment
+-- ----------------------------
+DROP TABLE IF EXISTS `queue_check_payment`;
+CREATE TABLE `queue_check_payment`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `payment_id` bigint(20) NOT NULL,
+  `last_check` datetime(0) NULL DEFAULT utc_timestamp,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for request_reset_password

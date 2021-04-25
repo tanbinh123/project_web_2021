@@ -18,6 +18,7 @@ public class Main {
 	@RequestMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<Object> hello() {
+		System.out.println("Hello");
 		return ResponseEntity.ok("Hello World from Spring Boot Started Web");
 	}
 
