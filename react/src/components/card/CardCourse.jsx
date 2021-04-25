@@ -139,6 +139,7 @@ export default function CardCourse(props) {
       setTmpDescription(description.slice(0, 140) + "...");
     }
   }
+  console.log(avatar);
   return (
     <Card className={classes.root}>
       <CardActionArea className={classes.CardActionArea}>

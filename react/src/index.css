@@ -18,6 +18,9 @@
   --colorOrange2: #f39c12;
   --colorGray1: #95a5a6;
   --colorGray2: #7f8c8d;
+  --colorRed0: #ff0000;
+  --colorRed1: #e74c3c;
+  --colorRed2: #c0392b;
 }
 [data-theme="dark"] {
   --colorBlack1: #ecf0f1;

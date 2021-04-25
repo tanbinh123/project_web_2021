@@ -6,6 +6,7 @@ import Register from "./features/Auth/components/Register";
 import CourseFeatures from "./features/Course";
 import ForgotPassword from "./features/ForgotPassword";
 import Home from "./features/home";
+import Actived from "./features/Infomation/components/Actived";
 import InfomationFeature from "./features/Infomation/InfomationFeature";
 import NotFound404 from "./features/NotFound";
 import CssColor from "./features/test/CssColor";
@@ -36,6 +37,7 @@ function App(props) {
         <Route path="/testsearch" component={TestSearch} exact />
         <Route path="/testcolor" component={CssColor} exact />
         <Route path="/setvalue" component={SetValue} exact />
+        <Route path="/actived" component={Actived} exact />
         <Route path="/*" component={NotFound404} />
         <Route path="/auth/*" component={NotFound404} />
       </Switch>

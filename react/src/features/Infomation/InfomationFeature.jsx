@@ -18,6 +18,7 @@ import { Route, Switch, useRouteMatch } from "react-router";
 import { Link, NavLink } from "react-router-dom";
 import Edit from "./components/Edit";
 import NotFound404 from "../NotFound";
+import Active from "./components/Active";
 
 InfomationFeature.propTypes = {};
 function InfomationFeature(props) {
@@ -51,11 +52,25 @@ function InfomationFeature(props) {
                           "https://upload-os-bbs.hoyolab.com/upload/2021/03/03/1015734/c396975a1041f466c80bd4f5b8f8e036_2256703502106078586.jpg?x-oss-process=image/resize,s_740/quality,q_80/auto-orient,0/interlace,1/format,jpg"
                         }
                       />
-                      <span>{dataUser.user.username}</span>
+                      <div>
+                        <span>
+                          {dataUser.user.username}{" "}
+                          {dataUser.user.actived ? (
+                            <i className="fas fa-check-circle green"></i>
+                          ) : (
+                            <i className="fas fa-times-circle red"></i>
+                          )}
+                        </span>
+                      </div>
                     </li>
                     <li>
                       <NavLink to={`${url}/info`}>Giới thiệu</NavLink>
                     </li>
+                    {!dataUser.user.actived && (
+                      <li>
+                        <NavLink to={`${url}/active`}>Kích hoạt</NavLink>
+                      </li>
+                    )}
                     <li>
                       <NavLink to={`${url}/edit`}>
                         Sửa thông tin cá nhân
@@ -78,6 +93,7 @@ function InfomationFeature(props) {
                 <Switch>
                   <Route path={`${url}/edit`} component={Edit} exact />
                   <Route path={`${url}/info`} component={Info} exact />
+                  <Route path={`${url}/active`} component={Active} exact />
                   <Route path={`${url}/`} component={NotFound404} />
                 </Switch>
               </Grid>

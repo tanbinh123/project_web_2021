@@ -10,9 +10,20 @@ const CSSLecture = makeStyles((theme) => ({
     width: "75%",
     overflowX: "hidden",
     overflowY: "auto",
-    "&>.video": {
-      // minHeight: 400,
-      minWidth: "100%",
+    "&>.videoRoot": {
+      "&>.video": {
+        // minHeight: 400,
+        minWidth: "100%",
+      },
+      "&>span": {
+        position: "absolute",
+        color: "var(--colorOrange1)",
+        position: "absolute",
+        left: "86%",
+        top: "4%",
+        zIndex: 1,
+        width: "100%",
+      },
     },
     height: "100%",
   },

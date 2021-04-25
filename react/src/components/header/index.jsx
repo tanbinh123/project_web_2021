@@ -14,6 +14,7 @@ import RightAppbar from "./components/RightAppbar";
 // css
 const useStyles = makeStyles((theme) => ({
   root: {
+    fontFamily: "'Open Sans', sans-serif",
     transition: "all 1s linear",
     "& > div": {
       display: "block",
