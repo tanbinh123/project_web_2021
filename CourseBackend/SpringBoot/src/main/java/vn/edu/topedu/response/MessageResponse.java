@@ -2,7 +2,11 @@ package vn.edu.topedu.response;
 
 public class MessageResponse {
 	private Message message;
-	
+	/**
+	 * 
+	 * @param en message by english
+	 * @param vi message by vietnamse
+	 */
 	
 	public MessageResponse(String en, String vi) {
 		super();

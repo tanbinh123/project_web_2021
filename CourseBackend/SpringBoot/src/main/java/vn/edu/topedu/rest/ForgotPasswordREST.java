@@ -28,13 +28,11 @@ public class ForgotPasswordREST {
 	private RequestResetPasswordDAO requestResetPasswordDAO;
 	@Autowired
 	private AppUserDAO appUserDAO;
-	@GetMapping("/forgotpassword")
-	@ResponseBody
-	public ResponseEntity<Object> get() {
-		RequestResetPassword rs=requestResetPasswordDAO.getCourse(Long.valueOf(1));
-		return ResponseEntity.ok(rs.getCode());
-		
-	}
+	@Autowired
+	private PBKDF2Encoder passwordEncoder;
+	
+	
+	
 	@PostMapping("/forgotpassword/username")
 	@ResponseBody
 	public ResponseEntity<Object> sendMailByUsername(
@@ -100,18 +98,17 @@ public class ForgotPasswordREST {
 			@RequestBody Map<String,Object> body) {
 		String username=body.get("username").toString();
 		String code=body.get("code").toString();
-		RequestResetPassword rrp = requestResetPasswordDAO.getCourse(username);
+		RequestResetPassword rrp = requestResetPasswordDAO.getNewCode(username);
 		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));
 		String trueCode=rrp.getCode();
 		if(code.equals(trueCode)) {
-			
+			//System.out.println(rrp.getTime());
 			return ResponseEntity.ok(new MessageResponse("Code valid.","Xác minh thành công."));
 		
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
 	}
-	@Autowired
-	private PBKDF2Encoder passwordEncoder;
+	
 	@PostMapping("/forgotpassword/change")
 	@ResponseBody
 	public ResponseEntity<Object> changePassword(
@@ -120,7 +117,7 @@ public class ForgotPasswordREST {
 		String username=body.get("username").toString();
 		String code=body.get("code").toString();
 		String password=body.get("password").toString();
-		RequestResetPassword rrp = requestResetPasswordDAO.getCourse(username);
+		RequestResetPassword rrp = requestResetPasswordDAO.getNewCode(username);
 		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
 		String trueCode=rrp.getCode();
 		if(code.equals(trueCode)) {
