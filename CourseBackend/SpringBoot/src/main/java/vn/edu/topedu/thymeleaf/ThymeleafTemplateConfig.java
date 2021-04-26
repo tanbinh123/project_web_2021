@@ -8,8 +8,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-import nz.net.ultraq.thymeleaf.LayoutDialect;
-
 @Configuration
 public class ThymeleafTemplateConfig {
 	@Bean
@@ -17,8 +15,6 @@ public class ThymeleafTemplateConfig {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.addTemplateResolver(htmlTemplateResolver());
 		templateEngine.addTemplateResolver(templateResolverTemplates());
-		templateEngine.setEnableSpringELCompiler(true);
-        templateEngine.addDialect(new LayoutDialect());
 		return templateEngine;
 	}
 
