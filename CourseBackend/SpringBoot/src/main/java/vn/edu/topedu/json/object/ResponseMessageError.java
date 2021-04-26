@@ -1,6 +1,6 @@
 package vn.edu.topedu.json.object;
 
-public class ResponseMessageError extends JsonResponse {
+public class ResponseMessageError implements JsonResponse {
 	private boolean isError;
 	private String message;
 

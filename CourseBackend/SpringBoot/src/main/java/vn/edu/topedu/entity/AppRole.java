@@ -1,14 +1,19 @@
 package vn.edu.topedu.entity;
  
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
  
 @Entity
 
@@ -17,21 +22,17 @@ import org.springframework.security.core.GrantedAuthority;
                 @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name") })
 public class AppRole implements GrantedAuthority {
      
-    @Id
-    @GeneratedValue
-    @Column(name = "Role_Id", nullable = false)
-    private Long roleId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
  
     @Column(name = "Role_Name", length = 30, nullable = false)
     private String roleName;
  
-    public Long getRoleId() {
-        return roleId;
-    }
- 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
+    @OneToMany(mappedBy = "appRole")
+	@JsonIgnore
+	private List<UserRole> userRole;
  
     public String getRoleName() {
         return roleName;
@@ -40,11 +41,29 @@ public class AppRole implements GrantedAuthority {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+    
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	@Override
+	@JsonIgnore
 	public String getAuthority() {
 		
 		return this.roleName;
 	}
+
+	public List<UserRole> getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(List<UserRole> userRole) {
+		this.userRole = userRole;
+	}
+	
      
 }

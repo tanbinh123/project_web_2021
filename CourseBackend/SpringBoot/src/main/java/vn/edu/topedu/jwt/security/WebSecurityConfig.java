@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		 //JWTUtil jwtUtil= new JWTUtil();
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
+			http/* .cors().and() */.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
 				.authenticationEntryPoint(restAuthenticationEntryPoint).and().authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/", "/auth/**", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
 						"/**/*.css", "/**/*.js")
@@ -42,14 +42,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/resource/**").permitAll().antMatchers("/course/**").permitAll()
 				.antMatchers("/forgotpassword/**").permitAll()
 				.antMatchers("/pay/**").permitAll()
-				.antMatchers("/test/**").permitAll()
+				.antMatchers("/test/**").permitAll()				
+				.antMatchers("/ws/**").permitAll()				
 				.antMatchers("/video/**").permitAll()
 				.antMatchers("/stream/**").permitAll()
-				.antMatchers("/")
-				.permitAll().antMatchers("/mail/**").denyAll().antMatchers("/auth/**").permitAll().anyRequest()
-				.authenticated().and()
+				.antMatchers("/").permitAll()
+				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+				.antMatchers("/mail/**").denyAll()
+				.antMatchers("/auth/**").permitAll()
+				
+//				.antMatchers("/**/**").permitAll()
+				.anyRequest()
+				.authenticated().and()//.cors()
+				.httpBasic().and()
 				.addFilterBefore(new TokenAuthenticationFilter(jwtUtil,appUserDAO), BasicAuthenticationFilter.class);
-
+		//http.cors();
 		http.csrf().disable();
 	}
 

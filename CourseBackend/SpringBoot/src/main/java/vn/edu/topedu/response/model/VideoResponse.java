@@ -2,7 +2,7 @@ package vn.edu.topedu.response.model;
 
 import vn.edu.topedu.json.object.JsonResponse;
 
-public class VideoResponse  extends JsonResponse {
+public class VideoResponse  implements JsonResponse {
 	private int id;
 	private String poster;
 	private String durations;//ms

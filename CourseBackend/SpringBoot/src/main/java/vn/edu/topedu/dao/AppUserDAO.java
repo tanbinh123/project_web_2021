@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.edu.topedu.entity.AppRole;
 import vn.edu.topedu.entity.AppUser;
+import vn.edu.topedu.entity.UserRole;
 
 @Repository
 @Transactional
@@ -19,6 +21,20 @@ public class AppUserDAO {
 
 	public AppUser findById(Long id) {
 		return this.entityManager.find(AppUser.class, id);
+	}
+	
+	public AppRole findRoleByRoleName(String roleName) {
+		try {
+			String sql = "Select e from " + AppRole.class.getName() + " e " //
+					+ " Where e.roleName = :roleName ";
+
+			Query query = entityManager.createQuery(sql, AppRole.class);
+			query.setParameter("roleName", roleName);
+
+			return (AppRole) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	public AppUser findUserAccount(String userName) {
@@ -70,19 +86,52 @@ public class AppUserDAO {
 //		return false;
 //	}
 
-	public boolean insertUser(AppUser user) {
-		
+	public AppUser insertUser(AppUser user) {
 		
 		try {
 			entityManager.persist(user);
-			return true;
+			entityManager.flush();
+			return user;
 		} catch (Exception e) {
-			// TODO: handle exception
+			//System.out.println(e.getMessage());
+			System.out.println("Không insert user");
+			return null;
 		}
 		
-		return false;
 		
-
+	}
+	public UserRole putUserRole(UserRole user) {
+		
+		if(user.getId()==null) {
+			try {
+				entityManager.persist(user);
+				entityManager.flush();
+				return user;
+			} catch (Exception e) {
+//				System.out.println(e.getMessage());
+//				System.out.println("Insert UserRole");
+				return null;
+			}
+			
+		}else {
+			try {
+				return entityManager.merge(user);
+			} catch (Exception e) {
+//				System.out.println(e.getMessage());
+//				System.out.println("Insert UserRole");
+				return null;
+			}
+		}
+	}
+	public AppUser updateAppUser(AppUser user) {
+		
+		try {
+			return entityManager.merge(user);
+		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+			System.out.println("AppUserDAO: Can't update user");
+			return null;
+		}
 	}
 	public boolean updateUser(AppUser user) {
 		

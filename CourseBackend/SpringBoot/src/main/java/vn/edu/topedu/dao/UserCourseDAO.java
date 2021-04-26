@@ -25,7 +25,7 @@ public class UserCourseDAO {
     public List<Course> getOwerCourse(Long userId) {
         String sql = "Select uc.course from " + 
         		UserCourse.class.getName() + " uc " //
-                + " where uc.appUser.userId = :userId ";
+                + " where uc.appUser.id = :userId ";
  
         Query query = this.entityManager.createQuery(sql, Course.class);
         query.setParameter("userId", userId);

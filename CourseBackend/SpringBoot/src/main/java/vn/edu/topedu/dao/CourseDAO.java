@@ -103,7 +103,7 @@ public class CourseDAO {
 //		return query.getResultList();
 //	}
 
-	public int insertCourse(Course course) {
+	public Long insertCourse(Course course) {
 		try {
 			entityManager.persist(course);
 			entityManager.flush();
@@ -113,7 +113,7 @@ public class CourseDAO {
 			System.out.println(e.getMessage());
 		}
 
-		return 0;
+		return Long.parseLong(String.valueOf(0));
 	}
 
 	public Course updateCourse(Course course) {
