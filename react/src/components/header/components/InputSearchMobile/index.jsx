@@ -18,13 +18,16 @@ function InputSearchAppbarMobile({ openSearch }) {
   const [dataSearch, setDataSearch] = useState([]);
   const { push } = useHistory();
   const [paramsSearch, setParamsSearch] = useState({
-    q: "wqeuyiwqyuhsdpjsapijdaspdnmasncixozpnc",
+    q: "",
   });
   useEffect(() => {
     (async () => {
       const { data } = await courseApiFake.search(paramsSearch);
       setDataSearch(data);
     })();
+    return () => {
+      setDataSearch([]);
+    };
   }, [paramsSearch]);
   const handleOnChange = (value) => {
     setParamsSearch((pre) => ({

@@ -10,8 +10,8 @@ import {
   colorBlack2,
   colorOrange1,
 } from "../../../../components/color/color";
-import PasswordField from "../../../../components/PasswordField";
-import InputTextHidden from "../../../../components/TextField/InputTextHidden";
+import CustomInput from "../../../../components/Input/CustomInput";
+import CustomInputHidden from "../../../../components/Input/CustomInputHidden";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,18 +34,10 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(-50%, -50%)",
     padding: "20px 40px 20px 40px",
     borderRadius: "10px",
-    width: "27%",
+    width: "400px",
     height: "75%",
-    [theme.breakpoints.only("md")]: {
-      width: "33%",
-      height: "80%",
-    },
-    [theme.breakpoints.only("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "90%",
-      height: "80%",
-    },
-    [theme.breakpoints.only("sm")]: {
-      width: "45%",
     },
   },
   title: {
@@ -127,12 +119,18 @@ function FormForgotPasswordPass(props) {
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
         <span className={classes.title}>Forgot Password</span>
-        <InputTextHidden value={data.username} name="username" form={form} />
-        <InputTextHidden value={data.code} name="code" form={form} />
-        <PasswordField label="Password" name="password" form={form} />
-        <PasswordField
+        <CustomInputHidden value={data.username} name="username" form={form} />
+        <CustomInputHidden value={data.code} name="code" form={form} />
+        <CustomInput
+          label="Password"
+          name="password"
+          type="password"
+          form={form}
+        />
+        <CustomInput
           label="Retype Password"
           name="retypepassword"
+          type="password"
           form={form}
         />
         <ButtonSubmit title="Submit" />

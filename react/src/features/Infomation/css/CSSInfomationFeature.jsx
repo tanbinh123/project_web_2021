@@ -13,7 +13,8 @@ const CSSInfomationFeature = makeStyles((theme) => ({
   leftRoot: {
     color: "var(--colorBlack1)",
     backgroundColor: "var(--colorWhite1)",
-    borderRadius: "5%",
+    borderRadius: "14px",
+    boxShadow: "0px 0px 10px var(--colorBlack1)",
     "&>ul": {
       display: "flex",
       flexFlow: "column nowrap",
@@ -42,6 +43,7 @@ const CSSInfomationFeature = makeStyles((theme) => ({
         borderTopLeftRadius: "14px",
         borderTopRightRadius: "14px",
         padding: "20px 10px 20px 10px",
+
         "&>div": {
           // marginRight: 20,
           marginLeft: 15,

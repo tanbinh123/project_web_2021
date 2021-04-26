@@ -10,8 +10,10 @@ const ActiveCss = makeStyles((theme) => ({
       justifyContent: "space-between",
       padding: "30px 40px 20px 40px",
       color: "var(--colorWhite1)",
+
       borderTopLeftRadius: "20px",
       borderTopRightRadius: "20px",
+      boxShadow: "0px 0px 10px var(--colorBlack1)",
       "&>ul": {
         display: "flex",
         flexFlow: "column",
@@ -45,6 +47,7 @@ const ActiveCss = makeStyles((theme) => ({
       borderBottomLeftRadius: "20px",
       borderBottomRightRadius: "20px",
 
+      boxShadow: "0px 0px 10px var(--colorBlack1)",
       "&>div": {
         display: "flex",
         justifyContent: "center",

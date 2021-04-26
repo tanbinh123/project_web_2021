@@ -11,7 +11,7 @@ import {
   colorBlack2,
   colorOrange1,
 } from "../../../../components/color/color";
-import InputText from "../../../../components/TextField";
+import CustomInput from "../../../../components/Input/CustomInput";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,14 +34,10 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(-50%, -50%)",
     padding: "20px 40px 20px 40px",
     borderRadius: "10px",
-    width: "27%",
+    width: "400px",
     height: "70%",
-    [theme.breakpoints.only("xs")]: {
-      width: "80%",
-      height: "80%",
-    },
-    [theme.breakpoints.only("sm")]: {
-      width: "40%",
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
     },
   },
   title: {
@@ -130,7 +126,7 @@ function FormForgotPassword(props) {
           }}
         />
         <span className={classes.title}>Forgot Password</span>
-        <InputText label="Email" name="email" form={form} />
+        <CustomInput label="Email" name="email" form={form} />
 
         <ButtonSubmit title="Submit" />
         <span className={classes.text1}>Did you remember the account?</span>

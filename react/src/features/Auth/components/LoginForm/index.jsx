@@ -6,13 +6,7 @@ import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import ButtonSubmit from "../../../../components/Button/ButtonSubmit";
-import {
-  colorBlack1,
-  colorBlack2,
-  colorOrange1,
-} from "../../../../components/color/color";
-import PasswordField from "../../../../components/PasswordField";
-import InputText from "../../../../components/TextField";
+import CustomInput from "../../../../components/Input/CustomInput";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,13 +29,9 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(-50%, -50%)",
     padding: "20px",
     borderRadius: "10px",
-    width: "26%",
-    [theme.breakpoints.only("xs")]: {
+    width: "400px",
+    [theme.breakpoints.down("sm")]: {
       width: "90%",
-      height: "80%",
-    },
-    [theme.breakpoints.only("sm")]: {
-      width: "36%",
     },
   },
   title: {
@@ -57,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "40px",
     display: "block",
     textAlign: "center",
-    color: colorBlack1,
+    color: "var(--colorBlack1)",
   },
   textDK: {
     fontSize: "16px",
@@ -65,9 +55,9 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     textAlign: "center",
     textDecoration: "none",
-    color: colorBlack2,
+    color: "var(--colorBlack2)",
     "&:hover": {
-      color: colorOrange1,
+      color: "var(--colorOrange1)",
     },
   },
   text3: {
@@ -77,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     textAlign: "right",
     textDecoration: "none",
-    color: colorBlack2,
+    color: "var(--colorBlack2)",
     "&:hover": {
-      color: colorOrange1,
+      color: "var(--colorOrange1)",
     },
   },
   iconback: {
@@ -101,6 +91,7 @@ function LoginForm(props) {
   const { push } = useHistory();
   const classes = useStyles();
   const form = useForm({
+    mode: "onBlur",
     defaultValues: {
       username: "",
       password: "",
@@ -125,8 +116,13 @@ function LoginForm(props) {
           }}
         />
         <span className={classes.title}>Login</span>
-        <InputText label="Username" name="username" form={form} />
-        <PasswordField name="password" label="Password" form={form} />
+        <CustomInput label="Username" name="username" form={form} />
+        <CustomInput
+          name="password"
+          label="Password"
+          type="password"
+          form={form}
+        />
         <Link to="/forgot-password" className={classes.text3}>
           <span>Forgot Password ?</span>
         </Link>

@@ -10,7 +10,7 @@ import {
   colorBlack2,
   colorOrange1,
 } from "../../../../components/color/color";
-import InputText from "../../../../components/TextField";
+import CustomInput from "../../../../components/Input/CustomInput";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,7 +120,7 @@ function FormUploadOne(props) {
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
         <span className={classes.title}>Form Upload</span>
-        <InputText name="name" label="Title" form={form} />
+        <CustomInput name="name" label="Title" form={form} />
 
         <ButtonUploadFW
           title="Upload"

@@ -3,52 +3,37 @@ import { makeStyles } from "@material-ui/core";
 const EditCss = makeStyles((theme) => ({
   rightRoot: {
     //o tren
-    // "&>div": {},
     "&>div:first-of-type": {
-      backgroundImage:
-        "linear-gradient(to top right,var(--colorOrange1),var(--colorOrange2))",
+      // backgroundImage:
+      //   "linear-gradient(to top,var(--colorBlack1),var(--colorBlack2))",
       display: "flex",
       justifyContent: "space-between",
       padding: "30px 40px 20px 40px",
-      color: "var(--colorWhite1)",
+      color: "var(--colorWhite0)",
       borderTopLeftRadius: "20px",
       borderTopRightRadius: "20px",
-      "&>div:first-of-type>ul": {
+      // boxShadow: "0px 0px 10px var(--colorOrange1)",
+
+      "&>ul": {
         display: "flex",
-        alignItems: "center",
-        "&>li:first-child": {
-          marginRight: "20px",
+        flexFlow: "column",
+        alignItems: "flex-start",
+        width: "100%",
+        "&>li": {
+          display: "flex",
+          width: "100%",
         },
-        "&>li:last-child": {
-          fontSize: "35px",
+        "&>li:nth-child(1)": {
+          // justifyContent: "center",
+          marginBottom: 15,
+          "&>span": {
+            fontSize: "25px",
+            fontWeight: 600,
+          },
         },
-      },
-      //ben phai
-      "&>div": {
-        fontWeight: "300",
-        "&>ul": {
-          "&>li": { marginBottom: 10 },
-          "&>li:first-child": {
-            "&>i": {
-              fontSize: "20px",
-            },
-          },
-          //facebook google
-          "&>li:last-child": {
-            "&>ul": {
-              "&>li": {
-                cursor: "pointer",
-                fontSize: 20,
-                "&:hover": {
-                  transform: "scale(1.2)",
-                },
-              },
-              display: "flex",
-              "&>li:first-child": {
-                marginRight: 20,
-              },
-            },
-          },
+        "&>li:nth-child(2)": {
+          justifyContent: "flex-end",
+          "&>span": {},
         },
       },
     },
@@ -57,45 +42,29 @@ const EditCss = makeStyles((theme) => ({
     "&>div:last-of-type": {
       backgroundColor: "var(--colorWhite1)",
       color: "var(--colorBlack2)",
-      padding: "30px 20px 40px 20px",
+      padding: "30px 20px 15px 20px",
 
       borderBottomLeftRadius: "20px",
       borderBottomRightRadius: "20px",
-      "&>ul": {
-        "&>li:first-child": {
-          fontSize: "30px",
-          fontWeight: 600,
-          marginBottom: "20px",
-        },
-        "&>li:last-child": {
-          fontSize: "18px",
+      // boxShadow: "0px 3px 7px var(--colorOrange1)",
+      "&>div": {
+        display: "flex",
+        justifyContent: "center",
+      },
+      "&>div:first-of-type": {
+        margin: "30px 0",
+        "&>span": {
+          fontSize: 18,
+          "&>span": {
+            fontWeight: "600",
+          },
         },
       },
-    },
-  },
-  avatarRight: {
-    width: 100,
-    height: 100,
-    "&:hover": {},
-  },
-  [theme.breakpoints.down("xs")]: {
-    rightRoot: {
-      //o tren
-      // "&>div": {},
-      "&>div:first-of-type": {
-        "&>div:first-of-type>ul": {
-          "&>li:first-child": {
-            marginRight: "0",
-          },
-        },
-        //ben phai
-        "&>div": {
-          "&>ul": {
-            display: "flex",
-            flexFlow: "column",
-            alignItems: "center",
-          },
-        },
+      "&>div:nth-child(2)": {
+        marginBottom: 30,
+      },
+      "& .MuiLinearProgress-barColorPrimary": {
+        backgroundColor: "var(--colorOrange2)",
       },
     },
   },

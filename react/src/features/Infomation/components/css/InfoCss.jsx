@@ -6,14 +6,16 @@ const InfoCss = makeStyles((theme) => ({
   rightRoot: {
     //o tren
     "&>div:first-of-type": {
-      backgroundImage:
-        "linear-gradient(to top right,var(--colorOrange1),var(--colorOrange2))",
+      // backgroundImage:
+      //   "linear-gradient(to top right,var(--colorOrange1),var(--colorOrange2))",
       display: "flex",
       justifyContent: "space-between",
       padding: "30px 40px 20px 40px",
-      color: "var(--colorWhite1)",
+      color: "var(--colorWhite0)",
+
       borderTopLeftRadius: "20px",
       borderTopRightRadius: "20px",
+      // boxShadow: "0px 0px 10px var(--colorOrange1)",
       "&>div:first-of-type>ul": {
         display: "flex",
         alignItems: "center",
@@ -66,6 +68,7 @@ const InfoCss = makeStyles((theme) => ({
 
       borderBottomLeftRadius: "20px",
       borderBottomRightRadius: "20px",
+      // boxShadow: "0px 3px 7px var(--colorOrange1)",
       "&>ul": {
         "&>li:first-child": {
           fontSize: "30px",

@@ -24,7 +24,9 @@ function InputTextHidden(props) {
   return (
     <Controller
       control={form.control}
-      as={<input type="hidden" />}
+      render={({ field }) => {
+        <input type="hidden" {...field} />;
+      }}
       className={classes.cssInputText}
       name={name}
       label={label}

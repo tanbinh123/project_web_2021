@@ -19,7 +19,7 @@ function Info(props) {
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   return (
     <div className={classes.rightRoot}>
-      <Grid container>
+      <Grid container className="backround__header">
         <Grid item xl={9} lg={9} md={9} sm={9} xs={12}>
           <ul>
             <li>

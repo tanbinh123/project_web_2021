@@ -30,3 +30,27 @@
         opacity: 0;
     }
 }
+
+.backround__header {
+    background: linear-gradient(
+        -45deg,
+        var(--colorOrange1),
+        var(--colorOrange2),
+        var(--colorOrange2),
+        var(--colorOrange1)
+    );
+    background-size: 400% 400%;
+    animation: gradient 5s alternate infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

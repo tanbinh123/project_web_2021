@@ -10,8 +10,8 @@ import {
   colorBlack2,
   colorOrange1,
 } from "../../../../components/color/color";
-import InputText from "../../../../components/TextField";
-import InputTextDisable from "../../../../components/TextField/InputTextDisable";
+import CustomInput from "../../../../components/Input/CustomInput";
+import CustomInputDisable from "../../../../components/Input/CustomInputDisable";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,14 +34,11 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(-50%, -50%)",
     padding: "20px 40px 20px 40px",
     borderRadius: "10px",
-    width: "27%",
+    width: "400px",
     height: "75%",
-    [theme.breakpoints.only("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "90%",
-      height: "80%",
-    },
-    [theme.breakpoints.only("sm")]: {
-      width: "36%",
+      // height: "80%",
     },
   },
   title: {
@@ -96,7 +93,7 @@ function FormForgotPasswordCode(props) {
   const classes = useStyles();
   const form = useForm({
     defaultValues: {
-      username: data.username,
+      username: data.username || "",
       code: "",
     },
     resolver: yupResolver(schema),
@@ -113,13 +110,13 @@ function FormForgotPasswordCode(props) {
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
         <span className={classes.title}>Confirm Forgot Password</span>
-        <InputTextDisable
+        <CustomInputDisable
           label="Username"
           name="username"
           value={data.username}
           form={form}
         />
-        <InputText label="Code" name="code" form={form} />
+        <CustomInput label="Code" name="code" form={form} />
         <ButtonSubmit title="Submit" />
         <span className={classes.text1}>Did you remember the account?</span>
         <Link to="/auth/login" className={classes.textDK}>
