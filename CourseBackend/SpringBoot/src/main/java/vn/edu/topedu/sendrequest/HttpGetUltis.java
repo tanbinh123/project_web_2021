@@ -1,4 +1,4 @@
-package vn.edu.topedu;
+package vn.edu.topedu.sendrequest;
 
 import java.util.Scanner;
 import org.apache.http.HttpResponse;

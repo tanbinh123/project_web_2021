@@ -1,4 +1,4 @@
-package vn.edu.topedu;
+package vn.edu.topedu.payment.vnpay;
 
 public class VNPayConfig {
 	public static String vnp_PayUrl = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";

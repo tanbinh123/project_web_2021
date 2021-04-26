@@ -1,4 +1,4 @@
-package vn.edu.topedu;
+package vn.edu.topedu.cors;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

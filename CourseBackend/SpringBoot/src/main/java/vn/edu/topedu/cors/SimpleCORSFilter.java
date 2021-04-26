@@ -1,4 +1,4 @@
-package vn.edu.topedu;
+package vn.edu.topedu.cors;
 
 import java.io.IOException;
 
