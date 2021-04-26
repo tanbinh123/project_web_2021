@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
  
 @Entity
 
@@ -18,17 +20,19 @@ import javax.persistence.UniqueConstraint;
                 @UniqueConstraint(name = "USER_ROLE_UK", columnNames = { "User_Id", "Role_Id" }) })
 public class UserRole {
  
-    @Id
-    @GeneratedValue
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Long id;
  
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "User_Id", nullable = false)
+    @JsonIgnore
     private AppUser appUser;
  
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Role_Id", nullable = false)
+    @JsonIgnore
     private AppRole appRole;
  
     public Long getId() {

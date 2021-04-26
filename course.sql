@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 26/04/2021 01:39:16
+ Date: 26/04/2021 14:25:15
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `active_account`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `active_account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of active_account
@@ -39,17 +39,27 @@ INSERT INTO `active_account` VALUES (58, 1, '2021-04-25 08:21:22', '4313c5ffb2d2
 INSERT INTO `active_account` VALUES (59, 1, '2021-04-25 08:22:29', '712cd07ac9a60f169302cdc47a2aead1');
 INSERT INTO `active_account` VALUES (60, 1, '2021-04-25 08:24:17', '88a56861a9786aa7c251b57ba1d0e049');
 INSERT INTO `active_account` VALUES (61, 1, '2021-04-25 08:38:32', '22208667e5875ffe2f8ca4d1e6353695');
+INSERT INTO `active_account` VALUES (62, 2, '2021-04-25 19:20:03', '7e8bb0233754793ee006c466be3d7297');
+INSERT INTO `active_account` VALUES (63, 1, '2021-04-26 05:32:50', '2a04fd0ca027243a45f7ae15a29566b6');
+INSERT INTO `active_account` VALUES (64, 1, '2021-04-26 05:34:17', 'b6490699aade715c1829b43068b42e96');
+INSERT INTO `active_account` VALUES (65, 1, '2021-04-26 05:35:12', '53c625725d4b78d47ce729b3747089d4');
+INSERT INTO `active_account` VALUES (66, 1, '2021-04-26 05:35:45', '160f409c5c971346e0b63d16e2127377');
+INSERT INTO `active_account` VALUES (67, 2, '2021-04-26 05:46:14', '1bd3604101760fba83d5f5ddc3ffab6d');
+INSERT INTO `active_account` VALUES (68, 1, '2021-04-26 05:50:21', '1d290e46ba2f70da5e40596090f42480');
+INSERT INTO `active_account` VALUES (69, 2, '2021-04-26 05:50:53', '60df8b1bb1335023a3cdd55ae8f1c6b9');
+INSERT INTO `active_account` VALUES (70, 2, '2021-04-26 05:52:05', '02bf59dff98b7ce811251bad05844196');
+INSERT INTO `active_account` VALUES (71, 2, '2021-04-26 05:53:31', '636c1c2d7d76290fbf352fda6f2b1f2f');
 
 -- ----------------------------
 -- Table structure for app_role
 -- ----------------------------
 DROP TABLE IF EXISTS `app_role`;
 CREATE TABLE `app_role`  (
-  `ROLE_ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ROLE_NAME` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`ROLE_ID`) USING BTREE,
+  PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE INDEX `APP_ROLE_UK`(`ROLE_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_role
@@ -72,15 +82,14 @@ CREATE TABLE `app_user`  (
   PRIMARY KEY (`USER_ID`) USING BTREE,
   UNIQUE INDEX `APP_USER_UK`(`USER_NAME`) USING BTREE,
   UNIQUE INDEX `email_uq`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
 INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com');
 INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com');
-INSERT INTO `app_user` VALUES (28, 'hello', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'1', 1, b'0', 'test@gmail.com');
-INSERT INTO `app_user` VALUES (30, 'sang', '3sPcFxUAEJv0+aHpLnEa87B8F9Dbo03RG9mPyIGGGtk=', b'1', 1, b'0', 'anonkill1999@gmail.com');
+INSERT INTO `app_user` VALUES (19, 'hello', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'1', 1, b'0', 'test@gmail.com');
 
 -- ----------------------------
 -- Table structure for course
@@ -663,15 +672,14 @@ INSERT INTO `user_course` VALUES (9, 1, 9);
 -- ----------------------------
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role`  (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USER_ID` bigint(20) NOT NULL,
   `ROLE_ID` bigint(20) NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE INDEX `USER_ROLE_UK`(`USER_ID`, `ROLE_ID`) USING BTREE,
   INDEX `USER_ROLE_FK2`(`ROLE_ID`) USING BTREE,
-  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`ROLE_ID`) REFERENCES `app_role` (`ROLE_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_role_ibfk_3` FOREIGN KEY (`USER_ID`) REFERENCES `app_user` (`USER_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role
@@ -679,6 +687,7 @@ CREATE TABLE `user_role`  (
 INSERT INTO `user_role` VALUES (1, 1, 1);
 INSERT INTO `user_role` VALUES (2, 1, 2);
 INSERT INTO `user_role` VALUES (3, 2, 2);
+INSERT INTO `user_role` VALUES (5, 19, 2);
 
 -- ----------------------------
 -- Table structure for video

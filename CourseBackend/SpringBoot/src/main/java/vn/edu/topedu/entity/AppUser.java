@@ -13,12 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import vn.edu.topedu.entity.detailcourse.Learning;
 
 @Entity
 @Table(name = "App_User", //
@@ -56,9 +59,10 @@ public class AppUser implements UserDetails {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", 
 	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), 
-	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
+	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private List<AppRole> authorities;
-
+	@OneToMany(mappedBy = "appUser")
+	private List<UserRole> userRoles;
 	public Long getUserId() {
 		return userId;
 	}
@@ -147,5 +151,27 @@ public class AppUser implements UserDetails {
 	public boolean isEnabled() {
 		return this.enabled;
 	}
+
+	public ResourceImage getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(ResourceImage avatar) {
+		this.avatar = avatar;
+	}
+
+	public void setAuthorities(List<AppRole> authorities) {
+		this.authorities = authorities;
+	}
+
+	public List<UserRole> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(List<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+	
+	
 
 }

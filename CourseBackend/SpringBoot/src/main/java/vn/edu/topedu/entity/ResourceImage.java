@@ -24,6 +24,18 @@ public class ResourceImage {
 	@Column(name = "deleted", length = 36, nullable = false)
 	@JsonIgnore
 	private String deleted;
+	
+	
+	public ResourceImage() {
+		super();
+	}
+	public ResourceImage(Long id, String path, Date updateAt, String deleted) {
+		super();
+		this.id = id;
+		this.path = path;
+		this.updateAt = updateAt;
+		this.deleted = deleted;
+	}
 	public Long getId() {
 		return id;
 	}

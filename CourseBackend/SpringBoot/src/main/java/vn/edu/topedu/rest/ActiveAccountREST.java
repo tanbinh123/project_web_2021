@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,11 +32,10 @@ public class ActiveAccountREST {
 	private ActiveAccountDAO activeAccountDAO;
 	@Autowired
 	private AppUserDAO appUserDAO;
-	@Autowired
-	private PBKDF2Encoder passwordEncoder;
 	
-	@PostMapping()
+	@PostMapping
 	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<Object> sendMailByEmail(
 			HttpServletRequest httpServletRequest,
 			Authentication authentication
@@ -74,6 +74,7 @@ public class ActiveAccountREST {
 	}
 	@PostMapping("/confirm")
 	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<Object> check(
 			Authentication authentication,
 			@RequestBody ActiveConfirmRequest requestBody) {
