@@ -1,41 +1,47 @@
 package vn.edu.topedu.thymeleaf;
 
-import java.nio.charset.StandardCharsets;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 public class ThymeleafTemplateConfig {
 	@Bean
 	public SpringTemplateEngine springTemplateEngine() {
-		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.addTemplateResolver(htmlTemplateResolver());
-		templateEngine.addTemplateResolver(templateResolverTemplates());
+		final  SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.addTemplateResolver(itemplateResolver());
+		templateEngine.addTemplateResolver(imailResolver());
 		return templateEngine;
 	}
-
-	
-	public SpringResourceTemplateResolver htmlTemplateResolver() {
-		SpringResourceTemplateResolver emailTemplateResolver = new SpringResourceTemplateResolver();
-		emailTemplateResolver.setPrefix("classpath:/mail/");
-		emailTemplateResolver.setSuffix(".html");
-		emailTemplateResolver.setTemplateMode(TemplateMode.HTML);
-		emailTemplateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		return emailTemplateResolver;
+	@Bean
+	public ITemplateResolver itemplateResolver() {
+		final  ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+	    //Ensure the path is right or you work without the logic using the ClassLoaderTemplateResolver
+		templateResolver.setOrder(Integer.valueOf(1));
+		templateResolver.setPrefix("/templates/");
+	    templateResolver.setSuffix(".html");
+	    templateResolver.setTemplateMode(TemplateMode.HTML);
+	    templateResolver.setCharacterEncoding("UTF-8");
+	    templateResolver.setCheckExistence(true);
+	    templateResolver.setCacheable(false);
+	    return templateResolver;
 	}
-	
-	public SpringResourceTemplateResolver templateResolverTemplates() {
-		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-		resolver.setPrefix("classpath:/templates/");
-		resolver.setSuffix(".html");
-		resolver.setTemplateMode(TemplateMode.HTML);
-		resolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
-
-		return resolver;
+	@Bean
+	public ITemplateResolver imailResolver() {
+		final  ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+		//Ensure the path is right or you work without the logic using the ClassLoaderTemplateResolver
+		templateResolver.setOrder(Integer.valueOf(2));
+		templateResolver.setPrefix("/mail/");
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode(TemplateMode.HTML);
+		templateResolver.setCharacterEncoding("UTF-8");
+		templateResolver.setCheckExistence(true);
+		templateResolver.setCacheable(false);
+		return templateResolver;
 	}
+
 
 }

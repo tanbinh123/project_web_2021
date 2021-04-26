@@ -90,15 +90,19 @@
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
 		<!-- Send mail optional: Thymeleaf -->
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring5</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
-		</dependency>
-		
+		</dependency> -->
+		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    <version>2.1.6.RELEASE</version>
+</dependency>
 		<dependency>
 			<groupId>com.paypal.sdk</groupId>
 			<artifactId>rest-api-sdk</artifactId>
@@ -112,18 +116,18 @@
 			<version>4.5.6</version>
 		</dependency>
 		<!-- WebSocket-->
-		<!-- <dependency>
+		 <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 
-		RabbitMQ Starter Dependency (Not required if you're using the simple in-memory broker for STOMP)
+		<!-- RabbitMQ Starter Dependency (Not required if you're using the simple in-memory broker for STOMP) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
 
-		Following dependency is required for Full Featured STOMP Broker Relay
+		<!-- Following dependency is required for Full Featured STOMP Broker Relay -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-reactor-netty</artifactId>
@@ -133,7 +137,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
-		</dependency> -->
+		</dependency> 
 
 	
 
