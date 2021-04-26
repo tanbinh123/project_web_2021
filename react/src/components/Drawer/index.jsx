@@ -11,6 +11,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import React from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { DataUser, removeLocalStorage } from "../../app/DataUser";
 import { isEmpty } from "../tools/Tools";
@@ -31,11 +32,16 @@ const useStyles = makeStyles({
     color: "var(--colorBlack1)",
   },
   listContent: {
-    "&>ul>div>span": {
+    "&>ul>div": {
       fontFamily: "'Open Sans', sans-serif",
       fontSize: 18,
       fontWeight: 500,
       color: "var(--colorBlack1)",
+      "&>a": {
+        textDecoration: "none",
+        display: "flex",
+        alignItems: "center",
+      },
     },
   },
 });
@@ -75,12 +81,14 @@ function CustomDrawer(props) {
       <div className={classes.listContent}>
         <List>
           <ListItem button>
-            <Avatar
-              className={classes.avatar}
-              alt={dataUser.user.username}
-              src={dataUser.user.avatar}
-            />
-            <span className={classes.textName}>{dataUser.user.username}</span>
+            <Link to="/setting-account/info">
+              <Avatar
+                className={classes.avatar}
+                alt={dataUser.user.username}
+                src={dataUser.user.avatar}
+              />
+              <span className={classes.textName}>{dataUser.user.username}</span>
+            </Link>
           </ListItem>
         </List>
         <Divider />
