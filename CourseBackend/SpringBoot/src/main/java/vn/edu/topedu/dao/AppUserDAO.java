@@ -100,7 +100,6 @@ public class AppUserDAO {
 		
 		
 	}
-//	@Transactional
 	public UserRole putUserRole(UserRole user) {
 		
 		if(user.getId()==null) {
@@ -123,8 +122,16 @@ public class AppUserDAO {
 				return null;
 			}
 		}
+	}
+	public AppUser updateAppUser(AppUser user) {
 		
-		
+		try {
+			return entityManager.merge(user);
+		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+			System.out.println("AppUserDAO: Can't update user");
+			return null;
+		}
 	}
 	public boolean updateUser(AppUser user) {
 		

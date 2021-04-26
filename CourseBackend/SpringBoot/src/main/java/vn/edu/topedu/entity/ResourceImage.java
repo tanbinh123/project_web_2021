@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import vn.edu.topedu.consts.VariableConst;
 @Entity
 @Table(name = "Resource_Image")
-public class ResourceImage {
+public class ResourceImage extends AHasResource {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
@@ -60,6 +62,8 @@ public class ResourceImage {
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
-	
+	public String getImage() {
+		return this.beforeResource+VariableConst.RESOURCE_BEFORE+this.path;
+	}
 
 }

@@ -84,7 +84,10 @@ public class ActiveAccountREST {
 			if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));
 			String trueCode=rrp.getCode();
 			if(requestBody.code.equals(trueCode)) {
-				//System.out.println(rrp.getTime());
+				 AppUser appUser=appUserDAO.findUserAccount(authentication.getName());
+				 appUser.setActived(true);
+				 appUserDAO.updateAppUser(appUser);
+				 //System.out.println(rrp.getTime());
 				return ResponseEntity.ok(new MessageResponse("Code valid.","Xác minh thành công."));
 			
 			}

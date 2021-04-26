@@ -32,7 +32,7 @@ public class UserRole {
  
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Role_Id", nullable = false)
-    @JsonIgnore
+    //@JsonIgnore
     private AppRole appRole;
  
     public Long getId() {

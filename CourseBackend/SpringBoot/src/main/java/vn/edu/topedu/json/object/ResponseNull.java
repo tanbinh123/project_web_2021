@@ -1,14 +1,11 @@
 package vn.edu.topedu.json.object;
 
-public class ResponseNull  extends JsonResponse {
+public class ResponseNull  implements JsonResponse {
 	private boolean isNull;
-	
-
 	public ResponseNull() {
 		super();
 		this.isNull = true;
 	}
-
 	public boolean getIsNull() {
 		return isNull;
 	}

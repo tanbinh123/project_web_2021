@@ -51,6 +51,7 @@ public class AppRole implements GrantedAuthority {
 	}
 
 	@Override
+	@JsonIgnore
 	public String getAuthority() {
 		
 		return this.roleName;

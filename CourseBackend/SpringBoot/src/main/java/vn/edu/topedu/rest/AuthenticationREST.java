@@ -54,11 +54,11 @@ public class AuthenticationREST implements IMyHost {
 		if (user!=null&&passwordEncoder.encode(ar.getPassword()).equals(user.getEncrytedPassword())) {
 			AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(user));
 			AccountResponse account = new AccountResponse();
-			account.setAvatar(getUrl(httpServletRequest)+VariableConst.RESOURCE_BEFORE+user.getAvater());
+			account.setAvatar(getUrl(httpServletRequest)+VariableConst.RESOURCE_BEFORE+user.getAvatar());
 			//account.setAvatar(VariableConst.SRC_IMAGE_BEFORE + FileProcess.encodeFileToBase64(user.getAvater()));
 			account.setUsername(user.getUserName());
 			authResponse.setUser(account);
-			List<Course> lstCourse = userCourseDAO.getOwerCourse(user.getUserId());
+			List<Course> lstCourse = userCourseDAO.getOwerCourse(user.getId());
 			for(Course c:lstCourse) {
 				c.setBeforeResource(this.getUrl(httpServletRequest));
 			}
@@ -104,7 +104,7 @@ public class AuthenticationREST implements IMyHost {
 		if (userRole!=null) {
 			SignUpResponse authResponse = new SignUpResponse(jwtUtil.generateToken(user));
 			AccountResponse account = new AccountResponse();
-			account.setAvatar(getUrl(serverHttpRequest)+VariableConst.RESOURCE_BEFORE +user.getAvater());
+			account.setAvatar(getUrl(serverHttpRequest)+VariableConst.RESOURCE_BEFORE +user.getAvatar());
 			account.setUsername(user.getUserName());
 			authResponse.setUser(account);
 			return ResponseEntity.ok(authResponse);

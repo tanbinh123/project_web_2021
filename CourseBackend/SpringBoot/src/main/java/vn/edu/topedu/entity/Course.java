@@ -25,7 +25,7 @@ public class Course extends AHasResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
  
     
     
@@ -56,10 +56,10 @@ public class Course extends AHasResource {
     @JsonIgnore
     private AppUser appUser;
     
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -94,9 +94,6 @@ public class Course extends AHasResource {
 	public void setBought(int bought) {
 		this.bought = bought;
 	}
-//	public byte getRateStar() {
-//		return (byte)Math.round(rateStar);
-//	}
 	public double getRateStar() {
 		return rateStar;
 	}
@@ -116,7 +113,7 @@ public class Course extends AHasResource {
 	
 	
 	public String getImgAvatar() {
-		return this.beforeResource+VariableConst.RESOURCE_BEFORE+appUser.getAvater();
+		return this.beforeResource+VariableConst.RESOURCE_BEFORE+appUser.getAvatar();
 	}
 	
 	public String getNameAuthor() {

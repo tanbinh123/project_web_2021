@@ -1,6 +1,6 @@
 package vn.edu.topedu.json.object;
 
-public class ResponseMessageSuccess extends JsonResponse {
+public class ResponseMessageSuccess implements JsonResponse {
 	private boolean isSuccess;
 	private String message;
 	
