@@ -10,37 +10,76 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.Course;
-import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
-import vn.edu.topedu.response.model.CourseResponse;
 import vn.edu.topedu.utils.WebUtils;
 
 @Repository
 @Transactional
 public class CourseDAO {
-
 	@Autowired
 	private EntityManager entityManager;
-
-	public List<Course> getListCourse(int _page, int _limit) {
-		--_page;
-		String sql = "Select c from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 group by c.id order by c.id desc ";
-		Query query = this.entityManager.createQuery(sql, Course.class);
-
-		query.setFirstResult(_page * _limit);
-		if (_limit != -1) {
-			System.out.println(_limit);
-			query.setMaxResults(_limit);
-
-		}
-		return query.getResultList();
-	}
-
-	public List<Course> getListCourse(int _page, int _limit, String sort/* , String sort2 */) {
+	
+	public List<Course> getListCourse(int _page, int _limit, String sort) {
 		--_page;
 		String sql = "Select c from " + Course.class.getName() + " c " //
 				+ " where c.deleted=0 group by c.id  order by  ";
+		String sqlSort = "";
+		sort = sort.toLowerCase();
+
+		String[] a = sort.split(",");
+		boolean started = true;
+		for (String str : a) {
+			int index = str.indexOf(':');
+			String _order = str.substring(index + 1);
+			String tmpSort = str.substring(0, index);
+			switch (tmpSort) {
+			case "id":
+				sqlSort += WebUtils.sort(_order, "c.id", started);
+				break;
+			case "bought":
+				sqlSort += WebUtils.sort(_order, "c.bought", started);
+				break;
+			case "ratestar":
+				sqlSort += WebUtils.sort(_order, "c.rateStar", started);
+				break;
+			case "price":
+				sqlSort += WebUtils.sort(_order, "c.price", started);
+				break;
+			case "updateat":
+				sqlSort += WebUtils.sort(_order, "c.updateAt", started);
+				break;
+			default:
+				break;
+			}
+			started = false;
+			sql += sqlSort;
+			sqlSort = "";
+		}
+		Query query = this.entityManager.createQuery(sql, Course.class);
+		query.setFirstResult(_page * _limit);
+		if (_limit != -1) {
+			query.setMaxResults(_limit);
+		}
+		return query.getResultList();
+	}
+	public long getCount() {
+		String sql = "Select count(*) from " + Course.class.getName() + " c " //
+				+ " where c.deleted=0 ";
+		Query query = this.entityManager.createQuery(sql, Long.class);
+		return (long) query.getSingleResult();
+	}
+	public long getCountSearch(String search) {
+		String sql = "Select count(*) from " + Course.class.getName() + " c " //
+				+ " where c.deleted=0 and (c.title like CONCAT('%',:search,'%')) ";
+		Query query = this.entityManager.createQuery(sql, Long.class);
+		query.setParameter("search", search);
+		return (long) query.getSingleResult();
+	}
+	
+	public List<Course> search(int _page, int _limit, String sort, String search) {
+		--_page;
+		String sql = "Select c from " + Course.class.getName() + " c " //
+				+ " where c.deleted=0 and (c.title like CONCAT('%',:search,'%')) group by c.id  order by  ";
 		String sqlSort = "";
 		sort = sort.toLowerCase();
 
@@ -77,7 +116,7 @@ public class CourseDAO {
 			sqlSort = "";
 		}
 		Query query = this.entityManager.createQuery(sql, Course.class);
-
+		query.setParameter("search", search);
 		query.setFirstResult(_page * _limit);
 		if (_limit != -1) {
 
