@@ -113,7 +113,7 @@ public class Course extends AHasResource {
 	
 	
 	public String getImgAvatar() {
-		return this.beforeResource+VariableConst.RESOURCE_BEFORE+appUser.getAvatar();
+		return this.beforeResource+appUser.getAvatar().getImage();
 	}
 	
 	public String getNameAuthor() {
