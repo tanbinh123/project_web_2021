@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/forgotpassword/**").permitAll()
 				.antMatchers("/pay/**").permitAll()
 				.antMatchers("/test/**").permitAll()				
+				.antMatchers("/payment/check/*").permitAll()				
 				.antMatchers("/ws/**").permitAll()				
 				.antMatchers("/video/**").permitAll()
 				.antMatchers("/stream/**").permitAll()

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,8 +50,8 @@ public class PaymentREST {
 				payment.setAppUser(appUser);
 				payment.setAmount(Long.parseLong(String.valueOf(body.get("amount"))));
 				payment.setCurrCode(String.valueOf(body.get("currCode")));
-//				payment.setIpAddress(WebUtils.getIpAddress(httpServletRequest));
-				payment.setIpAddress("119.17.249.22");
+				payment.setIpAddress(WebUtils.getIpAddress(httpServletRequest));
+//				payment.setIpAddress("119.17.249.22");
 				payment = paymentDAO.insert(payment);
 				if (payment == null)
 					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -74,36 +75,26 @@ public class PaymentREST {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", ""));
 	}
-	@PostMapping("/check/{id}")
+	@GetMapping("/check/{id}")
 	@ResponseBody
-	public ResponseEntity<Object> api(HttpServletRequest httpServletRequest, Authentication authentication,
+	public ResponseEntity<Object> api(HttpServletRequest httpServletRequest,
 			@PathVariable String id) {
-		if (authentication != null) {
-			authentication.getName();
-			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
-			if (appUser != null) {
-				Payment payment = paymentDAO.findById(Long.parseLong(id));
-				if (payment == null)
-					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-							.body(new MessageResponse("Can't create payment.", ""));
-				;
-				
-				try {
-					String url;
-					url = payment.getUrlQuerry();
-					payment=paymentDAO.merge(payment);
-					return ResponseEntity.ok(payment);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-							.body(new MessageResponse("Can't gender url.", ""));
-				}
-				
-			}
-		}
+		Payment payment = paymentDAO.findById(Long.parseLong(id));
+		if (payment == null)
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new MessageResponse("Can't create payment.", ""));
+		;
 		
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", ""));
+		try {
+			String url;
+			url = payment.querryFromVNPay();
+			payment=paymentDAO.merge(payment);
+			return ResponseEntity.ok(payment);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new MessageResponse("Can't gender url.", ""));
+		}
 	}
 //	@PostMapping("/confirm")
 //	@ResponseBody

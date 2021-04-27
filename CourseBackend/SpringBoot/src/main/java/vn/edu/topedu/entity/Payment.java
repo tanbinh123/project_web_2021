@@ -54,8 +54,13 @@ public class Payment {
 	private long amount;
 	@Column(name = "currcode", nullable = false)
 	private String currCode;
+	
 	@Column(name = "url_pay", nullable = false)
-	private String urlPay;
+	private String urlPay;	
+	
+	@Column(name = "params_url_status", nullable = false)
+	private String paramsUrlStatus;	
+	
 	@Column(name = "transaction_Status", nullable = false)
 	 @Enumerated(EnumType.STRING)
 	private TransactionState transactionStatus = TransactionState.UNCOMPLETE;
@@ -104,11 +109,16 @@ public class Payment {
         vnp_Params.put("vnp_Version", VNPayConfig.vnp_Version);
         vnp_Params.put("vnp_Command", VNPayConfig.vnp_Command);
         vnp_Params.put("vnp_TmnCode", VNPayConfig.vnp_TmnCode);
-        vnp_Params.put("vnp_Amount", String.valueOf(this.amount*100));
+        vnp_Params.put("vnp_Amount", String.valueOf(this.amount));
         vnp_Params.put("vnp_CurrCode", this.currCode);
         vnp_Params.put("vnp_IpAddr", this.ipAddress);
         vnp_Params.put("vnp_Locale", "vn");
-        vnp_Params.put("vnp_OrderInfo", "Day la mieu ta");
+        vnp_Params.put("vnp_OrderInfo", "SpringBoot");
+        if(returnUrl.charAt(returnUrl.length()-1)!='/') {
+        	returnUrl+="/"+this.id;
+        }else {
+        	returnUrl+=this.id;
+        }
         vnp_Params.put("vnp_ReturnUrl", returnUrl);
         vnp_Params.put("vnp_TxnRef", String.valueOf(this.id));
         vnp_Params.put("vnp_CreateDate", WebUtils.formatDate(new Date()));
@@ -147,7 +157,7 @@ public class Payment {
         return paymentUrl;
 	}
 	@JsonIgnore
-	public String getUrlQuerry() throws UnsupportedEncodingException {
+	public String querryFromVNPay() throws UnsupportedEncodingException {
 		//String vnp_IpAddr="119.17.249.22";
 		Map<String, String> vnp_Params = new HashMap<>();
 		vnp_Params.put("vnp_Version", VNPayConfig.vnp_Version);
@@ -205,6 +215,9 @@ public class Payment {
 					System.out.println(key);
 					break;
 				}
+				setParamsUrlStatus(rs);
+			}else {
+				System.err.println("Warning Spam VNPay");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -218,11 +231,20 @@ public class Payment {
 	public void setTransactionStatus(TransactionState transactionStatus) {
 		this.transactionStatus = transactionStatus;
 	}
-	@Override
-	public String toString() {
-		return "Payment [id=" + id + ", ipAddress=" + ipAddress + ", createTime=" + createTime + ", amount=" + amount
-				+ ", currCode=" + currCode + "]";
+	public String getUrlPay() {
+		return urlPay;
 	}
+	public void setUrlPay(String urlPay) {
+		this.urlPay = urlPay;
+	}
+	public String getParamsUrlStatus() {
+		return paramsUrlStatus;
+	}
+	public void setParamsUrlStatus(String paramsUrlStatus) {
+		this.paramsUrlStatus = paramsUrlStatus;
+	}
+	
+	
 	
 	
 	

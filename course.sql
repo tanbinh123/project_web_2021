@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 26/04/2021 15:40:52
+ Date: 27/04/2021 21:34:40
 */
 
 SET NAMES utf8mb4;
@@ -567,19 +567,22 @@ CREATE TABLE `payment`  (
   `currcode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `transaction_Status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `url_pay` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `params_url_status` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of payment
 -- ----------------------------
-INSERT INTO `payment` VALUES (15, 1, '2021-04-25 17:36:20', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL);
-INSERT INTO `payment` VALUES (16, 1, '2021-04-25 17:49:53', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL);
-INSERT INTO `payment` VALUES (17, 1, '2021-04-25 18:34:14', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL);
-INSERT INTO `payment` VALUES (18, 1, '2021-04-25 18:36:48', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL);
-INSERT INTO `payment` VALUES (19, 1, '2021-04-25 18:37:30', 10000, '119.17.249.22', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_Command=pay&vnp_CreateDate=20210426013730&vnp_CurrCode=VND&vnp_IpAddr=119.17.249.22&vnp_Locale=vn&vnp_OrderInfo=Day+la+mieu+ta&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001&vnp_TmnCode=67LF6OWG&vnp_TxnRef=19&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=6ddfbc525227fcbdae4f938ed4716d9684af15a53e9e65088706f3f616455368');
+INSERT INTO `payment` VALUES (15, 1, '2021-04-25 17:36:20', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL, NULL);
+INSERT INTO `payment` VALUES (16, 1, '2021-04-25 17:49:53', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL, 'vnp_Amount=1000000&vnp_Message=QueryDR+Success&vnp_OrderInfo=Day+la+mieu+ta&vnp_PayDate=20210426004949&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=1123123&vnp_TransactionStatus=01&vnp_TxnRef=16&vnp_SecureHash=52fa06bf43b28c9605bfb46f6a1bba3d5156474c1ac3691ca84e00feaf0a3b74');
+INSERT INTO `payment` VALUES (17, 1, '2021-04-25 18:34:14', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL, NULL);
+INSERT INTO `payment` VALUES (18, 1, '2021-04-25 18:36:48', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL, NULL);
+INSERT INTO `payment` VALUES (19, 1, '2021-04-25 18:37:30', 10000, '119.17.249.22', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_Command=pay&vnp_CreateDate=20210426013730&vnp_CurrCode=VND&vnp_IpAddr=119.17.249.22&vnp_Locale=vn&vnp_OrderInfo=Day+la+mieu+ta&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001&vnp_TmnCode=67LF6OWG&vnp_TxnRef=19&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=6ddfbc525227fcbdae4f938ed4716d9684af15a53e9e65088706f3f616455368', NULL);
+INSERT INTO `payment` VALUES (20, 2, '2021-04-27 14:17:41', 1000000, '0:0:0:0:0:0:0:1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_Command=pay&vnp_CreateDate=20210427211742&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fcheck%2F20&vnp_TmnCode=67LF6OWG&vnp_TxnRef=20&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=18d45aba1a539013b6d52b6414ce20041348744b332d5b30d10bf8fe00e1dcb8', NULL);
+INSERT INTO `payment` VALUES (21, 2, '2021-04-27 14:31:40', 1000000, '0:0:0:0:0:0:0:1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_Command=pay&vnp_CreateDate=20210427213140&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fcheck%2F21&vnp_TmnCode=67LF6OWG&vnp_TxnRef=21&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=7d3627e645385988a3ccabde0819513fd2b06afb5d165b528ce341721e2d73c4', 'vnp_Amount=1000000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210427213201&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13496429&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=21&vnp_SecureHash=0b28fe41fcd094ee0ecc697327c0ce29fdd201cb939916a093a7c251167492e2');
 
 -- ----------------------------
 -- Table structure for queue_check_payment
