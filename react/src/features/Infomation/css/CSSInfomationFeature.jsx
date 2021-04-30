@@ -2,9 +2,8 @@ import { makeStyles } from "@material-ui/core";
 
 const CSSInfomationFeature = makeStyles((theme) => ({
   root: {
-    padding: " 50px 0 100px 0",
+    marginTop: 50,
     fontFamily: " 'Open Sans', sans-serif",
-    background: "var(--colorWhite1)",
   },
   backgroundHeader: {
     height: "64px",
@@ -13,43 +12,25 @@ const CSSInfomationFeature = makeStyles((theme) => ({
   //left
   leftRoot: {
     color: "var(--colorBlack1)",
-    backgroundColor: "var(--colorWhite0)",
+    backgroundColor: "var(--colorWhite1)",
     borderRadius: "14px",
     boxShadow: "0px 0px 10px var(--colorBlack1)",
     "&>ul": {
       display: "flex",
       flexFlow: "column nowrap",
-      "&>a": {
-        color: "var(--colorBlack1)",
-        textDecoration: "none",
-        cursor: "pointer",
-        "&:hover": {
-          color: "var(--colorBlack1)",
-          fontWeight: 600,
-        },
-
-        "&>li": {
-          padding: "20px 15px 20px 15px",
-          borderRadius: "10px",
-          // color: "var(--colorBlack1)",
-          "&:hover": {
-            color: "var(--colorBlack1)",
-          },
-        },
-      },
-      "&>.active": {
-        color: "var(--colorBlack1)",
-        fontWeight: 600,
-        background: "var(--colorWhite2)",
-      },
       "&>li": {
         padding: "20px 15px 20px 15px",
 
-        // color: "var(--colorBlack1)",
-        cursor: "pointer",
-        "&:hover": {
+        "&>a": {
           color: "var(--colorBlack1)",
-          fontWeight: 600,
+          textDecoration: "none",
+          cursor: "pointer",
+          "&:hover": {
+            color: "var(--colorOrange1)",
+          },
+        },
+        "&>.active": {
+          color: "var(--colorOrange1)",
         },
       },
       "&>li:first-child": {
@@ -57,6 +38,7 @@ const CSSInfomationFeature = makeStyles((theme) => ({
         alignItems: "center",
         backgroundImage:
           "linear-gradient(to top right,var(--colorOrange1),var(--colorOrange2))",
+        borderBottom: "1px solid var(--colorWhite1)",
         color: "var(--colorWhite1)",
         borderTopLeftRadius: "14px",
         borderTopRightRadius: "14px",
@@ -69,22 +51,17 @@ const CSSInfomationFeature = makeStyles((theme) => ({
         "&>div:last-of-type": {
           display: "flex",
           flexFlow: "column",
-          "&>a": {
-            textDecoration: "none",
-            color: "var(--colorWhite0)",
-            fontWeight: 600,
-            "&>span": {
-              fontSize: 18,
+          "&>span": {
+            fontSize: 18,
 
-              "&>i": {
-                fontSize: 18,
-              },
-              "&>.red": {
-                color: "var(--colorRed1)",
-              },
-              "&>.green": {
-                color: "var(--colorGreen2)",
-              },
+            "&>i": {
+              fontSize: 18,
+            },
+            "&>.red": {
+              color: "var(--colorRed1)",
+            },
+            "&>.green": {
+              color: "var(--colorGreen2)",
             },
           },
         },

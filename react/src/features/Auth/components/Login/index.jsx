@@ -23,7 +23,6 @@ function Login(props) {
 
   const handleOnSubmit = async (values) => {
     const data = await userApi.login(values);
-    console.log(data);
     if (!!!data.status) {
       setDataUser({ ...dataUser, user: data.user });
       addLocalStorage(data);

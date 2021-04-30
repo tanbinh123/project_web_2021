@@ -56,7 +56,6 @@ const ActiveCss = makeStyles((theme) => ({
         margin: "30px 0",
         "&>span": {
           fontSize: 18,
-          textAlign: "center",
           "&>span": {
             fontWeight: "600",
           },

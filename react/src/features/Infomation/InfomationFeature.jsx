@@ -53,33 +53,30 @@ function InfomationFeature(props) {
                         }
                       />
                       <div>
-                        <Link to={`${url}/info`}>
-                          <span>
-                            {dataUser.user.username}{" "}
-                            {dataUser.user.actived ? (
-                              <i className="fas fa-check-circle green"></i>
-                            ) : (
-                              <i className="fas fa-times-circle red"></i>
-                            )}
-                          </span>
-                        </Link>
+                        <span>
+                          {dataUser.user.username}{" "}
+                          {dataUser.user.actived ? (
+                            <i className="fas fa-check-circle green"></i>
+                          ) : (
+                            <i className="fas fa-times-circle red"></i>
+                          )}
+                        </span>
                       </div>
                     </li>
-                    <NavLink to={`${url}/info`}>
-                      <li>Giới thiệu</li>
-                    </NavLink>
+                    <li>
+                      <NavLink to={`${url}/info`}>Giới thiệu</NavLink>
+                    </li>
                     {!dataUser.user.actived && (
-                      <NavLink to={`${url}/active`}>
-                        <li>Kích hoạt</li>
-                      </NavLink>
+                      <li>
+                        <NavLink to={`${url}/active`}>Kích hoạt</NavLink>
+                      </li>
                     )}
-                    <NavLink to={`${url}/edit`}>
-                      <li>Sửa thông tin cá nhân</li>
-                    </NavLink>
-                    <NavLink to={`${url}/change-password`}>
-                      <li> Đổi mật khẩu</li>
-                    </NavLink>
-
+                    <li>
+                      <NavLink to={`${url}/edit`}>
+                        Sửa thông tin cá nhân
+                      </NavLink>
+                    </li>
+                    <li>Đổi mật khẩu</li>
                     <li>Đăng xuất</li>
                   </ul>
                 </div>

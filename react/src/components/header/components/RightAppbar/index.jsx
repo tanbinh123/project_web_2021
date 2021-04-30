@@ -128,16 +128,6 @@ const useStyles = makeStyles((theme) => ({
   linkNone: {
     textDecoration: "none",
     color: "var(--colorWhite0)",
-    "&>div>.icon": {
-      fontSize: "18px",
-      marginRight: 10,
-      color: "var(--colorWhite0)",
-    },
-  },
-  rootPopover: {
-    "& .MuiPaper-root": {
-      background: "none",
-    },
   },
 }));
 RightAppbar.propTypes = {};
@@ -280,7 +270,6 @@ function RightAppbar(props) {
   //menu after login
   const popover = (
     <Popover
-      className={classes.rootPopover}
       {...bindPopover(popupState)}
       anchorOrigin={{
         vertical: "bottom",
@@ -299,12 +288,6 @@ function RightAppbar(props) {
                 <Person fontSize="small" />
               </Avatar>
               <ListItemText primary="Cá Nhân" />
-            </ListItem>
-          </Link>
-          <Link to="/admin/home" className={classes.linkNone}>
-            <ListItem button onClick={popupState.close}>
-              <i className="fas fa-user-cog icon"></i>
-              <ListItemText primary="Admin" />
             </ListItem>
           </Link>
           <ListItem button divider onClick={handleLogOut}>

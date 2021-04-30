@@ -15,7 +15,7 @@ const InfoCss = makeStyles((theme) => ({
 
       borderTopLeftRadius: "20px",
       borderTopRightRadius: "20px",
-      boxShadow: "0px 0px 10px var(--colorBlack1)",
+      // boxShadow: "0px 0px 10px var(--colorOrange1)",
       "&>div:first-of-type>ul": {
         display: "flex",
         alignItems: "center",
@@ -62,13 +62,13 @@ const InfoCss = makeStyles((theme) => ({
 
     // o duoi
     "&>div:last-of-type": {
-      backgroundColor: "var(--colorWhite0)",
+      backgroundColor: "var(--colorWhite1)",
       color: "var(--colorBlack2)",
       padding: "30px 20px 40px 20px",
 
       borderBottomLeftRadius: "20px",
       borderBottomRightRadius: "20px",
-      boxShadow: "0px 3px 7px var(--colorBlack1)",
+      // boxShadow: "0px 3px 7px var(--colorOrange1)",
       "&>ul": {
         "&>li:first-child": {
           fontSize: "30px",

@@ -12,7 +12,7 @@ const EditCss = makeStyles((theme) => ({
       color: "var(--colorWhite0)",
       borderTopLeftRadius: "20px",
       borderTopRightRadius: "20px",
-      boxShadow: "0px 0px 10px var(--colorBlack1)",
+      // boxShadow: "0px 0px 10px var(--colorOrange1)",
 
       "&>ul": {
         display: "flex",
@@ -40,13 +40,13 @@ const EditCss = makeStyles((theme) => ({
 
     // o duoi
     "&>div:last-of-type": {
-      backgroundColor: "var(--colorWhite0)",
+      backgroundColor: "var(--colorWhite1)",
       color: "var(--colorBlack2)",
       padding: "30px 20px 15px 20px",
 
       borderBottomLeftRadius: "20px",
       borderBottomRightRadius: "20px",
-      boxShadow: "0px 3px 7px var(--colorBlack1)",
+      // boxShadow: "0px 3px 7px var(--colorOrange1)",
       "&>div": {
         display: "flex",
         justifyContent: "center",
