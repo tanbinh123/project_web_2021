@@ -63,7 +63,7 @@ public class ResourceImage extends AHasResource {
 		this.deleted = deleted;
 	}
 	public String getImage() {
-		return this.beforeResource+VariableConst.RESOURCE_BEFORE+this.path;
+		return (this.beforeResource!=null)?this.beforeResource:""+VariableConst.RESOURCE_BEFORE+this.path;
 	}
 
 }

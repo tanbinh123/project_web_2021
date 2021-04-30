@@ -62,12 +62,13 @@ public class CourseREST implements IMyHost {
 			) {
 		_page=(_page<=0)?1:_page;
 		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort);
-		
+		long countRows=courseDAO.getCount();
+		System.out.println(countRows);
 		for(Course c:lstCourse) {
 			c.setBeforeResource(getUrl(serverHttpRequest));
 			
 		}
-		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, 170,_sort);
+		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, countRows,_sort);
 		return ResponseEntity.ok(pageResponse);
 	}
 	@GetMapping(value = "/{id}")

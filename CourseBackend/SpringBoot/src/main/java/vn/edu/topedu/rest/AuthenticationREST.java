@@ -54,7 +54,7 @@ public class AuthenticationREST implements IMyHost {
 		if (user!=null&&passwordEncoder.encode(ar.getPassword()).equals(user.getEncrytedPassword())) {
 			AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(user));
 			AccountResponse account = new AccountResponse();
-			account.setAvatar(getUrl(httpServletRequest)+VariableConst.RESOURCE_BEFORE+user.getAvatar());
+			account.setAvatar(getUrl(httpServletRequest)+user.getAvatar().getImage());
 			//account.setAvatar(VariableConst.SRC_IMAGE_BEFORE + FileProcess.encodeFileToBase64(user.getAvater()));
 			account.setUsername(user.getUserName());
 			authResponse.setUser(account);
