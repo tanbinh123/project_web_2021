@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import AdminRouter from "./admin/AdminRouter";
 import "./cssreset.css";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
@@ -38,6 +39,7 @@ function App(props) {
         <Route path="/testcolor" component={CssColor} exact />
         <Route path="/setvalue" component={SetValue} exact />
         <Route path="/actived" component={Actived} exact />
+        <Route path="/admin" component={AdminRouter} />
         <Route path="/*" component={NotFound404} />
         <Route path="/auth/*" component={NotFound404} />
       </Switch>
