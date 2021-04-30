@@ -25,7 +25,7 @@ public class DetailCourseEntity extends AHasResource {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	private Integer id;
+	private Long id;
 	@Column(name = "poster", length = 255)
 	@JsonIgnore
 	private String poster = "image/avatar/momo.webp";
@@ -57,11 +57,11 @@ public class DetailCourseEntity extends AHasResource {
 		this.learning = learning;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

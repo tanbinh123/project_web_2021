@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 27/04/2021 21:34:40
+ Date: 01/05/2021 01:47:02
 */
 
 SET NAMES utf8mb4;
@@ -348,188 +348,24 @@ INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 9);
 -- ----------------------------
 DROP TABLE IF EXISTS `ower_course`;
 CREATE TABLE `ower_course`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NULL DEFAULT NULL,
-  `course_id` int(11) NULL DEFAULT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `course_id` bigint(20) NOT NULL,
+  `payment_id` bigint(20) NOT NULL,
+  `successed` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `course_id_uq`(`course_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
-  CONSTRAINT `ower_course_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 171 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  INDEX `course_id`(`course_id`) USING BTREE,
+  UNIQUE INDEX `payment_id`(`payment_id`) USING BTREE,
+  CONSTRAINT `ower_course_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `ower_course_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `ower_course_ibfk_4` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ower_course
 -- ----------------------------
-INSERT INTO `ower_course` VALUES (1, 2, 1);
-INSERT INTO `ower_course` VALUES (2, 2, 2);
-INSERT INTO `ower_course` VALUES (3, 2, 3);
-INSERT INTO `ower_course` VALUES (4, 2, 4);
-INSERT INTO `ower_course` VALUES (5, 2, 5);
-INSERT INTO `ower_course` VALUES (6, 2, 6);
-INSERT INTO `ower_course` VALUES (7, 2, 7);
-INSERT INTO `ower_course` VALUES (8, 2, 8);
-INSERT INTO `ower_course` VALUES (9, 2, 9);
-INSERT INTO `ower_course` VALUES (10, 2, 10);
-INSERT INTO `ower_course` VALUES (11, 2, 11);
-INSERT INTO `ower_course` VALUES (12, 2, 12);
-INSERT INTO `ower_course` VALUES (13, 2, 13);
-INSERT INTO `ower_course` VALUES (14, 2, 14);
-INSERT INTO `ower_course` VALUES (15, 2, 15);
-INSERT INTO `ower_course` VALUES (16, 2, 16);
-INSERT INTO `ower_course` VALUES (17, 2, 17);
-INSERT INTO `ower_course` VALUES (18, 2, 18);
-INSERT INTO `ower_course` VALUES (19, 2, 19);
-INSERT INTO `ower_course` VALUES (20, 2, 20);
-INSERT INTO `ower_course` VALUES (21, 2, 21);
-INSERT INTO `ower_course` VALUES (22, 2, 22);
-INSERT INTO `ower_course` VALUES (23, 2, 23);
-INSERT INTO `ower_course` VALUES (24, 2, 24);
-INSERT INTO `ower_course` VALUES (25, 2, 25);
-INSERT INTO `ower_course` VALUES (26, 2, 26);
-INSERT INTO `ower_course` VALUES (27, 2, 27);
-INSERT INTO `ower_course` VALUES (28, 2, 28);
-INSERT INTO `ower_course` VALUES (29, 2, 29);
-INSERT INTO `ower_course` VALUES (30, 2, 30);
-INSERT INTO `ower_course` VALUES (31, 2, 31);
-INSERT INTO `ower_course` VALUES (32, 2, 32);
-INSERT INTO `ower_course` VALUES (33, 2, 33);
-INSERT INTO `ower_course` VALUES (34, 2, 34);
-INSERT INTO `ower_course` VALUES (35, 2, 35);
-INSERT INTO `ower_course` VALUES (36, 2, 36);
-INSERT INTO `ower_course` VALUES (37, 2, 37);
-INSERT INTO `ower_course` VALUES (38, 2, 38);
-INSERT INTO `ower_course` VALUES (39, 2, 39);
-INSERT INTO `ower_course` VALUES (40, 2, 40);
-INSERT INTO `ower_course` VALUES (41, 2, 41);
-INSERT INTO `ower_course` VALUES (42, 2, 42);
-INSERT INTO `ower_course` VALUES (43, 2, 43);
-INSERT INTO `ower_course` VALUES (44, 2, 44);
-INSERT INTO `ower_course` VALUES (45, 2, 45);
-INSERT INTO `ower_course` VALUES (46, 2, 46);
-INSERT INTO `ower_course` VALUES (47, 2, 47);
-INSERT INTO `ower_course` VALUES (48, 2, 48);
-INSERT INTO `ower_course` VALUES (49, 2, 49);
-INSERT INTO `ower_course` VALUES (50, 2, 50);
-INSERT INTO `ower_course` VALUES (51, 2, 51);
-INSERT INTO `ower_course` VALUES (52, 2, 52);
-INSERT INTO `ower_course` VALUES (53, 2, 53);
-INSERT INTO `ower_course` VALUES (54, 2, 54);
-INSERT INTO `ower_course` VALUES (55, 2, 55);
-INSERT INTO `ower_course` VALUES (56, 2, 56);
-INSERT INTO `ower_course` VALUES (57, 2, 57);
-INSERT INTO `ower_course` VALUES (58, 2, 58);
-INSERT INTO `ower_course` VALUES (59, 2, 59);
-INSERT INTO `ower_course` VALUES (60, 2, 60);
-INSERT INTO `ower_course` VALUES (61, 2, 61);
-INSERT INTO `ower_course` VALUES (62, 2, 62);
-INSERT INTO `ower_course` VALUES (63, 2, 63);
-INSERT INTO `ower_course` VALUES (64, 2, 64);
-INSERT INTO `ower_course` VALUES (65, 2, 65);
-INSERT INTO `ower_course` VALUES (66, 2, 66);
-INSERT INTO `ower_course` VALUES (67, 2, 67);
-INSERT INTO `ower_course` VALUES (68, 2, 68);
-INSERT INTO `ower_course` VALUES (69, 2, 69);
-INSERT INTO `ower_course` VALUES (70, 2, 70);
-INSERT INTO `ower_course` VALUES (71, 2, 71);
-INSERT INTO `ower_course` VALUES (72, 2, 72);
-INSERT INTO `ower_course` VALUES (73, 2, 73);
-INSERT INTO `ower_course` VALUES (74, 2, 74);
-INSERT INTO `ower_course` VALUES (75, 2, 75);
-INSERT INTO `ower_course` VALUES (76, 2, 76);
-INSERT INTO `ower_course` VALUES (77, 2, 77);
-INSERT INTO `ower_course` VALUES (78, 2, 78);
-INSERT INTO `ower_course` VALUES (79, 2, 79);
-INSERT INTO `ower_course` VALUES (80, 2, 80);
-INSERT INTO `ower_course` VALUES (81, 2, 81);
-INSERT INTO `ower_course` VALUES (82, 2, 82);
-INSERT INTO `ower_course` VALUES (83, 2, 83);
-INSERT INTO `ower_course` VALUES (84, 2, 84);
-INSERT INTO `ower_course` VALUES (85, 2, 85);
-INSERT INTO `ower_course` VALUES (86, 2, 86);
-INSERT INTO `ower_course` VALUES (87, 2, 87);
-INSERT INTO `ower_course` VALUES (88, 2, 88);
-INSERT INTO `ower_course` VALUES (89, 2, 89);
-INSERT INTO `ower_course` VALUES (90, 2, 90);
-INSERT INTO `ower_course` VALUES (91, 2, 91);
-INSERT INTO `ower_course` VALUES (92, 2, 92);
-INSERT INTO `ower_course` VALUES (93, 2, 93);
-INSERT INTO `ower_course` VALUES (94, 2, 94);
-INSERT INTO `ower_course` VALUES (95, 2, 95);
-INSERT INTO `ower_course` VALUES (96, 2, 96);
-INSERT INTO `ower_course` VALUES (97, 2, 97);
-INSERT INTO `ower_course` VALUES (98, 2, 98);
-INSERT INTO `ower_course` VALUES (99, 2, 99);
-INSERT INTO `ower_course` VALUES (100, 2, 100);
-INSERT INTO `ower_course` VALUES (101, 2, 101);
-INSERT INTO `ower_course` VALUES (102, 2, 102);
-INSERT INTO `ower_course` VALUES (103, 2, 103);
-INSERT INTO `ower_course` VALUES (104, 2, 104);
-INSERT INTO `ower_course` VALUES (105, 2, 105);
-INSERT INTO `ower_course` VALUES (106, 2, 106);
-INSERT INTO `ower_course` VALUES (107, 2, 107);
-INSERT INTO `ower_course` VALUES (108, 2, 108);
-INSERT INTO `ower_course` VALUES (109, 2, 109);
-INSERT INTO `ower_course` VALUES (110, 2, 110);
-INSERT INTO `ower_course` VALUES (111, 2, 111);
-INSERT INTO `ower_course` VALUES (112, 2, 112);
-INSERT INTO `ower_course` VALUES (113, 2, 113);
-INSERT INTO `ower_course` VALUES (114, 2, 114);
-INSERT INTO `ower_course` VALUES (115, 2, 115);
-INSERT INTO `ower_course` VALUES (116, 2, 116);
-INSERT INTO `ower_course` VALUES (117, 2, 117);
-INSERT INTO `ower_course` VALUES (118, 2, 118);
-INSERT INTO `ower_course` VALUES (119, 2, 119);
-INSERT INTO `ower_course` VALUES (120, 2, 120);
-INSERT INTO `ower_course` VALUES (121, 2, 121);
-INSERT INTO `ower_course` VALUES (122, 2, 122);
-INSERT INTO `ower_course` VALUES (123, 2, 123);
-INSERT INTO `ower_course` VALUES (124, 2, 124);
-INSERT INTO `ower_course` VALUES (125, 2, 125);
-INSERT INTO `ower_course` VALUES (126, 2, 126);
-INSERT INTO `ower_course` VALUES (127, 2, 127);
-INSERT INTO `ower_course` VALUES (128, 2, 128);
-INSERT INTO `ower_course` VALUES (129, 2, 129);
-INSERT INTO `ower_course` VALUES (130, 2, 130);
-INSERT INTO `ower_course` VALUES (131, 2, 131);
-INSERT INTO `ower_course` VALUES (132, 2, 132);
-INSERT INTO `ower_course` VALUES (133, 2, 133);
-INSERT INTO `ower_course` VALUES (134, 2, 134);
-INSERT INTO `ower_course` VALUES (135, 2, 135);
-INSERT INTO `ower_course` VALUES (136, 2, 136);
-INSERT INTO `ower_course` VALUES (137, 2, 137);
-INSERT INTO `ower_course` VALUES (138, 2, 138);
-INSERT INTO `ower_course` VALUES (139, 2, 139);
-INSERT INTO `ower_course` VALUES (140, 2, 140);
-INSERT INTO `ower_course` VALUES (141, 2, 141);
-INSERT INTO `ower_course` VALUES (142, 2, 142);
-INSERT INTO `ower_course` VALUES (143, 2, 143);
-INSERT INTO `ower_course` VALUES (144, 2, 144);
-INSERT INTO `ower_course` VALUES (145, 2, 145);
-INSERT INTO `ower_course` VALUES (146, 2, 146);
-INSERT INTO `ower_course` VALUES (147, 2, 147);
-INSERT INTO `ower_course` VALUES (148, 2, 148);
-INSERT INTO `ower_course` VALUES (149, 2, 149);
-INSERT INTO `ower_course` VALUES (150, 2, 150);
-INSERT INTO `ower_course` VALUES (151, 2, 151);
-INSERT INTO `ower_course` VALUES (152, 2, 152);
-INSERT INTO `ower_course` VALUES (153, 2, 153);
-INSERT INTO `ower_course` VALUES (154, 2, 154);
-INSERT INTO `ower_course` VALUES (155, 2, 155);
-INSERT INTO `ower_course` VALUES (156, 2, 156);
-INSERT INTO `ower_course` VALUES (157, 2, 157);
-INSERT INTO `ower_course` VALUES (158, 2, 158);
-INSERT INTO `ower_course` VALUES (159, 2, 159);
-INSERT INTO `ower_course` VALUES (160, 2, 160);
-INSERT INTO `ower_course` VALUES (161, 2, 161);
-INSERT INTO `ower_course` VALUES (162, 2, 162);
-INSERT INTO `ower_course` VALUES (163, 2, 163);
-INSERT INTO `ower_course` VALUES (164, 2, 164);
-INSERT INTO `ower_course` VALUES (165, 2, 165);
-INSERT INTO `ower_course` VALUES (166, 2, 166);
-INSERT INTO `ower_course` VALUES (167, 2, 167);
-INSERT INTO `ower_course` VALUES (168, 2, 168);
-INSERT INTO `ower_course` VALUES (169, 2, 169);
-INSERT INTO `ower_course` VALUES (170, 2, 170);
+INSERT INTO `ower_course` VALUES (4, 2, 171, 31, b'1');
 
 -- ----------------------------
 -- Table structure for part
@@ -568,21 +404,16 @@ CREATE TABLE `payment`  (
   `transaction_Status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `url_pay` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `params_url_status` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `url_return` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of payment
 -- ----------------------------
-INSERT INTO `payment` VALUES (15, 1, '2021-04-25 17:36:20', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL, NULL);
-INSERT INTO `payment` VALUES (16, 1, '2021-04-25 17:49:53', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL, 'vnp_Amount=1000000&vnp_Message=QueryDR+Success&vnp_OrderInfo=Day+la+mieu+ta&vnp_PayDate=20210426004949&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=1123123&vnp_TransactionStatus=01&vnp_TxnRef=16&vnp_SecureHash=52fa06bf43b28c9605bfb46f6a1bba3d5156474c1ac3691ca84e00feaf0a3b74');
-INSERT INTO `payment` VALUES (17, 1, '2021-04-25 18:34:14', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL, NULL);
-INSERT INTO `payment` VALUES (18, 1, '2021-04-25 18:36:48', 10000, '119.17.249.22', 'VND', 'UNCOMPLETE', NULL, NULL);
-INSERT INTO `payment` VALUES (19, 1, '2021-04-25 18:37:30', 10000, '119.17.249.22', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_Command=pay&vnp_CreateDate=20210426013730&vnp_CurrCode=VND&vnp_IpAddr=119.17.249.22&vnp_Locale=vn&vnp_OrderInfo=Day+la+mieu+ta&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001&vnp_TmnCode=67LF6OWG&vnp_TxnRef=19&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=6ddfbc525227fcbdae4f938ed4716d9684af15a53e9e65088706f3f616455368', NULL);
-INSERT INTO `payment` VALUES (20, 2, '2021-04-27 14:17:41', 1000000, '0:0:0:0:0:0:0:1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_Command=pay&vnp_CreateDate=20210427211742&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fcheck%2F20&vnp_TmnCode=67LF6OWG&vnp_TxnRef=20&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=18d45aba1a539013b6d52b6414ce20041348744b332d5b30d10bf8fe00e1dcb8', NULL);
-INSERT INTO `payment` VALUES (21, 2, '2021-04-27 14:31:40', 1000000, '0:0:0:0:0:0:0:1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1000000&vnp_Command=pay&vnp_CreateDate=20210427213140&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fcheck%2F21&vnp_TmnCode=67LF6OWG&vnp_TxnRef=21&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=7d3627e645385988a3ccabde0819513fd2b06afb5d165b528ce341721e2d73c4', 'vnp_Amount=1000000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210427213201&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13496429&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=21&vnp_SecureHash=0b28fe41fcd094ee0ecc697327c0ce29fdd201cb939916a093a7c251167492e2');
+INSERT INTO `payment` VALUES (31, 2, '2021-04-30 18:25:41', 1085700000, '0:0:0:0:0:0:0:1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1085700000&vnp_Command=pay&vnp_CreateDate=20210501012542&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F31&vnp_TmnCode=67LF6OWG&vnp_TxnRef=31&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=d51138a299de7aa2bebb7e8ffbeefdc156d68f784f804f5ff35f82b4afc6a107', 'vnp_Amount=1085700000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210501082542&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13497645&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=31&vnp_SecureHash=fd826155a1d22615509dfb33025ec12480c5571fe1e354fc1bea515ea18f17ca', 'http://localhost:25001/test/returnurl');
 
 -- ----------------------------
 -- Table structure for queue_check_payment

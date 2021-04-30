@@ -13,6 +13,7 @@ import org.springframework.web.server.WebSession;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.TestDAO;
 import vn.edu.topedu.json.object.ResponseMessageSuccess;
 import vn.edu.topedu.json.object.ResponseNull;
@@ -22,10 +23,19 @@ import vn.edu.topedu.response.MessageResponse;
 public class TestREST {
 	@Autowired
 	TestDAO testDAO;
+	@Autowired
+	OwerCourseDAO owerCourseDAO;
+	@RequestMapping(value = "/test/bug", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> testBug() {
+
+//		return ResponseEntity.ok(owerCourseDAO.querry2((long) 2, (long) 171));
+		return ResponseEntity.ok(owerCourseDAO.querryByPayment((long) 31));
+	}
 	@RequestMapping(value = "/test/mysql", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<Object> testMysql() {
-
+		
 		return ResponseEntity.ok(testDAO.findById((long) 1));
 	}
 	@RequestMapping(value = "/test/null", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,6 +43,12 @@ public class TestREST {
 	public String isNull() {
 
 		return new ResponseNull().toJsonString();
+	}
+	@RequestMapping(value = "/test/returnurl", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> testReturnUrl() {
+		
+		return ResponseEntity.ok(new MessageResponse("Hello", "Xin chào"));
 	}
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -24,6 +24,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -58,11 +59,16 @@ public class Payment {
 	@Column(name = "url_pay", nullable = false)
 	private String urlPay;	
 	
+	@Column(name = "url_return", nullable = false)
+	private String urReturn;	
+	
+	
+
 	@Column(name = "params_url_status", nullable = false)
 	private String paramsUrlStatus;	
 	
 	@Column(name = "transaction_Status", nullable = false)
-	 @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private TransactionState transactionStatus = TransactionState.UNCOMPLETE;
 	public long getId() {
 		return id;
@@ -102,6 +108,12 @@ public class Payment {
 	}
 	public void setCurrCode(String currCode) {
 		this.currCode = currCode;
+	}
+	public String getUrReturn() {
+		return urReturn;
+	}
+	public void setUrReturn(String urReturn) {
+		this.urReturn = urReturn;
 	}
 	public String getUrl(String returnUrl) throws UnsupportedEncodingException {
 		//String vnp_IpAddr="119.17.249.22";

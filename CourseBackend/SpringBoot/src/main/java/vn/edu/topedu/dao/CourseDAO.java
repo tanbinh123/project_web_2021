@@ -127,12 +127,19 @@ public class CourseDAO {
 
 	}
 
-	public DetailCourseEntity getCourse(int id) {
+	public DetailCourseEntity getCourse(Long idCourse) {
 		String sql = "Select c from " + DetailCourseEntity.class.getName() + " c " //
 				+ " where c.deleted=0 and c.id= :id ";
 		Query query = this.entityManager.createQuery(sql, DetailCourseEntity.class);
-		query.setParameter("id", id);
+		query.setParameter("id", idCourse);
 		return (DetailCourseEntity) query.getSingleResult();
+	}
+	public Course getCourse2(Long idCourse) {
+		String sql = "Select c from " + Course.class.getName() + " c " //
+				+ " where c.deleted=0 and c.id= :id ";
+		Query query = this.entityManager.createQuery(sql, Course.class);
+		query.setParameter("id", idCourse);
+		return (Course) query.getSingleResult();
 	}
 //	public List<Course> getCourse(int id) {
 //		String sql = "Select c from " + Course.class.getName() + " c " //

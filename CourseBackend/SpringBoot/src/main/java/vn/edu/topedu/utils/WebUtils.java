@@ -44,6 +44,11 @@ public class WebUtils {
 		}
 
 	}
+	/**
+	 * 
+	 * @param httpServletRequest
+	 * @return scheme://servername:%port/
+	 */
 	public static String getUrl(HttpServletRequest httpServletRequest) {
 		return String.format("%s://%s:%d/", httpServletRequest.getScheme(),httpServletRequest.getServerName(),httpServletRequest.getServerPort());
 	}

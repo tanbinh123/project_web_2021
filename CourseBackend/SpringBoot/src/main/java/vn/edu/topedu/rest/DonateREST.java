@@ -28,14 +28,13 @@ import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.Course;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.Payment;
-import vn.edu.topedu.entity.TransactionState;
 import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
 
 @RestController
 @RequestMapping("/payment")
-public class PaymentREST {
+public class DonateREST {
 	@Autowired
 	private PaymentDAO paymentDAO;
 	@Autowired
@@ -45,28 +44,17 @@ public class PaymentREST {
 	@Autowired
 	private CourseDAO courseDAO;
 
-	@PostMapping
+	@PostMapping("/donate")
 	@ResponseBody
-	public ResponseEntity<Object> buyCourse(HttpServletRequest httpServletRequest, Authentication authentication,
+	public ResponseEntity<Object> donate(HttpServletRequest httpServletRequest, Authentication authentication,
 			@RequestBody Map<String, Object> body) {
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {
-				OwerCourse owerCourse=null;
-				Long idCourse=Long.parseLong(String.valueOf(body.get("idCourse")));
-				try {
-					owerCourse = owerCourseDAO.querry(appUser.getId(),idCourse );
-					return ResponseEntity.ok(owerCourse);
-					
-				} catch (NoResultException noResultException) {
-					owerCourse= new OwerCourse();
-					System.err.println("Not found owerCourse");
-				} 
-				Course course= courseDAO.getCourse2(idCourse);
 				Payment payment = new Payment();
 				payment.setAppUser(appUser);
-				payment.setAmount(course.getPrice()*100);
+				payment.setAmount(Long.parseLong(String.valueOf(body.get("amount")+"00")));
 				payment.setCurrCode("VND");
 				payment.setIpAddress(WebUtils.getIpAddress(httpServletRequest));
 				payment.setUrReturn(String.valueOf(body.get("returnUrl")));
@@ -75,13 +63,45 @@ public class PaymentREST {
 					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 							.body(new MessageResponse("Can't create payment.", ""));
 				;
-				owerCourse.setAppUser(appUser);
-				owerCourse.setCourse(course);
-				owerCourse.setPayment(payment);
-				owerCourse=owerCourseDAO.insertOwerCourse(owerCourse);
 				String url;
 				try {
-					url = payment.getUrl(WebUtils.getUrl(httpServletRequest)+"payment/buycourse/check");
+					url = payment.getUrl(WebUtils.getUrl(httpServletRequest)+"payment/check");
+					payment=paymentDAO.merge(payment);
+					PaymnetResponse paymnetResponse = new PaymnetResponse(url,payment.getId());
+					return ResponseEntity.ok(paymnetResponse);
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+							.body(new MessageResponse("Can't gender url.", ""));
+				}
+
+			}
+		}
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", ""));
+	}
+	@PostMapping("/donate/manyCurrCode")
+	@ResponseBody
+	public ResponseEntity<Object> donateManyCurrCode(HttpServletRequest httpServletRequest, Authentication authentication,
+			@RequestBody Map<String, Object> body) {
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {
+				Payment payment = new Payment();
+				payment.setAppUser(appUser);
+				payment.setAmount(Long.parseLong(String.valueOf(body.get("amount"))));
+				payment.setCurrCode(String.valueOf(body.get("currCode")));
+				payment.setIpAddress(WebUtils.getIpAddress(httpServletRequest));
+				payment.setUrReturn(String.valueOf(body.get("returnUrl")));
+				payment = paymentDAO.insert(payment);
+				if (payment == null)
+					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+							.body(new MessageResponse("Can't create payment.", ""));
+				;
+				String url;
+				try {
+					url = payment.getUrl(WebUtils.getUrl(httpServletRequest)+"payment/check");
 					payment=paymentDAO.merge(payment);
 					PaymnetResponse paymnetResponse = new PaymnetResponse(url,payment.getId());
 					return ResponseEntity.ok(paymnetResponse);
@@ -96,20 +116,12 @@ public class PaymentREST {
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", ""));
 	}
-	@GetMapping("/buycourse/check/{id}")
-	public void redirectAfterTransectionBuyCourse(HttpServletResponse httpResponse,HttpServletRequest httpServletRequest,
+	
+	@GetMapping("/check/{id}")
+	public void redirectAfterTransection(HttpServletResponse httpResponse,HttpServletRequest httpServletRequest,
 			@PathVariable String id) {
-		long idPayment = Long.parseLong(id);
-		Payment payment = null;
-		payment=paymentDAO.findById(idPayment);
+		Payment payment = paymentDAO.findById(Long.parseLong(id));
 		if (payment == null) {
-			return;
-		}
-		OwerCourse owerCourse = null;
-		try {
-			owerCourse=owerCourseDAO.querryByPayment(idPayment);
-			
-		} catch (NoResultException e) {
 			return;
 		}
 		
@@ -117,11 +129,7 @@ public class PaymentREST {
 			String url;
 			url = payment.querryFromVNPay();
 			payment=paymentDAO.merge(payment);
-			//System.out.println(payment.getUrReturn()+"?"+payment.getParamsUrlStatus());
-			if(payment.getTransactionStatus()==TransactionState.COMPLETE) {
-				owerCourse.setSuccessed(true);
-				owerCourseDAO.merge(owerCourse);
-			}
+			System.out.println(payment.getUrReturn()+"?"+payment.getParamsUrlStatus());
 			httpResponse.sendRedirect(payment.getUrReturn()+"?"+payment.getParamsUrlStatus());
 			return ;
 		} catch (UnsupportedEncodingException e) {
@@ -133,6 +141,26 @@ public class PaymentREST {
 			httpResponse.sendRedirect(payment.getUrReturn());
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	@GetMapping("/api/check/{id}")
+	public ResponseEntity<Object> apiCheck(HttpServletRequest httpServletRequest,
+			@PathVariable String id) {
+		Payment payment = paymentDAO.findById(Long.parseLong(id));
+		if (payment == null)
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new MessageResponse("Can't create payment.", ""));
+		;
+		
+		try {
+			String url;
+			url = payment.querryFromVNPay();
+			payment=paymentDAO.merge(payment);
+			return ResponseEntity.ok(payment);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new MessageResponse("Can't gender url.", ""));
 		}
 	}
 
