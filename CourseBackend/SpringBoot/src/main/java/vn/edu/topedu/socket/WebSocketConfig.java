@@ -12,24 +12,20 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
         .setAllowedOrigins("*")
-//        .setAllowedOrigins("http://localhost:5500", "http://127.0.0.1:5500")
         .withSockJS();
+        
+        registry.addEndpoint("/notifications")
+		.setAllowedOrigins("*")
+		.withSockJS();
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.setApplicationDestinationPrefixes("/app");
-        registry.enableSimpleBroker("/topic");   // Enables a simple in-memory broker
+        registry.setApplicationDestinationPrefixes("/app","/swns");
+        registry.enableSimpleBroker("/topic","/notification");   // Enables a simple in-memory broker
+        
+        
 
-
-        //   Use this for enabling a Full featured broker like RabbitMQ
-
-        /*
-        registry.enableStompBrokerRelay("/topic")
-                .setRelayHost("localhost")
-                .setRelayPort(61613)
-                .setClientLogin("guest")
-                .setClientPasscode("guest");
-        */
+       
     }
 }

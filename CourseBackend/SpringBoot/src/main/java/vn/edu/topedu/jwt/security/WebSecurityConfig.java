@@ -46,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/payment/check/*").permitAll()				
 				.antMatchers("/payment/buycourse/check/*").permitAll()				
 				.antMatchers("/ws/**").permitAll()				
+				.antMatchers("/notifications/**").permitAll()				
 				.antMatchers("/home/**").permitAll()				
 				.antMatchers("/video/**").permitAll()
 				.antMatchers("/stream/**").permitAll()
