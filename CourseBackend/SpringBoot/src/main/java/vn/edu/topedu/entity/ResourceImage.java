@@ -63,7 +63,12 @@ public class ResourceImage extends AHasResource {
 		this.deleted = deleted;
 	}
 	public String getImage() {
-		return (this.beforeResource!=null)?this.beforeResource:""+VariableConst.RESOURCE_BEFORE+this.path;
+		return ((this.beforeResource!=null)?this.beforeResource:"")+VariableConst.RESOURCE_BEFORE+this.path;
 	}
+	@Override
+	public String toString() {
+		return "ResourceImage [id=" + id + ", path=" + path + ", updateAt=" + updateAt + ", deleted=" + deleted + "]";
+	}
+	
 
 }

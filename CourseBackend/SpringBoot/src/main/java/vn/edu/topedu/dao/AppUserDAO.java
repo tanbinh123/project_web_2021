@@ -1,5 +1,7 @@
 package vn.edu.topedu.dao;
 
+import java.util.Arrays;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -85,7 +87,26 @@ public class AppUserDAO {
 //			return true;
 //		return false;
 //	}
-
+	@Transactional
+	public boolean register(AppUser user, AppRole appRole) {
+		
+		try {
+			user=insertUser(user);			
+			UserRole userRole= new UserRole();
+			userRole.setAppUser(user);
+			userRole.setAppRole(appRole);
+			user.setUserRoles(Arrays.asList(userRole));
+			userRole=putUserRole(userRole);
+			
+			return true;
+		} catch (Exception e) {
+			//System.out.println(e.getMessage());
+			System.out.println("Không insert user");
+			return false;
+		}
+		
+		
+	}
 	public AppUser insertUser(AppUser user) {
 		
 		try {
@@ -94,7 +115,7 @@ public class AppUserDAO {
 			return user;
 		} catch (Exception e) {
 			//System.out.println(e.getMessage());
-			System.out.println("Không insert user");
+			//System.out.println("Không insert user");
 			return null;
 		}
 		

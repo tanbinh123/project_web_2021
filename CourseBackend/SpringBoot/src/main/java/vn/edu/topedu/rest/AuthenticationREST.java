@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,7 @@ import vn.edu.topedu.response.AuthResponse;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.response.SignUpResponse;
 import vn.edu.topedu.response.model.AccountResponse;
+import vn.edu.topedu.utils.WebUtils;
 
 @RestController
 public class AuthenticationREST implements IMyHost {
@@ -74,7 +76,57 @@ public class AuthenticationREST implements IMyHost {
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public ResponseEntity<Object> signup(HttpServletRequest serverHttpRequest,@RequestBody SignUpRequest signUpRequest) {
+	public ResponseEntity<Object> signup(HttpServletRequest httpServletRequest,@RequestBody SignUpRequest signUpRequest) {
+		System.out.println(signUpRequest);
+		AppUser user = new AppUser();
+		user.setEmail(signUpRequest.getEmail());
+		user.setUserName(signUpRequest.getUsername());
+		user.setEncrytedPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+		user.setAvatar(resourceImageDAO.findById(Long.parseLong(String.valueOf(1))));
+		System.out.println(user.getAvatar().getImage());
+		AppRole role = appUserDAO.findRoleByRoleName("ROLE_USER");
+		if(role==null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+					new MessageResponse("Role Default not found ROLE_USER.", "Không tìm thấy quyền default ROLE_USER."));
+		}
+		try {
+			boolean rs = appUserDAO.register(user, role);
+			if (rs) {
+				SignUpResponse authResponse = new SignUpResponse(jwtUtil.generateToken(user));
+				AccountResponse account = new AccountResponse();
+				user.getAvatar().setBeforeResource(getUrl(httpServletRequest));
+//				System.out.println(user.getAvatar().getPath());
+//				System.out.println(user.getAvatar());
+				System.out.println(user.getAvatar().getImage());
+				account.setAvatar(user.getAvatar().getImage());
+				account.setUsername(user.getUserName());
+				authResponse.setUser(account);
+				return ResponseEntity.ok(authResponse);
+			}else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+						new MessageResponse("Not insert UserRole.", "Không cấp quyền cho user được."));
+				
+			}
+			
+		}catch(UnexpectedRollbackException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+					new Object() {
+						private String message="Lỗi Mysql, không thể chèn bảng ghi vào cơ sở dữ liệu";
+
+						public String getMessage() {
+							return message;
+						}
+
+						
+					});
+			
+		}
+		
+		
+
+	}
+	@RequestMapping(value = "/signup2", method = RequestMethod.POST)
+	public ResponseEntity<Object> signup2(HttpServletRequest serverHttpRequest,@RequestBody SignUpRequest signUpRequest) {
 		System.out.println(signUpRequest);
 		AppUser user = new AppUser();
 		user.setEmail(signUpRequest.getEmail());
