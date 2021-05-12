@@ -10,7 +10,8 @@ import React, { useState } from "react";
 import ButtonSmall from "../Button/ButtonSmall";
 import { colorBlack1 } from "../color/color";
 import { convertVND } from "../tools/Tools";
-
+import PropTypes from "prop-types";
+import { useEffect } from "react";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "sticky",
@@ -29,6 +30,15 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%)",
     borderRadius: "4%",
   },
+  bgImage: {
+    background:
+      "linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../assets/images/qiqi.jpg)",
+    width: "100%",
+    paddingTop: "56%",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "50% 50%",
+    backgroundSize: "100% auto",
+  },
   image: {
     width: "calc(100% - 2px)",
     margin: "2px 0 20px",
@@ -41,15 +51,7 @@ const useStyles = makeStyles((theme) => ({
     "-ms-user-select": "none",
     userSelect: "none",
   },
-  bgImage: {
-    background:
-      "linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../assets/images/qiqi.jpg)",
-    width: "100%",
-    paddingTop: "56%",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "50% 50%",
-    backgroundSize: "100% auto",
-  },
+
   content: {
     display: "flex",
     flexFlow: "column nowrap",
@@ -85,35 +87,43 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
 }));
-CardCourseDetail.propTypes = {};
 
-CardCourseDetail.defaultProps = {};
+CardCourseDetail.propTypes = {
+  poster: PropTypes.string,
+};
+CardCourseDetail.defaultProps = {
+  poster: "",
+};
 export default function CardCourseDetail(props) {
   const classes = useStyles();
-  const { onClickOpenVideo } = props;
+  const { onClickOpenVideo, poster } = props;
+  const background1 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("${poster}")`;
+  const background2 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("http://localhost:25001/resource/user/user/image/demo.jpg")`;
+  console.log("background1", background1);
+  console.log("background2", background2);
+
   function handleOnClickOpenVideo() {
     if (!onClickOpenVideo) return;
     onClickOpenVideo();
   }
-  const [background, setBackground] = useState(
-    "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg"
-  );
+
   return (
     <div className={classes.root}>
       <div className={classes.image} title="Xem giới thiệu khóa học">
-        <div
-          className={classes.bgImage}
+        <div /* className={classes.bgImage} */
           style={{
-            background: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("${
-              background || "../assets/images/qiqi.jpg"
-            }")`,
+           // ...classes.bgImage,
+            background: background2,
             width: "100%",
             paddingTop: "56%",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "50% 50%",
             backgroundSize: "100% auto",
+           
           }}
         ></div>
+
+        
         <PlayCircleFilled
           className={classes.iconPlay}
           onClick={handleOnClickOpenVideo}

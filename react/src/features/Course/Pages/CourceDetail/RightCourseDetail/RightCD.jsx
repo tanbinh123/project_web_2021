@@ -1,11 +1,18 @@
 import React from "react";
 import CardCourseDetail from "../../../../../components/card/CardCourseDetail";
 import RightCDCSS from "./CSSRightCD";
+import PropTypes from "prop-types";
 
-//RightCD.propTypes = {};
-
+RightCD.propTypes = {
+  poster: PropTypes.string,
+  
+};
+RightCD.defaultProps = {
+  poster: "",
+ 
+};
 function RightCD(props) {
-  const { onClickOpenVideo } = props;
+  const { onClickOpenVideo, poster } = props;
   function handleOnClickOpenVideo() {
     if (!onClickOpenVideo) return;
     onClickOpenVideo();
@@ -13,7 +20,7 @@ function RightCD(props) {
   const classes = RightCDCSS();
   return (
     <div className={classes.root}>
-      <CardCourseDetail onClickOpenVideo={handleOnClickOpenVideo} />
+      <CardCourseDetail onClickOpenVideo={handleOnClickOpenVideo} poster={poster} />
     </div>
   );
 }

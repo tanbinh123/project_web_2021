@@ -31,6 +31,9 @@ function CourseDetail(props) {
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const [course, setCourse] = useState({
     title: "",
+    poster: {
+      image:"../assets/images/qiqi.jpg",
+    }
   });
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
@@ -86,7 +89,7 @@ function CourseDetail(props) {
               xs={12}
             >
               <Paper elevation={0}>
-                <RightCD onClickOpenVideo={handleToggleDialog} />
+                <RightCD onClickOpenVideo={handleToggleDialog} poster={course.poster.image} />
               </Paper>
             </Grid>
           </Grid>
