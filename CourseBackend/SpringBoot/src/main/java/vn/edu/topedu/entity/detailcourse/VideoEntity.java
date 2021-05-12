@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import vn.edu.topedu.consts.VariableConst;
 import vn.edu.topedu.entity.AHasResource;
+import vn.edu.topedu.entity.Course;
 
 @Entity
 @Table(name = "video")
@@ -28,9 +29,14 @@ public class VideoEntity extends AHasResource {
 	@Column(name = "video", nullable = false)
 	@JsonIgnore
 	private String video;
+	
 	@OneToMany(mappedBy = "demo")
 	@JsonIgnore
-	private List<DetailCourseEntity> course;
+	private List<DetailCourseEntity> detailCourses;
+	
+//	@OneToMany(mappedBy = "demo")
+//	@JsonIgnore
+//	private List<Course> courses;
 	public Long getId() {
 		return id;
 	}
@@ -44,15 +50,23 @@ public class VideoEntity extends AHasResource {
 		this.video = video;
 	}
 	
-	public List<DetailCourseEntity> getCourse() {
-		return course;
-	}
-	public void setCourse(List<DetailCourseEntity> course) {
-		this.course = course;
-	}
+	
 	public String getUrlVideo() {
 		return this.beforeResource+VariableConst.VIDEO_BEFORE+ this.video;
 	}
+	public List<DetailCourseEntity> getDetailCourses() {
+		return detailCourses;
+	}
+	public void setDetailCourses(List<DetailCourseEntity> detailCourses) {
+		this.detailCourses = detailCourses;
+	}
+//	public List<Course> getCourses() {
+//		return courses;
+//	}
+//	public void setCourses(List<Course> courses) {
+//		this.courses = courses;
+//	}
+	
 	
 
 }

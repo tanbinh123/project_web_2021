@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import vn.edu.topedu.entity.AHasResource;
+import vn.edu.topedu.entity.ResourceImage;
 
 @Entity
 @Table(name = "Course")
@@ -27,9 +28,13 @@ public class DetailCourseEntity extends AHasResource {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-	@Column(name = "poster", length = 255)
-	@JsonIgnore
-	private String poster = "image/avatar/momo.webp";
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "poster", referencedColumnName = "id")
+    private ResourceImage poster;
+	
+	
+
 	@Column(name = "description", length = 255)
 	private String description = "";
 	@Column(name = "title", length = 255, nullable = false)
@@ -66,13 +71,7 @@ public class DetailCourseEntity extends AHasResource {
 		this.id = id;
 	}
 
-	public String getPoster() {
-		return poster;
-	}
-
-	public void setPoster(String poster) {
-		this.poster = poster;
-	}
+	
 
 	public String getDescription() {
 		return description;
@@ -133,8 +132,17 @@ public class DetailCourseEntity extends AHasResource {
 		this.parts = parts;
 	}
 	
+	public ResourceImage getPoster() {
+		return poster;
+	}
+
+	public void setPoster(ResourceImage poster) {
+		this.poster = poster;
+	}
+	
 	@Override
 	public void setBeforeResource(String beforeResource) {
+		this.poster.setBeforeResource(beforeResource);
 		this.demo.setBeforeResource(beforeResource);
 		this.parts.forEach(e->e.getLessons().forEach(x-> x.getVideo().setBeforeResource(beforeResource)));
 		super.setBeforeResource(beforeResource);

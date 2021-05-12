@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.AppUser;
-import vn.edu.topedu.entity.Test;
+import vn.edu.topedu.entity.test.Test;
 
 @Repository
 @Transactional

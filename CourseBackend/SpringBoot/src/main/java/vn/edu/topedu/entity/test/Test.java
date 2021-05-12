@@ -1,4 +1,4 @@
-package vn.edu.topedu.entity;
+package vn.edu.topedu.entity.test;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

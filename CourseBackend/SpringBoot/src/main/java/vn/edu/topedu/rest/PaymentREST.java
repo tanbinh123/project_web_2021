@@ -63,7 +63,7 @@ public class PaymentREST {
 					owerCourse= new OwerCourse();
 					System.err.println("Not found owerCourse");
 				} 
-				Course course= courseDAO.getCourse2(idCourse);
+				Course course= courseDAO.getCourse(idCourse);
 				Payment payment = new Payment();
 				payment.setAppUser(appUser);
 				payment.setAmount(course.getPrice()*100);
