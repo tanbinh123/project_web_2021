@@ -33,7 +33,6 @@ import { colorBlack1, colorWhite1, colorWhite2 } from "../../../color/color";
 import CustomsDrawer from "../../../Drawer";
 import { isEmpty } from "../../../tools/Tools";
 import InputSearchMobile from "../InputSearchMobile";
-
 // css
 const useStyles = makeStyles((theme) => ({
   floatLeft: {
@@ -84,10 +83,8 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: colorWhite1,
-
     height: "35px",
     width: "35px",
-
     marginTop: "5px",
   },
   username: {
@@ -128,17 +125,25 @@ const useStyles = makeStyles((theme) => ({
   linkNone: {
     textDecoration: "none",
     color: "var(--colorWhite0)",
+    "&>div>.icon": {
+      fontSize: "18px",
+      marginRight: 10,
+      color: "var(--colorWhite0)",
+    },
+  },
+  rootPopover: {
+    "& .MuiPaper-root": {
+      background: "none",
+    },
   },
 }));
 RightAppbar.propTypes = {};
-
 function RightAppbar(props) {
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   const classes = useStyles();
   const { push } = useHistory();
   //
   // const url = useRouteMatch();
-
   //
   const popupState = usePopupState({
     variant: "popover",
@@ -146,14 +151,11 @@ function RightAppbar(props) {
   });
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   // const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -174,7 +176,6 @@ function RightAppbar(props) {
       document.removeEventListener("scroll", handleScrollAppBar);
     };
   }, []);
-
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -219,7 +220,6 @@ function RightAppbar(props) {
     anchor: "left",
     isOpen: false,
   });
-
   const toggleDrawer = (anchor, isOpen) => (event) => {
     if (
       event.type === "keydown" &&
@@ -227,7 +227,6 @@ function RightAppbar(props) {
     ) {
       return;
     }
-
     setDataDrawer({ ...dataDrawer, anchor: anchor, isOpen: isOpen });
   };
   function handleCloseDrawer(anchor, isOpen) {
@@ -270,6 +269,7 @@ function RightAppbar(props) {
   //menu after login
   const popover = (
     <Popover
+      className={classes.rootPopover}
       {...bindPopover(popupState)}
       anchorOrigin={{
         vertical: "bottom",
@@ -290,6 +290,15 @@ function RightAppbar(props) {
               <ListItemText primary="Cá Nhân" />
             </ListItem>
           </Link>
+          {/* <Link
+            to={`${REACT_APP_URL_ADMIN}/index`}
+            className={classes.linkNone}
+          >
+            <ListItem button onClick={popupState.close}>
+              <i className="fas fa-user-cog icon"></i>
+              <ListItemText primary="Admin" />
+            </ListItem>
+          </Link> */}
           <ListItem button divider onClick={handleLogOut}>
             <ExitToApp className={classes.avatarSmall} fontSize="small" />
             <ListItemText primary="Đăng Xuất" />
@@ -347,5 +356,4 @@ function RightAppbar(props) {
     </>
   );
 }
-
 export default RightAppbar;

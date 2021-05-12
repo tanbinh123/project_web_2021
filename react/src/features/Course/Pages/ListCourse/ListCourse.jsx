@@ -77,8 +77,8 @@ function ListCourse(props) {
     (async () => {
       try {
         const { data, pagination } =
-          (await courseApi.getAll(queryParams)) ||
-          (await courseApiFake.testGetAll(queryParams));
+          // (await courseApi.getAll(queryParams)) ||
+          await courseApiFake.testGetAll(queryParams);
         // const { data, pagination } = await courseApi.getAll(filter);
         // const data = await courseApi.getAll(filter);
         setDataCourse(data);
@@ -89,6 +89,10 @@ function ListCourse(props) {
       }
       setLoading(false);
     })();
+    return () => {
+      setDataCourse([]);
+      setPagination({});
+    };
   }, [queryParams]);
 
   function handlePageChange(e, page) {

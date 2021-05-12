@@ -40,7 +40,7 @@ const ActiveCss = makeStyles((theme) => ({
 
     // o duoi
     "&>div:last-of-type": {
-      backgroundColor: "var(--colorWhite1)",
+      backgroundColor: "var(--colorWhite0)",
       color: "var(--colorBlack2)",
       padding: "30px 20px 15px 20px",
 
@@ -56,6 +56,7 @@ const ActiveCss = makeStyles((theme) => ({
         margin: "30px 0",
         "&>span": {
           fontSize: 18,
+          textAlign: "center",
           "&>span": {
             fontWeight: "600",
           },

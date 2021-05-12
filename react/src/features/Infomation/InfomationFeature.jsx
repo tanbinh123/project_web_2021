@@ -19,7 +19,6 @@ import { Link, NavLink } from "react-router-dom";
 import Edit from "./components/Edit";
 import NotFound404 from "../NotFound";
 import Active from "./components/Active";
-
 InfomationFeature.propTypes = {};
 function InfomationFeature(props) {
   const classes = CSSInfomationFeature();
@@ -53,30 +52,33 @@ function InfomationFeature(props) {
                         }
                       />
                       <div>
-                        <span>
-                          {dataUser.user.username}{" "}
-                          {dataUser.user.actived ? (
-                            <i className="fas fa-check-circle green"></i>
-                          ) : (
-                            <i className="fas fa-times-circle red"></i>
-                          )}
-                        </span>
+                        <Link to={`${url}/info`}>
+                          <span>
+                            {dataUser.user.username}{" "}
+                            {dataUser.user.actived ? (
+                              <i className="fas fa-check-circle green"></i>
+                            ) : (
+                              <i className="fas fa-times-circle red"></i>
+                            )}
+                          </span>
+                        </Link>
                       </div>
                     </li>
-                    <li>
-                      <NavLink to={`${url}/info`}>Giới thiệu</NavLink>
-                    </li>
+                    <NavLink to={`${url}/info`}>
+                      <li>Giới thiệu</li>
+                    </NavLink>
                     {!dataUser.user.actived && (
-                      <li>
-                        <NavLink to={`${url}/active`}>Kích hoạt</NavLink>
-                      </li>
-                    )}
-                    <li>
-                      <NavLink to={`${url}/edit`}>
-                        Sửa thông tin cá nhân
+                      <NavLink to={`${url}/active`}>
+                        <li>Kích hoạt</li>
                       </NavLink>
-                    </li>
-                    <li>Đổi mật khẩu</li>
+                    )}
+                    <NavLink to={`${url}/edit`}>
+                      <li>Sửa thông tin cá nhân</li>
+                    </NavLink>
+                    <NavLink to={`${url}/change-password`}>
+                      <li> Đổi mật khẩu</li>
+                    </NavLink>
+
                     <li>Đăng xuất</li>
                   </ul>
                 </div>
@@ -104,5 +106,4 @@ function InfomationFeature(props) {
     </div>
   );
 }
-
 export default InfomationFeature;

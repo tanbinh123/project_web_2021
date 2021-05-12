@@ -6,7 +6,7 @@ import {
   PlayCircleFilled,
   SentimentVerySatisfied,
 } from "@material-ui/icons";
-import React from "react";
+import React, { useState } from "react";
 import ButtonSmall from "../Button/ButtonSmall";
 import { colorBlack1 } from "../color/color";
 import { convertVND } from "../tools/Tools";
@@ -95,11 +95,25 @@ export default function CardCourseDetail(props) {
     if (!onClickOpenVideo) return;
     onClickOpenVideo();
   }
-
+  const [background, setBackground] = useState(
+    "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg"
+  );
   return (
     <div className={classes.root}>
       <div className={classes.image} title="Xem giới thiệu khóa học">
-        <div className={classes.bgImage}></div>
+        <div
+          className={classes.bgImage}
+          style={{
+            background: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("${
+              background || "../assets/images/qiqi.jpg"
+            }")`,
+            width: "100%",
+            paddingTop: "56%",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "50% 50%",
+            backgroundSize: "100% auto",
+          }}
+        ></div>
         <PlayCircleFilled
           className={classes.iconPlay}
           onClick={handleOnClickOpenVideo}
