@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,7 +34,7 @@ public class DetailCourseEntity extends AHasResource {
 	private String description = "";
 	@Column(name = "title", length = 255, nullable = false)
 	private String title = "";
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "demo_id", referencedColumnName = "id")
 	private VideoEntity demo;
 	@Column(name = "update_at", nullable = false)

@@ -23,7 +23,7 @@ public class RequestResetPasswordDAO {
 		try {
 			
 			String sql = "Select rrp from " + RequestResetPassword.class.getName() + " rrp " //
-					+ " where rrp.appUser.userName= :userName and TIMESTAMPDIFF(MINUTE, rrp.time,UTC_TIMESTAMP) < 20 group by rrp.time order by rrp.time desc ";
+					+ " where rrp.appUser.userName= :userName and TIMESTAMPDIFF(MINUTE, rrp.time,UTC_TIMESTAMP) < 20 and rrp.alive = true group by rrp.time order by rrp.time desc ";
 			Query query = this.entityManager.createQuery(sql, RequestResetPassword.class);
 			query.setParameter("userName", userName);
 			
@@ -47,6 +47,17 @@ public class RequestResetPasswordDAO {
 		}
 		
 		return 0;
+	}
+	public RequestResetPassword merge(RequestResetPassword rrp) {
+		try {
+			rrp = entityManager.merge(rrp);
+			return rrp;
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		
 	}
 
 

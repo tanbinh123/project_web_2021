@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.WebSession;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,12 +32,6 @@ public class TestREST {
 
 //		return ResponseEntity.ok(owerCourseDAO.querry2((long) 2, (long) 171));
 		return ResponseEntity.ok(owerCourseDAO.querryByPayment((long) 31));
-	}
-	@RequestMapping(value = "/test/mysql", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<Object> testMysql() {
-		
-		return ResponseEntity.ok(testDAO.findById((long) 1));
 	}
 	@RequestMapping(value = "/test/null", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -87,6 +82,8 @@ public class TestREST {
 		String jsonString = objectMapper.writeValueAsString(new ResponseMessageSuccess());
 		return jsonString;
 	}
+	
+
 
 
 	

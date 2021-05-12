@@ -46,14 +46,14 @@ public class VideoStreamController {
 		return videoStreamService.prepareContent(fileName, fileType, httpRangeList);
 	}
 	
-	@GetMapping("/user/{user}/video/{idCourse}/{fileType}/{fileName}")
+	@GetMapping("/user/{user}/video/{folder}/{fileType}/{fileName}")
 	public ResponseEntity<byte[]> streamVideo2(
 			@RequestHeader(value = "Range", required = false) String httpRangeList,
 			@PathVariable("fileType") String fileType, 
 			@PathVariable String fileName,
-			@PathVariable int idCourse,
+			@PathVariable String folder,
 			@PathVariable String user) {
-		String fullFileName ="user/"+user+"/video/"+idCourse+"/"+fileName;
+		String fullFileName ="user/"+user+"/video/"+folder+"/"+fileName;
 		//System.out.println(fullFileName);
 		return videoStreamService.prepareContent(fullFileName, fileType, httpRangeList);
 	}

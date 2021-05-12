@@ -110,7 +110,7 @@ function CourseDetail(props) {
         </DialogTitle>
         <DialogContent dividers>
           <div className={classes.video}>
-            <video autoPlay muted loop className="video__play" controls>
+            <video autoPlay /* muted */ loop className="video__play" controls>
               <source src={course.demo?.urlVideo} type="video/mp4"></source>
             </video>
           </div>

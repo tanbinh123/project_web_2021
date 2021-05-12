@@ -161,7 +161,7 @@ public class AppUserDAO {
 			entityManager.merge(user);
 			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.err.println(e.getMessage());
 		}
 		
 		return false;

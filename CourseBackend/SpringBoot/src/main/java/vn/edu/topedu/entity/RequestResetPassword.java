@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import vn.edu.topedu.utils.WebUtils;
 
 @Entity
@@ -31,6 +33,17 @@ public class RequestResetPassword {
 	private String code = "";
 	@Column(name = "Time", nullable = false)
 	private Date time = new Date();
+	
+	@JsonIgnore
+    @Column(name = "Alive", length = 1, nullable = false )
+    private Boolean alive =true;
+    
+	public Boolean getAlive() {
+		return alive;
+	}
+	public void setAlive(Boolean alive) {
+		this.alive = alive;
+	}
 	public Integer getId() {
 		return id;
 	}

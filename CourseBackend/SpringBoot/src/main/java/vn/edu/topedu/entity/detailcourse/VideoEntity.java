@@ -1,5 +1,7 @@
 package vn.edu.topedu.entity.detailcourse;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,9 +28,9 @@ public class VideoEntity extends AHasResource {
 	@Column(name = "video", nullable = false)
 	@JsonIgnore
 	private String video;
-	@OneToOne(mappedBy = "demo")
+	@OneToMany(mappedBy = "demo")
 	@JsonIgnore
-	private DetailCourseEntity course;
+	private List<DetailCourseEntity> course;
 	public Long getId() {
 		return id;
 	}
@@ -40,10 +43,11 @@ public class VideoEntity extends AHasResource {
 	public void setVideo(String video) {
 		this.video = video;
 	}
-	public DetailCourseEntity getCourse() {
+	
+	public List<DetailCourseEntity> getCourse() {
 		return course;
 	}
-	public void setCourse(DetailCourseEntity course) {
+	public void setCourse(List<DetailCourseEntity> course) {
 		this.course = course;
 	}
 	public String getUrlVideo() {

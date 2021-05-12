@@ -118,13 +118,20 @@ public class ForgotPasswordREST {
 		String code=body.get("code").toString();
 		String password=body.get("password").toString();
 		RequestResetPassword rrp = requestResetPasswordDAO.getNewCode(username);
-		if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
+		if(rrp==null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
 		String trueCode=rrp.getCode();
 		if(code.equals(trueCode)) {
 			AppUser user=appUserDAO.findUserAccount(username);
 			user.setEncrytedPassword(passwordEncoder.encode(password));
-			appUserDAO.updateUser(user);
-			return ResponseEntity.ok(new MessageResponse("Password change successful.","Thay đổi mật khẩu thành công."));
+			if(appUserDAO.updateUser(user)) {
+				rrp.setAlive(false);
+				requestResetPasswordDAO.merge(rrp);
+				
+				return ResponseEntity.ok(new MessageResponse("Password change successful.","Thay đổi mật khẩu thành công."));
+			}
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Object() {
+				String message="MySql error";
+			});
 			
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
