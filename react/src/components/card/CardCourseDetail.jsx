@@ -97,28 +97,23 @@ CardCourseDetail.defaultProps = {
 export default function CardCourseDetail(props) {
   const classes = useStyles();
   const { onClickOpenVideo, poster } = props;
-  const background1 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("${poster}")`;
-  const background2 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("http://localhost:25001/resource/user/user/image/demo.jpg")`;
-  console.log("background1", background1);
-  console.log("background2", background2);
+  var background1 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) no-repeat center center / cover,url("${poster}") no-repeat center center / cover`;
 
   function handleOnClickOpenVideo() {
     if (!onClickOpenVideo) return;
     onClickOpenVideo();
   }
 
+  
+
   return (
     <div className={classes.root}>
       <div className={classes.image} title="Xem giới thiệu khóa học">
-        <div /* className={classes.bgImage} */
+        <div 
           style={{
-           // ...classes.bgImage,
-            background: background2,
+            background: background1,
             width: "100%",
             paddingTop: "56%",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "50% 50%",
-            backgroundSize: "100% auto",
            
           }}
         ></div>
