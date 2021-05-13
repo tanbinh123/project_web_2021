@@ -86,9 +86,13 @@ public class ActiveAccountREST {
 			if(requestBody.code.equals(trueCode)) {
 				 AppUser appUser=appUserDAO.findUserAccount(authentication.getName());
 				 appUser.setActived(true);
-				 appUserDAO.updateAppUser(appUser);
+				 appUser=appUserDAO.updateAppUser(appUser);
+				 if(appUser!=null) {
+					 rrp.setAlive(false);
+					 activeAccountDAO.merge(rrp);
+					 return ResponseEntity.ok(new MessageResponse("Code valid.","Xác minh thành công."));
+				 }
 				 //System.out.println(rrp.getTime());
-				return ResponseEntity.ok(new MessageResponse("Code valid.","Xác minh thành công."));
 			
 			}
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		

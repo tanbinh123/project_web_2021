@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 13/05/2021 18:07:52
+ Date: 14/05/2021 01:13:01
 */
 
 SET NAMES utf8mb4;
@@ -26,31 +26,16 @@ CREATE TABLE `active_account`  (
   `user_id` bigint(20) NOT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `alive` bit(1) NULL DEFAULT b'1',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `active_account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 82 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of active_account
 -- ----------------------------
-INSERT INTO `active_account` VALUES (57, 1, '2021-04-25 08:15:06', '85821a966c76aed4716e2d73999dadba');
-INSERT INTO `active_account` VALUES (58, 1, '2021-04-25 08:21:22', '4313c5ffb2d2672936915acda5586f3a');
-INSERT INTO `active_account` VALUES (59, 1, '2021-04-25 08:22:29', '712cd07ac9a60f169302cdc47a2aead1');
-INSERT INTO `active_account` VALUES (60, 1, '2021-04-25 08:24:17', '88a56861a9786aa7c251b57ba1d0e049');
-INSERT INTO `active_account` VALUES (61, 1, '2021-04-25 08:38:32', '22208667e5875ffe2f8ca4d1e6353695');
-INSERT INTO `active_account` VALUES (62, 2, '2021-04-25 19:20:03', '7e8bb0233754793ee006c466be3d7297');
-INSERT INTO `active_account` VALUES (63, 1, '2021-04-26 05:32:50', '2a04fd0ca027243a45f7ae15a29566b6');
-INSERT INTO `active_account` VALUES (64, 1, '2021-04-26 05:34:17', 'b6490699aade715c1829b43068b42e96');
-INSERT INTO `active_account` VALUES (65, 1, '2021-04-26 05:35:12', '53c625725d4b78d47ce729b3747089d4');
-INSERT INTO `active_account` VALUES (66, 1, '2021-04-26 05:35:45', '160f409c5c971346e0b63d16e2127377');
-INSERT INTO `active_account` VALUES (67, 2, '2021-04-26 05:46:14', '1bd3604101760fba83d5f5ddc3ffab6d');
-INSERT INTO `active_account` VALUES (68, 1, '2021-04-26 05:50:21', '1d290e46ba2f70da5e40596090f42480');
-INSERT INTO `active_account` VALUES (69, 2, '2021-04-26 05:50:53', '60df8b1bb1335023a3cdd55ae8f1c6b9');
-INSERT INTO `active_account` VALUES (70, 2, '2021-04-26 05:52:05', '02bf59dff98b7ce811251bad05844196');
-INSERT INTO `active_account` VALUES (71, 2, '2021-04-26 05:53:31', '636c1c2d7d76290fbf352fda6f2b1f2f');
-INSERT INTO `active_account` VALUES (72, 2, '2021-04-26 07:45:01', '82ff02ee8c35d0a95e0d6092f3002023');
-INSERT INTO `active_account` VALUES (73, 2, '2021-04-26 08:37:56', '2bdd1146df7c4ee33f53da143434576e');
+INSERT INTO `active_account` VALUES (81, 1, '2021-05-13 18:12:17', '111bbaf4ba2018abd9af120f7bd6074d', b'0');
 
 -- ----------------------------
 -- Table structure for app_role
@@ -86,6 +71,8 @@ CREATE TABLE `app_user`  (
   `birth_day` datetime(0) NULL DEFAULT utc_timestamp,
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `facebook` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gmail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `APP_USER_UK`(`USER_NAME`) USING BTREE,
   UNIQUE INDEX `email_uq`(`email`) USING BTREE,
@@ -96,8 +83,8 @@ CREATE TABLE `app_user`  (
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM');
-INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'1', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM');
+INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'1', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com');
+INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'1', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n');
 
 -- ----------------------------
 -- Table structure for categories

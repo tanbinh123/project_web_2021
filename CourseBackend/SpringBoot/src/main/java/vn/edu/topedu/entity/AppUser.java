@@ -1,5 +1,6 @@
 package vn.edu.topedu.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import vn.edu.topedu.entity.detailcourse.Learning;
@@ -51,6 +53,7 @@ public class AppUser extends AHasResource implements UserDetails {
 	private String phone;
 	
 	@Column(name = "birth_day")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date birthDay;
 
 	
@@ -91,8 +94,32 @@ public class AppUser extends AHasResource implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private GENDER gender = GENDER.NAM;
 	
+	@Column(name = "facebook", length = 255, nullable = false)
+	private String facebook;
+	
+	@Column(name = "gmail", length = 255, nullable = false)
+	private String gmail;
+	
+	
 	
 
+	public String getGmail() {
+		return gmail;
+	}
+
+	public void setGmail(String gmail) {
+		this.gmail = gmail;
+	}
+
+	public String getFacebook() {
+		return facebook;
+	}
+
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
+	}
+
+	
 
 	public GENDER getGender() {
 		return gender;
@@ -121,7 +148,7 @@ public class AppUser extends AHasResource implements UserDetails {
 	public Date getBirthDay() {
 		return birthDay;
 	}
-
+	
 	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;
 	}

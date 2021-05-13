@@ -49,6 +49,18 @@ public class ActiveAccountDAO {
 		
 		return null;
 	}
+	
+	public ActiveAccount merge(ActiveAccount activeAccount) {
+		try {
+			activeAccount = entityManager.merge(activeAccount);
+			return activeAccount;
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		
+	}
 
 
 }

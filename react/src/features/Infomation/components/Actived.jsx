@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { Grid, makeStyles, Paper } from "@material-ui/core";
 import "././css/Actived.css";
 import ButtonClick from "../../../components/Button/ButtonClick";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
+import userApi from "../../../api/userApi";
 
 Actived.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -44,18 +45,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function Actived(props) {
+  let params = useParams();
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
   const { push } = useHistory();
   const handleOnClick = () => {
     push("/");
   };
-  useEffect(() => {
+  useEffect( async () => {
     console.log("Goi Api");
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    const payload = {
+      code: `${params?.code}`,
+    };
+    const res = await userApi.actived(payload);
+    console.log(res);
+    setLoading(false);
   }, []);
+  console.log(params?.code);
   return (
     <Grid container className={classes.root}>
       {loading ? (

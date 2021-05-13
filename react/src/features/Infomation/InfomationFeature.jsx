@@ -22,6 +22,7 @@ import NotFound404 from "../NotFound";
 import Active from "./components/Active";
 import { useEffect } from "react";
 import { isEmpty } from "../../components/tools/Tools";
+import Actived from "./components/Actived";
 InfomationFeature.propTypes = {};
 function InfomationFeature(props) {
   const classes = CSSInfomationFeature();
@@ -116,8 +117,12 @@ function InfomationFeature(props) {
               >
                 <Switch>
                   <Route path={`${url}/edit`} component={Edit} exact />
-                  <Route path={`${url}/info`} component={()=> <Info profile={profile} />}  exact />
-                  {!profile.actived&&<Route path={`${url}/active`} component={Active} exact />}
+                 { <Route path={`${url}/active/:code`} component={Actived} exact />}
+                  <Route path={`${url}/info`} component={
+                    ()=> <Info profile={profile} />
+                    }  exact />
+                  {!profile.actived&&<Route path={`${url}/active`} component={
+                    ()=> <Active profile={profile}/>}  exact/>}
                   <Route path={`${url}/`} component={NotFound404} />
                 </Switch>
               </Grid>
