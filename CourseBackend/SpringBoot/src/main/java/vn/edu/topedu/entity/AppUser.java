@@ -1,11 +1,14 @@
 package vn.edu.topedu.entity;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +43,17 @@ public class AppUser extends AHasResource implements UserDetails {
 
 	@Column(name = "User_Name", length = 36, nullable = false)
 	private String userName;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "phone")
+	private String phone;
+	
+	@Column(name = "birth_day")
+	private Date birthDay;
+
+	
 
 	@Column(name = "Encryted_Password", length = 128, nullable = false)
 	@JsonIgnore
@@ -73,15 +87,43 @@ public class AppUser extends AHasResource implements UserDetails {
 	@OneToMany(mappedBy = "appUser")
 	private List<UserRole> userRoles;
 	
+	@Column(name = "gender", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private GENDER gender = GENDER.NAM;
+	
 	
 
+
+	public GENDER getGender() {
+		return gender;
+	}
+
+	public void setGender(GENDER gender) {
+		this.gender = gender;
+	}
 
 	public Long getId() {
 		return id;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Date getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
 	}
 
 	public String getUserName() {
@@ -160,6 +202,14 @@ public class AppUser extends AHasResource implements UserDetails {
 
 	public ResourceImage getAvatar() {
 		return avatar;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public void setAvatar(ResourceImage avatar) {

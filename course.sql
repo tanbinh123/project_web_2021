@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 13/05/2021 03:55:42
+ Date: 13/05/2021 18:07:52
 */
 
 SET NAMES utf8mb4;
@@ -82,6 +82,10 @@ CREATE TABLE `app_user`  (
   `deleted` bit(1) NULL DEFAULT b'0',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `actived` bit(1) NULL DEFAULT b'0',
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `birth_day` datetime(0) NULL DEFAULT utc_timestamp,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `APP_USER_UK`(`USER_NAME`) USING BTREE,
   UNIQUE INDEX `email_uq`(`email`) USING BTREE,
@@ -92,15 +96,8 @@ CREATE TABLE `app_user`  (
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0');
-INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'1');
-INSERT INTO `app_user` VALUES (33, 'hello', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'0', 1, b'0', 'test@gmail.com', b'0');
-INSERT INTO `app_user` VALUES (34, 'hello1', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'0', 1, b'0', 'test1@gmail.com', b'0');
-INSERT INTO `app_user` VALUES (36, 'hello11', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'0', 1, b'0', 'test11@gmail.com', b'0');
-INSERT INTO `app_user` VALUES (37, 'hello111', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'0', 1, b'0', 'test111@gmail.com', b'0');
-INSERT INTO `app_user` VALUES (38, 'hello1111', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'0', 1, b'0', 'test1111@gmail.com', b'0');
-INSERT INTO `app_user` VALUES (39, 'hello11111', 'Wwtf1LEt+oBYjbew/WeFdU+HFW+oMIGDhTy+E6Q0f4Q=', b'0', 1, b'0', 'test11111@gmail.com', b'0');
-INSERT INTO `app_user` VALUES (40, 'yasuo', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'yasuo@gmail.com', b'0');
+INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM');
+INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'1', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM');
 
 -- ----------------------------
 -- Table structure for categories
@@ -539,13 +536,6 @@ CREATE TABLE `user_course`  (
 -- ----------------------------
 INSERT INTO `user_course` VALUES (1, 1, 1);
 INSERT INTO `user_course` VALUES (2, 1, 2);
-INSERT INTO `user_course` VALUES (3, 1, 3);
-INSERT INTO `user_course` VALUES (4, 1, 4);
-INSERT INTO `user_course` VALUES (5, 1, 5);
-INSERT INTO `user_course` VALUES (6, 1, 6);
-INSERT INTO `user_course` VALUES (7, 1, 7);
-INSERT INTO `user_course` VALUES (8, 1, 8);
-INSERT INTO `user_course` VALUES (9, 1, 9);
 
 -- ----------------------------
 -- Table structure for user_role
@@ -568,13 +558,6 @@ CREATE TABLE `user_role`  (
 INSERT INTO `user_role` VALUES (1, 1, 1);
 INSERT INTO `user_role` VALUES (2, 1, 2);
 INSERT INTO `user_role` VALUES (3, 2, 2);
-INSERT INTO `user_role` VALUES (16, 33, 2);
-INSERT INTO `user_role` VALUES (17, 34, 2);
-INSERT INTO `user_role` VALUES (18, 36, 2);
-INSERT INTO `user_role` VALUES (19, 37, 2);
-INSERT INTO `user_role` VALUES (20, 38, 2);
-INSERT INTO `user_role` VALUES (21, 39, 2);
-INSERT INTO `user_role` VALUES (22, 40, 2);
 
 -- ----------------------------
 -- Table structure for video

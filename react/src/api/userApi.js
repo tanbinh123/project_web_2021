@@ -29,6 +29,10 @@ const userApi = {
     const url = `/active`;
     return axiosClient.post(url, data);
   },
+  profile() {
+    const url = `/profile`;
+    return axiosClient.get(url);
+  },
 };
 
 export default userApi;

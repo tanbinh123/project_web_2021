@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { removeLocalStorage, DataUser } from "../app/DataUser";
 const axiosClient = axios.create({
   baseURL: "http://localhost:25001/",
   //baseURL: "http://192.168.0.222:25001/",
@@ -21,6 +21,7 @@ axiosClient.interceptors.request.use(
   },
   function (error) {
     // Do something with request error
+    console.log('error1',{error});
     return Promise.reject(error);
   }
 );
@@ -34,7 +35,12 @@ axiosClient.interceptors.response.use(
     return response;
   },
   function (error) {
+    if (error.response && error.response.status === 401) {
+      removeLocalStorage();
+    }
+
     if (error && error.response) {
+      const response = error.response.status;
       return error.response;
     }
     return Promise.reject(error);

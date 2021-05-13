@@ -12,11 +12,13 @@ import {
 import { Camera } from "@material-ui/icons";
 import { DataUser } from "../../../app/DataUser";
 import InfoCss from "./css/InfoCss";
+import { isEmpty } from "../../../components/tools/Tools";
 Info.propTypes = {};
 
 function Info(props) {
   const classes = InfoCss();
   const [dataUser, setDataUser] = useRecoilState(DataUser);
+  isEmpty(props.profile)||console.log("info", props.profile);
   return (
     <div className={classes.rightRoot}>
       <Grid container className="backround__header">
@@ -44,12 +46,16 @@ function Info(props) {
             <li>
               <span>
                 Giới tính: {/* <i className="fas fa-mars"></i> */}
-                <i className="fas fa-venus" title="Nữ"></i>
+
+                {props?.profile?.gender==='NAM'?
+                <i className="fas fa-mars"></i>:
+                <i className="fas fa-venus" title="Nữ"></i>}
+               
               </span>
             </li>
-            <li>Ngày sinh: 22/06/1999</li>
+            <li>Ngày sinh: {props?.profile?.birthDay}</li>
             <li>
-              <span>SĐT: 037-509-4399</span>
+              <span>SĐT: {props?.profile?.phone}</span>
             </li>
             <li>
               <ul>
@@ -71,10 +77,7 @@ function Info(props) {
           </li>
           <li>
             <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-              deleniti, similique deserunt tempore maiores minima cum? Esse
-              architecto totam labore doloribus qui veniam in. Quasi aperiam
-              accusamus eligendi inventore ex!
+              {props?.profile?.description}
             </span>
           </li>
         </ul>

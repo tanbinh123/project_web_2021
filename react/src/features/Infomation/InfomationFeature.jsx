@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Header from "../../components/header";
+import userApi from "../../api/userApi";
 import {
   Avatar,
   Box,
@@ -19,11 +20,32 @@ import { Link, NavLink } from "react-router-dom";
 import Edit from "./components/Edit";
 import NotFound404 from "../NotFound";
 import Active from "./components/Active";
+import { useEffect } from "react";
+import { isEmpty } from "../../components/tools/Tools";
 InfomationFeature.propTypes = {};
 function InfomationFeature(props) {
   const classes = CSSInfomationFeature();
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   const { url } = useRouteMatch();
+  const [profile, setProfile] = useState({});
+  //console.log(dataUser);
+  useEffect(() => {
+    
+    //console.log(`${localStorage.getItem("access_token")}`);
+    (async () => {
+      try {
+       
+        const res = await userApi.profile();
+        setProfile(res || {});
+        
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+  }, []);
+  //!isEmpty(profile)&&console.log("profile", profile);
+
+
   return (
     <div>
       <>
@@ -54,8 +76,8 @@ function InfomationFeature(props) {
                       <div>
                         <Link to={`${url}/info`}>
                           <span>
-                            {dataUser.user.username}{" "}
-                            {dataUser.user.actived ? (
+                            {profile?.username}{" "}
+                            {profile?.actived ? (
                               <i className="fas fa-check-circle green"></i>
                             ) : (
                               <i className="fas fa-times-circle red"></i>
@@ -67,7 +89,7 @@ function InfomationFeature(props) {
                     <NavLink to={`${url}/info`}>
                       <li>Giới thiệu</li>
                     </NavLink>
-                    {!dataUser.user.actived && (
+                    {!profile?.actived && (
                       <NavLink to={`${url}/active`}>
                         <li>Kích hoạt</li>
                       </NavLink>
@@ -94,8 +116,8 @@ function InfomationFeature(props) {
               >
                 <Switch>
                   <Route path={`${url}/edit`} component={Edit} exact />
-                  <Route path={`${url}/info`} component={Info} exact />
-                  <Route path={`${url}/active`} component={Active} exact />
+                  <Route path={`${url}/info`} component={()=> <Info profile={profile} />}  exact />
+                  {!profile.actived&&<Route path={`${url}/active`} component={Active} exact />}
                   <Route path={`${url}/`} component={NotFound404} />
                 </Switch>
               </Grid>
