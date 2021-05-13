@@ -32,8 +32,8 @@ function CourseDetail(props) {
   const [course, setCourse] = useState({
     title: "",
     poster: {
-      image:"../assets/images/qiqi.jpg",
-    }
+      image: "",
+    },
   });
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
@@ -89,7 +89,10 @@ function CourseDetail(props) {
               xs={12}
             >
               <Paper elevation={0}>
-                <RightCD onClickOpenVideo={handleToggleDialog} poster={course.poster.image} />
+                <RightCD
+                  onClickOpenVideo={handleToggleDialog}
+                  poster={course.poster.image}
+                />
               </Paper>
             </Grid>
           </Grid>

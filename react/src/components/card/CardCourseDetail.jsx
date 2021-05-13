@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "4%",
   },
   bgImage: {
-    background:
-      "linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../assets/images/qiqi.jpg)",
+    // background:
+    //   "linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../assets/images/qiqi.jpg)",
     width: "100%",
     paddingTop: "56%",
     backgroundRepeat: "no-repeat",
@@ -97,6 +97,7 @@ CardCourseDetail.defaultProps = {
 export default function CardCourseDetail(props) {
   const classes = useStyles();
   const { onClickOpenVideo, poster } = props;
+  console.log(poster);
   var background1 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) no-repeat center center / cover,url("${poster}") no-repeat center center / cover`;
 
   function handleOnClickOpenVideo() {
@@ -104,21 +105,17 @@ export default function CardCourseDetail(props) {
     onClickOpenVideo();
   }
 
-  
-
   return (
     <div className={classes.root}>
       <div className={classes.image} title="Xem giới thiệu khóa học">
-        <div 
+        <div
           style={{
             background: background1,
             width: "100%",
             paddingTop: "56%",
-           
           }}
         ></div>
 
-        
         <PlayCircleFilled
           className={classes.iconPlay}
           onClick={handleOnClickOpenVideo}
