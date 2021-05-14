@@ -1,4 +1,4 @@
-package vn.edu.topedu.entity.detailcourse;
+package vn.edu.topedu.entity.previewcourse;
 
 import java.util.Date;
 import java.util.List;
@@ -16,13 +16,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import vn.edu.topedu.entity.AHasResource;
+import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.ResourceImage;
+import vn.edu.topedu.entity.course.full.Learning;
+import vn.edu.topedu.entity.course.full.Part;
+import vn.edu.topedu.entity.course.full.VideoEntity;
 
 @Entity
 @Table(name = "Course")
-public class DetailCourseEntity extends AHasResource {
+public class FullCourse extends AHasResource {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +45,7 @@ public class DetailCourseEntity extends AHasResource {
 	@Column(name = "title", length = 255, nullable = false)
 	private String title = "";
 	@ManyToOne(cascade = CascadeType.ALL)
+//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "demo_id", referencedColumnName = "id")
 	private VideoEntity demo;
 	@Column(name = "update_at", nullable = false)
@@ -54,9 +60,18 @@ public class DetailCourseEntity extends AHasResource {
 	private List<Learning> learning;
 	@OneToMany(mappedBy = "course")
 	private List<Part> parts;
+//	@OneToMany(mappedBy = "detailCourseEntity")
+//	@JsonIgnore
+//	private List<OwerCourse> owerCourse;
+	
+	
 
 	public List<Learning> getLearning() {
 		return learning;
+	}
+
+	public FullCourse() {
+		super();
 	}
 
 	public void setLearning(List<Learning> learning) {
@@ -147,6 +162,7 @@ public class DetailCourseEntity extends AHasResource {
 		this.parts.forEach(e->e.getLessons().forEach(x-> x.getVideo().setBeforeResource(beforeResource)));
 		super.setBeforeResource(beforeResource);
 	}
+	
 
 	
 	

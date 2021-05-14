@@ -20,6 +20,7 @@ function Lecture(props) {
     url.indexOf("/lecture")
   );
   const [course, setCourse] = useState({});
+  const [src, setSrc] = useState({ url: "" });
   const [showList, setShowList] = useState(false);
   const handleToggleList = () => {
     setShowList(!showList);
@@ -27,16 +28,37 @@ function Lecture(props) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await courseApi.get(idCourse);
-        // console.log(res);
+        const res = await courseApi.check({ idCourse: idCourse });
+        console.log(res);
 
         setCourse(res ?? {});
+
+        var src2;
+        res?.parts?.every((e) => {
+          var lesson = e?.lessons.find((a) => {
+            return a.id == idLecture;
+          });
+
+          src2 = lesson?.video?.urlVideo;
+          if (typeof src2 != "undefined") {
+            console.log("Break");
+            return false;
+          } else {
+            return true;
+          }
+        });
+
+        console.log(src2);
+        setSrc({ url: src2 });
         // console.log("course", course);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
+
+  console.log("init lecture", course);
+
   return (
     <>
       <HeaderLecture />
@@ -63,6 +85,7 @@ function Lecture(props) {
                   <i className="fas fa-angle-double-left"></i> Xem danh sách bài
                   học
                 </span>
+
                 <video
                   autoPlay
                   //  muted
@@ -71,7 +94,8 @@ function Lecture(props) {
                   controls
                 >
                   <source
-                    src="https://r2---sn-oxuo5h-nboe.googlevideo.com/videoplayback?expire=1619111220&ei=1FiBYP_GKqjt3LUP-dCGgAI&ip=119.17.249.22&id=o-ALmWyWXBTCls82THUdNKrJowTFB_oIG1_p_tVubilfZv&itag=18&source=youtube&requiressl=yes&mh=QG&mm=31%2C29&mn=sn-oxuo5h-nboe%2Csn-8pxuuxa-nboe6&ms=au%2Crdu&mv=m&mvi=2&pl=24&initcwndbps=711250&vprv=1&mime=video%2Fmp4&ns=4pT-t5O7xfECt0nvoD_DZ3gF&gir=yes&clen=13501675&ratebypass=yes&dur=315.907&lmt=1616685647727387&mt=1619089239&fvip=4&fexp=24001373%2C24007246&c=WEB&txp=5430432&n=VTyD_1ojQadOsEgn&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIgP-8hSbznkDTQ-FsBIw_eaojTyOxwaBhBbcfLoy1nG1sCIQCbjM5Xfpmbv7TQ-WVPkcstzH3U6D5GbqrNfIGRNZykNw%3D%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRAIgJ6a3nifYLuMoANZuhMIhsw3gvIu1ctjrQVQAJiwwbd0CIDwpRyu2T7MbDTX2MNGHAjpXsKKogYj1Txlv9aM7mfPE"
+                    src={src.url}
+                    //src="http://localhost:25001/video/user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!"
                     type="video/mp4"
                   ></source>
                 </video>

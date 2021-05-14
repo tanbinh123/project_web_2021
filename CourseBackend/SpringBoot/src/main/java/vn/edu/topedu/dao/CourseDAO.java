@@ -10,8 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.CategoryEntity;
-import vn.edu.topedu.entity.Course;
-import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
+import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.previewcourse.FullCourse;
+import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.utils.WebUtils;
 
 @Repository
@@ -136,12 +137,19 @@ public class CourseDAO {
 
 	}
 
-	public DetailCourseEntity getDetailCourse(Long idCourse) {
-		String sql = "Select c from " + DetailCourseEntity.class.getName() + " c " //
+	public PreviewCourseEntity getPreviewCourse(Long idCourse) {
+		String sql = "Select c from " + PreviewCourseEntity.class.getName() + " c " //
 				+ " where c.deleted=0 and c.id= :id ";
-		Query query = this.entityManager.createQuery(sql, DetailCourseEntity.class);
+		Query query = this.entityManager.createQuery(sql, PreviewCourseEntity.class);
 		query.setParameter("id", idCourse);
-		return (DetailCourseEntity) query.getSingleResult();
+		return (PreviewCourseEntity) query.getSingleResult();
+	}
+	public FullCourse getFullCourse(Long idCourse) {
+		String sql = "Select c from " + FullCourse.class.getName() + " c " //
+				+ " where c.deleted=0 and c.id= :id ";
+		Query query = this.entityManager.createQuery(sql, FullCourse.class);
+		query.setParameter("id", idCourse);
+		return (FullCourse) query.getSingleResult();
 	}
 	public Course getCourse(Long idCourse) {
 		String sql = "Select c from " + Course.class.getName() + " c " //

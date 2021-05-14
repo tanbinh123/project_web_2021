@@ -1,7 +1,10 @@
 package vn.edu.topedu.rest;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,12 +29,18 @@ import vn.edu.topedu.consts.VariableConst;
 import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.UserCourseDAO;
+import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
-import vn.edu.topedu.entity.Course;
-import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
+import vn.edu.topedu.entity.OwerCourse;
+import vn.edu.topedu.entity.Payment;
+import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.fileprocess.FileProcess;
+import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.model.CourseResponse;
+import vn.edu.topedu.rest.PaymentREST.PaymnetResponse;
+import vn.edu.topedu.utils.WebUtils;
 
 
 @RestController
@@ -84,7 +94,7 @@ public class CourseREST implements IMyHost {
 	}
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Object> getCourse(@PathVariable Long id,HttpServletRequest serverHttpRequest) {
-		DetailCourseEntity course = courseDAO.getDetailCourse(id);
+		PreviewCourseEntity course = courseDAO.getPreviewCourse(id);
 		course.setBeforeResource(getUrl(serverHttpRequest));
 		return ResponseEntity.ok(course);
 	}	
@@ -104,5 +114,7 @@ public class CourseREST implements IMyHost {
 		//System.err.println(lstCategories);
 		return ResponseEntity.ok(lstCategories);
 	}
+	
+	
 
 }

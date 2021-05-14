@@ -28,7 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import vn.edu.topedu.entity.detailcourse.Learning;
+import vn.edu.topedu.entity.course.full.Learning;
 
 @Entity
 @Table(name = "App_User", //

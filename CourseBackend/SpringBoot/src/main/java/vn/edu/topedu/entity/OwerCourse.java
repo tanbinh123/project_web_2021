@@ -1,5 +1,7 @@
 package vn.edu.topedu.entity;
  
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
  
 @Entity
 @Table(name = "Ower_Course")
@@ -26,10 +32,17 @@ public class OwerCourse {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "User_Id", nullable = false)
     private AppUser appUser;
+	
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,optional=false)
+    
     @JoinColumn(name = "Course_Id", nullable = false)
     private Course course;
+    
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY,optional=false)
+//    @JoinColumn(name = "Course_Id", nullable = false, insertable=false, updatable=false)    
+//    private PreviewCourseEntity detailCourseEntity;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id", referencedColumnName = "id")
@@ -38,13 +51,54 @@ public class OwerCourse {
     @Column(name = "successed", length = 1, nullable = true)
     private Boolean successed= false;
  
+    @Column(name = "deleted", length = 1, nullable = false)
+	private Boolean deleted = false;
+	
+	@Column(name = "Create_Time", nullable = false)
+	private Date createTime = new Date();
+	
+	@Column(name = "Update_Time", nullable = false)
+	private Date updateTime = new Date();
+	
+	
    
- 
-   
+
+
 
 	public OwerCourse() {
 		super();
 	}
+	
+	
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 
 	public Boolean getSuccessed() {
 		return successed;

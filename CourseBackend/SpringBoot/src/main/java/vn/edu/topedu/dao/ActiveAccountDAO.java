@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.ActiveAccount;
-import vn.edu.topedu.entity.Course;
 import vn.edu.topedu.entity.RequestResetPassword;
+import vn.edu.topedu.entity.course.Course;
 
 @Repository
 @Transactional

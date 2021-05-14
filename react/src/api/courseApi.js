@@ -9,6 +9,10 @@ const courseApi = {
     const url = `/course/${id}`;
     return axiosClient.get(url);
   },
+  check(data) {
+    const url = `/payment/access`;
+    return axiosClient.post(url,data);
+  },
   categories(data) {
     const url = '/course/categories';
     return axiosClient.get(url, data);

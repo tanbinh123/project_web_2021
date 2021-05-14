@@ -1,4 +1,4 @@
-package vn.edu.topedu.entity.detailcourse;
+package vn.edu.topedu.entity.previewcourse;
 
 import java.util.List;
 
@@ -14,11 +14,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
+
 @Entity
 @Table(name = "part")
-public class Part {
+public class PartReview {
 
-	@Id
+	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	//@JsonIgnore
@@ -28,10 +30,10 @@ public class Part {
 	@ManyToOne
 	@JoinColumn(name = "course_id")
 	@JsonIgnore
-	private DetailCourseEntity course;
+	private PreviewCourseEntity course;
 	
 	@OneToMany(mappedBy = "part")
-	private List<Lesson> lessons;
+	private List<LessonPreview> lessons;
 
 	public Long getId() {
 		return id;
@@ -49,19 +51,19 @@ public class Part {
 		this.title = title;
 	}
 
-	public DetailCourseEntity getCourse() {
+	public PreviewCourseEntity getCourse() {
 		return course;
 	}
 
-	public void setCourse(DetailCourseEntity course) {
+	public void setCourse(PreviewCourseEntity course) {
 		this.course = course;
 	}
 
-	public List<Lesson> getLessons() {
+	public List<LessonPreview> getLessons() {
 		return lessons;
 	}
 
-	public void setLessons(List<Lesson> lessons) {
+	public void setLessons(List<LessonPreview> lessons) {
 		this.lessons = lessons;
 	}
 

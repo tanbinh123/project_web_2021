@@ -25,11 +25,12 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.PaymentDAO;
 import vn.edu.topedu.entity.AppUser;
-import vn.edu.topedu.entity.Course;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.entity.TransactionState;
-import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
+import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.previewcourse.FullCourse;
+import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -56,7 +57,7 @@ public class PaymentREST {
 				OwerCourse owerCourse=null;
 				Long idCourse=Long.parseLong(String.valueOf(body.get("idCourse")));
 				try {
-					owerCourse = owerCourseDAO.querry(appUser.getId(),idCourse );
+					owerCourse = owerCourseDAO.querryBought(appUser.getId(),idCourse );
 					return ResponseEntity.ok(owerCourse);
 					
 				} catch (NoResultException noResultException) {
@@ -134,6 +135,48 @@ public class PaymentREST {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@PostMapping("/access")
+	@ResponseBody
+	public ResponseEntity<Object> checkBought(HttpServletRequest httpServletRequest, Authentication authentication,
+			@RequestBody Map<String, Object> body) {
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {
+				OwerCourse owerCourse=null;
+				Long idCourse=Long.parseLong(String.valueOf(body.get("idCourse")));
+				try {
+					owerCourse = owerCourseDAO.querryBought(appUser.getId(),idCourse );
+					if(owerCourse!=null) {
+						//owerCourseDAO.detach(owerCourse);
+						FullCourse course = courseDAO.getFullCourse(idCourse);
+						course.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+						return ResponseEntity.ok(course);
+					}
+					
+					return ResponseEntity.ok(owerCourse);
+					
+				} catch (NoResultException noResultException) {
+					System.err.println("Not found owerCourse");
+				} 
+				
+				
+			}
+		}
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Object() {
+			String message="Bạn chưa mua khóa học này";
+			public String getMessage() {
+				return message;
+			}
+
+			public void setMessage(String message) {
+				this.message = message;
+			}
+			
+		});
 	}
 
 	public static class PaymnetResponse {

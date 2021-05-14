@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import vn.edu.topedu.entity.Course;
 import vn.edu.topedu.entity.OwerCourse;
+import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.response.model.CourseResponse;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -49,13 +49,13 @@ public class OwerCourseDAO {
 		return query.getResultList();
 	}
 
-	public OwerCourse querry(Long appUserId, Long courseId) throws NoResultException {
+	public OwerCourse querryBought(Long appUserId, Long courseId) throws NoResultException {
 		String sql = "Select oc from " + OwerCourse.class.getName() + " oc " //
-				+ " where  oc.successed = 1 and oc.appUser.id = :appUserId and oc.course.id = :courseId  ";
+				+ " where  oc.successed = true and oc.appUser.id = :appUserId and oc.course.id = :courseId  ";
 //		String sql = "Select oc from " + OwerCourse.class.getName() + " oc " //
 //				+ " where  oc.success = :success and oc.appUser.id = :appUserId and oc.course.id = :courseId  ";
 		Query query = this.entityManager.createQuery(sql);
-		System.err.println("1.5");
+		//System.err.println("1.5");
 		query.setParameter("appUserId", appUserId);
 		query.setParameter("courseId", courseId);
 //		query.setParameter("success", true);
@@ -137,6 +137,12 @@ public class OwerCourseDAO {
 
 		}
 		return query.getResultList();
+	}
+
+	public void detach(OwerCourse owerCourse) {
+		this.entityManager.detach(owerCourse.getCourse());
+		
+		
 	}
 
 }

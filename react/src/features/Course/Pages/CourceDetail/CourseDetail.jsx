@@ -30,10 +30,7 @@ function CourseDetail(props) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const [course, setCourse] = useState({
-    title: "",
-    poster: {
-      image: "",
-    },
+    isFull:false,
   });
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
@@ -43,15 +40,32 @@ function CourseDetail(props) {
     (async () => {
       try {
         var id = props.match.params.idCourse;
-        const res = await courseApi.get(id);
-        console.log(res);
-        setCourse(res || {});
+        
+        const res1 = await courseApi.check({idCourse : id});
+        console.log("check",res1);
+        if(!res1?.id){
+          const res = await courseApi.get(id);
+          console.log("review", res);
+          setCourse(            
+            {
+              isFull:false,
+              ...res
+            });
+        }else{        
+          
+          setCourse({
+            isFull:true,
+            ...res1
+          });
+          
+        }
         // console.log("course", course);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
+    console.log("init Detail",course);
 
   return (
     <>
@@ -91,7 +105,7 @@ function CourseDetail(props) {
               <Paper elevation={0}>
                 <RightCD
                   onClickOpenVideo={handleToggleDialog}
-                  poster={course.poster.image}
+                  poster={course.poster?.image}
                 />
               </Paper>
             </Grid>

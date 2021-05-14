@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import vn.edu.topedu.entity.course.Course;
  
 @Entity
 @Table(name = "User_Course", //

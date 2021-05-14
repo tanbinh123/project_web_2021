@@ -1,4 +1,4 @@
-package vn.edu.topedu.entity.detailcourse;
+package vn.edu.topedu.entity.course.full;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import vn.edu.topedu.consts.VariableConst;
 import vn.edu.topedu.entity.AHasResource;
-import vn.edu.topedu.entity.Course;
+import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 
 @Entity
 @Table(name = "video")
@@ -32,7 +32,7 @@ public class VideoEntity extends AHasResource {
 	
 	@OneToMany(mappedBy = "demo")
 	@JsonIgnore
-	private List<DetailCourseEntity> detailCourses;
+	private List<PreviewCourseEntity> detailCourses;
 	
 //	@OneToMany(mappedBy = "demo")
 //	@JsonIgnore
@@ -54,10 +54,10 @@ public class VideoEntity extends AHasResource {
 	public String getUrlVideo() {
 		return this.beforeResource+VariableConst.VIDEO_BEFORE+ this.video;
 	}
-	public List<DetailCourseEntity> getDetailCourses() {
+	public List<PreviewCourseEntity> getDetailCourses() {
 		return detailCourses;
 	}
-	public void setDetailCourses(List<DetailCourseEntity> detailCourses) {
+	public void setDetailCourses(List<PreviewCourseEntity> detailCourses) {
 		this.detailCourses = detailCourses;
 	}
 //	public List<Course> getCourses() {

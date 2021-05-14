@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import vn.edu.topedu.dao.CourseDAO;
-import vn.edu.topedu.entity.Course;
+import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.utils.WebUtils;
 

@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 14/05/2021 12:34:17
+ Date: 14/05/2021 18:12:30
 */
 
 SET NAMES utf8mb4;
@@ -364,6 +364,9 @@ CREATE TABLE `ower_course`  (
   `course_id` bigint(20) NOT NULL,
   `payment_id` bigint(20) NOT NULL,
   `successed` bit(1) NOT NULL DEFAULT b'0',
+  `deleted` bit(1) NULL DEFAULT b'0',
+  `create_time` datetime(0) NULL DEFAULT utc_timestamp,
+  `update_time` datetime(0) NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `payment_id`(`payment_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
@@ -371,13 +374,12 @@ CREATE TABLE `ower_course`  (
   CONSTRAINT `ower_course_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_4` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ower_course
 -- ----------------------------
-INSERT INTO `ower_course` VALUES (4, 2, 171, 31, b'1');
-INSERT INTO `ower_course` VALUES (8, 2, 170, 35, b'1');
+INSERT INTO `ower_course` VALUES (9, 1, 171, 37, b'1', b'0', '2021-05-14 08:59:09', '2021-05-14 08:59:09');
 
 -- ----------------------------
 -- Table structure for part
@@ -420,13 +422,12 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of payment
 -- ----------------------------
-INSERT INTO `payment` VALUES (31, 2, '2021-04-30 18:25:41', 1085700000, '0:0:0:0:0:0:0:1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1085700000&vnp_Command=pay&vnp_CreateDate=20210501012542&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F31&vnp_TmnCode=67LF6OWG&vnp_TxnRef=31&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=d51138a299de7aa2bebb7e8ffbeefdc156d68f784f804f5ff35f82b4afc6a107', 'vnp_Amount=1085700000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210501082542&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13497645&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=31&vnp_SecureHash=fd826155a1d22615509dfb33025ec12480c5571fe1e354fc1bea515ea18f17ca', 'http://localhost:25001/test/returnurl');
-INSERT INTO `payment` VALUES (35, 2, '2021-04-30 18:51:51', 1387900000, '0:0:0:0:0:0:0:1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1387900000&vnp_Command=pay&vnp_CreateDate=20210501015152&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F35&vnp_TmnCode=67LF6OWG&vnp_TxnRef=35&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=005d6ea82da4733f6ea8f9e9a1ab35f5462e1ac58b5519255223edc7a5c17df4', 'vnp_Amount=1387900000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210501085152&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13497646&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=35&vnp_SecureHash=a02cdfca9fcc3bfb52164b602685b66cbc48d566708132fdf3f6041a873ab3cc', 'http://localhost:25001/test/returnurl');
+INSERT INTO `payment` VALUES (37, 1, '2021-05-14 08:59:09', 1085700000, '0:0:0:0:0:0:0:1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1085700000&vnp_Command=pay&vnp_CreateDate=20210514155909&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F37&vnp_TmnCode=67LF6OWG&vnp_TxnRef=37&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=82dfbd59224fcbdabb638ed99fff8db3195e03cfc15415c6f20cf39331afb82f', 'vnp_Amount=1085700000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210514225909&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13504760&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=37&vnp_SecureHash=02709dfc5f584bca9bc6d5626089803a1b4fa2a1b224ca3b954359fff92c5543', 'http://localhost:25001/test/returnurl');
 
 -- ----------------------------
 -- Table structure for queue_check_payment
@@ -598,5 +599,41 @@ INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MU
 INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL);
 INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL);
 INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL);
+
+-- ----------------------------
+-- Triggers structure for table payment
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_delete_payment`;
+delimiter ;;
+CREATE TRIGGER `before_delete_payment` BEFORE DELETE ON `payment` FOR EACH ROW BEGIN
+			DELETE FROM ower_course WHERE payment_id=old.id ;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table payment
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_delete_part`;
+delimiter ;;
+CREATE TRIGGER `before_delete_part` BEFORE DELETE ON `payment` FOR EACH ROW BEGIN
+			DELETE FROM lesson WHERE part_id=old.id ;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table payment
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_delete_course`;
+delimiter ;;
+CREATE TRIGGER `before_delete_course` BEFORE DELETE ON `payment` FOR EACH ROW BEGIN
+			DELETE FROM ower_course WHERE course_id=old.id;
+			DELETE FROM user_course WHERE course_id=old.id;
+			DELETE FROM part WHERE course_id=old.id;
+			DELETE FROM learning WHERE course_id=old.id;
+	 END
+;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;

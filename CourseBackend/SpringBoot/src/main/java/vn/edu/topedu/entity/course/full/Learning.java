@@ -1,4 +1,4 @@
-package vn.edu.topedu.entity.detailcourse;
+package vn.edu.topedu.entity.course.full;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 
 @Entity
 @Table(name = "learning")
@@ -25,7 +27,7 @@ public class Learning {
 	@ManyToOne
 	@JoinColumn(name = "course_id")
 	@JsonIgnore
-	private DetailCourseEntity course;
+	private PreviewCourseEntity course;
 
 	public Integer getId() {
 		return id;

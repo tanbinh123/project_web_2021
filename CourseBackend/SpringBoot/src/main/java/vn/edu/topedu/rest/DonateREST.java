@@ -25,10 +25,10 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.PaymentDAO;
 import vn.edu.topedu.entity.AppUser;
-import vn.edu.topedu.entity.Course;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.Payment;
-import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
+import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
 

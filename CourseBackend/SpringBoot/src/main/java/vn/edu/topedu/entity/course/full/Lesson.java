@@ -1,4 +1,4 @@
-package vn.edu.topedu.entity.detailcourse;
+package vn.edu.topedu.entity.course.full;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

@@ -1,4 +1,4 @@
-package vn.edu.topedu.entity;
+package vn.edu.topedu.entity.course;
  
 import java.util.Date;
 
@@ -17,6 +17,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import vn.edu.topedu.consts.VariableConst;
+import vn.edu.topedu.entity.AHasResource;
+import vn.edu.topedu.entity.AppUser;
+import vn.edu.topedu.entity.CategoryEntity;
+import vn.edu.topedu.entity.ResourceImage;
  
 @Entity
 @Table(name = "Course")

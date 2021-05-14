@@ -105,7 +105,7 @@ function ItemAccordion(props) {
       <AccordionDetails className={classes.AccordionDetails}>
         {Array.from(lessons).map((item, index) => (
           <div key={index} className={classes.lesson}>
-            <Link to={`${url}/lecture/${item.video.id}`}>
+            <Link to={`${url}/lecture/${item?.id}`}>
               <span>
                 {indexLecture + index + 1}. {item.description}
               </span>
