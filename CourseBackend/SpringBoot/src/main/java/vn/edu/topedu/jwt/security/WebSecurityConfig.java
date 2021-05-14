@@ -39,7 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/", "/auth/**", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
 						"/**/*.css", "/**/*.js")
 				.permitAll().antMatchers("/login").permitAll().antMatchers("/signup").permitAll()
-				.antMatchers("/resource/**").permitAll().antMatchers("/course/**").permitAll()
+				.antMatchers("/resource/**").permitAll()
+				.antMatchers("/course/**").permitAll()
 				.antMatchers("/forgotpassword/**").permitAll()
 				.antMatchers("/pay/**").permitAll()
 				.antMatchers("/test/**").permitAll()				

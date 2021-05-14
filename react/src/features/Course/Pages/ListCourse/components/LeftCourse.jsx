@@ -19,29 +19,22 @@ const useStyles = makeStyles((theme) => ({
 
 function LeftCourse(props) {
   const classes = useStyles();
+  //console.log("init LeftCourse",props.categories);
   const handleOnClickCategory = (e) => {
     console.log(e.target.attributes.value.nodeValue);
   };
+
+  // props.categories.map
 
   return (
     <div className={classes.root}>
       <h3 className="__title">Danh Mục</h3>
       <ul>
-        <li value="cntt1" onClick={handleOnClickCategory}>
-          Công nghệ thông tin
-        </li>
-        <li value="cntt2" onClick={handleOnClickCategory}>
-          Kinh doanh
-        </li>
-        <li value="cntt3" onClick={handleOnClickCategory}>
-          Kĩ năng sống
-        </li>
-        <li value="cntt4" onClick={handleOnClickCategory}>
-          Ngoại ngữ
-        </li>
-        <li value="cntt5" onClick={handleOnClickCategory}>
-          Thiết kế
-        </li>
+        {Array.from(props.categories).map((x, index)=>(
+          <li key={index+''} value={x.id} onClick={handleOnClickCategory}>
+            {x.name}
+          </li>
+        ))}
       </ul>
     </div>
   );

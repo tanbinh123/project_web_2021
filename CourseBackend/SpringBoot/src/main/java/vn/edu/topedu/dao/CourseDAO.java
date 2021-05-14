@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.Course;
 import vn.edu.topedu.entity.detailcourse.DetailCourseEntity;
 import vn.edu.topedu.utils.WebUtils;
@@ -19,10 +20,12 @@ public class CourseDAO {
 	@Autowired
 	private EntityManager entityManager;
 	
-	public List<Course> getListCourse(int _page, int _limit, String sort) {
+	public List<Course> getListCourse(int _page, int _limit, String sort, int category) {
 		--_page;
 		String sql = "Select c from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 group by c.id  order by  ";
+				+ " where c.deleted=0 ";
+		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
+		sql+=" group by c.id  order by  ";
 		String sqlSort = "";
 		sort = sort.toLowerCase();
 
@@ -62,24 +65,30 @@ public class CourseDAO {
 		}
 		return query.getResultList();
 	}
-	public long getCount() {
+	public long getCount(int category) {
 		String sql = "Select count(*) from " + Course.class.getName() + " c " //
 				+ " where c.deleted=0 ";
+		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
 		Query query = this.entityManager.createQuery(sql, Long.class);
 		return (long) query.getSingleResult();
 	}
-	public long getCountSearch(String search) {
+	public long getCountSearch(String search, int category) {
 		String sql = "Select count(*) from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 and (c.title like CONCAT('%',:search,'%')) ";
+				+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
+		
 		Query query = this.entityManager.createQuery(sql, Long.class);
 		query.setParameter("search", search);
 		return (long) query.getSingleResult();
 	}
 	
-	public List<Course> search(int _page, int _limit, String sort, String search) {
+	public List<Course> search(int _page, int _limit, String sort, String search, int category) {
 		--_page;
 		String sql = "Select c from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 and (c.title like CONCAT('%',:search,'%')) group by c.id  order by  ";
+				+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
+		sql+=" group by c.id  order by  ";
+		
 		String sqlSort = "";
 		sort = sort.toLowerCase();
 
@@ -174,6 +183,18 @@ public class CourseDAO {
 		if (rs == 1)
 			return true;
 		return false;
+	}
+	public List<CategoryEntity> getCategories(int actived){
+		
+		String sql = "Select c from CategoryEntity c "
+				+ " where c.deleted=false ";
+		if(actived <2 && actived > -1) {
+			sql += String.format("and c.actived = %d ", actived);
+		}
+		Query query = this.entityManager.createQuery(sql, CategoryEntity.class);
+		//query.setParameter("id", idCourse);
+		return query.getResultList();
+		
 	}
 
 }

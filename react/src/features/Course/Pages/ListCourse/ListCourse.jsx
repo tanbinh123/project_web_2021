@@ -50,6 +50,7 @@ function ListCourse(props) {
   const history = useHistory();
   const location = useLocation();
   const [dataCourse, setDataCourse] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [pagination, setPagination] = useState({
     _page: 1,
     _limit: 9,
@@ -72,24 +73,35 @@ function ListCourse(props) {
       _sort: params._sort || "updateAt:desc",
     };
   }, [location.search]);
-
+  useEffect(() => {
+    (async () => {
+      try {
+        const rp = await courseApi.categories({});
+        console.log("fetch categories", rp);
+        setCategories(rp);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    return () => {
+      console.log("return fetch categories");
+    };
+  }, []);
   useEffect(() => {
     (async () => {
       try {
         const { data, pagination } =
-          (await courseApi.getAll(queryParams)) ||
-          await courseApiFake.testGetAll(queryParams);
-        // const { data, pagination } = await courseApi.getAll(filter);
-        // const data = await courseApi.getAll(filter);
+          await courseApi.getAll(queryParams);
         setDataCourse(data);
         setPagination(pagination);
-        // console.log(data);
+        console.log("fetch page courses");
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     })();
     return () => {
+      console.log("return fetch page courses");
       setDataCourse([]);
       setPagination({});
     };
@@ -133,7 +145,7 @@ function ListCourse(props) {
           <Grid container spacing={2}>
             <Grid item className={classes.left} xl={3} lg={3} md={3}>
               <Paper elevation={0}>
-                <LeftCourse />
+                <LeftCourse categories={categories} />
               </Paper>
             </Grid>
             <Grid

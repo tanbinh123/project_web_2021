@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 14/05/2021 01:13:01
+ Date: 14/05/2021 12:34:17
 */
 
 SET NAMES utf8mb4;
@@ -93,15 +93,18 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `active` bit(1) NULL DEFAULT b'1',
+  `actived` bit(1) NULL DEFAULT b'1',
+  `deleted` bit(1) NULL DEFAULT b'0',
+  `create_time` datetime(0) NULL DEFAULT utc_timestamp,
+  `update_time` datetime(0) NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (1, 'Genshin Impact', b'1');
-INSERT INTO `categories` VALUES (2, 'Lập trình', b'1');
+INSERT INTO `categories` VALUES (1, 'Genshin Impact', b'1', b'0', '2021-05-14 04:28:32', '2021-05-14 04:28:32');
+INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-14 04:28:32', '2021-05-14 04:28:32');
 
 -- ----------------------------
 -- Table structure for course
@@ -299,7 +302,7 @@ INSERT INTO `course` VALUES (167, 4, 'Ganyu là nhân vật cuối cùng của p
 INSERT INTO `course` VALUES (168, 7, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Khóa học demo 168', 'Demo 168', 3276000, 2, 3, '2019-08-05 10:18:41', 2, 6, 2);
 INSERT INTO `course` VALUES (169, 2, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 169', 'Demo 169', 3712000, 3, 41, '2019-12-20 19:03:14', 2, 6, 2);
 INSERT INTO `course` VALUES (170, 6, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Khóa học demo 170', 'Demo 170', 13879000, 0, 70, '2020-11-14 12:05:41', 2, 6, 2);
-INSERT INTO `course` VALUES (171, 11, 'Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops', b'0', '', 'Kiến thức cơ bản, cốt lõi dân IT cần học trước', 10857000, 0, 0, '2021-04-22 23:36:51', 1, 2, 2);
+INSERT INTO `course` VALUES (171, 11, 'Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops', b'0', '', 'Kiến thức cơ bản, cốt lõi dân IT cần học trước', 10857000, 0, 0, '2021-04-22 23:36:51', 1, 2, 1);
 
 -- ----------------------------
 -- Table structure for learning
@@ -487,6 +490,26 @@ INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', 
 INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50');
 INSERT INTO `resource_image` VALUES (12, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50');
 INSERT INTO `resource_image` VALUES (13, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50');
+
+-- ----------------------------
+-- Table structure for templates
+-- ----------------------------
+DROP TABLE IF EXISTS `templates`;
+CREATE TABLE `templates`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `actived` bit(1) NULL DEFAULT b'0',
+  `deleted` bit(1) NULL DEFAULT b'0',
+  `create_time` datetime(0) NULL DEFAULT utc_timestamp,
+  `update_time` datetime(0) NULL DEFAULT utc_timestamp,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of templates
+-- ----------------------------
+INSERT INTO `templates` VALUES (1, 'Genshin Impact', b'1', b'1', '2021-05-14 04:27:33', '2021-05-14 04:28:01');
+INSERT INTO `templates` VALUES (2, 'Lập trình', b'1', b'1', '2021-05-14 04:27:33', '2021-05-14 04:28:01');
 
 -- ----------------------------
 -- Table structure for test

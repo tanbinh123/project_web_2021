@@ -12,7 +12,7 @@ Info.propTypes = {};
 
 function Info(props) {
   const classes = InfoCss();
-  isEmpty(props.profile)||console.log("info", props.profile);
+  //isEmpty(props.profile)||console.log("info", props.profile);
   return (
     <div className={classes.rightRoot}>
       <Grid container className="backround__header">

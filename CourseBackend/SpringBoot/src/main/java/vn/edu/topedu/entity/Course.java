@@ -56,6 +56,11 @@ public class Course extends AHasResource {
     @JsonIgnore
     private AppUser appUser;
     
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", nullable = false)
+    @JsonIgnore
+    private CategoryEntity category;
+    
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +69,26 @@ public class Course extends AHasResource {
 	}
 	
 	
+	
+	
+	public ResourceImage getPoster() {
+		return poster;
+	}
+	public void setPoster(ResourceImage poster) {
+		this.poster = poster;
+	}
+	public AppUser getAppUser() {
+		return appUser;
+	}
+	public void setAppUser(AppUser appUser) {
+		this.appUser = appUser;
+	}
+	public CategoryEntity getCategory() {
+		return category;
+	}
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -118,6 +143,10 @@ public class Course extends AHasResource {
 	
 	public String getNameAuthor() {
 		return appUser.getUsername();
+	}
+	
+	public String getCategoryName() {
+		return this.category.getName();
 	}
 	
 	

@@ -9,10 +9,10 @@ public class PageResponse {
 	private List<Course> data;
 	private Pagination pagination;
 	
-	public PageResponse(List<Course> lstCourse,int _limit, int _page, long _totalRows, String _sort) {
+	public PageResponse(List<Course> lstCourse,int _limit, int _page, long _totalRows, String _sort, String _filter) {
 		super();
 		this.data = lstCourse;
-		this.pagination = new Pagination(_limit, _page, _totalRows,_sort);
+		this.pagination = new Pagination(_limit, _page, _totalRows,_sort,_filter);
 	}
 
 	public class Pagination{
@@ -20,12 +20,14 @@ public class PageResponse {
 		private int _page;
 		private long _totalRows;
 		private String _sort;
-		public Pagination(int _limit, int _page, long _totalRows,String _sort) {
+		private String _filter;
+		public Pagination(int _limit, int _page, long _totalRows,String _sort, String _filter) {
 			super();
 			this._limit = _limit;
 			this._page = _page;
 			this._totalRows = _totalRows;
 			this._sort=_sort;
+			this._filter=_filter;
 		}
 		public int get_limit() {
 			return _limit;
@@ -51,6 +53,13 @@ public class PageResponse {
 		public void set_sort(String _sort) {
 			this._sort = _sort;
 		}
+		public String get_filter() {
+			return _filter;
+		}
+		public void set_filter(String _filter) {
+			this._filter = _filter;
+		}
+		
 		
 		
 		
