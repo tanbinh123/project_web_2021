@@ -20,7 +20,7 @@ function RightCD(props) {
   const classes = RightCDCSS();
   return (
     <div className={classes.root}>
-      <CardCourseDetail onClickOpenVideo={handleOnClickOpenVideo} poster={poster} />
+      <CardCourseDetail onClickBuy={props.onClickBuy} course={props.course} onClickOpenVideo={handleOnClickOpenVideo} poster={poster} />
     </div>
   );
 }

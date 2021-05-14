@@ -35,6 +35,16 @@ function CourseDetail(props) {
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
   }
+  function handleOnClickBuy() {
+    console.log("Buy");
+    (async () => {
+      // console.log(url);
+      //console.log(window.location.href);
+      const res1 = await courseApi.payment({"returnUrl":window.location.href,"idCourse":idCourse});
+      window.location=res1.url;
+      console.log(res1);
+    })();
+  }
 
   useEffect(() => {
     (async () => {
@@ -42,10 +52,10 @@ function CourseDetail(props) {
         var id = props.match.params.idCourse;
 
         const res1 = await courseApi.check({ idCourse: id });
-        console.log("check", res1);
+        //console.log("check", res1);
         if (!res1?.id) {
           const res = await courseApi.get(id);
-          console.log("review", res);
+          //console.log("review", res);
           setCourse({
             isFull: false,
             ...res,
@@ -62,7 +72,7 @@ function CourseDetail(props) {
       }
     })();
   }, [url]);
-  // console.log("init Detail",course);
+  console.log("init Detail",course);
 
   return (
     <>
@@ -102,7 +112,9 @@ function CourseDetail(props) {
               <Paper elevation={0}>
                 <RightCD
                   onClickOpenVideo={handleToggleDialog}
+                  onClickBuy={handleOnClickBuy}
                   poster={course.poster?.image}
+                  course={course}
                 />
               </Paper>
             </Grid>

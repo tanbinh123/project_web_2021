@@ -13,6 +13,10 @@ const courseApi = {
     const url = `/payment/access`;
     return axiosClient.post(url, data);
   },
+  payment(data) {
+    const url = `/payment`;
+    return axiosClient.post(url, data);
+  },
   categories(data) {
     const url = "/course/categories";
     return axiosClient.get(url, data);

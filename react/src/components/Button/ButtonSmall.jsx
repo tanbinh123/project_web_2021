@@ -30,7 +30,7 @@ ButtonSmall.defaultProps = {
 function ButtonSmall(props) {
   const { title } = props;
   const classes = useStyles();
-  return <Button className={classes.CustomButton}>{title}</Button>;
+  return <Button onClick={props.onClickBuy} className={classes.CustomButton}>{title}</Button>;
 }
 
 export default ButtonSmall;

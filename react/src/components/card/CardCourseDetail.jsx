@@ -96,14 +96,17 @@ CardCourseDetail.defaultProps = {
 };
 export default function CardCourseDetail(props) {
   const classes = useStyles();
-  const { onClickOpenVideo, poster } = props;
-  console.log(poster);
+  const { onClickOpenVideo, poster, course } = props;
+  //console.log(poster);
   var background1 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) no-repeat center center / cover,url("${poster}") no-repeat center center / cover`;
 
   function handleOnClickOpenVideo() {
     if (!onClickOpenVideo) return;
     onClickOpenVideo();
   }
+
+  
+  //console.log("init cardCourseDetail", course);
 
   return (
     <div className={classes.root}>
@@ -122,8 +125,8 @@ export default function CardCourseDetail(props) {
         />
       </div>
       <div className={classes.content}>
-        <p className={classes.price}>{convertVND(2000000)}</p>
-        <ButtonSmall title="Đăng Kí Học" />
+        <p className={classes.price}>{convertVND(course?.price || 0)}</p>
+        {!course.isFull?  <ButtonSmall onClickBuy={props.onClickBuy} title="Đăng Kí Học" />: "Đã Mua"}
         <ul>
           <li>
             <LibraryBooks />
