@@ -8,6 +8,8 @@ import courseApi from "../../../../../api/courseApi";
 import { Link } from "react-router-dom";
 import ListAccordion from "./ListLecture/ListAccordion";
 import classNames from "classnames";
+import { stringify, stringifyUrl } from "query-string";
+import VideoLecture from "./ListLecture/VideoLecture";
 
 Lecture.propTypes = {};
 
@@ -20,7 +22,7 @@ function Lecture(props) {
     url.indexOf("/lecture")
   );
   const [course, setCourse] = useState({});
-  const [src, setSrc] = useState({ url: "" });
+  const [src, setSrc] = useState();
   const [showList, setShowList] = useState(false);
   const handleToggleList = () => {
     setShowList(!showList);
@@ -47,9 +49,7 @@ function Lecture(props) {
             return true;
           }
         });
-
-        console.log(src2);
-        setSrc({ url: src2 });
+        setSrc(src2);
         // console.log("course", course);
       } catch (error) {
         console.log(error);
@@ -57,7 +57,7 @@ function Lecture(props) {
     })();
   }, []);
 
-  console.log("init lecture", course);
+  console.log("src", src);
 
   return (
     <>
@@ -80,26 +80,7 @@ function Lecture(props) {
                 showList && classes.fullScreen
               )}
             >
-              <div className="videoRoot">
-                <span>
-                  <i className="fas fa-angle-double-left"></i> Xem danh sách bài
-                  học
-                </span>
-
-                <video
-                  autoPlay
-                  //  muted
-                  loop
-                  className="video"
-                  controls
-                >
-                  <source
-                    src={src.url}
-                    //src="http://localhost:25001/video/user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!"
-                    type="video/mp4"
-                  ></source>
-                </video>
-              </div>
+              {src && <VideoLecture video={src} />}
               {/* <ListAccordion parts={course.parts} />
               <ListAccordion parts={course.parts} /> */}
             </div>

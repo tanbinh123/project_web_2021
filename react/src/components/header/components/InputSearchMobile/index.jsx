@@ -3,6 +3,7 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import courseApi from "../../../../api/courseApi";
 import courseApiFake from "../../../../api/courseApiFake";
 import TextFieldSearchMobile from "../../../TextField/TextFieldSearchMobile";
 
@@ -18,11 +19,11 @@ function InputSearchAppbarMobile({ openSearch }) {
   const [dataSearch, setDataSearch] = useState([]);
   const { push } = useHistory();
   const [paramsSearch, setParamsSearch] = useState({
-    q: "",
+    _search: "",
   });
   useEffect(() => {
     (async () => {
-      const { data } = await courseApiFake.search(paramsSearch);
+      const { data } = await courseApi.search(paramsSearch);
       setDataSearch(data);
     })();
     return () => {
@@ -32,7 +33,7 @@ function InputSearchAppbarMobile({ openSearch }) {
   const handleOnChange = (value) => {
     setParamsSearch((pre) => ({
       ...pre,
-      q: value,
+      _search: value,
     }));
   };
 

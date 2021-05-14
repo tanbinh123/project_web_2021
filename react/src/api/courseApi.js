@@ -3,7 +3,7 @@ import axiosClient from "./axiosClient";
 const courseApi = {
   getAll(params) {
     const url = "/course/list";
-    return axiosClient.get(url,{params});
+    return axiosClient.get(url, { params });
   },
   get(id) {
     const url = `/course/${id}`;
@@ -11,14 +11,18 @@ const courseApi = {
   },
   check(data) {
     const url = `/payment/access`;
-    return axiosClient.post(url,data);
+    return axiosClient.post(url, data);
   },
   categories(data) {
-    const url = '/course/categories';
+    const url = "/course/categories";
     return axiosClient.get(url, data);
   },
   testGetAll(params) {
     const url = "/courses";
+    return axiosClient.get(url, { params });
+  },
+  search(params) {
+    const url = "/home/search";
     return axiosClient.get(url, { params });
   },
 };
