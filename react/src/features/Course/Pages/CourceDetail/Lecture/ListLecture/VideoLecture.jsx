@@ -2,7 +2,7 @@ import React from "react";
 
 function VideoLecture(props) {
   const { video } = props;
-  console.log("video", video);
+  //console.log("video", video);
   return (
     <div className="videoRoot">
       <span>

@@ -59,7 +59,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeaderLecture(props) {
+  
   const classes = useStyles();
+  // console.log("header lesson", props.lesson);
+  // console.log("header index", props.index);
   return (
     <>
       <AppBar className={classes.root} position="fixed">
@@ -74,7 +77,7 @@ function HeaderLecture(props) {
               </Link>
             </li>
             <li>
-              <span className="title">Muộn Rồi Mà Sao Còn</span>
+              <span className="title">Bài {props?.index} {props?.lesson?.description}</span>
             </li>
           </ul>
         </Toolbar>

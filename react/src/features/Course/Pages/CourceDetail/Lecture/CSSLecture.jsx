@@ -14,6 +14,8 @@ const CSSLecture = makeStyles((theme) => ({
       "&>.video": {
         // minHeight: 400,
         minWidth: "100%",
+        maxHeight:"700px",
+        maxWidth:"100%",
       },
       "&>span": {
         position: "absolute",

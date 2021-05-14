@@ -3,12 +3,12 @@ import {
   AccordionDetails,
   AccordionSummary,
   Grid,
-  makeStyles,
+  makeStyles
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import React, { useEffect } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
 import PropTypes from "prop-types";
+import React from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 import "./IteamALecture.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -80,7 +80,14 @@ ItemAccordionLecture.defaultProps = {
 };
 function ItemAccordionLecture(props) {
   const { url } = useRouteMatch();
+
+  const url2 =
+    url.slice(
+      0,
+      url.indexOf("/lecture")
+    ) + "/lecture/";
   const { id, title, lessons, indexLecture } = props;
+  console.log(url2);
   const classes = useStyles();
 
   return (
@@ -108,9 +115,9 @@ function ItemAccordionLecture(props) {
       <AccordionDetails className={classes.AccordionDetails}>
         {Array.from(lessons).map((item, index) => (
           <div key={index} className={classes.lesson}>
-            <Link to={`${url}/lecture/${item.video?.id}`}>
+            <Link to={`${url2}${indexLecture + index + 1}`}>
               <span>
-                {indexLecture + index + 1}. {item.description}
+                Bài {indexLecture + index + 1}. {item.description}
               </span>
             </Link>
             <span className="lesson__time">30:30</span>

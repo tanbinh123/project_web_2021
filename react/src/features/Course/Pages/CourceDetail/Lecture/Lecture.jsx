@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { useParams, useRouteMatch } from "react-router";
-import CSSLecture from "./CSSLecture";
-import { Box, Container, Dialog, Grid, Paper } from "@material-ui/core";
-import HeaderLecture from "../../../../../components/HeaderLecture/HeaderLecture";
-import courseApi from "../../../../../api/courseApi";
-import { Link } from "react-router-dom";
-import ListAccordion from "./ListLecture/ListAccordion";
+import { Box, Grid } from "@material-ui/core";
 import classNames from "classnames";
-import { stringify, stringifyUrl } from "query-string";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouteMatch } from "react-router";
+import { Link } from "react-router-dom";
+import courseApi from "../../../../../api/courseApi";
+import HeaderLecture from "../../../../../components/HeaderLecture/HeaderLecture";
+import CSSLecture from "./CSSLecture";
+import ListAccordion from "./ListLecture/ListAccordion";
 import VideoLecture from "./ListLecture/VideoLecture";
 
 Lecture.propTypes = {};
@@ -23,6 +21,7 @@ function Lecture(props) {
   );
   const [course, setCourse] = useState({});
   const [src, setSrc] = useState();
+  const [lesson, setLesson] = useState();
   const [showList, setShowList] = useState(false);
   const handleToggleList = () => {
     setShowList(!showList);
@@ -36,14 +35,17 @@ function Lecture(props) {
         setCourse(res ?? {});
 
         var src2;
+        var index=0;
         res?.parts?.every((e) => {
           var lesson = e?.lessons.find((a) => {
-            return a.id == idLecture;
+            index++;
+            return index == idLecture;
           });
 
           src2 = lesson?.video?.urlVideo;
           if (typeof src2 != "undefined") {
-            console.log("Break");
+            //console.log("Break");
+            setLesson(lesson);
             return false;
           } else {
             return true;
@@ -55,13 +57,16 @@ function Lecture(props) {
         console.log(error);
       }
     })();
-  }, []);
+    return setSrc();
+  }, [url]);
 
-  console.log("src", src);
+  //console.log("src", src);
+  console.log("lesson", lesson);
 
   return (
     <>
-      <HeaderLecture />
+      {lesson&&<HeaderLecture lesson={lesson} index={idLecture}/>}
+      
       <Box className={classes.root}>
         {/* <Container> */}
         <Grid container spacing={0}>
