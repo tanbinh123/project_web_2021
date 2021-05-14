@@ -23,7 +23,7 @@ function InputSearchAppbar({ openSearch }) {
   });
   useEffect(() => {
     (async () => {
-      const { data } = await courseApi.search(paramsSearch);
+      const { data } = await courseApi.getAll(paramsSearch);
       setDataSearch(data);
     })();
     return () => {

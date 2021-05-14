@@ -21,10 +21,17 @@ public class CourseDAO {
 	@Autowired
 	private EntityManager entityManager;
 	
-	public List<Course> getListCourse(int _page, int _limit, String sort, int category) {
+	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search) {
 		--_page;
-		String sql = "Select c from " + Course.class.getName() + " c " //
+		String sql =null;
+		if(_search.length()==0) {
+		sql = "Select c from " + Course.class.getName() + " c " //
 				+ " where c.deleted=0 ";
+		}else{
+			sql = "Select c from " + Course.class.getName() + " c " //
+					+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+			
+		}
 		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
 		sql+=" group by c.id  order by  ";
 		String sqlSort = "";
@@ -59,83 +66,37 @@ public class CourseDAO {
 			sql += sqlSort;
 			sqlSort = "";
 		}
+		System.out.println(sql);
 		Query query = this.entityManager.createQuery(sql, Course.class);
 		query.setFirstResult(_page * _limit);
+		if(_search.length()!=0) {
+			query.setParameter("search", _search);
+		}
 		if (_limit != -1) {
 			query.setMaxResults(_limit);
 		}
 		return query.getResultList();
 	}
-	public long getCount(int category) {
-		String sql = "Select count(*) from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 ";
+	public long getCount(int category, String _search) {
+		String sql =null;
+		if(_search.length()==0) {
+			sql = "Select count(*) from " + Course.class.getName() + " c " //
+					+ " where c.deleted=0 ";
+			
+		}else{
+			sql = "Select count(*) from " + Course.class.getName() + " c " //
+					+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+			
+		}
+			
 		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
 		Query query = this.entityManager.createQuery(sql, Long.class);
-		return (long) query.getSingleResult();
-	}
-	public long getCountSearch(String search, int category) {
-		String sql = "Select count(*) from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
-		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
-		
-		Query query = this.entityManager.createQuery(sql, Long.class);
-		query.setParameter("search", search);
+		if(_search.length()!=0) {
+			query.setParameter("search", _search);
+		}
 		return (long) query.getSingleResult();
 	}
 	
-	public List<Course> search(int _page, int _limit, String sort, String search, int category) {
-		--_page;
-		String sql = "Select c from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
-		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
-		sql+=" group by c.id  order by  ";
-		
-		String sqlSort = "";
-		sort = sort.toLowerCase();
-
-		String[] a = sort.split(",");
-		boolean started = true;
-		for (String str : a) {
-			int index = str.indexOf(':');
-			String _order = str.substring(index + 1);
-			String tmpSort = str.substring(0, index);
-			switch (tmpSort) {
-			case "id":
-				sqlSort += WebUtils.sort(_order, "c.id", started);
-				break;
-
-			case "bought":
-				sqlSort += WebUtils.sort(_order, "c.bought", started);
-				break;
-
-			case "ratestar":
-				sqlSort += WebUtils.sort(_order, "c.rateStar", started);
-				break;
-			case "price":
-				sqlSort += WebUtils.sort(_order, "c.price", started);
-				break;
-			case "updateat":
-				sqlSort += WebUtils.sort(_order, "c.updateAt", started);
-				break;
-
-			default:
-				break;
-			}
-			started = false;
-			sql += sqlSort;
-			sqlSort = "";
-		}
-		Query query = this.entityManager.createQuery(sql, Course.class);
-		query.setParameter("search", search);
-		query.setFirstResult(_page * _limit);
-		if (_limit != -1) {
-
-			query.setMaxResults(_limit);
-
-		}
-		return query.getResultList();
-
-	}
 
 	public PreviewCourseEntity getPreviewCourse(Long idCourse) {
 		String sql = "Select c from " + PreviewCourseEntity.class.getName() + " c " //

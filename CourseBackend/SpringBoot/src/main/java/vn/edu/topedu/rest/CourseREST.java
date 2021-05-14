@@ -72,18 +72,21 @@ public class CourseREST implements IMyHost {
 			, @RequestParam(defaultValue = "-1") int _page 
 			, @RequestParam(defaultValue = "-1") int _limit 
 			, @RequestParam(defaultValue = "id:asc") String _sort 
+			, @RequestParam(defaultValue = "") String _search 
 			, @RequestParam(defaultValue = "-1") int category 
 			) {
 		String _filter = "";
 		if(category!=-1)
 			_filter+=String.format("category=%d&", category);
+		if(_search.length()!=0)
+			_filter+=String.format("_search=%s&", _search);
 		if(_filter.length()>0&&_filter.charAt(_filter.length()-1)=='&') {
 			_filter=_filter.substring(0, _filter.length()-1);
 		}
 		
 		_page=(_page<=0)?1:_page;
-		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category);
-		long countRows=courseDAO.getCount(category);
+		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category, _search);
+		long countRows=courseDAO.getCount(category, _search);
 		//System.out.println(countRows);
 		for(Course c:lstCourse) {
 			c.setBeforeResource(getUrl(serverHttpRequest));

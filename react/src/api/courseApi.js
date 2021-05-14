@@ -25,10 +25,7 @@ const courseApi = {
     const url = "/courses";
     return axiosClient.get(url, { params });
   },
-  search(params) {
-    const url = "/home/search";
-    return axiosClient.get(url, { params });
-  },
+ 
 };
 
 export default courseApi;
