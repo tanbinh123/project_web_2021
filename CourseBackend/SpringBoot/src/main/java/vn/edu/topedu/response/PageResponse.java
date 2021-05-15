@@ -3,8 +3,10 @@ package vn.edu.topedu.response;
 import java.util.List;
 
 import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.json.object.JsonResponse;
+import vn.edu.topedu.json.ultis.JsonFactoryUltis;
 
-public class PageResponse {
+public class PageResponse implements JsonResponse {
 	
 	private List<Course> data;
 	private Pagination pagination;
@@ -14,8 +16,14 @@ public class PageResponse {
 		this.data = lstCourse;
 		this.pagination = new Pagination(_limit, _page, _totalRows,_sort,_filter);
 	}
+	
 
-	public class Pagination{
+	public PageResponse() {
+		super();
+	}
+
+
+	public static class Pagination implements JsonResponse{
 		private int _limit;
 		private int _page;
 		private long _totalRows;
@@ -29,6 +37,11 @@ public class PageResponse {
 			this._sort=_sort;
 			this._filter=_filter;
 		}
+		
+		public Pagination() {
+			super();
+		}
+
 		public int get_limit() {
 			return _limit;
 		}
@@ -79,6 +92,10 @@ public class PageResponse {
 
 	public void setPagination(Pagination pagination) {
 		this.pagination = pagination;
+	}
+	@Override
+	public String toJsonString() {
+		return JsonResponse.super.toJsonString();
 	}
 
 }

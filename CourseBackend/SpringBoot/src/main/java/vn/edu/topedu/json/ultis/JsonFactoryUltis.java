@@ -10,6 +10,7 @@ public class JsonFactoryUltis {
 			ObjectMapper objectMapper = new ObjectMapper();
 			String jsonString;
 			jsonString = objectMapper.writeValueAsString(object);
+//			objectMapper.
 			return jsonString;
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();

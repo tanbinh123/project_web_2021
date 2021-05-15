@@ -1,4 +1,4 @@
-package vn.edu.topedu.entity.previewcourse;
+package vn.edu.topedu.entity.course.full;
 
 import java.util.Date;
 import java.util.List;
@@ -19,11 +19,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import vn.edu.topedu.entity.AHasResource;
+import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.ResourceImage;
-import vn.edu.topedu.entity.course.full.Learning;
-import vn.edu.topedu.entity.course.full.Part;
-import vn.edu.topedu.entity.course.full.VideoEntity;
 
 @Entity
 @Table(name = "Course")
@@ -33,12 +31,10 @@ public class FullCourse extends AHasResource {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "poster", referencedColumnName = "id")
-    private ResourceImage poster;
-	
-	
+	@JoinColumn(name = "poster", referencedColumnName = "id")
+	private ResourceImage poster;
 
 	@Column(name = "description", length = 255)
 	private String description = "";
@@ -46,13 +42,13 @@ public class FullCourse extends AHasResource {
 	private String title = "";
 	@ManyToOne(cascade = CascadeType.ALL)
 //	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "demo_id", referencedColumnName = "id")
+	@JoinColumn(name = "demo_id", referencedColumnName = "id")
 	private VideoEntity demo;
 	@Column(name = "update_at", nullable = false)
 	private Date updateAt = new Date();
 	@Column(name = "price", length = 10, nullable = false)
 	private int price = 0;
-	
+
 	@JsonIgnore
 	@Column(name = "Deleted", length = 1, nullable = false)
 	private Boolean deleted = false;
@@ -63,8 +59,18 @@ public class FullCourse extends AHasResource {
 //	@OneToMany(mappedBy = "detailCourseEntity")
 //	@JsonIgnore
 //	private List<OwerCourse> owerCourse;
-	
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "category_id", nullable = false)
+	@JsonIgnore
+	private CategoryEntity category;
+
+	public CategoryEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
+	}
 
 	public List<Learning> getLearning() {
 		return learning;
@@ -85,8 +91,6 @@ public class FullCourse extends AHasResource {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 
 	public String getDescription() {
 		return description;
@@ -120,9 +124,6 @@ public class FullCourse extends AHasResource {
 		this.price = price;
 	}
 
-	
-
-	
 	public Date getUpdateAt() {
 		return updateAt;
 	}
@@ -146,7 +147,7 @@ public class FullCourse extends AHasResource {
 	public void setParts(List<Part> parts) {
 		this.parts = parts;
 	}
-	
+
 	public ResourceImage getPoster() {
 		return poster;
 	}
@@ -154,21 +155,13 @@ public class FullCourse extends AHasResource {
 	public void setPoster(ResourceImage poster) {
 		this.poster = poster;
 	}
-	
+
 	@Override
 	public void setBeforeResource(String beforeResource) {
 		this.poster.setBeforeResource(beforeResource);
 		this.demo.setBeforeResource(beforeResource);
-		this.parts.forEach(e->e.getLessons().forEach(x-> x.getVideo().setBeforeResource(beforeResource)));
+		this.parts.forEach(e -> e.getLessons().forEach(x -> x.getVideo().setBeforeResource(beforeResource)));
 		super.setBeforeResource(beforeResource);
 	}
-	
-
-	
-	
-
-
-	
-	
 
 }

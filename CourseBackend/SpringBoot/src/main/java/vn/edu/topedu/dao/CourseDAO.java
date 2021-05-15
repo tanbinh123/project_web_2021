@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.course.Course;
-import vn.edu.topedu.entity.previewcourse.FullCourse;
+import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -23,6 +23,8 @@ public class CourseDAO {
 	
 	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search) {
 		--_page;
+		if(sort==""||sort==null)sort="id:asc";
+		
 		String sql =null;
 		if(_search.length()==0) {
 		sql = "Select c from " + Course.class.getName() + " c " //

@@ -29,7 +29,7 @@ import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.entity.TransactionState;
 import vn.edu.topedu.entity.course.Course;
-import vn.edu.topedu.entity.previewcourse.FullCourse;
+import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;

@@ -29,8 +29,5 @@ public class WebConfig implements WebMvcConfigurer {
 	 * return bean; }
 	 */
 	
-	@Override
-  public void addFormatters(FormatterRegistry registry) {
-      registry.addConverter(new DateToStringConverter());
-  }
+	
 }

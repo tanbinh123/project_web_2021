@@ -21,10 +21,11 @@ import vn.edu.topedu.entity.AHasResource;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.ResourceImage;
+import vn.edu.topedu.json.object.JsonResponse;
  
 @Entity
 @Table(name = "Course")
-public class Course extends AHasResource {
+public class Course extends AHasResource implements JsonResponse {
      
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,6 +76,9 @@ public class Course extends AHasResource {
 	
 	
 	
+	public Course() {
+		super();
+	}
 	public ResourceImage getPoster() {
 		return poster;
 	}

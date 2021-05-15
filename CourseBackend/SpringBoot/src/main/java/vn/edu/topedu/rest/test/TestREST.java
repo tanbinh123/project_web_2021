@@ -77,7 +77,7 @@ public class TestREST {
 
 	@RequestMapping(value = "/test/mapper", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String testMapper(WebSession session) throws JsonProcessingException {
+	public String testMapper() throws JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(new ResponseMessageSuccess());
 		return jsonString;
