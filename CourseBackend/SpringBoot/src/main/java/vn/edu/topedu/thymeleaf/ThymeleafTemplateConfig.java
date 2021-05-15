@@ -14,6 +14,7 @@ public class ThymeleafTemplateConfig {
 		final  SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.addTemplateResolver(itemplateResolver());
 		templateEngine.addTemplateResolver(imailResolver());
+//		templateEngine.addTemplateResolver(iviewsResolver());
 		return templateEngine;
 	}
 	@Bean
@@ -42,6 +43,20 @@ public class ThymeleafTemplateConfig {
 		templateResolver.setCacheable(false);
 		return templateResolver;
 	}
+	
+//	@Bean
+//	public ITemplateResolver iviewsResolver() {
+//		final  ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+//		//Ensure the path is right or you work without the logic using the ClassLoaderTemplateResolver
+//		templateResolver.setOrder(Integer.valueOf(2));
+//		templateResolver.setPrefix("/views/");
+//		templateResolver.setSuffix(".html");
+//		templateResolver.setTemplateMode(TemplateMode.HTML);
+//		templateResolver.setCharacterEncoding("UTF-8");
+//		templateResolver.setCheckExistence(true);
+//		templateResolver.setCacheable(false);
+//		return templateResolver;
+//	}
 
 
 }

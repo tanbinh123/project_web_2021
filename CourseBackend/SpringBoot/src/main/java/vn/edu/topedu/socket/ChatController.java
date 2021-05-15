@@ -40,7 +40,7 @@ public class ChatController {
 		Context context = new Context();
 		Map<String, Object> props = new HashMap<>();
 		context.setVariables(props);
-		String html = templateEngine.process("index.html", context);
+		String html = templateEngine.process("demo_chat_socket/index.html", context);
 		
 		return html;
 	}

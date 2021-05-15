@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class TestMVCREST {
 	@RequestMapping(value = "/test/mvc", method = RequestMethod.GET)
 	public ModelAndView testMVC()  {
-		ModelAndView modelAndView= new ModelAndView("index.html");
+		ModelAndView modelAndView= new ModelAndView("views/index.html");
 		return modelAndView;
 	}
 
