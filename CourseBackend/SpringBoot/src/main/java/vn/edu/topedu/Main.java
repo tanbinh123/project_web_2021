@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class Main /* extends SpringBootServletInitializer */ {
+public class Main extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
 
-	/*
-	 * @Override protected SpringApplicationBuilder
-	 * configure(SpringApplicationBuilder application) { return
-	 * application.sources(Main.class); }
-	 */
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(Main.class);
+	}
+
 	@RequestMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<Object> hello() {
