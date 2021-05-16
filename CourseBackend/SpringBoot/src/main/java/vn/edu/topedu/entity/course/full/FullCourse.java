@@ -39,7 +39,7 @@ public class FullCourse extends AHasResource {
 	private Long imgPosterId;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
-	//@Transient
+	// @Transient
 	private ResourceImage poster;
 
 	@Column(name = "description", length = 255)
@@ -59,18 +59,16 @@ public class FullCourse extends AHasResource {
 	@Column(name = "Deleted", length = 1, nullable = false)
 	private Boolean deleted = false;
 	@OneToMany(mappedBy = "course")
-	private List<Learning> learning;
+	private List<Learning> learnings;
 	@OneToMany(mappedBy = "course")
 	private List<Part> parts;
-	
+
 	@JsonIgnore
 	@Column(name = "category_id", nullable = false)
 	private Integer categoryId;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
-//	@Column(insertable = false, updatable = false)
 	private CategoryEntity category;
-
 
 	public Long getImgPosterId() {
 		return imgPosterId;
@@ -96,16 +94,16 @@ public class FullCourse extends AHasResource {
 		this.category = category;
 	}
 
-	public List<Learning> getLearning() {
-		return learning;
+	public List<Learning> getLearnings() {
+		return learnings;
 	}
 
 	public FullCourse() {
 		super();
 	}
 
-	public void setLearning(List<Learning> learning) {
-		this.learning = learning;
+	public void setLearnings(List<Learning> learning) {
+		this.learnings = learning;
 	}
 
 	public Long getId() {
@@ -147,7 +145,6 @@ public class FullCourse extends AHasResource {
 //	public void setPrice(int price) {
 //		this.price = price;
 //	}
-	
 
 	public Date getUpdateAt() {
 		return updateAt;
@@ -191,12 +188,19 @@ public class FullCourse extends AHasResource {
 
 	@Override
 	public void setBeforeResource(String beforeResource) {
-		if(this.poster!=null)
-		this.poster.setBeforeResource(beforeResource);
-		if(this.demo!=null)
-		this.demo.setBeforeResource(beforeResource);
-		if(this.parts!=null)
-		this.parts.forEach(e -> e.getLessons().forEach(x -> x.getVideo().setBeforeResource(beforeResource)));
+		if (this.poster != null)
+			this.poster.setBeforeResource(beforeResource);
+		if (this.demo != null)
+			this.demo.setBeforeResource(beforeResource);
+		if (this.parts != null)
+			this.parts.forEach(e -> {
+				if (e.getLessons() != null)
+					e.getLessons().forEach(x -> {
+						if (x.getVideo() != null)
+							x.getVideo().setBeforeResource(beforeResource);
+					});
+			});
+
 		super.setBeforeResource(beforeResource);
 	}
 

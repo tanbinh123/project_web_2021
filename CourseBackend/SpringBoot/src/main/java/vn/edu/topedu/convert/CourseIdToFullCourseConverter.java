@@ -17,7 +17,7 @@ public class CourseIdToFullCourseConverter implements Converter<String, FullCour
 
 	@Override
 	public FullCourse convert(String source) {
-		System.err.println("courseDAO" + courseDAO);
+		//System.err.println("courseDAO" + courseDAO);
 		return courseDAO.getFullCourse(Long.valueOf(source));
 	}
 

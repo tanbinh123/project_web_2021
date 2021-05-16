@@ -21,28 +21,61 @@ public class Learning {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	//@JsonIgnore
-	private Integer id;
+	private Long id;// = Long.valueOf(0);
 	@Column(name = "learning", nullable = false)
 	private String learning;
+	@Column(name = "course_id", nullable = false)
+	private Long courseId;
 	@ManyToOne
-	@JoinColumn(name = "course_id")
+	@JoinColumn(name = "course_id",insertable = false, updatable = false)
 	@JsonIgnore
-	private PreviewCourseEntity course;
+	private FullCourse course;
+	
+	@Column(name = "deleted", length = 1, nullable = false)
+	private Boolean deleted = false;
 
-	public Integer getId() {
+	
+	
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public String getLearning() {
 		return learning;
 	}
+	
+
+	public Long getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
+	}
 
 	public void setLearning(String learning) {
 		this.learning = learning;
 	}
+
+	public FullCourse getCourse() {
+		return course;
+	}
+
+	public void setCourse(FullCourse course) {
+		this.course = course;
+	}
+	
 
 }

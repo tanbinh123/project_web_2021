@@ -27,13 +27,38 @@ public class Part {
 	private Long id;
 	@Column(name = "title", nullable = false)
 	private String title;
+	
+	@Column(name = "course_id", nullable = false)
+	private Long courseId;
 	@ManyToOne
-	@JoinColumn(name = "course_id")
+	@JoinColumn(name = "course_id", insertable = false, updatable = false)
 	@JsonIgnore
-	private PreviewCourseEntity course;
+	private FullCourse course;
 	
 	@OneToMany(mappedBy = "part")
 	private List<Lesson> lessons;
+
+	
+	@Column(name = "deleted", length = 1, nullable = false)
+	private Boolean deleted = false;
+	
+	
+	
+	public Long getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	public Long getId() {
 		return id;
@@ -51,11 +76,11 @@ public class Part {
 		this.title = title;
 	}
 
-	public PreviewCourseEntity getCourse() {
+	public FullCourse getCourse() {
 		return course;
 	}
 
-	public void setCourse(PreviewCourseEntity course) {
+	public void setCourse(FullCourse course) {
 		this.course = course;
 	}
 

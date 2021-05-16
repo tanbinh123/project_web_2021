@@ -13,6 +13,8 @@ import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
+import vn.edu.topedu.entity.course.full.Learning;
+import vn.edu.topedu.entity.course.full.Part;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -165,9 +167,39 @@ public class CourseDAO {
 			entityManager.persist(course.getCategory());
 			entityManager.flush();
 		}
+		if(course.getLearnings()!=null) {
+			for (Learning l : course.getLearnings()) {
+				l.setCourseId(course.getId());
+				if(l.getId()==null) {
+					entityManager.persist(l);
+				}else {
+					entityManager.merge(l);
+				}
+				entityManager.flush();
+				
+			}
+			int rs=deleteAllLearningDeleted();
+			System.out.println("delete learning: "+ rs);
+		}
+		
+		if(course.getParts()!=null) {
+			for (Part l : course.getParts()) {
+				l.setCourseId(course.getId());
+				if(l.getId()==null) {
+					entityManager.persist(l);
+				}else {
+					entityManager.merge(l);
+				}
+				entityManager.flush();
+				
+			}
+			int rs=deleteAllPartDeleted();
+			System.out.println("delete part: "+ rs);
+		}
 		FullCourse rs = entityManager.merge(course);
 		rs.setCategory(findCatetoryById(rs.getCategoryId()));
 		rs.setPoster(findImageById(rs.getImgPosterId()));
+//		rs.set
 		return rs;
 	}
 
@@ -179,6 +211,19 @@ public class CourseDAO {
 		if (rs == 1)
 			return true;
 		return false;
+	}
+	
+	public int deleteAllLearningDeleted() {
+
+		int rs = entityManager.createNativeQuery("Delete from  learning where deleted=1")
+				.executeUpdate();
+		return rs;
+	}
+	public int deleteAllPartDeleted() {
+
+		int rs = entityManager.createNativeQuery("Delete from  part where deleted=1")
+				.executeUpdate();
+		return rs;
 	}
 
 	public List<CategoryEntity> getCategories(int actived) {

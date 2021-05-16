@@ -87,14 +87,14 @@ public class AdminControlller {
 		model.put("images", images);
 //		LOG.info("Sending order for the request date {} ", c.getUpdateAt());
 //		LOG.info("Sending order for the request date {} ", c.getCategory());
-		System.err.println(conversionService.convert(c.getUpdateAt(), String.class));
-		System.err.println(c.getUpdateAt());
+//		System.err.println(conversionService.convert(c.getUpdateAt(), String.class));
+//		System.err.println(c.getUpdateAt());
 		return "course";
 	}
 	
 	@PostMapping("/admin/course/{idCourse}")
 	public String adminCourse(HttpServletRequest serverHttpRequest,@ModelAttribute FullCourse c,Map<String, Object> model, @PathVariable long idCourse) {
-		System.err.println(c.getUpdateAt());
+		//System.err.println(c.getLearnings());
 		c.setUpdateAt(new Date());
 		c=courseDAO.updateFullCourse(c);
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);
