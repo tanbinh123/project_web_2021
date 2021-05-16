@@ -29,7 +29,7 @@ public class Part {
 	private String title;
 	
 	@Column(name = "course_id", nullable = false)
-	private Long courseId;
+	private Long courseId = Long.valueOf(0);
 	@ManyToOne
 	@JoinColumn(name = "course_id", insertable = false, updatable = false)
 	@JsonIgnore

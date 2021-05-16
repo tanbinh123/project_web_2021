@@ -94,7 +94,7 @@ public class AdminControlller {
 	
 	@PostMapping("/admin/course/{idCourse}")
 	public String adminCourse(HttpServletRequest serverHttpRequest,@ModelAttribute FullCourse c,Map<String, Object> model, @PathVariable long idCourse) {
-		//System.err.println(c.getLearnings());
+		System.err.println("POST");
 		c.setUpdateAt(new Date());
 		c=courseDAO.updateFullCourse(c);
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);

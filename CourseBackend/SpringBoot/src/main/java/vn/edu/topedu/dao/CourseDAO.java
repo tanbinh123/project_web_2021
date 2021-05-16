@@ -171,6 +171,7 @@ public class CourseDAO {
 			for (Learning l : course.getLearnings()) {
 				l.setCourseId(course.getId());
 				if(l.getId()==null) {
+					if(l.getDeleted()==false)
 					entityManager.persist(l);
 				}else {
 					entityManager.merge(l);
@@ -186,6 +187,7 @@ public class CourseDAO {
 			for (Part l : course.getParts()) {
 				l.setCourseId(course.getId());
 				if(l.getId()==null) {
+					if(l.getDeleted()==false)
 					entityManager.persist(l);
 				}else {
 					entityManager.merge(l);

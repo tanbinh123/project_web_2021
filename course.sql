@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 17/05/2021 01:03:17
+ Date: 17/05/2021 01:52:47
 */
 
 SET NAMES utf8mb4;
@@ -99,7 +99,7 @@ CREATE TABLE `categories`  (
   `create_time` datetime(0) NOT NULL DEFAULT utc_timestamp,
   `update_time` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 219 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 259 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
@@ -309,6 +309,45 @@ INSERT INTO `categories` VALUES (215, 'Lập trình', b'1', b'0', '2021-05-16 18
 INSERT INTO `categories` VALUES (216, 'Lập trình', b'1', b'0', '2021-05-16 18:01:23', '2021-05-16 18:01:23');
 INSERT INTO `categories` VALUES (217, 'Lập trình', b'1', b'0', '2021-05-16 18:01:42', '2021-05-16 18:01:42');
 INSERT INTO `categories` VALUES (218, 'Lập trình', b'1', b'0', '2021-05-16 18:02:46', '2021-05-16 18:02:46');
+INSERT INTO `categories` VALUES (219, 'Lập trình', b'1', b'0', '2021-05-16 18:08:27', '2021-05-16 18:08:27');
+INSERT INTO `categories` VALUES (220, 'Lập trình', b'1', b'0', '2021-05-16 18:11:03', '2021-05-16 18:11:03');
+INSERT INTO `categories` VALUES (221, 'Lập trình', b'1', b'0', '2021-05-16 18:14:20', '2021-05-16 18:14:20');
+INSERT INTO `categories` VALUES (222, 'Lập trình', b'1', b'0', '2021-05-16 18:14:21', '2021-05-16 18:14:21');
+INSERT INTO `categories` VALUES (223, 'Lập trình', b'1', b'0', '2021-05-16 18:14:22', '2021-05-16 18:14:22');
+INSERT INTO `categories` VALUES (224, 'Lập trình', b'1', b'0', '2021-05-16 18:14:23', '2021-05-16 18:14:23');
+INSERT INTO `categories` VALUES (225, 'Lập trình', b'1', b'0', '2021-05-16 18:14:23', '2021-05-16 18:14:23');
+INSERT INTO `categories` VALUES (226, 'Lập trình', b'1', b'0', '2021-05-16 18:14:24', '2021-05-16 18:14:24');
+INSERT INTO `categories` VALUES (227, 'Lập trình', b'1', b'0', '2021-05-16 18:14:25', '2021-05-16 18:14:25');
+INSERT INTO `categories` VALUES (228, 'Lập trình', b'1', b'0', '2021-05-16 18:14:25', '2021-05-16 18:14:25');
+INSERT INTO `categories` VALUES (229, 'Lập trình', b'1', b'0', '2021-05-16 18:14:32', '2021-05-16 18:14:32');
+INSERT INTO `categories` VALUES (230, 'Lập trình', b'1', b'0', '2021-05-16 18:14:32', '2021-05-16 18:14:32');
+INSERT INTO `categories` VALUES (231, 'Lập trình', b'1', b'0', '2021-05-16 18:14:33', '2021-05-16 18:14:33');
+INSERT INTO `categories` VALUES (232, 'Lập trình', b'1', b'0', '2021-05-16 18:16:54', '2021-05-16 18:16:54');
+INSERT INTO `categories` VALUES (233, 'Lập trình', b'1', b'0', '2021-05-16 18:16:55', '2021-05-16 18:16:55');
+INSERT INTO `categories` VALUES (234, 'Lập trình', b'1', b'0', '2021-05-16 18:18:11', '2021-05-16 18:18:11');
+INSERT INTO `categories` VALUES (235, 'Lập trình', b'1', b'0', '2021-05-16 18:19:17', '2021-05-16 18:19:17');
+INSERT INTO `categories` VALUES (236, 'Lập trình', b'1', b'0', '2021-05-16 18:19:56', '2021-05-16 18:19:56');
+INSERT INTO `categories` VALUES (237, 'Lập trình', b'1', b'0', '2021-05-16 18:21:00', '2021-05-16 18:21:00');
+INSERT INTO `categories` VALUES (238, 'Lập trình', b'1', b'0', '2021-05-16 18:22:10', '2021-05-16 18:22:10');
+INSERT INTO `categories` VALUES (239, 'Lập trình', b'1', b'0', '2021-05-16 18:23:05', '2021-05-16 18:23:05');
+INSERT INTO `categories` VALUES (240, 'Lập trình', b'1', b'0', '2021-05-16 18:23:07', '2021-05-16 18:23:07');
+INSERT INTO `categories` VALUES (241, 'Lập trình', b'1', b'0', '2021-05-16 18:23:42', '2021-05-16 18:23:42');
+INSERT INTO `categories` VALUES (242, 'Lập trình', b'1', b'0', '2021-05-16 18:23:46', '2021-05-16 18:23:46');
+INSERT INTO `categories` VALUES (243, 'Lập trình', b'1', b'0', '2021-05-16 18:23:49', '2021-05-16 18:23:49');
+INSERT INTO `categories` VALUES (244, 'Lập trình', b'1', b'0', '2021-05-16 18:23:54', '2021-05-16 18:23:54');
+INSERT INTO `categories` VALUES (246, 'Lập trình', b'1', b'0', '2021-05-16 18:33:43', '2021-05-16 18:33:43');
+INSERT INTO `categories` VALUES (247, 'Lập trình', b'1', b'0', '2021-05-16 18:35:26', '2021-05-16 18:35:26');
+INSERT INTO `categories` VALUES (248, 'Lập trình', b'1', b'0', '2021-05-16 18:35:48', '2021-05-16 18:35:48');
+INSERT INTO `categories` VALUES (249, 'Lập trình', b'1', b'0', '2021-05-16 18:35:55', '2021-05-16 18:35:55');
+INSERT INTO `categories` VALUES (250, 'Lập trình', b'1', b'0', '2021-05-16 18:48:29', '2021-05-16 18:48:29');
+INSERT INTO `categories` VALUES (251, 'Lập trình', b'1', b'0', '2021-05-16 18:48:34', '2021-05-16 18:48:34');
+INSERT INTO `categories` VALUES (252, 'Lập trình', b'1', b'0', '2021-05-16 18:49:49', '2021-05-16 18:49:49');
+INSERT INTO `categories` VALUES (253, 'Lập trình', b'1', b'0', '2021-05-16 18:49:55', '2021-05-16 18:49:55');
+INSERT INTO `categories` VALUES (254, 'Lập trình', b'1', b'0', '2021-05-16 18:50:51', '2021-05-16 18:50:51');
+INSERT INTO `categories` VALUES (255, 'Lập trình', b'1', b'0', '2021-05-16 18:50:54', '2021-05-16 18:50:54');
+INSERT INTO `categories` VALUES (256, 'Lập trình', b'1', b'0', '2021-05-16 18:52:24', '2021-05-16 18:52:24');
+INSERT INTO `categories` VALUES (257, 'Lập trình', b'1', b'0', '2021-05-16 18:52:31', '2021-05-16 18:52:31');
+INSERT INTO `categories` VALUES (258, 'Lập trình', b'1', b'0', '2021-05-16 18:52:35', '2021-05-16 18:52:35');
 
 -- ----------------------------
 -- Table structure for course
@@ -334,7 +373,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 2, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 1', 'Course Demo 1', 1000000, 1, 66, '2021-05-16 18:02:46', 2, NULL, 2);
+INSERT INTO `course` VALUES (1, 2, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 1', 'Course Demo 1', 1000000, 1, 66, '2021-05-16 18:52:35', 2, NULL, 2);
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Khóa học demo 2', 'Demo 2', 12288000, 5, 88, '2019-02-03 22:20:54', 2, 6, 2);
 INSERT INTO `course` VALUES (3, 10, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Khóa học demo 3', 'Demo 3', 14929000, 5, 4, '2020-10-25 13:14:43', 2, 6, 2);
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 4', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 2, 6, 2);
@@ -518,7 +557,7 @@ CREATE TABLE `learning`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of learning
@@ -527,6 +566,8 @@ INSERT INTO `learning` VALUES (1, 171, 'Các kiến thức cơ bản, nền món
 INSERT INTO `learning` VALUES (2, 171, 'Các mô hình, kiến trúc cơ bản khi triển khai ứng dụng', b'0');
 INSERT INTO `learning` VALUES (3, 171, 'Các khái niệm, thuật ngữ cốt lõi khi triển khai ứng dụng', b'0');
 INSERT INTO `learning` VALUES (4, 171, 'Hiểu hơn về cách internet và máy vi tính hoạt động', b'0');
+INSERT INTO `learning` VALUES (33, 1, '1', b'0');
+INSERT INTO `learning` VALUES (35, 1, '3', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -593,12 +634,12 @@ CREATE TABLE `part`  (
   `course_id` bigint(20) NULL DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `number_lesson` int(11) NULL DEFAULT 0,
-  `duration` decimal(65, 0) NULL DEFAULT NULL,
+  `duration` decimal(65, 0) NULL DEFAULT 0,
   `deleted` bit(1) NULL DEFAULT b'0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `part_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of part
@@ -607,8 +648,8 @@ INSERT INTO `part` VALUES (1, 171, 'Phương pháp học tập', 2, 1832000, b'0
 INSERT INTO `part` VALUES (2, 171, 'Tư duy phát triển', 1, 1539000, b'0');
 INSERT INTO `part` VALUES (3, 171, 'Khái niệm kỹ thuật cần biết', 2, 1539000, b'0');
 INSERT INTO `part` VALUES (4, 171, 'Tham khảo thêm', 3, 1539000, b'0');
-INSERT INTO `part` VALUES (16, 1, '', 0, NULL, b'0');
-INSERT INTO `part` VALUES (17, 1, '', 0, NULL, b'0');
+INSERT INTO `part` VALUES (27, 1, '1', 0, 0, b'0');
+INSERT INTO `part` VALUES (29, 1, '3', 0, 0, b'0');
 
 -- ----------------------------
 -- Table structure for payment
@@ -680,7 +721,7 @@ CREATE TABLE `resource_image`  (
   `update_at` datetime(0) NOT NULL DEFAULT current_timestamp(0),
   `poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 229 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 269 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -901,6 +942,45 @@ INSERT INTO `resource_image` VALUES (225, '', b'0', '2021-05-16 18:00:32', NULL)
 INSERT INTO `resource_image` VALUES (226, '', b'0', '2021-05-16 18:01:23', NULL);
 INSERT INTO `resource_image` VALUES (227, '', b'0', '2021-05-16 18:01:42', NULL);
 INSERT INTO `resource_image` VALUES (228, '', b'0', '2021-05-16 18:02:46', NULL);
+INSERT INTO `resource_image` VALUES (229, '', b'0', '2021-05-16 18:08:27', NULL);
+INSERT INTO `resource_image` VALUES (230, '', b'0', '2021-05-16 18:11:03', NULL);
+INSERT INTO `resource_image` VALUES (231, '', b'0', '2021-05-16 18:14:20', NULL);
+INSERT INTO `resource_image` VALUES (232, '', b'0', '2021-05-16 18:14:21', NULL);
+INSERT INTO `resource_image` VALUES (233, '', b'0', '2021-05-16 18:14:22', NULL);
+INSERT INTO `resource_image` VALUES (234, '', b'0', '2021-05-16 18:14:23', NULL);
+INSERT INTO `resource_image` VALUES (235, '', b'0', '2021-05-16 18:14:23', NULL);
+INSERT INTO `resource_image` VALUES (236, '', b'0', '2021-05-16 18:14:24', NULL);
+INSERT INTO `resource_image` VALUES (237, '', b'0', '2021-05-16 18:14:25', NULL);
+INSERT INTO `resource_image` VALUES (238, '', b'0', '2021-05-16 18:14:25', NULL);
+INSERT INTO `resource_image` VALUES (239, '', b'0', '2021-05-16 18:14:32', NULL);
+INSERT INTO `resource_image` VALUES (240, '', b'0', '2021-05-16 18:14:32', NULL);
+INSERT INTO `resource_image` VALUES (241, '', b'0', '2021-05-16 18:14:33', NULL);
+INSERT INTO `resource_image` VALUES (242, '', b'0', '2021-05-16 18:16:54', NULL);
+INSERT INTO `resource_image` VALUES (243, '', b'0', '2021-05-16 18:16:55', NULL);
+INSERT INTO `resource_image` VALUES (244, '', b'0', '2021-05-16 18:18:11', NULL);
+INSERT INTO `resource_image` VALUES (245, '', b'0', '2021-05-16 18:19:17', NULL);
+INSERT INTO `resource_image` VALUES (246, '', b'0', '2021-05-16 18:19:56', NULL);
+INSERT INTO `resource_image` VALUES (247, '', b'0', '2021-05-16 18:21:00', NULL);
+INSERT INTO `resource_image` VALUES (248, '', b'0', '2021-05-16 18:22:10', NULL);
+INSERT INTO `resource_image` VALUES (249, '', b'0', '2021-05-16 18:23:05', NULL);
+INSERT INTO `resource_image` VALUES (250, '', b'0', '2021-05-16 18:23:07', NULL);
+INSERT INTO `resource_image` VALUES (251, '', b'0', '2021-05-16 18:23:42', NULL);
+INSERT INTO `resource_image` VALUES (252, '', b'0', '2021-05-16 18:23:46', NULL);
+INSERT INTO `resource_image` VALUES (253, '', b'0', '2021-05-16 18:23:49', NULL);
+INSERT INTO `resource_image` VALUES (254, '', b'0', '2021-05-16 18:23:54', NULL);
+INSERT INTO `resource_image` VALUES (256, '', b'0', '2021-05-16 18:33:43', NULL);
+INSERT INTO `resource_image` VALUES (257, '', b'0', '2021-05-16 18:35:26', NULL);
+INSERT INTO `resource_image` VALUES (258, '', b'0', '2021-05-16 18:35:48', NULL);
+INSERT INTO `resource_image` VALUES (259, '', b'0', '2021-05-16 18:35:55', NULL);
+INSERT INTO `resource_image` VALUES (260, '', b'0', '2021-05-16 18:48:29', NULL);
+INSERT INTO `resource_image` VALUES (261, '', b'0', '2021-05-16 18:48:34', NULL);
+INSERT INTO `resource_image` VALUES (262, '', b'0', '2021-05-16 18:49:49', NULL);
+INSERT INTO `resource_image` VALUES (263, '', b'0', '2021-05-16 18:49:55', NULL);
+INSERT INTO `resource_image` VALUES (264, '', b'0', '2021-05-16 18:50:51', NULL);
+INSERT INTO `resource_image` VALUES (265, '', b'0', '2021-05-16 18:50:54', NULL);
+INSERT INTO `resource_image` VALUES (266, '', b'0', '2021-05-16 18:52:24', NULL);
+INSERT INTO `resource_image` VALUES (267, '', b'0', '2021-05-16 18:52:31', NULL);
+INSERT INTO `resource_image` VALUES (268, '', b'0', '2021-05-16 18:52:35', NULL);
 
 -- ----------------------------
 -- Table structure for templates

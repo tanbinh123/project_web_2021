@@ -6,8 +6,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html lang="en">
 <head>
+<meta charset="UTF-8"> 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Full Course</title>
 <link rel="stylesheet" href="/admin/css/course.css" />
 <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
@@ -20,6 +22,8 @@
 		<form:input type="hidden" path="id" id="id" />
 		<form:input type="hidden" id="deleted" path="deleted" />
 		<form:input type="hidden" id="updateAt" path="updateAt" />
+		<input type="hidden" id="sizeLearnings" value="${(fullcourse.learnings==null)?0:fullcourse.learnings.size()}" />
+		<input type="hidden" id="sizeParts" value="${(fullcourse.parts==null)?0:fullcourse.parts.size()}"/>
 
 		<table>
 			<tr>
@@ -129,130 +133,13 @@
 	<strong><a href="/admin/courses">link</a></strong> to visit list course
 	page.
 	<script>
-		document
-				.querySelectorAll('input[list]').forEach((e)=>{
-					e.addEventListener(
-							'input',
-							function(e) {
-								var input = e.target, list = input
-										.getAttribute('list'), options = document
-										.querySelectorAll('#' + list + ' option'), hiddenInput = document
-										.getElementById(input.getAttribute('id')
-												+ '-hidden'), inputValue = input.value;
-
-								hiddenInput.value = "0";
-
-								for (var i = 0; i < options.length; i++) {
-									var option = options[i];
-
-									if (option.innerText === inputValue) {
-										hiddenInput.value = option
-												.getAttribute('data-value');
-										break;
-									}
-								}
-							});
-				});
-		var deleteLearnig=function(b){
-			console.log(".delete-learning");
-			b.preventDefault();
-			var btn = b.target;
-			var tmp=document.getElementById(btn.getAttribute('learning-index'));
-			tmp.children[1].value="1";
-			tmp.style="display: none;";
-			}
-			if(indexL>0)
-		document.querySelectorAll(".delete-learning").forEach((e)=>{
-			
-			e.addEventListener('click',deleteLearnig);
-			});
-		var indexL=${fullcourse.learnings.size()};
-		document.querySelector("#add-learnings").addEventListener('click',function(b){
-			b.preventDefault();
-			console.log("#add-learnings");
-				var tmp=document.getElementById('learnings');
-				 var tag = document.createElement("div");
-				 tag.style="display: flex;";
-				 tag.id="learning-index-"+indexL;
-				 var id = document.createElement("input");
-				 id.type="hidden";
-				 id.name="learnings["+indexL+"].id";
-				 
-				 var deleted = document.createElement("input");
-				 deleted.type="hidden";
-				 deleted.value="0";
-				 deleted.name="learnings["+indexL+"].deleted";
-				 var learning = document.createElement("input");
-				 learning.name="learnings["+indexL+"].learning";
-				 var btn = document.createElement("button");
-				 btn.setAttribute('learning-index',"learning-index-"+indexL);
-				 btn.setAttribute('class',"delete-learning");
-				 var text = document.createTextNode("Delete");
-				 learning.value="";
-				 btn.appendChild(text);
-				 btn.addEventListener('click',deleteLearnig);
-			  	 tag.appendChild(id);
-			  	 tag.appendChild(deleted);
-			  	 tag.appendChild(learning);
-			  	 tag.appendChild(btn);
-	  			tmp.appendChild(tag);
-	  			indexL++;
-				
-			});
-		
-		
-		
-		
-		var deletePart=function(b){
-			console.log(".delete-part");
-			b.preventDefault();
-			var btn = b.target;
-			var tmp=document.getElementById(btn.getAttribute('part-index'));
-			tmp.children[1].value="1";
-			tmp.style="display: none;";
-			}
-			if(indexP>0)
-		document.querySelectorAll(".delete-part").forEach((e)=>{
-			
-			e.addEventListener('click',deletePart);
-			});
-		var indexP=${fullcourse.parts.size()} ;
-		
-		document.querySelector("#add-parts").addEventListener('click',function(b){
-			b.preventDefault();
-			console.log("#add-parts");
-				var tmp=document.getElementById('parts');
-				 var tag = document.createElement("div");
-				 tag.style="display: flex;";
-				 tag.id="part-index-"+indexP;
-				 var id = document.createElement("input");
-				 id.type="hidden";
-				 //id.value="0";
-				 id.name="parts["+indexL+"].id";
-				 
-				 var deleted = document.createElement("input");
-				 deleted.type="hidden";
-				 deleted.value="0";
-				 deleted.name="parts["+indexP+"].deleted";
-				 var learning = document.createElement("input");
-				 learning.name="parts["+indexP+"].title";
-				 var btn = document.createElement("button");
-				 btn.setAttribute('part-index',"part-index-"+indexP);
-				 btn.setAttribute('class',"delete-part");
-				 var text = document.createTextNode("Delete");
-				 learning.value="";
-				 btn.appendChild(text);
-				 btn.addEventListener('click',deletePart);
-			  	 tag.appendChild(id);
-			  	 tag.appendChild(deleted);
-			  	 tag.appendChild(learning);
-			  	 tag.appendChild(btn);
-	  			tmp.appendChild(tag);
-	  			indexP++;
-				
-			});
-		
-				
+		/* var indexL = parseInt("${fullcourse.learnings.size()}");
+		var indexP = parseInt("${fullcourse.parts.size()}"); */
 	</script>
+	<script src="/admin/js/course.js">
+		
+	</script>
+
+
 </body>
 </html>
