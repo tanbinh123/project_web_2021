@@ -2,6 +2,7 @@ package vn.edu.topedu.rest;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.persistence.NoResultException;
@@ -54,7 +55,7 @@ public class DonateREST {
 			if (appUser != null) {
 				Payment payment = new Payment();
 				payment.setAppUser(appUser);
-				payment.setAmount(Long.parseLong(String.valueOf(body.get("amount")+"00")));
+				payment.setAmount(new BigDecimal(body.get("amount")+"00"));
 				payment.setCurrCode("VND");
 				payment.setIpAddress(WebUtils.getIpAddress(httpServletRequest));
 				payment.setUrReturn(String.valueOf(body.get("returnUrl")));
@@ -90,7 +91,7 @@ public class DonateREST {
 			if (appUser != null) {
 				Payment payment = new Payment();
 				payment.setAppUser(appUser);
-				payment.setAmount(Long.parseLong(String.valueOf(body.get("amount"))));
+				payment.setAmount(new BigDecimal(body.get("amount").toString()));
 				payment.setCurrCode(String.valueOf(body.get("currCode")));
 				payment.setIpAddress(WebUtils.getIpAddress(httpServletRequest));
 				payment.setUrReturn(String.valueOf(body.get("returnUrl")));

@@ -1,6 +1,7 @@
 package vn.edu.topedu.entity;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
@@ -52,7 +53,7 @@ public class Payment {
 	private Date createTime = new Date();
 	
 	@Column(name = "Amount", nullable = false)
-	private long amount;
+	private BigDecimal amount;
 	@Column(name = "currcode", nullable = false)
 	private String currCode;
 	
@@ -96,10 +97,10 @@ public class Payment {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public long getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount(long amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 	

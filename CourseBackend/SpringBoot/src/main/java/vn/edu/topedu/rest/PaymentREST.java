@@ -2,6 +2,7 @@ package vn.edu.topedu.rest;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.persistence.NoResultException;
@@ -67,7 +68,7 @@ public class PaymentREST {
 				Course course= courseDAO.getCourse(idCourse);
 				Payment payment = new Payment();
 				payment.setAppUser(appUser);
-				payment.setAmount(course.getPrice()*100);
+				payment.setAmount(course.getPrice().multiply(new BigDecimal(100)));
 				payment.setCurrCode("VND");
 				payment.setIpAddress(WebUtils.getIpAddress(httpServletRequest));
 				payment.setUrReturn(String.valueOf(body.get("returnUrl")));
