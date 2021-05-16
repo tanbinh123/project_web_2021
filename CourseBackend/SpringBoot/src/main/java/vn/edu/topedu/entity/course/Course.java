@@ -1,5 +1,6 @@
 package vn.edu.topedu.entity.course;
  
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class Course extends AHasResource implements JsonResponse {
     
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "poster", referencedColumnName = "id")
+    @JoinColumn(name = "img_poster_id", referencedColumnName = "id")
     @JsonIgnore
     private ResourceImage poster;
     
@@ -46,8 +47,8 @@ public class Course extends AHasResource implements JsonResponse {
     private String title="";
     @Column(name = "update_at", nullable = false)
     private Date updateAt=new Date();
-    @Column(name = "price", length = 10, nullable = false)
-    private int price=0;
+    @Column(name = "price", length = 15, nullable = false)
+    private BigDecimal price=new BigDecimal(0);
     @Column(name = "bought", length = 10, nullable = false)
     private int bought=0;
     @Column(name = "rateStar", length = 10, nullable = false)
@@ -115,10 +116,10 @@ public class Course extends AHasResource implements JsonResponse {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public int getBought() {

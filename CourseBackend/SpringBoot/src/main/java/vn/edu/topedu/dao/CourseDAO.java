@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.CategoryEntity;
+import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
@@ -20,22 +21,24 @@ import vn.edu.topedu.utils.WebUtils;
 public class CourseDAO {
 	@Autowired
 	private EntityManager entityManager;
-	
+
 	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search) {
 		--_page;
-		if(sort==""||sort==null)sort="id:asc";
-		
-		String sql =null;
-		if(_search.length()==0) {
-		sql = "Select c from " + Course.class.getName() + " c " //
-				+ " where c.deleted=0 ";
-		}else{
+		if (sort == "" || sort == null)
+			sort = "id:asc";
+
+		String sql = null;
+		if (_search.length() == 0) {
+			sql = "Select c from " + Course.class.getName() + " c " //
+					+ " where c.deleted=0 ";
+		} else {
 			sql = "Select c from " + Course.class.getName() + " c " //
 					+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
-			
+
 		}
-		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
-		sql+=" group by c.id  order by  ";
+		if (category != -1)
+			sql += String.format(" and c.category.id = %d ", category);
+		sql += " group by c.id  order by  ";
 		String sqlSort = "";
 		sort = sort.toLowerCase();
 
@@ -71,7 +74,7 @@ public class CourseDAO {
 		System.out.println(sql);
 		Query query = this.entityManager.createQuery(sql, Course.class);
 		query.setFirstResult(_page * _limit);
-		if(_search.length()!=0) {
+		if (_search.length() != 0) {
 			query.setParameter("search", _search);
 		}
 		if (_limit != -1) {
@@ -79,26 +82,27 @@ public class CourseDAO {
 		}
 		return query.getResultList();
 	}
+
 	public long getCount(int category, String _search) {
-		String sql =null;
-		if(_search.length()==0) {
+		String sql = null;
+		if (_search.length() == 0) {
 			sql = "Select count(*) from " + Course.class.getName() + " c " //
 					+ " where c.deleted=0 ";
-			
-		}else{
+
+		} else {
 			sql = "Select count(*) from " + Course.class.getName() + " c " //
 					+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
-			
+
 		}
-			
-		if(category!=-1) sql+= String.format(" and c.category.id = %d ", category);
+
+		if (category != -1)
+			sql += String.format(" and c.category.id = %d ", category);
 		Query query = this.entityManager.createQuery(sql, Long.class);
-		if(_search.length()!=0) {
+		if (_search.length() != 0) {
 			query.setParameter("search", _search);
 		}
 		return (long) query.getSingleResult();
 	}
-	
 
 	public PreviewCourseEntity getPreviewCourse(Long idCourse) {
 		String sql = "Select c from " + PreviewCourseEntity.class.getName() + " c " //
@@ -107,6 +111,7 @@ public class CourseDAO {
 		query.setParameter("id", idCourse);
 		return (PreviewCourseEntity) query.getSingleResult();
 	}
+
 	public FullCourse getFullCourse(Long idCourse) {
 		String sql = "Select c from " + FullCourse.class.getName() + " c " //
 				+ " where c.deleted=0 and c.id= :id ";
@@ -114,6 +119,7 @@ public class CourseDAO {
 		query.setParameter("id", idCourse);
 		return (FullCourse) query.getSingleResult();
 	}
+
 	public Course getCourse(Long idCourse) {
 		String sql = "Select c from " + Course.class.getName() + " c " //
 				+ " where c.deleted=0 and c.id= :id ";
@@ -146,6 +152,25 @@ public class CourseDAO {
 		return entityManager.merge(course);
 	}
 
+	public ResourceImage findImageById(Long id) {
+		return this.entityManager.find(ResourceImage.class, id);
+	}
+	public CategoryEntity findCatetoryById(Integer id) {
+		return this.entityManager.find(CategoryEntity.class, id);
+	}
+
+	@Transactional
+	public FullCourse updateFullCourse(FullCourse course) {
+		if (course.getCategoryId().equals(Long.valueOf("0"))) {
+			entityManager.persist(course.getCategory());
+			entityManager.flush();
+		}
+		FullCourse rs = entityManager.merge(course);
+		rs.setCategory(findCatetoryById(rs.getCategoryId()));
+		rs.setPoster(findImageById(rs.getImgPosterId()));
+		return rs;
+	}
+
 	public boolean deleteCourse(int id) {
 
 		int rs = entityManager.createNativeQuery("UPDATE course set deleted=? where id=? and deleted=0")
@@ -155,17 +180,17 @@ public class CourseDAO {
 			return true;
 		return false;
 	}
-	public List<CategoryEntity> getCategories(int actived){
-		
-		String sql = "Select c from CategoryEntity c "
-				+ " where c.deleted=false ";
-		if(actived <2 && actived > -1) {
+
+	public List<CategoryEntity> getCategories(int actived) {
+
+		String sql = "Select c from CategoryEntity c " + " where c.deleted=false ";
+		if (actived < 2 && actived > -1) {
 			sql += String.format("and c.actived = %d ", actived);
 		}
 		Query query = this.entityManager.createQuery(sql, CategoryEntity.class);
-		//query.setParameter("id", idCourse);
+		// query.setParameter("id", idCourse);
 		return query.getResultList();
-		
+
 	}
 
 }

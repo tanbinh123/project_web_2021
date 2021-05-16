@@ -1,16 +1,22 @@
 package vn.edu.topedu.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,11 +67,14 @@ public class AdminControlller {
 	CourseDAO courseDAO;
 	@Autowired
 	ResourceImageDAO resourceImageDAO;
+	@Autowired
+	ConversionService conversionService;
 	
-
-	@GetMapping("/admin/course/{idCourse}")
-	public String adminCourse(HttpServletRequest serverHttpRequest,Map<String, Object> model, @PathVariable long idCourse) {
-		FullCourse c = courseDAO.getFullCourse(idCourse);
+//	private static final Logger LOG = LoggerFactory.getLogger(AdminControlller.class);
+	
+	@GetMapping("/admin/course/{fullcourse}")
+	public String adminCourse(HttpServletRequest serverHttpRequest,Map<String, Object> model, @PathVariable FullCourse fullcourse) {
+		FullCourse c = fullcourse;
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);
 		List<ResourceImage> images = resourceImageDAO.getResourceImages(Long.valueOf("2"));
 		String bef=WebUtils.getUrl(serverHttpRequest);
@@ -76,7 +85,30 @@ public class AdminControlller {
 		model.put("fullcourse", c);
 		model.put("categories", categories);
 		model.put("images", images);
-		//System.out.println(images.size());
+//		LOG.info("Sending order for the request date {} ", c.getUpdateAt());
+//		LOG.info("Sending order for the request date {} ", c.getCategory());
+		System.err.println(conversionService.convert(c.getUpdateAt(), String.class));
+		System.err.println(c.getUpdateAt());
+		return "course";
+	}
+	
+	@PostMapping("/admin/course/{idCourse}")
+	public String adminCourse(HttpServletRequest serverHttpRequest,@ModelAttribute FullCourse c,Map<String, Object> model, @PathVariable long idCourse) {
+		System.err.println(c.getUpdateAt());
+		c.setUpdateAt(new Date());
+		c=courseDAO.updateFullCourse(c);
+		List<CategoryEntity> categories = courseDAO.getCategories(-1);
+		List<ResourceImage> images = resourceImageDAO.getResourceImages(Long.valueOf("2"));
+		String bef=WebUtils.getUrl(serverHttpRequest);
+		c.setBeforeResource(bef);
+		images.forEach(e->{
+			e.setBeforeResource(bef);
+		});
+		model.put("fullcourse", c);
+		model.put("categories", categories);
+		model.put("images", images);
+//		System.err.println(conversionService.convert(c.getUpdateAt(), String.class));
+//		System.err.println(c.getUpdateAt());
 		return "course";
 	}
 

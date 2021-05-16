@@ -8,6 +8,7 @@ public class ApplicationConstants {
 	public static final String CONTENT_RANGE = "Content-Range";
 	public static final String ACCEPT_RANGES = "Accept-Ranges";
 	public static final String BYTES = "bytes";
+	public static final String DATE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
 	public static final int BYTE_RANGE = 1024;
 
 	private ApplicationConstants() {

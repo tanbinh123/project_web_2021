@@ -1,5 +1,6 @@
 package vn.edu.topedu.entity.course.full;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -32,8 +34,12 @@ public class FullCourse extends AHasResource {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
+	@JsonIgnore
+	@Column(name = "img_poster_id", nullable = false)
+	private Long imgPosterId;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "poster", referencedColumnName = "id")
+	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
+	//@Transient
 	private ResourceImage poster;
 
 	@Column(name = "description", length = 255)
@@ -46,8 +52,8 @@ public class FullCourse extends AHasResource {
 	private VideoEntity demo;
 	@Column(name = "update_at", nullable = false)
 	private Date updateAt = new Date();
-	@Column(name = "price", length = 10, nullable = false)
-	private int price = 0;
+	@Column(name = "price", length = 15, nullable = false)
+	private BigDecimal price = new BigDecimal(0);
 
 	@JsonIgnore
 	@Column(name = "Deleted", length = 1, nullable = false)
@@ -56,13 +62,31 @@ public class FullCourse extends AHasResource {
 	private List<Learning> learning;
 	@OneToMany(mappedBy = "course")
 	private List<Part> parts;
-//	@OneToMany(mappedBy = "detailCourseEntity")
-//	@JsonIgnore
-//	private List<OwerCourse> owerCourse;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "category_id", nullable = false)
+	
 	@JsonIgnore
+	@Column(name = "category_id", nullable = false)
+	private Integer categoryId;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
+//	@Column(insertable = false, updatable = false)
 	private CategoryEntity category;
+
+
+	public Long getImgPosterId() {
+		return imgPosterId;
+	}
+
+	public void setImgPosterId(Long imgPosterId) {
+		this.imgPosterId = imgPosterId;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
 
 	public CategoryEntity getCategory() {
 		return category;
@@ -116,16 +140,25 @@ public class FullCourse extends AHasResource {
 		this.title = title;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
+//	public int getPrice() {
+//		return price;
+//	}
+//
+//	public void setPrice(int price) {
+//		this.price = price;
+//	}
+	
 
 	public Date getUpdateAt() {
 		return updateAt;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	public void setUpdateAt(Date updateAt) {
@@ -158,8 +191,11 @@ public class FullCourse extends AHasResource {
 
 	@Override
 	public void setBeforeResource(String beforeResource) {
+		if(this.poster!=null)
 		this.poster.setBeforeResource(beforeResource);
+		if(this.demo!=null)
 		this.demo.setBeforeResource(beforeResource);
+		if(this.parts!=null)
 		this.parts.forEach(e -> e.getLessons().forEach(x -> x.getVideo().setBeforeResource(beforeResource)));
 		super.setBeforeResource(beforeResource);
 	}

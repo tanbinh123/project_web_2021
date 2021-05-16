@@ -2,6 +2,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html lang="en">
 <head>
 <meta name="viewport"
@@ -15,6 +17,10 @@
 	<h4>Course Id ${fullcourse.id}</h4>
 
 	<form:form modelAttribute="fullcourse">
+		<form:input type="hidden" path="id" id="id" />
+		<form:input type="hidden" id="deleted" path="deleted" />
+		<form:input type="hidden" id="updateAt" path="updateAt" />
+
 		<table>
 			<tr>
 				<td><label for="title">Title</label></td>
@@ -25,9 +31,12 @@
 				<td><form:input id="price" path="price" /></td>
 			</tr>
 			<tr>
-				<td><label for="deleted">Deleted</label></td>
-				<td><form:input id="deleted" path="deleted" /></td>
+				<td><label for="price">Format Price</label></td>
+				<td><span> <fmt:formatNumber type="number"
+							pattern="###,###,### VND" value="${fullcourse.price}" var="pat" />
+				</span> ${fn:replace(pat, ",", " ")}</td>
 			</tr>
+
 			<tr>
 				<td><label for="category">Category</label></td>
 				<td><form:input id="category" path="category.name"
@@ -36,7 +45,7 @@
 							<option data-value="${category.id}">${category.name}</option>
 						</c:forEach>
 
-					</datalist> <form:input type="hidden" path="category.id" id="category-hidden" /></td>
+					</datalist> <form:input type="hidden" path="categoryId" id="category-hidden" /></td>
 			</tr>
 
 			<tr>
@@ -47,12 +56,17 @@
 							<option data-value="${poster.id}">${poster.image}</option>
 						</c:forEach>
 
-					</datalist> <form:input type="hidden" path="poster.id" id="poster-hidden" /></td>
+					</datalist> <form:input type="hidden" path="imgPosterId" id="poster-hidden" />
+					<%-- <form:input type="hidden" path="poster.path" id="poster-hidden" /> --%>
+
+				</td>
 			</tr>
 
 			<tr>
-				<td><label for="updateAt">UpdateAt</label></td>
-				<td><form:input id="updateAt" path="updateAt" /></td>
+				<td><label>UpdateAt</label></td>
+				<td><fmt:formatDate pattern="EEE MMM dd HH:mm:ss zzz yyyy"
+						value="${fullcourse.updateAt}" /> <%-- <c:out value="${fullcourse.updateAt}"/> --%>
+				</td>
 			</tr>
 
 

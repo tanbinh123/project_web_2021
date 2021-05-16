@@ -24,7 +24,7 @@ public class CategoryEntity {
 	private String name;
 	
 	@Column(name = "actived")
-	private Boolean actived;
+	private Boolean actived = true;
 	
 	@Column(name = "Create_Time", nullable = false)
 	private Date createTime = new Date();

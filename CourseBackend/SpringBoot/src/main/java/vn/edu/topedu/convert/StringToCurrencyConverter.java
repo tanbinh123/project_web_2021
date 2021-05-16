@@ -8,7 +8,7 @@ import org.springframework.core.convert.converter.Converter;
 
 import vn.edu.topedu.constants.ApplicationConstants;
 
-public class StringToDateConverter implements Converter<String, Date> {
+public class StringToCurrencyConverter implements Converter<String, Date> {
 	SimpleDateFormat simpleDateFormat= new SimpleDateFormat(ApplicationConstants.DATE_FORMAT);
 	@Override
 	public Date convert(String source) {

@@ -24,7 +24,7 @@ public class ResourceImage extends AHasResource {
 	@Column(name = "id", nullable = false)
 	private Long id;
 	@Column(name = "img_path", length = 36, nullable = false)
-	private String path;
+	private String path = "";
 	@Column(name = "updateAt", length = 36, nullable = false)
 	private Date updateAt = new Date();
 	@Column(name = "deleted", length = 1, nullable = false)

@@ -1,5 +1,6 @@
 package vn.edu.topedu.entity.previewcourse;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class PreviewCourseEntity extends AHasResource {
 	private Long id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "poster", referencedColumnName = "id")
+    @JoinColumn(name = "img_poster_id", referencedColumnName = "id")
     private ResourceImage poster;
 	
 	
@@ -49,8 +50,8 @@ public class PreviewCourseEntity extends AHasResource {
 	private VideoEntity demo;
 	@Column(name = "update_at", nullable = false)
 	private Date updateAt = new Date();
-	@Column(name = "price", length = 10, nullable = false)
-	private int price = 0;
+	@Column(name = "price", length = 15, nullable = false)
+	private BigDecimal price = new BigDecimal(0);
 	
 	@JsonIgnore
 	@Column(name = "Deleted", length = 1, nullable = false)
@@ -111,11 +112,11 @@ public class PreviewCourseEntity extends AHasResource {
 		this.title = title;
 	}
 
-	public int getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
