@@ -14,7 +14,9 @@ import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.course.full.Learning;
+import vn.edu.topedu.entity.course.full.Lesson;
 import vn.edu.topedu.entity.course.full.Part;
+import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -184,13 +186,27 @@ public class CourseDAO {
 		}
 		
 		if(course.getParts()!=null) {
-			for (Part l : course.getParts()) {
-				l.setCourseId(course.getId());
-				if(l.getId()==null) {
-					if(l.getDeleted()==false)
-					entityManager.persist(l);
+			for (Part part : course.getParts()) {
+				part.setCourseId(course.getId());
+				if(part.getId()==null) {
+					if(part.getDeleted()==false)
+					entityManager.persist(part);
 				}else {
-					entityManager.merge(l);
+					entityManager.merge(part);
+					if(part.getLessons()!=null) {
+						for(Lesson le: part.getLessons()) {
+							le.setPartId(part.getId());
+							if(le.getId()==null) {
+								//System.err.println("is lesson"+le.getDescription());
+								if(le.getDeleted()==false)
+								entityManager.persist(le);
+							}else {
+								entityManager.merge(le);
+							}
+						}
+						
+						deleteAllLessonDeleted();
+					}
 				}
 				entityManager.flush();
 				
@@ -201,7 +217,14 @@ public class CourseDAO {
 		FullCourse rs = entityManager.merge(course);
 		rs.setCategory(findCatetoryById(rs.getCategoryId()));
 		rs.setPoster(findImageById(rs.getImgPosterId()));
-//		rs.set
+		if(rs.getParts()!=null)
+		rs.getParts().forEach(e->{
+			if(e.getLessons()!=null)
+			e.getLessons().forEach(a->{
+				a.setVideo(this.entityManager.find(VideoEntity.class, a.getVideoId()));
+			});
+		});
+		//		rs.set
 		return rs;
 	}
 
@@ -227,7 +250,12 @@ public class CourseDAO {
 				.executeUpdate();
 		return rs;
 	}
+	public int deleteAllLessonDeleted() {
 
+		int rs = entityManager.createNativeQuery("Delete from  lesson where deleted=1")
+				.executeUpdate();
+		return rs;
+	}
 	public List<CategoryEntity> getCategories(int actived) {
 
 		String sql = "Select c from CategoryEntity c " + " where c.deleted=false ";
@@ -235,6 +263,18 @@ public class CourseDAO {
 			sql += String.format("and c.actived = %d ", actived);
 		}
 		Query query = this.entityManager.createQuery(sql, CategoryEntity.class);
+		// query.setParameter("id", idCourse);
+		return query.getResultList();
+
+	}
+	
+	public List<VideoEntity> getVideos(int actived) {
+
+		String sql = "Select c from "+VideoEntity.class.getName()+" c  where c.deleted=false ";
+		if (actived < 2 && actived > -1) {
+			sql += String.format("and c.actived = %d ", actived);
+		}
+		Query query = this.entityManager.createQuery(sql, VideoEntity.class);
 		// query.setParameter("id", idCourse);
 		return query.getResultList();
 

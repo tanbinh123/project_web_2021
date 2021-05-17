@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html lang="en">
 <head>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -15,6 +15,14 @@
 <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 </head>
 <body>
+	<datalist id="videos">
+		<c:forEach var="video" items="${videos}">
+			<option data-value="${video.id}">${video.urlVideo}</option>
+		</c:forEach>
+
+	</datalist>
+
+
 	<h1>Detail Course</h1>
 	<h4>Course Id ${fullcourse.id}</h4>
 
@@ -22,8 +30,10 @@
 		<form:input type="hidden" path="id" id="id" />
 		<form:input type="hidden" id="deleted" path="deleted" />
 		<form:input type="hidden" id="updateAt" path="updateAt" />
-		<input type="hidden" id="sizeLearnings" value="${(fullcourse.learnings==null)?0:fullcourse.learnings.size()}" />
-		<input type="hidden" id="sizeParts" value="${(fullcourse.parts==null)?0:fullcourse.parts.size()}"/>
+		<input type="hidden" id="sizeLearnings"
+			value="${(fullcourse.learnings==null)?0:fullcourse.learnings.size()}" />
+		<input type="hidden" id="sizeParts"
+			value="${(fullcourse.parts==null)?0:fullcourse.parts.size()}" />
 
 		<table>
 			<tr>
@@ -81,6 +91,9 @@
 						path="description" /></td>
 			</tr>
 			<tr>
+				<td colspan="2"><br /></td>
+			</tr>
+			<tr>
 				<td><label>Learnings</label></td>
 				<td>
 					<div id="learnings">
@@ -101,25 +114,72 @@
 					<button id="add-learnings">Add</button>
 				</td>
 			</tr>
-
+			<tr>
+				<td colspan="2"><br /></td>
+			</tr>
 			<tr>
 				<td><label>Parts</label></td>
 				<td>
-					<div id="parts">
+					<div id="parts" style="overflow: scroll;">
 
 						<c:forEach var="part" items="${fullcourse.parts}"
 							varStatus="status">
-							<div id="part-index-${status.index}" style="display: flex;">
-								<form:input type="hidden" path="parts[${status.index}].id" />
-								<form:input type="hidden" path="parts[${status.index}].deleted" />
-								<form:input path="parts[${status.index}].title" />
-								<button part-index="part-index-${status.index}"
-									class="delete-part">Delete</button>
+							<div style="display: block;">
+
+								<div id="part-index-${status.index}" style="display: flex;">
+									<form:input type="hidden" path="parts[${status.index}].id" />
+									<form:input type="hidden" path="parts[${status.index}].deleted" />
+									<form:input path="parts[${status.index}].title" />
+
+									<button part-index="part-index-${status.index}"
+										class="delete-part">Delete</button>
+
+								</div>
+								<div style="display: flex">
+									<div>lessons</div>
+									<div id="part-index-${status.index}-lessons"
+										style="width: 100%;">
+										<c:forEach var="lesson" items="${part.lessons}"
+											varStatus="statusLesson">
+
+											<div
+												id="part-index-${status.index}-lesson-index-${statusLesson.index}"
+												style="display: flex;flex:1;overflow: auto;">
+												<form:input type="hidden"
+													path="parts[${status.index}].lessons[${statusLesson.index}].id" />
+												<form:input type="hidden"
+													path="parts[${status.index}].lessons[${statusLesson.index}].deleted" />
+												<form:input
+													path="parts[${status.index}].lessons[${statusLesson.index}].description" />
+												<form:input id="video-hidden" type="hidden"
+													path="parts[${status.index}].lessons[${statusLesson.index}].videoId" />
+												<form:input id="video" list="videos"
+													path="parts[${status.index}].lessons[${statusLesson.index}].video.urlVideo" />
+												<%-- <input type="text"
+													value="${lesson.video.urlVideo}" /> --%>
+
+												<button
+													delete-lesson-id="part-index-${status.index}-lesson-index-${statusLesson.index}"
+													class="delete-lesson">Delete</button>
+
+											</div>
+										</c:forEach>
+
+									</div>
+
+								</div>
+								<input type="hidden"
+									id="part-index-${status.index}-size-lessons"
+									value="${(part.lessons==null)?0:part.lessons.size()}" />
+								<button part-index="${status.index}"
+									lessons-wrap-id="part-index-${status.index}-lessons"
+									index="part-index-${status.index}-size-lessons"
+									id="add-lessons">Add lesson</button>
 
 							</div>
 						</c:forEach>
 					</div>
-					<button id="add-parts">Add</button>
+					<button id="add-parts">Add Part</button>
 				</td>
 			</tr>
 

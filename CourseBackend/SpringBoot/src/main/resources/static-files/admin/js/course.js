@@ -128,3 +128,59 @@ document.querySelector("#add-parts").addEventListener('click', function(b) {
 	sizeParts.value=indexP++;
 
 });
+
+
+var deleteLesson = function(b) {
+	b.preventDefault();
+	var btn = b.target;
+	console.log(".delete-lesson",btn.getAttribute('delete-lesson-id'));
+	var tmp = document.getElementById(btn.getAttribute('delete-lesson-id'));
+	//tmp.querySelector('input')[1].value=1;
+	
+	tmp.children[1].value = "1";
+	
+	tmp.style = "display: none;";
+}
+
+document.querySelectorAll(".delete-lesson").forEach((e) => {
+
+	e.addEventListener('click', deleteLesson);
+});
+
+
+document.querySelector("#add-lessons").addEventListener('click', function(b) {
+	b.preventDefault();
+	var sizeE=document.getElementById(b.target.getAttribute("index"));
+	var indexP = b.target.getAttribute("part-index");
+	var index = parseInt(sizeE.value);
+	//console.log("#add-lessons",b.target.getAttribute("lessons-wrap-id"));
+	var tmp = document.getElementById(b.target.getAttribute("lessons-wrap-id"));
+	var tag = document.createElement("div");
+	tag.style = "display: flex;";
+	tag.id = "part-index-" + indexP +"-lesson-index-"+index;
+	var id = document.createElement("input");
+	id.type = "hidden";
+	
+	id.name = "parts[" + indexP + "].lessons["+index+"].id";
+
+	var deleted = document.createElement("input");
+	deleted.type = "hidden";
+	deleted.value = "0";
+	deleted.name = "parts[" + indexP + "].lessons["+index+"].deleted";
+	var name = document.createElement("input");
+	name.name = "parts[" + indexP + "].lessons["+index+"].description";
+	var btn = document.createElement("button");
+	btn.setAttribute('delete-lesson-id', "part-index-" + indexP+"-lesson-index-"+index);
+	btn.setAttribute('class', "delete-lesson");
+	var text = document.createTextNode("Delete");
+	name.value = "";
+	btn.appendChild(text);
+	btn.addEventListener('click', deleteLesson);
+	tag.appendChild(id);
+	tag.appendChild(deleted);
+	tag.appendChild(name);
+	tag.appendChild(btn);
+	tmp.appendChild(tag);
+	sizeE.value=index+1;
+
+});

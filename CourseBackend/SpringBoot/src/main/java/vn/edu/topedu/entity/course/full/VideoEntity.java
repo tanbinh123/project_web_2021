@@ -29,34 +29,71 @@ public class VideoEntity extends AHasResource {
 	@Column(name = "video", nullable = false)
 	@JsonIgnore
 	private String video;
-	
+
 	@OneToMany(mappedBy = "demo")
 	@JsonIgnore
 	private List<PreviewCourseEntity> detailCourses;
-	
-//	@OneToMany(mappedBy = "demo")
+
+	@Column(name = "actived")
+	private Boolean actived;
+
+	@Column(name = "deleted", length = 1, nullable = false)
+	private Boolean deleted = false;
+
+	// @OneToMany(mappedBy = "demo")
 //	@JsonIgnore
 //	private List<Course> courses;
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getVideo() {
 		return video;
 	}
+
 	public void setVideo(String video) {
 		this.video = video;
 	}
-	
-	
-	public String getUrlVideo() {
-		return this.beforeResource+VariableConst.VIDEO_BEFORE+ this.video;
+
+	public Boolean getActived() {
+		return actived;
 	}
+
+	public void setActived(Boolean actived) {
+		this.actived = actived;
+	}
+
+	public String getUrlVideo() {
+		return this.beforeResource + VariableConst.VIDEO_BEFORE + this.video;
+	}
+	
+	@Override
+	public void setBeforeResource(String beforeResource) {
+		if(this.video!=null)
+		if(!this.video.contains("http")
+//				||!this.video.contains("HTTP")
+				) {
+			super.setBeforeResource(beforeResource);
+		}
+	}
+
 	public List<PreviewCourseEntity> getDetailCourses() {
 		return detailCourses;
 	}
+
 	public void setDetailCourses(List<PreviewCourseEntity> detailCourses) {
 		this.detailCourses = detailCourses;
 	}
@@ -66,7 +103,5 @@ public class VideoEntity extends AHasResource {
 //	public void setCourses(List<Course> courses) {
 //		this.courses = courses;
 //	}
-	
-	
 
 }

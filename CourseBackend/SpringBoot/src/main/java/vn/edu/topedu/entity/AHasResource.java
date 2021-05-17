@@ -11,6 +11,7 @@ public abstract class AHasResource {
 	}
 
 	public void setBeforeResource(String beforeResource) {
+		
 		this.beforeResource = beforeResource;
 	}
 	

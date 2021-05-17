@@ -63,8 +63,6 @@ public class ResourceImage extends AHasResource {
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
-	
-	
 
 	public String getImage() {
 		return ((this.beforeResource != null) ? this.beforeResource : "") + VariableConst.RESOURCE_BEFORE + this.path;
@@ -84,6 +82,16 @@ public class ResourceImage extends AHasResource {
 
 	public void setAppUser(AppUser appUser) {
 		this.appUser = appUser;
+	}
+
+	@Override
+	public void setBeforeResource(String beforeResource) {
+		if(this.path!=null)
+		if (!this.path.contains("http")
+				||!this.path.contains("data:image")
+		) {
+			super.setBeforeResource(beforeResource);
+		}
 	}
 
 }

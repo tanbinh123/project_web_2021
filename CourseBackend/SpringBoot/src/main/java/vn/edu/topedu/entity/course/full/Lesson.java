@@ -24,12 +24,47 @@ public class Lesson  {
 	@Column(name = "description", nullable = false)
 	private String description;
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "video_id", referencedColumnName = "id")
+    @JoinColumn(name = "video_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private VideoEntity video;
 	@ManyToOne
-	@JoinColumn(name = "part_id")
+	@JoinColumn(name = "part_id", insertable = false, updatable = false)
 	@JsonIgnore
 	private Part part;
+	
+	@Column(name = "part_id", nullable = false)
+	private Long partId;
+	
+	@Column(name = "video_id", nullable = false)
+	private Long videoId;
+	
+	@Column(name = "deleted", length = 1, nullable = false)
+	private Boolean deleted = false;
+
+	
+
+	public Long getVideoId() {
+		return videoId;
+	}
+
+	public void setVideoId(Long videoId) {
+		this.videoId = videoId;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public Long getPartId() {
+		return partId;
+	}
+
+	public void setPartId(Long partId) {
+		this.partId = partId;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	public Long getId() {
 		return id;

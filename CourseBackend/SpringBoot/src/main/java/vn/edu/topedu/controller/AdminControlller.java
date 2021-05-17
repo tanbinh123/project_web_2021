@@ -31,6 +31,7 @@ import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
+import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.json.object.JsonResponse;
 import vn.edu.topedu.json.object.ResponseMessageSuccess;
 import vn.edu.topedu.response.PageResponse;
@@ -82,9 +83,16 @@ public class AdminControlller {
 		images.forEach(e->{
 			e.setBeforeResource(bef);
 		});
+		List<VideoEntity> videos = courseDAO.getVideos(-1);
+		
+		if(videos!=null)
+		videos.forEach(e->{
+			e.setBeforeResource(bef);
+		});
+		model.put("videos", videos);
+		model.put("images", images);
 		model.put("fullcourse", c);
 		model.put("categories", categories);
-		model.put("images", images);
 //		LOG.info("Sending order for the request date {} ", c.getUpdateAt());
 //		LOG.info("Sending order for the request date {} ", c.getCategory());
 //		System.err.println(conversionService.convert(c.getUpdateAt(), String.class));
@@ -98,15 +106,21 @@ public class AdminControlller {
 		c.setUpdateAt(new Date());
 		c=courseDAO.updateFullCourse(c);
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);
+		List<VideoEntity> videos = courseDAO.getVideos(-1);
 		List<ResourceImage> images = resourceImageDAO.getResourceImages(Long.valueOf("2"));
 		String bef=WebUtils.getUrl(serverHttpRequest);
 		c.setBeforeResource(bef);
 		images.forEach(e->{
 			e.setBeforeResource(bef);
 		});
+		if(videos!=null)
+		videos.forEach(e->{
+			e.setBeforeResource(bef);
+		});
+		model.put("videos", videos);
 		model.put("fullcourse", c);
-		model.put("categories", categories);
 		model.put("images", images);
+		model.put("categories", categories);
 //		System.err.println(conversionService.convert(c.getUpdateAt(), String.class));
 //		System.err.println(c.getUpdateAt());
 		return "course";

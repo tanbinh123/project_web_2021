@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 17/05/2021 01:52:47
+ Date: 17/05/2021 16:53:22
 */
 
 SET NAMES utf8mb4;
@@ -99,7 +99,7 @@ CREATE TABLE `categories`  (
   `create_time` datetime(0) NOT NULL DEFAULT utc_timestamp,
   `update_time` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 259 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 292 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
@@ -348,6 +348,38 @@ INSERT INTO `categories` VALUES (255, 'Lập trình', b'1', b'0', '2021-05-16 18
 INSERT INTO `categories` VALUES (256, 'Lập trình', b'1', b'0', '2021-05-16 18:52:24', '2021-05-16 18:52:24');
 INSERT INTO `categories` VALUES (257, 'Lập trình', b'1', b'0', '2021-05-16 18:52:31', '2021-05-16 18:52:31');
 INSERT INTO `categories` VALUES (258, 'Lập trình', b'1', b'0', '2021-05-16 18:52:35', '2021-05-16 18:52:35');
+INSERT INTO `categories` VALUES (259, 'Lập trình', b'1', b'0', '2021-05-17 08:01:06', '2021-05-17 08:01:06');
+INSERT INTO `categories` VALUES (260, 'Lập trình', b'1', b'0', '2021-05-17 08:01:24', '2021-05-17 08:01:24');
+INSERT INTO `categories` VALUES (261, 'Lập trình', b'1', b'0', '2021-05-17 08:04:51', '2021-05-17 08:04:51');
+INSERT INTO `categories` VALUES (262, 'Lập trình', b'1', b'0', '2021-05-17 08:29:42', '2021-05-17 08:29:42');
+INSERT INTO `categories` VALUES (263, 'Lập trình', b'1', b'0', '2021-05-17 08:38:41', '2021-05-17 08:38:41');
+INSERT INTO `categories` VALUES (264, 'Lập trình', b'1', b'0', '2021-05-17 08:41:47', '2021-05-17 08:41:47');
+INSERT INTO `categories` VALUES (265, 'Lập trình', b'1', b'0', '2021-05-17 08:42:33', '2021-05-17 08:42:33');
+INSERT INTO `categories` VALUES (266, 'Lập trình', b'1', b'0', '2021-05-17 08:44:59', '2021-05-17 08:44:59');
+INSERT INTO `categories` VALUES (267, 'Lập trình', b'1', b'0', '2021-05-17 08:45:01', '2021-05-17 08:45:01');
+INSERT INTO `categories` VALUES (268, 'Lập trình', b'1', b'0', '2021-05-17 08:45:04', '2021-05-17 08:45:04');
+INSERT INTO `categories` VALUES (269, 'Lập trình', b'1', b'0', '2021-05-17 08:46:13', '2021-05-17 08:46:13');
+INSERT INTO `categories` VALUES (270, 'Lập trình', b'1', b'0', '2021-05-17 08:46:46', '2021-05-17 08:46:46');
+INSERT INTO `categories` VALUES (271, 'Lập trình', b'1', b'0', '2021-05-17 08:46:48', '2021-05-17 08:46:48');
+INSERT INTO `categories` VALUES (272, 'Lập trình', b'1', b'0', '2021-05-17 08:47:55', '2021-05-17 08:47:55');
+INSERT INTO `categories` VALUES (273, 'Lập trình', b'1', b'0', '2021-05-17 08:48:02', '2021-05-17 08:48:02');
+INSERT INTO `categories` VALUES (274, 'Lập trình', b'1', b'0', '2021-05-17 08:48:32', '2021-05-17 08:48:32');
+INSERT INTO `categories` VALUES (275, 'Lập trình', b'1', b'0', '2021-05-17 08:48:39', '2021-05-17 08:48:39');
+INSERT INTO `categories` VALUES (276, 'Lập trình', b'1', b'0', '2021-05-17 08:49:46', '2021-05-17 08:49:46');
+INSERT INTO `categories` VALUES (277, 'Lập trình', b'1', b'0', '2021-05-17 08:49:52', '2021-05-17 08:49:52');
+INSERT INTO `categories` VALUES (278, 'Lập trình', b'1', b'0', '2021-05-17 08:50:15', '2021-05-17 08:50:15');
+INSERT INTO `categories` VALUES (279, 'Lập trình', b'1', b'0', '2021-05-17 08:50:33', '2021-05-17 08:50:33');
+INSERT INTO `categories` VALUES (280, 'Lập trình', b'1', b'0', '2021-05-17 08:50:43', '2021-05-17 08:50:43');
+INSERT INTO `categories` VALUES (281, 'Lập trình', b'1', b'0', '2021-05-17 08:51:22', '2021-05-17 08:51:22');
+INSERT INTO `categories` VALUES (282, 'Lập trình', b'1', b'0', '2021-05-17 08:51:30', '2021-05-17 08:51:30');
+INSERT INTO `categories` VALUES (283, 'Lập trình', b'1', b'0', '2021-05-17 08:51:35', '2021-05-17 08:51:35');
+INSERT INTO `categories` VALUES (284, 'Lập trình', b'1', b'0', '2021-05-17 09:08:52', '2021-05-17 09:08:52');
+INSERT INTO `categories` VALUES (285, 'Lập trình', b'1', b'0', '2021-05-17 09:08:54', '2021-05-17 09:08:54');
+INSERT INTO `categories` VALUES (286, 'Lập trình', b'1', b'0', '2021-05-17 09:31:41', '2021-05-17 09:31:41');
+INSERT INTO `categories` VALUES (287, 'Lập trình', b'1', b'0', '2021-05-17 09:33:18', '2021-05-17 09:33:18');
+INSERT INTO `categories` VALUES (288, 'Lập trình', b'1', b'0', '2021-05-17 09:34:31', '2021-05-17 09:34:31');
+INSERT INTO `categories` VALUES (289, 'Lập trình', b'1', b'0', '2021-05-17 09:37:27', '2021-05-17 09:37:27');
+INSERT INTO `categories` VALUES (291, 'Lập trình', b'1', b'0', '2021-05-17 09:41:40', '2021-05-17 09:41:40');
 
 -- ----------------------------
 -- Table structure for course
@@ -373,7 +405,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 2, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 1', 'Course Demo 1', 1000000, 1, 66, '2021-05-16 18:52:35', 2, NULL, 2);
+INSERT INTO `course` VALUES (1, 2, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 1', 'Course Demo 1', 1000000, 1, 66, '2021-05-17 09:41:40', 2, NULL, 2);
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Khóa học demo 2', 'Demo 2', 12288000, 5, 88, '2019-02-03 22:20:54', 2, 6, 2);
 INSERT INTO `course` VALUES (3, 10, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Khóa học demo 3', 'Demo 3', 14929000, 5, 4, '2020-10-25 13:14:43', 2, 6, 2);
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 4', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 2, 6, 2);
@@ -566,8 +598,8 @@ INSERT INTO `learning` VALUES (1, 171, 'Các kiến thức cơ bản, nền món
 INSERT INTO `learning` VALUES (2, 171, 'Các mô hình, kiến trúc cơ bản khi triển khai ứng dụng', b'0');
 INSERT INTO `learning` VALUES (3, 171, 'Các khái niệm, thuật ngữ cốt lõi khi triển khai ứng dụng', b'0');
 INSERT INTO `learning` VALUES (4, 171, 'Hiểu hơn về cách internet và máy vi tính hoạt động', b'0');
-INSERT INTO `learning` VALUES (33, 1, '1', b'0');
-INSERT INTO `learning` VALUES (35, 1, '3', b'0');
+INSERT INTO `learning` VALUES (33, 1, 'Học nữa', b'0');
+INSERT INTO `learning` VALUES (35, 1, 'Học mãi', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -575,28 +607,31 @@ INSERT INTO `learning` VALUES (35, 1, '3', b'0');
 DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE `lesson`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `part_id` bigint(20) NULL DEFAULT NULL,
+  `part_id` bigint(20) NOT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `duration` bigint(20) NULL DEFAULT NULL,
   `video_id` bigint(20) NULL DEFAULT NULL,
+  `deleted` bit(1) NULL DEFAULT b'0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `video_id`(`video_id`) USING BTREE,
   INDEX `part_id`(`part_id`) USING BTREE,
   CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `lesson_ibfk_2` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson
 -- ----------------------------
-INSERT INTO `lesson` VALUES (1, 1, '8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 387, 2);
-INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập trình của Sơn Đặng', 1445, 3);
-INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 1539, 4);
-INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 695, 5);
-INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, 6);
-INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 7);
-INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, 8);
-INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 8);
+INSERT INTO `lesson` VALUES (1, 1, '8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 387, 2, b'0');
+INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập trình của Sơn Đặng', 1445, 3, b'0');
+INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 1539, 4, b'0');
+INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 695, 5, b'0');
+INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, 6, b'0');
+INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 7, b'0');
+INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, 8, b'0');
+INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 8, b'0');
+INSERT INTO `lesson` VALUES (19, 27, 'Xin chào', NULL, 3, b'0');
+INSERT INTO `lesson` VALUES (20, 27, 'Hello', NULL, 1, b'0');
 
 -- ----------------------------
 -- Table structure for ower_course
@@ -639,7 +674,7 @@ CREATE TABLE `part`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `part_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of part
@@ -648,8 +683,8 @@ INSERT INTO `part` VALUES (1, 171, 'Phương pháp học tập', 2, 1832000, b'0
 INSERT INTO `part` VALUES (2, 171, 'Tư duy phát triển', 1, 1539000, b'0');
 INSERT INTO `part` VALUES (3, 171, 'Khái niệm kỹ thuật cần biết', 2, 1539000, b'0');
 INSERT INTO `part` VALUES (4, 171, 'Tham khảo thêm', 3, 1539000, b'0');
-INSERT INTO `part` VALUES (27, 1, '1', 0, 0, b'0');
-INSERT INTO `part` VALUES (29, 1, '3', 0, 0, b'0');
+INSERT INTO `part` VALUES (27, 1, 'Part 1', 0, 0, b'0');
+INSERT INTO `part` VALUES (31, 1, 'Học mãi mãi', 0, 0, b'0');
 
 -- ----------------------------
 -- Table structure for payment
@@ -721,7 +756,7 @@ CREATE TABLE `resource_image`  (
   `update_at` datetime(0) NOT NULL DEFAULT current_timestamp(0),
   `poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 269 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 302 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -739,248 +774,13 @@ INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', 
 INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2);
 INSERT INTO `resource_image` VALUES (12, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50', NULL);
 INSERT INTO `resource_image` VALUES (13, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50', NULL);
-INSERT INTO `resource_image` VALUES (14, '', b'0', '2021-05-16 07:16:36', NULL);
-INSERT INTO `resource_image` VALUES (15, '', b'0', '2021-05-16 07:19:41', NULL);
-INSERT INTO `resource_image` VALUES (16, '', b'0', '2021-05-16 07:37:10', NULL);
-INSERT INTO `resource_image` VALUES (17, '', b'0', '2021-05-16 07:45:19', NULL);
-INSERT INTO `resource_image` VALUES (18, '', b'0', '2021-05-16 07:50:16', NULL);
-INSERT INTO `resource_image` VALUES (19, '', b'0', '2021-05-16 07:54:02', NULL);
-INSERT INTO `resource_image` VALUES (20, '', b'0', '2021-05-16 08:01:33', NULL);
-INSERT INTO `resource_image` VALUES (21, '', b'0', '2021-05-16 08:04:46', NULL);
-INSERT INTO `resource_image` VALUES (22, '', b'0', '2021-05-16 08:06:54', NULL);
-INSERT INTO `resource_image` VALUES (24, '', b'0', '2021-05-16 08:11:29', NULL);
-INSERT INTO `resource_image` VALUES (25, '', b'0', '2021-05-16 09:08:51', NULL);
-INSERT INTO `resource_image` VALUES (26, '', b'0', '2021-05-16 09:08:53', NULL);
-INSERT INTO `resource_image` VALUES (27, '', b'0', '2021-05-16 09:08:55', NULL);
-INSERT INTO `resource_image` VALUES (28, '', b'0', '2021-05-16 09:08:56', NULL);
-INSERT INTO `resource_image` VALUES (29, '', b'0', '2021-05-16 09:08:57', NULL);
-INSERT INTO `resource_image` VALUES (30, '', b'0', '2021-05-16 09:08:58', NULL);
-INSERT INTO `resource_image` VALUES (31, '', b'0', '2021-05-16 09:08:59', NULL);
-INSERT INTO `resource_image` VALUES (32, '', b'0', '2021-05-16 09:08:59', NULL);
-INSERT INTO `resource_image` VALUES (33, '', b'0', '2021-05-16 09:09:00', NULL);
-INSERT INTO `resource_image` VALUES (34, '', b'0', '2021-05-16 09:09:10', NULL);
-INSERT INTO `resource_image` VALUES (35, '', b'0', '2021-05-16 09:09:11', NULL);
-INSERT INTO `resource_image` VALUES (36, '', b'0', '2021-05-16 09:09:12', NULL);
-INSERT INTO `resource_image` VALUES (37, '', b'0', '2021-05-16 09:09:13', NULL);
-INSERT INTO `resource_image` VALUES (38, '', b'0', '2021-05-16 09:09:48', NULL);
-INSERT INTO `resource_image` VALUES (39, '', b'0', '2021-05-16 09:09:49', NULL);
-INSERT INTO `resource_image` VALUES (40, '', b'0', '2021-05-16 09:09:50', NULL);
-INSERT INTO `resource_image` VALUES (41, '', b'0', '2021-05-16 09:11:36', NULL);
-INSERT INTO `resource_image` VALUES (42, '', b'0', '2021-05-16 09:12:07', NULL);
-INSERT INTO `resource_image` VALUES (43, '', b'0', '2021-05-16 09:13:15', NULL);
-INSERT INTO `resource_image` VALUES (44, '', b'0', '2021-05-16 09:19:54', NULL);
-INSERT INTO `resource_image` VALUES (45, '', b'0', '2021-05-16 09:19:55', NULL);
-INSERT INTO `resource_image` VALUES (46, '', b'0', '2021-05-16 09:19:55', NULL);
-INSERT INTO `resource_image` VALUES (47, '', b'0', '2021-05-16 09:19:56', NULL);
-INSERT INTO `resource_image` VALUES (48, '', b'0', '2021-05-16 09:19:57', NULL);
-INSERT INTO `resource_image` VALUES (49, '', b'0', '2021-05-16 09:22:40', NULL);
-INSERT INTO `resource_image` VALUES (50, '', b'0', '2021-05-16 09:22:41', NULL);
-INSERT INTO `resource_image` VALUES (51, '', b'0', '2021-05-16 09:22:42', NULL);
-INSERT INTO `resource_image` VALUES (52, '', b'0', '2021-05-16 09:22:42', NULL);
-INSERT INTO `resource_image` VALUES (53, '', b'0', '2021-05-16 09:23:54', NULL);
-INSERT INTO `resource_image` VALUES (54, '', b'0', '2021-05-16 09:24:05', NULL);
-INSERT INTO `resource_image` VALUES (55, '', b'0', '2021-05-16 09:24:06', NULL);
-INSERT INTO `resource_image` VALUES (56, '', b'0', '2021-05-16 09:24:06', NULL);
-INSERT INTO `resource_image` VALUES (57, '', b'0', '2021-05-16 09:24:07', NULL);
-INSERT INTO `resource_image` VALUES (58, '', b'0', '2021-05-16 09:24:08', NULL);
-INSERT INTO `resource_image` VALUES (59, '', b'0', '2021-05-16 09:24:09', NULL);
-INSERT INTO `resource_image` VALUES (60, '', b'0', '2021-05-16 09:24:09', NULL);
-INSERT INTO `resource_image` VALUES (61, '', b'0', '2021-05-16 09:25:01', NULL);
-INSERT INTO `resource_image` VALUES (62, '', b'0', '2021-05-16 09:25:26', NULL);
-INSERT INTO `resource_image` VALUES (63, '', b'0', '2021-05-16 09:27:45', NULL);
-INSERT INTO `resource_image` VALUES (64, '', b'0', '2021-05-16 09:27:46', NULL);
-INSERT INTO `resource_image` VALUES (65, '', b'0', '2021-05-16 09:27:47', NULL);
-INSERT INTO `resource_image` VALUES (66, '', b'0', '2021-05-16 09:27:47', NULL);
-INSERT INTO `resource_image` VALUES (67, '', b'0', '2021-05-16 09:27:48', NULL);
-INSERT INTO `resource_image` VALUES (68, '', b'0', '2021-05-16 09:27:48', NULL);
-INSERT INTO `resource_image` VALUES (69, '', b'0', '2021-05-16 09:27:49', NULL);
-INSERT INTO `resource_image` VALUES (70, '', b'0', '2021-05-16 09:27:50', NULL);
-INSERT INTO `resource_image` VALUES (71, '', b'0', '2021-05-16 09:27:50', NULL);
-INSERT INTO `resource_image` VALUES (72, '', b'0', '2021-05-16 09:27:51', NULL);
-INSERT INTO `resource_image` VALUES (73, '', b'0', '2021-05-16 09:28:54', NULL);
-INSERT INTO `resource_image` VALUES (74, '', b'0', '2021-05-16 09:57:08', NULL);
-INSERT INTO `resource_image` VALUES (75, '', b'0', '2021-05-16 09:57:12', NULL);
-INSERT INTO `resource_image` VALUES (76, '', b'0', '2021-05-16 09:57:17', NULL);
-INSERT INTO `resource_image` VALUES (78, '', b'0', '2021-05-16 10:00:07', NULL);
-INSERT INTO `resource_image` VALUES (79, '', b'0', '2021-05-16 10:00:14', NULL);
-INSERT INTO `resource_image` VALUES (80, '', b'0', '2021-05-16 10:00:19', NULL);
-INSERT INTO `resource_image` VALUES (81, '', b'0', '2021-05-16 10:00:22', NULL);
-INSERT INTO `resource_image` VALUES (82, '', b'0', '2021-05-16 10:00:25', NULL);
-INSERT INTO `resource_image` VALUES (83, '', b'0', '2021-05-16 10:00:27', NULL);
-INSERT INTO `resource_image` VALUES (84, '', b'0', '2021-05-16 10:00:32', NULL);
-INSERT INTO `resource_image` VALUES (85, '', b'0', '2021-05-16 10:00:34', NULL);
-INSERT INTO `resource_image` VALUES (86, '', b'0', '2021-05-16 10:00:36', NULL);
-INSERT INTO `resource_image` VALUES (87, '', b'0', '2021-05-16 10:00:39', NULL);
-INSERT INTO `resource_image` VALUES (89, '', b'0', '2021-05-16 10:02:31', NULL);
-INSERT INTO `resource_image` VALUES (90, '', b'0', '2021-05-16 15:33:40', NULL);
-INSERT INTO `resource_image` VALUES (91, '', b'0', '2021-05-16 15:40:03', NULL);
-INSERT INTO `resource_image` VALUES (92, '', b'0', '2021-05-16 15:41:12', NULL);
-INSERT INTO `resource_image` VALUES (93, '', b'0', '2021-05-16 15:41:14', NULL);
-INSERT INTO `resource_image` VALUES (94, '', b'0', '2021-05-16 15:41:19', NULL);
-INSERT INTO `resource_image` VALUES (95, '', b'0', '2021-05-16 15:41:41', NULL);
-INSERT INTO `resource_image` VALUES (96, '', b'0', '2021-05-16 15:43:35', NULL);
-INSERT INTO `resource_image` VALUES (97, '', b'0', '2021-05-16 15:43:49', NULL);
-INSERT INTO `resource_image` VALUES (98, '', b'0', '2021-05-16 15:45:10', NULL);
-INSERT INTO `resource_image` VALUES (99, '', b'0', '2021-05-16 15:47:40', NULL);
-INSERT INTO `resource_image` VALUES (100, '', b'0', '2021-05-16 15:48:28', NULL);
-INSERT INTO `resource_image` VALUES (101, '', b'0', '2021-05-16 15:48:49', NULL);
-INSERT INTO `resource_image` VALUES (102, '', b'0', '2021-05-16 15:49:04', NULL);
-INSERT INTO `resource_image` VALUES (103, '', b'0', '2021-05-16 15:49:16', NULL);
-INSERT INTO `resource_image` VALUES (104, '', b'0', '2021-05-16 15:49:47', NULL);
-INSERT INTO `resource_image` VALUES (105, '', b'0', '2021-05-16 15:50:25', NULL);
-INSERT INTO `resource_image` VALUES (106, '', b'0', '2021-05-16 15:52:53', NULL);
-INSERT INTO `resource_image` VALUES (107, '', b'0', '2021-05-16 15:54:16', NULL);
-INSERT INTO `resource_image` VALUES (108, '', b'0', '2021-05-16 15:54:18', NULL);
-INSERT INTO `resource_image` VALUES (109, '', b'0', '2021-05-16 15:54:51', NULL);
-INSERT INTO `resource_image` VALUES (110, '', b'0', '2021-05-16 15:55:12', NULL);
-INSERT INTO `resource_image` VALUES (111, '', b'0', '2021-05-16 15:55:34', NULL);
-INSERT INTO `resource_image` VALUES (112, '', b'0', '2021-05-16 15:56:21', NULL);
-INSERT INTO `resource_image` VALUES (113, '', b'0', '2021-05-16 15:57:24', NULL);
-INSERT INTO `resource_image` VALUES (114, '', b'0', '2021-05-16 16:02:13', NULL);
-INSERT INTO `resource_image` VALUES (115, '', b'0', '2021-05-16 16:02:41', NULL);
-INSERT INTO `resource_image` VALUES (116, '', b'0', '2021-05-16 16:03:35', NULL);
-INSERT INTO `resource_image` VALUES (117, '', b'0', '2021-05-16 16:05:23', NULL);
-INSERT INTO `resource_image` VALUES (118, '', b'0', '2021-05-16 16:06:10', NULL);
-INSERT INTO `resource_image` VALUES (119, '', b'0', '2021-05-16 16:06:35', NULL);
-INSERT INTO `resource_image` VALUES (120, '', b'0', '2021-05-16 16:06:56', NULL);
-INSERT INTO `resource_image` VALUES (121, '', b'0', '2021-05-16 16:14:40', NULL);
-INSERT INTO `resource_image` VALUES (122, '', b'0', '2021-05-16 16:15:07', NULL);
-INSERT INTO `resource_image` VALUES (123, '', b'0', '2021-05-16 16:15:08', NULL);
-INSERT INTO `resource_image` VALUES (124, '', b'0', '2021-05-16 16:15:48', NULL);
-INSERT INTO `resource_image` VALUES (125, '', b'0', '2021-05-16 16:16:00', NULL);
-INSERT INTO `resource_image` VALUES (126, '', b'0', '2021-05-16 16:17:26', NULL);
-INSERT INTO `resource_image` VALUES (127, '', b'0', '2021-05-16 16:18:00', NULL);
-INSERT INTO `resource_image` VALUES (128, '', b'0', '2021-05-16 16:20:37', NULL);
-INSERT INTO `resource_image` VALUES (129, '', b'0', '2021-05-16 16:21:18', NULL);
-INSERT INTO `resource_image` VALUES (130, '', b'0', '2021-05-16 16:21:29', NULL);
-INSERT INTO `resource_image` VALUES (131, '', b'0', '2021-05-16 16:21:37', NULL);
-INSERT INTO `resource_image` VALUES (132, '', b'0', '2021-05-16 16:21:55', NULL);
-INSERT INTO `resource_image` VALUES (133, '', b'0', '2021-05-16 16:22:04', NULL);
-INSERT INTO `resource_image` VALUES (134, '', b'0', '2021-05-16 16:22:38', NULL);
-INSERT INTO `resource_image` VALUES (135, '', b'0', '2021-05-16 16:22:56', NULL);
-INSERT INTO `resource_image` VALUES (136, '', b'0', '2021-05-16 16:23:02', NULL);
-INSERT INTO `resource_image` VALUES (137, '', b'0', '2021-05-16 16:23:41', NULL);
-INSERT INTO `resource_image` VALUES (138, '', b'0', '2021-05-16 16:23:45', NULL);
-INSERT INTO `resource_image` VALUES (139, '', b'0', '2021-05-16 16:25:25', NULL);
-INSERT INTO `resource_image` VALUES (140, '', b'0', '2021-05-16 16:25:34', NULL);
-INSERT INTO `resource_image` VALUES (141, '', b'0', '2021-05-16 16:27:38', NULL);
-INSERT INTO `resource_image` VALUES (142, '', b'0', '2021-05-16 16:28:12', NULL);
-INSERT INTO `resource_image` VALUES (143, '', b'0', '2021-05-16 16:29:06', NULL);
-INSERT INTO `resource_image` VALUES (144, '', b'0', '2021-05-16 16:34:09', NULL);
-INSERT INTO `resource_image` VALUES (145, '', b'0', '2021-05-16 16:35:30', NULL);
-INSERT INTO `resource_image` VALUES (146, '', b'0', '2021-05-16 16:35:36', NULL);
-INSERT INTO `resource_image` VALUES (147, '', b'0', '2021-05-16 16:35:53', NULL);
-INSERT INTO `resource_image` VALUES (148, '', b'0', '2021-05-16 16:38:43', NULL);
-INSERT INTO `resource_image` VALUES (149, '', b'0', '2021-05-16 16:38:45', NULL);
-INSERT INTO `resource_image` VALUES (150, '', b'0', '2021-05-16 16:39:44', NULL);
-INSERT INTO `resource_image` VALUES (151, '', b'0', '2021-05-16 16:41:02', NULL);
-INSERT INTO `resource_image` VALUES (152, '', b'0', '2021-05-16 16:41:42', NULL);
-INSERT INTO `resource_image` VALUES (153, '', b'0', '2021-05-16 16:41:44', NULL);
-INSERT INTO `resource_image` VALUES (162, '', b'0', '2021-05-16 17:01:30', NULL);
-INSERT INTO `resource_image` VALUES (163, '', b'0', '2021-05-16 17:01:51', NULL);
-INSERT INTO `resource_image` VALUES (164, '', b'0', '2021-05-16 17:02:18', NULL);
-INSERT INTO `resource_image` VALUES (165, '', b'0', '2021-05-16 17:02:43', NULL);
-INSERT INTO `resource_image` VALUES (166, '', b'0', '2021-05-16 17:03:42', NULL);
-INSERT INTO `resource_image` VALUES (167, '', b'0', '2021-05-16 17:03:45', NULL);
-INSERT INTO `resource_image` VALUES (168, '', b'0', '2021-05-16 17:04:45', NULL);
-INSERT INTO `resource_image` VALUES (169, '', b'0', '2021-05-16 17:06:29', NULL);
-INSERT INTO `resource_image` VALUES (170, '', b'0', '2021-05-16 17:06:40', NULL);
-INSERT INTO `resource_image` VALUES (171, '', b'0', '2021-05-16 17:06:42', NULL);
-INSERT INTO `resource_image` VALUES (172, '', b'0', '2021-05-16 17:07:15', NULL);
-INSERT INTO `resource_image` VALUES (173, '', b'0', '2021-05-16 17:07:34', NULL);
-INSERT INTO `resource_image` VALUES (174, '', b'0', '2021-05-16 17:07:43', NULL);
-INSERT INTO `resource_image` VALUES (175, '', b'0', '2021-05-16 17:07:56', NULL);
-INSERT INTO `resource_image` VALUES (176, '', b'0', '2021-05-16 17:18:17', NULL);
-INSERT INTO `resource_image` VALUES (177, '', b'0', '2021-05-16 17:23:07', NULL);
-INSERT INTO `resource_image` VALUES (178, '', b'0', '2021-05-16 17:26:24', NULL);
-INSERT INTO `resource_image` VALUES (179, '', b'0', '2021-05-16 17:26:25', NULL);
-INSERT INTO `resource_image` VALUES (180, '', b'0', '2021-05-16 17:29:49', NULL);
-INSERT INTO `resource_image` VALUES (181, '', b'0', '2021-05-16 17:32:54', NULL);
-INSERT INTO `resource_image` VALUES (182, '', b'0', '2021-05-16 17:37:42', NULL);
-INSERT INTO `resource_image` VALUES (183, '', b'0', '2021-05-16 17:37:50', NULL);
-INSERT INTO `resource_image` VALUES (184, '', b'0', '2021-05-16 17:37:55', NULL);
-INSERT INTO `resource_image` VALUES (185, '', b'0', '2021-05-16 17:41:43', NULL);
-INSERT INTO `resource_image` VALUES (186, '', b'0', '2021-05-16 17:44:53', NULL);
-INSERT INTO `resource_image` VALUES (187, '', b'0', '2021-05-16 17:45:14', NULL);
-INSERT INTO `resource_image` VALUES (188, '', b'0', '2021-05-16 17:45:26', NULL);
-INSERT INTO `resource_image` VALUES (189, '', b'0', '2021-05-16 17:46:11', NULL);
-INSERT INTO `resource_image` VALUES (190, '', b'0', '2021-05-16 17:46:12', NULL);
-INSERT INTO `resource_image` VALUES (191, '', b'0', '2021-05-16 17:46:14', NULL);
-INSERT INTO `resource_image` VALUES (192, '', b'0', '2021-05-16 17:46:15', NULL);
-INSERT INTO `resource_image` VALUES (193, '', b'0', '2021-05-16 17:46:46', NULL);
-INSERT INTO `resource_image` VALUES (194, '', b'0', '2021-05-16 17:47:30', NULL);
-INSERT INTO `resource_image` VALUES (195, '', b'0', '2021-05-16 17:47:31', NULL);
-INSERT INTO `resource_image` VALUES (196, '', b'0', '2021-05-16 17:47:33', NULL);
-INSERT INTO `resource_image` VALUES (197, '', b'0', '2021-05-16 17:47:53', NULL);
-INSERT INTO `resource_image` VALUES (198, '', b'0', '2021-05-16 17:47:59', NULL);
-INSERT INTO `resource_image` VALUES (199, '', b'0', '2021-05-16 17:48:00', NULL);
-INSERT INTO `resource_image` VALUES (200, '', b'0', '2021-05-16 17:48:02', NULL);
-INSERT INTO `resource_image` VALUES (201, '', b'0', '2021-05-16 17:48:03', NULL);
-INSERT INTO `resource_image` VALUES (202, '', b'0', '2021-05-16 17:48:05', NULL);
-INSERT INTO `resource_image` VALUES (203, '', b'0', '2021-05-16 17:48:07', NULL);
-INSERT INTO `resource_image` VALUES (204, '', b'0', '2021-05-16 17:48:08', NULL);
-INSERT INTO `resource_image` VALUES (205, '', b'0', '2021-05-16 17:48:09', NULL);
-INSERT INTO `resource_image` VALUES (206, '', b'0', '2021-05-16 17:48:15', NULL);
-INSERT INTO `resource_image` VALUES (207, '', b'0', '2021-05-16 17:48:40', NULL);
-INSERT INTO `resource_image` VALUES (208, '', b'0', '2021-05-16 17:48:45', NULL);
-INSERT INTO `resource_image` VALUES (209, '', b'0', '2021-05-16 17:48:50', NULL);
-INSERT INTO `resource_image` VALUES (210, '', b'0', '2021-05-16 17:49:24', NULL);
-INSERT INTO `resource_image` VALUES (211, '', b'0', '2021-05-16 17:49:53', NULL);
-INSERT INTO `resource_image` VALUES (212, '', b'0', '2021-05-16 17:50:11', NULL);
-INSERT INTO `resource_image` VALUES (214, '', b'0', '2021-05-16 17:51:34', NULL);
-INSERT INTO `resource_image` VALUES (215, '', b'0', '2021-05-16 17:52:16', NULL);
-INSERT INTO `resource_image` VALUES (216, '', b'0', '2021-05-16 17:54:48', NULL);
-INSERT INTO `resource_image` VALUES (217, '', b'0', '2021-05-16 17:55:02', NULL);
-INSERT INTO `resource_image` VALUES (218, '', b'0', '2021-05-16 17:55:08', NULL);
-INSERT INTO `resource_image` VALUES (219, '', b'0', '2021-05-16 17:55:11', NULL);
-INSERT INTO `resource_image` VALUES (220, '', b'0', '2021-05-16 17:57:49', NULL);
-INSERT INTO `resource_image` VALUES (221, '', b'0', '2021-05-16 17:57:51', NULL);
-INSERT INTO `resource_image` VALUES (222, '', b'0', '2021-05-16 17:59:52', NULL);
-INSERT INTO `resource_image` VALUES (223, '', b'0', '2021-05-16 18:00:28', NULL);
-INSERT INTO `resource_image` VALUES (224, '', b'0', '2021-05-16 18:00:31', NULL);
-INSERT INTO `resource_image` VALUES (225, '', b'0', '2021-05-16 18:00:32', NULL);
-INSERT INTO `resource_image` VALUES (226, '', b'0', '2021-05-16 18:01:23', NULL);
-INSERT INTO `resource_image` VALUES (227, '', b'0', '2021-05-16 18:01:42', NULL);
-INSERT INTO `resource_image` VALUES (228, '', b'0', '2021-05-16 18:02:46', NULL);
-INSERT INTO `resource_image` VALUES (229, '', b'0', '2021-05-16 18:08:27', NULL);
-INSERT INTO `resource_image` VALUES (230, '', b'0', '2021-05-16 18:11:03', NULL);
-INSERT INTO `resource_image` VALUES (231, '', b'0', '2021-05-16 18:14:20', NULL);
-INSERT INTO `resource_image` VALUES (232, '', b'0', '2021-05-16 18:14:21', NULL);
-INSERT INTO `resource_image` VALUES (233, '', b'0', '2021-05-16 18:14:22', NULL);
-INSERT INTO `resource_image` VALUES (234, '', b'0', '2021-05-16 18:14:23', NULL);
-INSERT INTO `resource_image` VALUES (235, '', b'0', '2021-05-16 18:14:23', NULL);
-INSERT INTO `resource_image` VALUES (236, '', b'0', '2021-05-16 18:14:24', NULL);
-INSERT INTO `resource_image` VALUES (237, '', b'0', '2021-05-16 18:14:25', NULL);
-INSERT INTO `resource_image` VALUES (238, '', b'0', '2021-05-16 18:14:25', NULL);
-INSERT INTO `resource_image` VALUES (239, '', b'0', '2021-05-16 18:14:32', NULL);
-INSERT INTO `resource_image` VALUES (240, '', b'0', '2021-05-16 18:14:32', NULL);
-INSERT INTO `resource_image` VALUES (241, '', b'0', '2021-05-16 18:14:33', NULL);
-INSERT INTO `resource_image` VALUES (242, '', b'0', '2021-05-16 18:16:54', NULL);
-INSERT INTO `resource_image` VALUES (243, '', b'0', '2021-05-16 18:16:55', NULL);
-INSERT INTO `resource_image` VALUES (244, '', b'0', '2021-05-16 18:18:11', NULL);
-INSERT INTO `resource_image` VALUES (245, '', b'0', '2021-05-16 18:19:17', NULL);
-INSERT INTO `resource_image` VALUES (246, '', b'0', '2021-05-16 18:19:56', NULL);
-INSERT INTO `resource_image` VALUES (247, '', b'0', '2021-05-16 18:21:00', NULL);
-INSERT INTO `resource_image` VALUES (248, '', b'0', '2021-05-16 18:22:10', NULL);
-INSERT INTO `resource_image` VALUES (249, '', b'0', '2021-05-16 18:23:05', NULL);
-INSERT INTO `resource_image` VALUES (250, '', b'0', '2021-05-16 18:23:07', NULL);
-INSERT INTO `resource_image` VALUES (251, '', b'0', '2021-05-16 18:23:42', NULL);
-INSERT INTO `resource_image` VALUES (252, '', b'0', '2021-05-16 18:23:46', NULL);
-INSERT INTO `resource_image` VALUES (253, '', b'0', '2021-05-16 18:23:49', NULL);
-INSERT INTO `resource_image` VALUES (254, '', b'0', '2021-05-16 18:23:54', NULL);
-INSERT INTO `resource_image` VALUES (256, '', b'0', '2021-05-16 18:33:43', NULL);
-INSERT INTO `resource_image` VALUES (257, '', b'0', '2021-05-16 18:35:26', NULL);
-INSERT INTO `resource_image` VALUES (258, '', b'0', '2021-05-16 18:35:48', NULL);
-INSERT INTO `resource_image` VALUES (259, '', b'0', '2021-05-16 18:35:55', NULL);
-INSERT INTO `resource_image` VALUES (260, '', b'0', '2021-05-16 18:48:29', NULL);
-INSERT INTO `resource_image` VALUES (261, '', b'0', '2021-05-16 18:48:34', NULL);
-INSERT INTO `resource_image` VALUES (262, '', b'0', '2021-05-16 18:49:49', NULL);
-INSERT INTO `resource_image` VALUES (263, '', b'0', '2021-05-16 18:49:55', NULL);
-INSERT INTO `resource_image` VALUES (264, '', b'0', '2021-05-16 18:50:51', NULL);
-INSERT INTO `resource_image` VALUES (265, '', b'0', '2021-05-16 18:50:54', NULL);
-INSERT INTO `resource_image` VALUES (266, '', b'0', '2021-05-16 18:52:24', NULL);
-INSERT INTO `resource_image` VALUES (267, '', b'0', '2021-05-16 18:52:31', NULL);
-INSERT INTO `resource_image` VALUES (268, '', b'0', '2021-05-16 18:52:35', NULL);
+INSERT INTO `resource_image` VALUES (294, '', b'0', '2021-05-17 09:08:52', NULL);
+INSERT INTO `resource_image` VALUES (295, '', b'0', '2021-05-17 09:08:54', NULL);
+INSERT INTO `resource_image` VALUES (296, '', b'0', '2021-05-17 09:31:41', NULL);
+INSERT INTO `resource_image` VALUES (297, '', b'0', '2021-05-17 09:33:18', NULL);
+INSERT INTO `resource_image` VALUES (298, '', b'0', '2021-05-17 09:34:31', NULL);
+INSERT INTO `resource_image` VALUES (299, '', b'0', '2021-05-17 09:37:27', NULL);
+INSERT INTO `resource_image` VALUES (301, '', b'0', '2021-05-17 09:41:40', NULL);
 
 -- ----------------------------
 -- Table structure for templates
@@ -1070,25 +870,37 @@ CREATE TABLE `video`  (
   `poster` bigint(20) NULL DEFAULT NULL,
   `duration` int(255) NULL DEFAULT NULL,
   `count_id_linked` int(255) NULL DEFAULT NULL,
+  `actived` bit(1) NULL DEFAULT b'0',
+  `deleted` bit(1) NULL DEFAULT b'0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`poster`) USING BTREE,
   CONSTRAINT `video_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 238 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 256 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL);
-INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL);
+INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', 11, 10000000, NULL, b'0', b'0');
+INSERT INTO `video` VALUES (242, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (243, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (244, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (245, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (246, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (247, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (248, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (249, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (252, NULL, NULL, NULL, NULL, NULL, b'0');
+INSERT INTO `video` VALUES (253, NULL, NULL, NULL, NULL, NULL, b'0');
 
 -- ----------------------------
 -- Triggers structure for table payment
@@ -1122,6 +934,17 @@ CREATE TRIGGER `before_delete_course` BEFORE DELETE ON `payment` FOR EACH ROW BE
 			DELETE FROM user_course WHERE course_id=old.id;
 			DELETE FROM part WHERE course_id=old.id;
 			DELETE FROM learning WHERE course_id=old.id;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table video
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_delete_video`;
+delimiter ;;
+CREATE TRIGGER `before_delete_video` BEFORE DELETE ON `video` FOR EACH ROW BEGIN
+			DELETE FROM lesson WHERE video_id=old.id ;
 	 END
 ;;
 delimiter ;
