@@ -22,7 +22,7 @@ import vn.edu.topedu.entity.AHasResource;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.ResourceImage;
-import vn.edu.topedu.json.object.JsonResponse;
+import vn.edu.topedu.json.JsonResponse;
  
 @Entity
 @Table(name = "Course")

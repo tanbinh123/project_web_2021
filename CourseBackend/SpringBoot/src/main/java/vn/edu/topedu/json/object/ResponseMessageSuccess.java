@@ -1,5 +1,7 @@
 package vn.edu.topedu.json.object;
 
+import vn.edu.topedu.json.JsonResponse;
+
 public class ResponseMessageSuccess implements JsonResponse {
 	private boolean isSuccess;
 	private String message;

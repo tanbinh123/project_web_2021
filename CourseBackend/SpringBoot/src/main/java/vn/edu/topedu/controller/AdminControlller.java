@@ -43,7 +43,7 @@ import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.fileprocess.FileProcess;
-import vn.edu.topedu.json.object.JsonResponse;
+import vn.edu.topedu.json.JsonResponse;
 import vn.edu.topedu.json.object.ResponseMessageSuccess;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.utils.WebUtils;

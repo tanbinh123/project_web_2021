@@ -3,8 +3,8 @@ package vn.edu.topedu.response;
 import java.util.List;
 
 import vn.edu.topedu.entity.course.Course;
-import vn.edu.topedu.json.object.JsonResponse;
-import vn.edu.topedu.json.ultis.JsonFactoryUltis;
+import vn.edu.topedu.json.JsonFactoryUltis;
+import vn.edu.topedu.json.JsonResponse;
 
 public class PageResponse implements JsonResponse {
 	

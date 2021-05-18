@@ -1,6 +1,4 @@
-package vn.edu.topedu.json.object;
-
-import vn.edu.topedu.json.ultis.JsonFactoryUltis;
+package vn.edu.topedu.json;
 
 public interface JsonResponse {
 	public default String toJsonString() {

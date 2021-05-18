@@ -1,5 +1,7 @@
 package vn.edu.topedu.json.object;
 
+import vn.edu.topedu.json.JsonResponse;
+
 public class ResponseNull  implements JsonResponse {
 	private boolean isNull;
 	public ResponseNull() {
