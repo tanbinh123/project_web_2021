@@ -9,7 +9,7 @@ document
 							.getElementById(input.getAttribute('id')
 								+ '-hidden'), inputValue = input.value;
 
-				hiddenInput.value = "0";
+				hiddenInput.value = null;
 
 				for (var i = 0; i < options.length; i++) {
 					var option = options[i];

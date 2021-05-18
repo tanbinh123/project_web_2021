@@ -34,25 +34,23 @@ public class PreviewCourseEntity extends AHasResource {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "img_poster_id", referencedColumnName = "id")
-    private ResourceImage poster;
-	
-	
+	@JoinColumn(name = "img_poster_id", referencedColumnName = "id")
+	private ResourceImage poster;
 
 	@Column(name = "description", length = 255)
 	private String description = "";
 	@Column(name = "title", length = 255, nullable = false)
 	private String title = "";
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "demo_id", referencedColumnName = "id")
+	@JoinColumn(name = "demo_id", referencedColumnName = "id")
 	private VideoEntity demo;
 	@Column(name = "update_at", nullable = false)
 	private Date updateAt = new Date();
 	@Column(name = "price", length = 15, nullable = false)
 	private BigDecimal price = new BigDecimal(0);
-	
+
 	@JsonIgnore
 	@Column(name = "Deleted", length = 1, nullable = false)
 	private Boolean deleted = false;
@@ -63,8 +61,6 @@ public class PreviewCourseEntity extends AHasResource {
 //	@OneToMany(mappedBy = "detailCourseEntity")
 //	@JsonIgnore
 //	private List<OwerCourse> owerCourse;
-	
-	
 
 	public List<Learning> getLearning() {
 		return learning;
@@ -85,8 +81,6 @@ public class PreviewCourseEntity extends AHasResource {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 
 	public String getDescription() {
 		return description;
@@ -120,9 +114,6 @@ public class PreviewCourseEntity extends AHasResource {
 		this.price = price;
 	}
 
-	
-
-	
 	public Date getUpdateAt() {
 		return updateAt;
 	}
@@ -146,7 +137,7 @@ public class PreviewCourseEntity extends AHasResource {
 	public void setParts(List<PartReview> parts) {
 		this.parts = parts;
 	}
-	
+
 	public ResourceImage getPoster() {
 		return poster;
 	}
@@ -154,21 +145,23 @@ public class PreviewCourseEntity extends AHasResource {
 	public void setPoster(ResourceImage poster) {
 		this.poster = poster;
 	}
-	
+
 	@Override
 	public void setBeforeResource(String beforeResource) {
-		this.poster.setBeforeResource(beforeResource);
-		this.demo.setBeforeResource(beforeResource);
-		this.parts.forEach(e->e.getLessons().forEach(x-> x.getVideo().setBeforeResource(beforeResource)));
+		if (poster != null)
+			this.poster.setBeforeResource(beforeResource);
+		if (demo != null)
+			this.demo.setBeforeResource(beforeResource);
+		if (parts != null)
+			this.parts.forEach(e -> {
+				if (e.getLessons() != null)
+					e.getLessons().forEach(x -> {
+						if (x.getVideo() != null)
+							x.getVideo().setBeforeResource(beforeResource);
+					});
+
+			});
 		super.setBeforeResource(beforeResource);
 	}
-	
-
-	
-	
-
-
-	
-	
 
 }

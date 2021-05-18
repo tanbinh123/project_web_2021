@@ -1,5 +1,9 @@
 package vn.edu.topedu.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -7,10 +11,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +27,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -32,6 +42,7 @@ import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.course.full.VideoEntity;
+import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.json.object.JsonResponse;
 import vn.edu.topedu.json.object.ResponseMessageSuccess;
 import vn.edu.topedu.response.PageResponse;
@@ -74,11 +85,11 @@ public class AdminControlller {
 //	private static final Logger LOG = LoggerFactory.getLogger(AdminControlller.class);
 	
 	@GetMapping("/admin/course/{fullcourse}")
-	public String adminCourse(HttpServletRequest serverHttpRequest,Map<String, Object> model, @PathVariable FullCourse fullcourse) {
+	public String adminCourse(HttpServletRequest httpServletRequest,Map<String, Object> model, @PathVariable FullCourse fullcourse) {
 		FullCourse c = fullcourse;
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);
 		List<ResourceImage> images = resourceImageDAO.getResourceImages(Long.valueOf("2"));
-		String bef=WebUtils.getUrl(serverHttpRequest);
+		String bef=WebUtils.getUrl(httpServletRequest);
 		c.setBeforeResource(bef);
 		images.forEach(e->{
 			e.setBeforeResource(bef);
@@ -101,14 +112,14 @@ public class AdminControlller {
 	}
 	
 	@PostMapping("/admin/course/{idCourse}")
-	public String adminCourse(HttpServletRequest serverHttpRequest,@ModelAttribute FullCourse c,Map<String, Object> model, @PathVariable long idCourse) {
+	public String adminCourse(HttpServletRequest httpServletRequest,@ModelAttribute FullCourse c,Map<String, Object> model, @PathVariable long idCourse) {
 		System.err.println("POST");
 		c.setUpdateAt(new Date());
 		c=courseDAO.updateFullCourse(c);
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);
 		List<VideoEntity> videos = courseDAO.getVideos(-1);
 		List<ResourceImage> images = resourceImageDAO.getResourceImages(Long.valueOf("2"));
-		String bef=WebUtils.getUrl(serverHttpRequest);
+		String bef=WebUtils.getUrl(httpServletRequest);
 		c.setBeforeResource(bef);
 		images.forEach(e->{
 			e.setBeforeResource(bef);
@@ -129,7 +140,7 @@ public class AdminControlller {
 	
 	
 	@GetMapping(value = "/admin/courses")
-	public String list(HttpServletRequest serverHttpRequest
+	public String list(HttpServletRequest httpServletRequest
 			, @RequestParam(defaultValue = "-1") int _page 
 			, @RequestParam(defaultValue = "10") int _limit 
 			, @RequestParam(defaultValue = "id:asc") String _sort 
@@ -150,12 +161,70 @@ public class AdminControlller {
 		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category, _search);
 		long countRows=courseDAO.getCount(category, _search);
 		for(Course c:lstCourse) {
-			c.setBeforeResource(WebUtils.getUrl(serverHttpRequest));
+			c.setBeforeResource(WebUtils.getUrl(httpServletRequest));
 			
 		}
 		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, countRows,_sort, _filter);
 		model.put("pageResponse", pageResponse);
+		String homeUrl = WebUtils.getUrl(httpServletRequest, 3000);
+		model.put("homeUrl",homeUrl);
 		return "courses";
+	}
+	
+	@PostMapping(value = "/admin/upload/video/multipartfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> testUploadFilePart(@RequestPart("name") String name,
+			@RequestPart("file") MultipartFile file) {
+		String pathContain = "test";
+		try {
+			System.out.println(String.format("Name: %s", name));
+			System.out.println(String.format("File: %s", file.getOriginalFilename()));
+			File p = FileProcess.getPath(pathContain, file.getOriginalFilename()).toFile();
+			System.out.println(p.getAbsolutePath());
+			p.getParentFile().mkdirs();
+			InputStream initialStream = file.getInputStream();
+			OutputStream outStream = new FileOutputStream(p);
+
+			byte[] buffer = new byte[8 * 1024];
+			int bytesRead;
+			while ((bytesRead = initialStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+			IOUtils.closeQuietly(initialStream);
+			IOUtils.closeQuietly(outStream);
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+
+	}
+	
+	@PostMapping(value = "/admin/upload/image/multipartfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> testUploadImage(@RequestPart("name") String name,
+			@RequestPart("file") MultipartFile file) {
+		String pathContain = "test";
+		try {
+			System.out.println(String.format("Name: %s", name));
+			System.out.println(String.format("File: %s", file.getOriginalFilename()));
+			File p = FileProcess.getPath(pathContain, file.getOriginalFilename()).toFile();
+			System.out.println(p.getAbsolutePath());
+			p.getParentFile().mkdirs();
+			InputStream initialStream = file.getInputStream();
+			OutputStream outStream = new FileOutputStream(p);
+
+			byte[] buffer = new byte[8 * 1024];
+			int bytesRead;
+			while ((bytesRead = initialStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+			IOUtils.closeQuietly(initialStream);
+			IOUtils.closeQuietly(outStream);
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+
 	}
 
 }

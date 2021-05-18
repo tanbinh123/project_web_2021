@@ -45,6 +45,10 @@
 		varStatus="status">
 		<c:out value="${i}" />
 	</c:forEach> --%>
+	<br/>
+	Click on this
+	<strong><a href="${homeUrl}">link</a></strong> to visit Home Page
+	
 	<script>
 		var pagination = JSON
 				.parse('${pageResponse.pagination.toJsonString()}');

@@ -52,6 +52,15 @@ public class WebUtils {
 	public static String getUrl(HttpServletRequest httpServletRequest) {
 		return String.format("%s://%s:%d/", httpServletRequest.getScheme(),httpServletRequest.getServerName(),httpServletRequest.getServerPort());
 	}
+	/**
+	 * 
+	 * @param httpServletRequest
+	 * @param port 
+	 * @return scheme://servername:%port/
+	 */
+	public static String getUrl(HttpServletRequest httpServletRequest, int port) {
+		return String.format("%s://%s:%d/", httpServletRequest.getScheme(),httpServletRequest.getServerName(),port);
+	}
 	 public static String getIpAddress(HttpServletRequest request) {
 	        String ipAdress;
 	        try {

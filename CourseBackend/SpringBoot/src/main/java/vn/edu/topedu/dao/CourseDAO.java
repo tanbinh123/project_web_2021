@@ -165,10 +165,16 @@ public class CourseDAO {
 
 	@Transactional
 	public FullCourse updateFullCourse(FullCourse course) {
-		if (course.getCategoryId().equals(Long.valueOf("0"))) {
+		if (course.getCategoryId()==null) {
 			entityManager.persist(course.getCategory());
 			entityManager.flush();
+			course.setCategoryId(course.getCategory().getId());
+		}else {
+			course.getCategory().setId(course.getCategoryId());
 		}
+		System.err.println("getCategoryId"+course.getCategoryId());
+		if(! (course.getImgPosterId()==null))
+		course.getPoster().setId(course.getImgPosterId());
 		if(course.getLearnings()!=null) {
 			for (Learning l : course.getLearnings()) {
 				l.setCourseId(course.getId());
@@ -214,9 +220,12 @@ public class CourseDAO {
 			int rs=deleteAllPartDeleted();
 			System.out.println("delete part: "+ rs);
 		}
+//		course.setCategory(findCatetoryById(course.getCategoryId()));
+//		course.setPoster(findImageById(course.getImgPosterId()));
 		FullCourse rs = entityManager.merge(course);
-		rs.setCategory(findCatetoryById(rs.getCategoryId()));
-		rs.setPoster(findImageById(rs.getImgPosterId()));
+		
+//		rs.setCategory(findCatetoryById(rs.getCategoryId()));
+//		rs.setPoster(findImageById(rs.getImgPosterId()));
 		if(rs.getParts()!=null)
 		rs.getParts().forEach(e->{
 			if(e.getLessons()!=null)

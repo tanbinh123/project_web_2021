@@ -13,16 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import vn.edu.topedu.entity.AHasResource;
 import vn.edu.topedu.entity.CategoryEntity;
-import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.ResourceImage;
 
 @Entity
@@ -37,9 +33,8 @@ public class FullCourse extends AHasResource {
 	@JsonIgnore
 	@Column(name = "img_poster_id", nullable = false)
 	private Long imgPosterId;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
-	// @Transient
 	private ResourceImage poster;
 
 	@Column(name = "description", length = 255)
@@ -47,7 +42,6 @@ public class FullCourse extends AHasResource {
 	@Column(name = "title", length = 255, nullable = false)
 	private String title = "";
 	@ManyToOne(cascade = CascadeType.ALL)
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "demo_id", referencedColumnName = "id")
 	private VideoEntity demo;
 	@Column(name = "update_at", nullable = false)
