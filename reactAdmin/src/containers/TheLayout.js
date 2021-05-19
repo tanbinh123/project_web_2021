@@ -1,25 +1,20 @@
-import React from 'react'
-import {
-  TheContent,
-  TheSidebar,
-  TheFooter,
-  TheHeader
-} from './index'
+import React from "react";
+import { TheContent, TheFooter, TheSidebar } from ".";
+import TheHeader from "./TheHeader";
 
-const TheLayout = () => {
-
+function TheLayout(props) {
   return (
     <div className="c-app c-default-layout">
-      <TheSidebar/>
+      <TheSidebar />
       <div className="c-wrapper">
-        <TheHeader/>
+        <TheHeader />
         <div className="c-body">
-          <TheContent/>
+          <TheContent />
         </div>
-        <TheFooter/>
+        <TheFooter />
       </div>
     </div>
-  )
+  );
 }
 
-export default TheLayout
+export default TheLayout;

@@ -1,27 +1,30 @@
-import 'react-app-polyfill/ie11'; // For IE 11 support
-import 'react-app-polyfill/stable';
-import 'core-js';
-import './polyfill'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import "core-js";
+import { SnackbarProvider } from "notistack";
+import React from "react";
+import "react-app-polyfill/ie11"; // For IE 11 support
+import "react-app-polyfill/stable";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import App2 from "./App2";
+import { icons } from "./assets/icons";
+import "./polyfill";
+import * as serviceWorker from "./serviceWorker";
+import store from "./store";
 
-import { icons } from './assets/icons'
-
-import { Provider } from 'react-redux'
-import store from './store'
-
-React.icons = icons
+React.icons = icons;
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App/>
-  </Provider>,
-  document.getElementById('root')
+  <RecoilRoot>
+    <BrowserRouter>
+      <SnackbarProvider maxSnack={3}>
+        <Provider store={store}>
+          <App2 />
+        </Provider>
+      </SnackbarProvider>
+    </BrowserRouter>
+  </RecoilRoot>,
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();

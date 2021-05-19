@@ -1,27 +1,21 @@
-import React, { Component, lazy } from "react";
+import React, { Suspense } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
+import { TheLayout } from "./containers";
+import Login from "./views/pages/login/Login";
+import Page404 from "./views/pages/page404/Page404";
+import Page500 from "./views/pages/page500/Page500";
+import Register from "./views/pages/register/Register";
 import "./scss/style.scss";
-
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
   </div>
 );
-
-// Containers
-const TheLayout = lazy(() => import("./containers/TheLayout"));
-
-// Pages
-const Login = lazy(() => import("./views/pages/login/Login"));
-const Register = lazy(() => import("./views/pages/register/Register"));
-const Page404 = lazy(() => import("./views/pages/page404/Page404"));
-const Page500 = lazy(() => import("./views/pages/page500/Page500"));
-
-class App extends Component {
-  render() {
-    return (
+function App2(props) {
+  return (
+    <div className="root">
       <HashRouter>
-        <React.Suspense fallback={loading}>
+        <Suspense fallback={loading}>
           <Switch>
             <Route
               exact
@@ -53,10 +47,10 @@ class App extends Component {
               render={(props) => <TheLayout {...props} />}
             />
           </Switch>
-        </React.Suspense>
+        </Suspense>
       </HashRouter>
-    );
-  }
+    </div>
+  );
 }
 
-export default App;
+export default App2;
