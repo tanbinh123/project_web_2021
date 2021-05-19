@@ -45,7 +45,8 @@
 		varStatus="status">
 		<c:out value="${i}" />
 	</c:forEach> --%>
-	<br/>
+	<!-- <br /> -->
+	<div></div>
 	Click on this
 	<strong><a href="${homeUrl}">link</a></strong> to visit Home Page
 	

@@ -81,6 +81,7 @@ public class VideoEntity extends AHasResource {
 	}
 	
 	@Override
+//	@Mapping
 	public void setBeforeResource(String beforeResource) {
 		if(this.video!=null)
 		if(!this.video.contains("http")

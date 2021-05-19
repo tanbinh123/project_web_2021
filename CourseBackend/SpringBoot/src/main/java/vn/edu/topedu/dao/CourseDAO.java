@@ -157,83 +157,97 @@ public class CourseDAO {
 	}
 
 	public ResourceImage findImageById(Long id) {
+		if(id==null)return null;
 		return this.entityManager.find(ResourceImage.class, id);
 	}
+	
+	public VideoEntity findVideoById(Long id) {
+		if(id==null)return null;
+		return this.entityManager.find(VideoEntity.class, id);
+	}
+
 	public CategoryEntity findCatetoryById(Integer id) {
 		return this.entityManager.find(CategoryEntity.class, id);
 	}
 
-	@Transactional
-	public FullCourse updateFullCourse(FullCourse course) {
-		if (course.getCategoryId()==null) {
+	@Transactional(rollbackFor=Exception.class)
+	public FullCourse updateFullCourse(FullCourse course) throws Exception {
+		if (course.getCategoryId() == null) {
 			entityManager.persist(course.getCategory());
 			entityManager.flush();
 			course.setCategoryId(course.getCategory().getId());
-		}else {
+		} else {
 			course.getCategory().setId(course.getCategoryId());
 		}
-		System.err.println("getCategoryId"+course.getCategoryId());
-		if(! (course.getImgPosterId()==null))
-		course.getPoster().setId(course.getImgPosterId());
-		if(course.getLearnings()!=null) {
+		///System.err.println("getImgPosterId" + course.getImgPosterId());
+		if (course.getImgPosterId() == null) throw new Exception(String.format("rollBack, IsNull: %s", "getImgPosterId"));
+		if (course.getVideoDemoId() == null) throw new Exception(String.format("rollBack, IsNull: %s", "getVideoDemoId"));
+		course.setPoster(findImageById(course.getImgPosterId()));
+		course.setDemo(findVideoById(course.getVideoDemoId()));
+		//course.setDemo(demo);
+//			//course.getPoster().setId(course.getImgPosterId());
+//		}else {
+//			course.setPoster(null);
+//		}
+		if (course.getLearnings() != null) {
 			for (Learning l : course.getLearnings()) {
 				l.setCourseId(course.getId());
-				if(l.getId()==null) {
-					if(l.getDeleted()==false)
-					entityManager.persist(l);
-				}else {
+				if (l.getId() == null) {
+					if (l.getDeleted() == false)
+						entityManager.persist(l);
+				} else {
 					entityManager.merge(l);
 				}
 				entityManager.flush();
-				
+
 			}
-			int rs=deleteAllLearningDeleted();
-			System.out.println("delete learning: "+ rs);
+			int rs = deleteAllLearningDeleted();
+			System.err.println("delete learning: " + rs);
 		}
-		
-		if(course.getParts()!=null) {
+
+		if (course.getParts() != null) {
 			for (Part part : course.getParts()) {
 				part.setCourseId(course.getId());
-				if(part.getId()==null) {
-					if(part.getDeleted()==false)
-					entityManager.persist(part);
-				}else {
+				if (part.getId() == null) {
+					if (part.getDeleted() == false)
+						entityManager.persist(part);
+				} else {
 					entityManager.merge(part);
-					if(part.getLessons()!=null) {
-						for(Lesson le: part.getLessons()) {
+					if (part.getLessons() != null) {
+						for (Lesson le : part.getLessons()) {
 							le.setPartId(part.getId());
-							if(le.getId()==null) {
-								//System.err.println("is lesson"+le.getDescription());
-								if(le.getDeleted()==false)
-								entityManager.persist(le);
-							}else {
+							if (le.getId() == null) {
+								if (le.getDeleted() == false)
+									entityManager.persist(le);
+							} else {
+								le.setVideo(findVideoById(le.getId()));
 								entityManager.merge(le);
 							}
+							//System.err.println("");
 						}
-						
+
 						deleteAllLessonDeleted();
 					}
 				}
 				entityManager.flush();
-				
+
 			}
-			int rs=deleteAllPartDeleted();
-			System.out.println("delete part: "+ rs);
+			int rs = deleteAllPartDeleted();
+			System.err.println("delete part: " + rs);
 		}
 //		course.setCategory(findCatetoryById(course.getCategoryId()));
-//		course.setPoster(findImageById(course.getImgPosterId()));
 		FullCourse rs = entityManager.merge(course);
-		
+
 //		rs.setCategory(findCatetoryById(rs.getCategoryId()));
 //		rs.setPoster(findImageById(rs.getImgPosterId()));
-		if(rs.getParts()!=null)
-		rs.getParts().forEach(e->{
-			if(e.getLessons()!=null)
-			e.getLessons().forEach(a->{
-				a.setVideo(this.entityManager.find(VideoEntity.class, a.getVideoId()));
+		if (rs.getParts() != null)
+			rs.getParts().forEach(e -> {
+				if (e.getLessons() != null)
+					e.getLessons().forEach(a -> {
+						a.setVideo(this.entityManager.find(VideoEntity.class, a.getVideoId()));
+					});
 			});
-		});
-		//		rs.set
+		// rs.set
 		return rs;
 	}
 
@@ -246,25 +260,25 @@ public class CourseDAO {
 			return true;
 		return false;
 	}
-	
+
 	public int deleteAllLearningDeleted() {
 
-		int rs = entityManager.createNativeQuery("Delete from  learning where deleted=1")
-				.executeUpdate();
+		int rs = entityManager.createNativeQuery("Delete from  learning where deleted=1").executeUpdate();
 		return rs;
 	}
+
 	public int deleteAllPartDeleted() {
 
-		int rs = entityManager.createNativeQuery("Delete from  part where deleted=1")
-				.executeUpdate();
+		int rs = entityManager.createNativeQuery("Delete from  part where deleted=1").executeUpdate();
 		return rs;
 	}
+
 	public int deleteAllLessonDeleted() {
 
-		int rs = entityManager.createNativeQuery("Delete from  lesson where deleted=1")
-				.executeUpdate();
+		int rs = entityManager.createNativeQuery("Delete from  lesson where deleted=1").executeUpdate();
 		return rs;
 	}
+
 	public List<CategoryEntity> getCategories(int actived) {
 
 		String sql = "Select c from CategoryEntity c " + " where c.deleted=false ";
@@ -276,10 +290,10 @@ public class CourseDAO {
 		return query.getResultList();
 
 	}
-	
+
 	public List<VideoEntity> getVideos(int actived) {
 
-		String sql = "Select c from "+VideoEntity.class.getName()+" c  where c.deleted=false ";
+		String sql = "Select c from " + VideoEntity.class.getName() + " c  where c.deleted=false ";
 		if (actived < 2 && actived > -1) {
 			sql += String.format("and c.actived = %d ", actived);
 		}

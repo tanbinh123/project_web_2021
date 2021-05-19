@@ -21,7 +21,11 @@
 		</c:forEach>
 
 	</datalist>
-
+	<datalist id="images">
+		<c:forEach var="poster" items="${images}">
+			<option data-value="${poster.id}">${poster.image}</option>
+		</c:forEach>
+	</datalist>
 
 	<h1>Detail Course</h1>
 	<h4>Course Id ${fullcourse.id}</h4>
@@ -64,16 +68,16 @@
 
 			<tr>
 				<td><label for="poster">Poster</label></td>
-				<td><form:input id="poster" path="poster.image" list="images" />
-					<datalist id="images">
-						<c:forEach var="poster" items="${images}">
-							<option data-value="${poster.id}">${poster.image}</option>
-						</c:forEach>
-
-					</datalist> <form:input type="hidden" path="imgPosterId" id="poster-hidden" />
-					<%-- <form:input type="hidden" path="poster.path" id="poster-hidden" /> --%>
-
+				<td>
+					<form:input id="poster" path="poster.image" list="images" />
+					<form:input type="hidden" path="imgPosterId" id="poster-hidden" />
 				</td>
+			</tr>
+
+			<tr>
+				<td><label for="demo">Demo</label></td>
+				<td><form:input id="demo" path="demo.urlVideo" list="videos" />
+					<form:input type="hidden" path="videoDemoId" id="demo-hidden" /></td>
 			</tr>
 
 			<tr>
@@ -144,7 +148,7 @@
 
 											<div
 												id="part-index-${status.index}-lesson-index-${statusLesson.index}"
-												style="display: flex;flex:1;overflow: auto;">
+												style="display: flex; flex: 1; overflow: auto;">
 												<form:input type="hidden"
 													path="parts[${status.index}].lessons[${statusLesson.index}].id" />
 												<form:input type="hidden"
@@ -193,13 +197,9 @@
 	<strong><a href="/admin/courses">link</a></strong> to visit list course
 	page.
 	<script>
-		/* var indexL = parseInt("${fullcourse.learnings.size()}");
-		var indexP = parseInt("${fullcourse.parts.size()}"); */
 	</script>
 	<script src="/admin/js/course.js">
 		
 	</script>
-
-
 </body>
 </html>

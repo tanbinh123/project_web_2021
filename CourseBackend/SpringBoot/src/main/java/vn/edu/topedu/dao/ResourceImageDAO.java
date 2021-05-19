@@ -30,9 +30,7 @@ public class ResourceImageDAO {
 	}
 
 	public List<ResourceImage> getResourceImages(Long userId) {
-
 		String sql = "Select e from "+ResourceImage.class.getName()+" e " + " where e.deleted=false and e.appUser.id =:userId ";
-		
 		Query query = this.entityManager.createQuery(sql, ResourceImage.class);
 		 query.setParameter("userId", userId);
 		return query.getResultList();

@@ -29,21 +29,32 @@ public class FullCourse extends AHasResource {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-
+	
+	@Column(name = "demo_id", length = 20, nullable = false)
 	@JsonIgnore
+	private Long videoDemoId;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "demo_id", referencedColumnName = "id" ,insertable = false, updatable = false)
+	private VideoEntity demo;
+
 	@Column(name = "img_poster_id", nullable = false)
+	@JsonIgnore
 	private Long imgPosterId;
-	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private ResourceImage poster;
 
 	@Column(name = "description", length = 255)
 	private String description = "";
+	
+	
 	@Column(name = "title", length = 255, nullable = false)
 	private String title = "";
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "demo_id", referencedColumnName = "id")
-	private VideoEntity demo;
+	
+	
+	
 	@Column(name = "update_at", nullable = false)
 	private Date updateAt = new Date();
 	@Column(name = "price", length = 15, nullable = false)
@@ -63,6 +74,16 @@ public class FullCourse extends AHasResource {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
 	private CategoryEntity category;
+
+	
+	
+	public Long getVideoDemoId() {
+		return videoDemoId;
+	}
+
+	public void setVideoDemoId(Long videoDemoId) {
+		this.videoDemoId = videoDemoId;
+	}
 
 	public Long getImgPosterId() {
 		return imgPosterId;
