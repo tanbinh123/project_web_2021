@@ -12,6 +12,7 @@ import { colorBlack1 } from "../color/color";
 import { convertVND } from "../tools/Tools";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import ButtonSmallGreen from "../Button/ButtonSmallGreen";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "sticky",
@@ -97,7 +98,7 @@ CardCourseDetail.defaultProps = {
 export default function CardCourseDetail(props) {
   const classes = useStyles();
   const { onClickOpenVideo, poster, course } = props;
-  //console.log(poster);
+  // console.log(course);
   var background1 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) no-repeat center center / cover,url("${poster}") no-repeat center center / cover`;
 
   function handleOnClickOpenVideo() {
@@ -105,7 +106,6 @@ export default function CardCourseDetail(props) {
     onClickOpenVideo();
   }
 
-  
   //console.log("init cardCourseDetail", course);
 
   return (
@@ -125,8 +125,14 @@ export default function CardCourseDetail(props) {
         />
       </div>
       <div className={classes.content}>
-        <p className={classes.price}>{convertVND(course?.price || 0)}</p>
-        {!course.isFull?  <ButtonSmall onClickBuy={props.onClickBuy} title="Đăng Kí Học" />: "Đã Mua"}
+        {!course.isFull && (
+          <p className={classes.price}>{convertVND(course?.price || 0)}</p>
+        )}
+        {!course.isFull ? (
+          <ButtonSmall onClickBuy={props.onClickBuy} title="Đăng Kí Học" />
+        ) : (
+          <ButtonSmallGreen title="Đã Mua" disabled={true} size="large" />
+        )}
         <ul>
           <li>
             <LibraryBooks />

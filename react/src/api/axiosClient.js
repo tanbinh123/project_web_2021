@@ -1,9 +1,9 @@
 import axios from "axios";
 import { removeLocalStorage } from "../app/DataUser";
 const axiosClient = axios.create({
-  // baseURL: "http://localhost:25001/",
+  baseURL: "http://localhost:25001/",
   //baseURL: "http://192.168.0.222:25001/",
-  baseURL: "http://192.168.0.111:25001/",
+  // baseURL: "http://192.168.0.111:25001/",
   // baseURL: "http://192.168.0.222:80/",
   //  baseURL: "http://192.168.0.111:80/",
   // headers: {
@@ -16,14 +16,16 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   function (config) {
     // console.log(config);
-    // Do something before request is 
-    
-    config.headers.Authorization =  `Bearer ${localStorage.getItem("access_token")}`;
+    // Do something before request is
+
+    config.headers.Authorization = `Bearer ${localStorage.getItem(
+      "access_token"
+    )}`;
     return config;
   },
   function (error) {
     // Do something with request error
-    console.log('error1',{error});
+    console.log("error1", { error });
     return Promise.reject(error);
   }
 );
@@ -39,7 +41,7 @@ axiosClient.interceptors.response.use(
   function (error) {
     if (error.response && error.response.status === 401) {
       console.log("token expire");
-      window.location = '/auth/login';
+      window.location = "/auth/login";
       removeLocalStorage();
     }
 

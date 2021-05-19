@@ -5,6 +5,8 @@ import "././css/Actived.css";
 import ButtonClick from "../../../components/Button/ButtonClick";
 import { useHistory, useParams } from "react-router";
 import userApi from "../../../api/userApi";
+import { useRecoilState } from "recoil";
+import { DataUser } from "../../../app/DataUser";
 
 Actived.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -46,22 +48,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Actived(props) {
   let params = useParams();
+  const [dataUser, setDataUser] = useRecoilState(DataUser);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
   const { push } = useHistory();
   const handleOnClick = () => {
     push("/");
   };
-  useEffect( async () => {
-    console.log("Goi Api");
-    const payload = {
-      code: `${params?.code}`,
-    };
-    const res = await userApi.actived(payload);
-    console.log(res);
-    setLoading(false);
+  useEffect(async () => {
+    if (dataUser.profile.actived) {
+      push("/");
+    } else {
+      console.log("Goi Api");
+      const payload = {
+        code: `${params?.code}`,
+      };
+      const res = await userApi.actived(payload);
+      console.log(res);
+      setLoading(false);
+    }
   }, []);
-  console.log(params?.code);
+  // console.log(params?.code);
   return (
     <Grid container className={classes.root}>
       {loading ? (

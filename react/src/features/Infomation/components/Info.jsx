@@ -1,9 +1,4 @@
-import {
-  Avatar,
-
-
-  Grid
-} from "@material-ui/core";
+import { Avatar, Grid } from "@material-ui/core";
 import { Camera } from "@material-ui/icons";
 import React from "react";
 import { isEmpty } from "../../../components/tools/Tools";
@@ -21,16 +16,16 @@ function Info(props) {
             <li>
               <Avatar
                 className={classes.avatarRight}
-                alt={props?.profile?.username}
-                src={
-                  props?.profile?.avatar?.image
-                }
+                alt={props?.profile?.userName}
+                src={props?.profile?.avatar?.image}
               >
                 <Camera />
               </Avatar>
             </li>
             <li>
-              <span>{props?.profile?.username}</span>
+              <span>
+                {props?.profile?.fullname || props?.profile?.userName}
+              </span>
             </li>
           </ul>
         </Grid>
@@ -40,11 +35,11 @@ function Info(props) {
             <li>
               <span>
                 Giới tính: {/* <i className="fas fa-mars"></i> */}
-
-                {props?.profile?.gender==='NAM'?
-                <i className="fas fa-mars"></i>:
-                <i className="fas fa-venus" title="Nữ"></i>}
-               
+                {props?.profile?.gender === "NAM" ? (
+                  <i className="fas fa-mars"></i>
+                ) : (
+                  <i className="fas fa-venus" title="Nữ"></i>
+                )}
               </span>
             </li>
             <li>Ngày sinh: {props?.profile?.birthDay}</li>
@@ -70,9 +65,7 @@ function Info(props) {
             <span>Giới Thiệu</span>
           </li>
           <li>
-            <span>
-              {props?.profile?.description}
-            </span>
+            <span>{props?.profile?.description}</span>
           </li>
         </ul>
       </div>

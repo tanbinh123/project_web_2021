@@ -29,6 +29,9 @@ function CustomInput(props) {
     label = "",
     value = "",
     type = "string",
+    fullWidth = true,
+    multiline = false,
+    rows = 1,
   } = props;
   const { control, formState } = form;
   const classes = useStyles();
@@ -44,7 +47,9 @@ function CustomInput(props) {
           label={label}
           type={type}
           margin="normal"
-          fullWidth
+          fullWidth={fullWidth}
+          multiline={multiline}
+          rows={rows}
           error={!!formState.errors?.[name]}
           helperText={formState.errors?.[name]?.message}
           {...field}

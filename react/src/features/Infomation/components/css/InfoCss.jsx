@@ -23,7 +23,9 @@ const InfoCss = makeStyles((theme) => ({
           marginRight: "20px",
         },
         "&>li:last-child": {
-          fontSize: "35px",
+          fontSize: "25px",
+          margin: "5px 0",
+          fontWeight: 600,
         },
       },
       //ben phai

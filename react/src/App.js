@@ -26,6 +26,7 @@ function App(props) {
         <Route path="/auth/login" component={Login} exact />
         <Route path="/auth/register" component={Register} exact />
         <Route path="/course" component={CourseFeatures} />
+        <Route path="/setting-account/active/:code" component={Actived} exact />
         <Route path="/setting-account" component={InfomationFeature} />
         <Route path="/form-upload-one" component={UploadOneFile} exact />
         {/* <Route
@@ -38,7 +39,6 @@ function App(props) {
         <Route path="/testsearch" component={TestSearch} exact />
         <Route path="/testcolor" component={CssColor} exact />
         <Route path="/setvalue" component={SetValue} exact />
-        <Route path="/actived" component={Actived} exact />
         <Route path="/admin" component={AdminRouter} />
         <Route path="/*" component={NotFound404} />
         <Route path="/auth/*" component={NotFound404} />

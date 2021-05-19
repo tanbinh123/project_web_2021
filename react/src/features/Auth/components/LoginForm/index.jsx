@@ -116,11 +116,17 @@ function LoginForm(props) {
           }}
         />
         <span className={classes.title}>Login</span>
-        <CustomInput label="Username" name="username" form={form} />
+        <CustomInput
+          label="Username"
+          name="username"
+          form={form}
+          fullWidth={true}
+        />
         <CustomInput
           name="password"
           label="Password"
           type="password"
+          fullWidth={true}
           form={form}
         />
         <Link to="/forgot-password" className={classes.text3}>
