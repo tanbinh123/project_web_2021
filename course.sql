@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 19/05/2021 09:31:35
+ Date: 19/05/2021 18:07:00
 */
 
 SET NAMES utf8mb4;
@@ -103,18 +103,13 @@ CREATE TABLE `categories`  (
   `create_time` datetime(0) NOT NULL DEFAULT utc_timestamp,
   `update_time` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
 INSERT INTO `categories` VALUES (1, 'Genshin Impact', b'1', b'0', '2021-05-14 04:28:32', '2021-05-14 04:28:32');
-INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-18 13:32:20', '2021-05-18 13:32:20');
-INSERT INTO `categories` VALUES (3, 'Test Category', b'1', b'0', '2021-05-18 13:04:11', '2021-05-18 13:04:11');
-INSERT INTO `categories` VALUES (7, 'Test Category 1', b'1', b'0', '2021-05-18 13:42:14', '2021-05-18 13:42:14');
-INSERT INTO `categories` VALUES (8, 'Test Category 2', b'1', b'0', '2021-05-18 13:54:57', '2021-05-18 13:54:57');
-INSERT INTO `categories` VALUES (9, '', b'1', b'0', '2021-05-18 13:55:26', '2021-05-18 13:55:26');
-INSERT INTO `categories` VALUES (10, 'Test Category 3', b'1', b'0', '2021-05-19 02:17:31', '2021-05-19 02:17:31');
+INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38');
 
 -- ----------------------------
 -- Table structure for course
@@ -136,13 +131,15 @@ CREATE TABLE `course`  (
   `category_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `img_poster_id`(`img_poster_id`) USING BTREE,
-  CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `category_id`(`category_id`) USING BTREE,
+  CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `course_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 172 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 1, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 1', 'Course Demo 1', 1000000, 1, 66, '2021-05-19 02:17:31', 2, 1, 10);
+INSERT INTO `course` VALUES (1, 67, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 1', 'Course Demo 1', 1000000, 1, 66, '2021-05-19 10:57:38', 2, 1, 2);
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Khóa học demo 2', 'Demo 2', 12288000, 5, 88, '2019-02-03 22:20:54', 2, 6, 2);
 INSERT INTO `course` VALUES (3, 10, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Khóa học demo 3', 'Demo 3', 14929000, 5, 4, '2020-10-25 13:14:43', 2, 6, 2);
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 4', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 2, 6, 2);
@@ -513,7 +510,7 @@ CREATE TABLE `resource_image`  (
   `update_at` datetime(0) NOT NULL DEFAULT current_timestamp(0),
   `poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -531,6 +528,8 @@ INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', 
 INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2);
 INSERT INTO `resource_image` VALUES (12, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50', 2);
 INSERT INTO `resource_image` VALUES (13, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50', 2);
+INSERT INTO `resource_image` VALUES (67, 'user/admin/image/girl.bmp', b'0', '2021-05-19 10:56:44', 2);
+INSERT INTO `resource_image` VALUES (69, 'user/admin/image/girl.bmp', b'0', '2021-05-19 11:02:25', 2);
 
 -- ----------------------------
 -- Table structure for spring_session
@@ -553,7 +552,7 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('835102bd-72b9-4d17-9afe-c6c8acd141c9', '05614d7d-6b4a-4543-b845-bcc1450473f3', 1621383314192, 1621391141360, 1800, 1621392941360, NULL);
+INSERT INTO `spring_session` VALUES ('5b45c142-e549-4d20-982a-41694d70bd2e', 'eda79218-7491-4278-a940-aba0bafe0338', 1621416938093, 1621422382164, 1800, 1621424182164, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -570,8 +569,8 @@ CREATE TABLE `spring_session_attributes`  (
 -- ----------------------------
 -- Records of spring_session_attributes
 -- ----------------------------
-INSERT INTO `spring_session_attributes` VALUES ('835102bd-72b9-4d17-9afe-c6c8acd141c9', 'javax.servlet.jsp.jstl.fmt.request.charset', 0xACED00057400055554462D38);
-INSERT INTO `spring_session_attributes` VALUES ('835102bd-72b9-4d17-9afe-c6c8acd141c9', 'username', 0xACED000574000561646D696E);
+INSERT INTO `spring_session_attributes` VALUES ('5b45c142-e549-4d20-982a-41694d70bd2e', 'javax.servlet.jsp.jstl.fmt.request.charset', 0xACED00057400055554462D38);
+INSERT INTO `spring_session_attributes` VALUES ('5b45c142-e549-4d20-982a-41694d70bd2e', 'username', 0xACED000574000561646D696E);
 
 -- ----------------------------
 -- Table structure for templates

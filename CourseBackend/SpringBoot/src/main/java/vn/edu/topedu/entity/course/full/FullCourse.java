@@ -219,4 +219,6 @@ public class FullCourse extends AHasResource {
 		super.setBeforeResource(beforeResource);
 	}
 
+
+	
 }

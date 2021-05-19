@@ -36,6 +36,7 @@ public class ResourceImage extends AHasResource {
 	@JsonIgnore
 	private AppUser appUser;
 
+
 	public ResourceImage() {
 		super();
 	}
@@ -64,9 +65,7 @@ public class ResourceImage extends AHasResource {
 		this.updateAt = updateAt;
 	}
 
-	public String getImage() {
-		return ((this.beforeResource != null) ? this.beforeResource : "") + VariableConst.RESOURCE_BEFORE + this.path;
-	}
+
 
 	public Boolean getDeleted() {
 		return deleted;
@@ -86,12 +85,20 @@ public class ResourceImage extends AHasResource {
 
 	@Override
 	public void setBeforeResource(String beforeResource) {
-		if(this.path!=null)
-		if (!this.path.contains("http")
-				||!this.path.contains("data:image")
-		) {
-			super.setBeforeResource(beforeResource);
-		}
+		if(checkExtendResource())super.setBeforeResource("");else super.setBeforeResource(beforeResource);
 	}
 
+	public boolean checkExtendResource() {
+		if (this.path != null
+				&& (this.path.contains("http") || this.path.contains("data:image"))) {
+			return true;
+		}
+		return false;
+	}
+	public String getImage() {
+		return ((this.beforeResource != null && this.beforeResource!="") ? this.beforeResource + VariableConst.RESOURCE_BEFORE : "")  + this.path;
+	}
+
+
+	
 }

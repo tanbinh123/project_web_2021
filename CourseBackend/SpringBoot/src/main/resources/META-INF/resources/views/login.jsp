@@ -17,7 +17,8 @@
 		<table>
 			<tr>
 				<td><label for="username">Username</label></td>
-				<td><form:input id="username" path="username" /></td>
+				<td><form:input id="username" path="username" /> <form:input type="hidden"
+						path="urlReturn" /></td>
 			</tr>
 			<tr>
 				<td><label for="password">Password</label></td>

@@ -34,7 +34,22 @@ public class ResourceImageDAO {
 		Query query = this.entityManager.createQuery(sql, ResourceImage.class);
 		 query.setParameter("userId", userId);
 		return query.getResultList();
-
+	}
+	public List<ResourceImage> getResourceImages(String  userName) {
+		String sql = "Select e from "+ResourceImage.class.getName()+" e " + " where e.deleted=false and e.appUser.userName =:userName ";
+		Query query = this.entityManager.createQuery(sql, ResourceImage.class);
+		 query.setParameter("userName", userName);
+		return query.getResultList();
+	}
+	
+	public ResourceImage save(ResourceImage image) {
+		if(image.getId()!=null) {
+			return entityManager.merge(image);
+		}else {
+			entityManager.persist(image);
+			entityManager.flush();
+			return image;
+		}
 	}
 
 }

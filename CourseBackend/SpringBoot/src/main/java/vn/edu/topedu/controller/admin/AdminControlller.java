@@ -30,6 +30,7 @@ import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.jwt.security.PBKDF2Encoder;
 import vn.edu.topedu.request.AuthRequest;
+import vn.edu.topedu.request.LoginFormRedirect;
 
 @Controller
 public class AdminControlller {
@@ -50,19 +51,20 @@ public class AdminControlller {
 	private AppUserDAO appUserDAO;
 	@GetMapping("/admin/login")
 	public String adminLogin(HttpServletRequest httpServletRequest,Map<String, Object> model, HttpSession httpSession) {
-		AuthRequest authRequest=new AuthRequest();
+		LoginFormRedirect authRequest=new LoginFormRedirect();
+		authRequest.setUrlReturn("/admin");
 		model.put("formLogin", authRequest);
 		return "login";
 	}
 	
 	@PostMapping("/admin/login")
-	public String adminLoginPost(HttpServletRequest httpServletRequest,@ModelAttribute AuthRequest authRequest,Map<String, Object> model, HttpSession httpSession) {
+	public String adminLoginPost(HttpServletRequest httpServletRequest,@ModelAttribute LoginFormRedirect authRequest,Map<String, Object> model, HttpSession httpSession) {
 		System.out.println(String.format("Username: %s", authRequest.getUsername()));
 		System.out.println(String.format("Password: %s", authRequest.getPassword()));
 		AppUser user = appUserDAO.findUserAccount(authRequest.getUsername());
 		if (user!=null&&passwordEncoder.encode(authRequest.getPassword()).equals(user.getEncrytedPassword())) {
 			httpSession.setAttribute("username", user.getUserName());
-			return "redirect:/admin/courses";
+			return "redirect:"+authRequest.getUrlReturn();
 		} else {
 			model.put("formLogin", authRequest); 
 		}
@@ -74,60 +76,6 @@ public class AdminControlller {
 	
 	
 	
-	@PostMapping(value = "/admin/upload/video/multipartfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	@ResponseBody
-	public ResponseEntity<Object> testUploadFilePart(@RequestPart("name") String name,
-			@RequestPart("file") MultipartFile file) {
-		String pathContain = "test";
-		try {
-			System.out.println(String.format("Name: %s", name));
-			System.out.println(String.format("File: %s", file.getOriginalFilename()));
-			File p = FileProcess.getPath(pathContain, file.getOriginalFilename()).toFile();
-			System.out.println(p.getAbsolutePath());
-			p.getParentFile().mkdirs();
-			InputStream initialStream = file.getInputStream();
-			OutputStream outStream = new FileOutputStream(p);
-
-			byte[] buffer = new byte[8 * 1024];
-			int bytesRead;
-			while ((bytesRead = initialStream.read(buffer)) != -1) {
-				outStream.write(buffer, 0, bytesRead);
-			}
-			IOUtils.closeQuietly(initialStream);
-			IOUtils.closeQuietly(outStream);
-			return ResponseEntity.ok().build();
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-
-	}
 	
-	@PostMapping(value = "/admin/upload/image/multipartfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	@ResponseBody
-	public ResponseEntity<Object> testUploadImage(@RequestPart("name") String name,
-			@RequestPart("file") MultipartFile file) {
-		String pathContain = "test";
-		try {
-			System.out.println(String.format("Name: %s", name));
-			System.out.println(String.format("File: %s", file.getOriginalFilename()));
-			File p = FileProcess.getPath(pathContain, file.getOriginalFilename()).toFile();
-			System.out.println(p.getAbsolutePath());
-			p.getParentFile().mkdirs();
-			InputStream initialStream = file.getInputStream();
-			OutputStream outStream = new FileOutputStream(p);
-
-			byte[] buffer = new byte[8 * 1024];
-			int bytesRead;
-			while ((bytesRead = initialStream.read(buffer)) != -1) {
-				outStream.write(buffer, 0, bytesRead);
-			}
-			IOUtils.closeQuietly(initialStream);
-			IOUtils.closeQuietly(outStream);
-			return ResponseEntity.ok().build();
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-
-	}
 
 }

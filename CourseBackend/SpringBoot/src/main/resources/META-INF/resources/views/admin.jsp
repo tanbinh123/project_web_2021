@@ -11,18 +11,9 @@
 </head>
 
 <body>
+	<a href="/admin/upload/image/multipartfile"> Upload Image</a>
+	<a href="/admin/courses"> Courses</a>
 
-	<form action="/admin/upload/image/multipartfile" method="post"  enctype="multipart/form-data" >
-		<table>
-			<tr>
-				<td><label for=file>File</label></td>
-				<td><input id="file" type="file" name="file" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="Upload" /></td>
-			</tr>
-		</table>
-	</form>
 	<script>
 		
 	</script>

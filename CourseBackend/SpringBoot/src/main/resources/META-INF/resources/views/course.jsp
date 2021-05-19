@@ -69,7 +69,7 @@
 			<tr>
 				<td><label for="poster">Poster</label></td>
 				<td>
-					<form:input id="poster" path="poster.image" list="images" />
+					<input id="poster" name="poster.path" value="${fullcourse.poster.image}" list="images" />
 					<form:input type="hidden" path="imgPosterId" id="poster-hidden" />
 				</td>
 			</tr>

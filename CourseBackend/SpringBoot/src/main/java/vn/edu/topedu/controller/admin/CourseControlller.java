@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -24,6 +25,7 @@ import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.jwt.security.PBKDF2Encoder;
+import vn.edu.topedu.request.LoginFormRedirect;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -46,10 +48,20 @@ public class CourseControlller {
 
 	@GetMapping("/admin/course/{fullcourse}")
 	public String adminCourse(HttpServletRequest httpServletRequest, Map<String, Object> model,
-			@PathVariable FullCourse fullcourse) {
+			@PathVariable FullCourse fullcourse, HttpSession httpSession) {
+		String username = (String) httpSession.getAttribute("username");
+		if (username == null) {
+			LoginFormRedirect authRequest=new LoginFormRedirect();
+			authRequest.setUrlReturn("/admin/upload/image/multipartfile");
+			model.put("formLogin", authRequest);
+			return "login";
+		}
+		
+		
 		FullCourse c = fullcourse;
+		System.err.println(c.getPoster().getImage());
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);
-		List<ResourceImage> images = resourceImageDAO.getResourceImages(Long.valueOf("2"));
+		List<ResourceImage> images = resourceImageDAO.getResourceImages(username);
 		String bef = WebUtils.getUrl(httpServletRequest);
 		c.setBeforeResource(bef);
 		images.forEach(e -> {
@@ -75,18 +87,25 @@ public class CourseControlller {
 
 	@PostMapping("/admin/course/{idCourse}")
 	public String adminCourse(HttpServletRequest httpServletRequest, @ModelAttribute FullCourse c,
-			Map<String, Object> model, @PathVariable long idCourse) {
+			Map<String, Object> model, @PathVariable long idCourse, HttpSession httpSession) {
+		
+		String username = (String) httpSession.getAttribute("username");
+		if (username == null) {
+			LoginFormRedirect authRequest=new LoginFormRedirect();
+			authRequest.setUrlReturn("/admin/upload/image/multipartfile");
+			model.put("formLogin", authRequest);
+			return "login";
+		}
 		System.err.println("POST");
 		c.setUpdateAt(new Date());
 		try {
 			c = courseDAO.updateFullCourse(c);
 		} catch (Exception e1) {
 			c = courseDAO.getFullCourse(idCourse);
-			System.err.println(e1.getMessage());
 		}
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);
 		List<VideoEntity> videos = courseDAO.getVideos(-1);
-		List<ResourceImage> images = resourceImageDAO.getResourceImages(Long.valueOf("2"));
+		List<ResourceImage> images = resourceImageDAO.getResourceImages(username);
 		String bef = WebUtils.getUrl(httpServletRequest);
 		c.setBeforeResource(bef);
 		images.forEach(e -> {
