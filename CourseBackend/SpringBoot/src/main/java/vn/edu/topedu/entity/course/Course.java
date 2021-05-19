@@ -28,10 +28,6 @@ import vn.edu.topedu.json.JsonResponse;
 @Table(name = "Course")
 public class Course extends AHasResource implements JsonResponse {
      
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
  
     
     
@@ -45,17 +41,12 @@ public class Course extends AHasResource implements JsonResponse {
     private String description="";
     @Column(name = "title", length = 255, nullable = false)
     private String title="";
-    @Column(name = "update_at", nullable = false)
-    private Date updateAt=new Date();
     @Column(name = "price", length = 15, nullable = false)
     private BigDecimal price=new BigDecimal(0);
     @Column(name = "bought", length = 10, nullable = false)
     private int bought=0;
     @Column(name = "rateStar", length = 10, nullable = false)
     private double rateStar=0;
-    @JsonIgnore
-    @Column(name = "Deleted", length = 1, nullable = false )
-    private Boolean deleted =false;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "poster_id", nullable = false)
@@ -133,12 +124,6 @@ public class Course extends AHasResource implements JsonResponse {
 	}
 	public void setRateStar(double rateStar) {
 		this.rateStar = rateStar;
-	}
-	public Date getUpdateAt() {
-		return updateAt;
-	}
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
 	}
 	
 	public String getThumbnail() {

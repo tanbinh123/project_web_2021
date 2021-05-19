@@ -89,7 +89,7 @@ public class CourseDAO {
 
 	public long getCount(int category, String _search) {
 		String sql = null;
-		if (_search.length() == 0) {
+		if (_search==null||_search.length() == 0) {
 			sql = "Select count(*) from " + Course.class.getName() + " c " //
 					+ " where c.deleted=0 ";
 
@@ -102,7 +102,7 @@ public class CourseDAO {
 		if (category != -1)
 			sql += String.format(" and c.category.id = %d ", category);
 		Query query = this.entityManager.createQuery(sql, Long.class);
-		if (_search.length() != 0) {
+		if (_search!=null&&_search.length() != 0) {
 			query.setParameter("search", _search);
 		}
 		return (long) query.getSingleResult();

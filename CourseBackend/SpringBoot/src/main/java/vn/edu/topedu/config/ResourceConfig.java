@@ -11,7 +11,7 @@ public class ResourceConfig {
 
 		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
 		source.setBasenames("messages/label"
-				//,"messages/label"
+				,"messages/chart/chart"
 				);
 		source.setUseCodeAsDefaultMessage(true);
 

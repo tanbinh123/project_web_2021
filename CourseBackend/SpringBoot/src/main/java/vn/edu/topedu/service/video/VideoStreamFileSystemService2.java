@@ -1,4 +1,4 @@
-package vn.edu.topedu.service;
+package vn.edu.topedu.service.video;
 
 import static vn.edu.topedu.constants.ApplicationConstants.ACCEPT_RANGES;
 import static vn.edu.topedu.constants.ApplicationConstants.BYTES;
@@ -24,8 +24,8 @@ import org.springframework.stereotype.Service;
 
 import vn.edu.topedu.fileprocess.FileProcess;
 
-@Service
-public class VideoStreamFileSystemService implements IVideoStreamService {
+
+public class VideoStreamFileSystemService2 implements IVideoStreamService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -88,7 +88,7 @@ public class VideoStreamFileSystemService implements IVideoStreamService {
      */
     public byte[] readByteRange(String filename, long start, long end) throws IOException {
         
-    	Path path = FileProcess.getPath(filename);
+    	Path path = FileProcess.getPathVideo(filename);
         try (InputStream inputStream = (Files.newInputStream(path));
              ByteArrayOutputStream bufferedOutputStream = new ByteArrayOutputStream()) {
             byte[] data = new byte[BYTE_RANGE];
@@ -113,7 +113,7 @@ public class VideoStreamFileSystemService implements IVideoStreamService {
      */
     public Long getFileSize(String fileName) {
         return Optional.ofNullable(fileName)
-                .map(file -> Paths.get(FileProcess.PATH, file))
+                .map(file -> Paths.get(FileProcess.PATH+FileProcess.VIDEO, file))
                 .map(this::sizeFromFile)
                 .orElse(0L);
     }

@@ -1,4 +1,4 @@
-package vn.edu.topedu.service;
+package vn.edu.topedu.service.video;
 
 
 import org.springframework.http.ResponseEntity;
