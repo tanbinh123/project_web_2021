@@ -18,6 +18,7 @@ import vn.edu.topedu.fileprocess.FileProcess;
 public class ResourceController {
 	@RequestMapping(value = "/image/{user}/{fileName}", produces = MediaType.IMAGE_PNG_VALUE)
 	public @ResponseBody byte[] getFile(@PathVariable String fileName,@PathVariable String user) {
+		//System.err.println("????");
 		try {
 			Path path = FileProcess.getPathImage(user+"\\"+fileName);
 			InputStream in = Files.newInputStream(path);

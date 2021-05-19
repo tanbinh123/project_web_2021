@@ -147,7 +147,7 @@ public class Course extends AHasResource implements JsonResponse {
 	
 	
 	public String getImgAvatar() {
-		return this.beforeResource+appUser.getAvatar().getImage();
+		return appUser.getAvatar().getImage();
 	}
 	
 	public String getNameAuthor() {
@@ -157,7 +157,17 @@ public class Course extends AHasResource implements JsonResponse {
 	public String getCategoryName() {
 		return this.category.getName();
 	}
-	
+	@Override
+	public void setBeforeResource(String beforeResource) {
+		if (this.poster != null)
+			this.poster.setBeforeResource(beforeResource);
+		if (this.appUser != null && this.appUser.getAvatar()!=null)
+			this.appUser.getAvatar().setBeforeResource(beforeResource);
+		
+		
+
+		super.setBeforeResource(beforeResource);
+	}
 	
 	
 	

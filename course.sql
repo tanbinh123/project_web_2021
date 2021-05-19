@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 19/05/2021 18:07:00
+ Date: 19/05/2021 22:02:14
 */
 
 SET NAMES utf8mb4;
@@ -516,7 +516,7 @@ CREATE TABLE `resource_image`  (
 -- Records of resource_image
 -- ----------------------------
 INSERT INTO `resource_image` VALUES (1, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2);
-INSERT INTO `resource_image` VALUES (2, 'user/user/image/ganyu-h-1.jpg', b'0', '2021-05-19 01:20:05', 2);
+INSERT INTO `resource_image` VALUES (2, 'user/user/image/ganyu-h-1.png', b'0', '2021-05-19 01:20:05', 2);
 INSERT INTO `resource_image` VALUES (3, 'user/user/image/ganyu-h-2.jpg', b'0', '2021-04-05 14:48:50', 2);
 INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '2021-04-05 14:48:50', 2);
 INSERT INTO `resource_image` VALUES (5, 'user/user/image/ganyu-h-4.jpg', b'0', '2021-04-05 14:48:50', 2);
@@ -552,7 +552,8 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('5b45c142-e549-4d20-982a-41694d70bd2e', 'eda79218-7491-4278-a940-aba0bafe0338', 1621416938093, 1621422382164, 1800, 1621424182164, NULL);
+INSERT INTO `spring_session` VALUES ('17f88a4a-6e57-403a-ad29-bab4a84787eb', '30a8a4ee-acc3-4196-bd50-6b05f8b89844', 1621435269297, 1621435269297, 1800, 1621437069297, NULL);
+INSERT INTO `spring_session` VALUES ('8eb34c05-7f05-4a7e-83c9-7e8a557f1218', '56105acb-e050-45ac-aeb4-20b167ff604b', 1621435077573, 1621436364305, 1800, 1621438164305, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -565,12 +566,6 @@ CREATE TABLE `spring_session_attributes`  (
   PRIMARY KEY (`SESSION_PRIMARY_ID`, `ATTRIBUTE_NAME`) USING BTREE,
   CONSTRAINT `SPRING_SESSION_ATTRIBUTES_FK` FOREIGN KEY (`SESSION_PRIMARY_ID`) REFERENCES `spring_session` (`PRIMARY_ID`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session_attributes
--- ----------------------------
-INSERT INTO `spring_session_attributes` VALUES ('5b45c142-e549-4d20-982a-41694d70bd2e', 'javax.servlet.jsp.jstl.fmt.request.charset', 0xACED00057400055554462D38);
-INSERT INTO `spring_session_attributes` VALUES ('5b45c142-e549-4d20-982a-41694d70bd2e', 'username', 0xACED000574000561646D696E);
 
 -- ----------------------------
 -- Table structure for templates
