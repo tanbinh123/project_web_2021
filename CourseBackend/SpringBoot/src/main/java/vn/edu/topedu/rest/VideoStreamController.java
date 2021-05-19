@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import vn.edu.topedu.service.IVideoStreamService;
+import vn.edu.topedu.service.video.IVideoStreamService;
 
 @RestController
 @RequestMapping("/video")

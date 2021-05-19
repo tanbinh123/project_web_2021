@@ -30,10 +30,6 @@ import vn.edu.topedu.entity.course.full.VideoEntity;
 @Table(name = "Course")
 public class PreviewCourseEntity extends AHasResource {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
-	private Long id;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id")
@@ -46,14 +42,9 @@ public class PreviewCourseEntity extends AHasResource {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "demo_id", referencedColumnName = "id")
 	private VideoEntity demo;
-	@Column(name = "update_at", nullable = false)
-	private Date updateAt = new Date();
 	@Column(name = "price", length = 15, nullable = false)
 	private BigDecimal price = new BigDecimal(0);
 
-	@JsonIgnore
-	@Column(name = "Deleted", length = 1, nullable = false)
-	private Boolean deleted = false;
 	@OneToMany(mappedBy = "course")
 	private List<Learning> learning;
 	@OneToMany(mappedBy = "course")
@@ -114,13 +105,7 @@ public class PreviewCourseEntity extends AHasResource {
 		this.price = price;
 	}
 
-	public Date getUpdateAt() {
-		return updateAt;
-	}
-
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
-	}
+	
 
 	public VideoEntity getDemo() {
 		return demo;

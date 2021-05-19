@@ -5,5 +5,9 @@ public interface JsonResponse {
 		return JsonFactoryUltis.covertToJsonString(this);
 	}
 	
+	public default String toJsonStringFromObject(Object object) {
+		return JsonFactoryUltis.covertToJsonString(object);
+	}
+	
 
 }

@@ -25,10 +25,6 @@ import vn.edu.topedu.entity.ResourceImage;
 @Table(name = "Course")
 public class FullCourse extends AHasResource {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
-	private Long id;
 	
 	@Column(name = "demo_id", length = 20, nullable = false)
 	@JsonIgnore
@@ -55,14 +51,9 @@ public class FullCourse extends AHasResource {
 	
 	
 	
-	@Column(name = "update_at", nullable = false)
-	private Date updateAt = new Date();
 	@Column(name = "price", length = 15, nullable = false)
 	private BigDecimal price = new BigDecimal(0);
 
-	@JsonIgnore
-	@Column(name = "Deleted", length = 1, nullable = false)
-	private Boolean deleted = false;
 	@OneToMany(mappedBy = "course")
 	private List<Learning> learnings;
 	@OneToMany(mappedBy = "course")
@@ -161,9 +152,6 @@ public class FullCourse extends AHasResource {
 //		this.price = price;
 //	}
 
-	public Date getUpdateAt() {
-		return updateAt;
-	}
 
 	public BigDecimal getPrice() {
 		return price;
@@ -173,9 +161,6 @@ public class FullCourse extends AHasResource {
 		this.price = price;
 	}
 
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
-	}
 
 	public VideoEntity getDemo() {
 		return demo;

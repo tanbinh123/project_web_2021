@@ -19,18 +19,10 @@ import vn.edu.topedu.consts.VariableConst;
 @Entity
 @Table(name = "Resource_Image")
 public class ResourceImage extends AHasResource {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
-	private Long id;
+	
 	@Column(name = "img_path", length = 36, nullable = false)
 	private String path = "";
-	@Column(name = "updateAt", length = 36, nullable = false)
-	private Date updateAt = new Date();
-	@Column(name = "deleted", length = 1, nullable = false)
-	@JsonIgnore
-	private Boolean deleted = false;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "poster_id", nullable = false)
 	@JsonIgnore
@@ -41,13 +33,7 @@ public class ResourceImage extends AHasResource {
 		super();
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 	public String getPath() {
 		return path;
@@ -57,23 +43,9 @@ public class ResourceImage extends AHasResource {
 		this.path = path;
 	}
 
-	public Date getUpdateAt() {
-		return updateAt;
-	}
-
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
-	}
+	
 
 
-
-	public Boolean getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(Boolean deleted) {
-		this.deleted = deleted;
-	}
 
 	public AppUser getAppUser() {
 		return appUser;
