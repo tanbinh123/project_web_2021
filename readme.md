@@ -54,6 +54,8 @@ VNPAY:
 
 Tài khoản ngân hàng dùng để test thanh toán
 
+
+
 <table>
      <thead>
         <tr>
@@ -81,19 +83,6 @@ Tài khoản ngân hàng dùng để test thanh toán
 </table>
 
 
+[Danh sách tài khoản test]( https://sandbox.vnpayment.vn/apis/vnpay-demo/)
 
-
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-
-```mermaid
-graph TD
-    fa:fa-check-->fa:fa-coffee
-```
-
-![dog](https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*)
+![eula](https://upanh.nhatkythuthuat.com/images/2021/05/13/image-1.jpg)
