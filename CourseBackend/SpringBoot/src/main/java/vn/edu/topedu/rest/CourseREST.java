@@ -38,6 +38,7 @@ import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.response.PageResponse;
+import vn.edu.topedu.response.PageResponse.Pagination;
 import vn.edu.topedu.response.model.CourseResponse;
 import vn.edu.topedu.rest.PaymentREST.PaymnetResponse;
 import vn.edu.topedu.utils.WebUtils;
@@ -67,32 +68,40 @@ public class CourseREST implements IMyHost {
 		return ResponseEntity.ok(c);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<Object> list(HttpServletRequest serverHttpRequest
 			, @RequestParam(defaultValue = "-1") int _page 
 			, @RequestParam(defaultValue = "-1") int _limit 
 			, @RequestParam(defaultValue = "id:asc") String _sort 
 			, @RequestParam(defaultValue = "") String _search 
-			, @RequestParam(defaultValue = "-1") int category 
+			, @RequestParam(defaultValue = "-1") int _category 
 			) {
-		String _filter = "";
-		if(category!=-1)
-			_filter+=String.format("category=%d&", category);
-		if(_search.length()!=0)
-			_filter+=String.format("_search=%s&", _search);
-		if(_filter.length()>0&&_filter.charAt(_filter.length()-1)=='&') {
-			_filter=_filter.substring(0, _filter.length()-1);
-		}
+	
 		
 		_page=(_page<=0)?1:_page;
-		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category, _search);
-		long countRows=courseDAO.getCount(category, _search);
+		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, _category, _search);
+		long countRows=courseDAO.getCount(_category, _search);
 		//System.out.println(countRows);
 		for(Course c:lstCourse) {
 			c.setBeforeResource(getUrl(serverHttpRequest));
 			
 		}
-		PageResponse pageResponse=new PageResponse(lstCourse, _limit, _page, countRows,_sort, _filter);
+		final String sort= _sort;
+		final int category= _category;
+		@SuppressWarnings("rawtypes")
+		PageResponse<Course> pageResponse=new PageResponse(lstCourse, _limit, _page, countRows,new Pagination() {
+			private String _sort = sort;
+			private int _category = category;
+			public String get_sort() {
+				return _sort;
+			}
+			@SuppressWarnings("unused")
+			public int get_category() {
+				return _category;
+			}
+
+		});
 		return ResponseEntity.ok(pageResponse);
 	}
 	@GetMapping(value = "/{id}")

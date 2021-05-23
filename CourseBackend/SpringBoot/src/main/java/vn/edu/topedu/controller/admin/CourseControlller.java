@@ -145,7 +145,7 @@ public class CourseControlller {
 			c.setBeforeResource(WebUtils.getUrl(httpServletRequest));
 
 		}
-		PageResponse pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, _sort, _filter);
+		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, null);
 		model.put("pageResponse", pageResponse);
 		
 		

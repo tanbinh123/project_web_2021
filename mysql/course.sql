@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 24/05/2021 03:34:27
+ Date: 24/05/2021 04:50:42
 */
 
 SET NAMES utf8mb4;
@@ -534,10 +534,10 @@ INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '
 INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 0, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (12, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (12, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (13, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (67, 'user/admin/image/girl.bmp', b'0', '2021-05-19 10:56:44', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (69, 'user/admin/image/girl.bmp', b'0', '2021-05-19 11:02:25', 2, 0, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (69, 'user/admin/image/girl.bmp', b'1', '2021-05-19 11:02:25', 2, 0, '2021-05-19 22:29:00');
 
 -- ----------------------------
 -- Table structure for spring_session
@@ -560,8 +560,7 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('87227ae1-9499-45a8-a50f-79f038723900', '90d99970-0597-48f0-b6be-f0d27a51812c', 1621799944366, 1621800388280, 1800, 1621802188280, NULL);
-INSERT INTO `spring_session` VALUES ('c777f7ca-8f99-42f8-9323-5c2266071909', '39120af5-ff6b-43aa-9653-07b8b5994157', 1621801445758, 1621802042279, 1800, 1621803842279, NULL);
+INSERT INTO `spring_session` VALUES ('7afb6cd5-73b2-484a-84df-f32bd95e963c', '2fb4cfd2-4c44-4b49-84e1-310e194e585b', 1621804263469, 1621806591679, 1800, 1621808391679, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -578,7 +577,7 @@ CREATE TABLE `spring_session_attributes`  (
 -- ----------------------------
 -- Records of spring_session_attributes
 -- ----------------------------
-INSERT INTO `spring_session_attributes` VALUES ('c777f7ca-8f99-42f8-9323-5c2266071909', 'username', 0xACED000574000561646D696E);
+INSERT INTO `spring_session_attributes` VALUES ('7afb6cd5-73b2-484a-84df-f32bd95e963c', 'username', 0xACED000574000561646D696E);
 
 -- ----------------------------
 -- Table structure for templates

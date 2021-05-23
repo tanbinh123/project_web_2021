@@ -17,7 +17,17 @@
 					Image</a></td>
 		</tr>
 		<tr>
+			<td><a href="/admin/upload/video/multipartfile"> Upload
+					Video</a></td>
+		</tr>
+		<tr>
 			<td><a href="/admin/courses"> Courses</a></td>
+		</tr>
+		<tr>
+			<td><a href="/admin/images"> Images</a></td>
+		</tr>
+		<tr>
+			<td><a href="/admin/videos"> Videos</a></td>
 		</tr>
 	</table>
 	Click on this

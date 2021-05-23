@@ -35,6 +35,22 @@ public class ResourceImageDAO {
 		 query.setParameter("userId", userId);
 		return query.getResultList();
 	}
+	public List<ResourceImage> getResourceImages(int _limit,int _page) {
+		_page--;
+		String sql = "Select e from "+ResourceImage.class.getName()+" e " + " where e.deleted=false ";
+		Query query = this.entityManager.createQuery(sql, ResourceImage.class);
+		query.setFirstResult(_page * _limit);
+		if (_limit != -1) {
+			query.setMaxResults(_limit);
+		}
+		
+		return query.getResultList();
+	}
+	public long getCountResourceImages() {
+		String sql = "Select count(e.id) from "+ResourceImage.class.getName()+" e " + " where e.deleted=false ";
+		Query query = this.entityManager.createQuery(sql, Long.class);
+		return (long) query.getSingleResult();
+	}
 	public List<ResourceImage> getResourceImages(String  userName) {
 		String sql = "Select e from "+ResourceImage.class.getName()+" e " + " where e.deleted=false and e.appUser.userName =:userName ";
 		Query query = this.entityManager.createQuery(sql, ResourceImage.class);
@@ -50,6 +66,15 @@ public class ResourceImageDAO {
 			entityManager.flush();
 			return image;
 		}
+	}
+
+	public ResourceImage deleteImage(long id) {
+		ResourceImage deleted = findById(id);
+		deleted.setDeleted(true);
+		entityManager.merge(deleted);
+		entityManager.flush();
+		return deleted;
+		
 	}
 
 }
