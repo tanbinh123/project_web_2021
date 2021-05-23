@@ -147,8 +147,8 @@ public class CourseControlller {
 		}
 		PageResponse pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, _sort, _filter);
 		model.put("pageResponse", pageResponse);
-		String homeUrl = WebUtils.getUrl(httpServletRequest, 3000);
-		model.put("homeUrl", homeUrl);
+		
+		
 		return "courses";
 	}
 

@@ -1,0 +1,27 @@
+version: "3"
+services:
+  topedu-backend:
+    image: topedu-backend
+    ports:
+      - "25001:25001"
+    networks:
+      - topedu
+    depends_on:
+      topedu-mysql:
+        condition: service_healthy
+    restart: always
+  topedu-mysql:
+    image: topedu-mysql
+    container_name: topedu-mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - topedu
+    ports:
+      - "3306:3306" 
+    restart: always
+
+networks:
+  topedu:

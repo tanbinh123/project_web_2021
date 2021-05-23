@@ -48,7 +48,7 @@
 	<!-- <br /> -->
 	<div></div>
 	Click on this
-	<strong><a href="${homeUrl}">link</a></strong> to visit Home Page
+	<strong><a href="/admin">link</a></strong> to visit Admin Page
 	
 	<script>
 		var pagination = JSON

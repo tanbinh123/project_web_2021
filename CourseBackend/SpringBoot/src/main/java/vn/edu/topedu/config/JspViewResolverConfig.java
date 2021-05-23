@@ -12,8 +12,8 @@ public class JspViewResolverConfig   {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 
 		viewResolver.setViewClass(JstlView.class);
-		//viewResolver.setPrefix("/WEB-INF/view/");
-		viewResolver.setPrefix("/views/");
+		viewResolver.setPrefix("/WEB-INF/views/");
+//		viewResolver.setPrefix("/views/");
 		viewResolver.setSuffix(".jsp");
 		viewResolver.setContentType("text/html");
 		// Make sure > Thymeleaf order & FreeMarker order.

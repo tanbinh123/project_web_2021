@@ -13,7 +13,7 @@
 
 <body>
 
-	<form:form modelAttribute="formLogin">
+	<form:form action="/admin/login" method="POST" modelAttribute="formLogin">
 		<table>
 			<tr>
 				<td><label for="username">Username</label></td>

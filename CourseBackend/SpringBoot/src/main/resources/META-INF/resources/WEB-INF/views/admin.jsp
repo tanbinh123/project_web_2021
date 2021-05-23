@@ -11,9 +11,17 @@
 </head>
 
 <body>
-	<a href="/admin/upload/image/multipartfile"> Upload Image</a>
-	<a href="/admin/courses"> Courses</a>
-
+	<table>
+		<tr>
+			<td><a href="/admin/upload/image/multipartfile"> Upload
+					Image</a></td>
+		</tr>
+		<tr>
+			<td><a href="/admin/courses"> Courses</a></td>
+		</tr>
+	</table>
+	Click on this
+	<strong><a href="${homeUrl}">link</a></strong> to visit Home Page
 	<script>
 		
 	</script>

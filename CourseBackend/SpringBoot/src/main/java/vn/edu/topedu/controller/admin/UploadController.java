@@ -27,6 +27,7 @@ import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.request.LoginFormRedirect;
+import vn.edu.topedu.utils.WebUtils;
 
 @Controller
 public class UploadController {
@@ -127,6 +128,8 @@ public class UploadController {
 			model.put("formLogin", authRequest);
 			return "login";
 		}
+		String homeUrl = WebUtils.getUrl(httpServletRequest, 3000);
+		model.put("homeUrl", homeUrl);
 		return "admin";
 	}
 
