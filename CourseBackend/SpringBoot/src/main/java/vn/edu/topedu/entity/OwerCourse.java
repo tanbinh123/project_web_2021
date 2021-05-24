@@ -1,5 +1,6 @@
 package vn.edu.topedu.entity;
  
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,6 @@ public class OwerCourse {
 	
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,optional=false)
-    
     @JoinColumn(name = "Course_Id", nullable = false)
     private Course course;
     
@@ -60,6 +60,9 @@ public class OwerCourse {
 	
 	@Column(name = "Update_Time", nullable = false)
 	private Date updateTime = new Date();
+	
+	@Column(name = "duration_learned", nullable = false)
+	private BigDecimal durationLearned = new BigDecimal(0);
 	
 	
    
@@ -140,6 +143,18 @@ public class OwerCourse {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+
+
+	public BigDecimal getDurationLearned() {
+		return durationLearned;
+	}
+
+
+	public void setDurationLearned(BigDecimal durationLearned) {
+		this.durationLearned = durationLearned;
+	}
+	
+	
 
 
 	

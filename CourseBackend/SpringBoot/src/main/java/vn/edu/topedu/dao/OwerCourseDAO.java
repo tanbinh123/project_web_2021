@@ -23,7 +23,18 @@ public class OwerCourseDAO {
 	private EntityManager entityManager;
 
 	public OwerCourse merge(OwerCourse payment) {
-		return this.entityManager.merge(payment);
+		OwerCourse oc = this.entityManager.merge(payment);
+		this.entityManager.flush();
+		deleteAllOwerCourseUnComplete(payment.getCourse().getId(), payment.getAppUser().getId());
+		return oc;
+	}
+
+	public int deleteAllOwerCourseUnComplete(Long courseId, Long userId) {
+		Query query = entityManager.createNativeQuery("Delete from ower_course where successed=0 and course_id = :courseId and user_id = :userId");
+		query.setParameter("courseId", courseId);
+		query.setParameter("userId", userId);
+		int rs = query.executeUpdate();
+		return rs;
 	}
 
 	public OwerCourse insertOwerCourse(OwerCourse user) {

@@ -107,6 +107,7 @@ public class CourseDAO {
 		}
 		return (long) query.getSingleResult();
 	}
+//	
 
 	public PreviewCourseEntity getPreviewCourse(Long idCourse) {
 		String sql = "Select c from " + PreviewCourseEntity.class.getName() + " c " //

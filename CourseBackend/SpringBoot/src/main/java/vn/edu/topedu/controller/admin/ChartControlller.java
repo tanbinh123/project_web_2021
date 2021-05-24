@@ -36,19 +36,35 @@ public class ChartControlller {
 	
 	@GetMapping(value = "/admin/charts/piechart")
 	public ModelAndView piechart(Map<String, Object> model) {
-		PieChart pieChart = chartsService.getPieChart();
+		PieChart pieChart = chartsService.getPieChartCategory();
 		model.put("pieChart",pieChart);
 		ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
 		return modelAndView;
 	}
 	
-	@PostMapping(value = "/admin/charts/piechart")
-	public String postPiechart(Map<String, Object> model, @ModelAttribute PieChart pieChart) {
-		pieChart=chartsService.getPieChart();
+	@GetMapping(value = "/admin/charts/piechart-duration-learned")
+	public ModelAndView piechartDurationLearned(Map<String, Object> model) {
+		PieChart pieChart = chartsService.getPieChartCategoryDurationLearned();
 		model.put("pieChart",pieChart);
-		//return "charts/piechart";
-		return "redirect:/admin/charts/piechart";
+		ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
+		return modelAndView;
 	}
+	
+	@GetMapping(value = "/admin/charts/piechart-category-money")
+	public ModelAndView piechartCategoryMoney(Map<String, Object> model) {
+		PieChart pieChart = chartsService.getPieChartCategoryMoney();
+		model.put("pieChart",pieChart);
+		ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
+		return modelAndView;
+	}
+	
+//	@PostMapping(value = "/admin/charts/piechart")
+//	public String postPiechart(Map<String, Object> model, @ModelAttribute PieChart pieChart) {
+//		pieChart=chartsService.getPieChartCategory();
+//		model.put("pieChart",pieChart);
+//		//return "charts/piechart";
+//		return "redirect:/admin/charts/piechart";
+//	}
 	
 	@RequestMapping(value = "/admin/charts/chart", method = RequestMethod.GET)
 	public ModelAndView testMVC(Map<String, Object> model) {

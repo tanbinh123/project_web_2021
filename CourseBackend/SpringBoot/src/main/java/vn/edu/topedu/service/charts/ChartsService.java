@@ -24,34 +24,83 @@ public class ChartsService {
 	private CatogoryDAO catogoryDAO;
 	@Autowired
 	private CourseDAO courseDAO;
-	
-	public PieChart getPieChart() {
-		PieChart pieChart= new PieChart();
+
+	public PieChart getPieChartCategory() {
+		PieChart pieChart = new PieChart();
 		String title = messageSource.getMessage("piechart", null, new Locale("vi", "VN"));
 		pieChart.setTitle(title);
 		List<CategoryEntity> categories = catogoryDAO.getCategories(-1);
-		long tolals = courseDAO.getCount(-1, null);
-		List<Data> data= new ArrayList<PieChart.Data>();
-		if(categories!=null)
-		categories.forEach(e->{
-			double rs=(double)e.getTotal()/(double)tolals*100;
-			BigDecimal bigDecimal = new BigDecimal(Double.toString(rs));
-	        bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
-			data.add(new Data(bigDecimal.doubleValue(), e.getName()));
-			
-		});
+		Long tolals = catogoryDAO.getToltalCourse(-1);
+		List<Data> data = new ArrayList<PieChart.Data>();
+		if (categories != null)
+			categories.forEach(e -> {
+				double rs = (double) e.getTotal() / (double) tolals.doubleValue() * 100;
+				BigDecimal bigDecimal = new BigDecimal(Double.toString(rs));
+				bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
+				data.add(new Data(bigDecimal.doubleValue(), e.getName()));
+
+			});
 		pieChart.setDataPoints(data);
 		System.err.println("Service Run");
 		return pieChart;
 	}
-	
-	
+
+	public PieChart getPieChartCategoryMoney() {
+		PieChart pieChart = new PieChart();
+		String title = "Biểu đồ doanh thu the từng thể loại khóa học";
+		pieChart.setTitle(title);
+		List<CategoryEntity> categories = catogoryDAO.getCategories(-1);
+		BigDecimal tolals = catogoryDAO.getToltalMoney(-1);
+		List<Data> data = new ArrayList<PieChart.Data>();
+		if (categories != null)
+			categories.forEach(e -> {
+				double rs = 0;
+				try {
+					rs = e.getTotalMoney().doubleValue() / tolals.doubleValue() * 100;
+					// if(rs)
+					BigDecimal bigDecimal = new BigDecimal(Double.toString(rs));
+					bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
+					data.add(new Data(bigDecimal.doubleValue(), e.getName()));
+
+				} catch (Exception e2) {
+					data.add(new Data(0, e.getName()));
+
+				}
+
+			});
+		pieChart.setDataPoints(data);
+		System.err.println("Service Run");
+		return pieChart;
+	}
+
+	public PieChart getPieChartCategoryDurationLearned() {
+		PieChart pieChart = new PieChart();
+		String title = "Biểu đồ thời gian học của học viên cho từng thể loại";
+		pieChart.setTitle(title);
+		List<CategoryEntity> categories = catogoryDAO.getCategories(-1);
+		BigDecimal tolals = catogoryDAO.getToltalDuration(-1);
+		List<Data> data = new ArrayList<PieChart.Data>();
+		if (categories != null)
+			categories.forEach(e -> {
+				double rs = (double) e.getDurationLearned().doubleValue() / tolals.doubleValue() * 100;
+				BigDecimal bigDecimal = new BigDecimal(Double.toString(rs));
+				bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
+				data.add(new Data(bigDecimal.doubleValue(), e.getName()));
+
+			});
+		pieChart.setDataPoints(data);
+		System.err.println("Service Run");
+		return pieChart;
+	}
+
 	public static class PieChart implements JsonResponse {
 		private String title = "Name";
 		private List<Data> dataPoints;
+
 		public String toJsonStringFromDataPoints() {
 			return toJsonStringFromObject(dataPoints);
 		}
+
 		public String getTitle() {
 			return title;
 		}
@@ -59,14 +108,15 @@ public class ChartsService {
 		public void setTitle(String title) {
 			this.title = title;
 		}
-		public static class Data  {
+
+		public static class Data {
 			private double y;
 			private String label;
-			
+
 			public Data() {
 				super();
 			}
-			
+
 			public Data(double y, String label) {
 				super();
 				this.y = y;
@@ -76,17 +126,21 @@ public class ChartsService {
 			public double getY() {
 				return y;
 			}
+
 			public void setY(double y) {
 				this.y = y;
 			}
+
 			public String getLabel() {
 				return label;
 			}
+
 			public void setLabel(String label) {
 				this.label = label;
 			}
-			
+
 		}
+
 		public List<Data> getDataPoints() {
 			return dataPoints;
 		}
@@ -94,7 +148,7 @@ public class ChartsService {
 		public void setDataPoints(List<Data> dataPoints) {
 			this.dataPoints = dataPoints;
 		}
-		
+
 	}
 
 }

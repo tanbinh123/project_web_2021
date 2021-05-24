@@ -1,5 +1,6 @@
 package vn.edu.topedu.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -36,13 +37,37 @@ public class CategoryEntity {
 	private Boolean deleted = false;
 	
 	
-	@Column(name = "total", nullable = false)
+	@Column(name = "total_course", nullable = false)
 	private Long total;
 	
 	
+	@Column(name = "duration_learned", nullable = false)
+	private BigDecimal durationLearned = new BigDecimal(0);
+	
+	@Column(name = "total_money", nullable = false)
+	private BigDecimal totalMoney = new BigDecimal(0);
 	
 	
 	
+	
+	
+	
+
+	public BigDecimal getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(BigDecimal totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+
+	public BigDecimal getDurationLearned() {
+		return durationLearned;
+	}
+
+	public void setDurationLearned(BigDecimal durationLearned) {
+		this.durationLearned = durationLearned;
+	}
 
 	public Long getTotal() {
 		return total;

@@ -39,23 +39,28 @@ chart.render();
 </head>
 
 <body>
-	<div style="display:flex">
-	<div id="chartContainer" style="height: 300px; width: 500px;"></div>
-	<div>
-		<form:form modelAttribute="pieChart">
-			<form:input id="title" type="hidden" path="title" />
-			<input id="dataPoints" type="hidden" value='${pieChart.toJsonStringFromDataPoints()}' />
+	<div style="display: flex">
+		<div id="chartContainer" style="height: 300px; width: 500px;"></div>
+		<div>
+			<input id="title" type="hidden" value="${pieChart.title}" />
+			<input id="dataPoints" type="hidden"
+				value='${pieChart.toJsonStringFromDataPoints()}' />
 			<table>
 				<%-- <tr>
 					<td><label for="title">Title</label></td>
 					<td><form:input id="title" path="title" /></td>
 				</tr> --%>
+				<tr>
+					<td colspan="2"><a href="/admin/charts/piechart-duration-learned"><button type="button">Piechart Categories</button></a></td>
+				</tr>
+				<tr>
+					<td colspan="2"><a href="/admin/charts/piechart"><button type="button">Piechart</button></a></td>
+				</tr>
+				<tr>
+					<td colspan="2"><a href="/admin/charts/piechart-category-money"><button type="button">Category Money</button></a></td>
+				</tr>
 			</table>
-			<tr>
-				<td colspan="2"><input type="submit" value="Login" /></td>
-			</tr>
-		</form:form>
-	</div>	
+		</div>
 	</div>
 	<script type="text/javascript" src="/asserts/canvasjs/canvasjs.min.js"></script>
 	<script>		
