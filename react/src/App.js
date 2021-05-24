@@ -42,8 +42,7 @@ function App(props) {
         <Route path="/testcolor" component={CssColor} exact />
         <Route path="/setvalue" component={SetValue} exact />
         <Route path="/admin" component={AdminRouter} />
-        <Route path="/chart" component={PieChart} />
-        <Route path="/charts" component={Charts} />
+       
         <Route path="/*" component={NotFound404} />
         <Route path="/auth/*" component={NotFound404} />
       </Switch>

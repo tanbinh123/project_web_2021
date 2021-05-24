@@ -35,7 +35,7 @@ public class ProfileREST {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {
-				appUser.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+				appUser.getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
 				return ResponseEntity.ok(appUser);
 			}
 		}

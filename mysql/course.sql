@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 24/05/2021 04:50:42
+ Date: 24/05/2021 22:57:39
 */
 
 SET NAMES utf8mb4;
@@ -313,7 +313,7 @@ INSERT INTO `course` VALUES (167, 4, 'Ganyu là nhân vật cuối cùng của p
 INSERT INTO `course` VALUES (168, 7, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Khóa học demo 168', 'Demo 168', 3276000, 2, 3, '2019-08-05 10:18:41', 2, 6, 2, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (169, 2, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Khóa học demo 169', 'Demo 169', 3712000, 3, 41, '2019-12-20 19:03:14', 2, 6, 2, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (170, 6, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Khóa học demo 170', 'Demo 170', 13879000, 0, 70, '2020-11-14 12:05:41', 2, 6, 2, '2021-05-19 15:35:12');
-INSERT INTO `course` VALUES (171, 11, 'Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops', b'0', '', 'Kiến thức cơ bản, cốt lõi dân IT cần học trước', 10857000, 0, 0, '2021-05-16 16:27:38', 1, NULL, 1, '2021-05-19 15:35:12');
+INSERT INTO `course` VALUES (171, 11, 'Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops', b'0', '', 'Kiến thức cơ bản, cốt lõi dân IT cần học trước', 10857000, 0, 0, '2021-05-16 16:27:38', 1, 6, 1, '2021-05-19 15:35:12');
 
 -- ----------------------------
 -- Table structure for learning
@@ -391,7 +391,7 @@ CREATE TABLE `ower_course`  (
   CONSTRAINT `ower_course_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_4` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ower_course
@@ -412,6 +412,7 @@ INSERT INTO `ower_course` VALUES (26, 1, 1, 54, b'0', b'0', '2021-05-18 12:49:23
 INSERT INTO `ower_course` VALUES (27, 1, 1, 55, b'1', b'0', '2021-05-19 00:13:13', '2021-05-19 00:13:13');
 INSERT INTO `ower_course` VALUES (28, 41, 171, 56, b'1', b'0', '2021-05-19 02:28:40', '2021-05-19 02:28:40');
 INSERT INTO `ower_course` VALUES (29, 1, 10, 57, b'1', b'0', '2021-05-23 10:30:38', '2021-05-23 10:30:38');
+INSERT INTO `ower_course` VALUES (30, 1, 44, 58, b'1', b'0', '2021-05-24 15:45:02', '2021-05-24 15:45:02');
 
 -- ----------------------------
 -- Table structure for part
@@ -457,7 +458,7 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of payment
@@ -478,6 +479,7 @@ INSERT INTO `payment` VALUES (54, 1, '2021-05-18 12:49:23', 100000000, '192.168.
 INSERT INTO `payment` VALUES (55, 1, '2021-05-19 00:13:13', 100000000, '192.168.0.111', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=100000000&vnp_Command=pay&vnp_CreateDate=20210519071313&vnp_CurrCode=VND&vnp_IpAddr=192.168.0.111&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2F192.168.0.111%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F55&vnp_TmnCode=67LF6OWG&vnp_TxnRef=55&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=bff0749a9bf9823f7b63a96e05e6fe5f3aeaae891b306e84d836c3556f4330e0', 'vnp_Amount=100000000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210519141313&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13506785&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=55&vnp_SecureHash=46cda1c9efc5c7ee95cff1e3979c66113573dcea7d8ef344f51902d5a005f844', 'http://localhost:3000/course/1');
 INSERT INTO `payment` VALUES (56, 41, '2021-05-19 02:28:40', 1085700000, '192.168.0.222', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1085700000&vnp_Command=pay&vnp_CreateDate=20210519092841&vnp_CurrCode=VND&vnp_IpAddr=192.168.0.222&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2F192.168.0.111%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F56&vnp_TmnCode=67LF6OWG&vnp_TxnRef=56&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=343fa5b6c5ad6d5920c20e9708b7f7202d0d7555b10ac3d77adb64aa2fb56796', 'vnp_Amount=1085700000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210519162841&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13506835&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=56&vnp_SecureHash=b263fc73d6f42d74ee9a17b32abd9d2255cc9fc2c24fe69f05cb31b425bbfbea', 'http://192.168.0.111:3000/course/171');
 INSERT INTO `payment` VALUES (57, 1, '2021-05-23 10:30:38', 615400000, '127.0.0.1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=615400000&vnp_Command=pay&vnp_CreateDate=20210523173038&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F57&vnp_TmnCode=67LF6OWG&vnp_TxnRef=57&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=1dc55d20facd3c38526baef37f2762a9fbcd3bfbbe8a3db5c9b46cec6aa358e3', 'vnp_Amount=615400000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210523173107&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13509574&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=57&vnp_SecureHash=10802bf22c10f4c6d5d49d80ff8d35be8032fd412ba152bf0cd05214dcf1a0b2', 'http://localhost:3000/course/10');
+INSERT INTO `payment` VALUES (58, 1, '2021-05-24 15:45:02', 1191500000, '127.0.0.1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1191500000&vnp_Command=pay&vnp_CreateDate=20210524224502&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F58&vnp_TmnCode=67LF6OWG&vnp_TxnRef=58&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=346064aca26c7a7d284aca7c51efaa3b91ae167a120430b4bf8a19e732c8da43', 'vnp_Amount=1191500000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210524224513&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13510481&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=58&vnp_SecureHash=881042864bfaf52f93ac4a60de3a9cf2ad6c57854f2fa90ce28167382241a56c', 'http://localhost:3000/course/44');
 
 -- ----------------------------
 -- Table structure for queue_check_payment
@@ -560,7 +562,9 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('7afb6cd5-73b2-484a-84df-f32bd95e963c', '2fb4cfd2-4c44-4b49-84e1-310e194e585b', 1621804263469, 1621806591679, 1800, 1621808391679, NULL);
+INSERT INTO `spring_session` VALUES ('1f2ae9ba-73d0-4f0a-912b-57fbef0bec5f', '0f0e3629-8b55-490b-8884-8adf9f61017f', 1621868529079, 1621871076652, 1800, 1621872876652, NULL);
+INSERT INTO `spring_session` VALUES ('78e644b0-03a2-421e-a983-5470d98d899a', '39aa9641-e773-41ab-aa28-34f94fbf3e91', 1621870932811, 1621870932811, 1800, 1621872732811, NULL);
+INSERT INTO `spring_session` VALUES ('b32a21d0-eeb7-4d50-b783-db3e3c8ceeda', '7dae1fa5-cf30-4ba3-a1de-df22b0312bb8', 1621868254902, 1621871839631, 1800, 1621873639631, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -577,7 +581,10 @@ CREATE TABLE `spring_session_attributes`  (
 -- ----------------------------
 -- Records of spring_session_attributes
 -- ----------------------------
-INSERT INTO `spring_session_attributes` VALUES ('7afb6cd5-73b2-484a-84df-f32bd95e963c', 'username', 0xACED000574000561646D696E);
+INSERT INTO `spring_session_attributes` VALUES ('1f2ae9ba-73d0-4f0a-912b-57fbef0bec5f', 'username', 0xACED000574000561646D696E);
+INSERT INTO `spring_session_attributes` VALUES ('78e644b0-03a2-421e-a983-5470d98d899a', 'username', 0xACED000574000561646D696E);
+INSERT INTO `spring_session_attributes` VALUES ('b32a21d0-eeb7-4d50-b783-db3e3c8ceeda', 'javax.servlet.jsp.jstl.fmt.request.charset', 0xACED00057400055554462D38);
+INSERT INTO `spring_session_attributes` VALUES ('b32a21d0-eeb7-4d50-b783-db3e3c8ceeda', 'username', 0xACED000574000561646D696E);
 
 -- ----------------------------
 -- Table structure for templates
@@ -616,26 +623,6 @@ CREATE TABLE `test`  (
 INSERT INTO `test` VALUES (1, b'1');
 
 -- ----------------------------
--- Table structure for user_course
--- ----------------------------
-DROP TABLE IF EXISTS `user_course`;
-CREATE TABLE `user_course`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NULL DEFAULT NULL,
-  `course_id` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `USER_COURSE_UK`(`user_id`, `course_id`) USING BTREE,
-  INDEX `course_id`(`course_id`) USING BTREE,
-  CONSTRAINT `user_course_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of user_course
--- ----------------------------
-INSERT INTO `user_course` VALUES (1, 1, 1);
-INSERT INTO `user_course` VALUES (2, 1, 2);
-
--- ----------------------------
 -- Table structure for user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `user_role`;
@@ -672,6 +659,7 @@ CREATE TABLE `video`  (
   `deleted` bit(1) NULL DEFAULT b'0',
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
   `update_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`poster`) USING BTREE,
   CONSTRAINT `video_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -680,17 +668,17 @@ CREATE TABLE `video`  (
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
-INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11');
+INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 
 -- ----------------------------
 -- Triggers structure for table course

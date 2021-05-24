@@ -122,15 +122,17 @@ function RightAppHadLogin(props) {
               <ListItemText primary="Cá Nhân" />
             </ListItem>
           </Link>
-          {/* <Link
-            to={`${REACT_APP_URL_ADMIN}/index`}
-            className={classes.linkNone}
-          >
-            <ListItem button onClick={popupState.close}>
-              <i className="fas fa-user-cog icon"></i>
-              <ListItemText primary="Admin" />
-            </ListItem>
-          </Link> */}
+          {dataUser.user?.admin ? (
+            <Link to="/admin/home" className={classes.linkNone}>
+              <ListItem button onClick={popupState.close}>
+                <i className="fas fa-user-cog icon"></i>
+                <ListItemText primary="Admin" />
+              </ListItem>
+            </Link>
+          ) : (
+            ""
+          )}
+
           <ListItem button divider onClick={handleLogOut}>
             <ExitToApp className={classes.avatarSmall} fontSize="small" />
             <ListItemText primary="Đăng Xuất" />

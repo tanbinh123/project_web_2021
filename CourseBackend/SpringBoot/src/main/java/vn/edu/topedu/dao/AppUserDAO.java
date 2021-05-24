@@ -1,6 +1,7 @@
 package vn.edu.topedu.dao;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.edu.topedu.entity.AppRole;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.UserRole;
+import vn.edu.topedu.entity.course.Course;
 
 @Repository
 @Transactional
@@ -24,7 +26,7 @@ public class AppUserDAO {
 	public AppUser findById(Long id) {
 		return this.entityManager.find(AppUser.class, id);
 	}
-	
+
 	public AppRole findRoleByRoleName(String roleName) {
 		try {
 			String sql = "Select e from " + AppRole.class.getName() + " e " //
@@ -52,14 +54,15 @@ public class AppUserDAO {
 			return null;
 		}
 	}
+
 	public AppUser findUserByEmail(String email) {
 		try {
 			String sql = "Select e from " + AppUser.class.getName() + " e " //
 					+ " Where e.email = :email ";
-			
+
 			Query query = entityManager.createQuery(sql, AppUser.class);
 			query.setParameter("email", email);
-			
+
 			return (AppUser) query.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
@@ -89,41 +92,41 @@ public class AppUserDAO {
 //	}
 	@Transactional
 	public boolean register(AppUser user, AppRole appRole) {
-		
+
 		try {
-			user=insertUser(user);			
-			UserRole userRole= new UserRole();
+			user = insertUser(user);
+			UserRole userRole = new UserRole();
 			userRole.setAppUser(user);
 			userRole.setAppRole(appRole);
 			user.setUserRoles(Arrays.asList(userRole));
-			userRole=putUserRole(userRole);
-			
+			userRole = putUserRole(userRole);
+
 			return true;
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 			System.out.println("Không insert user");
 			return false;
 		}
-		
-		
+
 	}
+
 	public AppUser insertUser(AppUser user) {
-		
+
 		try {
 			entityManager.persist(user);
 			entityManager.flush();
 			return user;
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
-			//System.out.println("Không insert user");
+			// System.out.println(e.getMessage());
+			// System.out.println("Không insert user");
 			return null;
 		}
-		
-		
+
 	}
+
 	public UserRole putUserRole(UserRole user) {
-		
-		if(user.getId()==null) {
+
+		if (user.getId() == null) {
 			try {
 				entityManager.persist(user);
 				entityManager.flush();
@@ -133,8 +136,8 @@ public class AppUserDAO {
 //				System.out.println("Insert UserRole");
 				return null;
 			}
-			
-		}else {
+
+		} else {
 			try {
 				return entityManager.merge(user);
 			} catch (Exception e) {
@@ -144,8 +147,9 @@ public class AppUserDAO {
 			}
 		}
 	}
+
 	public AppUser updateAppUser(AppUser user) {
-		
+
 		try {
 			return entityManager.merge(user);
 		} catch (Exception e) {
@@ -154,19 +158,27 @@ public class AppUserDAO {
 			return null;
 		}
 	}
+
 	public boolean updateUser(AppUser user) {
-		
-		
+
 		try {
 			entityManager.merge(user);
 			return true;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		
+
 		return false;
-		
-		
+
+	}
+
+	public List<Course> getCourseFromAccountPost(Long userId) {
+		String sql = "Select c from " + Course.class.getName() + " c " //
+				+ " where c.appUser.id = :userId ";
+
+		Query query = this.entityManager.createQuery(sql, Course.class);
+		query.setParameter("userId", userId);
+		return query.getResultList();
 	}
 
 }

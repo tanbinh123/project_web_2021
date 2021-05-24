@@ -1,5 +1,8 @@
 package vn.edu.topedu.entity;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
@@ -10,6 +13,20 @@ public abstract class AHasResource extends BaseEntity {
 	@JsonIgnore
 	@Transient
 	protected String beforeResource;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "poster_id", nullable = false)
+	@JsonIgnore
+	private AppUser appUser;
+	
+	
+	public AppUser getAppUser() {
+		return appUser;
+	}
+
+	public void setAppUser(AppUser appUser) {
+		this.appUser = appUser;
+	}
 
 	public String getBeforeResource() {
 		return beforeResource;

@@ -24,7 +24,7 @@ public class VideoController {
 	VideoDAO resourceImageDAO;
 
 	@GetMapping("/admin/videos")
-	public String getList(@RequestParam(defaultValue = "1") int _page, @RequestParam(defaultValue = "5") int _limit,
+	public String getList(@RequestParam(defaultValue = "1") int _page, @RequestParam(defaultValue = "3") int _limit,
 			Map<String, Object> model, HttpServletRequest httpServletRequest) {
 		_page = _page <= 0 ? 1 : _page;
 		List<VideoEntity> data = resourceImageDAO.getVideoEntitys(_limit, _page);

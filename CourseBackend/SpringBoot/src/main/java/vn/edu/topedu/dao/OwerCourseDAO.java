@@ -25,7 +25,7 @@ public class OwerCourseDAO {
 	public OwerCourse merge(OwerCourse payment) {
 		return this.entityManager.merge(payment);
 	}
-	
+
 	public OwerCourse insertOwerCourse(OwerCourse user) {
 
 		try {
@@ -55,11 +55,23 @@ public class OwerCourseDAO {
 //		String sql = "Select oc from " + OwerCourse.class.getName() + " oc " //
 //				+ " where  oc.success = :success and oc.appUser.id = :appUserId and oc.course.id = :courseId  ";
 		Query query = this.entityManager.createQuery(sql);
-		//System.err.println("1.5");
+		// System.err.println("1.5");
 		query.setParameter("appUserId", appUserId);
 		query.setParameter("courseId", courseId);
 //		query.setParameter("success", true);
 		return (OwerCourse) query.getSingleResult();
+	}
+
+	public List<Course> querryAllBought(Long appUserId) throws NoResultException {
+		String sql = "Select oc.course from " + OwerCourse.class.getName() + " oc " //
+				+ " where  oc.successed = true and oc.appUser.id = :appUserId ";
+//		String sql = "Select oc from " + OwerCourse.class.getName() + " oc " //
+//				+ " where  oc.success = :success and oc.appUser.id = :appUserId and oc.course.id = :courseId  ";
+		Query query = this.entityManager.createQuery(sql);
+		// System.err.println("1.5");
+		query.setParameter("appUserId", appUserId);
+//		query.setParameter("success", true);
+		return query.getResultList();
 	}
 
 	public OwerCourse querryByPayment(Long paymentId) throws NoResultException {
@@ -141,8 +153,7 @@ public class OwerCourseDAO {
 
 	public void detach(OwerCourse owerCourse) {
 		this.entityManager.detach(owerCourse.getCourse());
-		
-		
+
 	}
 
 }

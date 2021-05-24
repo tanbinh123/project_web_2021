@@ -35,7 +35,7 @@ import vn.edu.topedu.entity.course.full.Learning;
 		uniqueConstraints = { //
 				@UniqueConstraint(name = "email_uq", columnNames = "email"),
 				@UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name") })
-public class AppUser extends AHasResource implements UserDetails {
+public class AppUser implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -254,11 +254,7 @@ public class AppUser extends AHasResource implements UserDetails {
 	public void setUserRoles(List<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-	@Override
-	public void setBeforeResource(String beforeResource) {
-		super.setBeforeResource(beforeResource);
-		this.avatar.setBeforeResource(beforeResource);
-	}
+	
 
 	public Boolean getActived() {
 		return actived;

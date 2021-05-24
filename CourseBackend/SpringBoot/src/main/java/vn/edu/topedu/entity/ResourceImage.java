@@ -23,10 +23,7 @@ public class ResourceImage extends AHasResource {
 	@Column(name = "img_path", length = 36, nullable = false)
 	private String path = "";
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "poster_id", nullable = false)
-	@JsonIgnore
-	private AppUser appUser;
+	
 
 
 	public ResourceImage() {
@@ -47,13 +44,7 @@ public class ResourceImage extends AHasResource {
 
 
 
-	public AppUser getAppUser() {
-		return appUser;
-	}
-
-	public void setAppUser(AppUser appUser) {
-		this.appUser = appUser;
-	}
+	
 
 	@Override
 	public void setBeforeResource(String beforeResource) {

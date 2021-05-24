@@ -27,7 +27,7 @@
 				<tr>
 					<td>${item.id}</td>
 					<td>${item.urlVideo}</td>
-					<td><video width="100" height="100">
+					<td><video width="200" height="200">
 							<source src="${item.urlVideo}" type="video/mp4" />
 
 						</video></td>
