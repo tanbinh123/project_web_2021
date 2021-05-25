@@ -128,14 +128,14 @@
 
 						<c:forEach var="part" items="${fullcourse.parts}"
 							varStatus="status">
-							<div style="display: block;">
+							<div style="display: block;" id="all-part-index-${status.index}">
 
 								<div id="part-index-${status.index}" style="display: flex;">
 									<form:input type="hidden" path="parts[${status.index}].id" />
 									<form:input type="hidden" path="parts[${status.index}].deleted" />
 									<form:input path="parts[${status.index}].title" />
 
-									<button part-index="part-index-${status.index}"
+									<button part-wrap="part-index-${status.index}"
 										class="delete-part">Delete</button>
 
 								</div>
@@ -178,7 +178,7 @@
 								<button part-index="${status.index}"
 									lessons-wrap-id="part-index-${status.index}-lessons"
 									index="part-index-${status.index}-size-lessons"
-									id="add-lessons">Add lesson</button>
+									class="add-lessons">Add lesson</button>
 
 							</div>
 						</c:forEach>

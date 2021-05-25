@@ -1,16 +1,12 @@
 package vn.edu.topedu.entity.course.full;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,7 +14,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import vn.edu.topedu.entity.AHasResource;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.BaseEntity;
 import vn.edu.topedu.entity.CategoryEntity;
@@ -33,7 +28,7 @@ public class FullCourse extends BaseEntity {
 	@JsonIgnore
 	private Long videoDemoId;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "demo_id", referencedColumnName = "id" ,insertable = false, updatable = false)
 	private VideoEntity demo;
 
@@ -76,7 +71,7 @@ public class FullCourse extends BaseEntity {
 	@JsonIgnore
 	@Column(name = "category_id", nullable = false)
 	private Integer categoryId;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
 	private CategoryEntity category;
 
@@ -168,13 +163,6 @@ public class FullCourse extends BaseEntity {
 	
 	
 
-//	public int getPrice() {
-//		return price;
-//	}
-//
-//	public void setPrice(int price) {
-//		this.price = price;
-//	}
 
 
 	public Long getPosterId() {

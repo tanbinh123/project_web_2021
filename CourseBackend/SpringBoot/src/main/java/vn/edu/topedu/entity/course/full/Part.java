@@ -2,6 +2,7 @@ package vn.edu.topedu.entity.course.full;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class Part {
 	@JsonIgnore
 	private FullCourse course;
 	
-	@OneToMany(mappedBy = "part")
+	@OneToMany( mappedBy = "part")
 	private List<Lesson> lessons;
 
 	

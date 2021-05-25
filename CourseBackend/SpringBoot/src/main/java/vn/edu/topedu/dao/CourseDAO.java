@@ -310,8 +310,28 @@ public class CourseDAO {
 			for (Part part : course.getParts()) {
 				part.setCourseId(course.getId());
 				if (part.getId() == null) {
-					if (part.getDeleted() == false)
+					if (part.getDeleted() == false) {
+						
 						entityManager.persist(part);
+						entityManager.flush();
+						if (part.getLessons() != null) {
+							for (Lesson le : part.getLessons()) {
+								le.setPartId(part.getId());
+								if (le.getId() == null) {
+									if (le.getDeleted() == false) {
+										
+										entityManager.persist(le);
+										entityManager.flush();
+										System.err.println(le);
+									}
+								} 
+							}
+
+							
+							System.err.println("delete lesson: " + deleteAllLessonDeleted());
+						}
+					}
+						
 				} else {
 					entityManager.merge(part);
 					if (part.getLessons() != null) {

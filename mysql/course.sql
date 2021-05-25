@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 25/05/2021 16:47:25
+ Date: 25/05/2021 18:04:32
 */
 
 SET NAMES utf8mb4;
@@ -113,9 +113,9 @@ CREATE TABLE `categories`  (
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (1, 'Genshin Impact', b'1', b'0', '2021-05-25 09:37:58', '2021-05-25 09:37:58', 0, 0, 0);
+INSERT INTO `categories` VALUES (1, 'Genshin Impact', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 170, 0, 0);
 INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 1, 500, 10857000);
-INSERT INTO `categories` VALUES (19, 'Test Category 3', b'1', b'0', '2021-05-25 09:46:43', '2021-05-25 09:46:43', 0, 0, 0);
+INSERT INTO `categories` VALUES (19, 'Test Category 3', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for course
@@ -145,7 +145,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 67, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Course Demo 1', 1000000, 1, 66, '2021-05-25 09:37:58', 2, 1, 1, '2021-05-25 09:37:58');
+INSERT INTO `course` VALUES (1, 67, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Course Demo 1', 1000000, 1, 66, '2021-05-25 11:03:51', 2, 1, 1, '2021-05-25 11:03:51');
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 2', 12288000, 5, 88, '2019-02-03 22:20:54', 2, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (3, 10, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 3', 14929000, 5, 4, '2020-10-25 13:14:43', 2, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 2, 6, 1, '2021-05-19 15:35:12');
@@ -316,7 +316,7 @@ INSERT INTO `course` VALUES (168, 7, 'Bên cạnh sức mạnh và khả năng p
 INSERT INTO `course` VALUES (169, 2, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 169', 3712000, 3, 41, '2019-12-20 19:03:14', 2, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (170, 6, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 170', 13879000, 0, 70, '2020-11-14 12:05:41', 2, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (171, 11, 'Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops', b'0', 'Kiến thức cơ bản, cốt lõi dân IT cần học trước', 10857000, 0, 0, '2021-05-16 16:27:38', 1, 6, 2, '2021-05-19 15:35:12');
-INSERT INTO `course` VALUES (178, 8, 'Demo', b'0', 'Demo 172', 15000, 0, 0, '2021-05-25 09:46:43', 1, 1, 19, '2021-05-25 09:46:43');
+INSERT INTO `course` VALUES (178, 1, 'Demo 172', b'0', 'Demo 172', 15000, 0, 0, '2021-05-25 10:00:30', 1, 1, 1, '2021-05-25 10:00:30');
 
 -- ----------------------------
 -- Table structure for learning
@@ -330,7 +330,7 @@ CREATE TABLE `learning`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of learning
@@ -343,6 +343,7 @@ INSERT INTO `learning` VALUES (33, 1, 'Học nữa', b'0');
 INSERT INTO `learning` VALUES (35, 1, 'Học mãi', b'0');
 INSERT INTO `learning` VALUES (45, 178, 'Learning 1', b'0');
 INSERT INTO `learning` VALUES (47, 178, 'Learning 2', b'0');
+INSERT INTO `learning` VALUES (48, 178, 'Learning 3', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -360,7 +361,7 @@ CREATE TABLE `lesson`  (
   INDEX `part_id`(`part_id`) USING BTREE,
   CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `lesson_ibfk_2` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson
@@ -376,8 +377,9 @@ INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 8, b
 INSERT INTO `lesson` VALUES (19, 27, 'Xin chào', NULL, 3, b'0');
 INSERT INTO `lesson` VALUES (20, 27, 'Hello', NULL, 1, b'0');
 INSERT INTO `lesson` VALUES (33, 27, 'A', NULL, 1, b'0');
-INSERT INTO `lesson` VALUES (38, 33, '1231', NULL, 1, b'0');
+INSERT INTO `lesson` VALUES (38, 33, 'Câu truyện dồ chơi', NULL, 1, b'0');
 INSERT INTO `lesson` VALUES (39, 34, '12', NULL, 3, b'0');
+INSERT INTO `lesson` VALUES (47, 49, 'Tet', NULL, 3, b'0');
 
 -- ----------------------------
 -- Table structure for ower_course
@@ -422,7 +424,7 @@ CREATE TABLE `part`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `part_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of part
@@ -432,9 +434,9 @@ INSERT INTO `part` VALUES (2, 171, 'Tư duy phát triển', 1, 1539000, b'0');
 INSERT INTO `part` VALUES (3, 171, 'Khái niệm kỹ thuật cần biết', 2, 1539000, b'0');
 INSERT INTO `part` VALUES (4, 171, 'Tham khảo thêm', 3, 1539000, b'0');
 INSERT INTO `part` VALUES (27, 1, 'Part 1', 0, 0, b'0');
-INSERT INTO `part` VALUES (31, 1, 'Học mãi mãi', 0, 0, b'0');
 INSERT INTO `part` VALUES (33, 178, 'Part 1', 0, 0, b'0');
 INSERT INTO `part` VALUES (34, 178, 'Part 2', 0, 0, b'0');
+INSERT INTO `part` VALUES (49, 1, 'Test', 0, 0, b'0');
 
 -- ----------------------------
 -- Table structure for payment
@@ -561,7 +563,9 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('3b1932a6-45a9-4960-8309-8cbcbed27ff5', '2844eff0-10d7-452c-9d82-e3209305a76a', 1621929580811, 1621936003643, 1800, 1621937803643, NULL);
+INSERT INTO `spring_session` VALUES ('005f0d94-e725-4247-be9f-ab67a9bf60f4', 'bdcbe54f-ef9a-48b4-a401-606e5f39c735', 1621940311962, 1621940311962, 1800, 1621942111962, NULL);
+INSERT INTO `spring_session` VALUES ('3b1932a6-45a9-4960-8309-8cbcbed27ff5', '2844eff0-10d7-452c-9d82-e3209305a76a', 1621929580811, 1621940634214, 1800, 1621942434214, NULL);
+INSERT INTO `spring_session` VALUES ('c76f6223-9f3d-48c2-87da-2e622ef5e149', '838b29eb-4370-443e-9d9c-a980b073c933', 1621940038936, 1621940038936, 1800, 1621941838936, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
