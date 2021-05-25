@@ -52,7 +52,7 @@ function InfomationFeature(props) {
                         <Link to={`${url}/info`}>
                           <span>
                             {dataUser.profile?.fullname ||
-                              dataUser.profile?.userName}{" "}
+                              dataUser.profile?.username}{" "}
                             {dataUser.profile?.actived ? (
                               <i className="fas fa-check-circle green"></i>
                             ) : (

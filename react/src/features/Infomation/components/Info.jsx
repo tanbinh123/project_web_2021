@@ -16,7 +16,7 @@ function Info(props) {
             <li>
               <Avatar
                 className={classes.avatarRight}
-                alt={props?.profile?.userName}
+                alt={props?.profile?.username}
                 src={props?.profile?.avatar?.image}
               >
                 <Camera />
@@ -24,7 +24,7 @@ function Info(props) {
             </li>
             <li>
               <span>
-                {props?.profile?.fullname || props?.profile?.userName}
+                {props?.profile?.fullname || props?.profile?.username}
               </span>
             </li>
           </ul>

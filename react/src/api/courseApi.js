@@ -25,7 +25,10 @@ const courseApi = {
     const url = "/courses";
     return axiosClient.get(url, { params });
   },
- 
+  getCoursesBought(params) {
+    const url = "/course/course-bought";
+    return axiosClient.get(url, { params });
+  },
 };
 
 export default courseApi;

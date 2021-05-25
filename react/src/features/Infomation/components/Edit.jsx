@@ -40,7 +40,7 @@ function Edit(props) {
       </Grid>
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
         <form>
-          <Avatar />
+          <Avatar className={classes.Avatar} />
           <CustomInput
             title="Họ và Tên"
             name="fullName"

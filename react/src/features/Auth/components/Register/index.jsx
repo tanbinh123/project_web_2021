@@ -24,11 +24,15 @@ function Register(props) {
   const handleOnSubmit = async (values) => {
     const data = await userApi.register(values);
     if (!!!data.status) {
-      setDataUser({ ...dataUser, user: data.user });
       addLocalStorage(data);
       //set token de lay profile
       const profile = await userApi.profile();
-      setDataUser({ ...dataUser, user: data.user, profile: profile });
+      setDataUser({
+        ...dataUser,
+        user: data.user,
+        courses: data.courses,
+        profile: profile,
+      });
       addLocalStorage(data, profile);
       console.log("localStorage", data);
     } else {
