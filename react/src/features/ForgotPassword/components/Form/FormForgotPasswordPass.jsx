@@ -118,25 +118,25 @@ function FormForgotPasswordPass(props) {
         className={classes.cssForm}
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
-        <span className={classes.title}>Forgot Password</span>
+        <span className={classes.title}>Quên mật khẩu</span>
         <CustomInputHidden value={data.username} name="username" form={form} />
         <CustomInputHidden value={data.code} name="code" form={form} />
         <CustomInput
-          label="Password"
+          label="Mật khẩu"
           name="password"
           type="password"
           form={form}
         />
         <CustomInput
-          label="Retype Password"
+          label="Nhập lại mật khẩu"
           name="retypepassword"
           type="password"
           form={form}
         />
         <ButtonSubmit title="Submit" />
-        <span className={classes.text1}>Did you remember the account?</span>
+        <span className={classes.text1}>Bạn đã nhớ mật khẩu rồi ?</span>
         <Link to="/auth/login" className={classes.textDK}>
-          <span>Login</span>
+          <span>Đăng nhập</span>
         </Link>
       </form>
     </div>

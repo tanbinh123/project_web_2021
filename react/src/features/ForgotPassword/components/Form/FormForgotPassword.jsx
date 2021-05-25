@@ -125,13 +125,13 @@ function FormForgotPassword(props) {
             push("/auth/login");
           }}
         />
-        <span className={classes.title}>Forgot Password</span>
+        <span className={classes.title}>Quên mật khẩu</span>
         <CustomInput label="Email" name="email" form={form} />
 
-        <ButtonSubmit title="Submit" />
-        <span className={classes.text1}>Did you remember the account?</span>
+        <ButtonSubmit title="Gửi" />
+        <span className={classes.text1}>Bạn đã nhớ mật khẩu rồi ?</span>
         <Link to="/auth/login" className={classes.textDK}>
-          <span>Login</span>
+          <span>Đăng nhập</span>
         </Link>
         <Box className={classes.divCenter}>
           {showProcess && <LinearProgress />}

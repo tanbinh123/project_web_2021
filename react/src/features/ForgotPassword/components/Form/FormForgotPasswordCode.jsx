@@ -109,18 +109,18 @@ function FormForgotPasswordCode(props) {
         className={classes.cssForm}
         onSubmit={form.handleSubmit(handleOnSubmit)}
       >
-        <span className={classes.title}>Confirm Forgot Password</span>
+        <span className={classes.title}>Xác thực tài khoản</span>
         <CustomInputDisable
-          label="Username"
+          label="Tên đăng nhập"
           name="username"
           value={data.username}
           form={form}
         />
-        <CustomInput label="Code" name="code" form={form} />
+        <CustomInput label="Mã xác thực" name="code" form={form} />
         <ButtonSubmit title="Submit" />
-        <span className={classes.text1}>Did you remember the account?</span>
+        <span className={classes.text1}>Bạn đã nhớ mật khẩu rồi ?</span>
         <Link to="/auth/login" className={classes.textDK}>
-          <span>Login</span>
+          <span>Đăng nhập</span>
         </Link>
       </form>
     </div>

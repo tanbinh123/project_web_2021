@@ -115,27 +115,27 @@ function LoginForm(props) {
             push("/");
           }}
         />
-        <span className={classes.title}>Login</span>
+        <span className={classes.title}>Đăng nhập</span>
         <CustomInput
-          label="Username"
+          label="Tên đăng nhập"
           name="username"
           form={form}
           fullWidth={true}
         />
         <CustomInput
           name="password"
-          label="Password"
+          label="Mật khẩu"
           type="password"
           fullWidth={true}
           form={form}
         />
         <Link to="/forgot-password" className={classes.text3}>
-          <span>Forgot Password ?</span>
+          <span>Quên mật khẩu ?</span>
         </Link>
-        <ButtonSubmit title="login" />
-        <span className={classes.text1}>Do not have an account ?</span>
+        <ButtonSubmit title="Đăng nhập" />
+        <span className={classes.text1}>Bạn không có tài khoản ?</span>
         <Link to="/auth/register" className={classes.textDK}>
-          <span>Register</span>
+          <span>Đăng ký</span>
         </Link>
       </form>
     </div>

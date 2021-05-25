@@ -6,6 +6,7 @@ import { DataUser } from "../../app/DataUser";
 import CustomButton from "../../components/Button/CustomButton";
 import CardCourse from "../../components/card/CardCourse";
 import Header from "../../components/header";
+import { isEmpty } from "../../components/tools/Tools";
 import BoughtHome from "./components/BoughtHome";
 import Representative from "./components/Representative";
 
@@ -130,7 +131,7 @@ function Home(props) {
           </ul>
         </div>
         <Representative />
-        <BoughtHome />
+        {!isEmpty(dataUser.user) && <BoughtHome />}
       </Container>
     </div>
   );
