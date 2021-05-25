@@ -27,7 +27,7 @@ public class CategoryEntity {
 	@Column(name = "actived")
 	private Boolean actived = true;
 
-	@Column(name = "Create_Time", nullable = false)
+	@Column(name = "Create_Time", nullable = false, updatable = false)
 	private Date createTime = new Date();
 
 	@Column(name = "Update_Time", nullable = false)
@@ -36,13 +36,13 @@ public class CategoryEntity {
 	@Column(name = "deleted", length = 1, nullable = false)
 	private Boolean deleted = false;
 
-	@Column(name = "total_course", nullable = false)
+	@Column(name = "total_course", nullable = false, updatable = false)
 	private Long total = Long.valueOf(0);
 
 	@Column(name = "duration_learned", nullable = false)
 	private BigDecimal durationLearned = new BigDecimal(0);
 
-	@Column(name = "total_money", nullable = false)
+	@Column(name = "total_money", nullable = false, updatable = false)
 	private BigDecimal totalMoney = new BigDecimal(0);
 
 	public BigDecimal getTotalMoney() {
