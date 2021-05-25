@@ -61,7 +61,7 @@ public class OwerCourse {
 	@Column(name = "Update_Time", nullable = false)
 	private Date updateTime = new Date();
 	
-	@Column(name = "duration_learned", nullable = false)
+	@Column(name = "duration_learned", nullable = false, updatable = false)
 	private BigDecimal durationLearned = new BigDecimal(0);
 	
 	
