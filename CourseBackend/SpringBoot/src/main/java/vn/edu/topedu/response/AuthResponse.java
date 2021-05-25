@@ -8,7 +8,7 @@ import vn.edu.topedu.response.model.AccountResponse;
 public class AuthResponse {
 	private String token;
 	private AccountResponse user;
-	//private List<Course> courses;
+	private List<Course> courses;
 
 	public String getToken() {
 		return token;
@@ -41,11 +41,11 @@ public class AuthResponse {
 		this.user = user;
 	}
 
-	/*
-	 * public List<Course> getCourses() { return courses; }
-	 * 
-	 * public void setCourses(List<Course> courses) { this.courses = courses; }
-	 */
+	
+	  public List<Course> getCourses() { return courses; }
+	  
+	  public void setCourses(List<Course> courses) { this.courses = courses; }
+	 
 	
 
 	
