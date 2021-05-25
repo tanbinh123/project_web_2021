@@ -137,7 +137,7 @@ function RightAppHadLogin(props) {
             <ExitToApp className={classes.avatarSmall} fontSize="small" />
             <ListItemText primary="Đăng Xuất" />
           </ListItem>
-          <ListItem button divider>
+          {/* <ListItem button divider>
             <Link
               style={{ textDecoration: "none", color: "white" }}
               to="/form-upload-one"
@@ -154,7 +154,7 @@ function RightAppHadLogin(props) {
             >
               <ListItemText primary="FORM UPPLOAD Test" />
             </Link>
-          </ListItem>
+          </ListItem> */}
         </List>
       </Box>
     </Popover>

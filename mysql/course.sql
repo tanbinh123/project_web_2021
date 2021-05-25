@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 25/05/2021 21:31:51
+ Date: 25/05/2021 23:56:03
 */
 
 SET NAMES utf8mb4;
@@ -30,16 +30,12 @@ CREATE TABLE `active_account`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `active_account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 86 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 90 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of active_account
 -- ----------------------------
-INSERT INTO `active_account` VALUES (81, 1, '2021-05-13 18:12:17', '111bbaf4ba2018abd9af120f7bd6074d', b'0');
-INSERT INTO `active_account` VALUES (82, 2, '2021-05-15 07:09:29', '83c7be64a9eddcd893a7cc8fd444ca37', b'0');
-INSERT INTO `active_account` VALUES (83, 1, '2021-05-18 12:19:23', '28e636dd3cee8b0222879000a6ef0326', b'1');
-INSERT INTO `active_account` VALUES (84, 1, '2021-05-18 12:19:36', '626c7be995449f69632fb57ee8bea3b4', b'1');
-INSERT INTO `active_account` VALUES (85, 41, '2021-05-18 12:20:34', '7cea41278dae64ad78826ed04cda3b25', b'0');
+INSERT INTO `active_account` VALUES (89, 1, '2021-05-25 16:28:28', '8ea0418123cdd0d52eb89f19c39b06af', b'0');
 
 -- ----------------------------
 -- Table structure for app_role
@@ -84,14 +80,14 @@ CREATE TABLE `app_user`  (
   UNIQUE INDEX `email_uq`(`email`) USING BTREE,
   INDEX `avatar_id`(`avatar_id`) USING BTREE,
   CONSTRAINT `app_user_ibfk_1` FOREIGN KEY (`avatar_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
 INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37');
-INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'1', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37');
-INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'1', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37');
+INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37');
+INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37');
 
 -- ----------------------------
 -- Table structure for categories
@@ -515,7 +511,7 @@ CREATE TABLE `request_reset_password`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `request_reset_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 65 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for resource_image
@@ -574,7 +570,10 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('8438444c-299d-44a5-afc7-23a5eaedaf43', '14784ac1-771d-4d69-8d62-2b8a19dc9ff7', 1621951132403, 1621952951687, 1800, 1621954751687, NULL);
+INSERT INTO `spring_session` VALUES ('22c71446-23e3-4cae-bceb-8f8c407d90f2', '027dc03c-d703-43a4-aab6-dd694317681a', 1621960178027, 1621960178027, 1800, 1621961978027, NULL);
+INSERT INTO `spring_session` VALUES ('3e9e08ae-3876-47f9-aa46-b2089f2031e3', '35bc5355-ee90-4f07-ab86-42f22b0ab276', 1621960084211, 1621960084211, 1800, 1621961884211, NULL);
+INSERT INTO `spring_session` VALUES ('602e9876-7431-4b68-99d6-30598cac78d9', '3711e8c4-7b19-43cb-ac7f-22faf7653f23', 1621960103033, 1621960103033, 1800, 1621961903033, NULL);
+INSERT INTO `spring_session` VALUES ('f345c468-afd7-4fbd-b9a3-ba7f7f7c0ef5', '67f40018-b96c-451b-ad7f-293c87608280', 1621960644594, 1621960644594, 1800, 1621962444594, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -591,8 +590,10 @@ CREATE TABLE `spring_session_attributes`  (
 -- ----------------------------
 -- Records of spring_session_attributes
 -- ----------------------------
-INSERT INTO `spring_session_attributes` VALUES ('8438444c-299d-44a5-afc7-23a5eaedaf43', 'javax.servlet.jsp.jstl.fmt.request.charset', 0xACED00057400055554462D38);
-INSERT INTO `spring_session_attributes` VALUES ('8438444c-299d-44a5-afc7-23a5eaedaf43', 'username', 0xACED000574000561646D696E);
+INSERT INTO `spring_session_attributes` VALUES ('22c71446-23e3-4cae-bceb-8f8c407d90f2', 'username', 0xACED0005740005686F616E67);
+INSERT INTO `spring_session_attributes` VALUES ('3e9e08ae-3876-47f9-aa46-b2089f2031e3', 'username', 0xACED0005740005686F616E67);
+INSERT INTO `spring_session_attributes` VALUES ('602e9876-7431-4b68-99d6-30598cac78d9', 'username', 0xACED000574000561646D696E);
+INSERT INTO `spring_session_attributes` VALUES ('f345c468-afd7-4fbd-b9a3-ba7f7f7c0ef5', 'username', 0xACED000574000561646D696E);
 
 -- ----------------------------
 -- Table structure for templates
@@ -643,7 +644,7 @@ CREATE TABLE `user_role`  (
   INDEX `USER_ROLE_FK2`(`ROLE_ID`) USING BTREE,
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`ROLE_ID`) REFERENCES `app_role` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role
@@ -687,6 +688,20 @@ INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MU
 INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+
+-- ----------------------------
+-- Triggers structure for table app_user
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_delete_app_user`;
+delimiter ;;
+CREATE TRIGGER `before_delete_app_user` BEFORE DELETE ON `app_user` FOR EACH ROW BEGIN
+			DELETE FROM ower_course WHERE user_id=old.id ;
+			DELETE FROM active_account WHERE user_id=old.id ;
+			DELETE FROM request_reset_password WHERE user_id=old.id ;
+			DELETE FROM user_role WHERE user_id=old.id ;
+	 END
+;;
+delimiter ;
 
 -- ----------------------------
 -- Triggers structure for table course

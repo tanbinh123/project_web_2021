@@ -17,6 +17,7 @@ import SimpleReactFileUpload from "./features/test/FormUpload/SimpleReactFileUpl
 import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
 import SetValue from "./features/test/SetValue";
 import TestSearch from "./features/test/TestSearch";
+import Socket from "./Socket";
 import "./index.css";
 
 App.propTypes = {};
@@ -24,6 +25,8 @@ App.propTypes = {};
 function App(props) {
   return (
     <div>
+      <Socket/>
+
       <Switch>
         <Route path="/auth/login" component={Login} exact />
         <Route path="/auth/register" component={Register} exact />

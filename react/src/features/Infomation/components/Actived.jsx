@@ -6,7 +6,7 @@ import ButtonClick from "../../../components/Button/ButtonClick";
 import { useHistory, useParams } from "react-router";
 import userApi from "../../../api/userApi";
 import { useRecoilState } from "recoil";
-import { DataUser } from "../../../app/DataUser";
+import { addLocalStorage, DataUser } from "../../../app/DataUser";
 
 Actived.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +65,14 @@ function Actived(props) {
       };
       const res = await userApi.actived(payload);
       console.log(res);
+      /* const profile = await userApi.profile();
+      setDataUser({
+        ...dataUser,       
+        profile: profile,
+      });
+      addLocalStorage(null, profile); */
+      //console.log("localStorage", data);
+
       setLoading(false);
     }
   }, []);
