@@ -66,11 +66,12 @@ public class AuthenticationREST implements IMyHost {
 			// FileProcess.encodeFileToBase64(user.getAvater()));
 			account.setUsername(user.getUserName());
 			authResponse.setUser(account);
-			List<Course> lstCourse = owerCourseDAO.querryAllBought(user.getId());
-			for (Course c : lstCourse) {
-				c.setBeforeResource(this.getUrl(httpServletRequest));
-			}
-			authResponse.setCourses(lstCourse);
+			/*
+			 * List<Course> lstCourse = owerCourseDAO.querryAllBought(user.getId()); for
+			 * (Course c : lstCourse) {
+			 * c.setBeforeResource(this.getUrl(httpServletRequest)); }
+			 * authResponse.setCourses(lstCourse);
+			 */
 			// System.out.println(Arrays.toString(lstCourse.toArray()));
 
 			if (user.getAuthorities().contains(appRole)) {
