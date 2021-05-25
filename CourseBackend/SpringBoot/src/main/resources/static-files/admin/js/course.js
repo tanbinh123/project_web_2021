@@ -1,8 +1,4 @@
-document
-	.querySelectorAll('input[list]').forEach((e) => {
-		e.addEventListener(
-			'input',
-			function(e) {
+var funcListChoose=function (e) {
 				var input = e.target, list = input
 					.getAttribute('list'), options = document
 						.querySelectorAll('#' + list + ' option'), hiddenInput = document
@@ -20,7 +16,13 @@ document
 						break;
 					}
 				}
-			});
+			};
+
+document
+	.querySelectorAll('input[list]').forEach((e) => {
+		e.addEventListener(
+			'input',funcListChoose
+			);
 	});
 var deleteLearnig = function(b) {
 	console.log(".delete-learning");
@@ -135,7 +137,7 @@ var deleteLesson = function(b) {
 	var btn = b.target;
 	console.log(".delete-lesson",btn.getAttribute('delete-lesson-id'));
 	var tmp = document.getElementById(btn.getAttribute('delete-lesson-id'));
-	//tmp.querySelector('input')[1].value=1;
+	// tmp.querySelector('input')[1].value=1;
 	
 	tmp.children[1].value = "1";
 	
@@ -143,44 +145,60 @@ var deleteLesson = function(b) {
 }
 
 document.querySelectorAll(".delete-lesson").forEach((e) => {
-
 	e.addEventListener('click', deleteLesson);
 });
 
 
-document.querySelector("#add-lessons").addEventListener('click', function(b) {
-	b.preventDefault();
-	var sizeE=document.getElementById(b.target.getAttribute("index"));
-	var indexP = b.target.getAttribute("part-index");
-	var index = parseInt(sizeE.value);
-	//console.log("#add-lessons",b.target.getAttribute("lessons-wrap-id"));
-	var tmp = document.getElementById(b.target.getAttribute("lessons-wrap-id"));
-	var tag = document.createElement("div");
-	tag.style = "display: flex;";
-	tag.id = "part-index-" + indexP +"-lesson-index-"+index;
-	var id = document.createElement("input");
-	id.type = "hidden";
+document.querySelectorAll(".add-lessons").forEach((e) => {
+	e.addEventListener('click', function(b) {
+		b.preventDefault();
+		var sizeE=document.getElementById(b.target.getAttribute("index"));
+		var indexP = b.target.getAttribute("part-index");
+		var index = parseInt(sizeE.value);
+		// console.log("#add-lessons",b.target.getAttribute("lessons-wrap-id"));
+		var tmp = document.getElementById(b.target.getAttribute("lessons-wrap-id"));
+		var tag = document.createElement("div");
+		tag.style = "display: flex;";
+		tag.id = "part-index-" + indexP +"-lesson-index-"+index;
+		var id = document.createElement("input");
+		id.type = "hidden";
+		
+		id.name = "parts[" + indexP + "].lessons["+index+"].id";
 	
-	id.name = "parts[" + indexP + "].lessons["+index+"].id";
-
-	var deleted = document.createElement("input");
-	deleted.type = "hidden";
-	deleted.value = "0";
-	deleted.name = "parts[" + indexP + "].lessons["+index+"].deleted";
-	var name = document.createElement("input");
-	name.name = "parts[" + indexP + "].lessons["+index+"].description";
-	var btn = document.createElement("button");
-	btn.setAttribute('delete-lesson-id', "part-index-" + indexP+"-lesson-index-"+index);
-	btn.setAttribute('class', "delete-lesson");
-	var text = document.createTextNode("Delete");
-	name.value = "";
-	btn.appendChild(text);
-	btn.addEventListener('click', deleteLesson);
-	tag.appendChild(id);
-	tag.appendChild(deleted);
-	tag.appendChild(name);
-	tag.appendChild(btn);
-	tmp.appendChild(tag);
-	sizeE.value=index+1;
-
+		var deleted = document.createElement("input");
+		deleted.type = "hidden";
+		deleted.value = "0";
+		deleted.name = "parts[" + indexP + "].lessons["+index+"].deleted";
+		var name = document.createElement("input");
+		name.name = "parts[" + indexP + "].lessons["+index+"].description";
+		
+		var videoId = document.createElement("input");
+		videoId.name = "parts[" + indexP + "].lessons["+index+"].videoId";
+		videoId.id="part-index-"+indexP+"-lesson-index-"+index+"-video-hidden";
+		videoId.type="hidden";
+		var video = document.createElement("input");
+		video.name = "parts[" + indexP + "].lessons["+index+"].urlVideo";
+		video.id="part-index-"+indexP+"-lesson-index-"+index+"-video";
+		video.setAttribute('list','videos');	
+		video.addEventListener(
+				'input',funcListChoose
+		);
+		var btn = document.createElement("button");
+		btn.setAttribute('delete-lesson-id', "part-index-" + indexP+"-lesson-index-"+index);
+		btn.setAttribute('class', "delete-lesson");
+		
+		btn.addEventListener('click', deleteLesson);
+		var text = document.createTextNode("Delete");
+		name.value = "";
+		btn.appendChild(text);
+		btn.addEventListener('click', deleteLesson);
+		tag.appendChild(id);
+		tag.appendChild(deleted);
+		tag.appendChild(name);
+		tag.appendChild(videoId);
+		tag.appendChild(video);
+		tag.appendChild(btn);
+		tmp.appendChild(tag);
+		sizeE.value=index+1;
+	});
 });

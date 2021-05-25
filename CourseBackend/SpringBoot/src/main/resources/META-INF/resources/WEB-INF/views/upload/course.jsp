@@ -32,7 +32,6 @@
 
 	<form:form modelAttribute="fullcourse">
 		<form:input type="hidden" path="id" id="id" />
-		<form:input type="hidden" path="posterId" id="posterId" />
 		<form:input type="hidden" id="deleted" path="deleted" />
 		<form:input type="hidden" id="updateAt" path="updateAt" />
 		<input type="hidden" id="sizeLearnings"
@@ -156,9 +155,9 @@
 													path="parts[${status.index}].lessons[${statusLesson.index}].deleted" />
 												<form:input
 													path="parts[${status.index}].lessons[${statusLesson.index}].description" />
-												<form:input id="part-index-${status.index}-lesson-index-${statusLesson.index}-video-hidden" type="hidden"
+												<form:input id="video-hidden" type="hidden"
 													path="parts[${status.index}].lessons[${statusLesson.index}].videoId" />
-												<form:input id="part-index-${status.index}-lesson-index-${statusLesson.index}-video" list="videos"
+												<form:input id="video" list="videos"
 													path="parts[${status.index}].lessons[${statusLesson.index}].video.urlVideo" />
 												<%-- <input type="text"
 													value="${lesson.video.urlVideo}" /> --%>
@@ -179,7 +178,7 @@
 								<button part-index="${status.index}"
 									lessons-wrap-id="part-index-${status.index}-lessons"
 									index="part-index-${status.index}-size-lessons"
-									class="add-lessons">Add lesson</button>
+									id="add-lessons">Add lesson</button>
 
 							</div>
 						</c:forEach>

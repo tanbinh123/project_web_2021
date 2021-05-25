@@ -97,8 +97,14 @@ public class Lesson  {
 	public void setVideo(VideoEntity video) {
 		this.video = video;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "Lesson [id=" + id + ", description=" + description + ", video=" + video + ", part=" + part + ", partId="
+				+ partId + ", videoId=" + videoId + ", deleted=" + deleted + "]";
+	}
+	
+ 
 	
 
 	

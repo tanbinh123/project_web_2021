@@ -76,6 +76,13 @@ public class Learning {
 	public void setCourse(FullCourse course) {
 		this.course = course;
 	}
+
+	@Override
+	public String toString() {
+		return "Learning [id=" + id + ", learning=" + learning + ", courseId=" + courseId + ", course=" + course
+				+ ", deleted=" + deleted + "]";
+	}
+	
 	
 
 }

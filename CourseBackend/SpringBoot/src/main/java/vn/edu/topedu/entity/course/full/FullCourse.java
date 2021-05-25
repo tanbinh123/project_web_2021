@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,12 +19,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import vn.edu.topedu.entity.AHasResource;
+import vn.edu.topedu.entity.AppUser;
+import vn.edu.topedu.entity.BaseEntity;
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.ResourceImage;
 
 @Entity
 @Table(name = "Course")
-public class FullCourse extends AHasResource {
+public class FullCourse extends BaseEntity {
 
 	
 	@Column(name = "demo_id", length = 20, nullable = false)
@@ -34,11 +37,22 @@ public class FullCourse extends AHasResource {
 	@JoinColumn(name = "demo_id", referencedColumnName = "id" ,insertable = false, updatable = false)
 	private VideoEntity demo;
 
+	@Column(name = "poster_id", nullable = false)
+	@JsonIgnore
+	private Long posterId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "poster_id", nullable = false, insertable = false, updatable = false)
+	@JsonIgnore
+	private AppUser appUser;
+	
+	
+	
 	@Column(name = "img_poster_id", nullable = false)
 	@JsonIgnore
 	private Long imgPosterId;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private ResourceImage poster;
 
@@ -62,7 +76,7 @@ public class FullCourse extends AHasResource {
 	@JsonIgnore
 	@Column(name = "category_id", nullable = false)
 	private Integer categoryId;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
 	private CategoryEntity category;
 
@@ -143,6 +157,16 @@ public class FullCourse extends AHasResource {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public AppUser getAppUser() {
+		return appUser;
+	}
+
+	public void setAppUser(AppUser appUser) {
+		this.appUser = appUser;
+	}
+	
+	
 
 //	public int getPrice() {
 //		return price;
@@ -152,6 +176,14 @@ public class FullCourse extends AHasResource {
 //		this.price = price;
 //	}
 
+
+	public Long getPosterId() {
+		return posterId;
+	}
+
+	public void setPosterId(Long posterId) {
+		this.posterId = posterId;
+	}
 
 	public BigDecimal getPrice() {
 		return price;
@@ -186,7 +218,7 @@ public class FullCourse extends AHasResource {
 		this.poster = poster;
 	}
 
-	@Override
+	
 	public void setBeforeResource(String beforeResource) {
 		if (this.poster != null)
 			this.poster.setBeforeResource(beforeResource);
@@ -201,7 +233,6 @@ public class FullCourse extends AHasResource {
 					});
 			});
 
-		super.setBeforeResource(beforeResource);
 	}
 
 

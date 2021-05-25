@@ -13,45 +13,37 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class CategoryEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "actived")
 	private Boolean actived = true;
-	
+
 	@Column(name = "Create_Time", nullable = false)
 	private Date createTime = new Date();
-	
+
 	@Column(name = "Update_Time", nullable = false)
 	private Date updateTime = new Date();
-	
+
 	@Column(name = "deleted", length = 1, nullable = false)
 	private Boolean deleted = false;
-	
-	
+
 	@Column(name = "total_course", nullable = false)
-	private Long total;
-	
-	
+	private Long total = Long.valueOf(0);
+
 	@Column(name = "duration_learned", nullable = false)
 	private BigDecimal durationLearned = new BigDecimal(0);
-	
+
 	@Column(name = "total_money", nullable = false)
 	private BigDecimal totalMoney = new BigDecimal(0);
-	
-	
-	
-	
-	
-	
 
 	public BigDecimal getTotalMoney() {
 		return totalMoney;
@@ -124,8 +116,14 @@ public class CategoryEntity {
 	public void setActived(Boolean active) {
 		this.actived = active;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "CategoryEntity [id=" + id + ", name=" + name + ", actived=" + actived + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + ", deleted=" + deleted + ", total=" + total + ", durationLearned="
+				+ durationLearned + ", totalMoney=" + totalMoney + "]";
+	}
+	
+	
 
 }

@@ -89,7 +89,7 @@ public class CourseDAO {
 
 	public long getCount(int category, String _search) {
 		String sql = null;
-		if (_search==null||_search.length() == 0) {
+		if (_search == null || _search.length() == 0) {
 			sql = "Select count(*) from " + Course.class.getName() + " c " //
 					+ " where c.deleted=0 ";
 
@@ -102,7 +102,7 @@ public class CourseDAO {
 		if (category != -1)
 			sql += String.format(" and c.category.id = %d ", category);
 		Query query = this.entityManager.createQuery(sql, Long.class);
-		if (_search!=null&&_search.length() != 0) {
+		if (_search != null && _search.length() != 0) {
 			query.setParameter("search", _search);
 		}
 		return (long) query.getSingleResult();
@@ -174,11 +174,13 @@ public class CourseDAO {
 	}
 
 	@Transactional(rollbackFor = Exception.class)
-	public FullCourse updateFullCourse(FullCourse course) throws Exception {
+	public FullCourse persistFullCourse(FullCourse course) throws Exception {
 		if (course.getCategoryId() == null) {
 			entityManager.persist(course.getCategory());
 			entityManager.flush();
 			course.setCategoryId(course.getCategory().getId());
+			
+			
 		} else {
 			course.getCategory().setId(course.getCategoryId());
 		}
@@ -238,6 +240,99 @@ public class CourseDAO {
 						}
 
 						deleteAllLessonDeleted();
+					}
+				}
+				entityManager.flush();
+
+			}
+			int rs = deleteAllPartDeleted();
+			System.err.println("delete part: " + rs);
+		}
+//		course.setCategory(findCatetoryById(course.getCategoryId()));
+		//entityManager.detach(course.getCategory());
+		System.err.println(course.getCategory());
+		entityManager.persist(course);
+		entityManager.flush();
+//		rs.setCategory(findCatetoryById(rs.getCategoryId()));
+//		rs.setPoster(findImageById(rs.getImgPosterId()));
+		return course;
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public FullCourse updateFullCourse(FullCourse course) throws Exception {
+		if (course.getCategoryId() == null) {
+			entityManager.persist(course.getCategory());
+			entityManager.flush();
+			course.setCategoryId(course.getCategory().getId());
+		} else {
+			course.getCategory().setId(course.getCategoryId());
+		}
+		if (course.getImgPosterId() == null) {
+			System.err.println(course.getPoster().getImage());
+			if (course.getPoster() != null && course.getPoster().checkExtendResource()) {
+				entityManager.persist(course.getPoster());
+				entityManager.flush();
+				course.setImgPosterId(course.getPoster().getId());
+			} else
+				throw new Exception(String.format("rollBack, IsNull: %s", "getImgPosterId"));
+		} else {
+			course.setPoster(findImageById(course.getImgPosterId()));
+
+		}
+		if (course.getVideoDemoId() == null) {
+			throw new Exception(String.format("rollBack, IsNull: %s", "getVideoDemoId"));
+		} else {
+			course.setDemo(findVideoById(course.getVideoDemoId()));
+
+		}
+		if (course.getLearnings() != null) {
+			for (Learning l : course.getLearnings()) {
+				l.setCourseId(course.getId());
+				if (l.getId() == null) {
+					//System.err.println("Insert Le");
+					if (l.getDeleted() == false) {
+						
+						entityManager.persist(l);
+						
+						//System.err.println(l);
+					}
+				} else {
+					entityManager.merge(l);
+				}
+				entityManager.flush();
+
+			}
+			int rs = deleteAllLearningDeleted();
+			System.err.println("delete learning: " + rs);
+		}
+
+		if (course.getParts() != null) {
+			for (Part part : course.getParts()) {
+				part.setCourseId(course.getId());
+				if (part.getId() == null) {
+					if (part.getDeleted() == false)
+						entityManager.persist(part);
+				} else {
+					entityManager.merge(part);
+					if (part.getLessons() != null) {
+						for (Lesson le : part.getLessons()) {
+							le.setPartId(part.getId());
+							if (le.getId() == null) {
+								if (le.getDeleted() == false) {
+									
+									entityManager.persist(le);
+									entityManager.flush();
+									System.err.println(le);
+								}
+							} else {
+								le.setVideo(findVideoById(le.getId()));
+								entityManager.merge(le);
+							}
+							// System.err.println("");
+						}
+
+						
+						System.err.println("delete lesson: " + deleteAllLessonDeleted());
 					}
 				}
 				entityManager.flush();

@@ -58,6 +58,12 @@ public class ResourceImageDAO {
 		return query.getResultList();
 	}
 	
+	public List<ResourceImage> getResourceImages() {
+		String sql = "Select e from "+ResourceImage.class.getName()+" e " + " where e.deleted=false  ";
+		Query query = this.entityManager.createQuery(sql, ResourceImage.class);
+		return query.getResultList();
+	}
+	
 	public ResourceImage save(ResourceImage image) {
 		if(image.getId()!=null) {
 			return entityManager.merge(image);
