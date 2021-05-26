@@ -72,6 +72,36 @@ public class ChartsService {
 		System.err.println("Service Run");
 		return pieChart;
 	}
+	
+	public PieChart getChartMoneyCategories() {
+		PieChart pieChart = new PieChart();
+		String title = "Biểu đồ doanh thu từng thể loại khóa học";
+		pieChart.setTitle(title);
+		List<CategoryEntity> categories = catogoryDAO.getCategories(-1);
+		List<Data> data = new ArrayList<PieChart.Data>();
+		if (categories != null)
+			categories.forEach(e -> {
+				data.add(new Data(e.getTotalMoney().doubleValue(), e.getName()));
+			});
+		pieChart.setDataPoints(data);
+		System.err.println("Service Run");
+		return pieChart;
+	}
+	
+	public PieChart getChartMoneyMonth() {
+		PieChart pieChart = new PieChart();
+		String title = "Biểu đồ doanh thu từng thể loại khóa học";
+		pieChart.setTitle(title);
+		List<CategoryEntity> categories = catogoryDAO.getCategories(-1);
+		List<Data> data = new ArrayList<PieChart.Data>();
+		if (categories != null)
+			categories.forEach(e -> {
+				data.add(new Data(e.getTotalMoney().doubleValue(), e.getName()));
+			});
+		pieChart.setDataPoints(data);
+		System.err.println("Service Run");
+		return pieChart;
+	}
 
 	public PieChart getPieChartCategoryDurationLearned() {
 		PieChart pieChart = new PieChart();

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 HomeAdmin.propTypes = {};
 
 function HomeAdmin(props) {
+
+  useEffect(()=>{
+    window.location= "http://localhost:25001/admin";
+
+  },[]);
   return (
     <div>
       Home Admin

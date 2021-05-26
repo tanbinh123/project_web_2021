@@ -32,6 +32,9 @@
 		<tr>
 			<td><a href="/admin/upload/course"> Upload Course</a></td>
 		</tr>
+		<tr>
+			<td><a href="/admin/charts"> Charts</a></td>
+		</tr>
 	</table>
 	Click on this
 	<strong><a href="${homeUrl}">link</a></strong> to visit Home Page

@@ -66,8 +66,20 @@ public class ChartControlller {
 //		return "redirect:/admin/charts/piechart";
 //	}
 	
-	@RequestMapping(value = "/admin/charts/chart", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/charts/chart-money-categories", method = RequestMethod.GET)
 	public ModelAndView testMVC(Map<String, Object> model) {
+		
+		PieChart pieChart = chartsService.getChartMoneyCategories();
+		model.put("pieChart",pieChart);
+		ModelAndView modelAndView = new ModelAndView("charts/chart", model);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/admin/charts/chart-money-month", method = RequestMethod.GET)
+	public ModelAndView chartColumMoneyMonth(Map<String, Object> model) {
+		
+		PieChart pieChart = chartsService.getChartMoneyMonth();
+		model.put("pieChart",pieChart);
 		ModelAndView modelAndView = new ModelAndView("charts/chart", model);
 		return modelAndView;
 	}

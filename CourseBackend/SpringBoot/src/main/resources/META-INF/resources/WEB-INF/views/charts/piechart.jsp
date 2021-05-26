@@ -59,6 +59,9 @@ chart.render();
 				<tr>
 					<td colspan="2"><a href="/admin/charts/piechart-category-money"><button type="button">Category Money</button></a></td>
 				</tr>
+				<tr>
+					<td colspan="2"><a href="/admin/charts"><button type="button">Back</button></a></td>
+				</tr>
 			</table>
 		</div>
 	</div>

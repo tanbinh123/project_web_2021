@@ -16,7 +16,10 @@
 <body>
 	<a href="/admin/charts/piechart">Piechart</a>
 	<br/>
-	<a href="/admin/charts/chart">Chart</a>
+	<a href="/admin/charts/chart-money-categories">Chart</a>
+	<br />
+	<a href="/admin">Admin Page</a>
+	<br />
 	<div></div>
 	<script>
 		
