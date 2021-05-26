@@ -3,6 +3,8 @@ package vn.edu.topedu.service.charts;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import vn.edu.topedu.dao.CatogoryDAO;
 import vn.edu.topedu.dao.CourseDAO;
+import vn.edu.topedu.dao.RevenueDAO;
 import vn.edu.topedu.entity.CategoryEntity;
+import vn.edu.topedu.entity.Revenue;
 import vn.edu.topedu.json.JsonResponse;
 import vn.edu.topedu.service.charts.ChartsService.PieChart.Data;
 
@@ -24,6 +28,8 @@ public class ChartsService {
 	private CatogoryDAO catogoryDAO;
 	@Autowired
 	private CourseDAO courseDAO;
+	@Autowired
+	private RevenueDAO revenueAO;
 
 	public PieChart getPieChartCategory() {
 		PieChart pieChart = new PieChart();
@@ -90,13 +96,13 @@ public class ChartsService {
 	
 	public PieChart getChartMoneyMonth() {
 		PieChart pieChart = new PieChart();
-		String title = "Biểu đồ doanh thu từng thể loại khóa học";
+		String title = "Biểu đồ doanh thu từng tháng trong năm nay";
 		pieChart.setTitle(title);
-		List<CategoryEntity> categories = catogoryDAO.getCategories(-1);
+		List<Revenue> categories = revenueAO.getAll(Calendar.getInstance().get(Calendar.YEAR));
 		List<Data> data = new ArrayList<PieChart.Data>();
 		if (categories != null)
 			categories.forEach(e -> {
-				data.add(new Data(e.getTotalMoney().doubleValue(), e.getName()));
+				data.add(new Data(e.getMoney().doubleValue(),"Tháng "+ e.getMonth()+""));
 			});
 		pieChart.setDataPoints(data);
 		System.err.println("Service Run");

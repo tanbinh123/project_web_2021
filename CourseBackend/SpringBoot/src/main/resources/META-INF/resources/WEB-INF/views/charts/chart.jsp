@@ -2,11 +2,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<title>List Course</title>
+<title>Biểu đồ cột</title>
 <link rel="stylesheet" href="/admin/css/courses.css" />
 <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
@@ -47,12 +48,18 @@
 				<tr>
 					<td colspan="2"><a
 						href="/admin/charts/chart-money-categories"><button
-								type="button">Money Categories</button></a></td>
+								type="button">Doanh thu theo thể loại khóa học</button></a></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2"><a
+						href="/admin/charts/chart-money-month"><button
+								type="button">Doanh thu theo từng tháng trong năm nay</button></a></td>
 				</tr>
 				
 				<tr>
 					<td colspan="2"><a href="/admin/charts"><button
-								type="button">Back</button></a></td>
+								type="button">Trở về</button></a></td>
 				</tr>
 			</table>
 		</div>

@@ -2,11 +2,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<title>List Course</title>
+<title>Biểu đồ tròn</title>
 <link rel="stylesheet" href="/admin/css/courses.css" />
 <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
@@ -51,16 +52,16 @@ chart.render();
 					<td><form:input id="title" path="title" /></td>
 				</tr> --%>
 				<tr>
-					<td colspan="2"><a href="/admin/charts/piechart-duration-learned"><button type="button">Piechart Categories</button></a></td>
+					<td colspan="2"><a href="/admin/charts/piechart-duration-learned"><button type="button">Tỉ lệ thời gian học của từng thể loại khóa học</button></a></td>
 				</tr>
 				<tr>
-					<td colspan="2"><a href="/admin/charts/piechart"><button type="button">Piechart</button></a></td>
+					<td colspan="2"><a href="/admin/charts/piechart"><button type="button">Tỉ lệ thể loại khóa học</button></a></td>
 				</tr>
 				<tr>
-					<td colspan="2"><a href="/admin/charts/piechart-category-money"><button type="button">Category Money</button></a></td>
+					<td colspan="2"><a href="/admin/charts/piechart-category-money"><button type="button">Doanh thu theo thể loại khóa học</button></a></td>
 				</tr>
 				<tr>
-					<td colspan="2"><a href="/admin/charts"><button type="button">Back</button></a></td>
+					<td colspan="2"><a href="/admin/charts"><button type="button">Trờ về</button></a></td>
 				</tr>
 			</table>
 		</div>

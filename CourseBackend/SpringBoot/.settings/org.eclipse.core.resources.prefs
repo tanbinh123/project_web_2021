@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/META-INF/resources/WEB-INF/views/charts/chart.jsp=UTF-8
 encoding//src/main/resources/META-INF/resources/WEB-INF/views/course.jsp=UTF-8
 encoding//src/main/resources/META-INF/resources/WEB-INF/views/courses.jsp=UTF-8
 encoding//src/main/resources/META-INF/resources/WEB-INF/views/upload/images.jsp=UTF-8
