@@ -42,6 +42,7 @@ public class Main extends SpringBootServletInitializer {
 	@EventListener({ApplicationReadyEvent.class})
 	void applicationReadyEvent() {
 	    System.out.println("Application started ... launching browser now");
+	    System.out.println("http://localhost:"+port+"/admin");
 //	    browse("www.google.com");
 //	    browse("http://localhost:"+port+"/");
 //	    browse("http://localhost:"+port+"/admin");

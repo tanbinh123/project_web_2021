@@ -14,41 +14,13 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+   
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+ 
 
-    <script type="text/javascript">
-      window.onload = function () {
-        console.log("Document ready!");
-        var sockJS = new SockJS("http://localhost:25001/notifications");
-        stompClient = Stomp.over(sockJS);
-        stompClient.connect({}, onConnected, onError);
-        function onConnected() {
-          // Subscribe to the Public Topic
-          stompClient.subscribe("/user/notification/item", (response) => {
-            const object = JSON.parse(response.body);
-            console.log(object);
-          });
-          stompClient.send(
-            "/swns/start",
-            {},
-            JSON.stringify({ sender: "hello man", type: "JOIN" })
-          );
-
-          console.log("2");
-        }
-
-        function onError(error) {
-          console.log(
-            "Could not connect to WebSocket server. Please refresh this page to try again!"
-          );
-        }
-      };
-    </script>
-
-    <script src="./assets/sockjs.min.js"></script>
-    <script src="./assets/stomp.min.js"></script>
+    
   </body>
 </html>

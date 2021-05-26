@@ -17,7 +17,7 @@ export default function SimpleAccordion(props) {
     <div className={classes.root}>
       {Array.from(parts || []).map((item, index) => (
         <ItemAccordion
-          key={index}
+          key={item.id +""}
           title={index + 1 + ": " + item.title}
           indexLecture={
             index == 0
