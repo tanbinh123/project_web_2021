@@ -95,7 +95,7 @@ function CourseDetail(props) {
                 <LeftCD
                   title={course.title}
                   description={course.description}
-                  learning={course.learning}
+                  learnings={course.learnings}
                   parts={course.parts}
                 />
               </Paper>
