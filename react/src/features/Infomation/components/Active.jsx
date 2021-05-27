@@ -1,18 +1,12 @@
 import { Grid, LinearProgress } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  Route,
-  Switch,
   useHistory,
-  useParams,
-  useRouteMatch,
+
+  useRouteMatch
 } from "react-router";
-import { useRecoilState } from "recoil";
 import userApi from "../../../api/userApi";
-import { DataUser } from "../../../app/DataUser";
 import ButtonClick from "../../../components/Button/ButtonClick";
-import Actived from "./Actived.jsx";
-import { isEmpty } from "../../../components/tools/Tools";
 import ActiveCss from "./css/ActiveCss";
 Active.propTypes = {};
 

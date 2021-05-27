@@ -1,7 +1,7 @@
 import { AppBar, IconButton, makeStyles, Toolbar } from "@material-ui/core";
 import { ArrowBackIos } from "@material-ui/icons";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "var(--colorBlack1)",
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeaderLecture(props) {
-  
+  const { url } = useRouteMatch();
   const classes = useStyles();
   // console.log("header lesson", props.lesson);
   // console.log("header index", props.index);
@@ -69,7 +69,9 @@ function HeaderLecture(props) {
         <Toolbar>
           <ul>
             <li>
-              <i className="fas fa-chevron-left"></i>
+              <Link to={url.slice(0, url.indexOf("/lecture"))}>
+                <i className="fas fa-chevron-left"></i>
+              </Link>
             </li>
             <li>
               <Link to="/">
@@ -77,7 +79,9 @@ function HeaderLecture(props) {
               </Link>
             </li>
             <li>
-              <span className="title">Bài {props?.index} {props?.lesson?.description}</span>
+              <span className="title">
+                Bài {props?.index} {props?.lesson?.description}
+              </span>
             </li>
           </ul>
         </Toolbar>

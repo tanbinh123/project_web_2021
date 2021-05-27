@@ -1,12 +1,11 @@
+import { Grid, makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { Grid, makeStyles, Paper } from "@material-ui/core";
-import "././css/Actived.css";
-import ButtonClick from "../../../components/Button/ButtonClick";
 import { useHistory, useParams } from "react-router";
-import userApi from "../../../api/userApi";
 import { useRecoilState } from "recoil";
-import { addLocalStorage, DataUser } from "../../../app/DataUser";
+import userApi from "../../../api/userApi";
+import { DataUser } from "../../../app/DataUser";
+import ButtonClick from "../../../components/Button/ButtonClick";
+import "././css/Actived.css";
 
 Actived.propTypes = {};
 const useStyles = makeStyles((theme) => ({
