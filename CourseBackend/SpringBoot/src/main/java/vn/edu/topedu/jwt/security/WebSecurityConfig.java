@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			http/* .cors().and() */.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
 				.authenticationEntryPoint(restAuthenticationEntryPoint).and().authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/", "/auth/**", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
-						"/**/*.css", "/**/*.js")
+						"/**/*.css", "/**/*.js", "/**/*.png", "/**/*.svg")
 				.permitAll().antMatchers("/login").permitAll().antMatchers("/signup").permitAll()
 				.antMatchers("/resource/**").permitAll()
 				.antMatchers("/course/**").permitAll()

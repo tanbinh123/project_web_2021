@@ -35,6 +35,7 @@ function LeftCD(props) {
 
             <ul>
               {Array.from(learning).map((item, index) => (
+                
                 <li key={index}>
                   <CheckCircle />
                   <span>{item.learning}</span>

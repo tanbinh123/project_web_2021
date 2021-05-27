@@ -38,7 +38,8 @@ public class ChartControlller {
 	public ModelAndView piechart(Map<String, Object> model) {
 		PieChart pieChart = chartsService.getPieChartCategory();
 		model.put("pieChart",pieChart);
-		ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
+		ModelAndView modelAndView = new ModelAndView("template/piechart", model);
+//		ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
 		return modelAndView;
 	}
 	
@@ -46,7 +47,8 @@ public class ChartControlller {
 	public ModelAndView piechartDurationLearned(Map<String, Object> model) {
 		PieChart pieChart = chartsService.getPieChartCategoryDurationLearned();
 		model.put("pieChart",pieChart);
-		ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
+//		ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
+		ModelAndView modelAndView = new ModelAndView("template/piechart", model);
 		return modelAndView;
 	}
 	
@@ -54,7 +56,8 @@ public class ChartControlller {
 	public ModelAndView piechartCategoryMoney(Map<String, Object> model) {
 		PieChart pieChart = chartsService.getPieChartCategoryMoney();
 		model.put("pieChart",pieChart);
-		ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
+		//ModelAndView modelAndView = new ModelAndView("charts/piechart", model);
+		ModelAndView modelAndView = new ModelAndView("template/piechart", model);
 		return modelAndView;
 	}
 	
@@ -71,7 +74,8 @@ public class ChartControlller {
 		
 		PieChart pieChart = chartsService.getChartMoneyCategories();
 		model.put("pieChart",pieChart);
-		ModelAndView modelAndView = new ModelAndView("charts/chart", model);
+//		ModelAndView modelAndView = new ModelAndView("charts/chart", model);
+		ModelAndView modelAndView = new ModelAndView("template/chart", model);
 		return modelAndView;
 	}
 	
@@ -80,7 +84,7 @@ public class ChartControlller {
 		
 		PieChart pieChart = chartsService.getChartMoneyMonth();
 		model.put("pieChart",pieChart);
-		ModelAndView modelAndView = new ModelAndView("charts/chart", model);
+		ModelAndView modelAndView = new ModelAndView("template/chart", model);
 		return modelAndView;
 	}
 	

@@ -6,14 +6,15 @@ HomeAdmin.propTypes = {};
 function HomeAdmin(props) {
 
   useEffect(()=>{
-    window.location= "http://localhost:25001/admin";
+    window.location= "http://localhost:25001/admin/charts/piechart";
+    // window.location= "http://localhost:25001/admin";
 
   },[]);
   return (
     <div>
       Home Admin
       <br />
-      <ul>
+      {/* <ul>
         <li>
           Click <a href="http://localhost:25001/admin">Link</a> to jsp
         </li>
@@ -21,7 +22,7 @@ function HomeAdmin(props) {
           Click <a href="http://localhost:25001/admin/charts">Link</a> to Charts
         </li>
       
-      </ul>
+      </ul> */}
     </div>
   );
 }
