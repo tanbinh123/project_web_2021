@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Breadcrumb - Voler Admin Dashboard</title>
+<title>Admin</title>
 
 <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
@@ -162,7 +162,7 @@
 									<img src="/assets/images/avatar/avatar-s-1.png" alt=""
 										srcset="">
 								</div>
-								<div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
+								<div class="d-none d-md-block d-lg-inline-block">Hi, Admin</div>
 						</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="#"><i data-feather="user"></i>
@@ -181,18 +181,16 @@
 				<div class="page-title">
 					<div class="row">
 						<div class="col-12 col-md-6">
-							<h3>Breadcrumb</h3>
-							<p class="text-subtitle text-muted">Indicate the current
-								pageâs location within a navigational hierarchy that
-								automatically adds separators via CSS.</p>
+							<h3>Biểu đồ tròn</h3>
+							<p class="text-subtitle text-muted">Thống kê thông tin hệ thống</p>
 						</div>
 						<div class="col-12 col-md-6">
-							<nav aria-label="breadcrumb" class='breadcrumb-header text-right'>
+							<!-- <nav aria-label="breadcrumb" class='breadcrumb-header text-right'>
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Breadcrumb</li>
 								</ol>
-							</nav>
+							</nav> -->
 						</div>
 					</div>
 
