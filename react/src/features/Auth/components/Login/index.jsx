@@ -20,22 +20,20 @@ function Login(props) {
   }, [dataUser.user]);
   const handleOnSubmit = async (values) => {
     const data = await userApi.login(values);
-    // console.log(data);
+    console.log(data);
     if (!!!data.status) {
-      // setDataUser({ ...dataUser, user: data.user, courses: data.courses });
       addLocalStorage(data);
       //set token de lay profile
       const profile = await userApi.profile();
       setDataUser({
         ...dataUser,
-        user: data.user,
-        courses: data.courses,
+        user: data.user,        
         profile: profile,
       });
       addLocalStorage(data, profile);
       console.log("localStorage", data);
     } else {
-      enqueueSnackbar(data.data.message.en, { variant: "error" });
+      enqueueSnackbar(data.data.message.vi, { variant: "error" });
     }
   };
   return <LoginForm onSubmit={handleOnSubmit} />;

@@ -39,7 +39,7 @@ function ForgotPassword(props) {
       setStep(2);
     } else {
       setShowProcess(!show);
-      enqueueSnackbar(tmpData.data.message.en, { variant: "error" });
+      enqueueSnackbar(tmpData.data.message.vi, { variant: "error" });
     }
   };
   const handleOnSubmitCode = async (values) => {
@@ -52,7 +52,7 @@ function ForgotPassword(props) {
       // response data username
       setStep(3);
     } else {
-      enqueueSnackbar(tmpData.data.message.en, { variant: "error" });
+      enqueueSnackbar(tmpData.data.message.vi, { variant: "error" });
     }
   };
   const handleOnSubmitPass = async (values) => {

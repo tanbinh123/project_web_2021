@@ -83,7 +83,7 @@ public class AuthenticationREST implements IMyHost {
 		} else {
 			MessageResponse messageResponse = new MessageResponse("User not exists.", "Tài khoản không hợp lệ.");
 
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(messageResponse);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse);
 		}
 
 	}
@@ -123,14 +123,8 @@ public class AuthenticationREST implements IMyHost {
 			}
 
 		} catch (UnexpectedRollbackException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Object() {
-				private String message = "Lỗi Mysql, không thể chèn bảng ghi vào cơ sở dữ liệu";
-
-				public String getMessage() {
-					return message;
-				}
-
-			});
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error mysql, username or email exists.", "Lỗi cơ sỡ dữ liệu, username hoặc email đã tồn tại trong hệ thống."));
+				
 
 		}
 

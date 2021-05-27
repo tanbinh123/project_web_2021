@@ -75,7 +75,7 @@ public class ForgotPasswordREST {
 			requestResetPassword.genderCode(appUser.getUserName());
 			requestResetPassword.setAppUser(appUser);
 			int id=requestResetPasswordDAO.insert(requestResetPassword);
-			if(id==0)return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Can't gender code.",""));;
+			if(id==0)return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Can't gender code.","Không thể tạo mã xác thực"));;
 			String to= appUser.getEmail();
 			String subject= "Reset Password";
 			String text= "Code: "+requestResetPassword.getCode();
@@ -86,11 +86,11 @@ public class ForgotPasswordREST {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Not send mail",""));
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Not send mail","Không thể gửi mail"));
 			}
 			
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Email not exists.",""));		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Email not exists.","Email không tồn tại trong hệ thống"));		
 	}
 	@PostMapping("/forgotpassword/code")
 	@ResponseBody
