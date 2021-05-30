@@ -1,3 +1,5 @@
+import DateFnsUtils from "@date-io/date-fns";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -11,7 +13,9 @@ ReactDOM.render(
     <RecoilRoot>
       <BrowserRouter>
         <SnackbarProvider maxSnack={3}>
-          <App />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <App />
+          </MuiPickersUtilsProvider>
         </SnackbarProvider>
       </BrowserRouter>
     </RecoilRoot>

@@ -68,5 +68,54 @@ const EditCss = makeStyles((theme) => ({
       },
     },
   },
+  bgAvatar: {
+    // padding: "0px 40px 0px 40px",
+  },
+  Avatar: {
+    width: 120,
+    height: 120,
+    marginBottom: 30,
+    cursor: "pointer",
+  },
+  flexRow: {
+    display: "flex",
+    flexFlow: "row",
+    justifyContent: "space-around",
+  },
+  flexColumn: {
+    display: "flex",
+    flexFlow: "column",
+  },
+  rowEdit: {
+    display: "flex",
+    flexFlow: "row",
+    alignItems: "center",
+    width: 500,
+    "&>span": {
+      minWidth: 130,
+    },
+  },
+  bottomEdit: {
+    display: "flex",
+    justifyContent: "center",
+    margin: "50px 0 20px 0",
+  },
+  [theme.breakpoints.down("md")]: {
+    bgAvatar: {
+      display: "flex",
+      flexFlow: "column",
+      alignItems: "center",
+    },
+    flexRow: {
+      display: "flex",
+      flexFlow: "column",
+    },
+    rowEdit: {
+      "&>span": {
+        display: "none",
+      },
+      width: "100%",
+    },
+  },
 }));
 export default EditCss;

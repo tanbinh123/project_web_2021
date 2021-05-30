@@ -29,7 +29,6 @@ function Socket(props) {
           connected = true;
           stompClient.subscribe("/user/notification/item", (tick) => {
             console.log(tick);
-
           });
 
           send();

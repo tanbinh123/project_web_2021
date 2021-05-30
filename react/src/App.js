@@ -25,7 +25,7 @@ App.propTypes = {};
 function App(props) {
   return (
     <div>
-      <Socket/>
+      {/* <Socket/> */}
 
       <Switch>
         <Route path="/auth/login" component={Login} exact />
@@ -45,7 +45,7 @@ function App(props) {
         <Route path="/testcolor" component={CssColor} exact />
         <Route path="/setvalue" component={SetValue} exact />
         <Route path="/admin" component={AdminRouter} />
-       
+
         <Route path="/*" component={NotFound404} />
         <Route path="/auth/*" component={NotFound404} />
       </Switch>

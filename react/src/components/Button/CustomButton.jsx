@@ -25,6 +25,7 @@ function CustomButton(props) {
     fullWidth = false,
     css = false,
     color = "default",
+    onClick = null,
   } = props;
   const classes = useStyles();
   return (
@@ -35,6 +36,9 @@ function CustomButton(props) {
       fullWidth={fullWidth}
       color={color}
       className={css && classes.CustomButton}
+      onClick={() => {
+        if (onClick) onClick();
+      }}
     >
       {title}
     </Button>

@@ -1,5 +1,4 @@
 import { Button, makeStyles } from "@material-ui/core";
-import PropTypes from "prop-types";
 import React, { useState } from "react";
 const useStyles = makeStyles((theme) => ({
   CustomButton: {
@@ -25,21 +24,18 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     width: "100%",
     height: "100%",
+    cursor: "pointer",
   },
 }));
-ButtonUploadFW.propTypes = {
-  title: PropTypes.string,
-  name: PropTypes.string,
-  form: PropTypes.object,
-};
 
-ButtonUploadFW.defaultProps = {
-  title: "",
-  name: "",
-  form: {},
-};
 function ButtonUploadFW(props) {
-  const { title, name, form, onChange } = props;
+  const {
+    title = "",
+    name = "",
+    form = null,
+    onChange = null,
+    accept = "image/*",
+  } = props;
   const [newTitle, setNewTitle] = useState(title);
   const classes = useStyles();
   const handleOnChange = (e) => {
@@ -58,7 +54,7 @@ function ButtonUploadFW(props) {
         onChange={handleOnChange}
         control={form.control}
         style={{ display: "none" }}
-        accept="video/*"
+        accept={accept}
         id="contained-button-file"
         multiple
         name={name}

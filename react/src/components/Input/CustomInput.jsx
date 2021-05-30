@@ -28,6 +28,7 @@ function CustomInput(props) {
     name = "",
     label = "",
     value = "",
+    defaultValue = "",
     type = "string",
     fullWidth = true,
     multiline = false,
@@ -39,7 +40,7 @@ function CustomInput(props) {
     <Controller
       name={name}
       control={control}
-      defaultValue={value}
+      defaultValue={defaultValue}
       render={({ field }) => (
         <TextField
           className={classes.root}
