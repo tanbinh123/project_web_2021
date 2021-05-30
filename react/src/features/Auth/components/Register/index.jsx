@@ -36,7 +36,7 @@ function Register(props) {
       addLocalStorage(data, profile);
       console.log("localStorage", data);
     } else {
-      enqueueSnackbar(data.data.message.en, { variant: "error" });
+      enqueueSnackbar(data.data.message.vi, { variant: "error" });
     }
   };
   return <RegisterForm onSubmit={handleOnSubmit} />;

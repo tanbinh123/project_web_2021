@@ -31,7 +31,10 @@ function Lecture(props) {
       try {
         const res = await courseApi.check({ idCourse: idCourse });
         console.log(res);
-
+        if(res.status==400){
+          alert("Bạn chưa mua khóa học");
+          window.location=url.slice(0,url.indexOf("/lecture"));
+        }else
         setCourse(res ?? {});
 
         var src2;
@@ -54,6 +57,7 @@ function Lecture(props) {
         setSrc(src2);
         // console.log("course", course);
       } catch (error) {
+       
         console.log(error);
       }
     })();

@@ -117,7 +117,7 @@ function FormForgotPasswordCode(props) {
           form={form}
         />
         <CustomInput label="Mã xác thực" name="code" form={form} />
-        <ButtonSubmit title="Submit" />
+        <ButtonSubmit title="Gửi" />
         <span className={classes.text1}>Bạn đã nhớ mật khẩu rồi ?</span>
         <Link to="/auth/login" className={classes.textDK}>
           <span>Đăng nhập</span>

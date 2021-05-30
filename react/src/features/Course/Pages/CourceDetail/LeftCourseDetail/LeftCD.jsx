@@ -9,17 +9,17 @@ import PropTypes from "prop-types";
 LeftCD.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  learning: PropTypes.array,
+  learnings: PropTypes.array,
   parts: PropTypes.array,
 };
 LeftCD.defaultProps = {
   title: "",
   description: "",
-  learning: [],
+  learnings: [],
   parts: [],
 };
 function LeftCD(props) {
-  const { title, description, learning, parts } = props;
+  const { title, description, learnings, parts } = props;
   const classes = LeftCDCSS();
   return (
     <div className={classes.root}>
@@ -31,10 +31,11 @@ function LeftCD(props) {
           <div className={classes.introduce}>
             <h1>{title}</h1>
             <span>{description}</span>
-            <h2>Bạn sẽ học được gì</h2>
+            <h2>Bạn sẽ học được gì </h2>
 
             <ul>
-              {Array.from(learning).map((item, index) => (
+              {Array.from(learnings).map((item, index) => (
+                
                 <li key={index}>
                   <CheckCircle />
                   <span>{item.learning}</span>

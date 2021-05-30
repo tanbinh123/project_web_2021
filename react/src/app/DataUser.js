@@ -21,7 +21,7 @@ export const addLocalStorage = (data, profile) => {
   if (data) {
     localStorage.setItem(StorageKeys.TOKEN, data.token);
     localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
-    localStorage.setItem(StorageKeys.COURSES, JSON.stringify(data.courses));
+    /* localStorage.setItem(StorageKeys.COURSES, JSON.stringify(data.courses)); */
   }
   if (profile) {
     localStorage.setItem(StorageKeys.PROFILE, JSON.stringify(profile));

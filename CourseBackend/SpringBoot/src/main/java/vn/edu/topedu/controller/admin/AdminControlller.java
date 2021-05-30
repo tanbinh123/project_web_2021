@@ -72,6 +72,14 @@ public class AdminControlller {
 		return "login";
 	}
 	
+	
+	@GetMapping("/admin/template")
+	public String adminTemplate(HttpServletRequest httpServletRequest,Map<String, Object> model, HttpSession httpSession) {
+//		LoginFormRedirect authRequest=new LoginFormRedirect();
+//		authRequest.setUrlReturn("/admin");
+//		model.put("formLogin", authRequest);
+		return "template/statistic";
+	}
 
 	
 	

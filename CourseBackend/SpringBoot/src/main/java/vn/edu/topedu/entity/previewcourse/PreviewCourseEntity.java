@@ -46,23 +46,23 @@ public class PreviewCourseEntity extends AHasResource {
 	private BigDecimal price = new BigDecimal(0);
 
 	@OneToMany(mappedBy = "course")
-	private List<Learning> learning;
+	private List<Learning> learnings;
 	@OneToMany(mappedBy = "course")
 	private List<PartReview> parts;
 //	@OneToMany(mappedBy = "detailCourseEntity")
 //	@JsonIgnore
 //	private List<OwerCourse> owerCourse;
 
-	public List<Learning> getLearning() {
-		return learning;
+	public List<Learning> getLearnings() {
+		return learnings;
 	}
 
 	public PreviewCourseEntity() {
 		super();
 	}
 
-	public void setLearning(List<Learning> learning) {
-		this.learning = learning;
+	public void setLearnings(List<Learning> learning) {
+		this.learnings = learning;
 	}
 
 	public Long getId() {

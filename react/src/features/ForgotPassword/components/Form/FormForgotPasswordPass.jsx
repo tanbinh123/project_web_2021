@@ -133,7 +133,7 @@ function FormForgotPasswordPass(props) {
           type="password"
           form={form}
         />
-        <ButtonSubmit title="Submit" />
+        <ButtonSubmit title="Gửi" />
         <span className={classes.text1}>Bạn đã nhớ mật khẩu rồi ?</span>
         <Link to="/auth/login" className={classes.textDK}>
           <span>Đăng nhập</span>
