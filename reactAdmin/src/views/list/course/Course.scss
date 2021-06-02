@@ -3,3 +3,14 @@
         width: 10px;
     }
 }
+.tdCenter {
+    text-align: center;
+}
+.detailBody {
+    & > button {
+        margin-right: 20px;
+    }
+    & > button:last-of-type {
+        margin-right: 0;
+    }
+}

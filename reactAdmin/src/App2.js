@@ -6,6 +6,7 @@ import Page404 from "./views/pages/page404/Page404";
 import Page500 from "./views/pages/page500/Page500";
 import Register from "./views/pages/register/Register";
 import "./scss/style.scss";
+import "./index.css";
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>

@@ -1,17 +1,11 @@
-import {
-  CBadge,
-  CButton,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CCollapse,
-  CDataTable,
-  CRow,
-} from "@coreui/react";
+import { CButton, CCardBody, CCollapse, CDataTable } from "@coreui/react";
 import { Avatar } from "@material-ui/core";
+import { Rating } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import courseApi from "src/api/courseApi";
+import CustomButton from "src/components/CustomButton";
+import CustomButtonRed from "src/components/CustomButtonRed";
+import { DateToString } from "src/Tool/Tools";
 import "./Course.scss";
 
 const fields = [
@@ -64,21 +58,6 @@ const Course = () => {
       filter: false,
     },
   ];
-
-  //   const getBadge = (status) => {
-  //     switch (status) {
-  //       case "Active":
-  //         return "success";
-  //       case "Inactive":
-  //         return "secondary";
-  //       case "Pending":
-  //         return "warning";
-  //       case "Banned":
-  //         return "danger";
-  //       default:
-  //         return "primary";
-  //     }
-  //   };
   return (
     <>
       <CDataTable
@@ -93,7 +72,24 @@ const Course = () => {
         sorter
         pagination
         scopedSlots={{
-          imgAvatar: (item) => <td></td>,
+          imgAvatar: (item) => (
+            <td className="tdCenter">
+              <Avatar src={item.imgAvatar} />
+            </td>
+          ),
+          thumbnail: (item) => (
+            <td className="tdCenter">
+              <img style={{ height: 50 }} src={item.thumbnail} />
+            </td>
+          ),
+          updateAt: (item) => (
+            <td className="tdCenter">{DateToString(item.updateAt)}</td>
+          ),
+          rateStar: (item) => (
+            <td>
+              <Rating defaultValue={item.rateStar} precision={0.5} readOnly />
+            </td>
+          ),
           show_details: (item, index) => {
             return (
               <td className="py-2">
@@ -106,7 +102,7 @@ const Course = () => {
                     toggleDetails(index);
                   }}
                 >
-                  {details.includes(index) ? "Hide" : "Show"}
+                  {details.includes(index) ? "Ẩn" : "Hiện"}
                 </CButton>
               </td>
             );
@@ -114,13 +110,9 @@ const Course = () => {
           details: (item, index) => {
             return (
               <CCollapse show={details.includes(index)}>
-                <CCardBody>
-                  <CButton size="sm" color="info">
-                    User Settings
-                  </CButton>
-                  <CButton size="sm" color="danger" className="ml-1">
-                    Delete
-                  </CButton>
+                <CCardBody className="detailBody">
+                  <CustomButton title="Chi tiết phần học" />
+                  <CustomButtonRed title="Delete" />
                 </CCardBody>
               </CCollapse>
             );

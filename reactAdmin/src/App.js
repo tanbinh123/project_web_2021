@@ -1,6 +1,7 @@
 import React, { Component, lazy } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "./scss/style.scss";
+import "./index.css";
 
 const loading = (
   <div className="pt-3 text-center">
