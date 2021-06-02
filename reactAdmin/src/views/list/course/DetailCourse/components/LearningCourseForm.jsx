@@ -77,14 +77,12 @@ function LearningCourseForm(props) {
     Array.from(dataLearning).map((item, index) => {
       form.setValue(`data[${index}]`, item);
     });
+    return () => {
+      form.setValue(`data`, []);
+    };
   }, [dataLearning, isUpdate]);
   const handleOnSubmit = (value) => {
     console.log(value);
-  };
-  const handleOnChange = () => {
-    const tmpData = form.getValues("data");
-    console.log("tmpData", tmpData);
-    setDataLearning(tmpData);
   };
   return (
     <CCard>
@@ -110,11 +108,21 @@ function LearningCourseForm(props) {
                   <CustomButtonRed
                     title="Delete"
                     onClick={() => {
-                      handleOnChange();
-                      let tmpData = dataLearning;
-                      tmpData[index].deleted = true;
-                      setDataLearning(tmpData);
-                      setUpdate(!isUpdate);
+                      const tmpData = form.getValues("data");
+                      console.log(tmpData);
+                      if (item.id) {
+                        tmpData[index].deleted = true;
+                        setDataLearning(tmpData);
+                        setUpdate(!isUpdate);
+                      } else {
+                        tmpData.splice(index, 1);
+                        form.reset({ courseId: dataCourse.id, data: [] });
+                        let tmpData12 = form.getValues("data");
+                        form.setValue("data", tmpData);
+                        console.log(tmpData12);
+                        setDataLearning(tmpData);
+                        setUpdate(!isUpdate);
+                      }
                     }}
                   />
                 </div>
@@ -125,6 +133,7 @@ function LearningCourseForm(props) {
               title="Thêm"
               onClick={() => {
                 const tmpData = form.getValues("data");
+                console.log(tmpData);
                 setDataLearning([
                   ...tmpData,
                   {
