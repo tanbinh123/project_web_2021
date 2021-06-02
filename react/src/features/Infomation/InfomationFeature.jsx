@@ -1,6 +1,6 @@
 import { Avatar, Box, Container, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useRouteMatch } from "react-router";
+import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import userApi from "../../api/userApi";
@@ -17,14 +17,12 @@ function InfomationFeature(props) {
   const classes = CSSInfomationFeature();
   const [profile, setProfile] = useState({});
 
-  /* const [dataUser, setDataUser] = useRecoilState(DataUser);
-  console.log(dataUser); */
+  const [dataUser, setDataUser] = useRecoilState(DataUser);
+  console.log(dataUser);
   useEffect(() => {
-    
     //console.log(`${localStorage.getItem("access_token")}`);
     (async () => {
       try {
-       
         const res = await userApi.profile();
         setProfile(res || {});
         //console.log(res);
@@ -35,11 +33,11 @@ function InfomationFeature(props) {
   }, []);
   //!isEmpty(profile)&&console.log("profile", profile);
 
-
   const { url } = useRouteMatch();
+  const { push } = useHistory();
   function handleLogout() {
     removeLocalStorage();
-    window.location = "/auth/login";
+    push("/auth/login");
   }
 
   return (
@@ -70,8 +68,7 @@ function InfomationFeature(props) {
                       <div>
                         <Link to={`${url}/info`}>
                           <span>
-                            {profile?.fullname ||
-                              profile?.userName}{" "}
+                            {profile?.fullname || profile?.userName}{" "}
                             {profile?.actived ? (
                               <i className="fas fa-check-circle green"></i>
                             ) : (
