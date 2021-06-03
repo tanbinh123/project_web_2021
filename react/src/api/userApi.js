@@ -37,6 +37,15 @@ const userApi = {
     const url = `/profile`;
     return axiosClient.get(url);
   },
+  postProfile(data) {
+    const url = `/profile`;
+    //axiosClient.
+    return axiosClient.post(url,data,{
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+  },
 };
 
 export default userApi;

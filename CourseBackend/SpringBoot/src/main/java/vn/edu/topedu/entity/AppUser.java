@@ -1,6 +1,5 @@
 package vn.edu.topedu.entity;
 
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -22,15 +21,19 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import vn.edu.topedu.entity.course.full.Learning;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+//@JsonInclude(Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
+@DynamicUpdate
 @Table(name = "App_User", //
 		uniqueConstraints = { //
 				@UniqueConstraint(name = "email_uq", columnNames = "email"),
@@ -40,11 +43,12 @@ public class AppUser implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-
+	@JsonProperty(access = Access.READ_ONLY)	
 	private Long id;
-
 	@Column(name = "User_Name", length = 36, nullable = false)
 	private String userName;
+	@Column(name = "Fullname", length = 255)
+	private String fullname;
 	
 	@Column(name = "description")
 	private String description;
@@ -53,7 +57,9 @@ public class AppUser implements UserDetails {
 	private String phone;
 	
 	@Column(name = "birth_day")
-	@JsonFormat(pattern="dd/MM/yyyy")
+	//@JsonFormat(pattern="dd/MM/yyyy")
+	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS Z")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 	private Date birthDay;
 
 	
@@ -75,6 +81,7 @@ public class AppUser implements UserDetails {
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+	@JsonProperty(access = Access.READ_ONLY)
     private ResourceImage avatar;
 	
 	@Column(name = "Email", length = 255, nullable = false)
@@ -88,6 +95,7 @@ public class AppUser implements UserDetails {
 	private List<AppRole> authorities;
 	
 	@OneToMany(mappedBy = "appUser")
+	@JsonProperty(access = Access.READ_ONLY)
 	private List<UserRole> userRoles;
 	
 	@Column(name = "gender", nullable = false)
@@ -118,8 +126,16 @@ public class AppUser implements UserDetails {
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
 	}
-
 	
+	
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 
 	public GENDER getGender() {
 		return gender;

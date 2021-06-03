@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import * as yup from "yup";
 import { DataUser } from "../../../app/DataUser";
+import userApi from "../../../api/userApi";
 import ButtonUploadFW from "../../../components/Button/ButtonUploadFW";
 import CustomButton from "../../../components/Button/CustomButton";
 import CustomRadioForm from "../../../components/Form/CustomRadioForm";
@@ -35,7 +36,7 @@ function Edit(props) {
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      fullName: profile.fullName,
+      fullName: profile.fullname,
       email: profile.email,
       birthDay: date,
       gender: profile.gender,
@@ -47,8 +48,16 @@ function Edit(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = async (value) => {
-    console.log(value);
+  const handleOnSubmit = async (values) => {
+    const formData = new FormData();
+    formData.append("phone", values.phone);
+    formData.append("email", values.email);
+    formData.append("fullname", values.fullName);
+    var rp = await userApi.postProfile(formData);
+
+    console.log("postProfile", rp);
+    const dataUser2 ={...dataUser, profile: rp};
+    setDataUser(dataUser2);
   };
   const handleChangeAvatar = () => {
     const inputFile = document.getElementById("input-avatar");
