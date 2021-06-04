@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import vn.edu.topedu.dao.AppUserDAO;
 import vn.edu.topedu.entity.AppUser;
+import vn.edu.topedu.entity.GENDER;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -54,12 +55,14 @@ public class ProfileREST {
 			
 			@RequestPart String phone,
 			@RequestPart String fullname,
+			@RequestPart String gender,
 			@RequestPart String email
 			) {
 		System.out.println("---------------------------------");
 		System.out.println(String.format("email: %s", email));
 		System.out.println(String.format("phone: %s", phone));
 		System.out.println(String.format("fullname: %s", fullname));
+		System.out.println(String.format("gender: %s", gender));
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
@@ -68,6 +71,7 @@ public class ProfileREST {
 				appUser.setPhone(phone);
 				appUser.setEmail(email);
 				appUser.setFullname(fullname);
+				appUser.setGender(GENDER.valueOf(gender));
 				appUserDAO.updateAppUser(appUser);
 				appUser.getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
 				return ResponseEntity.ok(appUser);

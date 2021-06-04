@@ -1,10 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Avatar, Grid } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import * as yup from "yup";
-import { DataUser } from "../../../app/DataUser";
+import { addLocalStorage, DataUser } from "../../../app/DataUser";
 import userApi from "../../../api/userApi";
 import ButtonUploadFW from "../../../components/Button/ButtonUploadFW";
 import CustomButton from "../../../components/Button/CustomButton";
@@ -48,17 +48,25 @@ function Edit(props) {
     },
     resolver: yupResolver(schema),
   });
+  
   const handleOnSubmit = async (values) => {
+    console.log("values", values);
     const formData = new FormData();
     formData.append("phone", values.phone);
     formData.append("email", values.email);
+    formData.append("gender", values.gender);
     formData.append("fullname", values.fullName);
     var rp = await userApi.postProfile(formData);
 
     console.log("postProfile", rp);
-    const dataUser2 ={...dataUser, profile: rp};
-    setDataUser(dataUser2);
+    
+    setDataUser({
+      ...dataUser,        
+      profile: rp,
+    });
+    addLocalStorage(null,rp);
   };
+  console.log(dataUser);
   const handleChangeAvatar = () => {
     const inputFile = document.getElementById("input-avatar");
     inputFile.click();
@@ -69,6 +77,7 @@ function Edit(props) {
     const avatarTmp = URL.createObjectURL(file);
     setImageAvatar(avatarTmp);
     form.setValue("avatar", file);
+    
   };
   return (
     <Grid container className={classes.rightRoot}>

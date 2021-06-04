@@ -30,6 +30,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import vn.edu.topedu.json.MultiDateDeserializer;
 //@JsonInclude(Include.NON_NULL)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
@@ -57,9 +60,12 @@ public class AppUser implements UserDetails {
 	private String phone;
 	
 	@Column(name = "birth_day")
-	//@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS Z")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+	
+	//@JsonProperty("date") 
+	@JsonDeserialize(using = MultiDateDeserializer.class)
 	private Date birthDay;
 
 	
