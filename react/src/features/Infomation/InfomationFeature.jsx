@@ -15,28 +15,18 @@ import CSSInfomationFeature from "./css/CSSInfomationFeature";
 InfomationFeature.propTypes = {};
 function InfomationFeature(props) {
   const classes = CSSInfomationFeature();
-  const [profile, setProfile] = useState({});
+  
 
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   console.log(dataUser);
-  useEffect(() => {
-    //console.log(`${localStorage.getItem("access_token")}`);
-    (async () => {
-      try {
-        const res = await userApi.profile();
-        setProfile(res || {});
-        //console.log(res);
-      } catch (error) {
-        console.log(error.message);
-      }
-    })();
-  }, []);
+  
   //!isEmpty(profile)&&console.log("profile", profile);
 
   const { url } = useRouteMatch();
   const { push } = useHistory();
   function handleLogout() {
     removeLocalStorage();
+    setDataUser({});
     push("/auth/login");
   }
 
@@ -62,14 +52,14 @@ function InfomationFeature(props) {
                     <li>
                       <Avatar
                         className={classes.avatar}
-                        alt={profile.userName}
-                        src={profile?.avatar?.image}
+                        alt={dataUser?.profile.userName}
+                        src={dataUser?.profile?.avatar?.image}
                       />
                       <div>
                         <Link to={`${url}/info`}>
                           <span>
-                            {profile?.fullname || profile?.userName}{" "}
-                            {profile?.actived ? (
+                            {dataUser?.profile?.fullname || dataUser?.profile?.userName}{" "}
+                            {dataUser?.profile?.actived ? (
                               <i className="fas fa-check-circle green"></i>
                             ) : (
                               <i className="fas fa-times-circle red"></i>
@@ -81,7 +71,7 @@ function InfomationFeature(props) {
                     <NavLink to={`${url}/info`}>
                       <li>Giới thiệu</li>
                     </NavLink>
-                    {!profile?.actived && (
+                    {!dataUser?.profile?.actived && (
                       <NavLink to={`${url}/active`}>
                         <li>Kích hoạt</li>
                       </NavLink>
@@ -111,13 +101,13 @@ function InfomationFeature(props) {
 
                   <Route
                     path={`${url}/info`}
-                    component={() => <Info profile={profile} />}
+                    component={() => <Info profile={dataUser?.profile} />}
                     exact
                   />
-                  {!profile.actived && (
+                  {!dataUser?.profile.actived && (
                     <Route
                       path={`${url}/active`}
-                      component={() => <Active profile={profile} />}
+                      component={() => <Active profile={dataUser?.profile} />}
                       exact
                     />
                   )}

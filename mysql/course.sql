@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 03/06/2021 11:12:06
+ Date: 05/06/2021 01:35:35
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `active_account`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `active_account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 96 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 101 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of active_account
@@ -39,6 +39,11 @@ INSERT INTO `active_account` VALUES (89, 1, '2021-05-25 16:28:28', '8ea0418123cd
 INSERT INTO `active_account` VALUES (90, 2, '2021-05-27 10:46:29', 'b5208a7ee82c9d5d6ccb1b90175f6b71', b'0');
 INSERT INTO `active_account` VALUES (94, 45, '2021-05-27 11:45:55', 'f2b75a186fea6156c9f9ca180b90426e', b'0');
 INSERT INTO `active_account` VALUES (95, 1, '2021-05-27 16:35:33', '2f36d1ad7b6f9f427a04f8d7b42aca1c', b'0');
+INSERT INTO `active_account` VALUES (96, 2, '2021-06-04 18:10:29', '0ceb05f4d6a91521c519f882c9ad6ee9', b'0');
+INSERT INTO `active_account` VALUES (97, 2, '2021-06-04 18:26:12', '61e3b60389a39347c1968e5c7f488272', b'0');
+INSERT INTO `active_account` VALUES (98, 2, '2021-06-04 18:28:02', 'a517d3b80ca8793a80f8b6dbf02f7f6b', b'0');
+INSERT INTO `active_account` VALUES (99, 2, '2021-06-04 18:29:48', 'd296bc7258d3a0c684b821045c098c83', b'0');
+INSERT INTO `active_account` VALUES (100, 2, '2021-06-04 18:33:47', '12d95e4f1085baaf6e268439620439a2', b'0');
 
 -- ----------------------------
 -- Table structure for app_role
@@ -89,11 +94,11 @@ CREATE TABLE `app_user`  (
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'1', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL);
-INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'1', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', '123123');
+INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL);
+INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Lê Tấn Hoàng');
 INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL);
-INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'1', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL);
-INSERT INTO `app_user` VALUES (46, 'hoang002', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'1', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL);
+INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL);
+INSERT INTO `app_user` VALUES (46, 'hoang002', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL);
 
 -- ----------------------------
 -- Table structure for categories
@@ -619,7 +624,16 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('d44e7d6d-f32a-49d8-bff5-0d2e4b04e00e', '405a2f87-0d71-42f6-9f4f-432239850d29', 1622693295092, 1622693295092, 1800, 1622695095092, NULL);
+INSERT INTO `spring_session` VALUES ('1291a9d1-9fc8-43f8-9b15-d5f800d767df', 'b3e5226e-e321-4865-a437-aaa0713c1392', 1622830567883, 1622830567883, 1800, 1622832367883, NULL);
+INSERT INTO `spring_session` VALUES ('24415122-14e4-45fe-bd6f-77569ae23faa', 'a7afc741-0406-4a5e-ac5e-7977d6dea09f', 1622831239569, 1622831239569, 1800, 1622833039569, NULL);
+INSERT INTO `spring_session` VALUES ('2cbf3e62-06de-4fa6-b49d-0eaed56ce755', 'ae97d318-9dc7-41b6-bce2-000dfb4d1803', 1622830447828, 1622830447828, 1800, 1622832247828, NULL);
+INSERT INTO `spring_session` VALUES ('508eca5f-15ed-4f1f-8dd0-0b8c630ea88e', 'ea267fee-78fb-44e5-9c48-d69a75c1e7f9', 1622831157029, 1622831157029, 1800, 1622832957029, NULL);
+INSERT INTO `spring_session` VALUES ('a03cf9ae-de91-4d6d-8a8d-ccccb6196c84', '20e7d65a-99c2-4382-aae6-12a61ef6c8c2', 1622831261908, 1622831261908, 1800, 1622833061908, NULL);
+INSERT INTO `spring_session` VALUES ('b0c52b5f-e3b2-4015-b716-8c1cad70a113', '91dcb5c4-999e-4dd8-97bc-23c40507e77e', 1622830221874, 1622830221874, 1800, 1622832021874, NULL);
+INSERT INTO `spring_session` VALUES ('b13f8476-0281-465e-8ea8-28f5762562de', '5eb9f368-7571-40f3-abf7-57fa6dad3850', 1622831368789, 1622831368789, 1800, 1622833168789, NULL);
+INSERT INTO `spring_session` VALUES ('d315d943-966b-47cb-aff1-125505b20f65', '9e4c1303-7468-48e1-b68c-00f7174f5223', 1622831684566, 1622831684566, 1800, 1622833484566, NULL);
+INSERT INTO `spring_session` VALUES ('db9ea347-eca1-4d35-a230-f1eb38cbbc35', '495113cd-c885-4c5c-bbf9-17b6445b11a6', 1622831569686, 1622831569686, 1800, 1622833369686, NULL);
+INSERT INTO `spring_session` VALUES ('f3912003-9934-4ec9-9fdd-909c6033c739', 'd9b4f5f7-30fb-4b5c-a93d-ecef49f368e3', 1622830118053, 1622830118054, 1800, 1622831918054, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -636,7 +650,16 @@ CREATE TABLE `spring_session_attributes`  (
 -- ----------------------------
 -- Records of spring_session_attributes
 -- ----------------------------
-INSERT INTO `spring_session_attributes` VALUES ('d44e7d6d-f32a-49d8-bff5-0d2e4b04e00e', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('1291a9d1-9fc8-43f8-9b15-d5f800d767df', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('24415122-14e4-45fe-bd6f-77569ae23faa', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('2cbf3e62-06de-4fa6-b49d-0eaed56ce755', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('508eca5f-15ed-4f1f-8dd0-0b8c630ea88e', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('a03cf9ae-de91-4d6d-8a8d-ccccb6196c84', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('b0c52b5f-e3b2-4015-b716-8c1cad70a113', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('b13f8476-0281-465e-8ea8-28f5762562de', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('d315d943-966b-47cb-aff1-125505b20f65', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('db9ea347-eca1-4d35-a230-f1eb38cbbc35', 'username', 0xACED000574000475736572);
+INSERT INTO `spring_session_attributes` VALUES ('f3912003-9934-4ec9-9fdd-909c6033c739', 'username', 0xACED000574000475736572);
 
 -- ----------------------------
 -- Table structure for templates
