@@ -14,6 +14,7 @@ import CustomInput from "../../../components/Input/CustomInput";
 import { toDate } from "../../../components/tools/Tools";
 import "././css/Actived.css";
 import EditCss from "./css/EditCss";
+import { useSnackbar } from "notistack";
 
 Edit.propTypes = {};
 const schema = yup.object().shape({
@@ -33,17 +34,18 @@ function Edit(props) {
   console.log(profile);
   const [date, setDate] = useState(toDate(profile.birthDay));
   const [imgAvatar, setImageAvatar] = useState(profile.avatar.image);
+  const { enqueueSnackbar } = useSnackbar();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      fullName: profile.fullname,
-      email: profile.email,
+      fullName: profile?.fullname,
+      email: profile?.email,
       birthDay: date,
       gender: profile.gender,
-      location: profile.lacation,
-      facebook: profile.facebook,
-      description: profile.description,
-      phone: profile.phone,
+      location: profile?.location,
+      facebook: profile?.facebook,
+      description: profile?.description,
+      phone: profile?.phone,
       avatar: imgAvatar,
     },
     resolver: yupResolver(schema),
@@ -56,15 +58,32 @@ function Edit(props) {
     formData.append("email", values.email);
     formData.append("gender", values.gender);
     formData.append("fullname", values.fullName);
-    var rp = await userApi.postProfile(formData);
+    formData.append("birthDay", values.birthDay);
+    formData.append("location", values.location);
+    formData.append("facebook", values.facebook);
+    formData.append("description", values.description);
+    formData.append("uploadAvatar", values.uploadAvatar);
+    var res = await userApi.postProfile(formData);
 
-    console.log("postProfile", rp);
+
+    if(!!res.status){
+      enqueueSnackbar(res.data.message.vi, { variant: "error" });
+      console.log("Code InValid",res.data.message.vi);  
+      console.log(res);
+      //TODO
     
-    setDataUser({
-      ...dataUser,        
-      profile: rp,
-    });
-    addLocalStorage(null,rp);
+      
+    } else{    
+      console.log("postProfile", res);
+    
+      setDataUser({
+        ...dataUser,        
+        profile: res,
+      });
+      addLocalStorage(null,res);
+    }
+
+   
   };
   console.log(dataUser);
   const handleChangeAvatar = () => {
@@ -77,6 +96,7 @@ function Edit(props) {
     const avatarTmp = URL.createObjectURL(file);
     setImageAvatar(avatarTmp);
     form.setValue("avatar", file);
+    form.setValue("uploadAvatar", file);
     
   };
   return (

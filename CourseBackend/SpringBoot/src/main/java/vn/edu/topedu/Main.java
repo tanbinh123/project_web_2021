@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import vn.edu.topedu.dao.ResourceImageDAO;
+import vn.edu.topedu.dao.VideoDAO;
 
 
 @SpringBootApplication
@@ -39,10 +43,30 @@ public class Main extends SpringBootServletInitializer {
 	}
 	@Value("${server.port}")
 	private int port;
+	@Autowired
+	ResourceImageDAO resourceImageDAO;
+	@Autowired
+	VideoDAO videoDAO;
 	@EventListener({ApplicationReadyEvent.class})
 	void applicationReadyEvent() {
 	    System.out.println("Application started ... launching browser now");
 	    System.out.println("http://localhost:"+port+"/admin");
+	    if(videoDAO!=null) {
+	    	try {
+				videoDAO.deleteAllNoLink();
+				System.err.println("Delete All Video Not Link");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+	    if(resourceImageDAO!=null) {
+	    	try {
+				resourceImageDAO.deleteAllNoLink();
+				System.err.println("Delete All Image Not Link");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
 //	    browse("www.google.com");
 //	    browse("http://localhost:"+port+"/");
 //	    browse("http://localhost:"+port+"/admin");

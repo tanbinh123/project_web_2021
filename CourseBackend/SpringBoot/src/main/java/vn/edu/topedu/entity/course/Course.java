@@ -1,24 +1,18 @@
 package vn.edu.topedu.entity.course;
  
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import vn.edu.topedu.consts.VariableConst;
-import vn.edu.topedu.entity.AHasResource;
+import vn.edu.topedu.entity.AHasPoster;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.ResourceImage;
@@ -26,7 +20,7 @@ import vn.edu.topedu.json.JsonResponse;
  
 @Entity
 @Table(name = "Course")
-public class Course extends AHasResource implements JsonResponse {
+public class Course extends AHasPoster implements JsonResponse {
      
  
     
@@ -49,7 +43,7 @@ public class Course extends AHasResource implements JsonResponse {
     private double rateStar=0;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "poster_id", nullable = false)
+    @JoinColumn(name = "user_poster_id", nullable = false)
     @JsonIgnore
     private AppUser appUser;
     

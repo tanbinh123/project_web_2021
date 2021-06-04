@@ -1,5 +1,6 @@
 package vn.edu.topedu.dao;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,7 @@ import vn.edu.topedu.entity.RequestResetPassword;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.VideoEntity;
+import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.model.Video;
 
 @Repository
@@ -82,6 +84,28 @@ public class VideoDAO {
 		entityManager.flush();
 		return deleted;
 
+	}
+	public List<VideoEntity> getResourceImagesNoLinked() {
+		String sql = "Select e from "+VideoEntity.class.getName()+" e " + " where e.countLinked=0  and deleted=true ";
+		Query query = this.entityManager.createQuery(sql, VideoEntity.class);
+		return query.getResultList();
+	}
+	@Transactional
+	public int deleteAllNoLink() throws Exception {
+		try {
+			List<VideoEntity> a = getResourceImagesNoLinked();
+			for(VideoEntity ri:a) {
+				Path path = FileProcess.getPath(ri.getVideo());
+				path.toFile().delete();
+			}
+			
+			String sql = "delete from " + VideoEntity.class.getName() +  " where countLinked=0 and deleted=true ";
+			Query query = this.entityManager.createQuery(sql);
+			return  query.executeUpdate();
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 
 }

@@ -80,7 +80,7 @@ public class UploadController {
 			return "login";
 		}
 
-		String pathContain = String.format("user/%s/img", username);
+		String pathContain = String.format("user/%s/image", username);
 		try {
 			System.out.println(String.format("File: %s", file.getOriginalFilename()));
 			File p = FileProcess.getPath(pathContain, file.getOriginalFilename()).toFile();

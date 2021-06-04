@@ -20,6 +20,7 @@ public class MultiDateDeserializer extends StdDeserializer<Date> {
         "MMM dd, yyyy HH:mm:ss",
         "MMM dd, yyyy",
         "dd/MM/yyyy",
+        "E MMM dd yyyy HH:mm:ss 'GMT'z",
         "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
     };
 

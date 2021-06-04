@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 05/06/2021 01:35:35
+ Date: 05/06/2021 05:38:01
 */
 
 SET NAMES utf8mb4;
@@ -84,6 +84,7 @@ CREATE TABLE `app_user`  (
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
   `update_at` datetime(0) NULL DEFAULT utc_timestamp,
   `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `APP_USER_UK`(`USER_NAME`) USING BTREE,
   UNIQUE INDEX `email_uq`(`email`) USING BTREE,
@@ -94,11 +95,11 @@ CREATE TABLE `app_user`  (
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL);
-INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Lê Tấn Hoàng');
-INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL);
-INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL);
-INSERT INTO `app_user` VALUES (46, 'hoang002', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL);
+INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
+INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 77, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-25 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z');
+INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
+INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
+INSERT INTO `app_user` VALUES (46, 'hoang002', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for categories
@@ -139,7 +140,7 @@ CREATE TABLE `course`  (
   `rate_star` double(1, 0) UNSIGNED NOT NULL DEFAULT 0,
   `bought` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `update_at` timestamp(0) NOT NULL DEFAULT utc_timestamp,
-  `poster_id` bigint(20) NOT NULL,
+  `user_poster_id` bigint(20) NOT NULL,
   `demo_id` bigint(20) NULL DEFAULT NULL,
   `category_id` int(11) NULL DEFAULT NULL,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
@@ -551,32 +552,29 @@ CREATE TABLE `resource_image`  (
   `img_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
   `update_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
-  `poster_id` bigint(20) NULL DEFAULT NULL,
-  `count_linked` bigint(20) NOT NULL DEFAULT 0,
+  `user_poster_id` bigint(20) NULL DEFAULT NULL,
+  `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 78 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
 -- ----------------------------
-INSERT INTO `resource_image` VALUES (1, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (2, 'user/user/image/ganyu-h-1.png', b'0', '2021-05-19 01:20:05', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (3, 'user/user/image/ganyu-h-2.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (5, 'user/user/image/ganyu-h-4.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (6, 'user/user/image/ganyu-h-5.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (7, 'user/user/image/ganyu-h-6.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (12, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (13, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (67, 'user/admin/image/girl.bmp', b'0', '2021-05-19 10:56:44', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (69, 'user/admin/image/girl.bmp', b'1', '2021-05-19 11:02:25', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (71, 'user/admin/image/sddefault.jpg', b'0', '2021-05-25 14:01:08', 1, 0, '2021-05-25 14:01:08');
-INSERT INTO `resource_image` VALUES (72, 'user/admin/image/html.jpg', b'0', '2021-05-25 14:05:14', 1, 0, '2021-05-25 14:05:14');
+INSERT INTO `resource_image` VALUES (1, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 4, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (2, 'user/user/image/ganyu-h-1.png', b'0', '2021-05-19 01:20:05', 2, 21, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (3, 'user/user/image/ganyu-h-2.jpg', b'0', '2021-04-05 14:48:50', 2, 10, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '2021-04-05 14:48:50', 2, 23, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (5, 'user/user/image/ganyu-h-4.jpg', b'0', '2021-04-05 14:48:50', 2, 15, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (6, 'user/user/image/ganyu-h-5.jpg', b'0', '2021-04-05 14:48:50', 2, 20, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (7, 'user/user/image/ganyu-h-6.jpg', b'0', '2021-04-05 14:48:50', 2, 18, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 21, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 24, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 8, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (71, 'user/admin/image/sddefault.jpg', b'0', '2021-05-25 14:01:08', 1, 1, '2021-05-25 14:01:08');
+INSERT INTO `resource_image` VALUES (72, 'user/admin/image/html.jpg', b'0', '2021-05-25 14:05:14', 1, 1, '2021-05-25 14:05:14');
+INSERT INTO `resource_image` VALUES (77, 'user/user/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-04 20:57:49', 2, 1, '2021-06-04 20:57:49');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -624,16 +622,9 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('1291a9d1-9fc8-43f8-9b15-d5f800d767df', 'b3e5226e-e321-4865-a437-aaa0713c1392', 1622830567883, 1622830567883, 1800, 1622832367883, NULL);
-INSERT INTO `spring_session` VALUES ('24415122-14e4-45fe-bd6f-77569ae23faa', 'a7afc741-0406-4a5e-ac5e-7977d6dea09f', 1622831239569, 1622831239569, 1800, 1622833039569, NULL);
-INSERT INTO `spring_session` VALUES ('2cbf3e62-06de-4fa6-b49d-0eaed56ce755', 'ae97d318-9dc7-41b6-bce2-000dfb4d1803', 1622830447828, 1622830447828, 1800, 1622832247828, NULL);
-INSERT INTO `spring_session` VALUES ('508eca5f-15ed-4f1f-8dd0-0b8c630ea88e', 'ea267fee-78fb-44e5-9c48-d69a75c1e7f9', 1622831157029, 1622831157029, 1800, 1622832957029, NULL);
-INSERT INTO `spring_session` VALUES ('a03cf9ae-de91-4d6d-8a8d-ccccb6196c84', '20e7d65a-99c2-4382-aae6-12a61ef6c8c2', 1622831261908, 1622831261908, 1800, 1622833061908, NULL);
-INSERT INTO `spring_session` VALUES ('b0c52b5f-e3b2-4015-b716-8c1cad70a113', '91dcb5c4-999e-4dd8-97bc-23c40507e77e', 1622830221874, 1622830221874, 1800, 1622832021874, NULL);
-INSERT INTO `spring_session` VALUES ('b13f8476-0281-465e-8ea8-28f5762562de', '5eb9f368-7571-40f3-abf7-57fa6dad3850', 1622831368789, 1622831368789, 1800, 1622833168789, NULL);
-INSERT INTO `spring_session` VALUES ('d315d943-966b-47cb-aff1-125505b20f65', '9e4c1303-7468-48e1-b68c-00f7174f5223', 1622831684566, 1622831684566, 1800, 1622833484566, NULL);
-INSERT INTO `spring_session` VALUES ('db9ea347-eca1-4d35-a230-f1eb38cbbc35', '495113cd-c885-4c5c-bbf9-17b6445b11a6', 1622831569686, 1622831569686, 1800, 1622833369686, NULL);
-INSERT INTO `spring_session` VALUES ('f3912003-9934-4ec9-9fdd-909c6033c739', 'd9b4f5f7-30fb-4b5c-a93d-ecef49f368e3', 1622830118053, 1622830118054, 1800, 1622831918054, NULL);
+INSERT INTO `spring_session` VALUES ('0b21a3ff-7624-4e7f-8404-a7aed98b3b38', 'f40bdd5c-e29b-4902-ae28-d456b64bf07b', 1622845911743, 1622845911743, 1800, 1622847711743, NULL);
+INSERT INTO `spring_session` VALUES ('5c655fdc-abe9-470e-8ca4-637632540960', 'e6c6bdd9-4c36-4641-b3e9-c1adf3a6571f', 1622831776268, 1622846230015, 1800, 1622848030015, NULL);
+INSERT INTO `spring_session` VALUES ('66992739-894a-4998-9ad7-e2c97907527b', 'b8ee3a7f-4341-4edc-99fc-44f8a96b3d46', 1622845353781, 1622845893586, 1800, 1622847693586, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -646,20 +637,6 @@ CREATE TABLE `spring_session_attributes`  (
   PRIMARY KEY (`SESSION_PRIMARY_ID`, `ATTRIBUTE_NAME`) USING BTREE,
   CONSTRAINT `SPRING_SESSION_ATTRIBUTES_FK` FOREIGN KEY (`SESSION_PRIMARY_ID`) REFERENCES `spring_session` (`PRIMARY_ID`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session_attributes
--- ----------------------------
-INSERT INTO `spring_session_attributes` VALUES ('1291a9d1-9fc8-43f8-9b15-d5f800d767df', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('24415122-14e4-45fe-bd6f-77569ae23faa', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('2cbf3e62-06de-4fa6-b49d-0eaed56ce755', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('508eca5f-15ed-4f1f-8dd0-0b8c630ea88e', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('a03cf9ae-de91-4d6d-8a8d-ccccb6196c84', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('b0c52b5f-e3b2-4015-b716-8c1cad70a113', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('b13f8476-0281-465e-8ea8-28f5762562de', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('d315d943-966b-47cb-aff1-125505b20f65', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('db9ea347-eca1-4d35-a230-f1eb38cbbc35', 'username', 0xACED000574000475736572);
-INSERT INTO `spring_session_attributes` VALUES ('f3912003-9934-4ec9-9fdd-909c6033c739', 'username', 0xACED000574000475736572);
 
 -- ----------------------------
 -- Table structure for templates
@@ -728,33 +705,64 @@ DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `poster` bigint(20) NULL DEFAULT NULL,
+  `img_poster_id` bigint(20) NULL DEFAULT NULL,
   `duration` int(255) NULL DEFAULT NULL,
-  `count_linked` bigint(20) NOT NULL DEFAULT 0,
+  `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `actived` bit(1) NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
   `update_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `poster_id` bigint(20) NULL DEFAULT NULL,
+  `user_poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `poster`(`poster`) USING BTREE,
-  CONSTRAINT `video_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `poster`(`img_poster_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 8, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, 4, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 171, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 2, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+
+-- ----------------------------
+-- Triggers structure for table app_user
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_insert_app_user`;
+delimiter ;;
+CREATE TRIGGER `after_insert_app_user` AFTER INSERT ON `app_user` FOR EACH ROW BEGIN
+				if new.avatar_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.avatar_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table app_user
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_update_app_user`;
+delimiter ;;
+CREATE TRIGGER `after_update_app_user` AFTER UPDATE ON `app_user` FOR EACH ROW BEGIN
+			if old.avatar_id <> new.avatar_id  then		
+				if new.avatar_id is not null then
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.avatar_id;
+				end if;
+			
+				if old.avatar_id is not null then
+				UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.avatar_id;		
+				end if;
+			end if;
+			
+	 END
+;;
+delimiter ;
 
 -- ----------------------------
 -- Triggers structure for table app_user
@@ -773,12 +781,36 @@ CREATE TRIGGER `before_delete_app_user` BEFORE DELETE ON `app_user` FOR EACH ROW
 delimiter ;
 
 -- ----------------------------
+-- Triggers structure for table app_user
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_app_user`;
+delimiter ;;
+CREATE TRIGGER `after_delete_app_user` AFTER DELETE ON `app_user` FOR EACH ROW BEGIN
+				if old.avatar_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.avatar_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Triggers structure for table course
 -- ----------------------------
 DROP TRIGGER IF EXISTS `after_insert_course`;
 delimiter ;;
-CREATE TRIGGER `after_insert_course` BEFORE INSERT ON `course` FOR EACH ROW BEGIN
-			UPDATE categories SET categories.total_course=categories.total_course+1 WHERE categories.id =new.category_id;
+CREATE TRIGGER `after_insert_course` AFTER INSERT ON `course` FOR EACH ROW BEGIN
+				if new.img_poster_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.img_poster_id;					
+			
+			end if;
+			if new.demo_id is not null  then		
+			
+					UPDATE video SET count_linked=count_linked+1 WHERE id =  new.demo_id;					
+			
+			end if;
 	 END
 ;;
 delimiter ;
@@ -793,6 +825,24 @@ CREATE TRIGGER `after_update_course` AFTER UPDATE ON `course` FOR EACH ROW BEGIN
 		
 			UPDATE categories SET categories.total_course=categories.total_course+1 WHERE categories.id =  new.category_id;
 			UPDATE categories SET categories.total_course=categories.total_course-1 WHERE categories.id =  old.category_id;
+			end if;
+			
+			if old.img_poster_id <> new.img_poster_id  then		
+					if new.img_poster_id is not null then
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.img_poster_id;
+					end if;
+					if new.img_poster_id is not null then
+						UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.img_poster_id;		
+					end if;
+			end if;
+			
+			if old.demo_id <> new.demo_id  then		
+					if new.demo_id is not null then
+					UPDATE video SET count_linked=count_linked+1 WHERE id =  new.demo_id;
+					end if;
+					if new.demo_id is not null then
+					UPDATE video SET count_linked=count_linked-1 WHERE id =  old.demo_id;		
+					end if;
 			end if;
 			
 	 END
@@ -811,6 +861,76 @@ CREATE TRIGGER `before_delete_course` BEFORE DELETE ON `course` FOR EACH ROW BEG
 			DELETE FROM learning WHERE course_id=old.id;
 			UPDATE categories SET categories.total_course=categories.total_course-1 WHERE categories.id = old.category_id;
 			
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table course
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_course`;
+delimiter ;;
+CREATE TRIGGER `after_delete_course` AFTER DELETE ON `course` FOR EACH ROW BEGIN
+				if old.img_poster_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.img_poster_id;					
+			
+			end if;
+			
+				if old.demo_id is not null  then		
+			
+					UPDATE video SET count_linked=count_linked-1 WHERE id =  old.demo_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table lesson
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_insert_lesson`;
+delimiter ;;
+CREATE TRIGGER `after_insert_lesson` AFTER INSERT ON `lesson` FOR EACH ROW BEGIN
+					if new.video_id is not null  then		
+			
+					UPDATE video SET count_linked=count_linked+1 WHERE id =  new.video_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table lesson
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_update_lesson`;
+delimiter ;;
+CREATE TRIGGER `after_update_lesson` AFTER UPDATE ON `lesson` FOR EACH ROW BEGIN
+			if old.video_id <> new.video_id  then		
+				if new.video_id is not null then
+				UPDATE video SET count_linked=count_linked+1 WHERE id =  new.video_id;
+				end if;
+				if old.video_id is not null then
+				UPDATE video SET count_linked=count_linked-1 WHERE id =  old.video_id;						
+				end if;
+			end if;
+			
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table lesson
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_lesson`;
+delimiter ;;
+CREATE TRIGGER `after_delete_lesson` AFTER DELETE ON `lesson` FOR EACH ROW BEGIN
+					if old.video_id is not null  then		
+			
+					UPDATE video SET count_linked=count_linked-1 WHERE id =  old.video_id;					
+			
+			end if;
 	 END
 ;;
 delimiter ;
@@ -883,12 +1003,53 @@ CREATE TRIGGER `before_delete_payment` BEFORE DELETE ON `payment` FOR EACH ROW B
 delimiter ;
 
 -- ----------------------------
+-- Triggers structure for table resource_image
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_insert_resource_image`;
+delimiter ;;
+CREATE TRIGGER `before_insert_resource_image` BEFORE INSERT ON `resource_image` FOR EACH ROW BEGIN
+			-- SET new.img_path=
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table video
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_insert_video`;
+delimiter ;;
+CREATE TRIGGER `after_insert_video` AFTER INSERT ON `video` FOR EACH ROW BEGIN
+				if new.img_poster_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.img_poster_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Triggers structure for table video
 -- ----------------------------
 DROP TRIGGER IF EXISTS `before_delete_video`;
 delimiter ;;
 CREATE TRIGGER `before_delete_video` BEFORE DELETE ON `video` FOR EACH ROW BEGIN
 			DELETE FROM lesson WHERE video_id=old.id ;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table video
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_video`;
+delimiter ;;
+CREATE TRIGGER `after_delete_video` AFTER DELETE ON `video` FOR EACH ROW BEGIN
+				if old.img_poster_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.img_poster_id;					
+			
+			end if;
 	 END
 ;;
 delimiter ;

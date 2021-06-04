@@ -31,8 +31,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import vn.edu.topedu.json.CustomDateSerializer;
 import vn.edu.topedu.json.MultiDateDeserializer;
+
 //@JsonInclude(Include.NON_NULL)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
@@ -46,29 +49,25 @@ public class AppUser implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	@JsonProperty(access = Access.READ_ONLY)	
+	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 	@Column(name = "User_Name", length = 36, nullable = false)
 	private String userName;
 	@Column(name = "Fullname", length = 255)
 	private String fullname;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "phone")
 	private String phone;
-	
+	@Column(name = "location")
+	private String location;
+
 	@Column(name = "birth_day")
-	@JsonFormat(pattern="dd/MM/yyyy")
-	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS Z")
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-	
-	//@JsonProperty("date") 
+	@JsonSerialize(using = CustomDateSerializer.class)
 	@JsonDeserialize(using = MultiDateDeserializer.class)
 	private Date birthDay;
-
-	
 
 	@Column(name = "Encryted_Password", length = 128, nullable = false)
 	@JsonIgnore
@@ -76,46 +75,41 @@ public class AppUser implements UserDetails {
 
 	@Column(name = "actived", length = 1, nullable = false)
 	private Boolean actived = false;
-	
+
 	@Column(name = "Enabled", length = 1, nullable = false)
 	@JsonIgnore
 	private Boolean enabled = false;
-	
+
 	@Column(name = "deleted", length = 1, nullable = false)
 	@JsonIgnore
 	private Boolean deleted = false;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+	@JoinColumn(name = "avatar_id", referencedColumnName = "id")
 	@JsonProperty(access = Access.READ_ONLY)
-    private ResourceImage avatar;
-	
+	private ResourceImage avatar;
+
 	@Column(name = "Email", length = 255, nullable = false)
 	private String email;
-	
+
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", 
-	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
-	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private List<AppRole> authorities;
-	
+
 	@OneToMany(mappedBy = "appUser")
 	@JsonProperty(access = Access.READ_ONLY)
 	private List<UserRole> userRoles;
-	
+
 	@Column(name = "gender", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private GENDER gender = GENDER.NAM;
-	
+
 	@Column(name = "facebook", length = 255, nullable = false)
 	private String facebook;
-	
+
 	@Column(name = "gmail", length = 255, nullable = false)
 	private String gmail;
-	
-	
-	
 
 	public String getGmail() {
 		return gmail;
@@ -132,8 +126,14 @@ public class AppUser implements UserDetails {
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
 	}
-	
-	
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 	public String getFullname() {
 		return fullname;
@@ -170,7 +170,7 @@ public class AppUser implements UserDetails {
 	public Date getBirthDay() {
 		return birthDay;
 	}
-	
+
 	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;
 	}
@@ -206,8 +206,6 @@ public class AppUser implements UserDetails {
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
-
-	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -252,7 +250,7 @@ public class AppUser implements UserDetails {
 	public ResourceImage getAvatar() {
 		return avatar;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -276,7 +274,6 @@ public class AppUser implements UserDetails {
 	public void setUserRoles(List<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-	
 
 	public Boolean getActived() {
 		return actived;
@@ -293,8 +290,5 @@ public class AppUser implements UserDetails {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
-	
-	
 
 }
