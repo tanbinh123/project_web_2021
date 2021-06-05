@@ -78,7 +78,8 @@ public class AuthenticationREST implements IMyHost {
 			if (user.getAuthorities().contains(appRole)) {
 				authResponse.getUser().setAdmin(true);
 			}
-			httpSession.setAttribute("username", authResponse.getUser().getUsername());
+			
+			authResponse.setProfile(user);
 			return ResponseEntity.ok(authResponse);
 		} else {
 			MessageResponse messageResponse = new MessageResponse("User not exists.", "Tài khoản không hợp lệ.");

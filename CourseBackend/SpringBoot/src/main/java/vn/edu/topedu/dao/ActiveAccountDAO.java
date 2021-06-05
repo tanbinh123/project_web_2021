@@ -24,7 +24,7 @@ public class ActiveAccountDAO {
 		try {
 			
 			String sql = "Select rrp from " + ActiveAccount.class.getName() + " rrp " //
-					+ " where rrp.appUser.userName= :userName and TIMESTAMPDIFF(MINUTE, rrp.createTime,UTC_TIMESTAMP) < 10 group by rrp.createTime order by rrp.createTime desc ";
+					+ " where rrp.alive=true and rrp.appUser.userName= :userName and TIMESTAMPDIFF(MINUTE, rrp.createTime,UTC_TIMESTAMP) < 10 group by rrp.createTime order by rrp.createTime desc ";
 			Query query = this.entityManager.createQuery(sql, ActiveAccount.class);
 			query.setParameter("userName", userName);
 			

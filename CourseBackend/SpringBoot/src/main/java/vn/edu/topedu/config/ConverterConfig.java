@@ -19,8 +19,10 @@ public class ConverterConfig implements WebMvcConfigurer {
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(new CatetoryToStringConverter());		
-		registry.addConverter(new DateToStringConverter());
-		registry.addConverter(new StringToDateConverter());
+		/*
+		 * registry.addConverter(new DateToStringConverter()); registry.addConverter(new
+		 * StringToDateConverter());
+		 */
 		registry.addConverter(new CourseIdToFullCourseConverter(courseDAO));
 	}
 

@@ -10,7 +10,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
-public abstract class AHasResource extends BaseEntity {
+public abstract class AHasPoster extends BaseEntity {
 	@JsonIgnore
 	@Transient
 	protected String beforeResource;
@@ -20,8 +20,7 @@ public abstract class AHasResource extends BaseEntity {
 	@JsonIgnore
 	private AppUser appUser;
 	
-	@Column(name = "count_linked", nullable = false, updatable = false)
-	private Long countLinked = Long.valueOf(0);
+	
 	
 	
 	public AppUser getAppUser() {
@@ -41,13 +40,6 @@ public abstract class AHasResource extends BaseEntity {
 		this.beforeResource = beforeResource;
 	}
 
-	public Long getCountLinked() {
-		return countLinked;
-	}
-
-	public void setCountLinked(Long countLinked) {
-		this.countLinked = countLinked;
-	}
 	
 
 }

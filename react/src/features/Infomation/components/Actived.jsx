@@ -1,9 +1,10 @@
 import { Grid, makeStyles } from "@material-ui/core";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import userApi from "../../../api/userApi";
-import { DataUser } from "../../../app/DataUser";
+import { addLocalStorage, DataUser } from "../../../app/DataUser";
 import ButtonClick from "../../../components/Button/ButtonClick";
 import "././css/Actived.css";
 
@@ -47,6 +48,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Actived(props) {
   let params = useParams();
+
+  const { enqueueSnackbar } = useSnackbar();
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
@@ -64,15 +67,21 @@ function Actived(props) {
       };
       const res = await userApi.actived(payload);
       console.log(res);
-      /* const profile = await userApi.profile();
-      setDataUser({
-        ...dataUser,       
-        profile: profile,
-      });
-      addLocalStorage(null, profile); */
-      //console.log("localStorage", data);
-
+      if(!!res.status && res.status == 400){
+        enqueueSnackbar(res.data.message.vi, { variant: "error" });
+        console.log("Code InValid",res.data.message.vi);  
+        //TODO
+        push("/");
+        
+      } else{    
+        setDataUser({
+          ...dataUser,       
+          profile: res,
+        });
+        addLocalStorage(null, res);     
+      }
       setLoading(false);
+     
     }
   }, []);
   // console.log(params?.code);

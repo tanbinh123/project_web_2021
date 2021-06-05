@@ -1,10 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Avatar, Grid } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import * as yup from "yup";
-import { DataUser } from "../../../app/DataUser";
+import { addLocalStorage, DataUser } from "../../../app/DataUser";
+import userApi from "../../../api/userApi";
 import ButtonUploadFW from "../../../components/Button/ButtonUploadFW";
 import CustomButton from "../../../components/Button/CustomButton";
 import CustomRadioForm from "../../../components/Form/CustomRadioForm";
@@ -13,6 +14,7 @@ import CustomInput from "../../../components/Input/CustomInput";
 import { toDate } from "../../../components/tools/Tools";
 import "././css/Actived.css";
 import EditCss from "./css/EditCss";
+import { useSnackbar } from "notistack";
 
 Edit.propTypes = {};
 const schema = yup.object().shape({
@@ -32,24 +34,58 @@ function Edit(props) {
   console.log(profile);
   const [date, setDate] = useState(toDate(profile.birthDay));
   const [imgAvatar, setImageAvatar] = useState(profile.avatar.image);
+  const { enqueueSnackbar } = useSnackbar();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      fullName: profile.fullName,
-      email: profile.email,
+      fullName: profile?.fullname,
+      email: profile?.email,
       birthDay: date,
       gender: profile.gender,
-      location: profile.lacation,
-      facebook: profile.facebook,
-      description: profile.description,
-      phone: profile.phone,
+      location: profile?.location,
+      facebook: profile?.facebook,
+      description: profile?.description,
+      phone: profile?.phone,
       avatar: imgAvatar,
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = async (value) => {
-    console.log(value);
+  
+  const handleOnSubmit = async (values) => {
+    console.log("values", values);
+    const formData = new FormData();
+    formData.append("phone", values.phone);
+    formData.append("email", values.email);
+    formData.append("gender", values.gender);
+    formData.append("fullname", values.fullName);
+    formData.append("birthDay", values.birthDay);
+    formData.append("location", values.location);
+    formData.append("facebook", values.facebook);
+    formData.append("description", values.description);
+    formData.append("uploadAvatar", values.uploadAvatar);
+    var res = await userApi.postProfile(formData);
+
+
+    if(!!res.status){
+      enqueueSnackbar(res.data.message.vi, { variant: "error" });
+      console.log("Code InValid",res.data.message.vi);  
+      console.log(res);
+      //TODO
+    
+      
+    } else{    
+      console.log("postProfile", res);
+    
+      setDataUser({
+        ...dataUser,        
+        profile: res,
+      });
+      addLocalStorage(null,res);
+    }
+
+   
   };
+  console.log(dataUser);
   const handleChangeAvatar = () => {
     const inputFile = document.getElementById("input-avatar");
     inputFile.click();
@@ -60,6 +96,8 @@ function Edit(props) {
     const avatarTmp = URL.createObjectURL(file);
     setImageAvatar(avatarTmp);
     form.setValue("avatar", file);
+    form.setValue("uploadAvatar", file);
+    
   };
   return (
     <Grid container className={classes.rightRoot}>

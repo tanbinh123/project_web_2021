@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import vn.edu.topedu.entity.AHasPoster;
 import vn.edu.topedu.entity.AHasResource;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.ResourceImage;
@@ -28,7 +29,7 @@ import vn.edu.topedu.entity.course.full.VideoEntity;
 
 @Entity
 @Table(name = "Course")
-public class PreviewCourseEntity extends AHasResource {
+public class PreviewCourseEntity extends AHasPoster {
 
 
 	@OneToOne(cascade = CascadeType.ALL)

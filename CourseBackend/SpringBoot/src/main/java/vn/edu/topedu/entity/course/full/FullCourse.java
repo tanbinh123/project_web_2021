@@ -32,12 +32,12 @@ public class FullCourse extends BaseEntity {
 	@JoinColumn(name = "demo_id", referencedColumnName = "id" ,insertable = false, updatable = false)
 	private VideoEntity demo;
 
-	@Column(name = "poster_id", nullable = false)
+	@Column(name = "user_poster_id", nullable = false)
 	@JsonIgnore
 	private Long posterId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "poster_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "user_poster_id", nullable = false, insertable = false, updatable = false)
 	@JsonIgnore
 	private AppUser appUser;
 	

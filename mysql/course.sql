@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 27/05/2021 22:53:35
+ Date: 05/06/2021 05:38:01
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `active_account`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `active_account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 95 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 101 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of active_account
@@ -38,6 +38,12 @@ CREATE TABLE `active_account`  (
 INSERT INTO `active_account` VALUES (89, 1, '2021-05-25 16:28:28', '8ea0418123cdd0d52eb89f19c39b06af', b'0');
 INSERT INTO `active_account` VALUES (90, 2, '2021-05-27 10:46:29', 'b5208a7ee82c9d5d6ccb1b90175f6b71', b'0');
 INSERT INTO `active_account` VALUES (94, 45, '2021-05-27 11:45:55', 'f2b75a186fea6156c9f9ca180b90426e', b'0');
+INSERT INTO `active_account` VALUES (95, 1, '2021-05-27 16:35:33', '2f36d1ad7b6f9f427a04f8d7b42aca1c', b'0');
+INSERT INTO `active_account` VALUES (96, 2, '2021-06-04 18:10:29', '0ceb05f4d6a91521c519f882c9ad6ee9', b'0');
+INSERT INTO `active_account` VALUES (97, 2, '2021-06-04 18:26:12', '61e3b60389a39347c1968e5c7f488272', b'0');
+INSERT INTO `active_account` VALUES (98, 2, '2021-06-04 18:28:02', 'a517d3b80ca8793a80f8b6dbf02f7f6b', b'0');
+INSERT INTO `active_account` VALUES (99, 2, '2021-06-04 18:29:48', 'd296bc7258d3a0c684b821045c098c83', b'0');
+INSERT INTO `active_account` VALUES (100, 2, '2021-06-04 18:33:47', '12d95e4f1085baaf6e268439620439a2', b'0');
 
 -- ----------------------------
 -- Table structure for app_role
@@ -77,6 +83,8 @@ CREATE TABLE `app_user`  (
   `gmail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
   `update_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `APP_USER_UK`(`USER_NAME`) USING BTREE,
   UNIQUE INDEX `email_uq`(`email`) USING BTREE,
@@ -87,10 +95,11 @@ CREATE TABLE `app_user`  (
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37');
-INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 1, b'0', 'hearterzouest99.999@gmail.com', b'1', 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37');
-INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37');
-INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'1', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30');
+INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
+INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 77, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-25 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z');
+INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
+INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
+INSERT INTO `app_user` VALUES (46, 'hoang002', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for categories
@@ -114,7 +123,7 @@ CREATE TABLE `categories`  (
 -- Records of categories
 -- ----------------------------
 INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 170, 0, 13915000, 3);
-INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 2, 500, 32586000, 4);
+INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 2, 500, 32601000, 5);
 INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 1, 0, 0, 0);
 
 -- ----------------------------
@@ -131,7 +140,7 @@ CREATE TABLE `course`  (
   `rate_star` double(1, 0) UNSIGNED NOT NULL DEFAULT 0,
   `bought` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `update_at` timestamp(0) NOT NULL DEFAULT utc_timestamp,
-  `poster_id` bigint(20) NOT NULL,
+  `user_poster_id` bigint(20) NOT NULL,
   `demo_id` bigint(20) NULL DEFAULT NULL,
   `category_id` int(11) NULL DEFAULT NULL,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
@@ -316,7 +325,7 @@ INSERT INTO `course` VALUES (168, 7, 'Bên cạnh sức mạnh và khả năng p
 INSERT INTO `course` VALUES (169, 2, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 169', 3712000, 3, 0, '2019-12-20 19:03:14', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (170, 6, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 170', 13879000, 0, 0, '2020-11-14 12:05:41', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (171, 71, 'Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops', b'0', 'Kiến thức cơ bản, cốt lõi dân IT cần học trước', 10857000, 0, 3, '2021-05-25 14:02:46', 1, 6, 2, '2021-05-25 14:02:46');
-INSERT INTO `course` VALUES (178, 72, 'Khóa học đề cao việc thực hành qua những ví dụ trong thực tế giúp học viên nhanh chóng xây dựng được giao diện website', b'0', 'HTML, CSS từ Zero đến Hero', 15000, 0, 1, '2021-05-25 14:15:57', 1, 1, 2, '2021-05-25 14:15:57');
+INSERT INTO `course` VALUES (178, 72, 'Khóa học đề cao việc thực hành qua những ví dụ trong thực tế giúp học viên nhanh chóng xây dựng được giao diện website', b'0', 'HTML, CSS từ Zero đến Hero', 15000, 0, 2, '2021-05-25 14:15:57', 1, 1, 2, '2021-05-25 14:15:57');
 INSERT INTO `course` VALUES (179, 8, 'Test', b'0', 'Test', 120000, 0, 0, '2021-05-25 14:28:25', 1, 1, 19, '2021-05-25 14:28:25');
 
 -- ----------------------------
@@ -410,7 +419,7 @@ CREATE TABLE `ower_course`  (
   CONSTRAINT `ower_course_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_4` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ower_course
@@ -421,6 +430,7 @@ INSERT INTO `ower_course` VALUES (34, 1, 178, 62, b'1', b'0', '2021-05-26 14:36:
 INSERT INTO `ower_course` VALUES (35, 2, 1, 63, b'1', b'0', '2021-05-27 10:38:04', '2021-05-27 10:38:04', 0);
 INSERT INTO `ower_course` VALUES (37, 45, 171, 65, b'1', b'0', '2021-05-27 11:49:27', '2021-05-27 11:49:27', 0);
 INSERT INTO `ower_course` VALUES (38, 45, 44, 66, b'1', b'0', '2021-05-27 15:34:06', '2021-05-27 15:34:06', 0);
+INSERT INTO `ower_course` VALUES (39, 46, 178, 67, b'1', b'0', '2021-05-28 07:03:19', '2021-05-28 07:03:19', 0);
 
 -- ----------------------------
 -- Table structure for part
@@ -468,7 +478,7 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 67 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 68 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of payment
@@ -497,6 +507,7 @@ INSERT INTO `payment` VALUES (62, 1, '2021-05-26 14:36:19', 1500000, '192.168.0.
 INSERT INTO `payment` VALUES (63, 2, '2021-05-27 10:38:04', 100000000, '192.168.0.111', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=100000000&vnp_Command=pay&vnp_CreateDate=20210527173804&vnp_CurrCode=VND&vnp_IpAddr=192.168.0.111&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2F192.168.0.111%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F63&vnp_TmnCode=67LF6OWG&vnp_TxnRef=63&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=8a87e89b1694dfef6707dc59c2fa93e69c52e0f98a5bfbe9184c20fdb3cd04af', 'vnp_Amount=100000000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210527173817&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13512924&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=63&vnp_SecureHash=00f9b5d883061718066d26f9a4afe893714c75a2d9b522fa64933e59144c3072', 'http://localhost:3000/course/1');
 INSERT INTO `payment` VALUES (65, 45, '2021-05-27 11:49:27', 1085700000, '192.168.0.111', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1085700000&vnp_Command=pay&vnp_CreateDate=20210527184927&vnp_CurrCode=VND&vnp_IpAddr=192.168.0.111&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2F192.168.0.111%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F65&vnp_TmnCode=67LF6OWG&vnp_TxnRef=65&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=46fd5543d95e5244e636b0c6ce5c836968e8c502bbe41cafa8dd1e83b5d107e6', 'vnp_Amount=1085700000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210527185005&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13512956&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=65&vnp_SecureHash=156d609f55d149b0771e4f182af5ac02d47a5951dd5ca0f7e312326c96a4dbe9', 'http://localhost:3000/course/171');
 INSERT INTO `payment` VALUES (66, 45, '2021-05-27 15:34:06', 1191500000, '192.168.0.111', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1191500000&vnp_Command=pay&vnp_CreateDate=20210527223406&vnp_CurrCode=VND&vnp_IpAddr=192.168.0.111&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2F192.168.0.111%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F66&vnp_TmnCode=67LF6OWG&vnp_TxnRef=66&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=4bc1079f299262e278b2ab06c0f628a00637f33fe79053350b70f625ece326f9', 'vnp_Amount=1191500000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210527223422&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13513046&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=66&vnp_SecureHash=92f97bf2dc4d308fab436f351227de00476111ee58cf9f518e811c7769c24b72', 'http://localhost:3000/course/44');
+INSERT INTO `payment` VALUES (67, 46, '2021-05-28 07:03:19', 1500000, '127.0.0.1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1500000&vnp_Command=pay&vnp_CreateDate=20210528140320&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F67&vnp_TmnCode=67LF6OWG&vnp_TxnRef=67&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=8b970484b83fbdf9f1339b75d201786b0f46acc0be436288a96432632fa5eb1e', 'vnp_Amount=1500000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210528210320&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13513517&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=67&vnp_SecureHash=687f02adbaea0c68c31ca1c5a54dd0cd0ba482b9cb48cd622857caa89d8ce894', 'http://localhost:3000/course/178');
 
 -- ----------------------------
 -- Table structure for queue_check_payment
@@ -541,32 +552,29 @@ CREATE TABLE `resource_image`  (
   `img_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
   `update_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
-  `poster_id` bigint(20) NULL DEFAULT NULL,
-  `count_linked` bigint(20) NOT NULL DEFAULT 0,
+  `user_poster_id` bigint(20) NULL DEFAULT NULL,
+  `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 78 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
 -- ----------------------------
-INSERT INTO `resource_image` VALUES (1, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (2, 'user/user/image/ganyu-h-1.png', b'0', '2021-05-19 01:20:05', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (3, 'user/user/image/ganyu-h-2.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (5, 'user/user/image/ganyu-h-4.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (6, 'user/user/image/ganyu-h-5.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (7, 'user/user/image/ganyu-h-6.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (12, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (13, 'image/default/momo.webp', b'1', '2021-04-05 14:48:50', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (67, 'user/admin/image/girl.bmp', b'0', '2021-05-19 10:56:44', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (69, 'user/admin/image/girl.bmp', b'1', '2021-05-19 11:02:25', 2, 0, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (71, 'user/admin/image/sddefault.jpg', b'0', '2021-05-25 14:01:08', 1, 0, '2021-05-25 14:01:08');
-INSERT INTO `resource_image` VALUES (72, 'user/admin/image/html.jpg', b'0', '2021-05-25 14:05:14', 1, 0, '2021-05-25 14:05:14');
+INSERT INTO `resource_image` VALUES (1, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 4, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (2, 'user/user/image/ganyu-h-1.png', b'0', '2021-05-19 01:20:05', 2, 21, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (3, 'user/user/image/ganyu-h-2.jpg', b'0', '2021-04-05 14:48:50', 2, 10, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '2021-04-05 14:48:50', 2, 23, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (5, 'user/user/image/ganyu-h-4.jpg', b'0', '2021-04-05 14:48:50', 2, 15, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (6, 'user/user/image/ganyu-h-5.jpg', b'0', '2021-04-05 14:48:50', 2, 20, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (7, 'user/user/image/ganyu-h-6.jpg', b'0', '2021-04-05 14:48:50', 2, 18, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 21, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 24, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 8, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (71, 'user/admin/image/sddefault.jpg', b'0', '2021-05-25 14:01:08', 1, 1, '2021-05-25 14:01:08');
+INSERT INTO `resource_image` VALUES (72, 'user/admin/image/html.jpg', b'0', '2021-05-25 14:05:14', 1, 1, '2021-05-25 14:05:14');
+INSERT INTO `resource_image` VALUES (77, 'user/user/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-04 20:57:49', 2, 1, '2021-06-04 20:57:49');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -591,7 +599,7 @@ INSERT INTO `revenue` VALUES (1, b'0', '2020-01-07 19:07:33', '2021-01-26 19:07:
 INSERT INTO `revenue` VALUES (2, b'0', '2021-02-01 19:08:13', '2021-02-26 19:08:13', 2, 2021, 15000000);
 INSERT INTO `revenue` VALUES (3, b'0', '2021-03-26 19:10:41', '2021-03-26 19:10:41', 3, 2021, 15150000);
 INSERT INTO `revenue` VALUES (4, b'0', '2021-04-26 19:09:33', '2021-04-26 19:09:33', 4, 2021, 27000000);
-INSERT INTO `revenue` VALUES (50, b'0', '2021-05-26 18:37:41', '2021-05-26 18:37:41', 5, 2021, 46501000);
+INSERT INTO `revenue` VALUES (50, b'0', '2021-05-26 18:37:41', '2021-05-26 18:37:41', 5, 2021, 46516000);
 
 -- ----------------------------
 -- Table structure for spring_session
@@ -614,24 +622,9 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('0cc517d4-cc5b-4441-801e-d19c75f4d2c6', 'be30cec6-4268-4944-9f8d-a2da79a0fcca', 1622129355927, 1622129355927, 1800, 1622131155927, NULL);
-INSERT INTO `spring_session` VALUES ('325aa8ec-4438-4078-843e-76d3f0041b88', '9b72732b-632c-4e13-a16d-7ec903e55b34', 1622129857214, 1622129857214, 1800, 1622131657214, NULL);
-INSERT INTO `spring_session` VALUES ('41236db7-5f4a-482e-bfdf-3c061725d63d', '5f83b05e-9226-4e30-b257-0b6bd338f994', 1622129619476, 1622129619476, 1800, 1622131419476, NULL);
-INSERT INTO `spring_session` VALUES ('42aae97a-5a0c-462c-b0d8-340a1989cf12', '6aceacdd-0b9d-40ea-b28f-5555e2223a2c', 1622130465489, 1622130465489, 1800, 1622132265489, NULL);
-INSERT INTO `spring_session` VALUES ('4f3ed6fd-d241-48d8-9cca-a4f1a908c244', '5527159f-fe18-4367-af5b-58e25b61f9f9', 1622129330847, 1622129330847, 1800, 1622131130847, NULL);
-INSERT INTO `spring_session` VALUES ('50d6ed81-00d0-4b2a-ab4d-bcaf5226b479', 'dba70de4-ffb2-4ebb-89ed-954a61608fdb', 1622129517315, 1622129517315, 1800, 1622131317315, NULL);
-INSERT INTO `spring_session` VALUES ('58135399-dc77-4bef-b5f3-870506d73778', 'e521e6bd-4c42-4de2-9395-fc78bcce58d0', 1622130150836, 1622130150836, 1800, 1622131950836, NULL);
-INSERT INTO `spring_session` VALUES ('5e3f2693-b6f0-432b-9a63-c873930dbdf4', '98bc38c6-90f6-4b98-9e33-cd4c9d0d7627', 1622129608514, 1622129608514, 1800, 1622131408514, NULL);
-INSERT INTO `spring_session` VALUES ('723278db-1cc3-4923-ba18-9d3fa7db4bb7', '0ad61f39-e1a0-4cd3-9816-19a5f666aaa1', 1622129273634, 1622129273634, 1800, 1622131073634, NULL);
-INSERT INTO `spring_session` VALUES ('8424dc05-aa56-4554-98bd-a44a614896eb', 'b1b29515-e8a1-408a-9c0a-f0bc9f029cc2', 1622129504504, 1622129504504, 1800, 1622131304504, NULL);
-INSERT INTO `spring_session` VALUES ('87de6163-3a51-4675-a2da-5b271216734f', '099ff183-7f08-4d51-8c2d-bec1c315e050', 1622129867888, 1622129867888, 1800, 1622131667888, NULL);
-INSERT INTO `spring_session` VALUES ('9fe0b987-f6b2-4035-9240-e9fd23588c5d', '737a8b8f-82a6-4523-8515-3ed0977d2f77', 1622129218103, 1622129218103, 1800, 1622131018103, NULL);
-INSERT INTO `spring_session` VALUES ('a380d4f1-12ff-4597-8fd5-5ccfc7b3262a', 'e9f5724d-3097-4024-a911-a288dac3de07', 1622129450329, 1622129450329, 1800, 1622131250329, NULL);
-INSERT INTO `spring_session` VALUES ('b0aaa2a5-1ce3-4c0a-bc43-f3234d931111', '823677fe-2f2c-4b55-927d-f6c7e7dc67e5', 1622129207314, 1622129207314, 1800, 1622131007314, NULL);
-INSERT INTO `spring_session` VALUES ('bbabe3de-8110-4f72-a53f-c686889ca887', 'fa47c711-35dd-4bbd-a358-900127cd6867', 1622129031184, 1622129031184, 1800, 1622130831184, NULL);
-INSERT INTO `spring_session` VALUES ('c699d198-f704-4b04-aaed-48a576cbe854', 'a2c27fa9-0ee0-48a0-ae55-0c6de0f684f2', 1622129376660, 1622129376660, 1800, 1622131176660, NULL);
-INSERT INTO `spring_session` VALUES ('c6fa136c-7885-4fec-aa15-e999c2c59acd', 'e53ed9d0-b860-478f-832d-79afd8ac7028', 1622130377799, 1622130377799, 1800, 1622132177799, NULL);
-INSERT INTO `spring_session` VALUES ('d96a217b-b07e-484e-95ed-78b93bdbaf1d', '011dee1e-2335-479a-b963-49b0f7daf7c3', 1622130494389, 1622130522162, 1800, 1622132322162, NULL);
+INSERT INTO `spring_session` VALUES ('0b21a3ff-7624-4e7f-8404-a7aed98b3b38', 'f40bdd5c-e29b-4902-ae28-d456b64bf07b', 1622845911743, 1622845911743, 1800, 1622847711743, NULL);
+INSERT INTO `spring_session` VALUES ('5c655fdc-abe9-470e-8ca4-637632540960', 'e6c6bdd9-4c36-4641-b3e9-c1adf3a6571f', 1622831776268, 1622846230015, 1800, 1622848030015, NULL);
+INSERT INTO `spring_session` VALUES ('66992739-894a-4998-9ad7-e2c97907527b', 'b8ee3a7f-4341-4edc-99fc-44f8a96b3d46', 1622845353781, 1622845893586, 1800, 1622847693586, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -644,19 +637,6 @@ CREATE TABLE `spring_session_attributes`  (
   PRIMARY KEY (`SESSION_PRIMARY_ID`, `ATTRIBUTE_NAME`) USING BTREE,
   CONSTRAINT `SPRING_SESSION_ATTRIBUTES_FK` FOREIGN KEY (`SESSION_PRIMARY_ID`) REFERENCES `spring_session` (`PRIMARY_ID`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session_attributes
--- ----------------------------
-INSERT INTO `spring_session_attributes` VALUES ('41236db7-5f4a-482e-bfdf-3c061725d63d', 'username', 0xACED0005740005686F616E67);
-INSERT INTO `spring_session_attributes` VALUES ('42aae97a-5a0c-462c-b0d8-340a1989cf12', 'username', 0xACED000574000561646D696E);
-INSERT INTO `spring_session_attributes` VALUES ('50d6ed81-00d0-4b2a-ab4d-bcaf5226b479', 'username', 0xACED0005740005686F616E67);
-INSERT INTO `spring_session_attributes` VALUES ('723278db-1cc3-4923-ba18-9d3fa7db4bb7', 'username', 0xACED0005740005686F616E67);
-INSERT INTO `spring_session_attributes` VALUES ('87de6163-3a51-4675-a2da-5b271216734f', 'username', 0xACED0005740008686F616E67303031);
-INSERT INTO `spring_session_attributes` VALUES ('9fe0b987-f6b2-4035-9240-e9fd23588c5d', 'username', 0xACED0005740005686F616E67);
-INSERT INTO `spring_session_attributes` VALUES ('a380d4f1-12ff-4597-8fd5-5ccfc7b3262a', 'username', 0xACED0005740005686F616E67);
-INSERT INTO `spring_session_attributes` VALUES ('c699d198-f704-4b04-aaed-48a576cbe854', 'username', 0xACED0005740005686F616E67);
-INSERT INTO `spring_session_attributes` VALUES ('c6fa136c-7885-4fec-aa15-e999c2c59acd', 'username', 0xACED0005740008686F616E67303031);
 
 -- ----------------------------
 -- Table structure for templates
@@ -725,33 +705,64 @@ DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `poster` bigint(20) NULL DEFAULT NULL,
+  `img_poster_id` bigint(20) NULL DEFAULT NULL,
   `duration` int(255) NULL DEFAULT NULL,
-  `count_linked` bigint(20) NOT NULL DEFAULT 0,
+  `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `actived` bit(1) NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
   `update_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `poster_id` bigint(20) NULL DEFAULT NULL,
+  `user_poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `poster`(`poster`) USING BTREE,
-  CONSTRAINT `video_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `poster`(`img_poster_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (9, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (10, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (11, 'user/admin/video/171/mp4/toystory', 11, 10000000, 0, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 8, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, 4, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 171, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 2, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+
+-- ----------------------------
+-- Triggers structure for table app_user
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_insert_app_user`;
+delimiter ;;
+CREATE TRIGGER `after_insert_app_user` AFTER INSERT ON `app_user` FOR EACH ROW BEGIN
+				if new.avatar_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.avatar_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table app_user
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_update_app_user`;
+delimiter ;;
+CREATE TRIGGER `after_update_app_user` AFTER UPDATE ON `app_user` FOR EACH ROW BEGIN
+			if old.avatar_id <> new.avatar_id  then		
+				if new.avatar_id is not null then
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.avatar_id;
+				end if;
+			
+				if old.avatar_id is not null then
+				UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.avatar_id;		
+				end if;
+			end if;
+			
+	 END
+;;
+delimiter ;
 
 -- ----------------------------
 -- Triggers structure for table app_user
@@ -770,12 +781,36 @@ CREATE TRIGGER `before_delete_app_user` BEFORE DELETE ON `app_user` FOR EACH ROW
 delimiter ;
 
 -- ----------------------------
+-- Triggers structure for table app_user
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_app_user`;
+delimiter ;;
+CREATE TRIGGER `after_delete_app_user` AFTER DELETE ON `app_user` FOR EACH ROW BEGIN
+				if old.avatar_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.avatar_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Triggers structure for table course
 -- ----------------------------
 DROP TRIGGER IF EXISTS `after_insert_course`;
 delimiter ;;
-CREATE TRIGGER `after_insert_course` BEFORE INSERT ON `course` FOR EACH ROW BEGIN
-			UPDATE categories SET categories.total_course=categories.total_course+1 WHERE categories.id =new.category_id;
+CREATE TRIGGER `after_insert_course` AFTER INSERT ON `course` FOR EACH ROW BEGIN
+				if new.img_poster_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.img_poster_id;					
+			
+			end if;
+			if new.demo_id is not null  then		
+			
+					UPDATE video SET count_linked=count_linked+1 WHERE id =  new.demo_id;					
+			
+			end if;
 	 END
 ;;
 delimiter ;
@@ -790,6 +825,24 @@ CREATE TRIGGER `after_update_course` AFTER UPDATE ON `course` FOR EACH ROW BEGIN
 		
 			UPDATE categories SET categories.total_course=categories.total_course+1 WHERE categories.id =  new.category_id;
 			UPDATE categories SET categories.total_course=categories.total_course-1 WHERE categories.id =  old.category_id;
+			end if;
+			
+			if old.img_poster_id <> new.img_poster_id  then		
+					if new.img_poster_id is not null then
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.img_poster_id;
+					end if;
+					if new.img_poster_id is not null then
+						UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.img_poster_id;		
+					end if;
+			end if;
+			
+			if old.demo_id <> new.demo_id  then		
+					if new.demo_id is not null then
+					UPDATE video SET count_linked=count_linked+1 WHERE id =  new.demo_id;
+					end if;
+					if new.demo_id is not null then
+					UPDATE video SET count_linked=count_linked-1 WHERE id =  old.demo_id;		
+					end if;
 			end if;
 			
 	 END
@@ -808,6 +861,76 @@ CREATE TRIGGER `before_delete_course` BEFORE DELETE ON `course` FOR EACH ROW BEG
 			DELETE FROM learning WHERE course_id=old.id;
 			UPDATE categories SET categories.total_course=categories.total_course-1 WHERE categories.id = old.category_id;
 			
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table course
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_course`;
+delimiter ;;
+CREATE TRIGGER `after_delete_course` AFTER DELETE ON `course` FOR EACH ROW BEGIN
+				if old.img_poster_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.img_poster_id;					
+			
+			end if;
+			
+				if old.demo_id is not null  then		
+			
+					UPDATE video SET count_linked=count_linked-1 WHERE id =  old.demo_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table lesson
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_insert_lesson`;
+delimiter ;;
+CREATE TRIGGER `after_insert_lesson` AFTER INSERT ON `lesson` FOR EACH ROW BEGIN
+					if new.video_id is not null  then		
+			
+					UPDATE video SET count_linked=count_linked+1 WHERE id =  new.video_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table lesson
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_update_lesson`;
+delimiter ;;
+CREATE TRIGGER `after_update_lesson` AFTER UPDATE ON `lesson` FOR EACH ROW BEGIN
+			if old.video_id <> new.video_id  then		
+				if new.video_id is not null then
+				UPDATE video SET count_linked=count_linked+1 WHERE id =  new.video_id;
+				end if;
+				if old.video_id is not null then
+				UPDATE video SET count_linked=count_linked-1 WHERE id =  old.video_id;						
+				end if;
+			end if;
+			
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table lesson
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_lesson`;
+delimiter ;;
+CREATE TRIGGER `after_delete_lesson` AFTER DELETE ON `lesson` FOR EACH ROW BEGIN
+					if old.video_id is not null  then		
+			
+					UPDATE video SET count_linked=count_linked-1 WHERE id =  old.video_id;					
+			
+			end if;
 	 END
 ;;
 delimiter ;
@@ -880,12 +1003,53 @@ CREATE TRIGGER `before_delete_payment` BEFORE DELETE ON `payment` FOR EACH ROW B
 delimiter ;
 
 -- ----------------------------
+-- Triggers structure for table resource_image
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_insert_resource_image`;
+delimiter ;;
+CREATE TRIGGER `before_insert_resource_image` BEFORE INSERT ON `resource_image` FOR EACH ROW BEGIN
+			-- SET new.img_path=
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table video
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_insert_video`;
+delimiter ;;
+CREATE TRIGGER `after_insert_video` AFTER INSERT ON `video` FOR EACH ROW BEGIN
+				if new.img_poster_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.img_poster_id;					
+			
+			end if;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Triggers structure for table video
 -- ----------------------------
 DROP TRIGGER IF EXISTS `before_delete_video`;
 delimiter ;;
 CREATE TRIGGER `before_delete_video` BEFORE DELETE ON `video` FOR EACH ROW BEGIN
 			DELETE FROM lesson WHERE video_id=old.id ;
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table video
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_video`;
+delimiter ;;
+CREATE TRIGGER `after_delete_video` AFTER DELETE ON `video` FOR EACH ROW BEGIN
+				if old.img_poster_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.img_poster_id;					
+			
+			end if;
 	 END
 ;;
 delimiter ;

@@ -24,13 +24,13 @@ function Login(props) {
     if (!!!data.status) {
       addLocalStorage(data);
       //set token de lay profile
-      const profile = await userApi.profile();
+      
       setDataUser({
         ...dataUser,
         user: data.user,        
-        profile: profile,
+        profile: data.profile,
       });
-      addLocalStorage(data, profile);
+      addLocalStorage(data, data.profile);
       console.log("localStorage", data);
     } else {
       enqueueSnackbar(data.data.message.vi, { variant: "error" });

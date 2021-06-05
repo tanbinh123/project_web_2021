@@ -76,12 +76,15 @@ public class ActiveAccountREST {
 	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<Object> check(
+			HttpServletRequest httpServletRequest,
 			Authentication authentication,
 			@RequestBody ActiveConfirmRequest requestBody) {
-		 if (authentication != null) {
+		MessageResponse codeNotEquatls = new MessageResponse("Code not corect.","Mã xác mình không không đúng.");
+		MessageResponse codeNotExist = new MessageResponse("Error.","Lỗi. Không có code trong cơ sở dữ liệu để xác minh");
+		if (authentication != null) {
 			 System.out.println("Code: "+requestBody.code);
 			 ActiveAccount rrp = activeAccountDAO.getNewCode(authentication.getName());
-			if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));
+			if(rrp==null)return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(codeNotExist);
 			String trueCode=rrp.getCode();
 			if(requestBody.code.equals(trueCode)) {
 				 AppUser appUser=appUserDAO.findUserAccount(authentication.getName());
@@ -90,16 +93,17 @@ public class ActiveAccountREST {
 				 if(appUser!=null) {
 					 rrp.setAlive(false);
 					 activeAccountDAO.merge(rrp);
-					 return ResponseEntity.ok(new MessageResponse("Code valid.","Xác minh thành công."));
+					 appUser.getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
+					 return ResponseEntity.ok(appUser);
 				 }
 				 //System.out.println(rrp.getTime());
 			
 			}
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(codeNotEquatls);		
 					
 		 }
 	        
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.",""));		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(codeNotExist);		
 	}
 	public static class ActiveConfirmRequest{
 		private String code;
