@@ -1,9 +1,12 @@
-import React, { Suspense } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import React, { Suspense, useEffect } from "react";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { CContainer, CFade } from "@coreui/react";
 
 // routes config
 import routes from "../routes";
+import { useRecoilState } from "recoil";
+import { DataUser } from "src/app/DataUser";
+import { isEmpty } from "src/Tool/Tools";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -12,6 +15,13 @@ const loading = (
 );
 
 const TheContent = () => {
+  const [dataUser, setDataUser] = useRecoilState(DataUser);
+  const { push } = useHistory();
+  useEffect(() => {
+    if (isEmpty(dataUser.user)) {
+      push("/login");
+    }
+  }, []);
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -34,7 +44,6 @@ const TheContent = () => {
                 )
               );
             })}
-            <Redirect from="/" to="/dashboard" />
           </Switch>
         </Suspense>
       </CContainer>

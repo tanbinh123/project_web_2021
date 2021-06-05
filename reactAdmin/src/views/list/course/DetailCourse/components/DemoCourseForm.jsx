@@ -102,8 +102,9 @@ function DemoCourseForm(props) {
             <span>Hình xem trước</span>
             <video
               key={demoVideo}
-              autoPlay
-              /* muted */ loop
+              // autoPlay
+              muted
+              loop
               className={classes.videoPlay}
               controls
             >

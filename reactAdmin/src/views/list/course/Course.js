@@ -2,6 +2,7 @@ import { CButton, CCardBody, CCollapse, CDataTable } from "@coreui/react";
 import { Avatar } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import courseApi from "src/api/courseApi";
 import CustomButton from "src/components/CustomButton";
 import CustomButtonRed from "src/components/CustomButtonRed";
@@ -111,7 +112,12 @@ const Course = () => {
             return (
               <CCollapse show={details.includes(index)}>
                 <CCardBody className="detailBody">
-                  <CustomButton title="Chi tiết phần học" />
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={`/list/course/${item.id}`}
+                  >
+                    <CustomButton title="Chi tiết phần học" />
+                  </Link>
                   <CustomButtonRed title="Delete" />
                 </CCardBody>
               </CCollapse>

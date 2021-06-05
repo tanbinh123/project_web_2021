@@ -61,7 +61,7 @@ const schema = yup.object().shape({
 function LearningCourseForm(props) {
   const classes = useStyles();
   const { dataCourse = null, changeDataCourse = null } = props;
-  const [dataLearning, setDataLearning] = useState(dataCourse.learning);
+  const [dataLearning, setDataLearning] = useState(dataCourse.learnings);
   const [isUpdate, setUpdate] = useState(false);
   console.log(dataLearning);
   const form = useForm({
@@ -73,7 +73,7 @@ function LearningCourseForm(props) {
     resolver: yupResolver(schema),
   });
   useEffect(() => {
-    console.log("useEffect");
+    // console.log("useEffect");
     Array.from(dataLearning).map((item, index) => {
       form.setValue(`data[${index}]`, item);
     });
@@ -109,7 +109,7 @@ function LearningCourseForm(props) {
                     title="Delete"
                     onClick={() => {
                       const tmpData = form.getValues("data");
-                      console.log(tmpData);
+                      // console.log(tmpData);
                       if (item.id) {
                         tmpData[index].deleted = true;
                         setDataLearning(tmpData);
@@ -117,9 +117,9 @@ function LearningCourseForm(props) {
                       } else {
                         tmpData.splice(index, 1);
                         form.reset({ courseId: dataCourse.id, data: [] });
-                        let tmpData12 = form.getValues("data");
+                        // let tmpData12 = form.getValues("data");
                         form.setValue("data", tmpData);
-                        console.log(tmpData12);
+                        // console.log(tmpData12);
                         setDataLearning(tmpData);
                         setUpdate(!isUpdate);
                       }
@@ -133,7 +133,7 @@ function LearningCourseForm(props) {
               title="Thêm"
               onClick={() => {
                 const tmpData = form.getValues("data");
-                console.log(tmpData);
+                // console.log(tmpData);
                 setDataLearning([
                   ...tmpData,
                   {

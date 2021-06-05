@@ -7,6 +7,7 @@ import { Grid } from "@material-ui/core";
 import PosterCourseForm from "./components/PosterCourseForm";
 import DemoCourseForm from "./components/DemoCourseForm";
 import LearningCourseForm from "./components/LearningCourseForm";
+import PartCourseForm from "./components/PartCourseForm";
 
 const DetailCourse = () => {
   const { id } = useParams();
@@ -33,9 +34,18 @@ const DetailCourse = () => {
             />
           )}
         </Grid>
+
         <Grid item xl={6} lg={6} md={6} xs={12} sm={12}>
           {dataCourse && (
             <PosterCourseForm
+              dataCourse={dataCourse}
+              changeDataCourse={handleChangeDataCourse}
+            />
+          )}
+        </Grid>
+        <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
+          {dataCourse && (
+            <PartCourseForm
               dataCourse={dataCourse}
               changeDataCourse={handleChangeDataCourse}
             />
