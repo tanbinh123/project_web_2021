@@ -41,7 +41,7 @@ axiosClient.interceptors.response.use(
   function (error) {
     if (error.response && error.response.status === 401) {
       console.log("token expire");
-      window.location = "/auth/login";
+      window.location = "/login";
       removeLocalStorage();
     }
 

@@ -18,10 +18,11 @@ const TheContent = () => {
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   const { push } = useHistory();
   useEffect(() => {
-    if (isEmpty(dataUser.user)) {
+    if (isEmpty(dataUser.token)) {
       push("/login");
     }
-  }, []);
+  }, [dataUser.token]);
+
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -44,6 +45,7 @@ const TheContent = () => {
                 )
               );
             })}
+            <Redirect to="/dashboard" />
           </Switch>
         </Suspense>
       </CContainer>

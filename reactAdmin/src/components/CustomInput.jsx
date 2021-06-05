@@ -4,7 +4,7 @@ import { makeStyles, TextField } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& label.Mui-focused": {
-      color: "var(--colorOrange2)",
+      color: "var(--colorBlue2)",
     },
     "& .MuiInput-underline:after": {
       borderBottomColor: "var(--colorBlack2)",
