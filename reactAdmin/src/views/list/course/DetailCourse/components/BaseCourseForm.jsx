@@ -42,7 +42,7 @@ const schema = yup.object().shape({
 });
 function BaseCourseForm(props) {
   const classes = useStyles();
-  const { dataCourse = null, changeDataCourse = null } = props;
+  const { dataCourse = {}, changeDataCourse = null } = props;
   const form = useForm({
     mode: "onBlur",
     defaultValues: {

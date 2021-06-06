@@ -14,7 +14,7 @@ const DetailCourse = () => {
   const [dataCourse, setDataCourse] = useState();
   useEffect(() => {
     (async () => {
-      const res = await courseApi.get(id);
+      const res = await courseApi.check({ idCourse: id });
       console.log(res);
       setDataCourse(res);
     })();

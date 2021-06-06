@@ -14,6 +14,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import CustomSelectForm from "src/components/form/CustomSelectForm";
 import FormParts from "./PartCourse/FormParts";
 import FormCreateLesson from "./PartCourse/FormCreateLesson";
+import FormUploadLesson from "./PartCourse/FormUpdateLesson";
 const useStyles = makeStyles((theme) => ({
   formAddPart: {
     display: "flex",
@@ -51,7 +52,7 @@ const schema = yup.object().shape({
 });
 function PartCourseForm(props) {
   const classes = useStyles();
-  const { dataCourse = null, changeDataCourse = null } = props;
+  const { dataCourse = {}, changeDataCourse = null } = props;
   let indexLesson = 1;
   const formAddPart = useForm({
     mode: "onBlur",
@@ -93,7 +94,9 @@ function PartCourseForm(props) {
                         Bài {indexLesson++} : {item1.description}
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails></AccordionDetails>
+                    <AccordionDetails>
+                      <FormUploadLesson dataCourse={dataCourse} item={item1} />
+                    </AccordionDetails>
                   </Accordion>
                 ))}
                 <FormParts

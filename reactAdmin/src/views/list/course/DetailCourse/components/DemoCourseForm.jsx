@@ -57,7 +57,7 @@ const schema = yup.object().shape({
 });
 function DemoCourseForm(props) {
   const classes = useStyles();
-  const { dataCourse = null, changeDataCourse = null } = props;
+  const { dataCourse = {}, changeDataCourse = null } = props;
   const [demoVideo, setDemoVideo] = useState(dataCourse.demo.urlVideo);
   const form = useForm({
     mode: "onBlur",

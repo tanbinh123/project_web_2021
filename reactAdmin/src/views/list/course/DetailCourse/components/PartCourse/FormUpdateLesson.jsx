@@ -60,15 +60,15 @@ const useStyles = makeStyles(() => ({
 const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
-function FormCreateLesson(props) {
-  const { dataCourse = null } = props;
+function FormUpdateLesson(props) {
+  const { dataCourse = {}, item = {} } = props;
   const classes = useStyles();
-  const [demoVideo, setDemoVideo] = useState();
+  const [demoVideo, setDemoVideo] = useState(item.video.urlVideo);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
       idCourse: dataCourse.id,
-      description: "",
+      description: item.description,
     },
     resolver: yupResolver(schema),
   });
@@ -76,10 +76,8 @@ function FormCreateLesson(props) {
     //todo hoang todo
     console.log(value);
   };
-  const handleChangeVideo = () => {
-    const inputFile = document.getElementById(
-      `input-video-create-${dataCourse.id}`
-    );
+  const handleChangeImg = () => {
+    const inputFile = document.getElementById(`input-video-update-${item.id}`);
     inputFile.click();
   };
   const handleOnChangeFile = (event) => {
@@ -89,12 +87,13 @@ function FormCreateLesson(props) {
     setDemoVideo(tmpImg);
     form.setValue("videoCourse", file);
   };
+  // console.log(item);
   return (
     <form
       className={classes.formAddPart}
       onSubmit={form.handleSubmit(handleOnSubmit)}
     >
-      <h3 className={classes.title}>Thêm mới bài học</h3>
+      <h3 className={classes.title}>Cập nhật bài học</h3>
       <div>
         <span>Tiêu đề bài học</span>
         <CustomInput
@@ -112,7 +111,7 @@ function FormCreateLesson(props) {
             accept="video/*"
             type="file"
             name="avatar"
-            id={`input-video-create-${dataCourse.id}`}
+            id={`input-video-update-${item.id}`}
             onChange={handleOnChangeFile}
             hidden
           />
@@ -121,7 +120,7 @@ function FormCreateLesson(props) {
             title="Upload"
             color="secondary"
             variant="contained"
-            onClick={handleChangeVideo}
+            onClick={handleChangeImg}
             css={false}
           />
           <video
@@ -147,4 +146,4 @@ function FormCreateLesson(props) {
   );
 }
 
-export default FormCreateLesson;
+export default FormUpdateLesson;

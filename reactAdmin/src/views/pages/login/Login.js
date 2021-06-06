@@ -64,10 +64,14 @@ const Login = () => {
       if (res.status == 400) {
         enqueueSnackbar(res.data.message.vi, { variant: "error" });
       } else {
-        console.log(res);
-        addLocalStorage(res);
-        setDataUser(res);
-        push("/");
+        if (res.user.admin) {
+          console.log(res);
+          addLocalStorage(res);
+          setDataUser(res);
+          push("/");
+        } else {
+          enqueueSnackbar("Không đủ quyền truy cập", { variant: "error" });
+        }
       }
     } catch (error) {
       enqueueSnackbar(error.message, { variant: "error" });

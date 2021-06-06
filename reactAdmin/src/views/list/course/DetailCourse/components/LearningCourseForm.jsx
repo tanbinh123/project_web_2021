@@ -60,7 +60,7 @@ const schema = yup.object().shape({
 //   }
 function LearningCourseForm(props) {
   const classes = useStyles();
-  const { dataCourse = null, changeDataCourse = null } = props;
+  const { dataCourse = {}, changeDataCourse = null } = props;
   const [dataLearning, setDataLearning] = useState(dataCourse.learnings);
   const [isUpdate, setUpdate] = useState(false);
   console.log(dataLearning);
