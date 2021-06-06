@@ -64,11 +64,10 @@ function LearningCourseForm(props) {
   const { dataCourse = {}, changeDataCourse = null } = props;
   const [dataLearning, setDataLearning] = useState(dataCourse.learnings);
   const [isUpdate, setUpdate] = useState(false);
-  console.log(dataLearning);
+  // console.log(dataLearning);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      
       data: [],
     },
     resolver: yupResolver(schema),
@@ -83,15 +82,15 @@ function LearningCourseForm(props) {
     };
   }, [dataLearning, isUpdate]);
   const handleOnSubmit = (values) => {
-    console.log("Learnings Post",values);
+    console.log("Learnings Post", values);
 
     (async () => {
       // const formData = new FormData();
       // formData.append("image", values.image);
-      const rp=await courseApi.postLearnings(dataCourse.id,values.data);
-      if(!rp.status){
+      const rp = await courseApi.postLearnings(dataCourse.id, values.data);
+      if (!rp.status) {
         console.log(rp);
-        
+
         setDataLearning(rp.learnings);
         //setUpdate(true);
       }
@@ -150,7 +149,6 @@ function LearningCourseForm(props) {
                 setDataLearning([
                   ...tmpData,
                   {
-                    
                     deleted: false,
                     learning: "",
                   },

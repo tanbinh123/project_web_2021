@@ -68,7 +68,7 @@ const schema = yup.object().shape({
 });
 function PosterCourseForm(props) {
   const classes = useStyles();
-  const { dataCourse = null, changeDataCourse = null } = props;
+  const { dataCourse = {}, changeDataCourse = null } = props;
   const [img, setImg] = useState(dataCourse?.imagePoster?.image);
   const form = useForm({
     mode: "onBlur",

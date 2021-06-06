@@ -28,7 +28,7 @@ const TheHeaderDropdown = () => {
   const { push } = useHistory();
   useEffect(() => {
     if (isEmpty(dataUser.token)) push("/login");
-    console.log(dataUser);
+    // console.log(dataUser);
   }, [dataUser.token]);
 
   return (

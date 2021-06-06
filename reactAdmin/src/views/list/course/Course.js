@@ -88,7 +88,12 @@ const Course = () => {
           ),
           rateStar: (item) => (
             <td>
-              <Rating defaultValue={item.rateStar} precision={0.5} readOnly />
+              <Rating
+                key={item.id}
+                defaultValue={item.rateStar}
+                precision={0.5}
+                readOnly
+              />
             </td>
           ),
           show_details: (item, index) => {
