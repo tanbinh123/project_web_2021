@@ -5,6 +5,7 @@ import IconBreadcrumbs from "../../../../../components/Breadcrumbs/Breadcrumbs";
 import SimpleAccordion from "../../components/SimpleAccordion/SimpleAccordion";
 import LeftCDCSS from "./CSSLeftCD";
 import PropTypes from "prop-types";
+import Ratting from "./Ratting";
 
 LeftCD.propTypes = {
   title: PropTypes.string,
@@ -35,7 +36,6 @@ function LeftCD(props) {
 
             <ul>
               {Array.from(learnings).map((item, index) => (
-                
                 <li key={index}>
                   <CheckCircle />
                   <span>{item.learning}</span>
@@ -62,6 +62,7 @@ function LeftCD(props) {
           {/* render list courses */}
           <SimpleAccordion parts={parts} />
         </Grid>
+        <Ratting />
       </Grid>
     </div>
   );

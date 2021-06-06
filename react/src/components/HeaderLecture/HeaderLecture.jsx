@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 function HeaderLecture(props) {
   const { title = "", idCourse = "", idLecture = "" } = props;
+  console.log(idCourse);
   const classes = useStyles();
   return (
     <>

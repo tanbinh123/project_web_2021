@@ -68,7 +68,7 @@ function Lecture(props) {
   return (
     <>
       <HeaderLecture
-        id={idCourse}
+        idCourse={idCourse}
         title={lesson.description}
         idLecture={idLecture}
       />

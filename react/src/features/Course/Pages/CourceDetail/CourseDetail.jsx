@@ -13,7 +13,13 @@ import {
 import Dialog from "@material-ui/core/Dialog";
 import { Close } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useParams, useRouteMatch } from "react-router";
+import {
+  Route,
+  Switch,
+  useHistory,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 import courseApi from "../../../../api/courseApi";
 import Header from "../../../../components/header/index";
 import CourseDetailCSS from "./CSSCourseDetail";
@@ -26,6 +32,7 @@ function CourseDetail(props) {
   const { idCourse } = useParams();
   // console.log(idCourse);
   const { url } = useRouteMatch();
+  const { push } = useHistory();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -40,8 +47,11 @@ function CourseDetail(props) {
     (async () => {
       // console.log(url);
       //console.log(window.location.href);
-      const res1 = await courseApi.payment({"returnUrl":window.location.href,"idCourse":idCourse});
-      window.location=res1.url;
+      const res1 = await courseApi.payment({
+        returnUrl: window.location.href,
+        idCourse: idCourse,
+      });
+      window.location = res1.url;
       console.log(res1);
     })();
   }
@@ -52,10 +62,13 @@ function CourseDetail(props) {
         var id = props.match.params.idCourse;
 
         const res1 = await courseApi.check({ idCourse: id });
-        //console.log("check", res1);
-        if (!res1?.id) {
+        console.log("check", res1);
+        if (res1.status == 400) {
           const res = await courseApi.get(id);
-          //console.log("review", res);
+          // console.log("review", res);
+          if (res.status == 500) {
+            push("/course");
+          }
           setCourse({
             isFull: false,
             ...res,
@@ -72,7 +85,7 @@ function CourseDetail(props) {
       }
     })();
   }, [url]);
-  console.log("init Detail",course);
+  console.log("init Detail", course);
 
   return (
     <>
