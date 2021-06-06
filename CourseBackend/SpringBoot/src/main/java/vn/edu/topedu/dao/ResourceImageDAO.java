@@ -1,15 +1,23 @@
 package vn.edu.topedu.dao;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import vn.edu.topedu.entity.ActiveAccount;
 import vn.edu.topedu.entity.AppUser;
@@ -114,6 +122,56 @@ public class ResourceImageDAO {
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
+	}
+	@Transactional
+	public ResourceImage uploadImage(MultipartFile uploadAvatar, AppUser appUser) throws Exception {
+		ResourceImage newAvatar = null;
+		if(uploadAvatar!=null) {
+			System.err.println("Avatar upload");
+			
+			String pathContain = null;
+			try {
+				ResourceImage image = new ResourceImage();
+				pathContain = String.format("user/%s/image", appUser.getUsername());
+				image.setPath(pathContain + "/" + uploadAvatar.getOriginalFilename());
+				image.setAppUser(appUser);
+				newAvatar=save(image);
+				
+				pathContain = String.format("user/%s/image", appUser.getUsername());
+				
+				String filename= uploadAvatar.getOriginalFilename();
+				Matcher m = Pattern.compile("^(.+)(|_\\d*)\\.(\\w+)$").matcher(filename);
+				if(m.find()) {
+					String name=m.group(1)+"_"+newAvatar.getId();
+					String extend=m.group(3);
+					
+					System.err.println(String.format("Name: %s", name));
+					System.err.println(String.format("Extend: %s", extend));
+					filename=name+"."+extend;
+					
+				}
+				System.out.println(String.format("File: %s", uploadAvatar.getOriginalFilename()));
+				File p = FileProcess.getPath(pathContain, filename).toFile();
+				System.out.println(p.getAbsolutePath());
+				p.getParentFile().mkdirs();
+				InputStream initialStream = uploadAvatar.getInputStream();
+				OutputStream outStream = new FileOutputStream(p);
+				byte[] buffer = new byte[8 * 1024];
+				int bytesRead;
+				while ((bytesRead = initialStream.read(buffer)) != -1) {
+					outStream.write(buffer, 0, bytesRead);
+				}
+				IOUtils.closeQuietly(initialStream);
+				IOUtils.closeQuietly(outStream);
+
+				
+				System.err.println("Upload Success");
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				throw e;
+			}
+		}
+		return newAvatar;
 	}
 
 }

@@ -115,35 +115,11 @@ public class ProfileREST {
 				appUser.setFacebook(facebook);
 				appUser.setDescription(description);
 				
-				ResourceImage newAvatar = null;
-				if(uploadAvatar!=null) {
-					System.err.println("Avatar upload");
-					
-					String pathContain = String.format("user/%s/image", appUser.getUsername());
-					try {
-						System.out.println(String.format("File: %s", uploadAvatar.getOriginalFilename()));
-						File p = FileProcess.getPath(pathContain, uploadAvatar.getOriginalFilename()).toFile();
-						System.out.println(p.getAbsolutePath());
-						p.getParentFile().mkdirs();
-						InputStream initialStream = uploadAvatar.getInputStream();
-						OutputStream outStream = new FileOutputStream(p);
-						byte[] buffer = new byte[8 * 1024];
-						int bytesRead;
-						while ((bytesRead = initialStream.read(buffer)) != -1) {
-							outStream.write(buffer, 0, bytesRead);
-						}
-						IOUtils.closeQuietly(initialStream);
-						IOUtils.closeQuietly(outStream);
-
-						ResourceImage image = new ResourceImage();
-						pathContain = String.format("user/%s/image", appUser.getUsername());
-						image.setPath(pathContain + "/" + uploadAvatar.getOriginalFilename());
-						image.setAppUser(appUser);
-						newAvatar=resourceImageDAO.save(image);
-						System.err.println("Upload Success");
-					} catch (Exception e) {
-						System.err.println(e.getMessage());
-					}
+				ResourceImage newAvatar=null;
+				try {
+					newAvatar = resourceImageDAO.uploadImage(uploadAvatar, appUser);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				if(newAvatar!=null)appUser.setAvatar(newAvatar);
 				appUserDAO.updateAppUser(appUser);

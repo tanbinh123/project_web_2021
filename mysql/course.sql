@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 05/06/2021 05:38:01
+ Date: 06/06/2021 14:29:14
 */
 
 SET NAMES utf8mb4;
@@ -96,7 +96,7 @@ CREATE TABLE `app_user`  (
 -- Records of app_user
 -- ----------------------------
 INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
-INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 77, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-25 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z');
+INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 84, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-25 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z');
 INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
 INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
 INSERT INTO `app_user` VALUES (46, 'hoang002', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
@@ -154,7 +154,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 8, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Course Demo 1', 1000000, 1, 2, '2021-05-25 14:25:29', 1, 1, 1, '2021-05-25 14:25:29');
+INSERT INTO `course` VALUES (1, 90, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Course Demo 1', 1000000, 1, 2, '2021-05-25 14:25:29', 1, 1, 1, '2021-05-25 14:25:29');
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 2', 12288000, 5, 0, '2019-02-03 22:20:54', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (3, 10, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 3', 14929000, 5, 0, '2020-10-25 13:14:43', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12');
@@ -556,7 +556,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 78 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -568,13 +568,19 @@ INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '
 INSERT INTO `resource_image` VALUES (5, 'user/user/image/ganyu-h-4.jpg', b'0', '2021-04-05 14:48:50', 2, 15, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (6, 'user/user/image/ganyu-h-5.jpg', b'0', '2021-04-05 14:48:50', 2, 20, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (7, 'user/user/image/ganyu-h-6.jpg', b'0', '2021-04-05 14:48:50', 2, 18, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 21, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 20, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 24, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 8, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (71, 'user/admin/image/sddefault.jpg', b'0', '2021-05-25 14:01:08', 1, 1, '2021-05-25 14:01:08');
 INSERT INTO `resource_image` VALUES (72, 'user/admin/image/html.jpg', b'0', '2021-05-25 14:05:14', 1, 1, '2021-05-25 14:05:14');
-INSERT INTO `resource_image` VALUES (77, 'user/user/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-04 20:57:49', 2, 1, '2021-06-04 20:57:49');
+INSERT INTO `resource_image` VALUES (84, 'user/user/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-06 05:42:45', 2, 1, '2021-06-06 05:42:45');
+INSERT INTO `resource_image` VALUES (85, 'user/admin/image/', b'0', '2021-06-06 06:53:50', 1, 0, '2021-06-06 06:53:50');
+INSERT INTO `resource_image` VALUES (86, 'user/admin/image/', b'0', '2021-06-06 06:54:46', 1, 0, '2021-06-06 06:54:46');
+INSERT INTO `resource_image` VALUES (87, 'user/admin/image/', b'0', '2021-06-06 06:55:49', 1, 0, '2021-06-06 06:55:49');
+INSERT INTO `resource_image` VALUES (88, 'user/admin/image/', b'0', '2021-06-06 06:56:06', 1, 0, '2021-06-06 06:56:06');
+INSERT INTO `resource_image` VALUES (89, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-06 07:07:45', 1, 0, '2021-06-06 07:07:45');
+INSERT INTO `resource_image` VALUES (90, 'user/admin/image/girl.bmp', b'0', '2021-06-06 07:28:42', 1, 1, '2021-06-06 07:28:42');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -618,13 +624,6 @@ CREATE TABLE `spring_session`  (
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session
--- ----------------------------
-INSERT INTO `spring_session` VALUES ('0b21a3ff-7624-4e7f-8404-a7aed98b3b38', 'f40bdd5c-e29b-4902-ae28-d456b64bf07b', 1622845911743, 1622845911743, 1800, 1622847711743, NULL);
-INSERT INTO `spring_session` VALUES ('5c655fdc-abe9-470e-8ca4-637632540960', 'e6c6bdd9-4c36-4641-b3e9-c1adf3a6571f', 1622831776268, 1622846230015, 1800, 1622848030015, NULL);
-INSERT INTO `spring_session` VALUES ('66992739-894a-4998-9ad7-e2c97907527b', 'b8ee3a7f-4341-4edc-99fc-44f8a96b3d46', 1622845353781, 1622845893586, 1800, 1622847693586, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes

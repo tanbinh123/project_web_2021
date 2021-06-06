@@ -1,5 +1,8 @@
 package vn.edu.topedu.entity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -42,7 +45,19 @@ public class ResourceImage extends AHasResource {
 		return false;
 	}
 	public String getImage() {
-		return ((this.beforeResource != null && this.beforeResource!="") ? this.beforeResource + VariableConst.RESOURCE_BEFORE : "")  + this.path;
+		String filename=this.path;
+		Matcher m = Pattern.compile("^(.+)(|_\\d*)\\.(\\w+)$").matcher(filename);
+		if(m.find()) {
+			String name=m.group(1)+"_"+this.getId();
+			String extend=m.group(3);
+			
+//			System.err.println(String.format("Name: %s", name));
+//			System.err.println(String.format("Extend: %s", extend));
+			filename=name+"."+extend;
+			
+		}
+		
+		return ((this.beforeResource != null && this.beforeResource!="") ? this.beforeResource + VariableConst.RESOURCE_BEFORE : "")  + filename;
 	}
 
 

@@ -113,7 +113,7 @@ function CourseDetail(props) {
                 <RightCD
                   onClickOpenVideo={handleToggleDialog}
                   onClickBuy={handleOnClickBuy}
-                  poster={course.poster?.image}
+                  poster={course?.imagePoster?.image}
                   course={course}
                 />
               </Paper>

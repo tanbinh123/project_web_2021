@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import vn.edu.topedu.consts.VariableConst;
 import vn.edu.topedu.entity.AHasPoster;
@@ -17,6 +19,7 @@ import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.json.JsonResponse;
+import vn.edu.topedu.utils.WebUtils;
  
 @Entity
 @Table(name = "Course")
@@ -121,7 +124,7 @@ public class Course extends AHasPoster implements JsonResponse {
 	}
 	
 	public String getThumbnail() {
-		return this.beforeResource+VariableConst.RESOURCE_BEFORE+this.poster.getPath();
+		return this.poster.getImage();
 	}
 	
 	
@@ -136,20 +139,17 @@ public class Course extends AHasPoster implements JsonResponse {
 	public String getCategoryName() {
 		return this.category.getName();
 	}
-	@Override
-	public void setBeforeResource(String beforeResource) {
-		if (this.poster != null)
-			this.poster.setBeforeResource(beforeResource);
-		if (this.appUser != null && this.appUser.getAvatar()!=null)
-			this.appUser.getAvatar().setBeforeResource(beforeResource);
-		
-		
-
-		super.setBeforeResource(beforeResource);
+	
+	
+	public void setBeforeResource(String bf) {
+		this.getAppUser().getAvatar().setBeforeResource(bf);
+		this.getPoster().setBeforeResource(bf);
 	}
-	
-	
-	
+	public void setBeforeResource(HttpServletRequest httpServletRequest) {
+		String bf = WebUtils.getUrl(httpServletRequest);
+		this.getAppUser().getAvatar().setBeforeResource(bf);
+		this.getPoster().setBeforeResource(bf);
+	}
 	
 	
     

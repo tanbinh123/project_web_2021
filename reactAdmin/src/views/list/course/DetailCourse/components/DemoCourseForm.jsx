@@ -66,8 +66,8 @@ function DemoCourseForm(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
-    console.log(value);
+  const handleOnSubmit = (values) => {
+    console.log(values);
   };
   const [open, setOpen] = useState(false);
 
@@ -113,7 +113,7 @@ function DemoCourseForm(props) {
 
             <SimpleDialog
               open={open}
-              id={dataCourse.poster.id}
+              id={dataCourse?.imagePoster?.id}
               onClose={handleClickOpen}
               content={contentSimpleDialog}
             />

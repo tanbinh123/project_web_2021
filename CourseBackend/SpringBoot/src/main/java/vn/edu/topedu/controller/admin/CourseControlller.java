@@ -55,7 +55,7 @@ public class CourseControlller {
 		}
 
 		FullCourse c = fullcourse;
-		System.err.println(c.getPoster().getImage());
+		System.err.println(c.getImagePoster().getImage());
 		List<CategoryEntity> categories = courseDAO.getCategories(-1);
 		List<ResourceImage> images = resourceImageDAO.getResourceImages();
 		String bef = WebUtils.getUrl(httpServletRequest);
@@ -199,7 +199,7 @@ public class CourseControlller {
 		c.setUpdateAt(new Date());
 		try {
 			c.setAppUser(appUserDAO.findUserAccount(username));
-			c.setPosterId(c.getAppUser().getId());
+			c.setUserPosterId(c.getAppUser().getId());
 			c = courseDAO.persistFullCourse(c);
 		} catch (Exception e1) {
 			System.err.println(e1.getMessage());
