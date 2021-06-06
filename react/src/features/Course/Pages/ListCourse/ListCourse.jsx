@@ -90,18 +90,17 @@ function ListCourse(props) {
   useEffect(() => {
     (async () => {
       try {
-        const { data, pagination } =
-          await courseApi.getAll(queryParams);
+        const { data, pagination } = await courseApi.getAll(queryParams);
         setDataCourse(data);
         setPagination(pagination);
-        console.log("fetch page courses");
+        // console.log("fetch page courses");
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     })();
     return () => {
-      console.log("return fetch page courses");
+      // console.log("return fetch page courses");
       setDataCourse([]);
       setPagination({});
     };

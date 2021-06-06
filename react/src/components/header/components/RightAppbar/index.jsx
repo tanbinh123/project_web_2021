@@ -98,7 +98,6 @@ function RightAppbar(props) {
       </Link>
     </>
   );
-  console.log(isEmpty(dataUser.user));
   return (
     <>
       <div className={classNames(classes.sectionDesktop, classes.floatRight)}>

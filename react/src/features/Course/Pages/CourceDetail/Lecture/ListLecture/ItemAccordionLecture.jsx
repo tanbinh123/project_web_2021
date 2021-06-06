@@ -3,7 +3,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Grid,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PropTypes from "prop-types";
@@ -81,13 +81,9 @@ ItemAccordionLecture.defaultProps = {
 function ItemAccordionLecture(props) {
   const { url } = useRouteMatch();
 
-  const url2 =
-    url.slice(
-      0,
-      url.indexOf("/lecture")
-    ) + "/lecture/";
+  const url2 = url.slice(0, url.indexOf("/lecture")) + "/lecture/";
   const { id, title, lessons, indexLecture } = props;
-  console.log(url2);
+  // console.log(url2);
   const classes = useStyles();
 
   return (

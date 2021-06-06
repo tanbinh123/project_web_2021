@@ -1,10 +1,11 @@
 import { Box, Grid } from "@material-ui/core";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import { useParams, useRouteMatch } from "react-router";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import courseApi from "../../../../../api/courseApi";
 import HeaderLecture from "../../../../../components/HeaderLecture/HeaderLecture";
+import { isEmpty } from "../../../../../components/tools/Tools";
 import CSSLecture from "./CSSLecture";
 import ListAccordion from "./ListLecture/ListAccordion";
 import VideoLecture from "./ListLecture/VideoLecture";
@@ -15,62 +16,63 @@ function Lecture(props) {
   const classes = CSSLecture();
   const { idLecture } = useParams();
   const { url } = useRouteMatch();
+  const { push } = useHistory();
   const idCourse = url.slice(
     url.indexOf("/course/") + 8,
     url.indexOf("/lecture")
   );
   const [course, setCourse] = useState({});
-  const [src, setSrc] = useState();
-  const [lesson, setLesson] = useState();
+  const [lesson, setLesson] = useState({});
   const [showList, setShowList] = useState(false);
   const handleToggleList = () => {
     setShowList(!showList);
   };
+  // console.log(idLecture);
+  // console.log(idCourse);
   useEffect(() => {
     (async () => {
       try {
         const res = await courseApi.check({ idCourse: idCourse });
-        console.log(res);
-        if(res.status==400){
-          alert("Bạn chưa mua khóa học");
-          window.location=url.slice(0,url.indexOf("/lecture"));
-        }else
-        setCourse(res ?? {});
-
-        var src2;
-        var index=0;
-        res?.parts?.every((e) => {
-          var lesson = e?.lessons.find((a) => {
-            index++;
-            return index == idLecture;
+        // console.log(res);
+        if (res.status == 400) {
+          push(`/course/${idCourse}`);
+        } else {
+          setCourse(res);
+          //get lessson
+          let indexLesson = 1;
+          let tmpLecture = {};
+          Array.from(res.parts).map((part) => {
+            Array.from(part.lessons).map((lesson) => {
+              if (indexLesson == idLecture) {
+                tmpLecture = lesson;
+                setLesson(lesson);
+                indexLesson++;
+              } else {
+                indexLesson++;
+              }
+            });
           });
-
-          src2 = lesson?.video?.urlVideo;
-          if (typeof src2 != "undefined") {
-            //console.log("Break");
-            setLesson(lesson);
-            return false;
-          } else {
-            return true;
-          }
-        });
-        setSrc(src2);
-        // console.log("course", course);
+          if (isEmpty(tmpLecture)) push(`/course/${idCourse}`);
+        }
       } catch (error) {
-       
         console.log(error);
       }
     })();
-    return setSrc();
+    return () => {
+      setCourse({});
+      setLesson({});
+    };
   }, [url]);
-
-  //console.log("src", src);
-  console.log("lesson", lesson);
+  // console.log("lesson", lesson);
 
   return (
     <>
-      {lesson&&<HeaderLecture lesson={lesson} index={idLecture}/>}
-      
+      <HeaderLecture
+        id={idCourse}
+        title={lesson.description}
+        idLecture={idLecture}
+      />
+
       <Box className={classes.root}>
         {/* <Container> */}
         <Grid container spacing={0}>
@@ -89,9 +91,7 @@ function Lecture(props) {
                 showList && classes.fullScreen
               )}
             >
-              {src && <VideoLecture video={src} />}
-              {/* <ListAccordion parts={course.parts} />
-              <ListAccordion parts={course.parts} /> */}
+              <VideoLecture video={lesson.video} />
             </div>
           </Grid>
           <Grid
@@ -120,7 +120,6 @@ function Lecture(props) {
             </div>
           </Grid>
         </Grid>
-        {/* </Container> */}
       </Box>
     </>
   );

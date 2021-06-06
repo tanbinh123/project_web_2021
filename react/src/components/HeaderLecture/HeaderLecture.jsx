@@ -46,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
   backgroundHeader: {
     minHeight: "50px",
   },
+  link: {
+    textDecoration: "none",
+    color: "var(--colorWhite1)",
+  },
   [theme.breakpoints.only("xs")]: {
     backgroundHeader: {
       minHeight: "50px",
@@ -59,17 +63,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeaderLecture(props) {
-  const { url } = useRouteMatch();
+  const { title = "", idCourse = "", idLecture = "" } = props;
   const classes = useStyles();
-  // console.log("header lesson", props.lesson);
-  // console.log("header index", props.index);
   return (
     <>
       <AppBar className={classes.root} position="fixed">
         <Toolbar>
           <ul>
             <li>
-              <Link to={url.slice(0, url.indexOf("/lecture"))}>
+              <Link to={`/course/${idCourse}`} className={classes.link}>
                 <i className="fas fa-chevron-left"></i>
               </Link>
             </li>
@@ -80,7 +82,7 @@ function HeaderLecture(props) {
             </li>
             <li>
               <span className="title">
-                Bài {props?.index} {props?.lesson?.description}
+                Bài {idLecture}: {title}
               </span>
             </li>
           </ul>
