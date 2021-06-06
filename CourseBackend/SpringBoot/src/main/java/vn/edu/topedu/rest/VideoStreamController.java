@@ -57,5 +57,17 @@ public class VideoStreamController {
 		//System.out.println(fullFileName);
 		return videoStreamService.prepareContent(fullFileName, fileType, httpRangeList);
 	}
+	@GetMapping("/user/{user}/video/{fileName}")
+	public ResponseEntity<byte[]> sfgsfd(
+			@RequestHeader(value = "Range", required = false) String httpRangeList,
+			
+			@PathVariable String fileName,
+			
+			@PathVariable String user) {
+		String fullFileName ="user/"+user+"/video/"+"/"+fileName;
+		//System.out.println(fullFileName);
+		return videoStreamService.prepareContent(fullFileName, httpRangeList);
+	}
+	
 	
 }

@@ -132,4 +132,9 @@ public class VideoStreamFileSystemService2 implements IVideoStreamService {
         }
         return 0L;
     }
+    
+    @Override
+    public ResponseEntity<byte[]> prepareContent(String fullFileName, String httpRangeList) {
+    	return null;
+    }
 }

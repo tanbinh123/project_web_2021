@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import CustomButton from "src/components/CustomButton";
 import * as yup from "yup";
 import SimpleDialog from "./SimpleDialog";
+import courseApi from "src/api/courseApi";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -66,8 +67,15 @@ function DemoCourseForm(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
-    console.log(value);
+  const handleOnSubmit = (values) => {
+    console.log(values);
+
+    (async () => {
+      const formData = new FormData();
+      formData.append("video", values.image);
+      const rp=await courseApi.uploadNewVideoDemo(dataCourse?.id,formData);
+      console.log(rp);
+    })();
   };
   const [open, setOpen] = useState(false);
 
@@ -113,7 +121,7 @@ function DemoCourseForm(props) {
 
             <SimpleDialog
               open={open}
-              id={dataCourse.poster.id}
+              id={dataCourse?.imagePoster?.id}
               onClose={handleClickOpen}
               content={contentSimpleDialog}
             />

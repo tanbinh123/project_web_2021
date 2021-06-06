@@ -5,6 +5,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import CustomButton from "src/components/CustomButton";
 import CustomInput from "src/components/CustomInput";
+import courseApi from "src/api/courseApi";
 import * as yup from "yup";
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -52,8 +53,14 @@ function BaseCourseForm(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
-    console.log(value);
+  const handleOnSubmit = (values) => {
+    console.log(values);
+    (async () => {
+      // const formData = new FormData();
+      // formData.append("image", values.image);
+      const rp=await courseApi.post(dataCourse?.id,values);
+      console.log(rp);
+    })();
   };
   return (
     <CCard>

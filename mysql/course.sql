@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 05/06/2021 05:38:01
+ Date: 07/06/2021 00:33:35
 */
 
 SET NAMES utf8mb4;
@@ -96,7 +96,7 @@ CREATE TABLE `app_user`  (
 -- Records of app_user
 -- ----------------------------
 INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '2021-05-13 10:58:52', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
-INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 77, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-25 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z');
+INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 84, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-25 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z');
 INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
 INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
 INSERT INTO `app_user` VALUES (46, 'hoang002', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
@@ -154,9 +154,9 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 8, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Course Demo 1', 1000000, 1, 2, '2021-05-25 14:25:29', 1, 1, 1, '2021-05-25 14:25:29');
-INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 2', 12288000, 5, 0, '2019-02-03 22:20:54', 1, 6, 1, '2021-05-19 15:35:12');
-INSERT INTO `course` VALUES (3, 10, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 3', 14929000, 5, 0, '2020-10-25 13:14:43', 1, 6, 1, '2021-05-19 15:35:12');
+INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 1, 2, '2021-05-25 14:25:29', 1, 1, 1, '2021-05-25 14:25:29');
+INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Tìm hiểu Ganyu 1', 12288000, 5, 0, '2021-06-06 08:04:45', 1, 6, 1, '2021-05-19 15:35:12');
+INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 14929000, 5, 0, '2021-06-06 17:28:26', 1, 22, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (5, 7, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 5', 4172000, 5, 0, '2019-11-19 04:34:37', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (6, 5, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Demo 6', 5487000, 3, 0, '2019-05-17 05:12:53', 1, 6, 1, '2021-05-19 15:35:12');
@@ -326,7 +326,7 @@ INSERT INTO `course` VALUES (169, 2, 'Những biên bản cuộc họp phức t�
 INSERT INTO `course` VALUES (170, 6, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 170', 13879000, 0, 0, '2020-11-14 12:05:41', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (171, 71, 'Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops', b'0', 'Kiến thức cơ bản, cốt lõi dân IT cần học trước', 10857000, 0, 3, '2021-05-25 14:02:46', 1, 6, 2, '2021-05-25 14:02:46');
 INSERT INTO `course` VALUES (178, 72, 'Khóa học đề cao việc thực hành qua những ví dụ trong thực tế giúp học viên nhanh chóng xây dựng được giao diện website', b'0', 'HTML, CSS từ Zero đến Hero', 15000, 0, 2, '2021-05-25 14:15:57', 1, 1, 2, '2021-05-25 14:15:57');
-INSERT INTO `course` VALUES (179, 8, 'Test', b'0', 'Test', 120000, 0, 0, '2021-05-25 14:28:25', 1, 1, 19, '2021-05-25 14:28:25');
+INSERT INTO `course` VALUES (179, 92, 'Eula là đội trưởng của \"tiểu đội du kích\" trong Đội Kỵ Sĩ Tây Phong.\n\nDo yêu cầu công việc, cô ấy phải thường xuyên dẫn đội đi săn ma vật và Giáo Đoàn Vực Sâu ở bên ngoài trong thời gian dài, rất ít khi trở về Thành Mondstadt. ', b'0', 'Tìm hiểu Eula 2', 260000, 0, 0, '2021-06-06 08:03:26', 1, 1, 19, '2021-05-25 14:28:25');
 
 -- ----------------------------
 -- Table structure for learning
@@ -340,7 +340,7 @@ CREATE TABLE `learning`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of learning
@@ -349,8 +349,8 @@ INSERT INTO `learning` VALUES (1, 171, 'Các kiến thức cơ bản, nền món
 INSERT INTO `learning` VALUES (2, 171, 'Các mô hình, kiến trúc cơ bản khi triển khai ứng dụng', b'0');
 INSERT INTO `learning` VALUES (3, 171, 'Các khái niệm, thuật ngữ cốt lõi khi triển khai ứng dụng', b'0');
 INSERT INTO `learning` VALUES (4, 171, 'Hiểu hơn về cách internet và máy vi tính hoạt động', b'0');
-INSERT INTO `learning` VALUES (33, 1, 'Học nữa', b'0');
-INSERT INTO `learning` VALUES (35, 1, 'Học mãi', b'0');
+INSERT INTO `learning` VALUES (33, 1, 'Chém thẳng', b'0');
+INSERT INTO `learning` VALUES (35, 1, 'Chém dọc', b'0');
 INSERT INTO `learning` VALUES (45, 178, 'Biết cách xây dựng giao diện web với HTML, CSS', b'0');
 INSERT INTO `learning` VALUES (47, 178, 'Biết cách phân tích giao diện website', b'0');
 INSERT INTO `learning` VALUES (48, 178, 'Biết cách đặt tên class CSS theo chuẩn BEM', b'0');
@@ -359,6 +359,18 @@ INSERT INTO `learning` VALUES (50, 178, 'Làm chủ Flexbox khi dựng bố cụ
 INSERT INTO `learning` VALUES (51, 178, 'Sở hữu 2 giao diện web khi học xong khóa học', b'0');
 INSERT INTO `learning` VALUES (52, 178, 'Biết cách tự tạo động lực cho bản thân', b'0');
 INSERT INTO `learning` VALUES (53, 178, 'Biết cách tự học những kiến thức mới', b'0');
+INSERT INTO `learning` VALUES (54, 1, 'Bổ ngang', b'0');
+INSERT INTO `learning` VALUES (58, 1, 'Quăng kiếm', b'0');
+INSERT INTO `learning` VALUES (61, 1, 'Hồi mã thương', b'0');
+INSERT INTO `learning` VALUES (64, 3, 'Tổng Quát Thức', b'0');
+INSERT INTO `learning` VALUES (65, 3, 'Phá Kiếm Thức', b'0');
+INSERT INTO `learning` VALUES (66, 3, 'Phá Đao Thức', b'0');
+INSERT INTO `learning` VALUES (67, 3, 'Phá Khí Thức', b'0');
+INSERT INTO `learning` VALUES (68, 3, 'Phá Chưởng Thức', b'0');
+INSERT INTO `learning` VALUES (69, 3, 'Phá Tiễn Thức', b'0');
+INSERT INTO `learning` VALUES (70, 3, 'Phá Thương Thức', b'0');
+INSERT INTO `learning` VALUES (71, 3, 'Phá Tiên Thức', b'0');
+INSERT INTO `learning` VALUES (72, 3, 'Phá Sách Thức', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -386,7 +398,7 @@ INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập tr
 INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 1539, 4, b'0');
 INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 695, 5, b'0');
 INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, 6, b'0');
-INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 7, b'0');
+INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 1, b'0');
 INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, 8, b'0');
 INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 8, b'0');
 INSERT INTO `lesson` VALUES (19, 27, 'Xin chào', NULL, 3, b'0');
@@ -556,7 +568,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 78 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -568,13 +580,16 @@ INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '
 INSERT INTO `resource_image` VALUES (5, 'user/user/image/ganyu-h-4.jpg', b'0', '2021-04-05 14:48:50', 2, 15, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (6, 'user/user/image/ganyu-h-5.jpg', b'0', '2021-04-05 14:48:50', 2, 20, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (7, 'user/user/image/ganyu-h-6.jpg', b'0', '2021-04-05 14:48:50', 2, 18, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 21, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 24, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 8, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 23, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 7, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (71, 'user/admin/image/sddefault.jpg', b'0', '2021-05-25 14:01:08', 1, 1, '2021-05-25 14:01:08');
 INSERT INTO `resource_image` VALUES (72, 'user/admin/image/html.jpg', b'0', '2021-05-25 14:05:14', 1, 1, '2021-05-25 14:05:14');
-INSERT INTO `resource_image` VALUES (77, 'user/user/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-04 20:57:49', 2, 1, '2021-06-04 20:57:49');
+INSERT INTO `resource_image` VALUES (84, 'user/user/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-06 05:42:45', 2, 1, '2021-06-06 05:42:45');
+INSERT INTO `resource_image` VALUES (91, 'user/admin/image/1616839149520.png', b'0', '2021-06-06 07:42:25', 1, 1, '2021-06-06 07:42:25');
+INSERT INTO `resource_image` VALUES (92, 'user/admin/image/1616839149535.png', b'0', '2021-06-06 08:03:26', 1, 1, '2021-06-06 08:03:26');
+INSERT INTO `resource_image` VALUES (99, 'user/admin/image/4fa665b22e75a78b038ec14ae2e24296.jpg', b'0', '2021-06-06 17:06:13', 1, 1, '2021-06-06 17:06:13');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -618,13 +633,6 @@ CREATE TABLE `spring_session`  (
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session
--- ----------------------------
-INSERT INTO `spring_session` VALUES ('0b21a3ff-7624-4e7f-8404-a7aed98b3b38', 'f40bdd5c-e29b-4902-ae28-d456b64bf07b', 1622845911743, 1622845911743, 1800, 1622847711743, NULL);
-INSERT INTO `spring_session` VALUES ('5c655fdc-abe9-470e-8ca4-637632540960', 'e6c6bdd9-4c36-4641-b3e9-c1adf3a6571f', 1622831776268, 1622846230015, 1800, 1622848030015, NULL);
-INSERT INTO `spring_session` VALUES ('66992739-894a-4998-9ad7-e2c97907527b', 'b8ee3a7f-4341-4edc-99fc-44f8a96b3d46', 1622845353781, 1622845893586, 1800, 1622847693586, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -706,28 +714,28 @@ CREATE TABLE `video`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `img_poster_id` bigint(20) NULL DEFAULT NULL,
-  `duration` int(255) NULL DEFAULT NULL,
+  `duration` int(255) UNSIGNED NOT NULL DEFAULT 0,
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `actived` bit(1) NULL DEFAULT b'0',
+  `actived` bit(1) NOT NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
   `update_at` datetime(0) NULL DEFAULT utc_timestamp,
   `user_poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`img_poster_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 8, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 9, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, 4, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 171, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 170, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 2, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (22, 'user/admin/video/Trailer game Độc Cô Cửu Kiếm mobile.mp4', NULL, 0, 1, b'1', b'0', '2021-06-06 17:28:26', '2021-06-06 17:28:26', 1);
 
 -- ----------------------------
 -- Triggers structure for table app_user

@@ -6,25 +6,38 @@ const courseApi = {
     return axiosClient.get(url, { params });
   },
   get(id) {
-    const url = `/course/${id}`;
+    const url = `/api/admin/course/${id}`;
     return axiosClient.get(url);
-  },
-  check(data) {
-    const url = `/payment/access`;
+  },  
+  uploadNewPoster(idCourse, data) {
+    const url = `/api/admin/course/${idCourse}/img-poster`;
+    return axiosClient.post(url, data,{
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+  }, 
+  uploadNewVideoDemo(idCourse, data) {
+    const url = `/api/admin/course/${idCourse}/video-demo`;
+    return axiosClient.post(url, data,{
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+  }, 
+  post(idCourse, data) {
+    const url = `/api/admin/course/${idCourse}`;
     return axiosClient.post(url, data);
-  },
-  payment(data) {
-    const url = `/payment`;
+  },  
+  postLearnings(idCourse, data) {
+    const url = `/api/admin/course/${idCourse}/learnings`;
     return axiosClient.post(url, data);
-  },
+  },  
   categories(data) {
     const url = "/course/categories";
     return axiosClient.get(url, data);
   },
-  testGetAll(params) {
-    const url = "/courses";
-    return axiosClient.get(url, { params });
-  },
+  
  
 };
 

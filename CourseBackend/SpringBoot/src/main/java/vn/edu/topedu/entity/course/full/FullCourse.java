@@ -11,16 +11,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.BaseEntity;
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.ResourceImage;
+import vn.edu.topedu.utils.WebUtils;
 
 @Entity
 @Table(name = "Course")
+@DynamicUpdate
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FullCourse extends BaseEntity {
 
 	
@@ -28,28 +35,28 @@ public class FullCourse extends BaseEntity {
 	@JsonIgnore
 	private Long videoDemoId;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "demo_id", referencedColumnName = "id" ,insertable = false, updatable = false)
 	private VideoEntity demo;
 
 	@Column(name = "user_poster_id", nullable = false)
 	@JsonIgnore
-	private Long posterId;
+	private Long userPosterId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_poster_id", nullable = false, insertable = false, updatable = false)
 	@JsonIgnore
-	private AppUser appUser;
+	private AppUser userPoster;
 	
 	
 	
 	@Column(name = "img_poster_id", nullable = false)
 	@JsonIgnore
-	private Long imgPosterId;
+	private Long imagePosterId;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
-	private ResourceImage poster;
+	private ResourceImage imagePoster;
 
 	@Column(name = "description", length = 255)
 	private String description = "";
@@ -63,7 +70,7 @@ public class FullCourse extends BaseEntity {
 	@Column(name = "price", length = 15, nullable = false)
 	private BigDecimal price = new BigDecimal(0);
 
-	@OneToMany(mappedBy = "course")
+	@OneToMany(mappedBy = "course", cascade= {CascadeType.REFRESH})
 	private List<Learning> learnings;
 	@OneToMany(mappedBy = "course")
 	private List<Part> parts;
@@ -85,13 +92,7 @@ public class FullCourse extends BaseEntity {
 		this.videoDemoId = videoDemoId;
 	}
 
-	public Long getImgPosterId() {
-		return imgPosterId;
-	}
-
-	public void setImgPosterId(Long imgPosterId) {
-		this.imgPosterId = imgPosterId;
-	}
+	
 
 	public Integer getCategoryId() {
 		return categoryId;
@@ -99,6 +100,22 @@ public class FullCourse extends BaseEntity {
 
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
+	}
+	
+	public AppUser getUserPoster() {
+		return userPoster;
+	}
+
+	public void setUserPoster(AppUser userPoster) {
+		this.userPoster = userPoster;
+	}
+
+	public Long getImagePosterId() {
+		return imagePosterId;
+	}
+
+	public void setImagePosterId(Long imagePosterId) {
+		this.imagePosterId = imagePosterId;
 	}
 
 	public CategoryEntity getCategory() {
@@ -117,8 +134,8 @@ public class FullCourse extends BaseEntity {
 		super();
 	}
 
-	public void setLearnings(List<Learning> learning) {
-		this.learnings = learning;
+	public void setLearnings(List<Learning> learnings) {
+		this.learnings = learnings;
 	}
 
 	public Long getId() {
@@ -153,24 +170,18 @@ public class FullCourse extends BaseEntity {
 		this.title = title;
 	}
 	
-	public AppUser getAppUser() {
-		return appUser;
-	}
-
-	public void setAppUser(AppUser appUser) {
-		this.appUser = appUser;
-	}
+	
 	
 	
 
 
 
-	public Long getPosterId() {
-		return posterId;
+	public Long getUserPosterId() {
+		return userPosterId;
 	}
 
-	public void setPosterId(Long posterId) {
-		this.posterId = posterId;
+	public void setUserPosterId(Long posterId) {
+		this.userPosterId = posterId;
 	}
 
 	public BigDecimal getPrice() {
@@ -198,18 +209,36 @@ public class FullCourse extends BaseEntity {
 		this.parts = parts;
 	}
 
-	public ResourceImage getPoster() {
-		return poster;
+	public ResourceImage getImagePoster() {
+		return imagePoster;
 	}
 
-	public void setPoster(ResourceImage poster) {
-		this.poster = poster;
+	public void setImagePoster(ResourceImage poster) {
+		this.imagePoster = poster;
 	}
 
 	
 	public void setBeforeResource(String beforeResource) {
-		if (this.poster != null)
-			this.poster.setBeforeResource(beforeResource);
+		if (this.imagePoster != null)
+			this.imagePoster.setBeforeResource(beforeResource);
+		if (this.demo != null)
+			this.demo.setBeforeResource(beforeResource);
+		if (this.parts != null)
+			this.parts.forEach(e -> {
+				if (e.getLessons() != null)
+					e.getLessons().forEach(x -> {
+						if (x.getVideo() != null)
+							x.getVideo().setBeforeResource(beforeResource);
+					});
+			});
+
+	}
+	
+	
+	public void setBeforeResource(HttpServletRequest httpServletRequest) {
+		String beforeResource = WebUtils.getUrl(httpServletRequest);
+		if (this.imagePoster != null)
+			this.imagePoster.setBeforeResource(beforeResource);
 		if (this.demo != null)
 			this.demo.setBeforeResource(beforeResource);
 		if (this.parts != null)

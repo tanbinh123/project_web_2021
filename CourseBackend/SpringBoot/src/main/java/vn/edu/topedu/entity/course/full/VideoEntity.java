@@ -1,6 +1,8 @@
 package vn.edu.topedu.entity.course.full;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +37,8 @@ public class VideoEntity extends AHasResource {
 	private List<PreviewCourseEntity> detailCourses;
 
 	@Column(name = "actived")
-	private Boolean actived;
+	private Boolean actived =true;
+	
 
 	@Column(name = "deleted", length = 1, nullable = false)
 	private Boolean deleted = false;
@@ -77,18 +80,18 @@ public class VideoEntity extends AHasResource {
 	}
 
 	public String getUrlVideo() {
-		return this.beforeResource + VariableConst.VIDEO_BEFORE + this.video;
+		return this.beforeResource + VariableConst.VIDEO_BEFORE + this.absPath();
 	}
-	
+
 	@Override
 //	@Mapping
 	public void setBeforeResource(String beforeResource) {
-		if(this.video!=null)
-		if(!this.video.contains("http")
+		if (this.video != null)
+			if (!this.video.contains("http")
 //				||!this.video.contains("HTTP")
-				) {
-			super.setBeforeResource(beforeResource);
-		}
+			) {
+				super.setBeforeResource(beforeResource);
+			}
 	}
 
 	public List<PreviewCourseEntity> getDetailCourses() {
@@ -98,11 +101,55 @@ public class VideoEntity extends AHasResource {
 	public void setDetailCourses(List<PreviewCourseEntity> detailCourses) {
 		this.detailCourses = detailCourses;
 	}
+
 //	public List<Course> getCourses() {
 //		return courses;
 //	}
 //	public void setCourses(List<Course> courses) {
 //		this.courses = courses;
 //	}
+	@JsonIgnore
+	public String absPath() {
+		String filename = this.video;
+		Matcher m = Pattern.compile("^(.+)(_\\d*)\\.(\\w+)$").matcher(filename);
+		if (m.find()) {
+			String name = m.group(1) + "_" + this.getId();
+			String extend = m.group(3);
 
+//			System.err.println(String.format("Name: %s", name));
+//			System.err.println(String.format("Extend: %s", extend));
+			filename = name + "." + extend;
+			return filename;
+
+		}
+		m = Pattern.compile("^(.+)\\.(\\w+)$").matcher(filename);
+		if (m.find()) {
+			String name = m.group(1) + "_" + this.getId();
+			String extend = m.group(2);
+
+//				System.err.println(String.format("Name: %s", name));
+//				System.err.println(String.format("Extend: %s", extend));
+			filename = name + "." + extend;
+			return filename;
+		}
+
+		m = Pattern.compile("^(.+)(_\\d*)$").matcher(filename);
+		if (m.find()) {
+			String name = m.group(1) + "_" + this.getId();
+			filename = name;
+
+			return filename;
+		}
+
+		m = Pattern.compile("^(.+)$").matcher(filename);
+		if (m.find()) {
+			String name = m.group(1) + "_" + this.getId();
+//				System.err.println(String.format("Name: %s", name));
+//				System.err.println(String.format("Extend: %s", extend));
+			filename = name;
+
+			return filename;
+		}
+		return filename;
+	}
 }

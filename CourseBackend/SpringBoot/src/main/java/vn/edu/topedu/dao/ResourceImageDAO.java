@@ -1,15 +1,23 @@
 package vn.edu.topedu.dao;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import vn.edu.topedu.entity.ActiveAccount;
 import vn.edu.topedu.entity.AppUser;
@@ -104,16 +112,59 @@ public class ResourceImageDAO {
 
 			List<ResourceImage> a = getResourceImagesNoLinked();
 			for (ResourceImage ri : a) {
-				Path path = FileProcess.getPath(ri.getPath());
-				path.toFile().delete();
+				Path path = FileProcess.getPath(ri.getAbsPath());
+				if(path.toFile().delete()) {
+					System.err.println(String.format("Delete file: %s", path.toString()));
+				};
 			}
 			String sql = "delete from " + ResourceImage.class.getName() + " where countLinked=0 and deleted=true ";
 			Query query = this.entityManager.createQuery(sql);
 
+			
 			return query.executeUpdate();
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
+	}
+	@Transactional
+	public ResourceImage uploadImage(MultipartFile uploadAvatar, AppUser appUser) throws Exception {
+		ResourceImage newAvatar = null;
+		if(uploadAvatar!=null) {
+			System.err.println("Avatar upload");
+			
+			String pathContain = null;
+			try {
+				ResourceImage image = new ResourceImage();
+				pathContain = String.format("user/%s/image", appUser.getUsername());
+				image.setPath(pathContain + "/" + uploadAvatar.getOriginalFilename());
+				image.setAppUser(appUser);
+				newAvatar=save(image);
+				
+				pathContain = String.format("user/%s/image", appUser.getUsername());
+				
+				String filename= newAvatar.getAbsPath();
+				System.out.println(String.format("File: %s", uploadAvatar.getOriginalFilename()));
+				File p = FileProcess.getPath(filename).toFile();				
+				System.out.println(p.getAbsolutePath());
+				p.getParentFile().mkdirs();
+				InputStream initialStream = uploadAvatar.getInputStream();
+				OutputStream outStream = new FileOutputStream(p);
+				byte[] buffer = new byte[8 * 1024];
+				int bytesRead;
+				while ((bytesRead = initialStream.read(buffer)) != -1) {
+					outStream.write(buffer, 0, bytesRead);
+				}
+				IOUtils.closeQuietly(initialStream);
+				IOUtils.closeQuietly(outStream);
+
+				
+				System.err.println("Upload Success");
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				throw e;
+			}
+		}
+		return newAvatar;
 	}
 
 }

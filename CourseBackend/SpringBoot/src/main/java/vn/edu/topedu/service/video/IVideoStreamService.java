@@ -36,4 +36,6 @@ public interface IVideoStreamService {
     
     public Long getFileSize(String fileName);
 
+	public ResponseEntity<byte[]> prepareContent(String fullFileName, String httpRangeList);
+
 }

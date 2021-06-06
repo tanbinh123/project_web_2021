@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import CustomButton from "src/components/CustomButton";
 import CustomButtonRed from "src/components/CustomButtonRed";
 import CustomInput from "src/components/CustomInput";
+import courseApi from "src/api/courseApi";
 import * as yup from "yup";
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -67,7 +68,7 @@ function LearningCourseForm(props) {
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      courseId: dataCourse.id,
+      
       data: [],
     },
     resolver: yupResolver(schema),
@@ -81,8 +82,20 @@ function LearningCourseForm(props) {
       form.setValue(`data`, []);
     };
   }, [dataLearning, isUpdate]);
-  const handleOnSubmit = (value) => {
-    console.log(value);
+  const handleOnSubmit = (values) => {
+    console.log("Learnings Post",values);
+
+    (async () => {
+      // const formData = new FormData();
+      // formData.append("image", values.image);
+      const rp=await courseApi.postLearnings(dataCourse.id,values.data);
+      if(!rp.status){
+        console.log(rp);
+        
+        setDataLearning(rp.learnings);
+        //setUpdate(true);
+      }
+    })();
   };
   return (
     <CCard>
@@ -137,7 +150,7 @@ function LearningCourseForm(props) {
                 setDataLearning([
                   ...tmpData,
                   {
-                    courseId: 171,
+                    
                     deleted: false,
                     learning: "",
                   },

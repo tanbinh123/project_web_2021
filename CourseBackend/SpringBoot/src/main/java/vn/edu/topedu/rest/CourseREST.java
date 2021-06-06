@@ -59,7 +59,7 @@ public class CourseREST implements IMyHost {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity<Object> list(HttpServletRequest serverHttpRequest,
+	public ResponseEntity<Object> list(HttpServletRequest httpServletRequest,
 			@RequestParam(defaultValue = "-1") int _page, @RequestParam(defaultValue = "-1") int _limit,
 			@RequestParam(defaultValue = "id:asc") String _sort, @RequestParam(defaultValue = "") String _search,
 			@RequestParam(defaultValue = "-1") int _category) {
@@ -69,7 +69,11 @@ public class CourseREST implements IMyHost {
 		long countRows = courseDAO.getCount(_category, _search);
 		// System.out.println(countRows);
 		for (Course c : lstCourse) {
-			c.setBeforeResource(getUrl(serverHttpRequest));
+			String bf = getUrl(httpServletRequest);
+			//c.setBeforeResource();
+			c.getAppUser().getAvatar().setBeforeResource(bf);
+			c.getPoster().setBeforeResource(bf);
+			
 
 		}
 		final String sort = _sort;
@@ -93,9 +97,11 @@ public class CourseREST implements IMyHost {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Object> getCourse(@PathVariable Long id, HttpServletRequest serverHttpRequest) {
+	public ResponseEntity<Object> getCourse(@PathVariable Long id, HttpServletRequest httpServletRequest) {
 		PreviewCourseEntity course = courseDAO.getPreviewCourse(id);
-		course.setBeforeResource(getUrl(serverHttpRequest));
+		String bf = getUrl(httpServletRequest);
+		course.setBeforeResource(bf);
+		
 		return ResponseEntity.ok(course);
 	}
 
@@ -129,7 +135,9 @@ public class CourseREST implements IMyHost {
 			if (appUser != null) {
 				List<Course> lstCourse = owerCourseDAO.querryAllBought(appUser.getId());
 				for (Course c : lstCourse) {
-					c.setBeforeResource(this.getUrl(httpServletRequest));
+					String bf = getUrl(httpServletRequest);
+					c.getAppUser().getAvatar().setBeforeResource(bf);
+					c.getPoster().setBeforeResource(bf);
 				}
 				// System.err.println(lstCategories);
 				return ResponseEntity.ok(lstCourse);

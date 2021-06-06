@@ -133,4 +133,8 @@ public class VideoStreamFromClassPathService implements IVideoStreamService {
         }
         return 0L;
     }
+    @Override
+    public ResponseEntity<byte[]> prepareContent(String fullFileName, String httpRangeList) {
+    	return null;
+    }
 }

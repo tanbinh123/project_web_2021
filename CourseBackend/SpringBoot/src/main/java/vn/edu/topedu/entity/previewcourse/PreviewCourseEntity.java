@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,6 +27,7 @@ import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.full.Learning;
 import vn.edu.topedu.entity.course.full.Part;
 import vn.edu.topedu.entity.course.full.VideoEntity;
+import vn.edu.topedu.utils.WebUtils;
 
 @Entity
 @Table(name = "Course")
@@ -34,7 +36,7 @@ public class PreviewCourseEntity extends AHasPoster {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id")
-	private ResourceImage poster;
+	private ResourceImage imagePoster;
 
 	@Column(name = "description", length = 255)
 	private String description = "";
@@ -108,6 +110,14 @@ public class PreviewCourseEntity extends AHasPoster {
 
 	
 
+	public ResourceImage getImagePoster() {
+		return imagePoster;
+	}
+
+	public void setImagePoster(ResourceImage imagePoster) {
+		this.imagePoster = imagePoster;
+	}
+
 	public VideoEntity getDemo() {
 		return demo;
 	}
@@ -124,30 +134,25 @@ public class PreviewCourseEntity extends AHasPoster {
 		this.parts = parts;
 	}
 
-	public ResourceImage getPoster() {
-		return poster;
+	
+
+	public void setBeforeResource(String bf) {
+		
+		if (this.imagePoster != null)
+			this.imagePoster.setBeforeResource(bf);
+		if (this.demo != null)
+			this.demo.setBeforeResource(bf);
+		if (this.getAppUser() != null&&this.getAppUser().getAvatar() != null)
+		this.getAppUser().getAvatar().setBeforeResource(bf);
 	}
-
-	public void setPoster(ResourceImage poster) {
-		this.poster = poster;
-	}
-
-	@Override
-	public void setBeforeResource(String beforeResource) {
-		if (poster != null)
-			this.poster.setBeforeResource(beforeResource);
-		if (demo != null)
-			this.demo.setBeforeResource(beforeResource);
-		if (parts != null)
-			this.parts.forEach(e -> {
-				if (e.getLessons() != null)
-					e.getLessons().forEach(x -> {
-						if (x.getVideo() != null)
-							x.getVideo().setBeforeResource(beforeResource);
-					});
-
-			});
-		super.setBeforeResource(beforeResource);
+	public void setBeforeResource(HttpServletRequest httpServletRequest) {
+		String bf = WebUtils.getUrl(httpServletRequest);
+		if (this.imagePoster != null)
+			this.imagePoster.setBeforeResource(bf);
+		if (this.demo != null)
+			this.demo.setBeforeResource(bf);
+		if (this.getAppUser() != null&&this.getAppUser().getAvatar() != null)
+		this.getAppUser().getAvatar().setBeforeResource(bf);
 	}
 
 }

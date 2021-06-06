@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import CustomButton from "src/components/CustomButton";
 import CustomInput from "src/components/CustomInput";
 import * as yup from "yup";
+import courseApi from "src/api/courseApi";
 import SimpleDialog from "./SimpleDialog";
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -67,8 +68,8 @@ const schema = yup.object().shape({
 });
 function PosterCourseForm(props) {
   const classes = useStyles();
-  const { dataCourse = {}, changeDataCourse = null } = props;
-  const [img, setImg] = useState(dataCourse?.poster?.image);
+  const { dataCourse = null, changeDataCourse = null } = props;
+  const [img, setImg] = useState(dataCourse?.imagePoster?.image);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -76,8 +77,14 @@ function PosterCourseForm(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
-    console.log(value);
+  const handleOnSubmit = (values) => {
+    console.log(values);
+    (async () => {
+      const formData = new FormData();
+      formData.append("image", values.image);
+      const rp = await courseApi.uploadNewPoster(dataCourse?.id, formData);
+      console.log(rp);
+    })();
   };
   const [open, setOpen] = useState(false);
 
@@ -117,7 +124,7 @@ function PosterCourseForm(props) {
             />
             <SimpleDialog
               open={open}
-              id={dataCourse.poster.id}
+              id={dataCourse?.imagePoster?.id}
               onClose={handleClickOpen}
               content={contentSimpleDialog}
             />
