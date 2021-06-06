@@ -433,16 +433,16 @@ public class CourseDAO {
 
 	}
 	@Transactional
-	public void updateLearnings(List<Learning> learnings, Long courseId) throws Exception {
+	public void updateLearnings(List<Learning> learnings, FullCourse course) throws Exception {
 		for (Learning l : learnings) {
-			l.setCourseId(courseId);
+			l.setCourseId(course.getId());
 			if (l.getId() == null) {
 				if (l.getDeleted() == false) {
 					entityManager.persist(l);
 				}
 			} else {
 				Learning tmp = entityManager.find(Learning.class, l.getId());
-				if(tmp.getCourseId()==courseId)
+				if(tmp.getCourseId()==course.getId())
 				entityManager.merge(l);else {
 					throw new Exception("Learning này thuộc về khóa học khác");
 				}
@@ -451,6 +451,7 @@ public class CourseDAO {
 		}
 		entityManager.flush();
 		int rs = deleteAllLearningDeleted();
+		entityManager.refresh(course);
 		System.err.println(String.format("Delete %s row learning", rs));
 	}
 

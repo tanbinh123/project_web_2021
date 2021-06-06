@@ -28,6 +28,7 @@ public class Main extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
+		
 	}
 
 	@Override

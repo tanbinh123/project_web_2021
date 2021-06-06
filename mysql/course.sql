@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 06/06/2021 15:52:34
+ Date: 07/06/2021 00:33:35
 */
 
 SET NAMES utf8mb4;
@@ -156,7 +156,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 1, 2, '2021-05-25 14:25:29', 1, 1, 1, '2021-05-25 14:25:29');
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Tìm hiểu Ganyu 1', 12288000, 5, 0, '2021-06-06 08:04:45', 1, 6, 1, '2021-05-19 15:35:12');
-INSERT INTO `course` VALUES (3, 10, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 3', 14929000, 5, 0, '2020-10-25 13:14:43', 1, 6, 1, '2021-05-19 15:35:12');
+INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 14929000, 5, 0, '2021-06-06 17:28:26', 1, 22, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (5, 7, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 5', 4172000, 5, 0, '2019-11-19 04:34:37', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (6, 5, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Demo 6', 5487000, 3, 0, '2019-05-17 05:12:53', 1, 6, 1, '2021-05-19 15:35:12');
@@ -340,7 +340,7 @@ CREATE TABLE `learning`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of learning
@@ -362,6 +362,15 @@ INSERT INTO `learning` VALUES (53, 178, 'Biết cách tự học những kiến 
 INSERT INTO `learning` VALUES (54, 1, 'Bổ ngang', b'0');
 INSERT INTO `learning` VALUES (58, 1, 'Quăng kiếm', b'0');
 INSERT INTO `learning` VALUES (61, 1, 'Hồi mã thương', b'0');
+INSERT INTO `learning` VALUES (64, 3, 'Tổng Quát Thức', b'0');
+INSERT INTO `learning` VALUES (65, 3, 'Phá Kiếm Thức', b'0');
+INSERT INTO `learning` VALUES (66, 3, 'Phá Đao Thức', b'0');
+INSERT INTO `learning` VALUES (67, 3, 'Phá Khí Thức', b'0');
+INSERT INTO `learning` VALUES (68, 3, 'Phá Chưởng Thức', b'0');
+INSERT INTO `learning` VALUES (69, 3, 'Phá Tiễn Thức', b'0');
+INSERT INTO `learning` VALUES (70, 3, 'Phá Thương Thức', b'0');
+INSERT INTO `learning` VALUES (71, 3, 'Phá Tiên Thức', b'0');
+INSERT INTO `learning` VALUES (72, 3, 'Phá Sách Thức', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -389,7 +398,7 @@ INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập tr
 INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 1539, 4, b'0');
 INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 695, 5, b'0');
 INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, 6, b'0');
-INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 7, b'0');
+INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 1, b'0');
 INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, 8, b'0');
 INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 8, b'0');
 INSERT INTO `lesson` VALUES (19, 27, 'Xin chào', NULL, 3, b'0');
@@ -559,7 +568,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -573,19 +582,14 @@ INSERT INTO `resource_image` VALUES (6, 'user/user/image/ganyu-h-5.jpg', b'0', '
 INSERT INTO `resource_image` VALUES (7, 'user/user/image/ganyu-h-6.jpg', b'0', '2021-04-05 14:48:50', 2, 18, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 24, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 8, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 23, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 7, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (71, 'user/admin/image/sddefault.jpg', b'0', '2021-05-25 14:01:08', 1, 1, '2021-05-25 14:01:08');
 INSERT INTO `resource_image` VALUES (72, 'user/admin/image/html.jpg', b'0', '2021-05-25 14:05:14', 1, 1, '2021-05-25 14:05:14');
 INSERT INTO `resource_image` VALUES (84, 'user/user/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-06 05:42:45', 2, 1, '2021-06-06 05:42:45');
-INSERT INTO `resource_image` VALUES (85, 'user/admin/image/', b'0', '2021-06-06 06:53:50', 1, 0, '2021-06-06 06:53:50');
-INSERT INTO `resource_image` VALUES (86, 'user/admin/image/', b'0', '2021-06-06 06:54:46', 1, 0, '2021-06-06 06:54:46');
-INSERT INTO `resource_image` VALUES (87, 'user/admin/image/', b'0', '2021-06-06 06:55:49', 1, 0, '2021-06-06 06:55:49');
-INSERT INTO `resource_image` VALUES (88, 'user/admin/image/', b'0', '2021-06-06 06:56:06', 1, 0, '2021-06-06 06:56:06');
-INSERT INTO `resource_image` VALUES (89, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-06 07:07:45', 1, 0, '2021-06-06 07:07:45');
-INSERT INTO `resource_image` VALUES (90, 'user/admin/image/girl.bmp', b'0', '2021-06-06 07:28:42', 1, 0, '2021-06-06 07:28:42');
 INSERT INTO `resource_image` VALUES (91, 'user/admin/image/1616839149520.png', b'0', '2021-06-06 07:42:25', 1, 1, '2021-06-06 07:42:25');
 INSERT INTO `resource_image` VALUES (92, 'user/admin/image/1616839149535.png', b'0', '2021-06-06 08:03:26', 1, 1, '2021-06-06 08:03:26');
+INSERT INTO `resource_image` VALUES (99, 'user/admin/image/4fa665b22e75a78b038ec14ae2e24296.jpg', b'0', '2021-06-06 17:06:13', 1, 1, '2021-06-06 17:06:13');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -710,28 +714,28 @@ CREATE TABLE `video`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `img_poster_id` bigint(20) NULL DEFAULT NULL,
-  `duration` int(255) NULL DEFAULT NULL,
+  `duration` int(255) UNSIGNED NOT NULL DEFAULT 0,
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `actived` bit(1) NULL DEFAULT b'0',
+  `actived` bit(1) NOT NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
   `update_at` datetime(0) NULL DEFAULT utc_timestamp,
   `user_poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`img_poster_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 8, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (1, 'user/admin/video/171/mp4/toystory', 11, 10000000, 9, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (2, 'user/admin/video/171/mp4/8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (3, 'user/admin/video/171/mp4/8 lý do bạn nên học trên Fullstackeduvn hơn là Youtube!', 11, 10000000, 4, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (4, 'user/admin/video/171/mp4/Domain là gì Bạn đã thật sự hiểu về domain', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Server', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 171, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
-INSERT INTO `video` VALUES (7, 'user/admin/video/171/mp4/toystory', 11, 10000000, 1, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 170, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 2, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
+INSERT INTO `video` VALUES (22, 'user/admin/video/Trailer game Độc Cô Cửu Kiếm mobile.mp4', NULL, 0, 1, b'1', b'0', '2021-06-06 17:28:26', '2021-06-06 17:28:26', 1);
 
 -- ----------------------------
 -- Triggers structure for table app_user

@@ -35,7 +35,7 @@ public class FullCourse extends BaseEntity {
 	@JsonIgnore
 	private Long videoDemoId;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "demo_id", referencedColumnName = "id" ,insertable = false, updatable = false)
 	private VideoEntity demo;
 
@@ -54,7 +54,7 @@ public class FullCourse extends BaseEntity {
 	@JsonIgnore
 	private Long imagePosterId;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private ResourceImage imagePoster;
 
@@ -70,7 +70,7 @@ public class FullCourse extends BaseEntity {
 	@Column(name = "price", length = 15, nullable = false)
 	private BigDecimal price = new BigDecimal(0);
 
-	@OneToMany(mappedBy = "course")
+	@OneToMany(mappedBy = "course", cascade= {CascadeType.REFRESH})
 	private List<Learning> learnings;
 	@OneToMany(mappedBy = "course")
 	private List<Part> parts;

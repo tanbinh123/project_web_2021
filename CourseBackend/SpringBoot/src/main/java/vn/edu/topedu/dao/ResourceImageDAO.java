@@ -112,12 +112,15 @@ public class ResourceImageDAO {
 
 			List<ResourceImage> a = getResourceImagesNoLinked();
 			for (ResourceImage ri : a) {
-				Path path = FileProcess.getPath(ri.getPath());
-				path.toFile().delete();
+				Path path = FileProcess.getPath(ri.getAbsPath());
+				if(path.toFile().delete()) {
+					System.err.println(String.format("Delete file: %s", path.toString()));
+				};
 			}
 			String sql = "delete from " + ResourceImage.class.getName() + " where countLinked=0 and deleted=true ";
 			Query query = this.entityManager.createQuery(sql);
 
+			
 			return query.executeUpdate();
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -139,19 +142,9 @@ public class ResourceImageDAO {
 				
 				pathContain = String.format("user/%s/image", appUser.getUsername());
 				
-				String filename= uploadAvatar.getOriginalFilename();
-				Matcher m = Pattern.compile("^(.+)(|_\\d*)\\.(\\w+)$").matcher(filename);
-				if(m.find()) {
-					String name=m.group(1)+"_"+newAvatar.getId();
-					String extend=m.group(3);
-					
-					System.err.println(String.format("Name: %s", name));
-					System.err.println(String.format("Extend: %s", extend));
-					filename=name+"."+extend;
-					
-				}
+				String filename= newAvatar.getAbsPath();
 				System.out.println(String.format("File: %s", uploadAvatar.getOriginalFilename()));
-				File p = FileProcess.getPath(pathContain, filename).toFile();
+				File p = FileProcess.getPath(filename).toFile();				
 				System.out.println(p.getAbsolutePath());
 				p.getParentFile().mkdirs();
 				InputStream initialStream = uploadAvatar.getInputStream();

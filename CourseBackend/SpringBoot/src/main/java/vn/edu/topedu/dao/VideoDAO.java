@@ -1,15 +1,23 @@
 package vn.edu.topedu.dao;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import vn.edu.topedu.entity.ActiveAccount;
 import vn.edu.topedu.entity.AppUser;
@@ -95,8 +103,10 @@ public class VideoDAO {
 		try {
 			List<VideoEntity> a = getResourceImagesNoLinked();
 			for(VideoEntity ri:a) {
-				Path path = FileProcess.getPath(ri.getVideo());
-				path.toFile().delete();
+				Path path = FileProcess.getPath(ri.absPath());
+				if(path.toFile().delete()) {
+					System.err.println(String.format("Delete file: %s", path.toString()));
+				};
 			}
 			
 			String sql = "delete from " + VideoEntity.class.getName() +  " where countLinked=0 and deleted=true ";
@@ -106,6 +116,48 @@ public class VideoDAO {
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
+	}
+	
+	@Transactional
+	public VideoEntity uploadVideo(MultipartFile uploadVideo, AppUser appUser) throws Exception {
+		VideoEntity newFile = null;
+		if(uploadVideo!=null) {
+			System.err.println("Video upload");
+			
+			String pathContain = null;
+			try {
+				VideoEntity image = new VideoEntity();
+				pathContain = String.format("user/%s/video", appUser.getUsername());
+				image.setVideo(pathContain + "/" + uploadVideo.getOriginalFilename());
+				image.setAppUser(appUser);
+				newFile=save(image);
+				
+				pathContain = String.format("user/%s/video", appUser.getUsername());
+				
+				String filename= 
+				newFile.absPath();
+				System.out.println(String.format("File: %s", uploadVideo.getOriginalFilename()));
+				File p = FileProcess.getPath(filename).toFile();
+				System.out.println(p.getAbsolutePath());
+				p.getParentFile().mkdirs();
+				InputStream initialStream = uploadVideo.getInputStream();
+				OutputStream outStream = new FileOutputStream(p);
+				byte[] buffer = new byte[8 * 1024];
+				int bytesRead;
+				while ((bytesRead = initialStream.read(buffer)) != -1) {
+					outStream.write(buffer, 0, bytesRead);
+				}
+				IOUtils.closeQuietly(initialStream);
+				IOUtils.closeQuietly(outStream);
+
+				
+				System.err.println("Upload Success");
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				throw e;
+			}
+		}
+		return newFile;
 	}
 
 }

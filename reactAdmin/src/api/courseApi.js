@@ -17,6 +17,14 @@ const courseApi = {
       },
     });
   }, 
+  uploadNewVideoDemo(idCourse, data) {
+    const url = `/api/admin/course/${idCourse}/video-demo`;
+    return axiosClient.post(url, data,{
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+  }, 
   post(idCourse, data) {
     const url = `/api/admin/course/${idCourse}`;
     return axiosClient.post(url, data);

@@ -26,10 +26,12 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.edu.topedu.dao.AppUserDAO;
 import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.ResourceImageDAO;
+import vn.edu.topedu.dao.VideoDAO;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.course.full.Learning;
+import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -43,6 +45,8 @@ public class CourseAdminRest {
 	private AppUserDAO appUserDAO;
 	@Autowired
 	private ResourceImageDAO resourceImageDAO;
+	@Autowired
+	private VideoDAO videoDAO;
 	
 	@GetMapping(value = "/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
@@ -80,6 +84,47 @@ public class CourseAdminRest {
 				if(newPoster!=null) {
 					fullcourse.setImagePosterId(newPoster.getId());
 					fullcourse.setImagePoster(newPoster);
+				}
+				try {
+					fullcourse.setUpdateAt(new Date());
+					FullCourse rs = courseDAO.merge(fullcourse);
+					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));					
+					return ResponseEntity.ok(rs);
+				} catch (Exception e) {
+					return ResponseEntity.badRequest().body(new MessageResponse("Poster not update", "Không thể cập nhật poster"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
+	@PostMapping(value="/{fullcourse}/video-demo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> postVideoDemo(HttpServletRequest httpServletRequest, 
+			Authentication authentication,	
+			@PathVariable FullCourse fullcourse,
+			@RequestPart(required=false) MultipartFile video			
+			) {
+		System.out.println("---------------------------------");
+		if(video==null||video.isEmpty()) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Video not ready", "Chưa chọn video để tài lên"));
+		}
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				
+				VideoEntity newPoster=null;
+				try {
+					newPoster = videoDAO.uploadVideo(video, appUser);
+				} catch (Exception e) {
+					return ResponseEntity.badRequest().body(new MessageResponse("Video not upload", "Video không thể tải lên"));
+				}
+				if(newPoster!=null) {
+					fullcourse.setVideoDemoId(newPoster.getId());
+					fullcourse.setDemo(newPoster);
 				}
 				try {
 					fullcourse.setUpdateAt(new Date());
@@ -149,13 +194,13 @@ public class CourseAdminRest {
 				try {
 //					FullCourse rs = courseDAO.merge(fullcourse);
 //					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
-					courseDAO.updateLearnings(learnings, fullcourse.getId());
+					courseDAO.updateLearnings(learnings, fullcourse);
 					for (int i = learnings.size()-1; i >=0; i--) {
 						if(learnings.get(i).getDeleted()) {
 							learnings.remove(i);
 						}
 					}
-					fullcourse.setLearnings(learnings);
+					//fullcourse.setLearnings(learnings);
 					return ResponseEntity.ok(fullcourse);
 				} catch (Exception e) {
 					e.printStackTrace();
