@@ -77,7 +77,7 @@ public class CourseControlller {
 //		LOG.info("Sending order for the request date {} ", c.getCategory());
 //		System.err.println(conversionService.convert(c.getUpdateAt(), String.class));
 //		System.err.println(c.getUpdateAt());
-		System.err.println(c.getImgPosterId());
+		System.err.println(c.getImagePosterId());
 		return "course";
 	}
 
@@ -185,7 +185,7 @@ public class CourseControlller {
 	@PostMapping("/admin/upload/course")
 	public String uploadCourse(HttpServletRequest httpServletRequest, @ModelAttribute FullCourse c,
 			Map<String, Object> model, HttpSession httpSession) {
-		Long tmpImagePosterId= c.getImgPosterId();
+		Long tmpImagePosterId= c.getImagePosterId();
 		Long tmpVideoDemoId= c.getVideoDemoId();
 		String username = (String) httpSession.getAttribute("username");
 		if (username == null) {
@@ -206,7 +206,7 @@ public class CourseControlller {
 			List<CategoryEntity> categories = courseDAO.getCategories(-1);
 			List<VideoEntity> videos = courseDAO.getVideos(-1);
 			List<ResourceImage> images = resourceImageDAO.getResourceImages();
-			c.setImgPosterId(tmpImagePosterId);
+			c.setImagePosterId(tmpImagePosterId);
 			c.setVideoDemoId(tmpVideoDemoId);
 			
 			String bef = WebUtils.getUrl(httpServletRequest);
