@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 06/06/2021 14:29:14
+ Date: 06/06/2021 15:52:34
 */
 
 SET NAMES utf8mb4;
@@ -154,8 +154,8 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 90, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Course Demo 1', 1000000, 1, 2, '2021-05-25 14:25:29', 1, 1, 1, '2021-05-25 14:25:29');
-INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 2', 12288000, 5, 0, '2019-02-03 22:20:54', 1, 6, 1, '2021-05-19 15:35:12');
+INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 1, 2, '2021-05-25 14:25:29', 1, 1, 1, '2021-05-25 14:25:29');
+INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Tìm hiểu Ganyu 1', 12288000, 5, 0, '2021-06-06 08:04:45', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (3, 10, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 3', 14929000, 5, 0, '2020-10-25 13:14:43', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (5, 7, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 5', 4172000, 5, 0, '2019-11-19 04:34:37', 1, 6, 1, '2021-05-19 15:35:12');
@@ -326,7 +326,7 @@ INSERT INTO `course` VALUES (169, 2, 'Những biên bản cuộc họp phức t�
 INSERT INTO `course` VALUES (170, 6, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 170', 13879000, 0, 0, '2020-11-14 12:05:41', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (171, 71, 'Kiến thức cơ bản dành cho dân IT, không phân biệt bạn theo Front-end, Back-end hay Devops', b'0', 'Kiến thức cơ bản, cốt lõi dân IT cần học trước', 10857000, 0, 3, '2021-05-25 14:02:46', 1, 6, 2, '2021-05-25 14:02:46');
 INSERT INTO `course` VALUES (178, 72, 'Khóa học đề cao việc thực hành qua những ví dụ trong thực tế giúp học viên nhanh chóng xây dựng được giao diện website', b'0', 'HTML, CSS từ Zero đến Hero', 15000, 0, 2, '2021-05-25 14:15:57', 1, 1, 2, '2021-05-25 14:15:57');
-INSERT INTO `course` VALUES (179, 8, 'Test', b'0', 'Test', 120000, 0, 0, '2021-05-25 14:28:25', 1, 1, 19, '2021-05-25 14:28:25');
+INSERT INTO `course` VALUES (179, 92, 'Eula là đội trưởng của \"tiểu đội du kích\" trong Đội Kỵ Sĩ Tây Phong.\n\nDo yêu cầu công việc, cô ấy phải thường xuyên dẫn đội đi săn ma vật và Giáo Đoàn Vực Sâu ở bên ngoài trong thời gian dài, rất ít khi trở về Thành Mondstadt. ', b'0', 'Tìm hiểu Eula 2', 260000, 0, 0, '2021-06-06 08:03:26', 1, 1, 19, '2021-05-25 14:28:25');
 
 -- ----------------------------
 -- Table structure for learning
@@ -340,7 +340,7 @@ CREATE TABLE `learning`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of learning
@@ -349,8 +349,8 @@ INSERT INTO `learning` VALUES (1, 171, 'Các kiến thức cơ bản, nền món
 INSERT INTO `learning` VALUES (2, 171, 'Các mô hình, kiến trúc cơ bản khi triển khai ứng dụng', b'0');
 INSERT INTO `learning` VALUES (3, 171, 'Các khái niệm, thuật ngữ cốt lõi khi triển khai ứng dụng', b'0');
 INSERT INTO `learning` VALUES (4, 171, 'Hiểu hơn về cách internet và máy vi tính hoạt động', b'0');
-INSERT INTO `learning` VALUES (33, 1, 'Học nữa', b'0');
-INSERT INTO `learning` VALUES (35, 1, 'Học mãi', b'0');
+INSERT INTO `learning` VALUES (33, 1, 'Chém thẳng', b'0');
+INSERT INTO `learning` VALUES (35, 1, 'Chém dọc', b'0');
 INSERT INTO `learning` VALUES (45, 178, 'Biết cách xây dựng giao diện web với HTML, CSS', b'0');
 INSERT INTO `learning` VALUES (47, 178, 'Biết cách phân tích giao diện website', b'0');
 INSERT INTO `learning` VALUES (48, 178, 'Biết cách đặt tên class CSS theo chuẩn BEM', b'0');
@@ -359,6 +359,9 @@ INSERT INTO `learning` VALUES (50, 178, 'Làm chủ Flexbox khi dựng bố cụ
 INSERT INTO `learning` VALUES (51, 178, 'Sở hữu 2 giao diện web khi học xong khóa học', b'0');
 INSERT INTO `learning` VALUES (52, 178, 'Biết cách tự tạo động lực cho bản thân', b'0');
 INSERT INTO `learning` VALUES (53, 178, 'Biết cách tự học những kiến thức mới', b'0');
+INSERT INTO `learning` VALUES (54, 1, 'Bổ ngang', b'0');
+INSERT INTO `learning` VALUES (58, 1, 'Quăng kiếm', b'0');
+INSERT INTO `learning` VALUES (61, 1, 'Hồi mã thương', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -556,7 +559,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -568,7 +571,7 @@ INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '
 INSERT INTO `resource_image` VALUES (5, 'user/user/image/ganyu-h-4.jpg', b'0', '2021-04-05 14:48:50', 2, 15, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (6, 'user/user/image/ganyu-h-5.jpg', b'0', '2021-04-05 14:48:50', 2, 20, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (7, 'user/user/image/ganyu-h-6.jpg', b'0', '2021-04-05 14:48:50', 2, 18, '2021-05-19 22:29:00');
-INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 20, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (8, 'user/user/image/ganyu-h-7.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (9, 'user/user/image/ganyu-h-8.jpg', b'0', '2021-04-05 14:48:50', 2, 19, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (10, 'user/user/image/ganyu-h-9.jpg', b'0', '2021-05-16 07:05:29', 2, 24, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (11, 'user/user/image/demo.jpg', b'0', '2021-04-05 14:48:50', 2, 8, '2021-05-19 22:29:00');
@@ -580,7 +583,9 @@ INSERT INTO `resource_image` VALUES (86, 'user/admin/image/', b'0', '2021-06-06 
 INSERT INTO `resource_image` VALUES (87, 'user/admin/image/', b'0', '2021-06-06 06:55:49', 1, 0, '2021-06-06 06:55:49');
 INSERT INTO `resource_image` VALUES (88, 'user/admin/image/', b'0', '2021-06-06 06:56:06', 1, 0, '2021-06-06 06:56:06');
 INSERT INTO `resource_image` VALUES (89, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-06-06 07:07:45', 1, 0, '2021-06-06 07:07:45');
-INSERT INTO `resource_image` VALUES (90, 'user/admin/image/girl.bmp', b'0', '2021-06-06 07:28:42', 1, 1, '2021-06-06 07:28:42');
+INSERT INTO `resource_image` VALUES (90, 'user/admin/image/girl.bmp', b'0', '2021-06-06 07:28:42', 1, 0, '2021-06-06 07:28:42');
+INSERT INTO `resource_image` VALUES (91, 'user/admin/image/1616839149520.png', b'0', '2021-06-06 07:42:25', 1, 1, '2021-06-06 07:42:25');
+INSERT INTO `resource_image` VALUES (92, 'user/admin/image/1616839149535.png', b'0', '2021-06-06 08:03:26', 1, 1, '2021-06-06 08:03:26');
 
 -- ----------------------------
 -- Table structure for revenue

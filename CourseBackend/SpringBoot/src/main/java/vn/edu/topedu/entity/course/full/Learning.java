@@ -25,6 +25,7 @@ public class Learning {
 	@Column(name = "learning", nullable = false)
 	private String learning;
 	@Column(name = "course_id", nullable = false)
+	@JsonIgnore
 	private Long courseId;
 	@ManyToOne
 	@JoinColumn(name = "course_id",insertable = false, updatable = false)

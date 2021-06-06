@@ -1,5 +1,10 @@
 package vn.edu.topedu.rest.admin;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
@@ -12,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +29,7 @@ import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.full.FullCourse;
+import vn.edu.topedu.entity.course.full.Learning;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -71,17 +78,89 @@ public class CourseAdminRest {
 					return ResponseEntity.badRequest().body(new MessageResponse("Image not upload", "Hình không thể tải lên"));
 				}
 				if(newPoster!=null) {
-					fullcourse.setImgPosterId(newPoster.getId());
+					fullcourse.setImagePosterId(newPoster.getId());
 					fullcourse.setImagePoster(newPoster);
 				}
 				try {
-					courseDAO.updateFullCourse(fullcourse);
+					fullcourse.setUpdateAt(new Date());
+					FullCourse rs = courseDAO.merge(fullcourse);
+					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));					
+					return ResponseEntity.ok(rs);
 				} catch (Exception e) {
 					return ResponseEntity.badRequest().body(new MessageResponse("Poster not update", "Không thể cập nhật poster"));
 				}
-				fullcourse.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
+	@PostMapping(value="/{fullcourse}")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> sdfdasdf(HttpServletRequest httpServletRequest, 
+			Authentication authentication,	
+			@PathVariable FullCourse fullcourse,
+			@RequestBody Map<String,String> body 
+			) {
+		System.out.println("---------------------------------");
+		System.out.println(String.format("Title: %s", body.get("title")));
+		System.out.println(String.format("Description: %s", body.get("description")));
+		System.out.println(String.format("Price: %s", body.get("price")));
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
 				
-				return ResponseEntity.ok(fullcourse);
+				fullcourse.setDescription(body.get("description"));
+				fullcourse.setPrice(new BigDecimal(body.get("price")));
+				fullcourse.setTitle(body.get("title"));
+				fullcourse.setUpdateAt(new Date());
+				try {
+					FullCourse rs = courseDAO.merge(fullcourse);
+					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+					
+					return ResponseEntity.ok(rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
+	@PostMapping(value="/{fullcourse}/learnings")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> ada(HttpServletRequest httpServletRequest, 
+			Authentication authentication,	
+			@PathVariable FullCourse fullcourse,
+			@RequestBody List<Learning> learnings 
+			) {
+		System.out.println("---------------------------------");
+		System.out.println(String.format("Size: %s", learnings.size()));
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				
+				
+				try {
+//					FullCourse rs = courseDAO.merge(fullcourse);
+//					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+					courseDAO.updateLearnings(learnings, fullcourse.getId());
+					for (int i = learnings.size()-1; i >=0; i--) {
+						if(learnings.get(i).getDeleted()) {
+							learnings.remove(i);
+						}
+					}
+					fullcourse.setLearnings(learnings);
+					return ResponseEntity.ok(fullcourse);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+				}
 			}
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));

@@ -16,6 +16,14 @@ const courseApi = {
         "content-type": "multipart/form-data",
       },
     });
+  }, 
+  post(idCourse, data) {
+    const url = `/api/admin/course/${idCourse}`;
+    return axiosClient.post(url, data);
+  },  
+  postLearnings(idCourse, data) {
+    const url = `/api/admin/course/${idCourse}/learnings`;
+    return axiosClient.post(url, data);
   },  
   categories(data) {
     const url = "/course/categories";

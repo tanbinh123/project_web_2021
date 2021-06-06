@@ -184,16 +184,16 @@ public class CourseDAO {
 		} else {
 			course.getCategory().setId(course.getCategoryId());
 		}
-		if (course.getImgPosterId() == null) {
+		if (course.getImagePosterId() == null) {
 			System.err.println(course.getImagePoster().getImage());
 			if (course.getImagePoster() != null && course.getImagePoster().checkExtendResource()) {
 				entityManager.persist(course.getImagePoster());
 				entityManager.flush();
-				course.setImgPosterId(course.getImagePoster().getId());
+				course.setImagePosterId(course.getImagePoster().getId());
 			} else
 				throw new Exception(String.format("rollBack, IsNull: %s", "getImgPosterId"));
 		} else {
-			course.setImagePoster(findImageById(course.getImgPosterId()));
+			course.setImagePoster(findImageById(course.getImagePosterId()));
 
 		}
 		if (course.getVideoDemoId() == null) {
@@ -257,7 +257,11 @@ public class CourseDAO {
 //		rs.setPoster(findImageById(rs.getImgPosterId()));
 		return course;
 	}
-
+	@Transactional(rollbackFor = Exception.class)
+	public FullCourse merge(FullCourse course) throws Exception {
+		FullCourse rs = entityManager.merge(course);
+		return rs;
+	}
 	@Transactional(rollbackFor = Exception.class)
 	public FullCourse updateFullCourse(FullCourse course) throws Exception {
 		if (course.getCategoryId() == null) {
@@ -267,16 +271,16 @@ public class CourseDAO {
 		} else {
 			course.getCategory().setId(course.getCategoryId());
 		}
-		if (course.getImgPosterId() == null) {
+		if (course.getImagePosterId() == null) {
 			System.err.println(course.getImagePoster().getImage());
 			if (course.getImagePoster() != null && course.getImagePoster().checkExtendResource()) {
 				entityManager.persist(course.getImagePoster());
 				entityManager.flush();
-				course.setImgPosterId(course.getImagePoster().getId());
+				course.setImagePosterId(course.getImagePoster().getId());
 			} else
 				throw new Exception(String.format("rollBack, IsNull: %s", "getImgPosterId"));
 		} else {
-			course.setImagePoster(findImageById(course.getImgPosterId()));
+			course.setImagePoster(findImageById(course.getImagePosterId()));
 
 		}
 		if (course.getVideoDemoId() == null) {
@@ -427,6 +431,27 @@ public class CourseDAO {
 		// query.setParameter("id", idCourse);
 		return query.getResultList();
 
+	}
+	@Transactional
+	public void updateLearnings(List<Learning> learnings, Long courseId) throws Exception {
+		for (Learning l : learnings) {
+			l.setCourseId(courseId);
+			if (l.getId() == null) {
+				if (l.getDeleted() == false) {
+					entityManager.persist(l);
+				}
+			} else {
+				Learning tmp = entityManager.find(Learning.class, l.getId());
+				if(tmp.getCourseId()==courseId)
+				entityManager.merge(l);else {
+					throw new Exception("Learning này thuộc về khóa học khác");
+				}
+			}
+
+		}
+		entityManager.flush();
+		int rs = deleteAllLearningDeleted();
+		System.err.println(String.format("Delete %s row learning", rs));
 	}
 
 }

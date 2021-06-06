@@ -198,8 +198,8 @@ public class CourseControlller {
 		System.err.println("POST");
 		c.setUpdateAt(new Date());
 		try {
-			c.setAppUser(appUserDAO.findUserAccount(username));
-			c.setUserPosterId(c.getAppUser().getId());
+			c.setUserPoster(appUserDAO.findUserAccount(username));
+			c.setUserPosterId(c.getUserPoster().getId());
 			c = courseDAO.persistFullCourse(c);
 		} catch (Exception e1) {
 			System.err.println(e1.getMessage());

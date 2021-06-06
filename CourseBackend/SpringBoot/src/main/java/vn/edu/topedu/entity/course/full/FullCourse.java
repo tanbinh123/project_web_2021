@@ -13,7 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.BaseEntity;
@@ -23,6 +26,8 @@ import vn.edu.topedu.utils.WebUtils;
 
 @Entity
 @Table(name = "Course")
+@DynamicUpdate
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FullCourse extends BaseEntity {
 
 	
@@ -87,13 +92,7 @@ public class FullCourse extends BaseEntity {
 		this.videoDemoId = videoDemoId;
 	}
 
-	public Long getImgPosterId() {
-		return imagePosterId;
-	}
-
-	public void setImgPosterId(Long imgPosterId) {
-		this.imagePosterId = imgPosterId;
-	}
+	
 
 	public Integer getCategoryId() {
 		return categoryId;
@@ -101,6 +100,22 @@ public class FullCourse extends BaseEntity {
 
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
+	}
+	
+	public AppUser getUserPoster() {
+		return userPoster;
+	}
+
+	public void setUserPoster(AppUser userPoster) {
+		this.userPoster = userPoster;
+	}
+
+	public Long getImagePosterId() {
+		return imagePosterId;
+	}
+
+	public void setImagePosterId(Long imagePosterId) {
+		this.imagePosterId = imagePosterId;
 	}
 
 	public CategoryEntity getCategory() {
@@ -119,8 +134,8 @@ public class FullCourse extends BaseEntity {
 		super();
 	}
 
-	public void setLearnings(List<Learning> learning) {
-		this.learnings = learning;
+	public void setLearnings(List<Learning> learnings) {
+		this.learnings = learnings;
 	}
 
 	public Long getId() {
