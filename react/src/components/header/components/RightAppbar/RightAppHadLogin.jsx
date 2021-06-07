@@ -94,7 +94,12 @@ function RightAppHadLogin(props) {
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   const { push } = useHistory();
   const handleLogOut = () => {
-    setDataUser({ user: {} });
+    setDataUser({
+      user: {},
+      profile: {},
+      courses: {},
+      token: "",
+    });
     removeLocalStorage();
     push("/");
     popupState.close();

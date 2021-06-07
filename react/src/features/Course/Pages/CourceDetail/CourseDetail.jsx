@@ -20,8 +20,11 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import courseApi from "../../../../api/courseApi";
+import { DataUser } from "../../../../app/DataUser";
 import Header from "../../../../components/header/index";
+import { isEmpty } from "../../../../components/tools/Tools";
 import CourseDetailCSS from "./CSSCourseDetail";
 import Lecture from "./Lecture/Lecture";
 import LeftCD from "./LeftCourseDetail/LeftCD";
@@ -29,6 +32,7 @@ import RightCD from "./RightCourseDetail/RightCD";
 
 function CourseDetail(props) {
   const classes = CourseDetailCSS();
+  const [dataUser, setDataUser] = useRecoilState(DataUser);
   const { idCourse } = useParams();
   // console.log(idCourse);
   const { url } = useRouteMatch();
@@ -43,48 +47,63 @@ function CourseDetail(props) {
     setIsOpenDialog(!isOpenDialog);
   }
   function handleOnClickBuy() {
-    console.log("Buy");
-    (async () => {
-      // console.log(url);
-      //console.log(window.location.href);
-      const res1 = await courseApi.payment({
-        returnUrl: window.location.href,
-        idCourse: idCourse,
-      });
-      window.location = res1.url;
-      console.log(res1);
-    })();
+    if (!isEmpty(dataUser.token)) {
+      console.log("Buy");
+      (async () => {
+        // console.log(url);
+        //console.log(window.location.href);
+        const res1 = await courseApi.payment({
+          returnUrl: window.location.href,
+          idCourse: idCourse,
+        });
+        window.location = res1.url;
+        console.log(res1);
+      })();
+    } else {
+      push("/auth/login");
+    }
   }
 
   useEffect(() => {
     (async () => {
       try {
-        var id = props.match.params.idCourse;
-
-        const res1 = await courseApi.check({ idCourse: id });
-        console.log("check", res1);
-        if (res1.status == 400) {
-          const res = await courseApi.get(id);
-          // console.log("review", res);
-          if (res.status == 500) {
+        if (!isEmpty(dataUser.token)) {
+          const res1 = await courseApi.check({ idCourse: idCourse });
+          console.log("check", res1);
+          if (res1.status == 400) {
+            const res = await courseApi.get(idCourse);
+            // console.log("review", res);
+            if (res.status == 500) {
+              push("/course");
+            }
+            setCourse({
+              isFull: false,
+              ...res,
+            });
+          } else {
+            setCourse({
+              isFull: true,
+              ...res1,
+            });
+          }
+        } else {
+          const res = await courseApi.get(idCourse);
+          console.log("review", res);
+          if (res.status == 500 || res.status == 400) {
             push("/course");
           }
           setCourse({
             isFull: false,
             ...res,
           });
-        } else {
-          setCourse({
-            isFull: true,
-            ...res1,
-          });
         }
+
         // console.log("course", course);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [url]);
+  }, [url, dataUser.token]);
   console.log("init Detail", course);
 
   return (

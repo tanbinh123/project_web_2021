@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { isEmpty } from "../components/tools/Tools";
 import StorageKeys from "../constants/StorageKeys";
 
 export const DataUser = atom({
@@ -17,13 +18,11 @@ export const removeLocalStorage = () => {
   // localStorage.removeItem(StorageKeys.COURSES);
   localStorage.clear();
 };
-export const addLocalStorage = (data, profile) => {
-  if (data) {
+export const addLocalStorage = (data) => {
+  if (!isEmpty(data.token)) {
     localStorage.setItem(StorageKeys.TOKEN, data.token);
     localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
-    /* localStorage.setItem(StorageKeys.COURSES, JSON.stringify(data.courses)); */
-  }
-  if (profile) {
-    localStorage.setItem(StorageKeys.PROFILE, JSON.stringify(profile));
+    localStorage.setItem(StorageKeys.COURSES, JSON.stringify(data.courses));
+    localStorage.setItem(StorageKeys.PROFILE, JSON.stringify(data.profile));
   }
 };

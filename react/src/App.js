@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AdminRouter from "./admin/AdminRouter";
-import Charts from "./chart/Charts";
-import PieChart from "./chart/PieChart";
 import "./cssreset.css";
 import Login from "./features/Auth/components/Login";
 import Register from "./features/Auth/components/Register";
@@ -13,11 +11,9 @@ import Actived from "./features/Infomation/components/Actived";
 import InfomationFeature from "./features/Infomation/InfomationFeature";
 import NotFound404 from "./features/NotFound";
 import CssColor from "./features/test/CssColor";
-import SimpleReactFileUpload from "./features/test/FormUpload/SimpleReactFileUpload";
 import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
 import SetValue from "./features/test/SetValue";
 import TestSearch from "./features/test/TestSearch";
-import Socket from "./Socket";
 import "./index.css";
 
 App.propTypes = {};

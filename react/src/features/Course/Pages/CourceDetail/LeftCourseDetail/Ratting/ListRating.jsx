@@ -50,8 +50,8 @@ function ListRating(props) {
   const classes = useStyles();
   return (
     <Grid item className={classes.listRating}>
-      {[1, 2, 3, 4, 5].map(() => (
-        <div className={classes.itemRating}>
+      {[1, 2, 3, 4, 5].map((item, index) => (
+        <div className={classes.itemRating} key={index}>
           <div className={classes.headerItem}>
             <Avatar src="https://i.pinimg.com/originals/3b/0f/83/3b0f83d3269de58c51b5ab9a0106c8ee.jpg" />
             <div className={classes.headerItemRight}>

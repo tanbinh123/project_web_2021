@@ -15,19 +15,23 @@ import CSSInfomationFeature from "./css/CSSInfomationFeature";
 InfomationFeature.propTypes = {};
 function InfomationFeature(props) {
   const classes = CSSInfomationFeature();
-  
 
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   console.log(dataUser);
-  
+
   //!isEmpty(profile)&&console.log("profile", profile);
 
   const { url } = useRouteMatch();
   const { push } = useHistory();
   function handleLogout() {
+    setDataUser({
+      user: {},
+      profile: {},
+      courses: {},
+      token: "",
+    });
     removeLocalStorage();
-    setDataUser({});
-    push("/auth/login");
+    push("/");
   }
 
   return (
@@ -58,7 +62,8 @@ function InfomationFeature(props) {
                       <div>
                         <Link to={`${url}/info`}>
                           <span>
-                            {dataUser?.profile?.fullname || dataUser?.profile?.userName}{" "}
+                            {dataUser?.profile?.fullname ||
+                              dataUser?.profile?.userName}{" "}
                             {dataUser?.profile?.actived ? (
                               <i className="fas fa-check-circle green"></i>
                             ) : (

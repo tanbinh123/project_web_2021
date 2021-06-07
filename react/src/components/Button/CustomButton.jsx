@@ -23,7 +23,7 @@ function CustomButton(props) {
     size = "medium",
     variant = "text",
     fullWidth = false,
-    css = false,
+    css = true,
     color = "default",
     onClick = null,
   } = props;

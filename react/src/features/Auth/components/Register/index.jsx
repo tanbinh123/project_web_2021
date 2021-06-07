@@ -26,15 +26,15 @@ function Register(props) {
     if (!!!data.status) {
       addLocalStorage(data);
       //set token de lay profile
-      const profile = await userApi.profile();
+      const dataLogin = await userApi.login(values);
       setDataUser({
         ...dataUser,
-        user: data.user,
-        courses: data.courses,
-        profile: profile,
+        user: dataLogin.user,
+        courses: dataLogin.courses,
+        profile: dataLogin.profile,
       });
-      addLocalStorage(data, profile);
-      console.log("localStorage", data);
+      addLocalStorage(dataLogin);
+      console.log("localStorage", dataLogin);
     } else {
       enqueueSnackbar(data.data.message.vi, { variant: "error" });
     }

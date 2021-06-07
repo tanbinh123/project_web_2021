@@ -131,7 +131,7 @@ function Home(props) {
           </ul>
         </div>
         <Representative />
-        {!isEmpty(dataUser.user) && <BoughtHome />}
+        <BoughtHome />
       </Container>
     </div>
   );

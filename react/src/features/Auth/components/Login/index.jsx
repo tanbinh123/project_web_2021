@@ -24,13 +24,15 @@ function Login(props) {
     if (!!!data.status) {
       addLocalStorage(data);
       //set token de lay profile
-      
+
       setDataUser({
         ...dataUser,
-        user: data.user,        
+        user: data.user,
         profile: data.profile,
+        courses: data.courses,
+        token: data.courses,
       });
-      addLocalStorage(data, data.profile);
+      addLocalStorage(data);
       console.log("localStorage", data);
     } else {
       enqueueSnackbar(data.data.message.vi, { variant: "error" });
