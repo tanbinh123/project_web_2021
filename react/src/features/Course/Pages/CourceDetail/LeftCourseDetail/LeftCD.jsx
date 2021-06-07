@@ -1,11 +1,11 @@
 import { Grid } from "@material-ui/core";
 import { CheckCircle, FiberManualRecord } from "@material-ui/icons";
+import PropTypes from "prop-types";
 import React from "react";
 import IconBreadcrumbs from "../../../../../components/Breadcrumbs/Breadcrumbs";
 import SimpleAccordion from "../../components/SimpleAccordion/SimpleAccordion";
 import LeftCDCSS from "./CSSLeftCD";
-import PropTypes from "prop-types";
-import Ratting from "./Ratting";
+import RatingCourse from "./RatingCourse";
 
 LeftCD.propTypes = {
   title: PropTypes.string,
@@ -62,7 +62,7 @@ function LeftCD(props) {
           {/* render list courses */}
           <SimpleAccordion parts={parts} />
         </Grid>
-        <Ratting />
+        <RatingCourse />
       </Grid>
     </div>
   );
