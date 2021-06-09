@@ -32,7 +32,11 @@ const courseApi = {
   postLearnings(idCourse, data) {
     const url = `/api/admin/course/${idCourse}/learnings`;
     return axiosClient.post(url, data);
-  },  
+  }, 
+  postPart(idCourse, data) {
+    const url = `/api/admin/course/${idCourse}/part`;
+    return axiosClient.post(url, data);
+  },   
   categories(data) {
     const url = "/course/categories";
     return axiosClient.get(url, data);

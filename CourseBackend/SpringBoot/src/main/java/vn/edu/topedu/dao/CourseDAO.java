@@ -454,5 +454,12 @@ public class CourseDAO {
 		entityManager.refresh(course);
 		System.err.println(String.format("Delete %s row learning", rs));
 	}
+	
+	@Transactional
+	public Part persistPart(Part p) {
+		entityManager.persist(p);
+		entityManager.flush();
+		return  p;
+	}
 
 }

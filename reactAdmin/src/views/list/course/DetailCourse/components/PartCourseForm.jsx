@@ -15,6 +15,7 @@ import CustomSelectForm from "src/components/form/CustomSelectForm";
 import FormParts from "./PartCourse/FormParts";
 import FormCreateLesson from "./PartCourse/FormCreateLesson";
 import FormUploadLesson from "./PartCourse/FormUpdateLesson";
+import courseApi from "src/api/courseApi";
 const useStyles = makeStyles((theme) => ({
   formAddPart: {
     display: "flex",
@@ -58,12 +59,25 @@ function PartCourseForm(props) {
     mode: "onBlur",
     defaultValues: {
       namepart: "",
+      //idCourse: dataCourse?.id
     },
     resolver: yupResolver(schema),
   });
 
-  const handleOnSubmit = (value) => {
-    console.log(value);
+  const handleOnSubmit = (values) => {
+    console.log("PartPost",values);
+
+    (async () => {
+      // const formData = new FormData();
+      // formData.append("image", values.image);
+      const rp = await courseApi.postPart(dataCourse.id, values);
+      if (!rp.status) {
+        console.log(rp);
+
+        //setDataLearning(rp.learnings);
+        //setUpdate(true);
+      }
+    })();
   };
   const [indexPart, setIndexPart] = useState(() => {
     return Array.from(dataCourse.parts).map((item, index) => ({

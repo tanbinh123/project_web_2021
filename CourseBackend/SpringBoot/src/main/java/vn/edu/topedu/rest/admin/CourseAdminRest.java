@@ -31,6 +31,7 @@ import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.course.full.Learning;
+import vn.edu.topedu.entity.course.full.Part;
 import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
@@ -142,7 +143,7 @@ public class CourseAdminRest {
 	@PostMapping(value="/{fullcourse}")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> sdfdasdf(HttpServletRequest httpServletRequest, 
+	public ResponseEntity<Object> postBase(HttpServletRequest httpServletRequest, 
 			Authentication authentication,	
 			@PathVariable FullCourse fullcourse,
 			@RequestBody Map<String,String> body 
@@ -177,7 +178,7 @@ public class CourseAdminRest {
 	@PostMapping(value="/{fullcourse}/learnings")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> ada(HttpServletRequest httpServletRequest, 
+	public ResponseEntity<Object> postLearning(HttpServletRequest httpServletRequest, 
 			Authentication authentication,	
 			@PathVariable FullCourse fullcourse,
 			@RequestBody List<Learning> learnings 
@@ -202,6 +203,45 @@ public class CourseAdminRest {
 					}
 					//fullcourse.setLearnings(learnings);
 					return ResponseEntity.ok(fullcourse);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
+	
+	
+	
+	
+	@PostMapping(value="/{fullcourse}/part")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> postPart(HttpServletRequest httpServletRequest, 
+			Authentication authentication,	
+			@PathVariable FullCourse fullcourse,
+			@RequestBody Map<String,String> body 
+			) {
+		System.out.println("---------------------------------");
+		System.out.println(String.format("namepart: %s", body.get("namepart")));
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				Part part= new Part();
+				part.setCourseId(fullcourse.getId());
+				courseDAO.persistPart(part);
+				fullcourse.getParts().add(part);
+				//fullcourse.setTitle(body.get("title"));
+				fullcourse.setUpdateAt(new Date());
+				try {
+					FullCourse rs = courseDAO.merge(fullcourse);
+					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+					
+					return ResponseEntity.ok(rs);
 				} catch (Exception e) {
 					e.printStackTrace();
 					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
