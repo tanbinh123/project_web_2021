@@ -9,7 +9,9 @@ import CustomButtonRed from "src/components/CustomButtonRed";
 import CustomInput from "src/components/CustomInput";
 import CustomSelectForm from "src/components/form/CustomSelectForm";
 import { isEmpty } from "src/Tool/Tools";
+
 import * as yup from "yup";
+import { GolfCourseOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(() => ({
   formAddPart: {
@@ -75,6 +77,19 @@ function FormUpdateLesson(props) {
   const handleOnSubmit = (value) => {
     //todo hoang todo
     console.log(value);
+
+    (async () => {
+      // const formData = new FormData();
+      // formData.append("image", values.image);
+      // pass param courseId, partId
+     /*  const rp = await courseApi.updatePart(dataCourse.id, partId , values);
+      if (!rp.status) {
+        console.log(rp);
+
+        //setDataLearning(rp.learnings);
+        //setUpdate(true);
+      } */
+    })();
   };
   const handleChangeImg = () => {
     const inputFile = document.getElementById(`input-video-update-${item.id}`);

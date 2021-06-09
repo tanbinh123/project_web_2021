@@ -225,6 +225,7 @@ public class CourseAdminRest {
 			@RequestBody Map<String,String> body 
 			) {
 		System.out.println("---------------------------------");
+		String title=body.get("namepart");
 		System.out.println(String.format("namepart: %s", body.get("namepart")));
 		
 		if (authentication != null) {
@@ -233,6 +234,8 @@ public class CourseAdminRest {
 			if (appUser != null) {				
 				Part part= new Part();
 				part.setCourseId(fullcourse.getId());
+				part.setTitle(title);
+//				part.set
 				courseDAO.persistPart(part);
 				fullcourse.getParts().add(part);
 				//fullcourse.setTitle(body.get("title"));
@@ -250,5 +253,45 @@ public class CourseAdminRest {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
 	}
+	
+	@PostMapping(value="/{fullcourse}/{part}/")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> postPart(HttpServletRequest httpServletRequest, 
+			Authentication authentication,	
+			@PathVariable FullCourse fullcourse,
+			@PathVariable Part part,
+			@RequestBody Map<String,String> body 
+			) {
+		System.out.println("---------------------------------");
+		if(!part.getCourseId().equals(fullcourse.getId())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Course not contain part.", "Part không thuộc về khóa học này"));
+		}
+		String title=body.get("namepart");
+		System.out.println(String.format("namepart: %s", title));
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				part.setTitle(title);
+//				part.set
+				courseDAO.mergePart(part);
+				fullcourse.getParts().add(part);
+				//fullcourse.setTitle(body.get("title"));
+				fullcourse.setUpdateAt(new Date());
+				try {
+					FullCourse rs = courseDAO.merge(fullcourse);
+					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+					
+					return ResponseEntity.ok(rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+
 
 }

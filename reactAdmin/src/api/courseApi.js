@@ -36,7 +36,11 @@ const courseApi = {
   postPart(idCourse, data) {
     const url = `/api/admin/course/${idCourse}/part`;
     return axiosClient.post(url, data);
-  },   
+  },  
+  updatePart(idCourse, idPart, data) {
+    const url = `/api/admin/course/${idCourse}/${idPart}`;
+    return axiosClient.post(url, data);
+  },  
   categories(data) {
     const url = "/course/categories";
     return axiosClient.get(url, data);
