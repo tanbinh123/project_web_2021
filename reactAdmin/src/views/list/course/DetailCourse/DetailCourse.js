@@ -19,9 +19,8 @@ const DetailCourse = () => {
       setDataCourse(res);
     })();
   }, []);
-  const handleChangeDataCourse = async () => {
-    const res = await courseApi.get(id);
-    setDataCourse(res);
+  const handleChangeDataCourse = (value) => {
+    setDataCourse(value);
   };
   return (
     <>

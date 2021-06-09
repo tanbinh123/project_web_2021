@@ -1,12 +1,14 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CustomButton from "src/components/CustomButton";
 import CustomInput from "src/components/CustomInput";
 import courseApi from "src/api/courseApi";
 import * as yup from "yup";
+import { useSnackbar } from "notistack";
+import { convertVND, format1 } from "src/Tool/Tools";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
     },
   },
+  price: {},
   [theme.breakpoints.down("md")]: {
     form: {
       "& > div": {
@@ -39,11 +42,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const schema = yup.object().shape({
-  // firstName: yup.string().required(),
+  title: yup.string().required("Vui lòng nhập tiêu đề"),
+  price: yup
+    .string()
+    .required("Vui lòng nhập giá tiền")
+    .test("check number price", "Vui lòng nhập đúng kiểu giá tiền", (price) => {
+      const regularExp = /^\d+$/;
+      if (price.match(regularExp)) {
+        return true;
+      } else {
+        return false;
+      }
+    }),
 });
 function BaseCourseForm(props) {
   const classes = useStyles();
   const { dataCourse = {}, changeDataCourse = null } = props;
+  const { enqueueSnackbar } = useSnackbar();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -58,8 +73,14 @@ function BaseCourseForm(props) {
     (async () => {
       // const formData = new FormData();
       // formData.append("image", values.image);
-      const rp=await courseApi.post(dataCourse?.id,values);
-      console.log(rp);
+      try {
+        const rp = await courseApi.post(dataCourse?.id, values);
+        // console.log(rp);
+        if (changeDataCourse) changeDataCourse(rp);
+        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+      } catch (error) {
+        enqueueSnackbar(error.message, { variant: "error" });
+      }
     })();
   };
   return (
@@ -84,12 +105,15 @@ function BaseCourseForm(props) {
           <div>
             <span>Giá</span>
             <CustomInput
-              type="number"
               name="price"
               title="Giá khóa học"
               label="Giá khóa học"
               form={form}
             />
+          </div>
+          <div className={classes.price}>
+            <span>Hiển thị giá tiền</span>
+            <span>{convertVND(form.watch("price"))}</span>
           </div>
           <div>
             <span>Mô tả</span>

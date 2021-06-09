@@ -1,12 +1,13 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { makeStyles } from "@material-ui/core";
+import { LinearProgress, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import CustomButton from "src/components/CustomButton";
 import * as yup from "yup";
 import SimpleDialog from "./SimpleDialog";
 import courseApi from "src/api/courseApi";
+import { useSnackbar } from "notistack";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -58,6 +59,8 @@ const schema = yup.object().shape({
 });
 function DemoCourseForm(props) {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
+  const [progress, setProgress] = useState(false);
   const { dataCourse = {}, changeDataCourse = null } = props;
   const [demoVideo, setDemoVideo] = useState(dataCourse.demo.urlVideo);
   const form = useForm({
@@ -71,10 +74,19 @@ function DemoCourseForm(props) {
     console.log(values);
 
     (async () => {
-      const formData = new FormData();
-      formData.append("video", values.image);
-      const rp=await courseApi.uploadNewVideoDemo(dataCourse?.id,formData);
-      console.log(rp);
+      try {
+        const formData = new FormData();
+        formData.append("video", values.image);
+        setProgress(true);
+        const rp = await courseApi.uploadNewVideoDemo(dataCourse?.id, formData);
+        setProgress(false);
+        // console.log(rp);
+        if (changeDataCourse) changeDataCourse(rp);
+        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+      } catch (error) {
+        enqueueSnackbar(error.message, { variant: "error" });
+        setProgress(false);
+      }
     })();
   };
   const [open, setOpen] = useState(false);
@@ -98,6 +110,7 @@ function DemoCourseForm(props) {
   };
   return (
     <CCard>
+      {progress && <LinearProgress />}
       <CCardHeader>
         <span className="title">Chỉnh sửa video demo</span>
       </CCardHeader>
@@ -107,7 +120,7 @@ function DemoCourseForm(props) {
           onSubmit={form.handleSubmit(handleOnSubmit)}
         >
           <div>
-            <span>Hình xem trước</span>
+            <span>Video xem trước</span>
             <video
               key={demoVideo}
               // autoPlay

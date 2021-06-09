@@ -8,6 +8,7 @@ import CustomButtonRed from "src/components/CustomButtonRed";
 import CustomInput from "src/components/CustomInput";
 import courseApi from "src/api/courseApi";
 import * as yup from "yup";
+import { useSnackbar } from "notistack";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -61,6 +62,7 @@ const schema = yup.object().shape({
 //   }
 function LearningCourseForm(props) {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
   const { dataCourse = {}, changeDataCourse = null } = props;
   const [dataLearning, setDataLearning] = useState(dataCourse.learnings);
   const [isUpdate, setUpdate] = useState(false);
@@ -85,14 +87,14 @@ function LearningCourseForm(props) {
     console.log("Learnings Post", values);
 
     (async () => {
-      // const formData = new FormData();
-      // formData.append("image", values.image);
       const rp = await courseApi.postLearnings(dataCourse.id, values.data);
       if (!rp.status) {
-        console.log(rp);
-
+        // console.log(rp);
+        if (changeDataCourse) changeDataCourse(rp);
+        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
         setDataLearning(rp.learnings);
-        //setUpdate(true);
+      } else {
+        enqueueSnackbar("Cập nhật không thành công", { variant: "error" });
       }
     })();
   };

@@ -8,6 +8,7 @@ import CustomInput from "src/components/CustomInput";
 import * as yup from "yup";
 import courseApi from "src/api/courseApi";
 import SimpleDialog from "./SimpleDialog";
+import { useSnackbar } from "notistack";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -68,6 +69,7 @@ const schema = yup.object().shape({
 });
 function PosterCourseForm(props) {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
   const { dataCourse = {}, changeDataCourse = null } = props;
   const [img, setImg] = useState(dataCourse?.imagePoster?.image);
   const form = useForm({
@@ -80,10 +82,16 @@ function PosterCourseForm(props) {
   const handleOnSubmit = (values) => {
     console.log(values);
     (async () => {
-      const formData = new FormData();
-      formData.append("image", values.image);
-      const rp = await courseApi.uploadNewPoster(dataCourse?.id, formData);
-      console.log(rp);
+      try {
+        const formData = new FormData();
+        formData.append("image", values.image);
+        const rp = await courseApi.uploadNewPoster(dataCourse?.id, formData);
+        // console.log(rp);
+        if (changeDataCourse) changeDataCourse(rp);
+        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+      } catch (error) {
+        enqueueSnackbar(error.message, { variant: "error" });
+      }
     })();
   };
   const [open, setOpen] = useState(false);

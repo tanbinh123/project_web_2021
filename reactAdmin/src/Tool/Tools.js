@@ -16,12 +16,12 @@ export function isEmpty(obj) {
   return JSON.stringify(obj) === JSON.stringify({});
 }
 
-export function convertVND(int) {
-  return int
-    .toLocaleString("vi-VI", {
-      style: "currency",
-      currency: "VND",
-    })
+export function convertVND(value) {
+  return new Intl.NumberFormat("vi-VI", {
+    style: "currency",
+    currency: "VND",
+  })
+    .format(value)
     .replaceAll(".", ",");
 }
 
