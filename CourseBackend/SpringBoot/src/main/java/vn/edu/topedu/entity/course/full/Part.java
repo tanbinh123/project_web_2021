@@ -27,7 +27,7 @@ public class Part {
 	//@JsonIgnore
 	private Long id;
 	@Column(name = "title", nullable = false)
-	private String title;
+	private String title ="";
 	
 	@Column(name = "course_id", nullable = false)
 	private Long courseId = Long.valueOf(0);

@@ -124,6 +124,13 @@ public class CourseDAO {
 		query.setParameter("id", idCourse);
 		return (FullCourse) query.getSingleResult();
 	}
+	public Part getPart(Long idCourse) {
+		String sql = "Select c from " + Part.class.getName() + " c " //
+				+ " where c.deleted=0 and c.id= :id ";
+		Query query = this.entityManager.createQuery(sql, Part.class);
+		query.setParameter("id", idCourse);
+		return (Part) query.getSingleResult();
+	}
 
 	public Course getCourse(Long idCourse) {
 		String sql = "Select c from " + Course.class.getName() + " c " //
@@ -458,6 +465,12 @@ public class CourseDAO {
 	@Transactional
 	public Part persistPart(Part p) {
 		entityManager.persist(p);
+		entityManager.flush();
+		return  p;
+	}
+	@Transactional
+	public Part mergePart(Part p) {
+		entityManager.merge(p);
 		entityManager.flush();
 		return  p;
 	}
