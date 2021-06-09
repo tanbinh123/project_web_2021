@@ -9,7 +9,7 @@ import CustomButtonRed from "src/components/CustomButtonRed";
 import CustomInput from "src/components/CustomInput";
 import CustomSelectForm from "src/components/form/CustomSelectForm";
 import { isEmpty } from "src/Tool/Tools";
-import courseApi from "src/api/courseApi";
+
 import * as yup from "yup";
 import { GolfCourseOutlined } from "@material-ui/icons";
 
