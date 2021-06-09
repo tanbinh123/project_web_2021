@@ -40,20 +40,14 @@ const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
 function FormParts(props) {
-  const {
-    dataCourse = null,
-    item = null,
-    index = 0,
-    indexPart = [],
-    onSubmit = null,
-  } = props;
+  const { part = {}, index = 0, indexPart = [], onSubmit = null } = props;
   const classes = useStyles();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      idCourse: dataCourse.id,
+      idCourse: part.courseId,
       indexPart: index,
-      titlePart: item.title,
+      titlePart: part.title,
     },
     resolver: yupResolver(schema),
   });

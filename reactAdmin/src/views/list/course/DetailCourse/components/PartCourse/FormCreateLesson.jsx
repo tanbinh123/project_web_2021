@@ -61,14 +61,15 @@ const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
 function FormCreateLesson(props) {
-  const { dataCourse = null } = props;
+  const { part = {} } = props;
   const classes = useStyles();
   const [demoVideo, setDemoVideo] = useState();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      idCourse: dataCourse.id,
+      idCourse: part.courseId,
       description: "",
+      idPart: part.id,
     },
     resolver: yupResolver(schema),
   });
@@ -77,9 +78,7 @@ function FormCreateLesson(props) {
     console.log(value);
   };
   const handleChangeVideo = () => {
-    const inputFile = document.getElementById(
-      `input-video-create-${dataCourse.id}`
-    );
+    const inputFile = document.getElementById(`input-video-create-${part.id}`);
     inputFile.click();
   };
   const handleOnChangeFile = (event) => {
@@ -112,7 +111,7 @@ function FormCreateLesson(props) {
             accept="video/*"
             type="file"
             name="avatar"
-            id={`input-video-create-${dataCourse.id}`}
+            id={`input-video-create-${part.id}`}
             onChange={handleOnChangeFile}
             hidden
           />

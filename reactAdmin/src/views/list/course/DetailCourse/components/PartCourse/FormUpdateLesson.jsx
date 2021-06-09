@@ -63,14 +63,16 @@ const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
 function FormUpdateLesson(props) {
-  const { dataCourse = {}, item = {} } = props;
+  const { part = {}, lesson = {} } = props;
   const classes = useStyles();
-  const [demoVideo, setDemoVideo] = useState(item.video.urlVideo);
+  const [demoVideo, setDemoVideo] = useState(lesson.video.urlVideo);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      idCourse: dataCourse.id,
-      description: item.description,
+      idCourse: part.courseId,
+      idLesson: lesson.id,
+      idPart: lesson.partId,
+      description: lesson.description,
     },
     resolver: yupResolver(schema),
   });
@@ -82,7 +84,7 @@ function FormUpdateLesson(props) {
       // const formData = new FormData();
       // formData.append("image", values.image);
       // pass param courseId, partId
-     /*  const rp = await courseApi.updatePart(dataCourse.id, partId , values);
+      /*  const rp = await courseApi.updatePart(dataCourse.id, partId , values);
       if (!rp.status) {
         console.log(rp);
 
@@ -92,7 +94,9 @@ function FormUpdateLesson(props) {
     })();
   };
   const handleChangeImg = () => {
-    const inputFile = document.getElementById(`input-video-update-${item.id}`);
+    const inputFile = document.getElementById(
+      `input-video-update-${lesson.id}`
+    );
     inputFile.click();
   };
   const handleOnChangeFile = (event) => {
@@ -126,7 +130,7 @@ function FormUpdateLesson(props) {
             accept="video/*"
             type="file"
             name="avatar"
-            id={`input-video-update-${item.id}`}
+            id={`input-video-update-${lesson.id}`}
             onChange={handleOnChangeFile}
             hidden
           />

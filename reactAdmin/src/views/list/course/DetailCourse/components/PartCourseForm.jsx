@@ -1,7 +1,7 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CustomButton from "src/components/CustomButton";
 import CustomInput from "src/components/CustomInput";
@@ -16,6 +16,8 @@ import FormParts from "./PartCourse/FormParts";
 import FormCreateLesson from "./PartCourse/FormCreateLesson";
 import FormUploadLesson from "./PartCourse/FormUpdateLesson";
 import courseApi from "src/api/courseApi";
+import { isEmpty } from "src/Tool/Tools";
+import { useSnackbar } from "notistack";
 const useStyles = makeStyles((theme) => ({
   formAddPart: {
     display: "flex",
@@ -54,6 +56,7 @@ const schema = yup.object().shape({
 function PartCourseForm(props) {
   const classes = useStyles();
   const { dataCourse = {}, changeDataCourse = null } = props;
+  const { enqueueSnackbar } = useSnackbar();
   let indexLesson = 1;
   const formAddPart = useForm({
     mode: "onBlur",
@@ -65,17 +68,21 @@ function PartCourseForm(props) {
   });
 
   const handleOnSubmit = (values) => {
-    console.log("PartPost",values);
+    console.log("PartPost", values);
 
     (async () => {
-      // const formData = new FormData();
-      // formData.append("image", values.image);
-      const rp = await courseApi.postPart(dataCourse.id, values);
-      if (!rp.status) {
-        console.log(rp);
-
-        //setDataLearning(rp.learnings);
-        //setUpdate(true);
+      try {
+        const rp = await courseApi.postPart(dataCourse.id, values);
+        if (!rp.status) {
+          console.log(rp);
+          if (changeDataCourse) changeDataCourse(rp);
+          enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+          formAddPart.reset();
+        } else {
+          enqueueSnackbar("Cập nhật không thành công", { variant: "error" });
+        }
+      } catch (error) {
+        enqueueSnackbar(error.message, { variant: "error" });
       }
     })();
   };
@@ -85,7 +92,16 @@ function PartCourseForm(props) {
       title: index + 1,
     }));
   });
-  console.log(indexPart);
+  useEffect(() => {
+    setIndexPart(() => {
+      return Array.from(dataCourse.parts).map((item, index) => ({
+        value: index + 1,
+        title: index + 1,
+      }));
+    });
+  }, [dataCourse]);
+  // console.log(indexPart);
+  // console.log(dataCourse);
   return (
     <CCard>
       <CCardHeader>
@@ -93,43 +109,42 @@ function PartCourseForm(props) {
       </CCardHeader>
       <CCardBody>
         <div className={classes.contentPart}>
-          {Array.from(dataCourse.parts).map((item, index) => (
-            <Accordion key={item.id} className={classes.accordion}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <span className={classes.heading}>
-                  Phần {index + 1} : {item.title}
-                </span>
-              </AccordionSummary>
-              <AccordionDetails>
-                {Array.from(item.lessons).map((item1, index1) => (
-                  <Accordion key={item1.id}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                      <Typography className={classes.heading}>
-                        Bài {indexLesson++} : {item1.description}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <FormUploadLesson dataCourse={dataCourse} item={item1} />
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-                <FormParts
-                  dataCourse={dataCourse}
-                  item={item}
-                  index={index + 1}
-                  indexPart={indexPart}
-                  onSubmit={handleOnSubmit}
-                />
-                <FormCreateLesson
-                  dataCourse={dataCourse}
-                  item={item}
-                  index={index + 1}
-                  indexPart={indexPart}
-                  onSubmit={handleOnSubmit}
-                />
-              </AccordionDetails>
-            </Accordion>
-          ))}
+          {!isEmpty(dataCourse.parts) &&
+            Array.from(dataCourse.parts).map((item, index) => (
+              <Accordion key={item.id} className={classes.accordion}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <span className={classes.heading}>
+                    Phần {index + 1} : {item.title}
+                  </span>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {!isEmpty(item.lessons) &&
+                    Array.from(item.lessons).map((item1, index1) => (
+                      <Accordion key={item1.id}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                          <Typography className={classes.heading}>
+                            Bài {indexLesson++} : {item1.description}
+                          </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <FormUploadLesson lesson={item1} part={item} />
+                        </AccordionDetails>
+                      </Accordion>
+                    ))}
+                  <FormParts
+                    part={item}
+                    index={index + 1}
+                    indexPart={indexPart}
+                    onSubmit={handleOnSubmit}
+                  />
+                  <FormCreateLesson
+                    dataCourse={dataCourse}
+                    part={item}
+                    onSubmit={handleOnSubmit}
+                  />
+                </AccordionDetails>
+              </Accordion>
+            ))}
         </div>
         <form
           className={classes.formAddPart}
