@@ -51,9 +51,33 @@ function FormParts(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
+  const handleOnSubmit = (values) => {
     //todo hoang todo
-    console.log(value);
+    console.log(values);
+
+    (async () => {     
+        const rp = await courseApi.updatePart(part.courseId, part.id , values);
+      if (!rp.status) {
+        console.log(rp);
+
+        //setDataLearning(rp.learnings);
+        //setUpdate(true);
+      } 
+    })();
+  };
+  const deletedPartHanlde = () => {
+    //todo hoang todo
+   
+
+    (async () => {     
+        const rp = await courseApi.deletePart(part.courseId, part.id );
+      if (!rp.status) {
+        console.log(rp);
+
+        //setDataLearning(rp.learnings);
+        //setUpdate(true);
+      } 
+    })();
   };
   return (
     <form
@@ -81,7 +105,7 @@ function FormParts(props) {
       </div>
       <div>
         <CustomButton type="submit" title="Xác nhận" />
-        <CustomButtonRed title="Xóa" />
+        <CustomButtonRed title="Xóa"  onClick={deletedPartHanlde}/>
       </div>
     </form>
   );

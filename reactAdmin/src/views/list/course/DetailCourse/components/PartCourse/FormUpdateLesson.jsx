@@ -76,21 +76,24 @@ function FormUpdateLesson(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
+  const handleOnSubmit = (values) => {
     //todo hoang todo
-    console.log(value);
+    console.log("Update Lesson",values);
 
     (async () => {
-      // const formData = new FormData();
+      const formData = new FormData();
+
+      formData.append("videoCourse", values.videoCourse);
+      formData.append("description", values.description);
       // formData.append("image", values.image);
       // pass param courseId, partId
-      /*  const rp = await courseApi.updatePart(dataCourse.id, partId , values);
+        const rp = await courseApi.updateLesson(part.courseId, part.id,lesson.id , formData);
       if (!rp.status) {
         console.log(rp);
 
         //setDataLearning(rp.learnings);
         //setUpdate(true);
-      } */
+      } 
     })();
   };
   const handleChangeImg = () => {

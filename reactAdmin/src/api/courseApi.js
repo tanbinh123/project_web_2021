@@ -41,11 +41,31 @@ const courseApi = {
     const url = `/api/admin/course/${idCourse}/${idPart}`;
     return axiosClient.post(url, data);
   },  
+  deletePart(idCourse, idPart) {
+    const url = `/api/admin/course/${idCourse}/${idPart}`;
+    return axiosClient.delete(url);
+  }, 
   categories(data) {
     const url = "/course/categories";
     return axiosClient.get(url, data);
   },
-  
+
+  postLesson(idCourse, idPart, data) {
+    const url = `/api/admin/course/${idCourse}/${idPart}/lesson`;
+    return axiosClient.post(url, data,{
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+  }, 
+  updateLesson(idCourse, idPart, idLesson, data) {
+    const url = `/api/admin/course/${idCourse}/${idPart}/${idLesson}`;
+    return axiosClient.post(url, data,{
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+  }, 
  
 };
 

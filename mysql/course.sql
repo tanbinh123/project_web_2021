@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 10/06/2021 00:23:33
+ Date: 10/06/2021 23:36:16
 */
 
 SET NAMES utf8mb4;
@@ -154,7 +154,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 1, 2, '2021-05-25 14:25:29', 1, 1, 1, '2021-05-25 14:25:29');
+INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 1, 2, '2021-06-10 16:35:14', 1, 1, 1, '2021-05-25 14:25:29');
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Tìm hiểu Ganyu 1', 12288000, 5, 0, '2021-06-06 08:04:45', 1, 6, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 14929000, 5, 0, '2021-06-09 17:18:47', 1, 22, 1, '2021-05-19 15:35:12');
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 2, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12');
@@ -379,7 +379,7 @@ DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE `lesson`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `part_id` bigint(20) NOT NULL,
-  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `duration` bigint(20) NULL DEFAULT NULL,
   `video_id` bigint(20) NULL DEFAULT NULL,
   `deleted` bit(1) NULL DEFAULT b'0',
@@ -388,7 +388,7 @@ CREATE TABLE `lesson`  (
   INDEX `part_id`(`part_id`) USING BTREE,
   CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `lesson_ibfk_2` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson
@@ -409,6 +409,8 @@ INSERT INTO `lesson` VALUES (39, 34, 'Làm quen với DevTooll', NULL, 3, b'0');
 INSERT INTO `lesson` VALUES (47, 49, 'Tet', NULL, 3, b'0');
 INSERT INTO `lesson` VALUES (48, 33, 'HTML, CSS là gì?', NULL, 1, b'0');
 INSERT INTO `lesson` VALUES (49, 34, 'Cài đặt môi trường', NULL, 1, b'0');
+INSERT INTO `lesson` VALUES (50, 57, '54515', NULL, 24, b'0');
+INSERT INTO `lesson` VALUES (51, 57, 'Update Lesson', NULL, 25, b'0');
 
 -- ----------------------------
 -- Table structure for ower_course
@@ -458,7 +460,7 @@ CREATE TABLE `part`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `part_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of part
@@ -476,6 +478,8 @@ INSERT INTO `part` VALUES (51, 3, '', 0, 0, b'0');
 INSERT INTO `part` VALUES (52, 3, '12313', 0, 0, b'0');
 INSERT INTO `part` VALUES (53, 3, '123', 0, 0, b'0');
 INSERT INTO `part` VALUES (54, 3, '', 0, 0, b'0');
+INSERT INTO `part` VALUES (55, 1, 'Hoàng Test', 0, 0, b'0');
+INSERT INTO `part` VALUES (57, 1, 'Titel new', 0, 0, b'0');
 
 -- ----------------------------
 -- Table structure for payment
@@ -640,11 +644,6 @@ CREATE TABLE `spring_session`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of spring_session
--- ----------------------------
-INSERT INTO `spring_session` VALUES ('0b09bcaa-48a7-4771-8c30-9c56fc070ea1', '4092d19e-eb62-4698-8dd3-4a167d5053ea', 1623258313365, 1623258313366, 1800, 1623260113366, NULL);
-
--- ----------------------------
 -- Table structure for spring_session_attributes
 -- ----------------------------
 DROP TABLE IF EXISTS `spring_session_attributes`;
@@ -733,7 +732,7 @@ CREATE TABLE `video`  (
   `user_poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`img_poster_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
@@ -746,6 +745,9 @@ INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Serv
 INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 170, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 2, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (22, 'user/admin/video/Trailer game Độc Cô Cửu Kiếm mobile.mp4', NULL, 0, 1, b'1', b'0', '2021-06-06 17:28:26', '2021-06-06 17:28:26', 1);
+INSERT INTO `video` VALUES (23, 'user/admin/video/toystory.mp4', NULL, 0, 0, b'1', b'0', '2021-06-10 16:20:39', '2021-06-10 16:20:39', 1);
+INSERT INTO `video` VALUES (24, 'user/admin/video/toystory.mp4', NULL, 0, 1, b'1', b'0', '2021-06-10 16:22:02', '2021-06-10 16:22:02', 1);
+INSERT INTO `video` VALUES (25, 'user/admin/video/toystory.mp4', NULL, 0, 1, b'1', b'0', '2021-06-10 16:30:09', '2021-06-10 16:30:09', 1);
 
 -- ----------------------------
 -- Triggers structure for table app_user
