@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import courseApi from "src/api/courseApi";
 import CustomButton from "src/components/CustomButton";
 import CustomButtonRed from "src/components/CustomButtonRed";
 import CustomDialogAction from "src/components/CustomDialogAction";
@@ -60,7 +61,7 @@ const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
 function FormUpdateLesson(props) {
-  const { part = {}, lesson = {} } = props;
+  const { part = {}, lesson = {}, changeDataCourse = null } = props;
   const classes = useStyles();
   const [demoVideo, setDemoVideo] = useState(lesson.video.urlVideo);
   const form = useForm({
@@ -73,21 +74,28 @@ function FormUpdateLesson(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
+  const handleOnSubmit = (values) => {
     //todo hoang todo
-    console.log(value);
+    console.log("Update Lesson", values);
 
     (async () => {
-      // const formData = new FormData();
+      const formData = new FormData();
+
+      formData.append("videoCourse", values.videoCourse);
+      formData.append("description", values.description);
       // formData.append("image", values.image);
       // pass param courseId, partId
-      /*  const rp = await courseApi.updatePart(dataCourse.id, partId , values);
+      const rp = await courseApi.updateLesson(
+        part.courseId,
+        part.id,
+        lesson.id,
+        formData
+      );
       if (!rp.status) {
         console.log(rp);
 
-        //setDataLearning(rp.learnings);
-        //setUpdate(true);
-      } */
+        if (changeDataCourse) changeDataCourse(rp);
+      }
     })();
   };
   const handleChangeImg = () => {

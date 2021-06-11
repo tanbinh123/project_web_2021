@@ -61,7 +61,7 @@ const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
 function FormCreateLesson(props) {
-  const { part = {} } = props;
+  const { part = {}, changeDataCourse = null } = props;
   const classes = useStyles();
   const [demoVideo, setDemoVideo] = useState();
   const form = useForm({
@@ -73,9 +73,25 @@ function FormCreateLesson(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
+  const handleOnSubmit = (values) => {
     //todo hoang todo
-    console.log(value);
+    console.log("Post  Lesson: ", values);
+    (async () => {
+      try {
+        const formData = new FormData();
+        formData.append("videoCourse", values.videoCourse);
+        formData.append("description", values.description);
+        //  setProgress(true);
+        const rp = await courseApi.postLesson(part.courseId, part.id, formData);
+        //setProgress(false);
+        console.log(rp);
+        // if (changeDataCourse) changeDataCourse(rp);
+        // enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+      } catch (error) {
+        // enqueueSnackbar(error.message, { variant: "error" });
+        // setProgress(false);
+      }
+    })();
   };
   const handleChangeVideo = () => {
     const inputFile = document.getElementById(`input-video-create-${part.id}`);

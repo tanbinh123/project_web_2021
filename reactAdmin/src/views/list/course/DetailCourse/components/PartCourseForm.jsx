@@ -86,6 +86,9 @@ function PartCourseForm(props) {
       }
     })();
   };
+  const handleChangeDataCourse = (value) => {
+    if (changeDataCourse) changeDataCourse(value);
+  };
   // const [indexPart, setIndexPart] = useState(() => {
   //   return Array.from(dataCourse.parts).map((item, index) => ({
   //     value: index + 1,
@@ -127,7 +130,11 @@ function PartCourseForm(props) {
                           </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                          <FormUploadLesson lesson={item1} part={item} />
+                          <FormUploadLesson
+                            lesson={item1}
+                            part={item}
+                            changeDataCourse={handleChangeDataCourse}
+                          />
                         </AccordionDetails>
                       </Accordion>
                     ))}
@@ -136,11 +143,13 @@ function PartCourseForm(props) {
                     index={index + 1}
                     // indexPart={indexPart}
                     onSubmit={handleOnSubmit}
+                    changeDataCourse={handleChangeDataCourse}
                   />
                   <FormCreateLesson
                     dataCourse={dataCourse}
                     part={item}
                     onSubmit={handleOnSubmit}
+                    changeDataCourse={handleChangeDataCourse}
                   />
                 </AccordionDetails>
               </Accordion>

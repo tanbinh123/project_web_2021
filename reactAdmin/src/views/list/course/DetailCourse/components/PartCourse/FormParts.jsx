@@ -41,7 +41,12 @@ const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
 function FormParts(props) {
-  const { part = {}, index = 0, onSubmit = null } = props;
+  const {
+    part = {},
+    index = 0,
+    onSubmit = null,
+    changeDataCourse = null,
+  } = props;
   // console.log(part);
   //  indexPart = [],
   const classes = useStyles();
@@ -54,16 +59,32 @@ function FormParts(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
+  const handleOnSubmit = (values) => {
     //todo hoang todo
-    console.log(value);
+    console.log(values);
+
+    (async () => {
+      const rp = await courseApi.updatePart(part.courseId, part.id, values);
+      if (!rp.status) {
+        console.log(rp);
+        if (changeDataCourse) changeDataCourse(rp);
+        //setDataLearning(rp.learnings);
+        //setUpdate(true);
+      }
+    })();
   };
   const [isOpen, setOpen] = useState(false);
   const handleOnChangeOpen = () => {
     setOpen(!isOpen);
   };
   const handleDeletePart = async () => {
-    console.log("Hoang TODO");
+    const rp = await courseApi.deletePart(part.courseId, part.id);
+    if (!rp.status) {
+      console.log(rp);
+      if (changeDataCourse) changeDataCourse(rp);
+      //setDataLearning(rp.learnings);
+      //setUpdate(true);
+    }
   };
   return (
     <form
