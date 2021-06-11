@@ -1,14 +1,14 @@
-import { CCard, CCardBody, CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { makeStyles } from "@material-ui/core";
+import { LinearProgress, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import CustomButton from "src/components/CustomButton";
-import CustomInput from "src/components/CustomInput";
 import * as yup from "yup";
-import courseApi from "src/api/courseApi";
 import SimpleDialog from "./SimpleDialog";
+import courseApi from "src/api/courseApi";
 import { useSnackbar } from "notistack";
+import classNames from "classnames";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -27,13 +27,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   center: { display: "flex", justifyContent: "center", alignItems: "center" },
-  posterImage: {
+  videoPlay: {
     width: "50%",
-    cursor: "pointer",
+    height: "auto",
   },
-  posterImageDialog: {
-    width: "100%",
-    margin: "20px 0px 40px 0px",
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  visiable: {
+    visibility: "hidden",
   },
   [theme.breakpoints.down("md")]: {
     form: {
@@ -47,31 +50,35 @@ const useStyles = makeStyles((theme) => ({
       },
       "& > div:last-of-type": {},
     },
-    posterImage: {
-      width: "100%",
-      height: "auto",
-      cursor: "pointer",
-    },
-    posterImageDialog: {
-      width: "100%",
-      margin: "20px 0px 40px 0px",
-    },
     center: {
       display: "flex",
       flexFlow: "row !important",
       justifyContent: "center",
       alignItems: "center",
     },
+    videoPlay: {
+      width: "100%",
+      height: "auto",
+    },
   },
 }));
 const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
-function PosterCourseForm(props) {
+function FDemoCourse(props) {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
-  const { dataCourse = {}, changeDataCourse = null } = props;
-  const [img, setImg] = useState(dataCourse?.imagePoster?.image);
+  const [progress, setProgress] = useState(false);
+  const {
+    nextCurrentStep = null,
+    step = 0,
+    currentStep = 0,
+    prevStep = null,
+    nextStep = null,
+    dataCourse = {},
+    changeDataCourse = null,
+  } = props;
+  const [demoVideo, setDemoVideo] = useState(dataCourse?.demo?.urlVideo);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -81,16 +88,21 @@ function PosterCourseForm(props) {
   });
   const handleOnSubmit = (values) => {
     console.log(values);
+
     (async () => {
       try {
-        const formData = new FormData();
-        formData.append("image", values.image);
-        const rp = await courseApi.uploadNewPoster(dataCourse?.id, formData);
+        if (nextCurrentStep) nextCurrentStep(3);
+        // const formData = new FormData();
+        // formData.append("video", values.image);
+        // setProgress(true);
+        // const rp = await courseApi.uploadNewVideoDemo(dataCourse?.id, formData);
+        // setProgress(false);
         // console.log(rp);
-        if (changeDataCourse) changeDataCourse(rp);
+        // if (changeDataCourse) changeDataCourse(rp);
         enqueueSnackbar("Cập nhật thành công", { variant: "success" });
       } catch (error) {
         enqueueSnackbar(error.message, { variant: "error" });
+        setProgress(false);
       }
     })();
   };
@@ -100,23 +112,24 @@ function PosterCourseForm(props) {
     setOpen(!open);
   };
   const contentSimpleDialog = (
-    <img src={img} className={classes.posterImageDialog} />
+    <img src={demoVideo} className="poster_image_dialog" />
   );
   const handleChangeImg = () => {
-    const inputFile = document.getElementById("input-img");
+    const inputFile = document.getElementById("input-video-demo");
     inputFile.click();
   };
   const handleOnChangeFile = (event) => {
     const file = event.target.files[0];
     console.log(file);
     const tmpImg = URL.createObjectURL(file);
-    setImg(tmpImg);
+    setDemoVideo(tmpImg);
     form.setValue("image", file);
   };
   return (
     <CCard>
+      {progress && <LinearProgress />}
       <CCardHeader>
-        <span className="title">Chỉnh sửa Poster</span>
+        <span className="title">Chỉnh sửa video demo</span>
       </CCardHeader>
       <CCardBody>
         <form
@@ -124,26 +137,31 @@ function PosterCourseForm(props) {
           onSubmit={form.handleSubmit(handleOnSubmit)}
         >
           <div>
-            <span>Hình xem trước</span>
-            <img
-              src={img}
-              className={classes.posterImage}
-              onClick={handleClickOpen}
-            />
+            <span>Video xem trước</span>
+            <video
+              key={demoVideo}
+              // autoPlay
+              muted
+              loop
+              className={classes.videoPlay}
+              controls
+            >
+              <source src={demoVideo} type="video/mp4"></source>
+            </video>
+
             <SimpleDialog
               open={open}
               id={dataCourse?.imagePoster?.id}
               onClose={handleClickOpen}
-              title="Image Poster"
               content={contentSimpleDialog}
             />
           </div>
           <div className={classes.center}>
             <input
-              accept="image/*"
+              accept="video/*"
               type="file"
               name="avatar"
-              id="input-img"
+              id="input-video-demo"
               onChange={handleOnChangeFile}
               hidden
             />
@@ -160,9 +178,26 @@ function PosterCourseForm(props) {
           </div>
         </form>
       </CCardBody>
-      {/* <CCardFooter></CCardFooter> */}
+      <CCardFooter className={classes.footer}>
+        <div className={classNames(step <= 0 && classes.visiable)}>
+          <CustomButton
+            title="Trước"
+            onClick={() => {
+              if (prevStep) prevStep();
+            }}
+          />
+        </div>
+        <div className={classNames(step >= currentStep && classes.visiable)}>
+          <CustomButton
+            title="Sau"
+            onClick={() => {
+              if (nextStep) nextStep();
+            }}
+          />
+        </div>
+      </CCardFooter>
     </CCard>
   );
 }
 
-export default PosterCourseForm;
+export default FDemoCourse;

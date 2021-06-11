@@ -3,10 +3,11 @@ import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import courseApi from "src/api/courseApi";
 import CustomButton from "src/components/CustomButton";
 import CustomButtonRed from "src/components/CustomButtonRed";
-import CustomDialogAction from "src/components/CustomDialogAction";
 import CustomInput from "src/components/CustomInput";
+import CustomSelectForm from "src/components/form/CustomSelectForm";
 import { isEmpty } from "src/Tool/Tools";
 import * as yup from "yup";
 
@@ -59,41 +60,25 @@ const useStyles = makeStyles(() => ({
 const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
-function FormUpdateLesson(props) {
-  const { part = {}, lesson = {} } = props;
+function FormCreateLesson(props) {
+  const { part = {} } = props;
   const classes = useStyles();
-  const [demoVideo, setDemoVideo] = useState(lesson.video.urlVideo);
+  const [demoVideo, setDemoVideo] = useState();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
       idCourse: part.courseId,
-      idLesson: lesson.id,
-      idPart: lesson.partId,
-      description: lesson.description,
+      description: "",
+      idPart: part.id,
     },
     resolver: yupResolver(schema),
   });
   const handleOnSubmit = (value) => {
     //todo hoang todo
     console.log(value);
-
-    (async () => {
-      // const formData = new FormData();
-      // formData.append("image", values.image);
-      // pass param courseId, partId
-      /*  const rp = await courseApi.updatePart(dataCourse.id, partId , values);
-      if (!rp.status) {
-        console.log(rp);
-
-        //setDataLearning(rp.learnings);
-        //setUpdate(true);
-      } */
-    })();
   };
-  const handleChangeImg = () => {
-    const inputFile = document.getElementById(
-      `input-video-update-${lesson.id}`
-    );
+  const handleChangeVideo = () => {
+    const inputFile = document.getElementById(`input-video-create-${part.id}`);
     inputFile.click();
   };
   const handleOnChangeFile = (event) => {
@@ -103,19 +88,12 @@ function FormUpdateLesson(props) {
     setDemoVideo(tmpImg);
     form.setValue("videoCourse", file);
   };
-  const [isOpen, setOpen] = useState(false);
-  const handleOnChangeOpen = () => {
-    setOpen(!isOpen);
-  };
-  const handleDeleteLesson = async () => {
-    console.log("Hoang TODO");
-  };
   return (
     <form
       className={classes.formAddPart}
       onSubmit={form.handleSubmit(handleOnSubmit)}
     >
-      <h3 className={classes.title}>Cập nhật bài học</h3>
+      <h3 className={classes.title}>Thêm mới bài học</h3>
       <div>
         <span>Tiêu đề bài học</span>
         <CustomInput
@@ -133,7 +111,7 @@ function FormUpdateLesson(props) {
             accept="video/*"
             type="file"
             name="avatar"
-            id={`input-video-update-${lesson.id}`}
+            id={`input-video-create-${part.id}`}
             onChange={handleOnChangeFile}
             hidden
           />
@@ -142,7 +120,7 @@ function FormUpdateLesson(props) {
             title="Upload"
             color="secondary"
             variant="contained"
-            onClick={handleChangeImg}
+            onClick={handleChangeVideo}
             css={false}
           />
           <video
@@ -163,22 +141,9 @@ function FormUpdateLesson(props) {
 
       <div>
         <CustomButton type="submit" title="Xác nhận" />
-        <CustomButtonRed title="Xóa bài học" onClick={handleOnChangeOpen} />
-        <CustomDialogAction
-          title={`Bạn có muốn xóa bài ${lesson.description}`}
-          closeDialog={handleOnChangeOpen}
-          isOpen={isOpen}
-          accepct={handleDeleteLesson}
-          id={`delete-lesson-${lesson.id}`}
-          content={
-            <div>
-              Bạn có muốn xóa bài <b>{lesson.description}</b> này không ?
-            </div>
-          }
-        />
       </div>
     </form>
   );
 }
 
-export default FormUpdateLesson;
+export default FormCreateLesson;

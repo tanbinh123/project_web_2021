@@ -1,4 +1,4 @@
-import { CCard, CCardBody, CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
@@ -9,6 +9,7 @@ import * as yup from "yup";
 import courseApi from "src/api/courseApi";
 import SimpleDialog from "./SimpleDialog";
 import { useSnackbar } from "notistack";
+import classNames from "classnames";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -34,6 +35,13 @@ const useStyles = makeStyles((theme) => ({
   posterImageDialog: {
     width: "100%",
     margin: "20px 0px 40px 0px",
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  visiable: {
+    visibility: "hidden",
   },
   [theme.breakpoints.down("md")]: {
     form: {
@@ -67,11 +75,19 @@ const useStyles = makeStyles((theme) => ({
 const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
-function PosterCourseForm(props) {
+function FPosterCourse(props) {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
-  const { dataCourse = {}, changeDataCourse = null } = props;
-  const [img, setImg] = useState(dataCourse?.imagePoster?.image);
+  const {
+    nextCurrentStep = null,
+    step = 0,
+    currentStep = 0,
+    prevStep = null,
+    nextStep = null,
+    dataCourse = {},
+    changeDataCourse = null,
+  } = props;
+  const [img, setImg] = useState();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -79,20 +95,20 @@ function PosterCourseForm(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (values) => {
+  const handleOnSubmit = async (values) => {
     console.log(values);
-    (async () => {
-      try {
-        const formData = new FormData();
-        formData.append("image", values.image);
-        const rp = await courseApi.uploadNewPoster(dataCourse?.id, formData);
-        // console.log(rp);
-        if (changeDataCourse) changeDataCourse(rp);
-        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
-      } catch (error) {
-        enqueueSnackbar(error.message, { variant: "error" });
-      }
-    })();
+    if (nextCurrentStep) nextCurrentStep(2);
+    // try {
+    //   const formData = new FormData();
+    //   formData.append("image", values.image);
+    //   const rp = await courseApi.uploadNewPoster(dataCourse?.id, formData);
+    //   // console.log(rp);
+    //   if (changeDataCourse) changeDataCourse(rp);
+    //   if (nextCurrentStep) nextCurrentStep();
+    //   enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+    // } catch (error) {
+    //   enqueueSnackbar(error.message, { variant: "error" });
+    // }
   };
   const [open, setOpen] = useState(false);
 
@@ -132,7 +148,7 @@ function PosterCourseForm(props) {
             />
             <SimpleDialog
               open={open}
-              id={dataCourse?.imagePoster?.id}
+              id={`form-create-course-poster`}
               onClose={handleClickOpen}
               title="Image Poster"
               content={contentSimpleDialog}
@@ -160,9 +176,26 @@ function PosterCourseForm(props) {
           </div>
         </form>
       </CCardBody>
-      {/* <CCardFooter></CCardFooter> */}
+      <CCardFooter className={classes.footer}>
+        <div className={classNames(step <= 0 && classes.visiable)}>
+          <CustomButton
+            title="Trước"
+            onClick={() => {
+              if (prevStep) prevStep();
+            }}
+          />
+        </div>
+        <div className={classNames(step >= currentStep && classes.visiable)}>
+          <CustomButton
+            title="Sau"
+            onClick={() => {
+              if (nextStep) nextStep();
+            }}
+          />
+        </div>
+      </CCardFooter>
     </CCard>
   );
 }
 
-export default PosterCourseForm;
+export default FPosterCourse;

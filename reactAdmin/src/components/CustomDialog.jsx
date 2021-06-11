@@ -3,6 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Close } from "@material-ui/icons";
 import React from "react";
+import { isEmpty } from "src/Tool/Tools";
 const useStyles = makeStyles((theme) => ({
   title: {
     "&>h2": {
@@ -21,25 +22,24 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function SimpleDialog(props) {
+function CustomDialog(props) {
   const classes = useStyles();
-  const { onClose, open, content = null, id = 0, title = "" } = props;
+  const { closeDialog, isOpen, content = null, id = "", title = "" } = props;
 
   const handleClose = () => {
-    onClose(!open);
+    closeDialog(!isOpen);
   };
-
   return (
     <Dialog
       onClose={handleClose}
-      aria-labelledby={`simple-dialog-${id}`}
-      open={open}
+      aria-labelledby={`custom-dialog-${id}`}
+      open={isOpen}
     >
-      <DialogTitle className={classes.title} id={`simple-dialog-${id}`}>
+      <DialogTitle className={classes.title} id={`custom-dialog-${id}`}>
         {title} <Close onClick={handleClose} />
       </DialogTitle>
-      <DialogContent>{content && content}</DialogContent>
+      <DialogContent>{!isEmpty(content) && content}</DialogContent>
     </Dialog>
   );
 }
-export default SimpleDialog;
+export default CustomDialog;

@@ -1,4 +1,5 @@
 import React from "react";
+import FCourse from "./views/form/course/FCouse";
 import DetailCourse from "./views/list/course/DetailCourse/DetailCourse";
 
 const Toaster = React.lazy(() =>
@@ -67,6 +68,7 @@ const routes = [
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/list/course", name: "Course", component: Course, exact: true },
   { path: "/list/course/:id", name: "DetailCourse", component: DetailCourse },
+  { path: "/form/course", name: "Form Course", component: FCourse },
   // { path: "/theme", name: "Theme", component: Colors, exact: true },
   // { path: "/theme/colors", name: "Colors", component: Colors },
   // { path: "/theme/typography", name: "Typography", component: Typography },

@@ -7,6 +7,9 @@ import courseApi from "src/api/courseApi";
 import CustomButton from "src/components/CustomButton";
 import CustomButtonRed from "src/components/CustomButtonRed";
 import { DateToString } from "src/Tool/Tools";
+import BlockCourse from "./components/BlockCourse";
+import ImageHTML from "./components/ImageHTML";
+import UnBlockCourse from "./components/UnBlockCourse";
 import "./Course.scss";
 
 const fields = [
@@ -25,6 +28,7 @@ const fields = [
 const Course = () => {
   const [details, setDetails] = useState([]);
   const [dataCourse, setDataCourse] = useState();
+
   useEffect(() => {
     (async () => {
       const res = await courseApi.getAll();
@@ -59,6 +63,7 @@ const Course = () => {
       filter: false,
     },
   ];
+
   return (
     <>
       <CDataTable
@@ -78,11 +83,7 @@ const Course = () => {
               <Avatar src={item.imgAvatar} />
             </td>
           ),
-          thumbnail: (item) => (
-            <td className="tdCenter">
-              <img style={{ height: 50 }} src={item.thumbnail} />
-            </td>
-          ),
+          thumbnail: (item) => <ImageHTML item={item} />,
           updateAt: (item) => (
             <td className="tdCenter">{DateToString(item.updateAt)}</td>
           ),
@@ -123,7 +124,9 @@ const Course = () => {
                   >
                     <CustomButton title="Chi tiết phần học" />
                   </Link>
-                  <CustomButtonRed title="Delete" />
+                  <BlockCourse item={item} />
+                  {/* chi hien 1 trong 2 */}
+                  <UnBlockCourse item={item} />
                 </CCardBody>
               </CCollapse>
             );

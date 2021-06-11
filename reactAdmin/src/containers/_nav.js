@@ -22,6 +22,16 @@ const _nav = [
     to: "/list/course",
     icon: "cil-drop",
   },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Form tạo mới"],
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Tạo mới khóa học",
+    to: "/form/course",
+    icon: "cil-drop",
+  },
   // {
   //   _tag: "CSidebarNavTitle",
   //   _children: ["Theme"],

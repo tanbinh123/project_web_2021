@@ -7,10 +7,15 @@
     text-align: center;
 }
 .detailBody {
-    & > button {
-        margin-right: 20px;
+    & button {
+        margin-left: 20px;
     }
-    & > button:last-of-type {
-        margin-right: 0;
-    }
+}
+.img_thumbnail {
+    width: 100%;
+    margin: 20px 0px 40px 0px;
+}
+.row_image {
+    height: 50px;
+    cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { CCard, CCardBody, CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardFooter, CCardHeader } from "@coreui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
@@ -18,6 +18,7 @@ import FormUploadLesson from "./PartCourse/FormUpdateLesson";
 import courseApi from "src/api/courseApi";
 import { isEmpty } from "src/Tool/Tools";
 import { useSnackbar } from "notistack";
+import classNames from "classnames";
 const useStyles = makeStyles((theme) => ({
   formAddPart: {
     display: "flex",
@@ -48,14 +49,29 @@ const useStyles = makeStyles((theme) => ({
     color: "var(--colorBlack1)",
   },
   accordion: {},
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  visiable: {
+    visibility: "hidden",
+  },
   [theme.breakpoints.down("md")]: {},
 }));
 const schema = yup.object().shape({
   // firstName: yup.string().required(),
 });
-function PartCourseForm(props) {
+function FPartCourse(props) {
   const classes = useStyles();
-  const { dataCourse = {}, changeDataCourse = null } = props;
+  const {
+    nextCurrentStep = null,
+    step = 0,
+    currentStep = 0,
+    prevStep = null,
+    nextStep = null,
+    dataCourse = {},
+    changeDataCourse = null,
+  } = props;
   const { enqueueSnackbar } = useSnackbar();
   let indexLesson = 1;
   const formAddPart = useForm({
@@ -67,41 +83,23 @@ function PartCourseForm(props) {
     resolver: yupResolver(schema),
   });
 
-  const handleOnSubmit = (values) => {
+  const handleOnSubmit = async (values) => {
     console.log("PartPost", values);
-
-    (async () => {
-      try {
-        const rp = await courseApi.postPart(dataCourse.id, values);
-        if (!rp.status) {
-          console.log(rp);
-          if (changeDataCourse) changeDataCourse(rp);
-          enqueueSnackbar("Cập nhật thành công", { variant: "success" });
-          formAddPart.reset();
-        } else {
-          enqueueSnackbar("Cập nhật không thành công", { variant: "error" });
-        }
-      } catch (error) {
-        enqueueSnackbar(error.message, { variant: "error" });
-      }
-    })();
+    if (nextCurrentStep) nextCurrentStep(5);
+    // try {
+    //   const rp = await courseApi.postPart(dataCourse.id, values);
+    //   if (!rp.status) {
+    //     console.log(rp);
+    //     if (changeDataCourse) changeDataCourse(rp);
+    //     enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+    //     formAddPart.reset();
+    //   } else {
+    //     enqueueSnackbar("Cập nhật không thành công", { variant: "error" });
+    //   }
+    // } catch (error) {
+    //   enqueueSnackbar(error.message, { variant: "error" });
+    // }
   };
-  // const [indexPart, setIndexPart] = useState(() => {
-  //   return Array.from(dataCourse.parts).map((item, index) => ({
-  //     value: index + 1,
-  //     title: index + 1,
-  //   }));
-  // });
-  // useEffect(() => {
-  //   setIndexPart(() => {
-  //     return Array.from(dataCourse.parts).map((item, index) => ({
-  //       value: index + 1,
-  //       title: index + 1,
-  //     }));
-  //   });
-  // }, [dataCourse]);
-  // console.log(indexPart);
-  // console.log(dataCourse);
   return (
     <CCard>
       <CCardHeader>
@@ -160,9 +158,26 @@ function PartCourseForm(props) {
           <CustomButton type="submit" title="Thêm" />
         </form>
       </CCardBody>
-      {/* <CCardFooter></CCardFooter> */}
+      <CCardFooter className={classes.footer}>
+        <div className={classNames(step <= 0 && classes.visiable)}>
+          <CustomButton
+            title="Trước"
+            onClick={() => {
+              if (prevStep) prevStep();
+            }}
+          />
+        </div>
+        <div className={classNames(step >= currentStep && classes.visiable)}>
+          <CustomButton
+            title="Sau"
+            onClick={() => {
+              if (nextStep) nextStep();
+            }}
+          />
+        </div>
+      </CCardFooter>
     </CCard>
   );
 }
 
-export default PartCourseForm;
+export default FPartCourse;
