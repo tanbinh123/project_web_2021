@@ -187,6 +187,13 @@ public class CourseDAO {
 	public CategoryEntity findCatetoryById(Integer id) {
 		return this.entityManager.find(CategoryEntity.class, id);
 	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public FullCourse persistCourse(FullCourse course) throws Exception {
+		entityManager.persist(course);
+		entityManager.flush();
+		return course;
+	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public FullCourse persistFullCourse(FullCourse course) throws Exception {
@@ -499,6 +506,14 @@ public class CourseDAO {
 	public Part deletePart(Part p) {
 		p.setDeleted(true);
 		mergePart(p);
+		entityManager.flush();
+		return  p;
+	}
+	
+	@Transactional
+	public Lesson deleteLesson(Lesson p) {
+		p.setDeleted(true);
+		mergeLesson(p);
 		entityManager.flush();
 		return  p;
 	}

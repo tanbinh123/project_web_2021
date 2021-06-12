@@ -28,7 +28,16 @@ const courseApi = {
   post(idCourse, data) {
     const url = `/api/admin/course/${idCourse}`;
     return axiosClient.post(url, data);
+  }, 
+  
+  blockCourse(idCourse) {
+    const url = `/api/admin/course/${idCourse}/block`;
+    return axiosClient.post(url);
   },  
+  postNewCourse( data) {
+    const url = `/api/admin/course/new`;
+    return axiosClient.post(url, data);
+  }, 
   postLearnings(idCourse, data) {
     const url = `/api/admin/course/${idCourse}/learnings`;
     return axiosClient.post(url, data);
@@ -65,6 +74,10 @@ const courseApi = {
         "content-type": "multipart/form-data",
       },
     });
+  }, 
+  deleteLesson(idCourse, idPart, idLesson) {
+    const url = `/api/admin/course/${idCourse}/${idPart}/${idLesson}`;
+    return axiosClient.delete(url);
   }, 
  
 };

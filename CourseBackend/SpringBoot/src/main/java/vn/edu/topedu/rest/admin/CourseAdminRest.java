@@ -151,17 +151,51 @@ public class CourseAdminRest {
 			@RequestBody Map<String,String> body 
 			) {
 		System.out.println("---------------------------------");
-		System.out.println(String.format("Title: %s", body.get("title")));
-		System.out.println(String.format("Description: %s", body.get("description")));
-		System.out.println(String.format("Price: %s", body.get("price")));
+		String title=body.get("title");
+		String description=body.get("description");
+		String price=body.get("price");
+		System.out.println(String.format("Title: %s", title));
+		System.out.println(String.format("Description: %s", description));
+		System.out.println(String.format("Price: %s", price));
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {				
 				
-				fullcourse.setDescription(body.get("description"));
-				fullcourse.setPrice(new BigDecimal(body.get("price")));
-				fullcourse.setTitle(body.get("title"));
+				fullcourse.setDescription(description);
+				fullcourse.setPrice(new BigDecimal(price));
+				fullcourse.setTitle(title);
+				fullcourse.setUpdateAt(new Date());
+				try {
+					FullCourse rs = courseDAO.merge(fullcourse);
+					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+					
+					return ResponseEntity.ok(rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
+	@PostMapping(value="/{fullcourse}/block")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> blockCourse(HttpServletRequest httpServletRequest, 
+			Authentication authentication,	
+			@PathVariable FullCourse fullcourse
+			) {
+		System.out.println("---------------------------------");
+		
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				
+				fullcourse.setActived(true);
 				fullcourse.setUpdateAt(new Date());
 				try {
 					FullCourse rs = courseDAO.merge(fullcourse);
@@ -215,35 +249,36 @@ public class CourseAdminRest {
 	}
 	
 	
-	
-	
-	
-	@PostMapping(value="/{fullcourse}/part")
+	@PostMapping(value="/new")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> postPart(HttpServletRequest httpServletRequest, 
+	public ResponseEntity<Object> postNewCourseBase(HttpServletRequest httpServletRequest, 
 			Authentication authentication,	
-			@PathVariable FullCourse fullcourse,
+		
 			@RequestBody Map<String,String> body 
 			) {
 		System.out.println("---------------------------------");
-		String title=body.get("namepart");
-		System.out.println(String.format("namepart: %s", body.get("namepart")));
-		
+		String title=body.get("title");
+		String description=body.get("description");
+		String price=body.get("price");
+		System.out.println(String.format("Title: %s", title));
+		System.out.println(String.format("Description: %s", description));
+		System.out.println(String.format("Price: %s", price));
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {				
-				Part part= new Part();
-				part.setCourseId(fullcourse.getId());
-				part.setTitle(title);
-//				part.set
-				courseDAO.persistPart(part);
-				fullcourse.getParts().add(part);
-				//fullcourse.setTitle(body.get("title"));
+				FullCourse fullcourse= new FullCourse();
+				//=resourceImageDAO.findById(Long.valueOf(2));
+				fullcourse.setUserPosterId(appUser.getId());
+				fullcourse.setUserPoster(appUser);
+				//fullcourse.setImagePosterId(Long.valueOf(2));
+				fullcourse.setDescription(description);
+				fullcourse.setPrice(new BigDecimal(price));
+				fullcourse.setTitle(title);
 				fullcourse.setUpdateAt(new Date());
 				try {
-					FullCourse rs = courseDAO.merge(fullcourse);
+					FullCourse rs = courseDAO.persistCourse(fullcourse);
 					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
 					
 					return ResponseEntity.ok(rs);
@@ -256,201 +291,7 @@ public class CourseAdminRest {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
 	}
 	
-	@PostMapping(value="/{fullcourse}/{part}/lesson" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	@ResponseBody
-	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> postLesson(HttpServletRequest httpServletRequest, 
-			Authentication authentication,	
-			@PathVariable FullCourse fullcourse,
-			@PathVariable Part part,
-			@RequestPart MultipartFile videoCourse,
-			@RequestPart String description
-			) {
-		
-		if(!part.getCourseId().equals(fullcourse.getId())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Course not contain part.", "Part không thuộc về khóa học này"));
-		}
-		System.out.println("---------------------------------");
-		System.out.println(String.format("videoCourse: %s", videoCourse));
-		System.out.println(String.format("description: %s", description));
-		
-		if (authentication != null) {
-			authentication.getName();
-			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
-			if (appUser != null) {				
-				Lesson lesson = new Lesson();
-				lesson.setPartId(part.getId());
-				lesson.setDescription(description);
-				VideoEntity newPoster=null;
-				try {
-					newPoster = videoDAO.uploadVideo(videoCourse, appUser);
-				} catch (Exception e) {
-					return ResponseEntity.badRequest().body(new MessageResponse("Video not upload", "Video không thể tải lên"));
-				}
-				if(newPoster!=null) {
-					lesson.setVideoId(newPoster.getId());
-					lesson.setVideo(newPoster);
-					
-				}
-//				part.set
-				courseDAO.persistLesson(lesson);
-				part.getLessons().add(lesson);
-				//fullcourse.setTitle(body.get("title"));
-				fullcourse.setUpdateAt(new Date());
-				try {
-					FullCourse rs = courseDAO.merge(fullcourse);
-					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
-					
-					return ResponseEntity.ok(rs);
-				} catch (Exception e) {
-					e.printStackTrace();
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
-				}
-			}
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
-	}
 	
-	@PostMapping(value="/{fullcourse}/{part}/{lesson}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	@ResponseBody
-	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> updateLesson(HttpServletRequest httpServletRequest, 
-			Authentication authentication,	
-			@PathVariable FullCourse fullcourse,
-			@PathVariable Part part,
-			@PathVariable Lesson lesson,
-			@RequestPart(required = false) MultipartFile videoCourse,
-			@RequestPart String description
-			) {
-		
-		if(!part.getCourseId().equals(fullcourse.getId())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Course not contain part.", "Part không thuộc về khóa học này"));
-		}
-		if(!lesson.getPartId().equals(part.getId())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Part not contain lesson.", "Lesson không thuộc về phần học này"));
-		}
-		System.out.println("---------------------------------");
-		System.out.println(String.format("videoCourse: %s", videoCourse));
-		System.out.println(String.format("description: %s", description));
-		
-		if (authentication != null) {
-			authentication.getName();
-			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
-			if (appUser != null) {	
-				
-				lesson.setDescription(description);
-				if(videoCourse!=null) {
-					VideoEntity newPoster=null;
-					try {
-						newPoster = videoDAO.uploadVideo(videoCourse, appUser);
-					} catch (Exception e) {
-						return ResponseEntity.badRequest().body(new MessageResponse("Video not upload", "Video không thể tải lên"));
-					}
-					if(newPoster!=null) {
-						lesson.setVideoId(newPoster.getId());
-						lesson.setVideo(newPoster);
-						
-					}
-					
-				}
-//				part.set
-				courseDAO.mergeLesson(lesson);
-				part.getLessons().add(lesson);
-				//fullcourse.setTitle(body.get("title"));
-				fullcourse.setUpdateAt(new Date());
-				try {
-					FullCourse rs = courseDAO.merge(fullcourse);
-					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
-					
-					return ResponseEntity.ok(rs);
-				} catch (Exception e) {
-					e.printStackTrace();
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
-				}
-			}
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
-	}
 	
-	@PostMapping(value="/{fullcourse}/{part}")
-	@ResponseBody
-	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> postPart(HttpServletRequest httpServletRequest, 
-			Authentication authentication,	
-			@PathVariable FullCourse fullcourse,
-			@PathVariable Part part,
-			@RequestBody Map<String,String> body 
-			) {
-		System.out.println("---------------------------------");
-		if(!part.getCourseId().equals(fullcourse.getId())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Course not contain part.", "Part không thuộc về khóa học này"));
-		}
-		String titlePart=body.get("titlePart");
-		System.out.println(String.format("titlePart: %s", titlePart));
-		
-		if (authentication != null) {
-			authentication.getName();
-			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
-			if (appUser != null) {				
-				part.setTitle(titlePart);
-//				part.set
-				courseDAO.mergePart(part);
-				fullcourse.getParts().add(part);
-				//fullcourse.setTitle(body.get("title"));
-				fullcourse.setUpdateAt(new Date());
-				try {
-					FullCourse rs = courseDAO.merge(fullcourse);
-					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
-					
-					return ResponseEntity.ok(rs);
-				} catch (Exception e) {
-					e.printStackTrace();
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
-				}
-			}
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
-	}
 	
-	@DeleteMapping(value="/{fullcourse}/{part}")
-	@ResponseBody
-	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> deletePart(HttpServletRequest httpServletRequest, 
-			Authentication authentication,	
-			@PathVariable FullCourse fullcourse,
-			@PathVariable Part part
-			) {
-		System.out.println("---------------------------------");
-		if(!part.getCourseId().equals(fullcourse.getId())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Course not contain part.", "Part không thuộc về khóa học này"));
-		}
-		
-		
-		if (authentication != null) {
-			authentication.getName();
-			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
-			if (appUser != null) {				
-				
-//				part.set
-				courseDAO.deletePart(part);
-				fullcourse.getParts().remove(part);
-				courseDAO.deleteAllPartDeleted();
-				//fullcourse.setTitle(body.get("title"));
-				fullcourse.setUpdateAt(new Date());
-				try {
-					FullCourse rs = courseDAO.merge(fullcourse);
-					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
-					
-					return ResponseEntity.ok(rs);
-				} catch (Exception e) {
-					e.printStackTrace();
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
-				}
-			}
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
-	}
-
-
-
 }

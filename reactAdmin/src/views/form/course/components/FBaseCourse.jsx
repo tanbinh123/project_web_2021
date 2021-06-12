@@ -83,14 +83,16 @@ function FBaseCourse(props) {
     resolver: yupResolver(schema),
   });
   const handleOnSubmit = (values) => {
-    console.log(values);
+    console.log("POST NEW COURSE",values);
     (async () => {
       // const formData = new FormData();
       // formData.append("image", values.image);
       try {
+        const rp = await courseApi.postNewCourse(values);
+        if (!rp.status) {
+          console.log(rp);
+        }
         if (nextCurrentStep) nextCurrentStep(1);
-        // const rp = await courseApi.post(dataCourse?.id, values);
-        // console.log(rp);
         // if (changeDataCourse) changeDataCourse(rp);
         enqueueSnackbar("Cập nhật thành công", { variant: "success" });
       } catch (error) {

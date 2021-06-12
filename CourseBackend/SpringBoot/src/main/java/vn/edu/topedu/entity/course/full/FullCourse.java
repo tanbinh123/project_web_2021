@@ -82,8 +82,19 @@ public class FullCourse extends BaseEntity {
 	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
 	private CategoryEntity category;
 
+	@Column(name = "actived", length = 1, nullable = false)
+	protected Boolean actived = true;
 	
 	
+	
+	public Boolean getActived() {
+		return actived;
+	}
+
+	public void setActived(Boolean actived) {
+		this.actived = actived;
+	}
+
 	public Long getVideoDemoId() {
 		return videoDemoId;
 	}

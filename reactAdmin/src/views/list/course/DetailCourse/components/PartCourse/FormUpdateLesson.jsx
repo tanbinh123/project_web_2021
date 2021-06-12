@@ -116,7 +116,19 @@ function FormUpdateLesson(props) {
     setOpen(!isOpen);
   };
   const handleDeleteLesson = async () => {
-    console.log("Hoang TODO");
+    //console.log("Hoang TODO");
+    console.log("Xóa Bài Học");
+
+    const rp = await courseApi.deleteLesson(
+      part.courseId,
+      part.id,
+      lesson.id
+    );
+       if (!rp.status) {
+        console.log(rp);
+
+      
+    }
   };
   return (
     <form
