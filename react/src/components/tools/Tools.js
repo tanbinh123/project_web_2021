@@ -3,10 +3,10 @@ export function DateToString(date) {
   return `${date1.getDate()}/${date1.getMonth() + 1}/${date1.getFullYear()}`;
 }
 export function isEmpty(obj) {
-  if (obj == "") return true;
-  if (obj == null) return true;
+  if (obj === "") return true;
+  if (obj === null) return true;
   if (Array.isArray(obj)) {
-    if (obj.length == 0) return true;
+    if (obj.length === 0) return true;
   }
   for (var prop in obj) {
     if (obj.hasOwnProperty(prop)) {

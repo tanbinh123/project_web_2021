@@ -9,6 +9,7 @@ import Header from "../../components/header";
 import NotFound404 from "../NotFound";
 import Active from "./components/Active";
 import Actived from "./components/Actived";
+import CourseBoughtFull from "./components/CourseBoughtFull";
 import Edit from "./components/Edit";
 import Info from "./components/Info";
 import CSSInfomationFeature from "./css/CSSInfomationFeature";
@@ -87,6 +88,9 @@ function InfomationFeature(props) {
                     <NavLink to={`${url}/change-password`}>
                       <li> Đổi mật khẩu</li>
                     </NavLink>
+                    <NavLink to={`${url}/courses-bought`}>
+                      <li>Khóa học đã mua</li>
+                    </NavLink>
 
                     <li onClick={handleLogout}>Đăng xuất</li>
                   </ul>
@@ -116,6 +120,11 @@ function InfomationFeature(props) {
                       exact
                     />
                   )}
+                  <Route
+                    path={`${url}/courses-bought`}
+                    component={CourseBoughtFull}
+                    exact
+                  />
                   <Route path={`${url}/`} component={NotFound404} />
                 </Switch>
               </Grid>

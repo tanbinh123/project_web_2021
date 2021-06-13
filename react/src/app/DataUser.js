@@ -7,7 +7,7 @@ export const DataUser = atom({
   default: {
     user: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
     profile: JSON.parse(localStorage.getItem(StorageKeys.PROFILE)) || {},
-    courses: JSON.parse(localStorage.getItem(StorageKeys.COURSES)) || {},
+    courses: JSON.parse(localStorage.getItem(StorageKeys.COURSES)) || [],
     token: localStorage.getItem(StorageKeys.TOKEN) || "",
   },
 });
@@ -25,4 +25,10 @@ export const addLocalStorage = (data) => {
     localStorage.setItem(StorageKeys.COURSES, JSON.stringify(data.courses));
     localStorage.setItem(StorageKeys.PROFILE, JSON.stringify(data.profile));
   }
+};
+export const emptyUser = {
+  user: {},
+  profile: {},
+  courses: [],
+  token: "",
 };

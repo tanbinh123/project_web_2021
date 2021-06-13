@@ -26,7 +26,7 @@ function LeftCD(props) {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-          <IconBreadcrumbs />
+          <IconBreadcrumbs nameCourse={title} />
         </Grid>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
           <div className={classes.introduce}>

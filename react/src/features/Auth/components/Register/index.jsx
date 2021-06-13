@@ -27,12 +27,7 @@ function Register(props) {
       addLocalStorage(data);
       //set token de lay profile
       const dataLogin = await userApi.login(values);
-      setDataUser({
-        ...dataUser,
-        user: dataLogin.user,
-        courses: dataLogin.courses,
-        profile: dataLogin.profile,
-      });
+      setDataUser(dataLogin);
       addLocalStorage(dataLogin);
       console.log("localStorage", dataLogin);
     } else {

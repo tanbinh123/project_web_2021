@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Badge,
   Box,
   IconButton,
   List,
@@ -9,13 +8,7 @@ import {
   makeStyles,
   Popover,
 } from "@material-ui/core";
-import {
-  ArrowDropDown,
-  Bookmark,
-  ExitToApp,
-  Notifications,
-  Person,
-} from "@material-ui/icons";
+import { ArrowDropDown, ExitToApp, Person } from "@material-ui/icons";
 import {
   bindPopover,
   bindTrigger,
@@ -25,6 +18,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { DataUser, removeLocalStorage } from "../../../../app/DataUser";
+import CourseBought from "./components/CourseBought";
 import Notications from "./components/Notications";
 
 const useStyles = makeStyles((theme) => ({
@@ -97,7 +91,7 @@ function RightAppHadLogin(props) {
     setDataUser({
       user: {},
       profile: {},
-      courses: {},
+      courses: [],
       token: "",
     });
     removeLocalStorage();
@@ -174,11 +168,7 @@ function RightAppHadLogin(props) {
       />
       <span className={classes.username}>{dataUser.user.username}</span>
       <Box className={classes.lineBorder}></Box>
-      <IconButton color="inherit" className={classes.buttons}>
-        <Badge badgeContent={4} color="secondary">
-          <Bookmark />
-        </Badge>
-      </IconButton>
+      <CourseBought />
       <Notications />
       <IconButton
         className={classes.buttons}

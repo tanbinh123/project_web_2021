@@ -70,7 +70,7 @@ function ListCourse(props) {
       _limit: Number.parseInt(params._limit) || 9,
       // _sort: params._sort || "updateAt",
       // _order: params._order || "desc",
-      _sort: params._sort || "updateAt:desc",
+      // _sort: params._sort || "updateAt:desc",
     };
   }, [location.search]);
   useEffect(() => {
@@ -90,7 +90,10 @@ function ListCourse(props) {
   useEffect(() => {
     (async () => {
       try {
+        console.log(queryParams);
         const { data, pagination } = await courseApi.getAll(queryParams);
+        console.log(data);
+        console.log(pagination);
         setDataCourse(data);
         setPagination(pagination);
         // console.log("fetch page courses");

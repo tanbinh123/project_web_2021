@@ -30,12 +30,12 @@ function BoughtHome(props) {
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   return (
     <div className={classes.root}>
-      {!isEmpty(dataUser.courses) && (
+      {
         <div className={classes.text}>
           <h2>Khóa học Đã mua</h2>
           <h5>Những khóa học mà bạn đã mua</h5>
         </div>
-      )}
+      }
       <Grid container spacing={3}>
         {Array.from(dataUser.courses).map((x, index) => (
           <Grid key={index} item xl={4} lg={4} md={6} sm={6} xs={12}>

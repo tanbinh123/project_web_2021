@@ -13,7 +13,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { DataUser, removeLocalStorage } from "../../app/DataUser";
+import { DataUser, emptyUser, removeLocalStorage } from "../../app/DataUser";
 import { isEmpty } from "../tools/Tools";
 const useStyles = makeStyles({
   list: {
@@ -128,7 +128,7 @@ function CustomDrawer(props) {
           <ListItem
             button
             onClick={() => {
-              setDataUser({ user: {} });
+              setDataUser(emptyUser);
               removeLocalStorage();
               push("/");
             }}

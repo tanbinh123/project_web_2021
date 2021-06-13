@@ -25,13 +25,7 @@ function Login(props) {
       addLocalStorage(data);
       //set token de lay profile
 
-      setDataUser({
-        ...dataUser,
-        user: data.user,
-        profile: data.profile,
-        courses: data.courses,
-        token: data.courses,
-      });
+      setDataUser(data);
       addLocalStorage(data);
       console.log("localStorage", data);
     } else {

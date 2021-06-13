@@ -70,7 +70,7 @@ function CourseDetail(props) {
         if (!isEmpty(dataUser.token)) {
           const res1 = await courseApi.check({ idCourse: idCourse });
           console.log("check", res1);
-          if (res1.status == 400) {
+          if (res1.status == 400 || res1.status == 500) {
             const res = await courseApi.get(idCourse);
             // console.log("review", res);
             if (res.status == 500) {
