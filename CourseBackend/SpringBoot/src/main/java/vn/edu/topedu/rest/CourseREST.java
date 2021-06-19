@@ -72,6 +72,7 @@ public class CourseREST implements IMyHost {
 			String bf = getUrl(httpServletRequest);
 			//c.setBeforeResource();
 			c.getAppUser().getAvatar().setBeforeResource(bf);
+			if(c.getPoster()!=null)
 			c.getPoster().setBeforeResource(bf);
 			
 

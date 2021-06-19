@@ -124,7 +124,10 @@ public class Course extends AHasPoster implements JsonResponse {
 	}
 	
 	public String getThumbnail() {
-		return this.poster.getImage();
+		if(this.poster!=null)
+		return this.poster.getImage();else {
+			return null;
+		}
 	}
 	
 	
@@ -137,7 +140,10 @@ public class Course extends AHasPoster implements JsonResponse {
 	}
 	
 	public String getCategoryName() {
-		return this.category.getName();
+		if(this.category!=null)
+		return this.category.getName();else {
+			return null;
+		}
 	}
 	
 	
