@@ -29,6 +29,7 @@ public class CourseDAO {
 
 	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search) {
 		--_page;
+		if(_page<0)_page=0;
 		if (sort == "" || sort == null)
 			sort = "id:asc";
 
