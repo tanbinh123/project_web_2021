@@ -3,19 +3,20 @@ export function DateToString(date) {
   return `${date1.getDate()}/${date1.getMonth() + 1}/${date1.getFullYear()}`;
 }
 export function isEmpty(obj) {
-  if (obj == "") return true;
-  if (obj == null) return true;
-  if (Array.isArray(obj)) {
-    if (obj.length == 0) return true;
+  if (obj === "") {
+    return true;
+  } else if (obj === null) {
+    return true;
+  } else if (obj === undefined) {
+    return true;
+  } else if (Array.isArray(obj)) {
+    if (obj.length === 0) return true;
+  } else if (obj === {}) {
+    return true;
+  } else {
+    return false;
   }
-  for (var prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
-      return false;
-    }
-  }
-  return JSON.stringify(obj) === JSON.stringify({});
 }
-
 export function convertVND(value) {
   return new Intl.NumberFormat("vi-VI", {
     style: "currency",
