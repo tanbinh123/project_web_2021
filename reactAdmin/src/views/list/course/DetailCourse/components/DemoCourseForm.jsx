@@ -62,7 +62,7 @@ function DemoCourseForm(props) {
   const { enqueueSnackbar } = useSnackbar();
   const [progress, setProgress] = useState(false);
   const { dataCourse = {}, changeDataCourse = null } = props;
-  const [demoVideo, setDemoVideo] = useState(dataCourse.demo.urlVideo);
+  const [demoVideo, setDemoVideo] = useState(dataCourse?.demo?.urlVideo);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {

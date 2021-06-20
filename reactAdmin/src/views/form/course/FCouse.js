@@ -1,13 +1,9 @@
-import { CCard, CCardFooter } from "@coreui/react";
 import { Grid, makeStyles } from "@material-ui/core";
-import classNames from "classnames";
 import React, { useState } from "react";
-import CustomButton from "src/components/CustomButton";
 import FBaseCourse from "./components/FBaseCourse";
 import FDemoCourse from "./components/FDemoCourse";
 import FLearningCourse from "./components/FLearningCourse";
 import FPartCourse from "./components/FPartCourse";
-import FPosterCourse from "./components/FPosterCourse";
 
 const FCourse = () => {
   const classes = makeStyles(() => ({
@@ -40,6 +36,9 @@ const FCourse = () => {
   // step={step}
   // prevStep={handlePrevStep}
   // nextStep={handleNextStep}
+  const handleUpdateCourse = (values) => {
+    setDataCourse(values);
+  };
   return (
     <>
       <Grid container className="root" spacing={3}>
@@ -51,20 +50,11 @@ const FCourse = () => {
               currentStep={currentStep}
               prevStep={handlePrevStep}
               nextStep={handleNextStep}
+              dataCourse={dataCourse}
+              updateCourse={handleUpdateCourse}
             />
           )}
           {step === 1 && (
-            <FPosterCourse
-              nextCurrentStep={handleIncreaseCurrentStep}
-              step={step}
-              currentStep={currentStep}
-              prevStep={handlePrevStep}
-              nextStep={handleNextStep}
-              dataCourse={dataCourse}
-              changeDataCourse={changeDataCourse}
-            />
-          )}
-          {step === 2 && (
             <FDemoCourse
               nextCurrentStep={handleIncreaseCurrentStep}
               step={step}
@@ -72,10 +62,10 @@ const FCourse = () => {
               prevStep={handlePrevStep}
               nextStep={handleNextStep}
               dataCourse={dataCourse}
-              changeDataCourse={changeDataCourse}
+              updateCourse={handleUpdateCourse}
             />
           )}
-          {step === 3 && (
+          {step === 2 && (
             <FLearningCourse
               nextCurrentStep={handleIncreaseCurrentStep}
               step={step}
@@ -83,10 +73,10 @@ const FCourse = () => {
               prevStep={handlePrevStep}
               nextStep={handleNextStep}
               dataCourse={dataCourse}
-              changeDataCourse={changeDataCourse}
+              updateCourse={handleUpdateCourse}
             />
           )}
-          {step === 4 && (
+          {step === 3 && (
             <FPartCourse
               nextCurrentStep={handleIncreaseCurrentStep}
               step={step}
@@ -94,7 +84,7 @@ const FCourse = () => {
               prevStep={handlePrevStep}
               nextStep={handleNextStep}
               dataCourse={dataCourse}
-              changeDataCourse={changeDataCourse}
+              updateCourse={handleUpdateCourse}
             />
           )}
         </Grid>

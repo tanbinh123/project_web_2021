@@ -106,14 +106,17 @@ function FBaseCourse(props) {
     currentStep = 0,
     prevStep = null,
     nextStep = null,
+    dataCourse = {},
+    updateCourse = null,
   } = props;
   const { enqueueSnackbar } = useSnackbar();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      title: "",
-      price: "",
-      description: "",
+      title: dataCourse?.title || "",
+      price: dataCourse?.price || "",
+      description: dataCourse?.description || "",
+      categorie: dataCourse?.category?.id || "",
     },
     resolver: yupResolver(schema),
   });
@@ -143,7 +146,7 @@ function FBaseCourse(props) {
           console.log(rp);
         }
         if (nextCurrentStep) nextCurrentStep(1);
-
+        if (updateCourse) updateCourse(rp);
         // if (changeDataCourse) changeDataCourse(rp);
         enqueueSnackbar("Tạo khóa học thành công", { variant: "success" });
       } catch (error) {
@@ -160,7 +163,7 @@ function FBaseCourse(props) {
       }))
     );
   });
-  const [img, setImg] = useState();
+  const [img, setImg] = useState(dataCourse?.imagePoster?.image);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -180,6 +183,7 @@ function FBaseCourse(props) {
     setImg(tmpImg);
     form.setValue("imageThumbnail", file);
   };
+  console.log(dataCourse);
   return (
     <CCard>
       <CCardHeader>

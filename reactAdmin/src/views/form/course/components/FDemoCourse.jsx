@@ -9,6 +9,7 @@ import SimpleDialog from "./SimpleDialog";
 import courseApi from "src/api/courseApi";
 import { useSnackbar } from "notistack";
 import classNames from "classnames";
+import { isEmpty } from "src/Tool/Tools";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   videoPlay: {
     width: "50%",
     height: "auto",
+    marginInline: "auto",
   },
   footer: {
     display: "flex",
@@ -37,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
   visiable: {
     visibility: "hidden",
+  },
+  displayNone: {
+    display: "none !important",
   },
   [theme.breakpoints.down("md")]: {
     form: {
@@ -76,7 +81,7 @@ function FDemoCourse(props) {
     prevStep = null,
     nextStep = null,
     dataCourse = {},
-    changeDataCourse = null,
+    updateCourse = null,
   } = props;
   const [demoVideo, setDemoVideo] = useState(dataCourse?.demo?.urlVideo);
   const form = useForm({
@@ -91,14 +96,14 @@ function FDemoCourse(props) {
 
     (async () => {
       try {
-        if (nextCurrentStep) nextCurrentStep(3);
-        // const formData = new FormData();
-        // formData.append("video", values.image);
-        // setProgress(true);
-        // const rp = await courseApi.uploadNewVideoDemo(dataCourse?.id, formData);
-        // setProgress(false);
-        // console.log(rp);
-        // if (changeDataCourse) changeDataCourse(rp);
+        if (nextCurrentStep) nextCurrentStep(2);
+        const formData = new FormData();
+        formData.append("video", values.image);
+        setProgress(true);
+        const rp = await courseApi.uploadNewVideoDemo(dataCourse?.id, formData);
+        setProgress(false);
+        console.log(rp);
+        if (updateCourse) updateCourse(rp);
         enqueueSnackbar("Cập nhật thành công", { variant: "success" });
       } catch (error) {
         enqueueSnackbar(error.message, { variant: "error" });
@@ -136,7 +141,9 @@ function FDemoCourse(props) {
           className={classes.form}
           onSubmit={form.handleSubmit(handleOnSubmit)}
         >
-          <div>
+          <div
+            className={classNames(isEmpty(demoVideo) && classes.displayNone)}
+          >
             <span>Video xem trước</span>
             <video
               key={demoVideo}

@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
+import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import courseApi from "src/api/courseApi";
@@ -58,10 +59,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const schema = yup.object().shape({
-  // firstName: yup.string().required(),
+  description: yup.string().required("Vui lòng nhập tên bài học"),
 });
 function FormCreateLesson(props) {
   const { part = {}, changeDataCourse = null } = props;
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const [demoVideo, setDemoVideo] = useState();
   const form = useForm({
@@ -76,6 +78,11 @@ function FormCreateLesson(props) {
   const handleOnSubmit = (values) => {
     //todo hoang todo
     console.log("Post  Lesson: ", values);
+
+    if (isEmpty(values.videoCourse)) {
+      enqueueSnackbar("Vui lòng tải lên video bài học", { variant: "error" });
+      return;
+    }
     (async () => {
       try {
         const formData = new FormData();
@@ -85,8 +92,10 @@ function FormCreateLesson(props) {
         const rp = await courseApi.postLesson(part.courseId, part.id, formData);
         //setProgress(false);
         console.log(rp);
-        // if (changeDataCourse) changeDataCourse(rp);
-        // enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+        form.reset();
+        setDemoVideo({});
+        if (changeDataCourse) changeDataCourse(rp);
+        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
       } catch (error) {
         // enqueueSnackbar(error.message, { variant: "error" });
         // setProgress(false);

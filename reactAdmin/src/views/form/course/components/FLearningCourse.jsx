@@ -68,7 +68,7 @@ function FLearningCourse(props) {
     prevStep = null,
     nextStep = null,
     dataCourse = {},
-    changeDataCourse = null,
+    updateCourse = null,
   } = props;
   const [dataLearning, setDataLearning] = useState(dataCourse.learnings || []);
   const [isUpdate, setUpdate] = useState(false);
@@ -92,16 +92,16 @@ function FLearningCourse(props) {
   const handleOnSubmit = async (values) => {
     console.log("Learnings Post", values);
 
-    if (nextCurrentStep) nextCurrentStep(4);
-    // const rp = await courseApi.postLearnings(dataCourse.id, values.data);
-    // if (!rp.status) {
-    // console.log(rp);
-    // if (changeDataCourse) changeDataCourse(rp);
-    // enqueueSnackbar("Cập nhật thành công", { variant: "success" });
-    // setDataLearning(rp.learnings);
-    // } else {
-    // enqueueSnackbar("Cập nhật không thành công", { variant: "error" });
-    // }
+    if (nextCurrentStep) nextCurrentStep(3);
+    const rp = await courseApi.postLearnings(dataCourse.id, values.data);
+    if (!rp.status) {
+      console.log(rp);
+      if (updateCourse) updateCourse(rp);
+      enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+      setDataLearning(rp.learnings);
+    } else {
+      enqueueSnackbar("Cập nhật không thành công", { variant: "error" });
+    }
   };
   return (
     <CCard>

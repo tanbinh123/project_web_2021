@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from "@material-ui/core";
+import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import courseApi from "src/api/courseApi";
@@ -38,9 +39,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const schema = yup.object().shape({
-  // firstName: yup.string().required(),
+  titlePart: yup.string().required("Vui lòng không để trống"),
 });
 function FormParts(props) {
+  const { enqueueSnackbar } = useSnackbar();
   const {
     part = {},
     index = 0,
@@ -68,6 +70,8 @@ function FormParts(props) {
       if (!rp.status) {
         console.log(rp);
         if (changeDataCourse) changeDataCourse(rp);
+        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+
         //setDataLearning(rp.learnings);
         //setUpdate(true);
       }
