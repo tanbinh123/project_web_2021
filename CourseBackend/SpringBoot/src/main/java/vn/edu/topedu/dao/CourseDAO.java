@@ -530,6 +530,7 @@ public class CourseDAO {
 	
 	public List<EvaluateEntity> getEvaluates(Long courseId, int _page, int _limit, String sort, String _search) {
 		--_page;
+		if(_page<0)_page=0;
 		if (sort == "" || sort == null)
 			sort = "id:asc";
 

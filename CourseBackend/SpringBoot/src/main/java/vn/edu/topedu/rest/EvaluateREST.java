@@ -87,8 +87,8 @@ public class EvaluateREST {
 	public ResponseEntity<Object> getRatings(
 			HttpServletRequest httpServletRequest, 
 			@PathVariable PreviewCourseEntity previewCourse,				
-			@RequestParam(defaultValue = "-1") int _page,
-			@RequestParam(defaultValue = "-1") int _limit,
+			@RequestParam(defaultValue = "0") int _page,
+			@RequestParam(defaultValue = "10") int _limit,
 			@RequestParam(defaultValue = "id:asc") String _sort, 
 			@RequestParam(defaultValue = "") String _search,
 			Authentication authentication	
