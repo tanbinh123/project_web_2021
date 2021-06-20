@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 20/06/2021 14:56:43
+ Date: 20/06/2021 15:43:29
 */
 
 SET NAMES utf8mb4;
@@ -351,8 +351,6 @@ CREATE TABLE `evaluates`  (
 -- ----------------------------
 -- Records of evaluates
 -- ----------------------------
-INSERT INTO `evaluates` VALUES (1, 'Genshin Impact', b'1', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 1, 0, 0);
-INSERT INTO `evaluates` VALUES (2, 'Lập trình', b'1', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 1, 0, 0);
 INSERT INTO `evaluates` VALUES (3, '31231', b'0', '2021-06-20 07:02:09', '2021-06-20 07:02:09', 1, 5, 3);
 INSERT INTO `evaluates` VALUES (4, '123123', b'0', '2021-06-20 07:52:24', '2021-06-20 07:52:24', 1, 5, 3);
 
@@ -672,7 +670,7 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('8c2f7dc6-4567-4be0-9923-c9e952854a9b', '98eb932c-0d0f-4d04-8cf3-a8f6e64b6a84', 1624175411737, 1624175411738, 1800, 1624177211738, NULL);
+INSERT INTO `spring_session` VALUES ('080e63c3-5035-4574-9874-0137d58987ab', '6c3fd00c-57d6-433d-a2f5-796a13237a1e', 1624177805307, 1624178576267, 1800, 1624180376267, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes

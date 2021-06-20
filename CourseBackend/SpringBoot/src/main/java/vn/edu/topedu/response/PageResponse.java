@@ -32,15 +32,15 @@ public class PageResponse<T> implements JsonResponse {
 		private int _page;
 		private long _totalRows;
 		private String _sort;
-		private String _filter;
+		
 
-		public Pagination(int _limit, int _page, long _totalRows, String _sort, String _filter) {
+		public Pagination(int _limit, int _page, long _totalRows, String _sort) {
 			super();
 			this._limit = _limit;
 			this._page = _page;
 			this._totalRows = _totalRows;
 			this._sort = _sort;
-			this._filter = _filter;
+			
 		}
 
 		public Pagination() {
@@ -79,13 +79,7 @@ public class PageResponse<T> implements JsonResponse {
 			this._sort = _sort;
 		}
 
-		public String get_filter() {
-			return _filter;
-		}
-
-		public void set_filter(String _filter) {
-			this._filter = _filter;
-		}
+	
 
 	}
 

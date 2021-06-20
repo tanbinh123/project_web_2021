@@ -526,4 +526,81 @@ public class CourseDAO {
 		return  p;
 	}
 
+	
+	
+	public List<EvaluateEntity> getEvaluates(Long courseId, int _page, int _limit, String sort, String _search) {
+		--_page;
+		if (sort == "" || sort == null)
+			sort = "id:asc";
+
+		String sql = "Select c from " + EvaluateEntity.class.getName() + " c where courseId=:courseId and c.deleted=0 ";
+		if (_search.length() != 0) {
+					
+			sql += " and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+
+		}
+		
+		sql += " group by c.id  order by  ";
+		String sqlSort = "";
+		sort = sort.toLowerCase();
+
+		String[] a = sort.split(",");
+		boolean started = true;
+		for (String str : a) {
+			int index = str.indexOf(':');
+			String _order = str.substring(index + 1);
+			String tmpSort = str.substring(0, index);
+			switch (tmpSort) {
+			case "id":
+				sqlSort += WebUtils.sort(_order, "c.id", started);
+				break;
+			
+			
+			
+			case "updateat":
+				sqlSort += WebUtils.sort(_order, "c.updateAt", started);
+				break;
+			default:
+				break;
+			}
+			started = false;
+			sql += sqlSort;
+			sqlSort = "";
+		}
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, EvaluateEntity.class);
+		query.setParameter("courseId", courseId);
+		query.setFirstResult(_page * _limit);
+		if (_search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		if (_limit != -1) {
+			query.setMaxResults(_limit);
+		}
+		return query.getResultList();
+	}
+	
+	public Long countEvaluates(Long courseId, String _search) {
+		
+
+		String sql = "Select count(*)  from " + EvaluateEntity.class.getName() + " c where courseId=:courseId and c.deleted=0 ";
+		if (_search.length() != 0) {
+					
+			sql += " and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+
+		}
+		
+		sql += " group by c.id   ";
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql);
+		query.setParameter("courseId", courseId);
+		
+		if (_search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		
+		return (Long) query.getSingleResult();
+	}
+
 }

@@ -110,6 +110,9 @@ public class EvaluateEntity extends BaseEntity {
 	public String getUsername() {
 		if(userPoster==null) return null; else return userPoster.getUsername();
 	}
+	public String getAvatar() {
+		if(userPoster==null) return null; else return userPoster.getAvatar().getImage();
+	}
 	
 
 }
