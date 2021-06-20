@@ -1,6 +1,8 @@
 package vn.edu.topedu.rest;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,10 +28,14 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
+import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
+import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.PageResponse.Pagination;
+import vn.edu.topedu.utils.WebUtils;
 
 @RestController
 @RequestMapping("/course")
@@ -146,5 +152,49 @@ public class CourseREST implements IMyHost {
 		}
 		return ResponseEntity.badRequest().build();
 	}
+	
+	
+	@PostMapping(value="/{fullcourse}/rating")
+	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<Object> postRating(
+			HttpServletRequest httpServletRequest, 
+			@PathVariable FullCourse fullcourse,
+			@RequestBody Map<String, String> body,			
+			Authentication authentication	
+			) {
+		System.out.println("---------------------------------");
+		
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				String content=body.get("content");
+				System.out.println(String.format("Content : %s", content));
+				
+				String rating=body.get("rating");
+				System.out.println(String.format("rating : %s", rating));
+				
+				EvaluateEntity entity= new EvaluateEntity();
+				entity.setContent(content);
+				entity.setCourseId(fullcourse.getId());
+				entity.setUserPosterId(appUser.getId());
+				entity.setRating(Double.valueOf(rating));
+				try {
+//					fullcourse.setUpdateAt(new Date());
+//					FullCourse rs = courseDAO.merge(fullcourse);
+//					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));	
+					EvaluateEntity rs = courseDAO.persistEvaluateEntity(entity);
+					return ResponseEntity.ok(rs);
+				} catch (Exception e) {
+					return ResponseEntity.badRequest().body(new MessageResponse("Poster not update", "Không thể cập nhật poster"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
 
+	
+	
 }

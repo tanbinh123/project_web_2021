@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import * as yup from "yup";
 import { DataUser } from "../../../../../../app/DataUser";
+import courseApi from "../../../../../../api/courseApi";
 import CustomButton from "../../../../../../components/Button/CustomButton";
 import CustomInput from "../../../../../../components/Input/CustomInput";
 const schema = yup.object().shape({
@@ -67,8 +68,17 @@ function FormRating(props) {
     },
     resolver: yupResolver(schema),
   });
-  const handleOnSubmit = (value) => {
-    console.log(value);
+  const handleOnSubmit = (values) => {
+    const courseId=3;
+    console.log("Post Ratings:",values);
+    (async()=>{
+      const rp=await courseApi.postRating(courseId, values);
+      if(!rp.status){
+        console.log(rp);
+      }
+    })();
+
+    
   };
   return (
     <form className={classes.form} onSubmit={form.handleSubmit(handleOnSubmit)}>

@@ -131,13 +131,17 @@ function FBaseCourse(props) {
 
     (async () => {
       console.log("POST NEW COURSE", values);
-      // const formData = new FormData();
-      // formData.append("image", values.image);
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("imageThumbnail", values.imageThumbnail);
+      formData.append("categorie", values.categorie);
+      formData.append("price", values.price);
+      formData.append("description", values.description);
       try {
-        // const rp = await courseApi.postNewCourse(values);
-        // if (!rp.status) {
-        //   console.log(rp);
-        // }
+        const rp = await courseApi.postNewCourse(formData);
+        if (!rp.status) {
+          console.log(rp);
+        }
         if (nextCurrentStep) nextCurrentStep(1);
 
         // if (changeDataCourse) changeDataCourse(rp);

@@ -49,7 +49,7 @@ public class AppUser implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	@JsonProperty(access = Access.READ_ONLY)
+	//@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 	@Column(name = "User_Name", length = 36, nullable = false)
 	private String userName;
@@ -84,21 +84,22 @@ public class AppUser implements UserDetails {
 	@JsonIgnore
 	private Boolean deleted = false;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "avatar_id", referencedColumnName = "id")
-	@JsonProperty(access = Access.READ_ONLY)
+	//@JsonProperty(access = Access.READ_ONLY)
 	private ResourceImage avatar;
 
 	@Column(name = "Email", length = 255, nullable = false)
 	private String email;
 
-	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	@JsonIgnore
 	private List<AppRole> authorities;
 
-	@OneToMany(mappedBy = "appUser")
-	@JsonProperty(access = Access.READ_ONLY)
+	@OneToMany(mappedBy = "appUser", fetch = FetchType.EAGER)
+	//@JsonProperty(access = Access.READ_ONLY)
+	@JsonIgnore
 	private List<UserRole> userRoles;
 
 	@Column(name = "gender", nullable = false)
@@ -114,6 +115,8 @@ public class AppUser implements UserDetails {
 	public String getGmail() {
 		return gmail;
 	}
+	
+	
 
 	public void setGmail(String gmail) {
 		this.gmail = gmail;
@@ -208,6 +211,7 @@ public class AppUser implements UserDetails {
 	}
 
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.authorities;
 	}
@@ -266,7 +270,7 @@ public class AppUser implements UserDetails {
 	public void setAuthorities(List<AppRole> authorities) {
 		this.authorities = authorities;
 	}
-
+	@JsonIgnore
 	public List<UserRole> getUserRoles() {
 		return userRoles;
 	}

@@ -36,7 +36,11 @@ const courseApi = {
   },  
   postNewCourse( data) {
     const url = `/api/admin/course/new`;
-    return axiosClient.post(url, data);
+    return axiosClient.post(url, data,{
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
   }, 
   postLearnings(idCourse, data) {
     const url = `/api/admin/course/${idCourse}/learnings`;

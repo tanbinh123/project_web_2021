@@ -249,26 +249,38 @@ public class CourseAdminRest {
 	}
 	
 	
-	@PostMapping(value="/new")
+	@PostMapping(value="/new", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Object> postNewCourseBase(HttpServletRequest httpServletRequest, 
-			Authentication authentication,	
-		
-			@RequestBody Map<String,String> body 
+			@RequestPart(required=true) String title,
+			@RequestPart(required=true) String description,
+			@RequestPart(required=true) String price,
+			@RequestPart(required=true) String categorie,
+			@RequestPart(required=true) MultipartFile imageThumbnail,
+			Authentication authentication
 			) {
 		System.out.println("---------------------------------");
-		String title=body.get("title");
-		String description=body.get("description");
-		String price=body.get("price");
+	
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));
 		System.out.println(String.format("Price: %s", price));
+		System.out.println(String.format("categorie: %s", categorie));
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
-			if (appUser != null) {				
+			if (appUser != null) {	
+				ResourceImage newAvatar=null;
+				try {
+					newAvatar = resourceImageDAO.uploadImage(imageThumbnail, appUser);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+				
 				FullCourse fullcourse= new FullCourse();
+				if(newAvatar!=null)fullcourse.setImagePosterId(newAvatar.getId());
 				//=resourceImageDAO.findById(Long.valueOf(2));
 				fullcourse.setUserPosterId(appUser.getId());
 				fullcourse.setUserPoster(appUser);

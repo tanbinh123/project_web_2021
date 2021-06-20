@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.CategoryEntity;
+import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
@@ -485,6 +486,13 @@ public class CourseDAO {
 	}
 	@Transactional
 	public Lesson persistLesson(Lesson p) {
+		entityManager.persist(p);
+		entityManager.flush();
+		return  p;
+	}
+	
+	@Transactional
+	public EvaluateEntity persistEvaluateEntity(EvaluateEntity p) {
 		entityManager.persist(p);
 		entityManager.flush();
 		return  p;

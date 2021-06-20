@@ -29,6 +29,11 @@ const courseApi = {
     const url = "/course/course-bought";
     return axiosClient.get(url, { params });
   },
+
+  postRating(courseId, data) {
+    const url = `/course/${courseId}/rating`;
+    return axiosClient.post(url, data);
+  },
 };
 
 export default courseApi;

@@ -15,7 +15,7 @@ public abstract class AHasResource extends BaseEntity {
 	@Transient
 	protected String beforeResource;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_poster_id", nullable = false)
 	@JsonIgnore
 	private AppUser appUser;

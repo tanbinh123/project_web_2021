@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import vn.edu.topedu.entity.AHasPoster;
 import vn.edu.topedu.entity.AHasResource;
+import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.full.Learning;
@@ -34,7 +36,7 @@ import vn.edu.topedu.utils.WebUtils;
 public class PreviewCourseEntity extends AHasPoster {
 
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id")
 	private ResourceImage imagePoster;
 
@@ -42,7 +44,7 @@ public class PreviewCourseEntity extends AHasPoster {
 	private String description = "";
 	@Column(name = "title", length = 255, nullable = false)
 	private String title = "";
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "demo_id", referencedColumnName = "id")
 	private VideoEntity demo;
 	@Column(name = "price", length = 15, nullable = false)
@@ -50,14 +52,27 @@ public class PreviewCourseEntity extends AHasPoster {
 
 	@OneToMany(mappedBy = "course")
 	private List<Learning> learnings;
+	
+	@OneToMany(mappedBy = "previewCourseEntity", fetch = FetchType.EAGER)
+	private List<EvaluateEntity> evaluates;
 	@OneToMany(mappedBy = "course")
 	private List<PartReview> parts;
 //	@OneToMany(mappedBy = "detailCourseEntity")
 //	@JsonIgnore
 //	private List<OwerCourse> owerCourse;
+	
+	
 
 	public List<Learning> getLearnings() {
 		return learnings;
+	}
+
+	public List<EvaluateEntity> getEvaluates() {
+		return evaluates;
+	}
+
+	public void setEvaluates(List<EvaluateEntity> evaluates) {
+		this.evaluates = evaluates;
 	}
 
 	public PreviewCourseEntity() {

@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.BaseEntity;
 import vn.edu.topedu.entity.CategoryEntity;
+import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -74,6 +75,9 @@ public class FullCourse extends BaseEntity {
 	private List<Learning> learnings;
 	@OneToMany(mappedBy = "course")
 	private List<Part> parts;
+	
+	@OneToMany(mappedBy = "fullCourse", fetch = FetchType.EAGER)
+	private List<EvaluateEntity> evaluates;
 
 	@JsonIgnore
 	@Column(name = "category_id", nullable = false)
@@ -87,6 +91,14 @@ public class FullCourse extends BaseEntity {
 	
 	
 	
+	public List<EvaluateEntity> getEvaluates() {
+		return evaluates;
+	}
+
+	public void setEvaluates(List<EvaluateEntity> evaluates) {
+		this.evaluates = evaluates;
+	}
+
 	public Boolean getActived() {
 		return actived;
 	}
