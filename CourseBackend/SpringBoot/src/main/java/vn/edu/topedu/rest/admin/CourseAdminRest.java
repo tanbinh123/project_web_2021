@@ -285,6 +285,7 @@ public class CourseAdminRest {
 				fullcourse.setUserPosterId(appUser.getId());
 				fullcourse.setUserPoster(appUser);
 				//fullcourse.setImagePosterId(Long.valueOf(2));
+				fullcourse.setCategoryId(Integer.valueOf(categorie));
 				fullcourse.setDescription(description);
 				fullcourse.setPrice(new BigDecimal(price));
 				fullcourse.setTitle(title);

@@ -1,6 +1,7 @@
 package vn.edu.topedu.entity.course;
  
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,8 +43,12 @@ public class Course extends AHasPoster implements JsonResponse {
     private BigDecimal price=new BigDecimal(0);
     @Column(name = "bought", length = 10, nullable = false)
     private int bought=0;
-    @Column(name = "rateStar", length = 10, nullable = false)
-    private double rateStar=0;
+    @Column(name = "sum_star", length = 10, nullable = false)
+    @JsonIgnore
+    private BigDecimal rateStar=BigDecimal.ZERO;
+    @JsonIgnore
+    @Column(name = "sum_rating", length = 10, nullable = false)
+    private int sumRating=0;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_poster_id", nullable = false)
@@ -67,6 +72,16 @@ public class Course extends AHasPoster implements JsonResponse {
 	
 	public Course() {
 		super();
+	}
+	
+	public int getSumRating() {
+		return sumRating;
+	}
+	public void setSumRating(int sumRating) {
+		this.sumRating = sumRating;
+	}
+	public void setRateStar(BigDecimal rateStar) {
+		this.rateStar = rateStar;
 	}
 	public ResourceImage getPoster() {
 		return poster;
@@ -117,11 +132,9 @@ public class Course extends AHasPoster implements JsonResponse {
 		this.bought = bought;
 	}
 	public double getRateStar() {
-		return rateStar;
+		return rateStar.divide(BigDecimal.valueOf(sumRating)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
-	public void setRateStar(double rateStar) {
-		this.rateStar = rateStar;
-	}
+	
 	
 	public String getThumbnail() {
 		if(this.poster!=null)
