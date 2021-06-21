@@ -40,4 +40,21 @@ public class HomeREST {
 		
 	}
 	
+	@PostMapping(value="/username")
+	@ResponseBody
+	
+	public ResponseEntity<Object> username(
+			HttpServletRequest httpServletRequest, 
+			@RequestBody Map<String,String> body
+			) {	
+		System.out.println("---------------------------------");
+		String username=body.get("username");
+		AppUser a = appUserDAO.findUserAccount(username);
+		if(a!=null)
+		return ResponseEntity.ok(new MessageResponse("username exist.", "username tồn tại trong hệ thống."));
+		
+		else return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new MessageResponse("username not exist.", "username không tồn tại trong hệ thống."));
+		
+	}
+	
 }
