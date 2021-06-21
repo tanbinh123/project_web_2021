@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 21/06/2021 14:03:33
+ Date: 21/06/2021 14:08:31
 */
 
 SET NAMES utf8mb4;
@@ -330,9 +330,9 @@ INSERT INTO `course` VALUES (171, 71, 'Kiến thức cơ bản dành cho dân IT
 INSERT INTO `course` VALUES (178, 72, 'Khóa học đề cao việc thực hành qua những ví dụ trong thực tế giúp học viên nhanh chóng xây dựng được giao diện website', b'0', 'HTML, CSS từ Zero đến Hero', 15000, 0, 2, '2021-05-25 14:15:57', 1, 1, 2, '2021-05-25 14:15:57', b'1', 0);
 INSERT INTO `course` VALUES (179, 92, 'Eula là đội trưởng của \"tiểu đội du kích\" trong Đội Kỵ Sĩ Tây Phong.\n\nDo yêu cầu công việc, cô ấy phải thường xuyên dẫn đội đi săn ma vật và Giáo Đoàn Vực Sâu ở bên ngoài trong thời gian dài, rất ít khi trở về Thành Mondstadt. ', b'0', 'Tìm hiểu Eula 2', 260000, 0, 0, '2021-06-06 08:03:26', 1, 1, 19, '2021-05-25 14:28:25', b'1', 0);
 INSERT INTO `course` VALUES (180, 2, '2', b'0', '1', 2, 0, 0, '2021-06-12 18:46:13', 1, NULL, 1, '2021-06-12 18:46:13', b'1', 0);
-INSERT INTO `course` VALUES (181, NULL, '12313', b'0', 'Test', 54646, 0, 0, '2021-06-12 18:48:10', 1, NULL, 1, '2021-06-12 18:48:10', b'1', 0);
+INSERT INTO `course` VALUES (181, 103, 'Best Waifu', b'0', 'Tìm Hiểu Ganyu 2', 54646000, 0, 0, '2021-06-21 07:07:33', 1, NULL, 1, '2021-06-12 18:48:10', b'1', 0);
 INSERT INTO `course` VALUES (182, 100, '12312', b'0', '12312', 123123, 0, 0, '2021-06-20 06:14:06', 1, NULL, 2, '2021-06-20 06:14:06', b'1', 0);
-INSERT INTO `course` VALUES (183, 101, '123131', b'0', 'gsggsgsg', 23424243, 0, 0, '2021-06-20 08:53:57', 1, NULL, 2, '2021-06-20 08:53:57', b'1', 0);
+INSERT INTO `course` VALUES (183, 101, 'Best Waifu', b'0', 'Tìm hiểu Ganyu 4', 2343000, 0, 0, '2021-06-21 07:08:07', 1, NULL, 2, '2021-06-20 08:53:57', b'1', 0);
 INSERT INTO `course` VALUES (184, 102, 'Test', b'0', 'Hoàng Test', 1150000, 0, 0, '2021-06-21 07:02:44', 1, NULL, 19, '2021-06-21 07:02:44', b'1', 0);
 
 -- ----------------------------
@@ -606,7 +606,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -631,6 +631,7 @@ INSERT INTO `resource_image` VALUES (99, 'user/admin/image/4fa665b22e75a78b038ec
 INSERT INTO `resource_image` VALUES (100, 'user/admin/image/1609745981061.webp', b'0', '2021-06-20 06:14:06', 1, 1, '2021-06-20 06:14:06');
 INSERT INTO `resource_image` VALUES (101, 'user/admin/image/1609745981195.png', b'0', '2021-06-20 08:53:57', 1, 1, '2021-06-20 08:53:57');
 INSERT INTO `resource_image` VALUES (102, 'user/admin/image/1609745981038.png', b'0', '2021-06-21 07:02:44', 1, 1, '2021-06-21 07:02:44');
+INSERT INTO `resource_image` VALUES (103, 'user/admin/image/1609745981197.jpg', b'0', '2021-06-21 07:06:08', 1, 0, '2021-06-21 07:06:08');
 
 -- ----------------------------
 -- Table structure for revenue
