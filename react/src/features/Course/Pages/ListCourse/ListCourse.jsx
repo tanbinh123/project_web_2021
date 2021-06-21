@@ -70,14 +70,15 @@ function ListCourse(props) {
       _limit: Number.parseInt(params._limit) || 9,
       // _sort: params._sort || "updateAt",
       // _order: params._order || "desc",
-      // _sort: params._sort || "updateAt:desc",
+      _sort: params._sort || "updateAt:desc",
+      _category: params._category || "-1",
     };
   }, [location.search]);
   useEffect(() => {
     (async () => {
       try {
         const rp = await courseApi.categories({});
-        console.log("fetch categories", rp);
+        // console.log("fetch categories", rp);
         setCategories(rp);
       } catch (error) {
         console.log(error);
@@ -90,10 +91,10 @@ function ListCourse(props) {
   useEffect(() => {
     (async () => {
       try {
-        console.log(queryParams);
+        // console.log(queryParams);
         const { data, pagination } = await courseApi.getAll(queryParams);
-        console.log(data);
-        console.log(pagination);
+        // console.log(data);
+        // console.log(pagination);
         setDataCourse(data);
         setPagination(pagination);
         // console.log("fetch page courses");
@@ -137,7 +138,21 @@ function ListCourse(props) {
       search: stringify(filters, null, null, escape()),
     });
   }
+  const handleCategorieChange = (values) => {
+    console.log(values);
+    const category = values.id;
 
+    const filters = {
+      ...queryParams,
+      _category: category,
+      _page: 1,
+    };
+
+    history.push({
+      pathname: history.location.pathname,
+      search: stringify(filters, null, null, escape()),
+    });
+  };
   return (
     <>
       <Header />
@@ -147,7 +162,11 @@ function ListCourse(props) {
           <Grid container spacing={2}>
             <Grid item className={classes.left} xl={3} lg={3} md={3}>
               <Paper elevation={0}>
-                <LeftCourse categories={categories} />
+                <LeftCourse
+                  categories={categories}
+                  onChange={handleCategorieChange}
+                  categorie={queryParams._category}
+                />
               </Paper>
             </Grid>
             <Grid
@@ -170,7 +189,7 @@ function ListCourse(props) {
                   <Pagination
                     color="primary"
                     count={Math.ceil(pagination._totalRows / pagination._limit)}
-                    page={pagination._page}
+                    page={pagination._page || 1}
                     onChange={handlePageChange}
                   ></Pagination>
                 </Box>

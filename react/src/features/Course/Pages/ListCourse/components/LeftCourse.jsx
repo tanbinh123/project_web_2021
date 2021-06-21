@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import classNames from "classnames";
 import React from "react";
 
 //LeftCourse.propTypes = {};
@@ -33,18 +34,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   actived: {
-    color: "var(--colorOrange2)",
+    color: "var(--colorOrange2) !important",
   },
 }));
 
 function LeftCourse(props) {
   const classes = useStyles();
-  const { categories } = props;
-  console.log("init LeftCourse", categories);
+  const { categories, onChange, categorie = -1 } = props;
+  // console.log("init LeftCourse", categories);
   const handleOnClickCategory = (value) => {
-    console.log(value);
+    onChange(value);
   };
-
   // props.categories.map
 
   return (
@@ -57,10 +57,19 @@ function LeftCourse(props) {
             onClick={() => {
               handleOnClickCategory(item);
             }}
+            className={classNames(categorie == item.id && classes.actived)}
           >
             {item.name}
           </li>
         ))}
+        <li
+          onClick={() => {
+            handleOnClickCategory({ id: -1 });
+          }}
+          className={classNames(categorie == -1 && classes.actived)}
+        >
+          Tất cả
+        </li>
       </ul>
     </div>
   );

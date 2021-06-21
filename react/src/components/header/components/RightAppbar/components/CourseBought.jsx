@@ -15,7 +15,7 @@ import {
   bindTrigger,
   usePopupState,
 } from "material-ui-popup-state/hooks";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { DataUser } from "../../../../../app/DataUser";
@@ -111,7 +111,11 @@ function CourseBought(props) {
   });
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   const { courses } = dataUser;
-  console.log(courses);
+  // console.log(courses);
+  const [seeMore, setSeeMore] = useState(false);
+  const handleShowMore = () => {
+    setSeeMore(!seeMore);
+  };
   const popover = (
     <Popover
       className={classes.rootPopover}
@@ -129,7 +133,7 @@ function CourseBought(props) {
         <Box className={classes.title}>Khóa học đã mua</Box>
         <List component="nav">
           {Array.from(courses)
-            .splice(0, 3)
+            .splice(0, seeMore ? courses.length : 3)
             .map((item, index) => (
               <Link
                 key={item.id}
@@ -149,7 +153,9 @@ function CourseBought(props) {
               </Link>
             ))}
         </List>
-        <Box className={classes.seeMore}>Xem tất cả</Box>
+        <Box className={classes.seeMore} onClick={handleShowMore}>
+          {seeMore ? "Ẩn bớt" : "Xem tất cả"}
+        </Box>
       </Box>
     </Popover>
   );

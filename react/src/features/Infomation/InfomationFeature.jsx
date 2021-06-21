@@ -88,9 +88,9 @@ function InfomationFeature(props) {
                     <NavLink to={`${url}/change-password`}>
                       <li> Đổi mật khẩu</li>
                     </NavLink>
-                    <NavLink to={`${url}/courses-bought`}>
+                    {/* <NavLink to={`${url}/courses-bought`}>
                       <li>Khóa học đã mua</li>
-                    </NavLink>
+                    </NavLink> */}
 
                     <li onClick={handleLogout}>Đăng xuất</li>
                   </ul>
@@ -120,11 +120,11 @@ function InfomationFeature(props) {
                       exact
                     />
                   )}
-                  <Route
+                  {/* <Route
                     path={`${url}/courses-bought`}
                     component={CourseBoughtFull}
                     exact
-                  />
+                  /> */}
                   <Route path={`${url}/`} component={NotFound404} />
                 </Switch>
               </Grid>
