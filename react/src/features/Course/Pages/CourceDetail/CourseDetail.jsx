@@ -69,7 +69,7 @@ function CourseDetail(props) {
       try {
         if (!isEmpty(dataUser.token)) {
           const res1 = await courseApi.check({ idCourse: idCourse });
-          console.log("check", res1);
+          // console.log("check", res1);
           if (res1.status == 400 || res1.status == 500) {
             const res = await courseApi.get(idCourse);
             // console.log("review", res);
@@ -104,8 +104,33 @@ function CourseDetail(props) {
       }
     })();
   }, [url, dataUser.token]);
-  console.log("init Detail", course);
-
+  // console.log("init Detail", course);
+  const handleUpdateCourse = async () => {
+    try {
+      if (!isEmpty(dataUser.token)) {
+        const res1 = await courseApi.check({ idCourse: idCourse });
+        // console.log("check", res1);
+        if (res1.status == 400 || res1.status == 500) {
+          const res = await courseApi.get(idCourse);
+          // console.log("review", res);
+          if (res.status == 500) {
+            push("/course");
+          }
+          setCourse({
+            isFull: false,
+            ...res,
+          });
+        } else {
+          setCourse({
+            isFull: true,
+            ...res1,
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Header />
@@ -125,10 +150,13 @@ function CourseDetail(props) {
               <Paper elevation={0}>
                 {/* --------------------- Left Data --------------------------- */}
                 <LeftCD
+                  idCourse={course.id}
                   title={course.title}
                   description={course.description}
                   learnings={course.learnings}
                   parts={course.parts}
+                  evaluates={course.evaluates}
+                  onUpdate={handleUpdateCourse}
                 />
               </Paper>
             </Grid>

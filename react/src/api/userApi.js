@@ -40,11 +40,15 @@ const userApi = {
   postProfile(data) {
     const url = `/profile`;
     //axiosClient.
-    return axiosClient.post(url,data,{
+    return axiosClient.post(url, data, {
       headers: {
         "content-type": "multipart/form-data",
       },
     });
+  },
+  checkEmail(data) {
+    const url = `/home/email`;
+    return axiosClient.post(url, data);
   },
 };
 

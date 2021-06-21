@@ -1,0 +1,5 @@
+POST http://localhost:25001/home/email
+
+{
+email:"anonkill1999@gmail.com"
+}

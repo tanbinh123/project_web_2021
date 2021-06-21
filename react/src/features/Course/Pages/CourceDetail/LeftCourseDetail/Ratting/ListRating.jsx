@@ -1,7 +1,8 @@
 import { Avatar, Grid, makeStyles } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import Pagination from "@material-ui/lab/Pagination";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toDate } from "../../../../../../components/tools/Tools";
 const useStyles = makeStyles(() => ({
   listRating: {
     marginTop: 50,
@@ -47,37 +48,52 @@ const useStyles = makeStyles(() => ({
   },
 }));
 function ListRating(props) {
+  const { evaluates = [] } = props;
   const classes = useStyles();
+  const limit = 3;
+  const [indexRating, setIndexRating] = useState(0);
+  const [page, setPage] = useState(1);
+  const handleOnChange = (e, page) => {
+    setIndexRating((page - 1) * limit);
+    setPage(page);
+  };
+  useEffect(() => {
+    setIndexRating(0);
+    setPage(1);
+  }, [evaluates]);
   return (
     <Grid item className={classes.listRating}>
-      {[1, 2, 3, 4, 5].map((item, index) => (
-        <div className={classes.itemRating} key={index}>
-          <div className={classes.headerItem}>
-            <Avatar src="https://i.pinimg.com/originals/3b/0f/83/3b0f83d3269de58c51b5ab9a0106c8ee.jpg" />
-            <div className={classes.headerItemRight}>
-              <span>Heo con</span>
-              <div>
-                <Rating
-                  defaultValue={4.5}
-                  precision={0.5}
-                  readOnly
-                  className={classes.iconRating}
-                />
-                <span>6/7/2021</span>
+      {Array.from(evaluates)
+        .splice(indexRating, limit)
+        .map((item, index) => (
+          <div className={classes.itemRating} key={index}>
+            <div className={classes.headerItem}>
+              <Avatar src={item.avatar} />
+              <div className={classes.headerItemRight}>
+                <span>{item.fullname}</span>
+                <div>
+                  <Rating
+                    key={item.id}
+                    defaultValue={item.rating}
+                    precision={0.5}
+                    readOnly
+                    className={classes.iconRating}
+                  />
+                  <span></span>
+                </div>
               </div>
             </div>
+            <div className={classes.contentRating}>
+              <span>{item.content}</span>
+            </div>
           </div>
-          <div className={classes.contentRating}>
-            <span>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit
-              reprehenderit itaque, deleniti iure exercitationem quos expedita
-              officiis nesciunt. Alias, fuga! Rerum ullam, possimus assumenda
-              nostrum fuga quae labore nisi deserunt.
-            </span>
-          </div>
-        </div>
-      ))}
-      <Pagination count={10} className={classes.pagination} />
+        ))}
+      <Pagination
+        count={Math.ceil(evaluates.length / limit)}
+        className={classes.pagination}
+        onChange={handleOnChange}
+        page={page}
+      />
     </Grid>
   );
 }

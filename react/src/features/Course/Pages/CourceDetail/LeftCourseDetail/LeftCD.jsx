@@ -20,8 +20,17 @@ LeftCD.defaultProps = {
   parts: [],
 };
 function LeftCD(props) {
-  const { title, description, learnings, parts } = props;
+  const {
+    title,
+    description,
+    learnings,
+    parts,
+    idCourse = null,
+    evaluates = [],
+    onUpdate = null,
+  } = props;
   const classes = LeftCDCSS();
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -62,7 +71,11 @@ function LeftCD(props) {
           {/* render list courses */}
           <SimpleAccordion parts={parts} />
         </Grid>
-        <RatingCourse />
+        <RatingCourse
+          idCourse={idCourse}
+          evaluates={evaluates}
+          onUpdate={onUpdate}
+        />
       </Grid>
     </div>
   );

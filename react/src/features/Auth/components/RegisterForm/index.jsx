@@ -5,6 +5,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
+import userApi from "../../../../api/userApi";
 import ButtonSubmit from "../../../../components/Button/ButtonSubmit";
 import {
   colorBlack1,
@@ -12,6 +13,7 @@ import {
   colorOrange1,
 } from "../../../../components/color/color";
 import CustomInput from "../../../../components/Input/CustomInput";
+import { isEmpty } from "../../../../components/tools/Tools";
 //css
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,7 +85,10 @@ const useStyles = makeStyles((theme) => ({
 LoginForm.propTypes = {};
 
 //yup
-
+let checkEmail = {
+  status: false,
+  email: "",
+};
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -93,12 +98,30 @@ const schema = yup.object().shape({
     .string()
     .required("Vui lòng nhập dữ liệu")
     .email("Vui lòng nhập email")
-    .test("check account used", "account used ", async (email) => {
-      if (email === "sang@gmail.com") {
-        return false;
+    .test(
+      "check account used",
+      "Địa chỉ email đã được sử dụng",
+      async (email) => {
+        // console.log(checkEmail);
+        if (checkEmail.email != email) {
+          checkEmail.status = false;
+        }
+        if (checkEmail.status === false) {
+          // console.log(email);
+          const res = await userApi.checkEmail({ email: email });
+          console.log(res);
+          if (res?.message?.en == "Email exist.") {
+            return false;
+          } else {
+            checkEmail.status = true;
+            checkEmail.email = email;
+            return true;
+          }
+        } else {
+          return true;
+        }
       }
-      return true;
-    }),
+    ),
   password: yup
     .string()
     .required("Vui lòng nhập password")
@@ -158,9 +181,7 @@ function LoginForm(props) {
           />
           <Link to="/home" className={classes.text3}></Link>
           <ButtonSubmit title="Đăng ký" />
-          <span className={classes.text1}>
-            Bạn đã có tài khoản rồi ?
-          </span>
+          <span className={classes.text1}>Bạn đã có tài khoản rồi ?</span>
           <Link to="/auth/login" className={classes.textDK}>
             <span>Đăng nhập</span>
           </Link>

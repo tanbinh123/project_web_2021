@@ -99,8 +99,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function MenuRatting(props) {
+  const { onChangeSelected = null } = props;
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
+  const handleChangeSelected = (value) => {
+    if (onChangeSelected) onChangeSelected(value);
+    setSelected(value);
+  };
   return (
     <Grid className={classes.menuRating}>
       <Grid className={classes.leftMenu}>
@@ -113,9 +118,7 @@ function MenuRatting(props) {
             <li key={index}>
               <span
                 className={classNames(selected == item && classes.selected)}
-                onClick={() => {
-                  setSelected(item);
-                }}
+                onClick={() => handleChangeSelected(item)}
               >
                 {item == 0 ? "Tất cả" : `${item} sao`}
               </span>
