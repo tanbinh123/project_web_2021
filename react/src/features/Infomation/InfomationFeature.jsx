@@ -9,6 +9,7 @@ import Header from "../../components/header";
 import NotFound404 from "../NotFound";
 import Active from "./components/Active";
 import Actived from "./components/Actived";
+import ChangePassword from "./components/ChangePassword";
 import CourseBoughtFull from "./components/CourseBoughtFull";
 import Edit from "./components/Edit";
 import Info from "./components/Info";
@@ -120,6 +121,11 @@ function InfomationFeature(props) {
                       exact
                     />
                   )}
+                  <Route
+                    path={`${url}/change-password`}
+                    component={() => <ChangePassword />}
+                    exact
+                  />
                   {/* <Route
                     path={`${url}/courses-bought`}
                     component={CourseBoughtFull}

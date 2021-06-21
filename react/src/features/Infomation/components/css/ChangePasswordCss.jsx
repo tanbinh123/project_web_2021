@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const EditCss = makeStyles((theme) => ({
+const ChangePasswordCss = makeStyles((theme) => ({
   rightRoot: {
     //o tren
     "&>div:first-of-type": {
@@ -47,77 +47,33 @@ const EditCss = makeStyles((theme) => ({
       borderBottomLeftRadius: "20px",
       borderBottomRightRadius: "20px",
       boxShadow: "0px 3px 7px var(--colorBlack1)",
-      "&>div": {
-        display: "flex",
-        justifyContent: "center",
-      },
-      "&>div:first-of-type": {
-        margin: "30px 0",
-        "&>span": {
-          fontSize: 18,
-          "&>span": {
-            fontWeight: "600",
-          },
-        },
-      },
-      "&>div:nth-child(2)": {
-        marginBottom: 30,
-      },
-      "& .MuiLinearProgress-barColorPrimary": {
-        backgroundColor: "var(--colorOrange2)",
-      },
     },
   },
-  bgAvatar: {
-    // padding: "0px 40px 0px 40px",
+  form: {
+    marginBlock: "30px",
   },
-  Avatar: {
-    width: 120,
-    height: 120,
-    marginBottom: 30,
-    cursor: "pointer",
-  },
-  flexRow: {
+  rowForm: {
     display: "flex",
-    flexFlow: "row",
-    justifyContent: "space-around",
-  },
-  flexColumn: {
-    display: "flex",
-    flexFlow: "column",
-  },
-  rowEdit: {
-    display: "flex",
-    flexFlow: "row",
     alignItems: "center",
-    width: 500,
     "&>span": {
-      minWidth: "130px",
+      minWidth: "200px",
       textAlign: "right",
       marginRight: "20px",
     },
   },
-  bottomEdit: {
+  lastRow: {
     display: "flex",
     justifyContent: "center",
-    margin: "50px 0 20px 0",
+    marginTop: "20px",
   },
   [theme.breakpoints.down("md")]: {
-    bgAvatar: {
+    rowForm: {
       display: "flex",
-      flexFlow: "column",
       alignItems: "center",
-    },
-    flexRow: {
-      display: "flex",
-      flexFlow: "column",
-    },
-    rowEdit: {
       "&>span": {
         display: "none",
       },
-      width: "100%",
     },
   },
 }));
-export default EditCss;
+export default ChangePasswordCss;

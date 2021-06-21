@@ -2,9 +2,10 @@ import { makeStyles } from "@material-ui/core";
 
 const CSSInfomationFeature = makeStyles((theme) => ({
   root: {
-    padding: " 50px 0 100px 0",
+    paddingTop: " 50px",
     fontFamily: " 'Open Sans', sans-serif",
     background: "var(--colorWhite1)",
+    minHeight: "100vh",
   },
   backgroundHeader: {
     height: "64px",
