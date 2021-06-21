@@ -123,14 +123,7 @@ public class CourseREST implements IMyHost {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Thất bại xóa khóa học");
 	}
 
-	@GetMapping("/categories")
-	@ResponseBody
-	public ResponseEntity<Object> listCatogory(@RequestParam(defaultValue = "-1") int actived,
-			HttpServletRequest httpServletRequest) {
-		List<CategoryEntity> lstCategories = courseDAO.getCategories(actived);
-		// System.err.println(lstCategories);
-		return ResponseEntity.ok(lstCategories);
-	}
+	
 
 	@GetMapping("/course-bought")
 	@ResponseBody
@@ -155,7 +148,14 @@ public class CourseREST implements IMyHost {
 		return ResponseEntity.badRequest().build();
 	}
 	
-	
+	@GetMapping("/categories")
+	@ResponseBody
+	public ResponseEntity<Object> listCatogory(@RequestParam(defaultValue = "-1") int actived,
+			HttpServletRequest httpServletRequest) {
+		List<CategoryEntity> lstCategories = courseDAO.getCategories(actived);
+		// System.err.println(lstCategories);
+		return ResponseEntity.ok(lstCategories);
+	}
 	
 
 	

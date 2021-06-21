@@ -57,23 +57,80 @@ public class EvaluateREST {
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
-			if (appUser != null) {				
+			if (appUser != null) {	
+				EvaluateEntity ev = courseDAO.getEvalUser(fullcourse.getId(), appUser.getId());
+				if(ev!=null)return ResponseEntity.badRequest().body(new MessageResponse("user had rating.", "User Này đã đánh giá"));
 				String content=body.get("content");
 				System.out.println(String.format("Content : %s", content));
-				
+				if(content==null)return ResponseEntity.badRequest().body(new MessageResponse("Content null.", "Không có content"));
 				String rating=body.get("rating");
 				System.out.println(String.format("rating : %s", rating));
+				if(rating==null)return ResponseEntity.badRequest().body(new MessageResponse("Rating null.", "Không có rating"));
+				String deleted=body.get("deleted");
+				System.out.println(String.format("deleted : %s", deleted));
+				if(deleted==null||!deleted.equals("true"))deleted="false";
 				
 				EvaluateEntity entity= new EvaluateEntity();
 				entity.setContent(content);
 				entity.setCourseId(fullcourse.getId());
 				entity.setUserPosterId(appUser.getId());
 				entity.setRating(Double.valueOf(rating));
+				entity.setUserPoster(appUser);
+				entity.setDeleted(Boolean.parseBoolean(deleted));
 				try {
 					EvaluateEntity rs = courseDAO.persistEvaluateEntity(entity);					
 					rs.getUserPoster().getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
 					return ResponseEntity.ok(rs);
 				} catch (Exception e) {
+					System.err.println(e.getMessage());
+					return ResponseEntity.badRequest().body(new MessageResponse("Poster not update", "Không thể cập nhật poster"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
+	@PostMapping(value="/{fullcourse}/rating/{evaluate}")
+	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<Object> updateRating(
+			HttpServletRequest httpServletRequest, 
+			@PathVariable FullCourse fullcourse,
+			@PathVariable EvaluateEntity evaluate,
+			@RequestBody Map<String, String> body,			
+			Authentication authentication	
+			) {
+		System.out.println("---------------------------------");
+		
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				String content=body.get("content");
+				System.out.println(String.format("Content : %s", content));
+				String rating=body.get("rating");
+				System.out.println(String.format("rating : %s", rating));
+				String deleted=body.get("deleted");
+				System.out.println(String.format("deleted : %s", deleted));
+				if(deleted==null||!deleted.equals("true")) {
+					deleted="false";				
+					if(content==null)return ResponseEntity.badRequest().body(new MessageResponse("Content null.", "Không có content"));
+					if(rating==null)return ResponseEntity.badRequest().body(new MessageResponse("Rating null.", "Không có rating"));
+				}
+				
+				evaluate.setContent(content);
+				evaluate.setCourseId(fullcourse.getId());
+				evaluate.setUserPosterId(appUser.getId());
+				evaluate.setRating(Double.valueOf(rating));
+				evaluate.setUserPoster(appUser);
+				evaluate.setDeleted(Boolean.parseBoolean(deleted));
+				try {
+					EvaluateEntity rs = courseDAO.mergeEvaluateEntity(evaluate);					
+					rs.getUserPoster().getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
+					return ResponseEntity.ok(rs);
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
 					return ResponseEntity.badRequest().body(new MessageResponse("Poster not update", "Không thể cập nhật poster"));
 				}
 			}
@@ -126,5 +183,9 @@ public class EvaluateREST {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
 	}
+	
+	
+	
+	
 
 }

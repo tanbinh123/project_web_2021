@@ -126,6 +126,15 @@ public class CourseDAO {
 		query.setParameter("id", idCourse);
 		return (FullCourse) query.getSingleResult();
 	}
+	
+	public EvaluateEntity getEvalUser(Long courseId, Long userId) {
+		String sql = "Select c from " + EvaluateEntity.class.getName() + " c " //
+				+ " where c.userPosterId=:userId and c.courseId= :courseId ";
+		Query query = this.entityManager.createQuery(sql, EvaluateEntity.class);
+		query.setParameter("courseId", courseId);
+		query.setParameter("userId", userId);
+		return (EvaluateEntity) query.getSingleResult();
+	}
 	public Part getPart(Long idCourse) {
 		String sql = "Select c from " + Part.class.getName() + " c " //
 				+ " where c.deleted=0 and c.id= :id ";
@@ -498,6 +507,7 @@ public class CourseDAO {
 		entityManager.flush();
 		return  p;
 	}
+	
 	@Transactional
 	public Part mergePart(Part p) {
 		entityManager.merge(p);
@@ -603,6 +613,42 @@ public class CourseDAO {
 		}
 		
 		return (Long) query.getSingleResult();
+	}
+
+	public EvaluateEntity getEvaluate(Long id) {
+		if (id == null)
+			return null;
+		return this.entityManager.find(EvaluateEntity.class, id);
+		
+	}
+	
+	public CategoryEntity getCategoryEntity(Integer id) {
+		if (id == null)
+			return null;
+		return this.entityManager.find(CategoryEntity.class, id);
+		
+	}
+	
+	@Transactional
+	public EvaluateEntity mergeEvaluateEntity(EvaluateEntity p) {
+		entityManager.merge(p);
+		entityManager.flush();
+		return  p;
+	}
+	
+	@Transactional
+	public CategoryEntity mergeCategoryEntity(CategoryEntity p) {
+		entityManager.merge(p);
+		entityManager.flush();
+		return  p;
+	}
+	
+	@Transactional
+	public CategoryEntity persistCategoryEntity(CategoryEntity p) {
+		
+		entityManager.persist(p);
+		entityManager.flush();
+		return  p;
 	}
 
 }

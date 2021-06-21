@@ -45,7 +45,7 @@ public class Course extends AHasPoster implements JsonResponse {
     private int bought=0;
     @Column(name = "sum_star", length = 10, nullable = false)
     @JsonIgnore
-    private BigDecimal rateStar=BigDecimal.ZERO;
+    private BigDecimal sumStar=BigDecimal.ZERO;
     @JsonIgnore
     @Column(name = "sum_rating", length = 10, nullable = false)
     private int sumRating=0;
@@ -81,7 +81,7 @@ public class Course extends AHasPoster implements JsonResponse {
 		this.sumRating = sumRating;
 	}
 	public void setRateStar(BigDecimal rateStar) {
-		this.rateStar = rateStar;
+		this.sumStar = rateStar;
 	}
 	public ResourceImage getPoster() {
 		return poster;
@@ -132,7 +132,8 @@ public class Course extends AHasPoster implements JsonResponse {
 		this.bought = bought;
 	}
 	public double getRateStar() {
-		return rateStar.divide(BigDecimal.valueOf(sumRating)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		if(sumRating==0)return 0;
+		return sumStar.divide(BigDecimal.valueOf(sumRating)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
 	
 	

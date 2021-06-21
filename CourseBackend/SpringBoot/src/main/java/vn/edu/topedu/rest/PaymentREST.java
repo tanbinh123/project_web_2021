@@ -26,6 +26,7 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.PaymentDAO;
 import vn.edu.topedu.entity.AppUser;
+import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.entity.TransactionState;
@@ -154,6 +155,9 @@ public class PaymentREST {
 						//owerCourseDAO.detach(owerCourse);
 						FullCourse course = courseDAO.getFullCourse(idCourse);
 						course.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+						
+						
+						
 						return ResponseEntity.ok(course);
 					}
 					
