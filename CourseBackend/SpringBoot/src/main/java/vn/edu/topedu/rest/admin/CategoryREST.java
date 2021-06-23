@@ -93,20 +93,22 @@ public class CategoryREST {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {				
-				String name=body.get("name");
-				System.out.println(String.format("Name : %s", name));
-				if(name==null)return ResponseEntity.badRequest().body(new MessageResponse("Content null.", "Không có content"));
 				String deleted=body.get("deleted");
 				System.out.println(String.format("deleted : %s", deleted));
-				if(deleted==null||!deleted.equals("true"))deleted="false";
+				String name=body.get("name");
 				String actived=body.get("actived");
-				System.out.println(String.format("actived : %s", deleted));
-				if(actived==null||!actived.equals("false"))actived="true";
-				
+				if(deleted==null||!deleted.equals("true")) {
+					deleted="false";
+					System.out.println(String.format("Name : %s", name));
+					if(name==null)return ResponseEntity.badRequest().body(new MessageResponse("Content null.", "Không có content"));
+					System.out.println(String.format("actived : %s", deleted));
+					if(actived==null||!actived.equals("false"))actived="true";
+					category.setActived(Boolean.parseBoolean(actived));
+					category.setName(name);
+				}
 				
 				category.setDeleted(Boolean.parseBoolean(deleted));
-				category.setActived(Boolean.parseBoolean(actived));
-				category.setName(name);
+				
 				try {
 					CategoryEntity rs = courseDAO.mergeCategoryEntity(category);					
 //					rs.getUserPoster().getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
