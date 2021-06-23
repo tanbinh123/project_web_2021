@@ -10,8 +10,9 @@ import { DataUser } from "../../../../../app/DataUser";
 import { useRecoilState } from "recoil";
 import { isEmpty } from "../../../../../components/tools/Tools";
 import { useState } from "react";
+import ratingApi from "../../../../../api/ratingApi";
 function RatingCourse(props) {
-  const { idCourse = null, evaluates = [], onUpdate = null } = props;
+  const { idCourse = null,onUpdate = null } = props;
   const classes = makeStyles(() => ({
     root: {
       marginTop: "30px",
@@ -24,7 +25,8 @@ function RatingCourse(props) {
     },
   }))();
   const [dataUser, setDataUser] = useRecoilState(DataUser);
-  const [fillEva, setFillEva] = useState(evaluates);
+  const [fillEva, setFillEva] = useState();
+  const [evaluates,setEvaluates] = useState([]);
   const handleOnChangeSelected = (value) => {
     if (value === 0) {
       setFillEva(evaluates);
@@ -41,18 +43,31 @@ function RatingCourse(props) {
   const [evaluateUser, setEvaluateUser] = useState();
   const [bought, setBought] = useState(false);
   useEffect(() => {
-    setFillEva(evaluates);
-    if (!isEmpty(dataUser.token)) {
-      Array.from(evaluates).map((item) => {
-        if (item.username == dataUser.user.username) {
-          setEvaluateUser(item);
+    (async () => {
+      try {
+      const res = await ratingApi.get(idCourse);
+      console.log(res);
+      if(!(res?.message?.en=="List ratings not ready")){
+        setEvaluates(res.data);
+        setFillEva(res.data);
+        if (!isEmpty(dataUser.token)) {
+          Array.from(res.data).map((item) => {
+            if (item.username == dataUser.user.username) {
+              setEvaluateUser(item);
+            }
+          });
         }
-      });
-    }
+      }
+      
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+    
     Array.from(dataUser.courses).map((item) => {
       if (item.id === idCourse) setBought(true);
     });
-  }, [evaluates]);
+  }, [idCourse]);
   return (
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.root}>
       <div className={classes.contentCourse}>

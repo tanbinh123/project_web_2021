@@ -26,6 +26,11 @@ export const addLocalStorage = (data) => {
     localStorage.setItem(StorageKeys.PROFILE, JSON.stringify(data.profile));
   }
 };
+export const addLocalStorageProfile = (data) => {
+  if (!isEmpty(data)) {
+    localStorage.setItem(StorageKeys.PROFILE, JSON.stringify(data));
+  }
+};
 export const emptyUser = {
   user: {},
   profile: {},

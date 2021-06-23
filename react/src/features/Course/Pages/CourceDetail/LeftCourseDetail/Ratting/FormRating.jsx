@@ -79,23 +79,25 @@ function FormRating(props) {
       (async () => {
         const rp = await courseApi.postRating(idCourse, values);
         console.log(rp);
-        // if (!rp.status) {
-        console.log(rp);
-        enqueueSnackbar("Đánh giá thành công", { variant: "success" });
-        form.reset();
-        if (onUpdate) onUpdate();
-        // }
+        if (!rp.status) {
+          console.log(rp);
+          enqueueSnackbar("Đánh giá thành công", { variant: "success" });
+          form.reset();
+          if (onUpdate) onUpdate();
+        }
       })();
     } else {
       (async () => {
         const rp = await courseApi.postRating(idCourse, values);
         console.log(rp);
-        // if (!rp.status) {
-        console.log(rp);
-        enqueueSnackbar("Cập nhật đánh giá thành công", { variant: "success" });
-        form.reset();
-        if (onUpdate) onUpdate();
-        // }
+        if (!rp.status) {
+          console.log(rp);
+          enqueueSnackbar("Cập nhật đánh giá thành công", {
+            variant: "success",
+          });
+          form.reset();
+          if (onUpdate) onUpdate();
+        }
       })();
     }
   };

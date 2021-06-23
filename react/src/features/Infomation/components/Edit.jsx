@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import * as yup from "yup";
-import { addLocalStorage, DataUser } from "../../../app/DataUser";
+import {
+  addLocalStorage,
+  addLocalStorageProfile,
+  DataUser,
+} from "../../../app/DataUser";
 import userApi from "../../../api/userApi";
 import ButtonUploadFW from "../../../components/Button/ButtonUploadFW";
 import CustomButton from "../../../components/Button/CustomButton";
@@ -50,7 +54,7 @@ function Edit(props) {
     },
     resolver: yupResolver(schema),
   });
-  
+
   const handleOnSubmit = async (values) => {
     console.log("values", values);
     const formData = new FormData();
@@ -65,27 +69,22 @@ function Edit(props) {
     formData.append("uploadAvatar", values.uploadAvatar);
     var res = await userApi.postProfile(formData);
 
-
-    if(!!res.status){
+    if (!!res.status) {
       enqueueSnackbar(res.data.message.vi, { variant: "error" });
-      console.log("Code InValid",res.data.message.vi);  
+      console.log("Code InValid", res.data.message.vi);
       console.log(res);
       //TODO
-    
-      
-    } else{    
+    } else {
       console.log("postProfile", res);
-    
+
       setDataUser({
-        ...dataUser,        
+        ...dataUser,
         profile: res,
       });
-      addLocalStorage(null,res);
+      addLocalStorageProfile(res);
     }
-
-   
   };
-  console.log(dataUser);
+  // console.log(dataUser);
   const handleChangeAvatar = () => {
     const inputFile = document.getElementById("input-avatar");
     inputFile.click();
@@ -97,7 +96,6 @@ function Edit(props) {
     setImageAvatar(avatarTmp);
     form.setValue("avatar", file);
     form.setValue("uploadAvatar", file);
-    
   };
   return (
     <Grid container className={classes.rightRoot}>
