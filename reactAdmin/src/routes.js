@@ -1,6 +1,9 @@
 import React from "react";
 import FCourse from "./views/form/course/FCouse";
+import Categories from "./views/list/categories/Categories";
 import DetailCourse from "./views/list/course/DetailCourse/DetailCourse";
+import FCategorie from "./views/form/categorie/FCategorie";
+import CategorieDetailt from "./views/list/categories/categorieDetailt/CategorieDetailt";
 
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
@@ -67,8 +70,26 @@ const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/list/course", name: "Course", component: Course, exact: true },
+
   { path: "/list/course/:id", name: "DetailCourse", component: DetailCourse },
+  {
+    path: "/list/categories",
+    name: "Danh sách thể loại",
+    component: Categories,
+    exact: true,
+  },
+  {
+    path: "/list/categories/:id",
+    name: "Chi tiết thể loại",
+    component: CategorieDetailt,
+  },
   { path: "/form/course", name: "Form Course", component: FCourse },
+  {
+    path: "/form/categorie",
+    name: "Form tạo mới thể loại",
+    component: FCategorie,
+  },
+
   // { path: "/theme", name: "Theme", component: Colors, exact: true },
   // { path: "/theme/colors", name: "Colors", component: Colors },
   // { path: "/theme/typography", name: "Typography", component: Typography },

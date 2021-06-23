@@ -9,6 +9,7 @@ import courseApi from "src/api/courseApi";
 import * as yup from "yup";
 import { useSnackbar } from "notistack";
 import { convertVND, format1 } from "src/Tool/Tools";
+import CustomSelectForm from "src/components/form/CustomSelectForm";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -62,9 +63,10 @@ function BaseCourseForm(props) {
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      title: dataCourse.title,
-      price: dataCourse.price,
-      description: dataCourse.description,
+      title: dataCourse?.title,
+      price: dataCourse?.price,
+      description: dataCourse?.description,
+      categorie: dataCourse?.category?.id,
     },
     resolver: yupResolver(schema),
   });
@@ -75,7 +77,7 @@ function BaseCourseForm(props) {
       // formData.append("image", values.image);
       try {
         const rp = await courseApi.post(dataCourse?.id, values);
-        // console.log(rp);
+        console.log(rp);
         if (changeDataCourse) changeDataCourse(rp);
         enqueueSnackbar("Cập nhật thành công", { variant: "success" });
       } catch (error) {
@@ -83,6 +85,15 @@ function BaseCourseForm(props) {
       }
     })();
   };
+  const [dataSelect, setDataSelect] = useState(async () => {
+    const res = await courseApi.categories();
+    setDataSelect(
+      Array.from(res).map((item, index) => ({
+        value: item.id,
+        title: item.name,
+      }))
+    );
+  });
   return (
     <CCard>
       <CCardHeader>
@@ -114,6 +125,15 @@ function BaseCourseForm(props) {
           <div className={classes.price}>
             <span>Hiển thị giá tiền</span>
             <span>{convertVND(form.watch("price"))}</span>
+          </div>
+          <div>
+            <span>Chọn thể loại</span>
+            <CustomSelectForm
+              name={"categorie"}
+              label="Chọn thể loại"
+              data={dataSelect}
+              form={form}
+            />
           </div>
           <div>
             <span>Mô tả</span>

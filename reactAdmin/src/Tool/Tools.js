@@ -11,11 +11,19 @@ export function isEmpty(obj) {
     return true;
   } else if (Array.isArray(obj)) {
     if (obj.length === 0) return true;
-  } else if (obj === {}) {
+  } else if (isEmptyObj(obj)) {
     return true;
   } else {
     return false;
   }
+}
+function isEmptyObj(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      return false;
+    }
+  }
+  return JSON.stringify(obj) === JSON.stringify({});
 }
 export function convertVND(value) {
   return new Intl.NumberFormat("vi-VI", {

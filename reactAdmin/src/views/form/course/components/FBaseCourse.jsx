@@ -122,12 +122,11 @@ function FBaseCourse(props) {
   });
   const handleOnSubmit = (values) => {
     console.log(values.imageThumbnail);
-    console.log(isEmpty(values.imageThumbnail));
     if (isEmpty(values.categorie)) {
       enqueueSnackbar("Vui lòng chọn thể loại", { variant: "error" });
       return;
     }
-    if (isEmpty(values.imageThumbnail)) {
+    if (isEmpty(values?.imageThumbnail?.name)) {
       enqueueSnackbar("Vui tải hình lên", { variant: "error" });
       return;
     }
@@ -142,13 +141,13 @@ function FBaseCourse(props) {
       formData.append("description", values.description);
       try {
         const rp = await courseApi.postNewCourse(formData);
+        console.log(rp);
         if (!rp.status) {
           console.log(rp);
+          if (nextCurrentStep) nextCurrentStep(1);
+          if (updateCourse) updateCourse(rp);
+          enqueueSnackbar("Tạo khóa học thành công", { variant: "success" });
         }
-        if (nextCurrentStep) nextCurrentStep(1);
-        if (updateCourse) updateCourse(rp);
-        // if (changeDataCourse) changeDataCourse(rp);
-        enqueueSnackbar("Tạo khóa học thành công", { variant: "success" });
       } catch (error) {
         enqueueSnackbar(error.message, { variant: "error" });
       }

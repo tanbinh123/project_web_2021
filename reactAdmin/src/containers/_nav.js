@@ -23,6 +23,12 @@ const _nav = [
     icon: "cil-drop",
   },
   {
+    _tag: "CSidebarNavItem",
+    name: "Thể loại",
+    to: "/list/categories",
+    icon: "cil-drop",
+  },
+  {
     _tag: "CSidebarNavTitle",
     _children: ["Form tạo mới"],
   },
@@ -30,6 +36,12 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "Tạo mới khóa học",
     to: "/form/course",
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Tạo mới thể loại",
+    to: "/form/categorie",
     icon: "cil-drop",
   },
   // {
