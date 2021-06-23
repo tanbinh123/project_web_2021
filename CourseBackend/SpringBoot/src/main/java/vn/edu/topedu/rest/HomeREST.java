@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,19 @@ public class HomeREST {
 		
 		else return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new MessageResponse("username not exist.", "username không tồn tại trong hệ thống."));
 		
+	}
+	
+	@PostMapping(value="/admin")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> alive() {	
+		return ResponseEntity.ok().build();
+	}
+	@PostMapping(value="/user")
+	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<Object> user() {	
+		return ResponseEntity.ok().build();
 	}
 	
 }
