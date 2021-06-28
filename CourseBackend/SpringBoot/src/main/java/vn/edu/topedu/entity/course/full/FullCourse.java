@@ -76,7 +76,8 @@ public class FullCourse extends BaseEntity {
 	@OneToMany(mappedBy = "course")
 	private List<Part> parts;
 	
-	@OneToMany(mappedBy = "fullCourse", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "fullCourse", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<EvaluateEntity> evaluates;
 
 	@JsonIgnore
@@ -254,14 +255,16 @@ public class FullCourse extends BaseEntity {
 							x.getVideo().setBeforeResource(beforeResource);
 					});
 			});
-		
-		for(EvaluateEntity e: this.getEvaluates()) {						
-			e.getUserPoster().getAvatar().setBeforeResource(beforeResource);
-		}
+//		if(this.evaluates!=null)
+//		for(EvaluateEntity e: this.getEvaluates()) {						
+//			e.getUserPoster().getAvatar().setBeforeResource(beforeResource);
+//		}
 
 	}
 	
-	
+	public boolean getIsFull() {
+		return true;
+	}
 	public void setBeforeResource(HttpServletRequest httpServletRequest) {
 		String beforeResource = WebUtils.getUrl(httpServletRequest);
 		if (this.imagePoster != null)

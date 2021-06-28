@@ -1,8 +1,10 @@
 package vn.edu.topedu.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,7 +177,20 @@ public class EvaluateREST {
 					});
 					
 					return ResponseEntity.ok(pageResponse);
-				} catch (Exception e) {
+				} 
+				catch (NoResultException e) {
+					System.err.println(e.getMessage());
+					@SuppressWarnings({ "rawtypes", "unchecked" })
+					PageResponse<Course> pageResponse = new PageResponse(new ArrayList<>(), 1, 1, 0, new Pagination() {
+						public String get_sort() {
+							return _sort;
+						}
+
+					});
+					
+					return ResponseEntity.ok(pageResponse);
+				}
+				catch (Exception e) {
 					System.err.println(e.getMessage());
 					return ResponseEntity.badRequest().body(new MessageResponse("List ratings not ready", "Không thể lấy danh sách ratings"));
 				}

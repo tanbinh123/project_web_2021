@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 22/06/2021 03:08:05
+ Date: 28/06/2021 14:17:05
 */
 
 SET NAMES utf8mb4;
@@ -117,15 +117,15 @@ CREATE TABLE `categories`  (
   `total_money` decimal(30, 0) UNSIGNED NOT NULL DEFAULT 0,
   `total_course_bought` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 170, 0, 28844000, 4);
-INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 2, 500, 32601000, 5);
-INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 1, 0, 0, 0);
-INSERT INTO `categories` VALUES (20, 'GEN', b'1', b'0', '2021-06-21 20:00:37', '2021-06-21 20:00:37', 0, 0, 0, 0);
+INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 172, 0, 28844000, 4);
+INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 4, 500, 32601000, 5);
+INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 2, 0, 0, 0);
+INSERT INTO `categories` VALUES (22, 'Genshin Impact', b'1', b'0', '2021-06-28 06:39:44', '2021-06-28 06:39:44', 2, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for course
@@ -152,7 +152,7 @@ CREATE TABLE `course`  (
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 185 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 187 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
@@ -335,6 +335,8 @@ INSERT INTO `course` VALUES (181, 103, 'Best Waifu', b'0', 'Tìm Hiểu Ganyu 2'
 INSERT INTO `course` VALUES (182, 100, 'Best Waifu', b'0', 'Ganyu', 150000, 0, 0, '2021-06-21 20:07:08', 1, NULL, 2, '2021-06-20 06:14:06', b'1', 0);
 INSERT INTO `course` VALUES (183, 101, 'Best Waifu', b'0', 'Tìm hiểu Ganyu 4', 2343000, 0, 0, '2021-06-21 07:08:07', 1, NULL, 2, '2021-06-20 08:53:57', b'1', 0);
 INSERT INTO `course` VALUES (184, 102, 'Test', b'0', 'Hoàng Test', 1150000, 0, 0, '2021-06-21 07:02:44', 1, NULL, 19, '2021-06-21 07:02:44', b'1', 0);
+INSERT INTO `course` VALUES (185, 105, 'Ganyu', b'0', 'Tìm Hiểu Ganyu', 150000, 0, 0, '2021-06-28 06:40:31', 1, NULL, 22, '2021-06-28 06:40:31', b'1', 0);
+INSERT INTO `course` VALUES (186, 106, 'Ganyu', b'0', 'Tìm Hiểu Ganyu', 150000, 0, 0, '2021-06-28 06:42:27', 1, NULL, 22, '2021-06-28 06:42:27', b'1', 0);
 
 -- ----------------------------
 -- Table structure for evaluates
@@ -606,7 +608,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 105 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -633,6 +635,8 @@ INSERT INTO `resource_image` VALUES (101, 'user/admin/image/1609745981195.png', 
 INSERT INTO `resource_image` VALUES (102, 'user/admin/image/1609745981038.png', b'0', '2021-06-21 07:02:44', 1, 1, '2021-06-21 07:02:44');
 INSERT INTO `resource_image` VALUES (103, 'user/admin/image/1609745981197.jpg', b'0', '2021-06-21 07:06:08', 1, 0, '2021-06-21 07:06:08');
 INSERT INTO `resource_image` VALUES (104, 'user/admin/image/1609745981190.jpg', b'0', '2021-06-21 20:07:45', 1, 1, '2021-06-21 20:07:45');
+INSERT INTO `resource_image` VALUES (105, 'user/admin/image/1609745981327.png', b'0', '2021-06-28 06:40:31', 1, 1, '2021-06-28 06:40:31');
+INSERT INTO `resource_image` VALUES (106, 'user/admin/image/1609745981327.png', b'0', '2021-06-28 06:42:27', 1, 1, '2021-06-28 06:42:27');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -681,8 +685,7 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('39271e26-70e3-4b1a-bd98-15d44f9fbc77', '3fdb0dfd-dc7e-47bc-a500-822aa5a34f0d', 1624305995333, 1624305995334, 1800, 1624307795334, NULL);
-INSERT INTO `spring_session` VALUES ('932910fa-cd6d-4089-9ab8-9e16d6245664', '755f21ab-e7ad-4971-9d8f-f5ab515544f4', 1624303466244, 1624305642714, 1800, 1624307442714, NULL);
+INSERT INTO `spring_session` VALUES ('ed0b1af3-b7b9-4e6f-ae7e-f09879df83b7', '62b980ba-faec-4cae-a2c5-17a3e43b5a85', 1624864210028, 1624864210028, 1800, 1624866010028, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -872,6 +875,8 @@ CREATE TRIGGER `after_insert_course` AFTER INSERT ON `course` FOR EACH ROW BEGIN
 					UPDATE video SET count_linked=count_linked+1 WHERE id =  new.demo_id;					
 			
 			end if;
+			
+			UPDATE categories SET categories.total_course=categories.total_course+1 WHERE categories.id =new.category_id;
 	 END
 ;;
 delimiter ;

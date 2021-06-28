@@ -53,8 +53,7 @@ public class PreviewCourseEntity extends AHasPoster {
 	@OneToMany(mappedBy = "course")
 	private List<Learning> learnings;
 	
-	@OneToMany(mappedBy = "previewCourseEntity", fetch = FetchType.EAGER)
-	private List<EvaluateEntity> evaluates;
+	
 	@OneToMany(mappedBy = "course")
 	private List<PartReview> parts;
 //	@OneToMany(mappedBy = "detailCourseEntity")
@@ -67,12 +66,8 @@ public class PreviewCourseEntity extends AHasPoster {
 		return learnings;
 	}
 
-	public List<EvaluateEntity> getEvaluates() {
-		return evaluates;
-	}
-
-	public void setEvaluates(List<EvaluateEntity> evaluates) {
-		this.evaluates = evaluates;
+	public boolean getIsFull() {
+		return false;
 	}
 
 	public PreviewCourseEntity() {
