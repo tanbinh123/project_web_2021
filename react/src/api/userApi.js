@@ -46,6 +46,11 @@ const userApi = {
       },
     });
   },
+  changePassword(data) {
+    const url = `/profile/changepassword`;
+    //axiosClient.
+    return axiosClient.post(url, data);
+  },
   checkEmail(data) {
     const url = `/home/email`;
     return axiosClient.post(url, data);
