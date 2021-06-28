@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,9 +35,11 @@ import vn.edu.topedu.dao.AppUserDAO;
 import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.GENDER;
+import vn.edu.topedu.entity.RequestResetPassword;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.json.MultiDateDeserializer;
+import vn.edu.topedu.jwt.security.PBKDF2Encoder;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
 
@@ -49,6 +52,10 @@ public class ProfileREST {
 
 	@Autowired
 	ResourceImageDAO resourceImageDAO;
+	
+	@Autowired
+	private PBKDF2Encoder passwordEncoder;
+	
 
 	@GetMapping
 	@ResponseBody
@@ -144,6 +151,41 @@ public class ProfileREST {
 			return ResponseEntity.ok(appUser);
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", ""));
+	}
+	
+	@PostMapping("/changepassword")
+	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<Object> changePassword(
+			Authentication authentication,
+			@RequestBody Map<String,String> body) {
+		if (authentication != null) {
+			
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {
+				
+				System.out.println(body);
+				
+				String password=body.get("password");
+				if(password==null||password.length()==0)
+					return ResponseEntity.badRequest().body(new MessageResponse("Required Password.","Thiếu trường Password."));
+				String newPassword=body.get("newPassword");
+				if(newPassword==null||newPassword.length()==0)
+					return ResponseEntity.badRequest().body(new MessageResponse("Required newPassword.","Thiếu trường newPassword."));
+				if(!appUser.getEncrytedPassword().equals(passwordEncoder.encode(password)))
+					return ResponseEntity.badRequest().body(new MessageResponse("Password not corect.","Mật khẩu không đúng."));
+				appUser.setEncrytedPassword(passwordEncoder.encode(newPassword));
+				if(appUserDAO.updateUser(appUser)) {					
+					
+					return ResponseEntity.ok(new MessageResponse("Password change successful.","Thay đổi mật khẩu thành công."));
+				}
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Object() {
+					String message="MySql error";
+				});
+					
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
 	}
 
 	
