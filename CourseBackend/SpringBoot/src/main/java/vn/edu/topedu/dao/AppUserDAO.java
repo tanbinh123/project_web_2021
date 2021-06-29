@@ -13,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.AppRole;
 import vn.edu.topedu.entity.AppUser;
+import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.UserRole;
 import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.utils.WebUtils;
 
 @Repository
 @Transactional
@@ -34,6 +36,19 @@ public class AppUserDAO {
 
 			Query query = entityManager.createQuery(sql, AppRole.class);
 			query.setParameter("roleName", roleName);
+
+			return (AppRole) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	public AppRole findRoleById(Long roleId) {
+		try {
+			String sql = "Select e from " + AppRole.class.getName() + " e " //
+					+ " Where e.id = :roleId ";
+
+			Query query = entityManager.createQuery(sql, AppRole.class);
+			query.setParameter("roleId", roleId);
 
 			return (AppRole) query.getSingleResult();
 		} catch (NoResultException e) {
@@ -180,5 +195,155 @@ public class AppUserDAO {
 		query.setParameter("userId", userId);
 		return query.getResultList();
 	}
+	
+	
+	public List<AppUser> getAppUsers( int _page, int _limit, String sort, String _search) throws NoResultException {
+		--_page;
+		if(_page<0)_page=0;
+		if (sort == "" || sort == null)
+			sort = "id:asc";
+
+		String sql = "Select c from " + AppUser.class.getName() + " c where  c.deleted=0 ";
+		if (_search!=null &&_search.length() != 0) {
+					
+			sql += " and ((c.userName like CONCAT('%',:search,'%')) or (c.fullname like CONCAT('%',:search,'%')) ) ";
+
+		}
+		
+		sql += " group by c.id  order by  ";
+		String sqlSort = "";
+		sort = sort.toLowerCase();
+
+		String[] a = sort.split(",");
+		boolean started = true;
+		for (String str : a) {
+			int index = str.indexOf(':');
+			String _order = str.substring(index + 1);
+			String tmpSort = str.substring(0, index);
+			switch (tmpSort) {
+			case "id":
+				sqlSort += WebUtils.sort(_order, "c.id", started);
+				break;
+			
+			
+			
+			case "updateat":
+				sqlSort += WebUtils.sort(_order, "c.updateAt", started);
+				break;
+			default:
+				break;
+			}
+			started = false;
+			sql += sqlSort;
+			sqlSort = "";
+		}
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, AppUser.class);
+		query.setFirstResult(_page * _limit);
+		if (_search!=null &&_search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		if (_limit != -1) {
+			query.setMaxResults(_limit);
+		}
+		return query.getResultList();
+	}
+	
+	public Long countAppUser(String _search) throws NoResultException {
+		
+
+		String sql = "Select count(c.id)  from " + AppUser.class.getName() + " c where  c.deleted=false ";
+		if (_search!=null && _search.length() != 0) {
+			sql += " and ((c.userName like CONCAT('%',:search,'%')) or (c.fullname like CONCAT('%',:search,'%')) ) ";		
+
+		}
+		
+		//sql += " group by c.id   ";
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql);
+		
+		if (_search!=null &&  _search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		
+		return (Long) query.getSingleResult();
+	}
+	
+	
+	public List<AppRole> getAppRoles( int _page, int _limit, String sort, String _search) throws NoResultException {
+		--_page;
+		if(_page<0)_page=0;
+		if (sort == "" || sort == null)
+			sort = "id:asc";
+
+		String sql = "Select c from " + AppRole.class.getName() + " c where  c.deleted=0 ";
+		if (_search!=null &&_search.length() != 0) {
+					
+			//sql += " and ((c.userName like CONCAT('%',:search,'%')) or (c.fullname like CONCAT('%',:search,'%')) ) ";
+
+		}
+		
+		sql += " group by c.id  order by  ";
+		String sqlSort = "";
+		sort = sort.toLowerCase();
+
+		String[] a = sort.split(",");
+		boolean started = true;
+		for (String str : a) {
+			int index = str.indexOf(':');
+			String _order = str.substring(index + 1);
+			String tmpSort = str.substring(0, index);
+			switch (tmpSort) {
+			case "id":
+				sqlSort += WebUtils.sort(_order, "c.id", started);
+				break;
+			
+			
+			
+			case "updateat":
+				sqlSort += WebUtils.sort(_order, "c.updateAt", started);
+				break;
+			default:
+				break;
+			}
+			started = false;
+			sql += sqlSort;
+			sqlSort = "";
+		}
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, AppRole.class);
+		query.setFirstResult(_page * _limit);
+		if (_search!=null &&_search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		if (_limit != -1) {
+			query.setMaxResults(_limit);
+		}
+		return query.getResultList();
+	}
+	
+	public Long countAppRole(String _search) throws NoResultException {
+		
+
+		String sql = "Select count(c.id)  from " + AppRole.class.getName() + " c where  c.deleted=false ";
+		if (_search!=null && _search.length() != 0) {
+			//sql += " and ((c.userName like CONCAT('%',:search,'%')) or (c.fullname like CONCAT('%',:search,'%')) ) ";		
+
+		}
+		
+		//sql += " group by c.id   ";
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql);
+		
+		if (_search!=null &&  _search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		
+		return (Long) query.getSingleResult();
+	}
+
+
 
 }
