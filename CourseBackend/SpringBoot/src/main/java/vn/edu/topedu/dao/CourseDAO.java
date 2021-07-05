@@ -3,6 +3,7 @@ package vn.edu.topedu.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,7 +128,7 @@ public class CourseDAO {
 		return (FullCourse) query.getSingleResult();
 	}
 	
-	public EvaluateEntity getEvalUser(Long courseId, Long userId) {
+	public EvaluateEntity getEvalUser(Long courseId, Long userId) throws NoResultException {
 		String sql = "Select c from " + EvaluateEntity.class.getName() + " c " //
 				+ " where c.userPosterId=:userId and c.courseId= :courseId ";
 		Query query = this.entityManager.createQuery(sql, EvaluateEntity.class);

@@ -3,6 +3,7 @@ package vn.edu.topedu.rest;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,14 @@ public class EvaluateREST {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {	
-				EvaluateEntity ev = courseDAO.getEvalUser(fullcourse.getId(), appUser.getId());
-				if(ev!=null)return ResponseEntity.badRequest().body(new MessageResponse("user had rating.", "User Này đã đánh giá"));
+				try {
+					EvaluateEntity ev = courseDAO.getEvalUser(fullcourse.getId(), appUser.getId());
+					if(ev!=null)
+						return ResponseEntity.badRequest().body(new MessageResponse("user had rating.", "User Này đã đánh giá"));
+					
+				} catch (NoResultException e) {
+					
+				}
 				String content=body.get("content");
 				System.out.println(String.format("Content : %s", content));
 				if(content==null)return ResponseEntity.badRequest().body(new MessageResponse("Content null.", "Không có content"));
@@ -140,23 +147,19 @@ public class EvaluateREST {
 	
 	@GetMapping(value="/{previewCourse}/ratings")
 	@ResponseBody
-	@PreAuthorize("hasRole('USER')")
+	//@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<Object> getRatings(
 			HttpServletRequest httpServletRequest, 
 			@PathVariable PreviewCourseEntity previewCourse,				
 			@RequestParam(defaultValue = "0") int _page,
 			@RequestParam(defaultValue = "10") int _limit,
 			@RequestParam(defaultValue = "id:asc") String _sort, 
-			@RequestParam(defaultValue = "") String _search,
-			Authentication authentication	
+			@RequestParam(defaultValue = "") String _search
 			) {
 		System.out.println("---------------------------------");
 		
 		
-		if (authentication != null) {
-			authentication.getName();
-			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
-			if (appUser != null) {				
+			
 				
 				try {
 					List<EvaluateEntity> rs = courseDAO.getEvaluates(previewCourse.getId(),_page,_limit,_sort,_search);					
@@ -179,9 +182,8 @@ public class EvaluateREST {
 					System.err.println(e.getMessage());
 					return ResponseEntity.badRequest().body(new MessageResponse("List ratings not ready", "Không thể lấy danh sách ratings"));
 				}
-			}
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+			
+		
 	}
 	
 	

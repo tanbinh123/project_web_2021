@@ -254,9 +254,10 @@ public class FullCourse extends BaseEntity {
 							x.getVideo().setBeforeResource(beforeResource);
 					});
 			});
-		
-		for(EvaluateEntity e: this.getEvaluates()) {						
-			e.getUserPoster().getAvatar().setBeforeResource(beforeResource);
+		if(this.getEvaluates()!=null) {
+			for(EvaluateEntity e: this.getEvaluates()) {						
+				e.getUserPoster().getAvatar().setBeforeResource(beforeResource);
+			}
 		}
 
 	}
