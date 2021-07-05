@@ -33,7 +33,7 @@ public class FullCourse extends BaseEntity {
 
 	
 	@Column(name = "demo_id", length = 20, nullable = false)
-	@JsonIgnore
+	//@JsonIgnore
 	private Long videoDemoId;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
@@ -41,7 +41,7 @@ public class FullCourse extends BaseEntity {
 	private VideoEntity demo;
 
 	@Column(name = "user_poster_id", nullable = false)
-	@JsonIgnore
+	//@JsonIgnore
 	private Long userPosterId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -52,10 +52,10 @@ public class FullCourse extends BaseEntity {
 	
 	
 	@Column(name = "img_poster_id", nullable = false)
-	@JsonIgnore
+	//@JsonIgnore
 	private Long imagePosterId;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private ResourceImage imagePoster;
 
@@ -71,7 +71,7 @@ public class FullCourse extends BaseEntity {
 	@Column(name = "price", length = 15, nullable = false)
 	private BigDecimal price = new BigDecimal(0);
 
-	@OneToMany(mappedBy = "course", cascade= {CascadeType.REFRESH})
+	@OneToMany(mappedBy = "course", cascade= {CascadeType.ALL})
 	private List<Learning> learnings;
 	@OneToMany(mappedBy = "course")
 	private List<Part> parts;
@@ -80,7 +80,7 @@ public class FullCourse extends BaseEntity {
 	@JsonIgnore
 	private List<EvaluateEntity> evaluates;
 
-	@JsonIgnore
+	//@JsonIgnore
 	@Column(name = "category_id", nullable = false)
 	private Integer categoryId;
 	@ManyToOne
@@ -145,6 +145,8 @@ public class FullCourse extends BaseEntity {
 	public CategoryEntity getCategory() {
 		return category;
 	}
+	
+	
 
 	public void setCategory(CategoryEntity category) {
 		this.category = category;

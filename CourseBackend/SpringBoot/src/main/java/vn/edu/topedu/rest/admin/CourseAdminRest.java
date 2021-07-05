@@ -91,6 +91,7 @@ public class CourseAdminRest {
 				try {
 					fullcourse.setUpdateAt(new Date());
 					FullCourse rs = courseDAO.merge(fullcourse);
+					rs.setImagePoster(newPoster);
 					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));					
 					return ResponseEntity.ok(rs);
 				} catch (Exception e) {
@@ -292,6 +293,8 @@ public class CourseAdminRest {
 				fullcourse.setUpdateAt(new Date());
 				try {
 					FullCourse rs = courseDAO.persistCourse(fullcourse);
+					rs.setImagePoster(newAvatar);
+					
 					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
 					
 					return ResponseEntity.ok(rs);
