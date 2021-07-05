@@ -93,7 +93,10 @@ function FDemoCourse(props) {
   });
   const handleOnSubmit = (values) => {
     console.log(values);
-
+    if (isEmpty(values?.image?.name)) {
+      enqueueSnackbar("Vui lòng tải video lên", { variant: "error" });
+      return;
+    }
     (async () => {
       try {
         if (nextCurrentStep) nextCurrentStep(2);

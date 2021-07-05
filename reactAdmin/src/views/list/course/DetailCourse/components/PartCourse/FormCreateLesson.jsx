@@ -79,7 +79,7 @@ function FormCreateLesson(props) {
     //todo hoang todo
     console.log("Post  Lesson: ", values);
 
-    if (isEmpty(values.videoCourse)) {
+    if (isEmpty(values?.videoCourse?.name)) {
       enqueueSnackbar("Vui lòng tải lên video bài học", { variant: "error" });
       return;
     }

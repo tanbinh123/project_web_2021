@@ -8,6 +8,7 @@ import * as yup from "yup";
 import SimpleDialog from "./SimpleDialog";
 import courseApi from "src/api/courseApi";
 import { useSnackbar } from "notistack";
+import { isEmpty } from "src/Tool/Tools";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -72,7 +73,10 @@ function DemoCourseForm(props) {
   });
   const handleOnSubmit = (values) => {
     console.log(values);
-
+    if (isEmpty(values?.image?.name)) {
+      enqueueSnackbar("Vui lòng tải video lên", { variant: "error" });
+      return;
+    }
     (async () => {
       try {
         const formData = new FormData();
@@ -80,7 +84,7 @@ function DemoCourseForm(props) {
         setProgress(true);
         const rp = await courseApi.uploadNewVideoDemo(dataCourse?.id, formData);
         setProgress(false);
-        // console.log(rp);
+        console.log(rp);
         if (changeDataCourse) changeDataCourse(rp);
         enqueueSnackbar("Cập nhật thành công", { variant: "success" });
       } catch (error) {

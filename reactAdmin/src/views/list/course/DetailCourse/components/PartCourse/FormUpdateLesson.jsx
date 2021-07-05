@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
+import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import courseApi from "src/api/courseApi";
@@ -63,7 +64,8 @@ const schema = yup.object().shape({
 function FormUpdateLesson(props) {
   const { part = {}, lesson = {}, changeDataCourse = null } = props;
   const classes = useStyles();
-  const [demoVideo, setDemoVideo] = useState(lesson.video.urlVideo);
+  const [demoVideo, setDemoVideo] = useState(lesson?.video?.urlVideo);
+  const { enqueueSnackbar } = useSnackbar();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -77,7 +79,10 @@ function FormUpdateLesson(props) {
   const handleOnSubmit = (values) => {
     //todo hoang todo
     console.log("Update Lesson", values);
-
+    if (isEmpty(values?.videoCourse?.name)) {
+      enqueueSnackbar("Vui lòng tải lên video bài học", { variant: "error" });
+      return;
+    }
     (async () => {
       const formData = new FormData();
 
@@ -93,8 +98,8 @@ function FormUpdateLesson(props) {
       );
       if (!rp.status) {
         console.log(rp);
-
         if (changeDataCourse) changeDataCourse(rp);
+        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
       }
     })();
   };
@@ -119,15 +124,9 @@ function FormUpdateLesson(props) {
     //console.log("Hoang TODO");
     console.log("Xóa Bài Học");
 
-    const rp = await courseApi.deleteLesson(
-      part.courseId,
-      part.id,
-      lesson.id
-    );
-       if (!rp.status) {
-        console.log(rp);
-
-      
+    const rp = await courseApi.deleteLesson(part.courseId, part.id, lesson.id);
+    if (!rp.status) {
+      console.log(rp);
     }
   };
   return (

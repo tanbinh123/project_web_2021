@@ -1,5 +1,6 @@
 package vn.edu.topedu.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +34,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import vn.edu.topedu.dto.DTOAppRole;
 import vn.edu.topedu.json.CustomDateSerializer;
 import vn.edu.topedu.json.MultiDateDeserializer;
 
@@ -211,9 +213,17 @@ public class AppUser implements UserDetails {
 	}
 
 	@Override
-	@JsonIgnore
+	
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.authorities;
+	}
+	
+	public List<DTOAppRole> getAppRoles() {
+		ArrayList<DTOAppRole> rs= new ArrayList<>();
+		for (int i = 0; i < authorities.size(); i++) {
+			rs.add(DTOAppRole.cover(authorities.get(i)));
+		}
+		return rs;
 	}
 
 	@Override
@@ -270,7 +280,7 @@ public class AppUser implements UserDetails {
 	public void setAuthorities(List<AppRole> authorities) {
 		this.authorities = authorities;
 	}
-	@JsonIgnore
+	
 	public List<UserRole> getUserRoles() {
 		return userRoles;
 	}
@@ -294,5 +304,21 @@ public class AppUser implements UserDetails {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	public void setBeforeResource(String beforeResource) {
+		if (this.avatar != null)
+			this.avatar.setBeforeResource(beforeResource);
+		
+	}
+	
+	public boolean getIsAdmin() {
+		if(authorities!=null) {
+			for (AppRole a: authorities) {
+				if("ROLE_ADMIN".equals(a.getAuthority()))return true;
+			}
+		}
+		return false;
+	}
+	
 
 }

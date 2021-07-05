@@ -540,7 +540,7 @@ public class CourseDAO {
 
 	
 	
-	public List<EvaluateEntity> getEvaluates(Long courseId, int _page, int _limit, String sort, String _search) {
+	public List<EvaluateEntity> getEvaluates(Long courseId, int _page, int _limit, String sort, String _search) throws NoResultException {
 		--_page;
 		if(_page<0)_page=0;
 		if (sort == "" || sort == null)
@@ -593,7 +593,7 @@ public class CourseDAO {
 		return query.getResultList();
 	}
 	
-	public Long countEvaluates(Long courseId, String _search) {
+	public Long countEvaluates(Long courseId, String _search) throws NoResultException {
 		
 
 		String sql = "Select count(*)  from " + EvaluateEntity.class.getName() + " c where courseId=:courseId and c.deleted=0 ";
@@ -651,5 +651,13 @@ public class CourseDAO {
 		entityManager.flush();
 		return  p;
 	}
+
+	public int deleteAllCategoryNoCourse() {
+		int rs = entityManager.createNativeQuery("Delete from categories where deleted=1 and total_course = 0 ").executeUpdate();
+		return rs;
+		
+	}
+	
+	
 
 }

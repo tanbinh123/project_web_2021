@@ -43,6 +43,7 @@ function RatingCourse(props) {
   const [evaluateUser, setEvaluateUser] = useState();
   const [bought, setBought] = useState(false);
   useEffect(() => {
+    if(idCourse)
     (async () => {
       try {
       const res = await ratingApi.get(idCourse);

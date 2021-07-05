@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.dao.VideoDAO;
 
@@ -47,6 +48,8 @@ public class Main extends SpringBootServletInitializer {
 	@Autowired
 	ResourceImageDAO resourceImageDAO;
 	@Autowired
+	CourseDAO courseDAO;
+	@Autowired
 	VideoDAO videoDAO;
 	@EventListener({ApplicationReadyEvent.class})
 	void applicationReadyEvent() {
@@ -67,6 +70,14 @@ public class Main extends SpringBootServletInitializer {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+	    }
+	    if(courseDAO!=null) {
+	    	try {
+	    		courseDAO.deleteAllCategoryNoCourse();
+	    		System.err.println("Delete All Category No Course");
+	    	} catch (Exception e) {
+	    		e.printStackTrace();
+	    	}
 	    }
 //	    browse("www.google.com");
 //	    browse("http://localhost:"+port+"/");

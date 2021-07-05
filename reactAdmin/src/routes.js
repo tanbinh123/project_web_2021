@@ -4,6 +4,8 @@ import Categories from "./views/list/categories/Categories";
 import DetailCourse from "./views/list/course/DetailCourse/DetailCourse";
 import FCategorie from "./views/form/categorie/FCategorie";
 import CategorieDetailt from "./views/list/categories/categorieDetailt/CategorieDetailt";
+import ListUsers from "./views/list/users/ListUsers";
+import UserDetailt from "./views/list/users/userDetailt/UserDetailt";
 
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
@@ -70,7 +72,9 @@ const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/list/course", name: "Course", component: Course, exact: true },
+  { path: "/list/user", name: "List Users", component: ListUsers, exact: true },
 
+  { path: "/list/user/:id", name: "DetailUsers", component: UserDetailt },
   { path: "/list/course/:id", name: "DetailCourse", component: DetailCourse },
   {
     path: "/list/categories",

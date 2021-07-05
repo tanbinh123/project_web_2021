@@ -15,18 +15,16 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
  
 @Entity
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "App_Role", //
         uniqueConstraints = { //
                 @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name") })
-public class AppRole implements GrantedAuthority {
+public class AppRole extends BaseEntity implements GrantedAuthority {
      
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+	
  
     @Column(name = "Role_Name", length = 30, nullable = false)
     private String roleName;
@@ -57,7 +55,7 @@ public class AppRole implements GrantedAuthority {
 		
 		return this.roleName;
 	}
-
+	@JsonIgnore
 	public List<UserRole> getUserRole() {
 		return userRole;
 	}

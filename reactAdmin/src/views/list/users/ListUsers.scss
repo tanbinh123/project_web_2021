@@ -1,0 +1,35 @@
+.image {
+  & > img {
+    width: 10px;
+  }
+}
+.tdCenter {
+  text-align: center;
+}
+.detailBody {
+  & button {
+    margin-left: 20px;
+  }
+}
+.img_thumbnail {
+  width: 100%;
+  margin: 20px 0px 40px 0px;
+}
+.row_image {
+  height: 50px;
+  cursor: pointer;
+}
+.sex {
+  & > span:first-of-type {
+    margin-right: 5px;
+  }
+  & > i {
+    font-size: 17px;
+  }
+}
+.blue {
+  color: var(--colorBlue1);
+}
+.pink {
+  color: var(--colorPink1);
+}

@@ -37,6 +37,14 @@ const userApi = {
     const url = `/profile`;
     return axiosClient.get(url);
   },
+  getListAccount(params) {
+    const url = `/api/admin/user/list`;
+    return axiosClient.get(url, { params });
+  },
+  adminGetOneUser(id) {
+    const url = `/api/admin/user/${id}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default userApi;

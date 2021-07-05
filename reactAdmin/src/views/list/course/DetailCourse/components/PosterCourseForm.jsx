@@ -9,6 +9,7 @@ import * as yup from "yup";
 import courseApi from "src/api/courseApi";
 import SimpleDialog from "./SimpleDialog";
 import { useSnackbar } from "notistack";
+import { isEmpty } from "src/Tool/Tools";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -81,6 +82,10 @@ function PosterCourseForm(props) {
   });
   const handleOnSubmit = (values) => {
     console.log(values);
+    if (isEmpty(values?.image?.name)) {
+      enqueueSnackbar("Vui lòng tải hình lên", { variant: "error" });
+      return;
+    }
     (async () => {
       try {
         const formData = new FormData();

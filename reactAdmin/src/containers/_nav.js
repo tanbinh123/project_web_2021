@@ -29,6 +29,12 @@ const _nav = [
     icon: "cil-drop",
   },
   {
+    _tag: "CSidebarNavItem",
+    name: "Tài khoản",
+    to: "/list/user",
+    icon: "cil-drop",
+  },
+  {
     _tag: "CSidebarNavTitle",
     _children: ["Form tạo mới"],
   },

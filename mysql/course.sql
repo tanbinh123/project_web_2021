@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 22/06/2021 03:08:05
+ Date: 29/06/2021 15:26:43
 */
 
 SET NAMES utf8mb4;
@@ -52,6 +52,9 @@ DROP TABLE IF EXISTS `app_role`;
 CREATE TABLE `app_role`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ROLE_NAME` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
+  `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
+  `update_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE INDEX `APP_ROLE_UK`(`ROLE_NAME`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
@@ -59,8 +62,8 @@ CREATE TABLE `app_role`  (
 -- ----------------------------
 -- Records of app_role
 -- ----------------------------
-INSERT INTO `app_role` VALUES (1, 'ROLE_ADMIN');
-INSERT INTO `app_role` VALUES (2, 'ROLE_USER');
+INSERT INTO `app_role` VALUES (1, 'ROLE_ADMIN', b'0', '2021-06-29 08:20:11', '2021-06-29 08:20:11');
+INSERT INTO `app_role` VALUES (2, 'ROLE_USER', b'0', '2021-06-29 08:20:11', '2021-06-29 08:20:11');
 
 -- ----------------------------
 -- Table structure for app_user
@@ -90,7 +93,7 @@ CREATE TABLE `app_user`  (
   UNIQUE INDEX `email_uq`(`email`) USING BTREE,
   INDEX `avatar_id`(`avatar_id`) USING BTREE,
   CONSTRAINT `app_user_ibfk_1` FOREIGN KEY (`avatar_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_user
@@ -99,7 +102,7 @@ INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnY
 INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 84, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-25 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z');
 INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL);
 INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
-INSERT INTO `app_user` VALUES (46, 'hoang002', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL);
+INSERT INTO `app_user` VALUES (56, 'saitama', '+LKwVQ2dswVWrIwemPIIZap6myYUFzqG2JFrIELlbfs=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-06-29 08:11:21', '2021-06-29 08:11:21', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for categories
@@ -117,15 +120,15 @@ CREATE TABLE `categories`  (
   `total_money` decimal(30, 0) UNSIGNED NOT NULL DEFAULT 0,
   `total_course_bought` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 170, 0, 28844000, 4);
-INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 2, 500, 32601000, 5);
-INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 1, 0, 0, 0);
-INSERT INTO `categories` VALUES (20, 'GEN', b'1', b'0', '2021-06-21 20:00:37', '2021-06-21 20:00:37', 0, 0, 0, 0);
+INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 172, 0, 28844000, 4);
+INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 4, 500, 32601000, 5);
+INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 2, 0, 0, 0);
+INSERT INTO `categories` VALUES (22, 'Genshin Impact', b'1', b'0', '2021-06-28 06:39:44', '2021-06-28 06:39:44', 2, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for course
@@ -152,7 +155,7 @@ CREATE TABLE `course`  (
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 185 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 187 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
@@ -335,6 +338,8 @@ INSERT INTO `course` VALUES (181, 103, 'Best Waifu', b'0', 'Tìm Hiểu Ganyu 2'
 INSERT INTO `course` VALUES (182, 100, 'Best Waifu', b'0', 'Ganyu', 150000, 0, 0, '2021-06-21 20:07:08', 1, NULL, 2, '2021-06-20 06:14:06', b'1', 0);
 INSERT INTO `course` VALUES (183, 101, 'Best Waifu', b'0', 'Tìm hiểu Ganyu 4', 2343000, 0, 0, '2021-06-21 07:08:07', 1, NULL, 2, '2021-06-20 08:53:57', b'1', 0);
 INSERT INTO `course` VALUES (184, 102, 'Test', b'0', 'Hoàng Test', 1150000, 0, 0, '2021-06-21 07:02:44', 1, NULL, 19, '2021-06-21 07:02:44', b'1', 0);
+INSERT INTO `course` VALUES (185, 105, 'Ganyu', b'0', 'Tìm Hiểu Ganyu', 150000, 0, 0, '2021-06-28 06:40:31', 1, NULL, 22, '2021-06-28 06:40:31', b'1', 0);
+INSERT INTO `course` VALUES (186, 106, 'Ganyu', b'0', 'Tìm Hiểu Ganyu', 150000, 0, 0, '2021-06-28 06:42:27', 1, NULL, 22, '2021-06-28 06:42:27', b'1', 0);
 
 -- ----------------------------
 -- Table structure for evaluates
@@ -473,7 +478,6 @@ INSERT INTO `ower_course` VALUES (34, 1, 178, 62, b'1', b'0', '2021-05-26 14:36:
 INSERT INTO `ower_course` VALUES (35, 2, 1, 63, b'1', b'0', '2021-05-27 10:38:04', '2021-05-27 10:38:04', 0);
 INSERT INTO `ower_course` VALUES (37, 45, 171, 65, b'1', b'0', '2021-05-27 11:49:27', '2021-05-27 11:49:27', 0);
 INSERT INTO `ower_course` VALUES (38, 45, 44, 66, b'1', b'0', '2021-05-27 15:34:06', '2021-05-27 15:34:06', 0);
-INSERT INTO `ower_course` VALUES (39, 46, 178, 67, b'1', b'0', '2021-05-28 07:03:19', '2021-05-28 07:03:19', 0);
 INSERT INTO `ower_course` VALUES (40, 1, 3, 68, b'1', b'0', '2021-06-20 06:46:30', '2021-06-20 06:46:30', 0);
 
 -- ----------------------------
@@ -556,7 +560,6 @@ INSERT INTO `payment` VALUES (62, 1, '2021-05-26 14:36:19', 1500000, '192.168.0.
 INSERT INTO `payment` VALUES (63, 2, '2021-05-27 10:38:04', 100000000, '192.168.0.111', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=100000000&vnp_Command=pay&vnp_CreateDate=20210527173804&vnp_CurrCode=VND&vnp_IpAddr=192.168.0.111&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2F192.168.0.111%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F63&vnp_TmnCode=67LF6OWG&vnp_TxnRef=63&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=8a87e89b1694dfef6707dc59c2fa93e69c52e0f98a5bfbe9184c20fdb3cd04af', 'vnp_Amount=100000000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210527173817&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13512924&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=63&vnp_SecureHash=00f9b5d883061718066d26f9a4afe893714c75a2d9b522fa64933e59144c3072', 'http://localhost:3000/course/1');
 INSERT INTO `payment` VALUES (65, 45, '2021-05-27 11:49:27', 1085700000, '192.168.0.111', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1085700000&vnp_Command=pay&vnp_CreateDate=20210527184927&vnp_CurrCode=VND&vnp_IpAddr=192.168.0.111&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2F192.168.0.111%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F65&vnp_TmnCode=67LF6OWG&vnp_TxnRef=65&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=46fd5543d95e5244e636b0c6ce5c836968e8c502bbe41cafa8dd1e83b5d107e6', 'vnp_Amount=1085700000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210527185005&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13512956&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=65&vnp_SecureHash=156d609f55d149b0771e4f182af5ac02d47a5951dd5ca0f7e312326c96a4dbe9', 'http://localhost:3000/course/171');
 INSERT INTO `payment` VALUES (66, 45, '2021-05-27 15:34:06', 1191500000, '192.168.0.111', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1191500000&vnp_Command=pay&vnp_CreateDate=20210527223406&vnp_CurrCode=VND&vnp_IpAddr=192.168.0.111&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2F192.168.0.111%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F66&vnp_TmnCode=67LF6OWG&vnp_TxnRef=66&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=4bc1079f299262e278b2ab06c0f628a00637f33fe79053350b70f625ece326f9', 'vnp_Amount=1191500000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210527223422&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13513046&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=66&vnp_SecureHash=92f97bf2dc4d308fab436f351227de00476111ee58cf9f518e811c7769c24b72', 'http://localhost:3000/course/44');
-INSERT INTO `payment` VALUES (67, 46, '2021-05-28 07:03:19', 1500000, '127.0.0.1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1500000&vnp_Command=pay&vnp_CreateDate=20210528140320&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F67&vnp_TmnCode=67LF6OWG&vnp_TxnRef=67&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=8b970484b83fbdf9f1339b75d201786b0f46acc0be436288a96432632fa5eb1e', 'vnp_Amount=1500000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210528210320&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13513517&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=67&vnp_SecureHash=687f02adbaea0c68c31ca1c5a54dd0cd0ba482b9cb48cd622857caa89d8ce894', 'http://localhost:3000/course/178');
 INSERT INTO `payment` VALUES (68, 1, '2021-06-20 06:46:30', 1492900000, '127.0.0.1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1492900000&vnp_Command=pay&vnp_CreateDate=20210620134630&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F68&vnp_TmnCode=67LF6OWG&vnp_TxnRef=68&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=622947be814e45607794b78d58839af33e786e76d1197c38adc6a44a5b938161', 'vnp_Amount=1492900000&vnp_BankCode=NCB&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210620134706&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_TransactionNo=13527800&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=68&vnp_SecureHash=0ec1f339191fc48baba971fed7ae4f862d880f6bed53fc92bd315046e9a63fa6', 'http://localhost:3000/course/3');
 
 -- ----------------------------
@@ -606,7 +609,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 105 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -633,6 +636,8 @@ INSERT INTO `resource_image` VALUES (101, 'user/admin/image/1609745981195.png', 
 INSERT INTO `resource_image` VALUES (102, 'user/admin/image/1609745981038.png', b'0', '2021-06-21 07:02:44', 1, 1, '2021-06-21 07:02:44');
 INSERT INTO `resource_image` VALUES (103, 'user/admin/image/1609745981197.jpg', b'0', '2021-06-21 07:06:08', 1, 0, '2021-06-21 07:06:08');
 INSERT INTO `resource_image` VALUES (104, 'user/admin/image/1609745981190.jpg', b'0', '2021-06-21 20:07:45', 1, 1, '2021-06-21 20:07:45');
+INSERT INTO `resource_image` VALUES (105, 'user/admin/image/1609745981327.png', b'0', '2021-06-28 06:40:31', 1, 1, '2021-06-28 06:40:31');
+INSERT INTO `resource_image` VALUES (106, 'user/admin/image/1609745981327.png', b'0', '2021-06-28 06:42:27', 1, 1, '2021-06-28 06:42:27');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -681,8 +686,8 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('39271e26-70e3-4b1a-bd98-15d44f9fbc77', '3fdb0dfd-dc7e-47bc-a500-822aa5a34f0d', 1624305995333, 1624305995334, 1800, 1624307795334, NULL);
-INSERT INTO `spring_session` VALUES ('932910fa-cd6d-4089-9ab8-9e16d6245664', '755f21ab-e7ad-4971-9d8f-f5ab515544f4', 1624303466244, 1624305642714, 1800, 1624307442714, NULL);
+INSERT INTO `spring_session` VALUES ('e3f1b084-588c-48a2-a093-347e9497ef4d', 'a21b2f78-491a-4a78-89bf-cc8117169641', 1624952118072, 1624955178895, 1800, 1624956978895, NULL);
+INSERT INTO `spring_session` VALUES ('f204b7fc-4155-4b7a-a3ed-17c5257cfbe3', '7bda50c8-e575-4629-a669-06d0ba77cc25', 1624954281758, 1624954281758, 1800, 1624956081758, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -745,7 +750,7 @@ CREATE TABLE `user_role`  (
   INDEX `USER_ROLE_FK2`(`ROLE_ID`) USING BTREE,
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`ROLE_ID`) REFERENCES `app_role` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role
@@ -755,6 +760,7 @@ INSERT INTO `user_role` VALUES (2, 1, 2);
 INSERT INTO `user_role` VALUES (3, 2, 2);
 INSERT INTO `user_role` VALUES (23, 41, 2);
 INSERT INTO `user_role` VALUES (27, 45, 2);
+INSERT INTO `user_role` VALUES (28, 56, 2);
 
 -- ----------------------------
 -- Table structure for video
@@ -872,6 +878,8 @@ CREATE TRIGGER `after_insert_course` AFTER INSERT ON `course` FOR EACH ROW BEGIN
 					UPDATE video SET count_linked=count_linked+1 WHERE id =  new.demo_id;					
 			
 			end if;
+			
+			UPDATE categories SET categories.total_course=categories.total_course+1 WHERE categories.id =new.category_id;
 	 END
 ;;
 delimiter ;

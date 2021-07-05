@@ -23,6 +23,7 @@
   --colorRed0: #ff0000;
   --colorRed1: #e74c3c;
   --colorRed2: #c0392b;
+  --colorPink1: #f783ac;
 }
 [data-theme="dark"] {
   --colorBlack1: #ecf0f1;

@@ -9,6 +9,8 @@ import CustomButton from "../../../components/Button/CustomButton";
 import CustomInput from "../../../components/Input/CustomInput";
 import "././css/Actived.css";
 import ChangePasswordCss from "./css/ChangePasswordCss";
+import userApi from "../../../api/userApi";
+import { useSnackbar } from "notistack";
 
 const schema = yup.object().shape({
   password: yup.string().required("Vui lòng nhập password"),
@@ -19,7 +21,7 @@ function ChangePassword(props) {
   const classes = ChangePasswordCss();
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   const { courses } = dataUser;
-
+  const { enqueueSnackbar } = useSnackbar();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -29,7 +31,20 @@ function ChangePassword(props) {
     resolver: yupResolver(schema),
   });
   const handleOnSubmit = (values) => {
-    console.log(values);
+    console.log("postChangePassword",values);//HOANG
+    // field Request
+    /* password: password cũ
+    newPassword: password mới */
+
+    (async () => {
+      const rp = await userApi.changePassword(values);
+      console.log(rp);
+      if (!rp.status) {
+        console.log(rp);
+        enqueueSnackbar("Thay đổi mật khẩu thành công", { variant: "success" });
+       
+      }
+    })();
   };
   return (
     <Grid container className={classes.rightRoot}>

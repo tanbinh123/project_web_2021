@@ -109,6 +109,7 @@ const Login = () => {
                       title="Mật khẩu"
                       label="Mật khẩu"
                       name="password"
+                      type="password"
                       form={form}
                     />
                   </CInputGroup>

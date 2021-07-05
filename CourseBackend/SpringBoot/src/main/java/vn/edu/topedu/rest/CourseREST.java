@@ -1,9 +1,9 @@
 package vn.edu.topedu.rest;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
-import vn.edu.topedu.entity.EvaluateEntity;
+import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
@@ -157,6 +157,70 @@ public class CourseREST implements IMyHost {
 		return ResponseEntity.ok(lstCategories);
 	}
 	
+	
+	@PostMapping("/access/fullcourse")
+	@ResponseBody
+	public ResponseEntity<Object> getFullCourse(HttpServletRequest httpServletRequest, Authentication authentication,
+			@RequestBody Map<String, Object> body) {
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {
+				OwerCourse owerCourse=null;
+				Long idCourse=Long.parseLong(String.valueOf(body.get("idCourse")));
+				try {
+					owerCourse = owerCourseDAO.querryBought(appUser.getId(),idCourse );
+					if(owerCourse!=null) {
+						//owerCourseDAO.detach(owerCourse);
+						FullCourse course = courseDAO.getFullCourse(idCourse);
+						course.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+						
+						
+						
+						return ResponseEntity.ok(course);
+					}
+					
+					return ResponseEntity.ok(owerCourse);
+					
+				} catch (NoResultException noResultException) {
+					
+					
+					
+					try {
+						PreviewCourseEntity rs = courseDAO.getPreviewCourse(idCourse );
+						if(rs!=null) {						
+							
+							
+							return ResponseEntity.ok(rs);
+						}
+						
+						return ResponseEntity.ok(owerCourse);
+						
+					} catch (NoResultException noResultException2) {
+						System.err.println(noResultException2.getMessage());
+						return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Course not exists.", "Khóa học không tồn tại."));
+					} 
+					
+				} 
+				
+				
+				
+				
+			}
+		}
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Object() {
+			String message="Bạn chưa mua khóa học này";
+			public String getMessage() {
+				return message;
+			}
+
+			public void setMessage(String message) {
+				this.message = message;
+			}
+			
+		});
+	}
 
 	
 	

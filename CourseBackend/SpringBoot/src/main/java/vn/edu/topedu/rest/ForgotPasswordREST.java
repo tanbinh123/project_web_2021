@@ -136,6 +136,8 @@ public class ForgotPasswordREST {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Code not corect.",""));		
 	}
+	
+	
 	public class ForgotPasswordByEmailResponse{
 		private String username;
 

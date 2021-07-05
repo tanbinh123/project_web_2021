@@ -62,13 +62,13 @@ public class HomeREST {
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Object> alive() {	
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().body(new MessageResponse("You are ADMIN ROLE.", "Bạn có quyền ADMIN."));
 	}
 	@PostMapping(value="/user")
 	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<Object> user() {	
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().body(new MessageResponse("You are USER ROLE.", "Bạn có quyền USER."));
 	}
 	
 }
