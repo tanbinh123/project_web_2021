@@ -13,8 +13,18 @@ import userApi from "../../../api/userApi";
 import { useSnackbar } from "notistack";
 
 const schema = yup.object().shape({
-  password: yup.string().required("Vui lòng nhập password"),
-  retypePassword: yup.string().required("Vui lòng nhập lại password"),
+  password: yup
+    .string()
+    .required("Vui lòng nhập mật khẩu củ")
+    .min(4, "Mật khẩu ít nhất 4 kí tự"),
+  newPassword: yup
+    .string()
+    .required("Vui lòng nhập nhập khẩu mới")
+    .min(4, "Mật khẩu ít nhất 4 kí tự"),
+  retypePassword: yup
+    .string()
+    .required("Vui lòng nhập lại mật khẩu mới")
+    .oneOf([yup.ref("newPassword")], "mật khẩu mới không giống nhau"),
 });
 
 function ChangePassword(props) {
@@ -31,7 +41,7 @@ function ChangePassword(props) {
     resolver: yupResolver(schema),
   });
   const handleOnSubmit = (values) => {
-    console.log("postChangePassword",values);//HOANG
+    console.log("postChangePassword", values); //HOANG
     // field Request
     /* password: password cũ
     newPassword: password mới */
@@ -42,7 +52,6 @@ function ChangePassword(props) {
       if (!rp.status) {
         console.log(rp);
         enqueueSnackbar("Thay đổi mật khẩu thành công", { variant: "success" });
-       
       }
     })();
   };
@@ -72,11 +81,21 @@ function ChangePassword(props) {
           className={classes.form}
         >
           <div className={classes.rowForm}>
-            <span>Mật khẩu mới</span>
+            <span>Mật khẩu cũ</span>
             <CustomInput
               title="Mật khẩu mới"
               label="Mật khẩu mới"
               name="password"
+              type="password"
+              form={form}
+            />
+          </div>
+          <div className={classes.rowForm}>
+            <span>Mật khẩu mới</span>
+            <CustomInput
+              title="Mật khẩu mới"
+              label="Mật khẩu mới"
+              name="newPassword"
               type="password"
               form={form}
             />
