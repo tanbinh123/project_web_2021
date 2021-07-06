@@ -141,6 +141,30 @@ public class AppUserREST {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
 	}
 	
+	@PostMapping(value="/{appUser}/unblock")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> bloc2k(
+			HttpServletRequest httpServletRequest, 	
+			@PathVariable AppUser appUser,
+			Authentication authentication	
+			) {
+		System.out.println("---------------------------------");
+		
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser currentUser = appUserDAO.findUserAccount(authentication.getName());
+			if (currentUser != null) {	
+				appUser.setBlocked(false);
+				AppUser rs = appUserDAO.updateAppUser(appUser);
+				rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+				return ResponseEntity.ok(rs);				
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
 	@PostMapping(value="/{appUser}/admin")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
