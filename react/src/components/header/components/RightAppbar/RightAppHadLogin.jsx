@@ -122,12 +122,17 @@ function RightAppHadLogin(props) {
             </ListItem>
           </Link>
           {dataUser.user?.admin ? (
-            <Link to="/admin/home" className={classes.linkNone}>
+            <a
+              href="http://localhost:26001/login"
+              target="_blank"
+              rel="noreferrer"
+              className={classes.linkNone}
+            >
               <ListItem button onClick={popupState.close}>
                 <i className="fas fa-user-cog icon"></i>
                 <ListItemText primary="Admin" />
               </ListItem>
-            </Link>
+            </a>
           ) : (
             ""
           )}

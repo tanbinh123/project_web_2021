@@ -55,6 +55,10 @@ const userApi = {
     const url = `/home/email`;
     return axiosClient.post(url, data);
   },
+  checkUsername(data) {
+    const url = `/home/username`;
+    return axiosClient.post(url, data);
+  },
 };
 
 export default userApi;

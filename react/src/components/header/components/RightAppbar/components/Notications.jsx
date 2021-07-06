@@ -137,7 +137,7 @@ function Notications(props) {
         className={classes.buttons}
         {...bindTrigger(popupState)}
       >
-        <Badge badgeContent={12} color="secondary">
+        <Badge badgeContent={0} color="secondary">
           <Notifications />
         </Badge>
       </IconButton>

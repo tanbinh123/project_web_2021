@@ -71,11 +71,10 @@ function CourseDetail(props) {
           //const res1 = await courseApi.check({ idCourse: idCourse });
           const res1 = await courseApi.courseAccess({ idCourse: idCourse });
           // console.log("check", res1);
-          if(!res1.status){
+          if (!res1.status) {
             setCourse(res1);
           }
-          
-        }     else {
+        } else {
           const res = await courseApi.get(idCourse);
           console.log("review", res);
           if (res.status == 500 || res.status == 400) {

@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
+import courseApi from "src/api/courseApi";
 import CustomButtonRed from "src/components/CustomButtonRed";
 import CustomDialogAction from "src/components/CustomDialogAction";
 
@@ -9,8 +10,9 @@ function BlockCourse(props) {
   const handleOpenDialog = () => {
     setOpenDialog(!isOpenDialog);
   };
-  const handleBlockCourse = () => {
-    console.log("Hoang TODO");
+  const handleBlockCourse = async () => {
+    const res = await courseApi.blockCourse(item.id);
+    console.log(res);
   };
   return (
     <>

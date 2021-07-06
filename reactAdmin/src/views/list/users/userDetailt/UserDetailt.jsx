@@ -1,11 +1,16 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Avatar, Grid, makeStyles } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory, useParams } from "react-router-dom";
+import {
+  useHistory,
+  useLocation,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 import categoriesApi from "src/api/categoriesApi";
 import userApi from "src/api/userApi";
 import CustomButton from "src/components/CustomButton";
@@ -31,10 +36,16 @@ const UserDetailt = (props) => {
     itemForm: {
       display: "flex",
       alignItems: "center",
-      "&>span": {
-        minWidth: "150px",
+      justifyContent: "center",
+      "&>span:first-of-type": {
+        width: "200px",
         textAlign: "right",
-        marginRight: "20px",
+        marginRight: "25px",
+      },
+      "&>span:last-of-type": {
+        width: 200,
+        fontWeight: 600,
+        marginLeft: "25px",
       },
     },
     lastItem: {
@@ -45,8 +56,9 @@ const UserDetailt = (props) => {
   }))();
 
   const { id } = useParams();
-  const { push } = useHistory();
+  const { push, goBack } = useHistory();
   const { enqueueSnackbar } = useSnackbar();
+  const [user, setUser] = useState({});
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -55,20 +67,11 @@ const UserDetailt = (props) => {
     resolver: yupResolver(scheme),
   });
 
-  const handleOnSubmit = async (values) => {
-    try {
-      const res = await userApi.adminGetOneUser(id);
-      if (!res.status) {
-        enqueueSnackbar("Cập nhật thể loại thành công", { variant: "success" });
-      }
-    } catch (error) {
-      enqueueSnackbar(error.message, { variant: "error" });
-    }
-  };
   useEffect(() => {
     (async () => {
       const res = await userApi.adminGetOneUser(id);
       console.log(res);
+      setUser(res);
     })();
   }, [id]);
   return (
@@ -80,24 +83,74 @@ const UserDetailt = (props) => {
               <span className="title">Form thể loại</span>
             </CCardHeader>
             <CCardBody>
-              <form
-                className={classes.form}
-                onSubmit={form.handleSubmit(handleOnSubmit)}
-              >
+              <div className={classes.form}>
                 <div className={classes.itemForm}>
-                  <span>Tên thể loại</span>
-                  <CustomInput
-                    name="name"
-                    title="Tên thể loại"
-                    label="Tên thể loại"
-                    form={form}
-                  />
+                  <span>ID</span>
+                  <span>{user.id}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Tài Khoản</span>
+                  <span>{user.userName}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Hình avatar</span>
+                  <span>
+                    <Avatar src={user?.avatar?.image} />
+                  </span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Tên</span>
+                  <span>{user.fullname}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Email</span>
+                  <span>{user.userName}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Facebook</span>
+                  <span>{user.facebook}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Giới tính</span>
+                  <span>{user.gender}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Ngày sinh</span>
+                  <span>{user.birthDay}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Địa chỉ</span>
+                  <span>{user.location}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Số điện thoại</span>
+                  <span>{user.phone}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Quyền</span>
+                  <span>{user.isAdmin ? "ADMIN" : "USER"}</span>
+                </div>
+                <div className={classes.itemForm}>
+                  <span>Mô tả</span>
+                  <span>{user.description}</span>
+                </div>
+
+                <div className={classes.itemForm}>
+                  <span>Trạng thái</span>
+                  <span>
+                    {user.actived ? "Đã kích hoạt" : "Chưa kích hoạt"}
+                  </span>
                 </div>
 
                 <div className={classes.lastItem}>
-                  <CustomButton type="submit" title="Gửi" />
+                  <CustomButton
+                    title="Quay Lại"
+                    onClick={() => {
+                      goBack();
+                    }}
+                  />
                 </div>
-              </form>
+              </div>
             </CCardBody>
             {/* <CCardFooter></CCardFooter> */}
           </CCard>

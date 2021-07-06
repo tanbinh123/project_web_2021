@@ -89,11 +89,39 @@ let checkEmail = {
   status: false,
   email: "",
 };
+let checkUsername = {
+  status: false,
+  username: "",
+};
 const schema = yup.object().shape({
   username: yup
     .string()
     .required("Vui lòng nhập username")
-    .min(3, "Vui lòng nhập hơn 3 kí tự"),
+    .min(3, "Vui lòng nhập hơn 3 kí tự")
+    .test(
+      "check username used",
+      "Tài khoản đã được sử dụng",
+      async (username) => {
+        // console.log(checkEmail);
+        if (checkUsername.username !== username) {
+          checkUsername.status = false;
+        }
+        if (checkUsername.status === false) {
+          // console.log(email);
+          const res = await userApi.checkUsername({ username: username });
+          console.log(res);
+          if (res?.message?.en === "username exist.") {
+            return false;
+          } else {
+            checkUsername.status = true;
+            checkUsername.username = username;
+            return true;
+          }
+        } else {
+          return true;
+        }
+      }
+    ),
   email: yup
     .string()
     .required("Vui lòng nhập dữ liệu")
@@ -125,7 +153,7 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .required("Vui lòng nhập password")
-    .min(3, "Vui lòng nhập hơn 3 kí tự"),
+    .min(4, "Vui lòng nhập hơn 4 kí tự"),
   retypepassword: yup
     .string()
     .required("Vui lòng nhập password")
