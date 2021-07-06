@@ -90,8 +90,8 @@ public class FullCourse extends BaseEntity {
 	@Column(name = "actived", length = 1, nullable = false)
 	protected Boolean actived = true;
 	
-	
-	
+
+
 	public List<EvaluateEntity> getEvaluates() {
 		return evaluates;
 	}

@@ -77,6 +77,9 @@ public class AppUser implements UserDetails {
 
 	@Column(name = "actived", length = 1, nullable = false)
 	private Boolean actived = false;
+	
+	@Column(name = "blocked", length = 1, nullable = false)
+	private Boolean blocked = false;
 
 	@Column(name = "Enabled", length = 1, nullable = false)
 	@JsonIgnore
@@ -119,6 +122,19 @@ public class AppUser implements UserDetails {
 	}
 	
 	
+	
+
+	public Boolean getBlocked() {
+		return blocked;
+	}
+
+
+
+	public void setBlocked(Boolean blocked) {
+		this.blocked = blocked;
+	}
+
+
 
 	public void setGmail(String gmail) {
 		this.gmail = gmail;
