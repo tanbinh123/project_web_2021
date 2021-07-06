@@ -196,6 +196,37 @@ public class CourseAdminRest {
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {				
 				
+				fullcourse.setActived(false);
+				fullcourse.setUpdateAt(new Date());
+				try {
+					FullCourse rs = courseDAO.merge(fullcourse);
+					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+					
+					return ResponseEntity.ok(rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
+	@PostMapping(value="/{fullcourse}/unblock")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> unblockCourse(HttpServletRequest httpServletRequest, 
+			Authentication authentication,	
+			@PathVariable FullCourse fullcourse
+			) {
+		System.out.println("---------------------------------");
+		
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				
 				fullcourse.setActived(true);
 				fullcourse.setUpdateAt(new Date());
 				try {

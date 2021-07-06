@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.edu.topedu.entity.AppRole;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.EvaluateEntity;
+import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.UserRole;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.utils.WebUtils;
@@ -342,6 +343,15 @@ public class AppUserDAO {
 		}
 		
 		return (Long) query.getSingleResult();
+	}
+	
+	public int deleteRole(Long userId, AppRole role) {
+		String sql = "delete from " + UserRole.class.getName() + " e where e.appUser.id=:userId and e.appRole.id=:roleId ";
+		Query query = this.entityManager.createQuery(sql);
+		query.setParameter("userId", userId);
+		query.setParameter("roleId", role.getId());
+		
+		return query.executeUpdate();
 	}
 
 

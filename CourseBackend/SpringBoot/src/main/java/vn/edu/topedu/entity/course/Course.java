@@ -60,6 +60,8 @@ public class Course extends AHasPoster implements JsonResponse {
     @JsonIgnore
     private CategoryEntity category;
     
+	
+    
 	public Long getId() {
 		return id;
 	}
