@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 06/07/2021 16:00:59
+ Date: 14/07/2021 17:39:33
 */
 
 SET NAMES utf8mb4;
@@ -101,7 +101,7 @@ CREATE TABLE `app_user`  (
 -- ----------------------------
 INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'0', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '1999-08-25 17:00:00', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Vua phá lưới', 'Am Bình', b'0');
 INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 84, b'0', 'hearterzouest99.999@gmail.com', b'0', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-25 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z', b'0');
-INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL, b'1');
+INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill1999@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL, b'0');
 INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL, b'0');
 INSERT INTO `app_user` VALUES (56, 'saitama', '+LKwVQ2dswVWrIwemPIIZap6myYUFzqG2JFrIELlbfs=', b'0', 1, b'0', '17130073@st.hcmuaf.edu.vn', b'0', NULL, NULL, NULL, 'NAM', NULL, NULL, '2021-06-29 08:11:21', '2021-06-29 08:11:21', NULL, NULL, b'0');
 
@@ -161,7 +161,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 0, 2, '2021-06-12 18:30:24', 1, 1, 1, '2021-05-25 14:25:29', b'1', 0);
+INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 0, 2, '2021-07-06 09:05:04', 1, 1, 1, '2021-05-25 14:25:29', b'1', 0);
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Tìm hiểu Ganyu 1', 12288000, 0, 0, '2021-06-06 08:04:45', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 14929000, 2, 1, '2021-06-20 06:58:19', 1, 22, 1, '2021-05-19 15:35:12', b'1', 1);
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 0, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
@@ -461,6 +461,46 @@ INSERT INTO `lesson` VALUES (48, 33, 'HTML, CSS là gì?', NULL, 1, b'0');
 INSERT INTO `lesson` VALUES (49, 34, 'Cài đặt môi trường', NULL, 1, b'0');
 
 -- ----------------------------
+-- Table structure for notifications
+-- ----------------------------
+DROP TABLE IF EXISTS `notifications`;
+CREATE TABLE `notifications`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `actived` bit(1) NULL DEFAULT b'0',
+  `deleted` bit(1) NULL DEFAULT b'0',
+  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `user_id` bigint(20) NOT NULL,
+  `seen` bit(1) NOT NULL DEFAULT b'0',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_sent_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of notifications
+-- ----------------------------
+INSERT INTO `notifications` VALUES (1, 'Genshin Impact', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 1, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 1, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (3, 'Genshin Impact', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 1, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (4, 'Lập trình', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 1, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (5, 'Genshin Impact', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 1, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (6, 'Lập trình', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 1, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (7, 'Genshin Impact', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (8, 'Lập trình', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (9, 'Genshin Impact', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (10, 'Lập trình', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (11, 'Genshin Impact', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (12, 'Lập trình', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (13, 'Genshin Impact', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (14, 'Lập trình', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (15, 'Genshin Impact', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+INSERT INTO `notifications` VALUES (16, 'Lập trình', b'1', b'0', '2021-05-19 15:39:04', '2021-05-19 15:39:04', 2, b'0', 'Wellcome', 1);
+
+-- ----------------------------
 -- Table structure for ower_course
 -- ----------------------------
 DROP TABLE IF EXISTS `ower_course`;
@@ -712,7 +752,7 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('b5ec6fb7-abe4-4461-b2ee-869805a572c5', '76c7317f-53a7-4ff1-b16c-735f1d754fb6', 1625561615609, 1625561984558, 1800, 1625563784558, NULL);
+INSERT INTO `spring_session` VALUES ('6aa07596-49a3-42ba-bac6-7ea89871b420', '71fdea34-d73a-42ed-aa70-9f1f19e26261', 1626257967834, 1626259081503, 1800, 1626260881503, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
