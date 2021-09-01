@@ -3,7 +3,7 @@ export function DateToString(date) {
   return `${date1.getDate()}/${date1.getMonth() + 1}/${date1.getFullYear()}`;
 }
 export function isEmpty(obj) {
-  if (obj === "") {
+  if (obj === '') {
     return true;
   } else if (obj === null) {
     return true;
@@ -27,14 +27,19 @@ function isEmptyObj(obj) {
 }
 export function convertVND(int) {
   return int
-    .toLocaleString("vi-VI", {
-      style: "currency",
-      currency: "VND",
+    .toLocaleString('vi-VI', {
+      style: 'currency',
+      currency: 'VND',
     })
-    .replaceAll(".", ",");
+    .replaceAll('.', ',');
 }
 
 export function toDate(ddMMyyyy) {
-  const tmp = ddMMyyyy.split("/");
+  const tmp = ddMMyyyy.split('/');
   return new Date(tmp[2], tmp[1] - 1, tmp[0]);
+}
+export function validateEmail(email) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }

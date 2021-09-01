@@ -12,7 +12,7 @@ function VideoLecture(props) {
       <video
         key={video.id}
         autoPlay
-        //  muted
+         muted
         loop
         className="video"
         controls

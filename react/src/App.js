@@ -1,20 +1,22 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import AdminRouter from "./admin/AdminRouter";
-import "./cssreset.css";
-import Login from "./features/Auth/components/Login";
-import Register from "./features/Auth/components/Register";
-import CourseFeatures from "./features/Course";
-import ForgotPassword from "./features/ForgotPassword";
-import Home from "./features/home";
-import Actived from "./features/Infomation/components/Actived";
-import InfomationFeature from "./features/Infomation/InfomationFeature";
-import NotFound404 from "./features/NotFound";
-import CssColor from "./features/test/CssColor";
-import UploadOneFile from "./features/test/FormUpload/UploadOneFile";
-import SetValue from "./features/test/SetValue";
-import TestSearch from "./features/test/TestSearch";
-import "./index.css";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import AdminRouter from './admin/AdminRouter';
+import './cssreset.css';
+import Login from './features/Auth/components/Login';
+import Register from './features/Auth/components/Register';
+import CourseFeatures from './features/Course';
+import ForgotPassword from './features/ForgotPassword';
+import Home from './features/home';
+import Actived from './features/Infomation/components/Actived';
+import InfomationFeature from './features/Infomation/InfomationFeature';
+import NotFound404 from './features/NotFound';
+import CssColor from './features/test/CssColor';
+import UploadOneFile from './features/test/FormUpload/UploadOneFile';
+import SetValue from './features/test/SetValue';
+import TestSearch from './features/test/TestSearch';
+import './index.css';
+import './assets/css/main.css';
+import Footer from './components/Footer/Footer';
 
 App.propTypes = {};
 
@@ -51,6 +53,7 @@ function App(props) {
         {" "}
         <PopoverPopupState title="Open" />
       </Box> */}
+      <Footer />
     </div>
   );
 }

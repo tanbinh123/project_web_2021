@@ -52,6 +52,7 @@ function ChangePassword(props) {
       if (!rp.status) {
         console.log(rp);
         enqueueSnackbar("Thay đổi mật khẩu thành công", { variant: "success" });
+        form.reset();
       }
     })();
   };
@@ -83,8 +84,8 @@ function ChangePassword(props) {
           <div className={classes.rowForm}>
             <span>Mật khẩu cũ</span>
             <CustomInput
-              title="Mật khẩu mới"
-              label="Mật khẩu mới"
+              title="Mật khẩu cũ"
+              label="Mật khẩu cũ"
               name="password"
               type="password"
               form={form}
