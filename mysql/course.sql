@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 14/07/2021 17:39:33
+ Date: 01/09/2021 21:03:21
 */
 
 SET NAMES utf8mb4;
@@ -379,6 +379,28 @@ CREATE TABLE `evaluates`  (
 INSERT INTO `evaluates` VALUES (3, 'Hello', b'0', '2021-06-20 07:02:09', '2021-06-20 07:02:09', 1, 2, 3);
 
 -- ----------------------------
+-- Table structure for image_admin
+-- ----------------------------
+DROP TABLE IF EXISTS `image_admin`;
+CREATE TABLE `image_admin`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_id` bigint(20) NOT NULL,
+  `deleted` bit(1) NULL DEFAULT b'0',
+  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name_unique`(`name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of image_admin
+-- ----------------------------
+INSERT INTO `image_admin` VALUES (4, 119, b'0', '2021-09-01 13:36:55', '2021-09-01 13:36:55', 'background_home', 'Hình để ở trang chủ');
+INSERT INTO `image_admin` VALUES (6, 121, b'0', '2021-09-01 13:47:34', '2021-09-01 13:47:34', 'icon_logo', 'Hình để ở trang chủ');
+
+-- ----------------------------
 -- Table structure for learning
 -- ----------------------------
 DROP TABLE IF EXISTS `learning`;
@@ -664,7 +686,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 118 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 122 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -704,6 +726,10 @@ INSERT INTO `resource_image` VALUES (114, 'user/admin/image/1616839149599.jpg', 
 INSERT INTO `resource_image` VALUES (115, 'user/admin/image/1616839149599.jpg', b'0', '2021-07-05 10:20:58', 1, 1, '2021-07-05 10:20:58');
 INSERT INTO `resource_image` VALUES (116, 'user/admin/image/1616839149599.jpg', b'0', '2021-07-05 10:22:08', 1, 1, '2021-07-05 10:22:08');
 INSERT INTO `resource_image` VALUES (117, 'user/admin/image/1616839149544.png', b'0', '2021-07-05 10:27:51', 1, 1, '2021-07-05 10:27:51');
+INSERT INTO `resource_image` VALUES (118, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:32:11', 1, 0, '2021-09-01 13:32:11');
+INSERT INTO `resource_image` VALUES (119, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:36:54', 1, 1, '2021-09-01 13:36:54');
+INSERT INTO `resource_image` VALUES (120, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:46:50', 1, 0, '2021-09-01 13:46:50');
+INSERT INTO `resource_image` VALUES (121, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:47:33', 1, 1, '2021-09-01 13:47:33');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -752,7 +778,7 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('6aa07596-49a3-42ba-bac6-7ea89871b420', '71fdea34-d73a-42ed-aa70-9f1f19e26261', 1626257967834, 1626259081503, 1800, 1626260881503, NULL);
+INSERT INTO `spring_session` VALUES ('c5159394-e324-4b7f-a31d-250173f814ad', '8280a387-4bf4-408f-a45d-d9f4d8d91cfe', 1630502312426, 1630504920942, 1800, 1630506720942, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -1056,6 +1082,59 @@ CREATE TRIGGER `after_update_evaluate` AFTER UPDATE ON `evaluates` FOR EACH ROW 
 							
 				end if;
 			
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table image_admin
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_insert_image_admin`;
+delimiter ;;
+CREATE TRIGGER `after_insert_image_admin` AFTER INSERT ON `image_admin` FOR EACH ROW BEGIN
+				if new.image_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.image_id;					
+			
+			end if;
+			
+			
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table image_admin
+-- ----------------------------
+DROP TRIGGER IF EXISTS `update_image_admin`;
+delimiter ;;
+CREATE TRIGGER `update_image_admin` AFTER UPDATE ON `image_admin` FOR EACH ROW BEGIN
+		
+			if old.image_id <> new.image_id  then		
+					if new.image_id is not null then
+					UPDATE resource_image SET count_linked=count_linked+1 WHERE id =  new.image_id;
+					end if;
+					if new.image_id is not null then
+						UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.image_id;		
+					end if;
+			end if;
+			
+		
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table image_admin
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_delete_image_admin`;
+delimiter ;;
+CREATE TRIGGER `after_delete_image_admin` AFTER DELETE ON `image_admin` FOR EACH ROW BEGIN
+				if old.image_id is not null  then		
+			
+					UPDATE resource_image SET count_linked=count_linked-1 WHERE id =  old.image_id;					
+			
+			end if;
 	 END
 ;;
 delimiter ;
