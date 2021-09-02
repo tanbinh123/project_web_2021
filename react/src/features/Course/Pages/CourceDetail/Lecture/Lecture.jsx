@@ -91,6 +91,9 @@ function Lecture(props) {
                 showList && classes.fullScreen
               )}
             >
+              <div className={classNames(classes.showList,showList&&classes.showListActive)} onClick={handleToggleList}>
+              <i className="fas fa-angle-double-left"></i> Hiện danh sách
+              </div>
               <VideoLecture video={lesson.video} />
             </div>
           </Grid>

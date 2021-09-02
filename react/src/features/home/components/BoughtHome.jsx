@@ -9,6 +9,7 @@ import { isEmpty } from "../../../components/tools/Tools";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: 50,
+    paddingBottom:50,
   },
   text: {
     display: "flex",

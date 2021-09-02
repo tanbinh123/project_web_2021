@@ -6,6 +6,8 @@ import FCategorie from "./views/form/categorie/FCategorie";
 import CategorieDetailt from "./views/list/categories/categorieDetailt/CategorieDetailt";
 import ListUsers from "./views/list/users/ListUsers";
 import UserDetailt from "./views/list/users/userDetailt/UserDetailt";
+import BackgroundHome from "./views/list/backgroundHome/BackgroundHome";
+import FImageBackgroundHome from "./views/form/imageBackgroundHome/FImageBackgroundHome";
 
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
@@ -87,11 +89,22 @@ const routes = [
     name: "Chi tiết thể loại",
     component: CategorieDetailt,
   },
+  {
+    path: "/list/image-background-home",
+    name: "Danh sách hình nền trang chủ",
+    component: BackgroundHome,
+    exact: true,
+  },
   { path: "/form/course", name: "Form Course", component: FCourse },
   {
     path: "/form/categorie",
     name: "Form tạo mới thể loại",
     component: FCategorie,
+  },
+  {
+    path: "/form/image-background-home",
+    name: "Form upload hình nền trang chủ",
+    component: FImageBackgroundHome,
   },
 
   // { path: "/theme", name: "Theme", component: Colors, exact: true },

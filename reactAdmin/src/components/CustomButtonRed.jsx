@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundPosition: "right",
     },
+    "&:focus": {
+      outline: "none",
+    },
     border: 0,
     color: "white",
     height: 35,
