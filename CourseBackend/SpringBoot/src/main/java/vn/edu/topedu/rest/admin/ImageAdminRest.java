@@ -94,6 +94,28 @@ public class ImageAdminRest {
 		
 	}
 	
+	@GetMapping(value="/tagname")
+	@ResponseBody
+	public ResponseEntity<Object> getTagName(
+			HttpServletRequest httpServletRequest,
+			@RequestParam String tagname
+			) {
+		System.out.println("---------------------------------");
+		System.out.println(tagname);
+		
+		List<ImageAdminEntity> rs = imageAdminDAO.getEntityByTagName(tagname);
+		if(rs==null)	
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Not Image.", "Không có hình với name tồn tại"));
+		for (ImageAdminEntity imageAdminEntity : rs) {
+			
+			imageAdminEntity.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+		}
+		
+		return ResponseEntity.ok(rs);
+	
+		
+	}
+	
 	@DeleteMapping(value="/{imageAdmin}")
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
@@ -135,7 +157,7 @@ public class ImageAdminRest {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Object> postProfile(HttpServletRequest httpServletRequest, 
 			Authentication authentication,				
-			@RequestPart(required=false) String name, 
+			@RequestPart(required=false) String tagName, 
 			@RequestPart(required=false) String description, 
 			@RequestPart(required=false) MultipartFile image
 			) {
@@ -144,13 +166,13 @@ public class ImageAdminRest {
 			return ResponseEntity.badRequest().body(new MessageResponse("Image not ready", "Chưa chọn hình để tài lên"));
 		}
 		
-		if(name==null||name.isEmpty()) {
+		if(tagName==null||tagName.isEmpty()) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Required name", "Yêu cầu name"));
 		}
 		
-		if(description==null||description.isEmpty()) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Required description", "Yêu cầu description"));
-		}
+//		if(description==null||description.isEmpty()) {
+//			return ResponseEntity.badRequest().body(new MessageResponse("Required description", "Yêu cầu description"));
+//		}
 		
 		if (authentication != null) {
 			authentication.getName();
@@ -166,7 +188,7 @@ public class ImageAdminRest {
 				if(newPoster!=null) {
 					ImageAdminEntity entity= new ImageAdminEntity();
 					entity.setImageId(newPoster.getId());
-					entity.setName(name);
+					entity.setTagName(tagName);
 					entity.setDescription(description);
 					try {
 						ImageAdminEntity rs = imageAdminDAO.insert(entity);

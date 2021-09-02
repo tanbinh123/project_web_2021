@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 01/09/2021 21:03:21
+ Date: 03/09/2021 02:06:40
 */
 
 SET NAMES utf8mb4;
@@ -388,17 +388,18 @@ CREATE TABLE `image_admin`  (
   `deleted` bit(1) NULL DEFAULT b'0',
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
   `update_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `name_unique`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of image_admin
 -- ----------------------------
 INSERT INTO `image_admin` VALUES (4, 119, b'0', '2021-09-01 13:36:55', '2021-09-01 13:36:55', 'background_home', 'Hình để ở trang chủ');
 INSERT INTO `image_admin` VALUES (6, 121, b'0', '2021-09-01 13:47:34', '2021-09-01 13:47:34', 'icon_logo', 'Hình để ở trang chủ');
+INSERT INTO `image_admin` VALUES (7, 122, b'0', '2021-09-02 19:02:43', '2021-09-02 19:02:43', 'icon_logo', 'Hình để ở trang chủ');
+INSERT INTO `image_admin` VALUES (8, 123, b'0', '2021-09-02 19:05:23', '2021-09-02 19:05:23', 'icon_logo', 'Hình để ở trang chủ');
 
 -- ----------------------------
 -- Table structure for learning
@@ -686,7 +687,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 122 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -730,6 +731,8 @@ INSERT INTO `resource_image` VALUES (118, 'user/admin/image/anh-1-16005873018901
 INSERT INTO `resource_image` VALUES (119, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:36:54', 1, 1, '2021-09-01 13:36:54');
 INSERT INTO `resource_image` VALUES (120, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:46:50', 1, 0, '2021-09-01 13:46:50');
 INSERT INTO `resource_image` VALUES (121, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:47:33', 1, 1, '2021-09-01 13:47:33');
+INSERT INTO `resource_image` VALUES (122, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:02:43', 1, 1, '2021-09-02 19:02:43');
+INSERT INTO `resource_image` VALUES (123, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:05:23', 1, 1, '2021-09-02 19:05:23');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -778,7 +781,7 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('c5159394-e324-4b7f-a31d-250173f814ad', '8280a387-4bf4-408f-a45d-d9f4d8d91cfe', 1630502312426, 1630504920942, 1800, 1630506720942, NULL);
+INSERT INTO `spring_session` VALUES ('65d4a92b-e474-4fd6-afed-cf786304a3aa', '265b5803-0a52-452f-9c74-5635853ffc7d', 1630609343917, 1630609531275, 1800, 1630611331275, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes

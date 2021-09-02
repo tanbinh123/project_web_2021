@@ -1,5 +1,6 @@
 package vn.edu.topedu.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -52,19 +53,36 @@ public class ImageAdminDAO {
 	
 	public ImageAdminEntity getEntity(String name) {
 
-		String sql = "Select c from "+ImageAdminEntity.class.getName()+" c " + " where c.name= :name ";
+//		String sql = "Select c from "+ImageAdminEntity.class.getName()+" c " + " where c.name= :name ";
+//		try {
+//			Query query = this.entityManager.createQuery(sql, ImageAdminEntity.class);
+//			query.setParameter("name", name);
+//			return (ImageAdminEntity) query.getSingleResult();
+//			
+//		} catch (Exception e) {
+//			System.err.println(e.getMessage());
+//			return null;
+//		}
+		return null;
+		
+
+	}
+	public List<ImageAdminEntity> getEntityByTagName(String tagName) {
+
+		String sql = "Select c from "+ImageAdminEntity.class.getName()+" c " + " where c.tagName= :tagName ";
 		try {
 			Query query = this.entityManager.createQuery(sql, ImageAdminEntity.class);
-			query.setParameter("name", name);
-			return (ImageAdminEntity) query.getSingleResult();
+			query.setParameter("tagName", tagName);
+			return  query.getResultList();
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-			return null;
+			return new ArrayList<>();
 		}
 		
 
 	}
+	
 	
 	
 	public List<ImageAdminEntity> getData(Long userId, int _page, int _limit, String sort, String _search) throws NoResultException {

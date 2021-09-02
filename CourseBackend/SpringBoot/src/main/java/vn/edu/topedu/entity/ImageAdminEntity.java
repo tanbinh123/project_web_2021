@@ -22,8 +22,8 @@ public class ImageAdminEntity {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "tag_name")
+	private String tagName;
 	
 	@Column(name = "description", length = 255)
 	private String description = "";
@@ -77,15 +77,17 @@ public class ImageAdminEntity {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 
 	
+
+	public String getTagName() {
+		return tagName;
+	}
+
+	public void setTagName(String tagName) {
+		this.tagName = tagName;
+	}
 
 	public String getDescription() {
 		return description;
