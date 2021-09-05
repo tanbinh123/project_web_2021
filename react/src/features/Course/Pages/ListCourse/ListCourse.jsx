@@ -10,6 +10,7 @@ import {
   colorOrange2,
   colorWhite1,
 } from '../../../../components/color/color';
+import CustomDialog from '../../../../components/Dialog/CustomDialog';
 import Header from '../../../../components/header/index';
 import FilterCategory from './components/FilterCategory';
 import FilterPrice from './components/FilterPrice';
@@ -154,6 +155,43 @@ function ListCourse(props) {
       search: stringify(filters, null, null, escape()),
     });
   };
+  const handleFilterPriceChange = (values) => {
+    console.log(values);
+    const min = values[0];
+    const max = values[1];
+
+    const filters = {
+      ...queryParams,
+      price_gte: min,
+      price_lt: max,
+      _page: 1,
+    };
+    console.log(filters);
+    history.push({
+      pathname: history.location.pathname,
+      search: stringify(filters, null, null, escape()),
+    });
+  };
+  const [isOpenMenuFilterMobile, setOpenMenuFilterMobile] =
+    React.useState(false);
+  const contentMenuFilterMobile = (
+    <>
+      <FilterCategory
+        categories={categories}
+        onChange={handleCategorieChange}
+        categorie={queryParams._category}
+      />
+      <FilterPrice
+        onChange={handleFilterPriceChange}
+        queryPrice={
+          queryParams?.price_gte && [
+            Number(queryParams?.price_gte),
+            Number(queryParams?.price_lt),
+          ]
+        }
+      />
+    </>
+  );
   return (
     <>
       <Header />
@@ -167,7 +205,15 @@ function ListCourse(props) {
                 onChange={handleCategorieChange}
                 categorie={queryParams._category}
               />
-              <FilterPrice />
+              <FilterPrice
+                onChange={handleFilterPriceChange}
+                queryPrice={
+                  queryParams?.price_gte && [
+                    Number(queryParams?.price_gte),
+                    Number(queryParams?.price_lt),
+                  ]
+                }
+              />
             </Grid>
             <Grid
               item
@@ -179,6 +225,24 @@ function ListCourse(props) {
               xs={12}
             >
               <Paper elevation={0}>
+                <div className="menu-filter-mobile">
+                  <button
+                    onClick={() => {
+                      setOpenMenuFilterMobile(true);
+                    }}
+                  >
+                    <i className="fas fa-sliders-h"></i>
+                  </button>
+                  <CustomDialog
+                    id="menu-filter-mobile"
+                    open={isOpenMenuFilterMobile}
+                    onClose={() => {
+                      setOpenMenuFilterMobile(false);
+                    }}
+                    content={contentMenuFilterMobile}
+                    fullScreen={true}
+                  />
+                </div>
                 <TabPrice onChange={handleSortChange} value={location.search} />
                 {loading ? (
                   <SkeletonCourse />

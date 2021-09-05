@@ -1,18 +1,30 @@
 import { Slider } from '@material-ui/core';
 import React from 'react';
 import CustomButton from '../../../../../components/Button/CustomButton';
-import { convertVND } from '../../../../../components/tools/Tools';
+import { convertVND, isEmpty } from '../../../../../components/tools/Tools';
 
-export default function FilterPrice() {
+export default function FilterPrice(props) {
   const minNunber = 0;
   const maxNumber = 3000000;
-  const [value, setValue] = React.useState([0, 100]);
-  const [price, setPrice] = React.useState([minNunber, maxNumber]);
+  const { onChange = null, queryPrice = [minNunber, maxNumber] } = props;
+  const [value, setValue] = React.useState([
+    Math.ceil(scale(queryPrice[0], minNunber, maxNumber, 0, 100)),
+    Math.ceil(scale(queryPrice[1], minNunber, maxNumber, 0, 100)),
+  ]);
+
+  const [price, setPrice] = React.useState([queryPrice[0], queryPrice[1]]);
+  React.useEffect(() => {
+    setValue([
+      Math.ceil(scale(queryPrice[0], minNunber, maxNumber, 0, 100)),
+      Math.ceil(scale(queryPrice[1], minNunber, maxNumber, 0, 100)),
+    ]);
+    setPrice([queryPrice[0], queryPrice[1]]);
+  }, [queryPrice[0], queryPrice[1]]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setPrice([
-      scale(value[0], 0, 100, 0, 3000000),
-      scale(value[1], 0, 100, 0, 3000000),
+      Math.ceil(scale(value[0], 0, 100, minNunber, maxNumber)),
+      Math.ceil(scale(value[1], 0, 100, minNunber, maxNumber)),
     ]);
   };
   function scale(number, inMin, inMax, outMin, outMax) {
@@ -35,7 +47,12 @@ export default function FilterPrice() {
         step={0.1}
       />
       <div className="bottom">
-        <CustomButton title="Áp dụng" />
+        <CustomButton
+          title="Áp dụng"
+          onClick={() => {
+            if (onChange) onChange(price);
+          }}
+        />
       </div>
     </div>
   );
