@@ -60,6 +60,8 @@ public class Course extends AHasPoster implements JsonResponse {
     @JsonIgnore
     private CategoryEntity category;
     
+	@Column(name = "actived", length = 1, nullable = false)
+	protected Boolean actived = true;
 	
     
 	public Long getId() {
@@ -171,6 +173,12 @@ public class Course extends AHasPoster implements JsonResponse {
 		String bf = WebUtils.getUrl(httpServletRequest);
 		this.getAppUser().getAvatar().setBeforeResource(bf);
 		this.getPoster().setBeforeResource(bf);
+	}
+	public Boolean getActived() {
+		return actived;
+	}
+	public void setActived(Boolean actived) {
+		this.actived = actived;
 	}
 	
 	

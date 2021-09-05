@@ -1,3 +1,33 @@
+div#bg-home {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  height: 100vh;
+}
+
+div#bg-home .img-bg-home {
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+  opacity: 0;
+}
+
+div#bg-home .img-bg-home.active {
+  opacity: 1;
+}
+
 div#bg-home::before {
   content: '';
   position: absolute;
@@ -6,7 +36,41 @@ div#bg-home::before {
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0;
+  z-index: 1;
+}
+
+.dialog-course-bought-mobile {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.dialog-course-bought-mobile .link {
+  color: #000;
+  text-decoration: none;
+}
+
+.dialog-course-bought-mobile .link .content {
+  margin-left: 15px;
+}
+
+.dialog-course-bought-mobile .link .content .title {
+  font-size: 15px;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.dialog-course-bought-mobile .link .content .description {
+  font-size: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .footer {

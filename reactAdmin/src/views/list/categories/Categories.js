@@ -2,7 +2,7 @@ import { CButton, CCardBody, CCollapse, CDataTable } from "@coreui/react";
 import { Avatar } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import CustomButton from "src/components/CustomButton";
 import { convertVND, DateToString } from "src/Tool/Tools";
 import "./Categories.scss";
@@ -46,9 +46,17 @@ const Categories = () => {
       filter: false,
     },
   ];
-
+  const { push } = useHistory();
   return (
     <>
+      <div className="btn-add-container">
+        <CustomButton
+          title="Thêm"
+          onClick={() => {
+            push("/form/categorie");
+          }}
+        />
+      </div>
       <CDataTable
         items={Array.from(dataCourse).filter((item) => item.deleted === false)}
         fields={fields}

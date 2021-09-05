@@ -5,7 +5,7 @@ import CustomButtonRed from "src/components/CustomButtonRed";
 import CustomDialogAction from "src/components/CustomDialogAction";
 
 function BlockCourse(props) {
-  const { item } = props;
+  const { item, onReload = null } = props;
   const [isOpenDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => {
     setOpenDialog(!isOpenDialog);
@@ -13,6 +13,7 @@ function BlockCourse(props) {
   const handleBlockCourse = async () => {
     const res = await courseApi.blockCourse(item.id);
     console.log(res);
+    if (onReload) onReload();
   };
   return (
     <>

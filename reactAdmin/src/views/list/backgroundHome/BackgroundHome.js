@@ -2,7 +2,7 @@ import { CButton, CCardBody, CCollapse, CDataTable } from "@coreui/react";
 import { Avatar } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import CustomButton from "src/components/CustomButton";
 import { convertVND, DateToString } from "src/Tool/Tools";
 import categoriesApi from "src/api/categoriesApi";
@@ -20,13 +20,23 @@ const BackgroundHome = () => {
   useEffect(() => {
     (async () => {
       const res = await imageApi.getAll();
+      console.log(res);
       const dataFillter = Array.from(res).filter((item) => {
-        return item.tag === "background_home";
+        return item.tagName === "background_home";
       });
       console.log(dataFillter);
       setData(dataFillter);
     })();
   }, []);
+  function reloadData() {
+    (async () => {
+      const res = await imageApi.getAll();
+      const dataFillter = Array.from(res).filter((item) => {
+        return item.tagName === "background_home";
+      });
+      setData(dataFillter);
+    })();
+  }
   const toggleDetails = (index) => {
     const position = details.indexOf(index);
     let newDetails = details.slice();
@@ -50,11 +60,16 @@ const BackgroundHome = () => {
       filter: false,
     },
   ];
-
+  const { push } = useHistory();
   return (
     <>
       <div className="btn-add-container">
-        <CustomButton title="Thêm" />
+        <CustomButton
+          title="Thêm"
+          onClick={() => {
+            push("/form/image-background-home");
+          }}
+        />
       </div>
       <CDataTable
         items={Array.from(data).filter((item) => item.deleted === false)}
@@ -93,7 +108,7 @@ const BackgroundHome = () => {
           delete: (item, index) => {
             return (
               <td className="tdCenter">
-                <DeleteImageBgHome item={item} />
+                <DeleteImageBgHome item={item} onReload={reloadData} />
               </td>
             );
           },

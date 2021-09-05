@@ -92,7 +92,7 @@ const FImageBackgroundHome = () => {
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      tag: "background_home",
+      tagName: "background_home",
     },
     resolver: yupResolver(scheme),
   });
@@ -128,7 +128,7 @@ const FImageBackgroundHome = () => {
       // console.log("POST NEW COURSE", values);
       const formData = new FormData();
       formData.append("image", values.image);
-      formData.append("tag", values.tag);
+      formData.append("tagName", values.tagName);
       formData.append("description", values.description);
       try {
         const rp = await imageApi.add(formData);
@@ -137,6 +137,8 @@ const FImageBackgroundHome = () => {
           console.log(rp);
           enqueueSnackbar("Tải hình lên thành công", { variant: "success" });
         }
+        setImg(null);
+        form.reset();
       } catch (error) {
         enqueueSnackbar(error.message, { variant: "error" });
       }

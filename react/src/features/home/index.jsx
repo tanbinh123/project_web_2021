@@ -1,7 +1,8 @@
 import { Container, CssBaseline, makeStyles } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import imageApi from '../../api/imageApi';
 import { DataUser } from '../../app/DataUser';
 import CustomButton from '../../components/Button/CustomButton';
 import CardCourse from '../../components/card/CardCourse';
@@ -14,22 +15,27 @@ const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: "'Open Sans', sans-serif",
   },
-  bgHome: {
-    position: 'relative',
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'start',
-    transition: 'background 1s ease-in',
-    background: 'url("/assets/images/1.jpg")',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-  },
+  // bgHome: {
+  //   position: 'relative',
+  //   minHeight: '100vh',
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   justifyContent: 'start',
+  //   transition: 'all 2s ease-in',
+  //   backgroundColor: '#00000050',
+  //   // backgroundImage: 'url("/assets/images/1.jpg")',
+  //   backgroundSize: 'cover',
+  //   backgroundPosition: 'center',
+  //   backgroundRepeat: 'no-repeat',
+  // },
   wellcome: {
     color: 'var(--colorWhite1)',
     marginLeft: 100,
     zIndex: 1,
+    position: 'absolute',
+    top: '50%',
+    left: 0,
+    transform: 'translateY(-50%)',
     '&>h5': {
       fontSize: 14,
       marginBottom: 20,
@@ -66,11 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
   [theme.breakpoints.down('md')]: {
     root: {},
-    bgHome: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+    bgHome: {},
     wellcome: {
       marginLeft: 0,
       display: 'flex',
@@ -101,32 +103,59 @@ const useStyles = makeStyles((theme) => ({
 function Home(props) {
   const classes = useStyles();
   const [dataUser, setDataUser] = useRecoilState(DataUser);
+  const [arrImg, setArrImg] = useState([
+    '/assets/images/1.jpg',
+    '/assets/images/2.jpg',
+    '/assets/images/3.jpg',
+  ]);
+
   useEffect(() => {
+    let intervalBgHome;
     //get list img
-    let arrImg = [
-      '/assets/images/1.jpg',
-      '/assets/images/2.jpg',
-      '/assets/images/3.jpg',
-    ];
-    let index = 1;
-    const bgHome = document.getElementById('bg-home');
-    const setBgHome = setInterval(() => {
-      bgHome.style.backgroundImage = `url(${arrImg[index]})`;
-      if (index >= arrImg.length - 1) {
-        index = 0;
-      } else {
-        index++;
+    (async () => {
+      const res = await imageApi.getImageByTagName('background_home');
+      let tmpArr = [];
+      if (res.length > 0) {
+        // item?.image?.image
+        Array.from(res).forEach((item) => {
+          tmpArr.push(item?.image?.image);
+        });
+        setArrImg(tmpArr);
       }
-    }, 3000);
+      const imgs = document.querySelectorAll('.img-bg-home');
+      imgs[0]?.classList.add('active');
+      let i = 0;
+      intervalBgHome = setInterval(() => {
+        i++;
+        if (i >= imgs.length) i = 0;
+        removeClassActive();
+        console.log(i);
+        imgs[i]?.classList.add('active');
+      }, 5000);
+    })();
     return () => {
-      clearInterval(setBgHome);
+      clearInterval(intervalBgHome);
     };
   }, []);
+  function removeClassActive() {
+    const imgs = document.querySelectorAll('.img-bg-home');
+    imgs.forEach((item) => {
+      item.classList.remove('active');
+    });
+  }
   return (
     <div className={classes.root}>
       <Header />
       <CssBaseline />
       <div id="bg-home" className={classes.bgHome}>
+        {Array.from(arrImg).map((item) => (
+          <div
+            className="img-bg-home"
+            style={{
+              backgroundImage: `url("${item}")`,
+            }}
+          ></div>
+        ))}
         <div className={classes.wellcome}>
           <h5>Đừng xấu hổ khi bạn không biết, ta chỉ xấu hổ khi không học</h5>
           <h1>Học để thắp sáng tương lai</h1>

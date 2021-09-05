@@ -8,56 +8,56 @@ import {
   ListItemText,
   makeStyles,
   Popover,
-} from "@material-ui/core";
-import { Bookmark, Notifications, Person } from "@material-ui/icons";
+} from '@material-ui/core';
+import { Bookmark, Notifications, Person } from '@material-ui/icons';
 import {
   bindPopover,
   bindTrigger,
   usePopupState,
-} from "material-ui-popup-state/hooks";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { DataUser } from "../../../../../app/DataUser";
+} from 'material-ui-popup-state/hooks';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { DataUser } from '../../../../../app/DataUser';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    display: "flex",
-    justifyContent: "center",
-    fontSize: "16px",
-    fontWeight: "600",
-    borderBottom: "1px solid var(--colorGray2)",
-    paddingBottom: "5px",
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: '16px',
+    fontWeight: '600',
+    borderBottom: '1px solid var(--colorGray2)',
+    paddingBottom: '5px',
   },
   link: {
-    textDecoration: "none",
-    color: "var(--colorBlack2)",
+    textDecoration: 'none',
+    color: 'var(--colorBlack2)',
   },
   buttons: {
-    padding: "7px",
+    padding: '7px',
   },
   popover: {
-    background: "var(--colorWhite0)",
-    color: "var(--colorBlack2)",
+    background: 'var(--colorWhite0)',
+    color: 'var(--colorBlack2)',
   },
   avatarSmall: {
     // width: "20px",
     // height: "20px",
-    marginRight: "12px",
+    marginRight: '15px',
   },
   linkNone: {
-    textDecoration: "none",
-    color: "var(--colorWhite0)",
-    "&>div>.icon": {
-      fontSize: "18px",
+    textDecoration: 'none',
+    color: 'var(--colorWhite0)',
+    '&>div>.icon': {
+      fontSize: '18px',
       marginRight: 10,
-      color: "var(--colorWhite0)",
+      color: 'var(--colorWhite0)',
     },
   },
   rootPopover: {
     fontFamily: "'Open Sans', sans-serif",
-    "& .MuiPaper-root": {
-      background: "none",
+    '& .MuiPaper-root': {
+      background: 'none',
     },
     // "& .MuiPopover-paper": {
     //   outline: "0",
@@ -71,43 +71,44 @@ const useStyles = makeStyles((theme) => ({
     // },
   },
   seeMore: {
-    backgroundColor: "var(--colorWhite1)",
-    padding: "10px 0",
-    display: "flex",
-    justifyContent: "center",
-    cursor: "pointer",
-    "&:hover": {
-      color: "var(--colorOrange2)",
+    backgroundColor: 'var(--colorWhite1)',
+    padding: '10px 0',
+    display: 'flex',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    '&:hover': {
+      color: 'var(--colorOrange2)',
     },
   },
   contentNotication: {
     maxWidth: 200,
-    display: "flex",
-    flexFlow: "column",
-    "&>.title": {
-      // marginBottom: "10px",
+    display: 'flex',
+    flexFlow: 'column',
+    '&>.title': {
+      marginBottom: '10px',
       fontSize: 14,
       fontWeight: 600,
-      display: "-webkit-box",
-      "-webkit-box-orient": "vertical",
-      "-webkit-line-clamp": 1,
-      overflow: "hidden",
+      display: '-webkit-box',
+      '-webkit-box-orient': 'vertical',
+      '-webkit-line-clamp': 1,
+      overflow: 'hidden',
     },
-    "&>.content": {
+    '&>.content': {
       fontSize: 14,
       fontWeight: 400,
-      display: "-webkit-box",
-      "-webkit-box-orient": "vertical",
-      "-webkit-line-clamp": 3,
-      overflow: "hidden",
+      display: '-webkit-box',
+      '-webkit-box-orient': 'vertical',
+      '-webkit-line-clamp': 3,
+      overflow: 'hidden',
+      letterSpacing: '1px',
     },
   },
 }));
 function CourseBought(props) {
   const classes = useStyles();
   const popupState = usePopupState({
-    variant: "popover",
-    popupId: "popoverNotications",
+    variant: 'popover',
+    popupId: 'popoverNotications',
   });
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   const { courses } = dataUser;
@@ -121,12 +122,12 @@ function CourseBought(props) {
       className={classes.rootPopover}
       {...bindPopover(popupState)}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "center",
+        vertical: 'bottom',
+        horizontal: 'center',
       }}
       transformOrigin={{
-        vertical: "top",
-        horizontal: "center",
+        vertical: 'top',
+        horizontal: 'center',
       }}
     >
       <Box className={classes.popover} p={1}>
@@ -154,7 +155,7 @@ function CourseBought(props) {
             ))}
         </List>
         <Box className={classes.seeMore} onClick={handleShowMore}>
-          {seeMore ? "Ẩn bớt" : "Xem tất cả"}
+          {seeMore ? 'Ẩn bớt' : 'Xem tất cả'}
         </Box>
       </Box>
     </Popover>

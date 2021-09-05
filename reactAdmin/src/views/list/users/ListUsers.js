@@ -67,10 +67,13 @@ const ListUsers = () => {
               {item.gender === "NAM" ? (
                 <div className="sex">
                   <span>Nam</span>
-                  <i class="fas fa-mars blue"></i>
+                  <i className="fas fa-mars blue"></i>
                 </div>
               ) : (
-                <i class="fas fa-venus pink"></i>
+                <div className="sex">
+                  <span>Nữ</span>
+                  <i className="fas fa-mars blue"></i>
+                </div>
               )}
             </td>
           ),

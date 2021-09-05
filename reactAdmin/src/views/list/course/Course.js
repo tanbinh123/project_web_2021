@@ -2,7 +2,7 @@ import { CButton, CCardBody, CCollapse, CDataTable } from "@coreui/react";
 import { Avatar } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import courseApi from "src/api/courseApi";
 import CustomButton from "src/components/CustomButton";
 import CustomButtonRed from "src/components/CustomButtonRed";
@@ -26,6 +26,7 @@ const fields = [
 ];
 
 const Course = () => {
+  const { push } = useHistory();
   const [details, setDetails] = useState([]);
   const [dataCourse, setDataCourse] = useState();
 
@@ -36,6 +37,13 @@ const Course = () => {
       console.log(res);
     })();
   }, []);
+  function reloadData() {
+    (async () => {
+      const res = await courseApi.getAll();
+      setDataCourse(res.data);
+      console.log(res);
+    })();
+  }
   const toggleDetails = (index) => {
     const position = details.indexOf(index);
     let newDetails = details.slice();
@@ -54,6 +62,7 @@ const Course = () => {
     { key: "nameAuthor", label: "Tên Tác Giả" },
     { key: "rateStar", label: "Đánh Giá" },
     { key: "thumbnail", label: "Hình Thumbnail", sorter: false, filter: false },
+    { key: "actived", label: "Trạng thái" },
     { key: "updateAt", label: "Ngày Update" },
     {
       key: "show_details",
@@ -63,9 +72,16 @@ const Course = () => {
       filter: false,
     },
   ];
-
   return (
     <>
+      <div className="btn-add-container">
+        <CustomButton
+          title="Thêm"
+          onClick={() => {
+            push("/form/course");
+          }}
+        />
+      </div>
       <CDataTable
         items={dataCourse}
         fields={fields}
@@ -97,6 +113,21 @@ const Course = () => {
               />
             </td>
           ),
+          actived: (item) => (
+            <td className="tdCenter">
+              {item.actived ? (
+                <div>
+                  <span>Hoạt động</span>
+                  <i className="fas fa-circle green"></i>
+                </div>
+              ) : (
+                <div>
+                  <span>Khóa</span>
+                  <i className="fas fa-circle red"></i>
+                </div>
+              )}
+            </td>
+          ),
           show_details: (item, index) => {
             return (
               <td className="py-2">
@@ -115,6 +146,7 @@ const Course = () => {
             );
           },
           details: (item, index) => {
+            console.log(item);
             return (
               <CCollapse show={details.includes(index)}>
                 <CCardBody className="detailBody">
@@ -124,9 +156,11 @@ const Course = () => {
                   >
                     <CustomButton title="Chi tiết phần học" />
                   </Link>
-                  <BlockCourse item={item} />
-                  {/* chi hien 1 trong 2 */}
-                  <UnBlockCourse item={item} />
+                  {item.actived ? (
+                    <BlockCourse item={item} onReload={reloadData} />
+                  ) : (
+                    <UnBlockCourse item={item} onReload={reloadData} />
+                  )}
                 </CCardBody>
               </CCollapse>
             );

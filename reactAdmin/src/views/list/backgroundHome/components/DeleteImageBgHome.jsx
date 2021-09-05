@@ -6,7 +6,7 @@ import CustomButtonRed from "src/components/CustomButtonRed";
 import CustomDialogAction from "src/components/CustomDialogAction";
 
 function DeleteImageBgHome(props) {
-  const { item } = props;
+  const { item, onReload = null } = props;
   const [isOpenDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => {
     setOpenDialog(!isOpenDialog);
@@ -14,6 +14,7 @@ function DeleteImageBgHome(props) {
   const handleDeleteImage = async () => {
     const res = await imageApi.delete(item.id);
     console.log(res);
+    if (onReload) onReload();
   };
   return (
     <>

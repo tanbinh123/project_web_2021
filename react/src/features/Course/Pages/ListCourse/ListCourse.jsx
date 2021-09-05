@@ -1,46 +1,46 @@
-import { Box, Container, Grid, makeStyles, Paper } from "@material-ui/core";
-import { Pagination } from "@material-ui/lab";
-import { parse, stringify } from "query-string";
-import React, { useEffect, useMemo, useState } from "react";
-import { useHistory, useLocation } from "react-router";
-import courseApi from "../../../../api/courseApi";
-import courseApiFake from "../../../../api/courseApiFake";
+import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
+import { Pagination } from '@material-ui/lab';
+import { parse, stringify } from 'query-string';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
+import courseApi from '../../../../api/courseApi';
+import courseApiFake from '../../../../api/courseApiFake';
 import {
   colorBlack1,
   colorOrange2,
   colorWhite1,
-} from "../../../../components/color/color";
-import Header from "../../../../components/header/index";
-import LeftCourse from "./components/LeftCourse";
-import RightCoures from "./components/RightCoures";
-import SkeletonCourse from "./components/SkeletonCourse";
-import TabPrice from "./components/TabPrice";
+} from '../../../../components/color/color';
+import Header from '../../../../components/header/index';
+import LeftCourse from './components/LeftCourse';
+import RightCoures from './components/RightCoures';
+import SkeletonCourse from './components/SkeletonCourse';
+import TabPrice from './components/TabPrice';
 
 ListCourse.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
     background: colorWhite1,
-    padding: "50px 0px 20px 0px",
+    padding: '50px 0px 20px 0px',
   },
   left: {
-    display: "block",
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
+    display: 'block',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
   right: {},
   backgroundHeader: {
-    height: "64px",
+    height: '64px',
     background: colorBlack1,
   },
   pagination: {
-    display: "flex",
-    flexFlow: "row nowrap",
-    flex: "1 1 auto",
-    justifyContent: "center",
-    padding: "20px 0px 50px 0px",
-    "&> nav > ul> li> .MuiPaginationItem-textPrimary.Mui-selected": {
-      color: "#fff",
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    flex: '1 1 auto',
+    justifyContent: 'center',
+    padding: '20px 0px 50px 0px',
+    '&> nav > ul> li> .MuiPaginationItem-textPrimary.Mui-selected': {
+      color: '#fff',
       backgroundColor: colorOrange2,
     },
   },
@@ -70,8 +70,8 @@ function ListCourse(props) {
       _limit: Number.parseInt(params._limit) || 9,
       // _sort: params._sort || "updateAt",
       // _order: params._order || "desc",
-      _sort: params._sort || "updateAt:desc",
-      _category: params._category || "-1",
+      _sort: params._sort || 'updateAt:desc',
+      _category: params._category || '-1',
     };
   }, [location.search]);
   useEffect(() => {
@@ -85,7 +85,7 @@ function ListCourse(props) {
       }
     })();
     return () => {
-      console.log("return fetch categories");
+      console.log('return fetch categories');
     };
   }, []);
   useEffect(() => {
@@ -93,8 +93,8 @@ function ListCourse(props) {
       try {
         // console.log(queryParams);
         const { data, pagination } = await courseApi.getAll(queryParams);
-        // console.log(data);
-        // console.log(pagination);
+        console.log(data);
+        console.log(pagination);
         setDataCourse(data);
         setPagination(pagination);
         // console.log("fetch page courses");

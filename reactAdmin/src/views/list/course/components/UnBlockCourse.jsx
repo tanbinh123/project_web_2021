@@ -12,7 +12,7 @@ function UnBlockCourse(props) {
       margin: "20px 0",
     },
   }))();
-  const { item } = props;
+  const { item, onReload = null } = props;
   const [isOpenDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => {
     setOpenDialog(!isOpenDialog);
@@ -21,6 +21,7 @@ function UnBlockCourse(props) {
   const handleUnBlockCourse = async () => {
     const res = await courseApi.unblockCourse(item.id);
     console.log(res);
+    if (onReload) onReload();
   };
   return (
     <>

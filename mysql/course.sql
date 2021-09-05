@@ -3,15 +3,15 @@
 
  Source Server         : My SQL
  Source Server Type    : MySQL
- Source Server Version : 100417
+ Source Server Version : 100419
  Source Host           : localhost:3306
  Source Schema         : course
 
  Target Server Type    : MySQL
- Target Server Version : 100417
+ Target Server Version : 100419
  File Encoding         : 65001
 
- Date: 03/09/2021 02:06:40
+ Date: 05/09/2021 15:59:50
 */
 
 SET NAMES utf8mb4;
@@ -22,15 +22,15 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `active_account`;
 CREATE TABLE `active_account`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `create_time` datetime NULL DEFAULT NULL,
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `alive` bit(1) NULL DEFAULT b'1',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `active_account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 101 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 101 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of active_account
@@ -50,14 +50,14 @@ INSERT INTO `active_account` VALUES (100, 2, '2021-06-04 18:33:47', '12d95e4f108
 -- ----------------------------
 DROP TABLE IF EXISTS `app_role`;
 CREATE TABLE `app_role`  (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ID` bigint NOT NULL AUTO_INCREMENT,
   `ROLE_NAME` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
-  `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
-  `update_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
+  `create_at` datetime NOT NULL DEFAULT utc_timestamp,
+  `update_at` datetime NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE INDEX `APP_ROLE_UK`(`ROLE_NAME`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of app_role
@@ -70,22 +70,22 @@ INSERT INTO `app_role` VALUES (2, 'ROLE_USER', b'0', '2021-06-29 08:20:11', '202
 -- ----------------------------
 DROP TABLE IF EXISTS `app_user`;
 CREATE TABLE `app_user`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `USER_NAME` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ENCRYTED_PASSWORD` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ENABLED` bit(1) NOT NULL DEFAULT b'1',
-  `avatar_id` bigint(20) NULL DEFAULT NULL,
+  `avatar_id` bigint NULL DEFAULT NULL,
   `deleted` bit(1) NULL DEFAULT b'0',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `actived` bit(1) NULL DEFAULT b'0',
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `birth_day` datetime(0) NULL DEFAULT utc_timestamp,
+  `birth_day` datetime NULL DEFAULT utc_timestamp,
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `facebook` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `gmail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `create_at` datetime NULL DEFAULT utc_timestamp,
+  `update_at` datetime NULL DEFAULT utc_timestamp,
   `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `blocked` bit(1) NOT NULL DEFAULT b'0',
@@ -94,7 +94,7 @@ CREATE TABLE `app_user`  (
   UNIQUE INDEX `email_uq`(`email`) USING BTREE,
   INDEX `avatar_id`(`avatar_id`) USING BTREE,
   CONSTRAINT `app_user_ibfk_1` FOREIGN KEY (`avatar_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of app_user
@@ -110,18 +110,18 @@ INSERT INTO `app_user` VALUES (56, 'saitama', '+LKwVQ2dswVWrIwemPIIZap6myYUFzqG2
 -- ----------------------------
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `actived` bit(1) NOT NULL DEFAULT b'1',
   `deleted` bit(1) NOT NULL DEFAULT b'0',
-  `create_time` datetime(0) NOT NULL DEFAULT utc_timestamp,
-  `update_time` datetime(0) NOT NULL DEFAULT utc_timestamp,
-  `total_course` bigint(20) NOT NULL DEFAULT 0,
+  `create_time` datetime NOT NULL DEFAULT utc_timestamp,
+  `update_time` datetime NOT NULL DEFAULT utc_timestamp,
+  `total_course` bigint NOT NULL DEFAULT 0,
   `duration_learned` decimal(10, 0) UNSIGNED NOT NULL DEFAULT 0,
   `total_money` decimal(30, 0) UNSIGNED NOT NULL DEFAULT 0,
-  `total_course_bought` bigint(20) NOT NULL DEFAULT 0,
+  `total_course_bought` bigint NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of categories
@@ -136,35 +136,35 @@ INSERT INTO `categories` VALUES (22, 'Genshin Impact', b'1', b'0', '2021-06-28 0
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `img_poster_id` bigint(20) NULL DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `img_poster_id` bigint NULL DEFAULT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` decimal(15, 0) UNSIGNED NOT NULL,
   `sum_star` decimal(10, 0) UNSIGNED NOT NULL DEFAULT 0,
-  `bought` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `update_at` timestamp(0) NOT NULL DEFAULT utc_timestamp,
-  `user_poster_id` bigint(20) NOT NULL,
-  `demo_id` bigint(20) NULL DEFAULT NULL,
-  `category_id` int(11) NOT NULL,
-  `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
+  `bought` int UNSIGNED NOT NULL DEFAULT 0,
+  `update_at` timestamp NOT NULL DEFAULT utc_timestamp,
+  `user_poster_id` bigint NOT NULL,
+  `demo_id` bigint NULL DEFAULT NULL,
+  `category_id` int NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT utc_timestamp,
   `actived` bit(1) NOT NULL DEFAULT b'1',
-  `sum_rating` int(255) UNSIGNED NOT NULL DEFAULT 0,
+  `sum_rating` int UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `img_poster_id`(`img_poster_id`) USING BTREE,
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 198 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 198 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 0, 2, '2021-07-06 09:05:04', 1, 1, 1, '2021-05-25 14:25:29', b'1', 0);
+INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 0, 2, '2021-09-02 20:12:23', 1, 1, 1, '2021-05-25 14:25:29', b'1', 0);
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Tìm hiểu Ganyu 1', 12288000, 0, 0, '2021-06-06 08:04:45', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 14929000, 2, 1, '2021-06-20 06:58:19', 1, 22, 1, '2021-05-19 15:35:12', b'1', 1);
-INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 0, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
+INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 0, 0, '2021-09-02 19:49:38', 1, 6, 1, '2021-05-19 15:35:12', b'0', 0);
 INSERT INTO `course` VALUES (5, 7, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 5', 4172000, 0, 0, '2019-11-19 04:34:37', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (6, 5, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Demo 6', 5487000, 0, 0, '2019-05-17 05:12:53', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (7, 8, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 7', 4233000, 0, 0, '2020-09-20 15:11:21', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
@@ -176,7 +176,7 @@ INSERT INTO `course` VALUES (12, 9, 'Dòng máu \"con người\" chảy trong hu
 INSERT INTO `course` VALUES (13, 4, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Demo 13', 13238000, 0, 0, '2019-11-10 16:24:45', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (14, 3, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 14', 7300000, 0, 0, '2020-04-08 12:19:46', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (15, 8, 'Trong mắt của cô gái nửa người nửa tiên Ganyu, rốt cuộc giữa biển người tấp nập và những ngọn núi tĩnh mịch nơi đâu mới được gọi là nhà?', b'0', 'Demo 15', 2532000, 0, 0, '2020-02-03 00:36:45', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
-INSERT INTO `course` VALUES (16, 7, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 16', 2800000, 0, 0, '2020-01-08 17:22:10', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
+INSERT INTO `course` VALUES (16, 7, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 16', 2800000, 0, 0, '2021-09-02 20:30:17', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (17, 2, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 17', 5954000, 0, 0, '2019-03-16 10:42:38', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (18, 10, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 18', 10419000, 0, 0, '2020-04-23 17:19:24', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
 INSERT INTO `course` VALUES (19, 8, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 19', 14312000, 0, 0, '2020-09-04 09:42:36', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0);
@@ -358,20 +358,20 @@ INSERT INTO `course` VALUES (197, 117, '34342342', b'0', 'Eula', 1510000, 0, 0, 
 -- ----------------------------
 DROP TABLE IF EXISTS `evaluates`;
 CREATE TABLE `evaluates`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deleted` bit(1) NULL DEFAULT b'0',
-  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `user_poster_id` bigint(20) NOT NULL,
+  `create_at` datetime NULL DEFAULT utc_timestamp,
+  `update_at` datetime NULL DEFAULT utc_timestamp,
+  `user_poster_id` bigint NOT NULL,
   `rating` double NOT NULL DEFAULT 0,
-  `course_id` bigint(20) NOT NULL,
+  `course_id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_poster_id`(`user_poster_id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `evaluates_ibfk_1` FOREIGN KEY (`user_poster_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `evaluates_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of evaluates
@@ -383,37 +383,40 @@ INSERT INTO `evaluates` VALUES (3, 'Hello', b'0', '2021-06-20 07:02:09', '2021-0
 -- ----------------------------
 DROP TABLE IF EXISTS `image_admin`;
 CREATE TABLE `image_admin`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `image_id` bigint(20) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `image_id` bigint NOT NULL,
   `deleted` bit(1) NULL DEFAULT b'0',
-  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `create_at` datetime NULL DEFAULT utc_timestamp,
+  `update_at` datetime NULL DEFAULT utc_timestamp,
   `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of image_admin
 -- ----------------------------
-INSERT INTO `image_admin` VALUES (4, 119, b'0', '2021-09-01 13:36:55', '2021-09-01 13:36:55', 'background_home', 'Hình để ở trang chủ');
 INSERT INTO `image_admin` VALUES (6, 121, b'0', '2021-09-01 13:47:34', '2021-09-01 13:47:34', 'icon_logo', 'Hình để ở trang chủ');
 INSERT INTO `image_admin` VALUES (7, 122, b'0', '2021-09-02 19:02:43', '2021-09-02 19:02:43', 'icon_logo', 'Hình để ở trang chủ');
 INSERT INTO `image_admin` VALUES (8, 123, b'0', '2021-09-02 19:05:23', '2021-09-02 19:05:23', 'icon_logo', 'Hình để ở trang chủ');
+INSERT INTO `image_admin` VALUES (13, 128, b'0', '2021-09-04 06:13:16', '2021-09-04 06:13:16', 'background_home', '1');
+INSERT INTO `image_admin` VALUES (14, 129, b'0', '2021-09-04 06:13:25', '2021-09-04 06:13:25', 'background_home', '2');
+INSERT INTO `image_admin` VALUES (15, 130, b'0', '2021-09-04 06:13:31', '2021-09-04 06:13:31', 'background_home', '3');
+INSERT INTO `image_admin` VALUES (16, 131, b'0', '2021-09-04 06:13:37', '2021-09-04 06:13:37', 'background_home', '4');
 
 -- ----------------------------
 -- Table structure for learning
 -- ----------------------------
 DROP TABLE IF EXISTS `learning`;
 CREATE TABLE `learning`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `course_id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `course_id` bigint NOT NULL,
   `learning` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deleted` bit(1) NULL DEFAULT b'0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of learning
@@ -452,18 +455,18 @@ INSERT INTO `learning` VALUES (74, 187, 'ouhgiyhbiy', b'0');
 -- ----------------------------
 DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE `lesson`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `part_id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `part_id` bigint NOT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `duration` bigint(20) NULL DEFAULT NULL,
-  `video_id` bigint(20) NULL DEFAULT NULL,
+  `duration` bigint NULL DEFAULT NULL,
+  `video_id` bigint NULL DEFAULT NULL,
   `deleted` bit(1) NULL DEFAULT b'0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `video_id`(`video_id`) USING BTREE,
   INDEX `part_id`(`part_id`) USING BTREE,
   CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `lesson_ibfk_2` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of lesson
@@ -488,20 +491,20 @@ INSERT INTO `lesson` VALUES (49, 34, 'Cài đặt môi trường', NULL, 1, b'0'
 -- ----------------------------
 DROP TABLE IF EXISTS `notifications`;
 CREATE TABLE `notifications`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `actived` bit(1) NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
-  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `user_id` bigint(20) NOT NULL,
+  `create_at` datetime NULL DEFAULT utc_timestamp,
+  `update_at` datetime NULL DEFAULT utc_timestamp,
+  `user_id` bigint NOT NULL,
   `seen` bit(1) NOT NULL DEFAULT b'0',
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `user_sent_id` bigint(20) NOT NULL,
+  `user_sent_id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of notifications
@@ -528,14 +531,14 @@ INSERT INTO `notifications` VALUES (16, 'Lập trình', b'1', b'0', '2021-05-19 
 -- ----------------------------
 DROP TABLE IF EXISTS `ower_course`;
 CREATE TABLE `ower_course`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `course_id` bigint(20) NOT NULL,
-  `payment_id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `course_id` bigint NOT NULL,
+  `payment_id` bigint NOT NULL,
   `successed` bit(1) NOT NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
-  `create_time` datetime(0) NULL DEFAULT utc_timestamp,
-  `update_time` datetime(0) NULL DEFAULT utc_timestamp,
+  `create_time` datetime NULL DEFAULT utc_timestamp,
+  `update_time` datetime NULL DEFAULT utc_timestamp,
   `duration_learned` decimal(10, 0) UNSIGNED NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `payment_id`(`payment_id`) USING BTREE,
@@ -544,7 +547,7 @@ CREATE TABLE `ower_course`  (
   CONSTRAINT `ower_course_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_4` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ower_course
@@ -562,16 +565,16 @@ INSERT INTO `ower_course` VALUES (40, 1, 3, 68, b'1', b'0', '2021-06-20 06:46:30
 -- ----------------------------
 DROP TABLE IF EXISTS `part`;
 CREATE TABLE `part`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `course_id` bigint(20) NULL DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `course_id` bigint NULL DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `number_lesson` int(11) NULL DEFAULT 0,
+  `number_lesson` int NULL DEFAULT 0,
   `duration` decimal(65, 0) NULL DEFAULT 0,
   `deleted` bit(1) NULL DEFAULT b'0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `part_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of part
@@ -596,9 +599,9 @@ INSERT INTO `part` VALUES (58, 187, '5478494', 0, 0, b'0');
 -- ----------------------------
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `create_time` datetime NULL DEFAULT NULL,
   `amount` decimal(65, 0) NULL DEFAULT NULL,
   `ip_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `currcode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -609,7 +612,7 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment
@@ -645,26 +648,30 @@ INSERT INTO `payment` VALUES (68, 1, '2021-06-20 06:46:30', 1492900000, '127.0.0
 -- ----------------------------
 DROP TABLE IF EXISTS `queue_check_payment`;
 CREATE TABLE `queue_check_payment`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `payment_id` bigint(20) NOT NULL,
-  `last_check` datetime(0) NULL DEFAULT utc_timestamp,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `payment_id` bigint NOT NULL,
+  `last_check` datetime NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of queue_check_payment
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for request_reset_password
 -- ----------------------------
 DROP TABLE IF EXISTS `request_reset_password`;
 CREATE TABLE `request_reset_password`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `time` datetime(0) NULL DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `time` datetime NULL DEFAULT NULL,
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `alive` bit(1) NULL DEFAULT b'1',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `request_reset_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of request_reset_password
@@ -679,15 +686,15 @@ INSERT INTO `request_reset_password` VALUES (69, 45, '2021-05-27 15:22:47', 'a65
 -- ----------------------------
 DROP TABLE IF EXISTS `resource_image`;
 CREATE TABLE `resource_image`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `img_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
-  `update_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
-  `user_poster_id` bigint(20) NULL DEFAULT NULL,
-  `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
+  `update_at` datetime NOT NULL DEFAULT utc_timestamp,
+  `user_poster_id` bigint NULL DEFAULT NULL,
+  `count_linked` bigint UNSIGNED NOT NULL DEFAULT 0,
+  `create_at` datetime NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of resource_image
@@ -728,27 +735,35 @@ INSERT INTO `resource_image` VALUES (115, 'user/admin/image/1616839149599.jpg', 
 INSERT INTO `resource_image` VALUES (116, 'user/admin/image/1616839149599.jpg', b'0', '2021-07-05 10:22:08', 1, 1, '2021-07-05 10:22:08');
 INSERT INTO `resource_image` VALUES (117, 'user/admin/image/1616839149544.png', b'0', '2021-07-05 10:27:51', 1, 1, '2021-07-05 10:27:51');
 INSERT INTO `resource_image` VALUES (118, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:32:11', 1, 0, '2021-09-01 13:32:11');
-INSERT INTO `resource_image` VALUES (119, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:36:54', 1, 1, '2021-09-01 13:36:54');
+INSERT INTO `resource_image` VALUES (119, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:36:54', 1, 0, '2021-09-01 13:36:54');
 INSERT INTO `resource_image` VALUES (120, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:46:50', 1, 0, '2021-09-01 13:46:50');
 INSERT INTO `resource_image` VALUES (121, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:47:33', 1, 1, '2021-09-01 13:47:33');
 INSERT INTO `resource_image` VALUES (122, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:02:43', 1, 1, '2021-09-02 19:02:43');
 INSERT INTO `resource_image` VALUES (123, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:05:23', 1, 1, '2021-09-02 19:05:23');
+INSERT INTO `resource_image` VALUES (124, 'user/admin/image/Screenshot 2021-09-02 211604.png', b'0', '2021-09-02 19:24:04', 1, 0, '2021-09-02 19:24:04');
+INSERT INTO `resource_image` VALUES (125, 'user/admin/image/Screenshot 2021-09-02 211604.png', b'0', '2021-09-02 19:31:09', 1, 0, '2021-09-02 19:31:09');
+INSERT INTO `resource_image` VALUES (126, 'user/admin/image/Screenshot 2021-09-02 211604.png', b'0', '2021-09-02 19:31:57', 1, 0, '2021-09-02 19:31:57');
+INSERT INTO `resource_image` VALUES (127, 'user/admin/image/Screenshot 2021-09-02 211604.png', b'0', '2021-09-02 19:33:02', 1, 0, '2021-09-02 19:33:02');
+INSERT INTO `resource_image` VALUES (128, 'user/admin/image/dmitry-ratushny-O33IVNPb0RI-unsplash.jpg', b'0', '2021-09-04 06:13:16', 1, 1, '2021-09-04 06:13:16');
+INSERT INTO `resource_image` VALUES (129, 'user/admin/image/element5-digital-OyCl7Y4y0Bk-unsplash.jpg', b'0', '2021-09-04 06:13:25', 1, 1, '2021-09-04 06:13:25');
+INSERT INTO `resource_image` VALUES (130, 'user/admin/image/green-chameleon-s9CC2SKySJM-unsplash.jpg', b'0', '2021-09-04 06:13:31', 1, 1, '2021-09-04 06:13:31');
+INSERT INTO `resource_image` VALUES (131, 'user/admin/image/j-kelly-brito-PeUJyoylfe4-unsplash.jpg', b'0', '2021-09-04 06:13:37', 1, 1, '2021-09-04 06:13:37');
 
 -- ----------------------------
 -- Table structure for revenue
 -- ----------------------------
 DROP TABLE IF EXISTS `revenue`;
 CREATE TABLE `revenue`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `deleted` bit(1) NULL DEFAULT b'0',
-  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `month` int(255) NULL DEFAULT NULL,
-  `year` int(255) NULL DEFAULT NULL,
+  `create_at` datetime NULL DEFAULT utc_timestamp,
+  `update_at` datetime NULL DEFAULT utc_timestamp,
+  `month` int NULL DEFAULT NULL,
+  `year` int NULL DEFAULT NULL,
   `money` decimal(60, 0) UNSIGNED NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `unque_key`(`month`, `year`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of revenue
@@ -767,21 +782,21 @@ DROP TABLE IF EXISTS `spring_session`;
 CREATE TABLE `spring_session`  (
   `PRIMARY_ID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `SESSION_ID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `CREATION_TIME` bigint(20) NOT NULL,
-  `LAST_ACCESS_TIME` bigint(20) NOT NULL,
-  `MAX_INACTIVE_INTERVAL` int(11) NOT NULL,
-  `EXPIRY_TIME` bigint(20) NOT NULL,
+  `CREATION_TIME` bigint NOT NULL,
+  `LAST_ACCESS_TIME` bigint NOT NULL,
+  `MAX_INACTIVE_INTERVAL` int NOT NULL,
+  `EXPIRY_TIME` bigint NOT NULL,
   `PRINCIPAL_NAME` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`PRIMARY_ID`) USING BTREE,
   UNIQUE INDEX `SPRING_SESSION_IX1`(`SESSION_ID`) USING BTREE,
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('65d4a92b-e474-4fd6-afed-cf786304a3aa', '265b5803-0a52-452f-9c74-5635853ffc7d', 1630609343917, 1630609531275, 1800, 1630611331275, NULL);
+INSERT INTO `spring_session` VALUES ('20888923-a1d1-4fcf-855f-8cc83edff9b7', '5c464984-c3a2-47a1-af49-cc1499cf76d4', 1630831944179, 1630831944179, 1800, 1630833744179, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -793,21 +808,25 @@ CREATE TABLE `spring_session_attributes`  (
   `ATTRIBUTE_BYTES` blob NOT NULL,
   PRIMARY KEY (`SESSION_PRIMARY_ID`, `ATTRIBUTE_NAME`) USING BTREE,
   CONSTRAINT `SPRING_SESSION_ATTRIBUTES_FK` FOREIGN KEY (`SESSION_PRIMARY_ID`) REFERENCES `spring_session` (`PRIMARY_ID`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of spring_session_attributes
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for templates
 -- ----------------------------
 DROP TABLE IF EXISTS `templates`;
 CREATE TABLE `templates`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `actived` bit(1) NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
-  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
+  `create_at` datetime NULL DEFAULT utc_timestamp,
+  `update_at` datetime NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of templates
@@ -820,11 +839,11 @@ INSERT INTO `templates` VALUES (2, 'Lập trình', b'1', b'1', '2021-05-19 15:39
 -- ----------------------------
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE `test`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` bit(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `test_uk`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of test
@@ -836,15 +855,15 @@ INSERT INTO `test` VALUES (1, b'1');
 -- ----------------------------
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role`  (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `USER_ID` bigint(20) NOT NULL,
-  `ROLE_ID` bigint(20) NOT NULL,
+  `ID` bigint NOT NULL AUTO_INCREMENT,
+  `USER_ID` bigint NOT NULL,
+  `ROLE_ID` bigint NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE INDEX `USER_ROLE_UK`(`USER_ID`, `ROLE_ID`) USING BTREE,
   INDEX `USER_ROLE_FK2`(`ROLE_ID`) USING BTREE,
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`ROLE_ID`) REFERENCES `app_role` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_role
@@ -861,19 +880,19 @@ INSERT INTO `user_role` VALUES (28, 56, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `img_poster_id` bigint(20) NULL DEFAULT NULL,
-  `duration` int(255) UNSIGNED NOT NULL DEFAULT 0,
-  `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `img_poster_id` bigint NULL DEFAULT NULL,
+  `duration` int UNSIGNED NOT NULL DEFAULT 0,
+  `count_linked` bigint UNSIGNED NOT NULL DEFAULT 0,
   `actived` bit(1) NOT NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
-  `create_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `update_at` datetime(0) NULL DEFAULT utc_timestamp,
-  `user_poster_id` bigint(20) NULL DEFAULT NULL,
+  `create_at` datetime NULL DEFAULT utc_timestamp,
+  `update_at` datetime NULL DEFAULT utc_timestamp,
+  `user_poster_id` bigint NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`img_poster_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of video
