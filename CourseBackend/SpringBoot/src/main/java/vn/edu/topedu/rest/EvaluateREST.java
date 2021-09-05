@@ -120,6 +120,7 @@ public class EvaluateREST {
 				String rating=body.get("rating");
 				System.out.println(String.format("rating : %s", rating));
 				String deleted=body.get("deleted");
+				//if(deleted==null) deleted=false;
 				System.out.println(String.format("deleted : %s", deleted));
 				if(deleted==null||!deleted.equals("true")) {
 					deleted="false";				

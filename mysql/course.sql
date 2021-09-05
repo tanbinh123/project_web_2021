@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 06/09/2021 02:17:09
+ Date: 06/09/2021 02:35:56
 */
 
 SET NAMES utf8mb4;
@@ -164,7 +164,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 0, 2, '2021-07-06 09:05:04', 1, 1, 1, '2021-05-25 14:25:29', b'1', 1, 0);
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Tìm hiểu Ganyu 1', 12288000, 0, 0, '2021-06-06 08:04:45', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0, 0);
-INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 14929000, 2, 1, '2021-06-20 06:58:19', 1, 22, 1, '2021-05-19 15:35:12', b'1', 1, 2);
+INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 14929000, 2, 1, '2021-06-20 06:58:19', 1, 22, 1, '2021-05-19 15:35:12', b'1', 2, 1);
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 0, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0, 0);
 INSERT INTO `course` VALUES (5, 7, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 5', 4172000, 0, 0, '2019-11-19 04:34:37', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0, 0);
 INSERT INTO `course` VALUES (6, 5, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Demo 6', 5487000, 0, 0, '2019-05-17 05:12:53', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0, 0);
@@ -373,12 +373,13 @@ CREATE TABLE `evaluates`  (
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `evaluates_ibfk_1` FOREIGN KEY (`user_poster_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `evaluates_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of evaluates
 -- ----------------------------
 INSERT INTO `evaluates` VALUES (1, 'Hay', b'0', '2021-09-05 19:16:37', '2021-09-05 19:16:37', 1, 0, 1);
+INSERT INTO `evaluates` VALUES (2, 'Hay', b'0', '2021-09-05 19:16:37', '2021-09-05 19:16:37', 1, 0, 3);
 
 -- ----------------------------
 -- Table structure for image_admin
@@ -785,6 +786,11 @@ CREATE TABLE `spring_session`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of spring_session
+-- ----------------------------
+INSERT INTO `spring_session` VALUES ('bccea254-60a6-4293-a05d-8b4a527c34ce', '22ca53ed-c8b0-45cc-bc52-2cc859700aac', 1630869997347, 1630870223036, 1800, 1630872023036, NULL);
+
+-- ----------------------------
 -- Table structure for spring_session_attributes
 -- ----------------------------
 DROP TABLE IF EXISTS `spring_session_attributes`;
@@ -988,6 +994,24 @@ delimiter ;
 -- ----------------------------
 -- Triggers structure for table course
 -- ----------------------------
+DROP TRIGGER IF EXISTS `before_update_course`;
+delimiter ;;
+CREATE TRIGGER `before_update_course` BEFORE UPDATE ON `course` FOR EACH ROW BEGIN
+			
+			
+				if new.sum_rating <> 0 and new.sum_star <> 0   then		
+			
+					set	new.rate_star=new.sum_star/new.sum_rating;
+			
+				end if;
+			
+	 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table course
+-- ----------------------------
 DROP TRIGGER IF EXISTS `after_update_course`;
 delimiter ;;
 CREATE TRIGGER `after_update_course` AFTER UPDATE ON `course` FOR EACH ROW BEGIN
@@ -1015,11 +1039,8 @@ CREATE TRIGGER `after_update_course` AFTER UPDATE ON `course` FOR EACH ROW BEGIN
 					end if;
 			end if;
 			
-				if new.sum_rating <> 0 and new.sum_star <> 0   then		
 			
-					UPDATE course set rate_star=sum_star/sum_rating where id =new.id;
 			
-				end if;
 			
 	 END
 ;;
