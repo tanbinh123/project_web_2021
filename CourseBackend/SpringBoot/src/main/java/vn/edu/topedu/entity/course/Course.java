@@ -63,6 +63,9 @@ public class Course extends AHasPoster implements JsonResponse {
 	@Column(name = "actived", length = 1, nullable = false)
 	protected Boolean actived = true;
 	
+	
+	@Column(name = "rate_star", length = 10, nullable = false, updatable = false,insertable = false)
+    private int rateStar;
     
 	public Long getId() {
 		return id;
@@ -136,8 +139,7 @@ public class Course extends AHasPoster implements JsonResponse {
 		this.bought = bought;
 	}
 	public double getRateStar() {
-		if(sumRating==0)return 0;
-		return sumStar.divide(BigDecimal.valueOf(sumRating)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		return this.rateStar;
 	}
 	
 	

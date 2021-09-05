@@ -28,7 +28,7 @@ public class CourseDAO {
 	@Autowired
 	private EntityManager entityManager;
 
-	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search) {
+	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search, int price_gte, int price_lt) {
 		--_page;
 		if(_page<0)_page=0;
 		if (sort == "" || sort == null)
@@ -45,6 +45,11 @@ public class CourseDAO {
 		}
 		if (category != -1)
 			sql += String.format(" and c.category.id = %d ", category);
+		
+		if (price_gte != -1)
+			sql += String.format(" and c.price >= %d ", price_gte);
+		if (price_lt != -1)
+			sql += String.format(" and c.price < %d ", price_lt);
 		sql += " group by c.id  order by  ";
 		String sqlSort = "";
 		sort = sort.toLowerCase();
@@ -568,7 +573,9 @@ public class CourseDAO {
 				sqlSort += WebUtils.sort(_order, "c.id", started);
 				break;
 			
-			
+			case "rating":
+				sqlSort += WebUtils.sort(_order, "c.rating", started);
+				break;
 			
 			case "updateat":
 				sqlSort += WebUtils.sort(_order, "c.updateAt", started);

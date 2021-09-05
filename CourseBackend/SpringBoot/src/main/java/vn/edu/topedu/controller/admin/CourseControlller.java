@@ -124,8 +124,12 @@ public class CourseControlller {
 
 	@GetMapping(value = "/admin/courses")
 	public String list(HttpServletRequest httpServletRequest, @RequestParam(defaultValue = "-1") int _page,
-			@RequestParam(defaultValue = "10") int _limit, @RequestParam(defaultValue = "updateAt:desc") String _sort,
-			@RequestParam(defaultValue = "") String _search, @RequestParam(defaultValue = "-1") int category,
+			@RequestParam(defaultValue = "10") int _limit,
+			@RequestParam(defaultValue = "updateAt:desc") String _sort,
+			@RequestParam(defaultValue = "") String _search,
+			@RequestParam(defaultValue = "-1") int price_gte,
+			@RequestParam(defaultValue = "-1") int price_lt,
+			@RequestParam(defaultValue = "-1") int category,
 			Map<String, Object> model) {
 		String _filter = "";
 		if (category != -1)
@@ -137,7 +141,7 @@ public class CourseControlller {
 		}
 
 		_page = (_page <= 0) ? 1 : _page;
-		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category, _search);
+		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category, _search,price_gte,price_lt);
 		long countRows = courseDAO.getCount(category, _search);
 		for (Course c : lstCourse) {
 			c.setBeforeResource(WebUtils.getUrl(httpServletRequest));

@@ -70,10 +70,12 @@ public class CourseREST implements IMyHost {
 			@RequestParam(defaultValue = "-1") int _limit,
 			@RequestParam(defaultValue = "id:asc") String _sort, 
 			@RequestParam(defaultValue = "") String _search,
+			@RequestParam(defaultValue = "-1") int price_gte,
+			@RequestParam(defaultValue = "-1") int price_lt,
 			@RequestParam(defaultValue = "-1") int _category) {
 
 		_page = (_page <= 0) ? 1 : _page;
-		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, _category, _search);
+		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, _category, _search,price_gte,price_lt);
 		long countRows = courseDAO.getCount(_category, _search);
 		// System.out.println(countRows);
 		for (Course c : lstCourse) {
