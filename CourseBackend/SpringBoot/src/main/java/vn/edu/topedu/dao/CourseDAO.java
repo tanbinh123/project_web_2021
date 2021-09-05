@@ -1,5 +1,6 @@
 package vn.edu.topedu.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -28,7 +29,7 @@ public class CourseDAO {
 	@Autowired
 	private EntityManager entityManager;
 
-	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search, int price_gte, int price_lt) {
+	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search, BigDecimal price_gte, BigDecimal price_lt) {
 		--_page;
 		if(_page<0)_page=0;
 		if (sort == "" || sort == null)
@@ -46,10 +47,10 @@ public class CourseDAO {
 		if (category != -1)
 			sql += String.format(" and c.category.id = %d ", category);
 		
-		if (price_gte != -1)
-			sql += String.format(" and c.price >= %d ", price_gte);
-		if (price_lt != -1)
-			sql += String.format(" and c.price < %d ", price_lt);
+		if (!price_gte.equals(BigDecimal.valueOf(-1)))
+			sql += String.format(" and c.price >= %s ", price_gte.toString());
+		if (!price_lt.equals(BigDecimal.valueOf(-1)))
+			sql += String.format(" and c.price < %s ", price_lt.toString());
 		sql += " group by c.id  order by  ";
 		String sqlSort = "";
 		sort = sort.toLowerCase();
@@ -95,7 +96,7 @@ public class CourseDAO {
 		return query.getResultList();
 	}
 
-	public long getCount(int category, String _search) {
+	public long getCount(int category, String _search,BigDecimal price_gte, BigDecimal price_lt) {
 		String sql = null;
 		if (_search == null || _search.length() == 0) {
 			sql = "Select count(*) from " + Course.class.getName() + " c " //
@@ -109,6 +110,11 @@ public class CourseDAO {
 
 		if (category != -1)
 			sql += String.format(" and c.category.id = %d ", category);
+		
+		if (!price_gte.equals(BigDecimal.valueOf(-1)))
+			sql += String.format(" and c.price >= %s ", price_gte.toString());
+		if (!price_lt.equals(BigDecimal.valueOf(-1)))
+			sql += String.format(" and c.price < %s ", price_lt.toString());
 		Query query = this.entityManager.createQuery(sql, Long.class);
 		if (_search != null && _search.length() != 0) {
 			query.setParameter("search", _search);

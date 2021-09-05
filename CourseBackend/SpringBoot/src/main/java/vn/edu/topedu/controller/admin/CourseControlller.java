@@ -1,5 +1,6 @@
 package vn.edu.topedu.controller.admin;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -127,8 +128,8 @@ public class CourseControlller {
 			@RequestParam(defaultValue = "10") int _limit,
 			@RequestParam(defaultValue = "updateAt:desc") String _sort,
 			@RequestParam(defaultValue = "") String _search,
-			@RequestParam(defaultValue = "-1") int price_gte,
-			@RequestParam(defaultValue = "-1") int price_lt,
+			@RequestParam(defaultValue = "-1") BigDecimal price_gte,
+			@RequestParam(defaultValue = "-1") BigDecimal price_lt,
 			@RequestParam(defaultValue = "-1") int category,
 			Map<String, Object> model) {
 		String _filter = "";
@@ -142,7 +143,7 @@ public class CourseControlller {
 
 		_page = (_page <= 0) ? 1 : _page;
 		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category, _search,price_gte,price_lt);
-		long countRows = courseDAO.getCount(category, _search);
+		long countRows = courseDAO.getCount(category, _search,price_gte,price_lt);
 		for (Course c : lstCourse) {
 			c.setBeforeResource(WebUtils.getUrl(httpServletRequest));
 
