@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 05/09/2021 17:40:19
+ Date: 06/09/2021 02:17:09
 */
 
 SET NAMES utf8mb4;
@@ -126,7 +126,7 @@ CREATE TABLE `categories`  (
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 172, 0, 28844000, 4);
+INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 173, 0, 28844000, 4);
 INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 5, 500, 32601000, 5);
 INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 3, 0, 0, 0);
 INSERT INTO `categories` VALUES (22, 'Genshin Impact', b'1', b'0', '2021-06-28 06:39:44', '2021-06-28 06:39:44', 11, 0, 0, 0);
@@ -157,12 +157,12 @@ CREATE TABLE `course`  (
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 198 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 199 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 0, 2, '2021-07-06 09:05:04', 1, 1, 1, '2021-05-25 14:25:29', b'1', 0, 0);
+INSERT INTO `course` VALUES (1, 91, 'Eula với danh hiệu \"Kỵ Sĩ Sóng Nước\", không những tinh thông kiếm thuật mà còn rất mưu trí và gan dạ. Đại đội trưởng Varka đã từng đánh giá cô cực kỳ cao, gọi cô là chiến binh xuất sắc có thể sánh vai với \"Kỵ Sĩ Bồ Công Anh\". ', b'0', 'Tìm hiểu Eula 1', 25000000, 0, 2, '2021-07-06 09:05:04', 1, 1, 1, '2021-05-25 14:25:29', b'1', 1, 0);
 INSERT INTO `course` VALUES (2, 5, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Tìm hiểu Ganyu 1', 12288000, 0, 0, '2021-06-06 08:04:45', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0, 0);
 INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 14929000, 2, 1, '2021-06-20 06:58:19', 1, 22, 1, '2021-05-19 15:35:12', b'1', 1, 2);
 INSERT INTO `course` VALUES (4, 7, 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', b'0', 'Demo 4', 4382000, 0, 0, '2019-12-19 15:45:06', 1, 6, 1, '2021-05-19 15:35:12', b'1', 0, 0);
@@ -353,6 +353,7 @@ INSERT INTO `course` VALUES (194, 114, '34342342', b'0', 'Eula', 1510000, 0, 0, 
 INSERT INTO `course` VALUES (195, 115, '34342342', b'0', 'Eula', 1510000, 0, 0, '2021-07-05 10:20:58', 1, NULL, 22, '2021-07-05 10:20:58', b'1', 0, 0);
 INSERT INTO `course` VALUES (196, 116, '34342342', b'0', 'Eula', 1510000, 0, 0, '2021-07-05 10:22:08', 1, NULL, 22, '2021-07-05 10:22:08', b'1', 0, 0);
 INSERT INTO `course` VALUES (197, 117, '34342342', b'0', 'Eula', 1510000, 0, 0, '2021-07-05 10:27:51', 1, NULL, 22, '2021-07-05 10:27:51', b'1', 0, 0);
+INSERT INTO `course` VALUES (198, 124, '123', b'0', 'Khóa học mới', 1020000, 0, 0, '2021-09-05 10:47:11', 1, NULL, 1, '2021-09-05 10:47:11', b'1', 0, 0);
 
 -- ----------------------------
 -- Table structure for evaluates
@@ -377,7 +378,7 @@ CREATE TABLE `evaluates`  (
 -- ----------------------------
 -- Records of evaluates
 -- ----------------------------
-INSERT INTO `evaluates` VALUES (3, 'Hello', b'0', '2021-06-20 07:02:09', '2021-06-20 07:02:09', 1, 2, 3);
+INSERT INTO `evaluates` VALUES (1, 'Hay', b'0', '2021-09-05 19:16:37', '2021-09-05 19:16:37', 1, 0, 1);
 
 -- ----------------------------
 -- Table structure for image_admin
@@ -691,7 +692,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 125 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -737,6 +738,7 @@ INSERT INTO `resource_image` VALUES (120, 'user/admin/image/anh-1-16005873018901
 INSERT INTO `resource_image` VALUES (121, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:47:33', 1, 1, '2021-09-01 13:47:33');
 INSERT INTO `resource_image` VALUES (122, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:02:43', 1, 1, '2021-09-02 19:02:43');
 INSERT INTO `resource_image` VALUES (123, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:05:23', 1, 1, '2021-09-02 19:05:23');
+INSERT INTO `resource_image` VALUES (124, 'user/admin/image/1616839149572.jpg', b'0', '2021-09-05 10:47:11', 1, 1, '2021-09-05 10:47:11');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -781,11 +783,6 @@ CREATE TABLE `spring_session`  (
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session
--- ----------------------------
-INSERT INTO `spring_session` VALUES ('6618664b-37a8-49e5-a9ee-212e6c358c87', '1fe0181a-83bf-4294-b7f7-60e5bb62b0f4', 1630838243784, 1630838243784, 1800, 1630840043784, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -1018,11 +1015,11 @@ CREATE TRIGGER `after_update_course` AFTER UPDATE ON `course` FOR EACH ROW BEGIN
 					end if;
 			end if;
 			
-				if new.sum_rating <> 0  then		
+				if new.sum_rating <> 0 and new.sum_star <> 0   then		
 			
 					UPDATE course set rate_star=sum_star/sum_rating where id =new.id;
 			
-			end if;
+				end if;
 			
 	 END
 ;;
