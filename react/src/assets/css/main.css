@@ -73,6 +73,44 @@ div#bg-home::before {
   word-break: break-word;
 }
 
+.filter-price {
+  font-family: 'Open sans', sans-serif;
+  color: #34495e;
+  padding: 40px 28px 30px 28px;
+  margin-top: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.filter-price .title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.filter-price .price {
+  color: #2980b9;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.filter-price .range-price {
+  margin-bottom: 20px;
+}
+
+.filter-price .slider {
+  margin-bottom: 20px;
+}
+
+.filter-price .bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
 .footer {
   width: 100%;
   background-color: #34495e;

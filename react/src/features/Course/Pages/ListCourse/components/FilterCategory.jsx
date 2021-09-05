@@ -1,44 +1,46 @@
-import { makeStyles } from "@material-ui/core";
-import classNames from "classnames";
-import React from "react";
+import { makeStyles } from '@material-ui/core';
+import classNames from 'classnames';
+import React from 'react';
 
 //LeftCourse.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
-    fontFamily: "Open Sans, sans-serif",
-    padding: "40px 15px 30px 15px",
-    "&> .__title": {
-      display: "flex",
-      justifyContent: "center",
-      fontSize: "23px",
-      marginBottom: "20px",
-      color: "var(--colorBlack2)",
+    fontFamily: 'Open Sans, sans-serif',
+    padding: '40px 15px 30px 15px',
+    backgroundColor: '#fff',
+    borderRadius: '10px',
+    '&> .__title': {
+      display: 'flex',
+      justifyContent: 'center',
+      fontSize: '23px',
+      marginBottom: '20px',
+      color: 'var(--colorBlack2)',
     },
 
-    "& ul": {
-      listStyle: "none",
-      display: "flex",
-      flexFlow: "column",
-      alignItems: "flex-star",
-      justifyContent: "center",
-      "& li": {
-        marginLeft: "20px",
-        margin: "10px 0px",
-        fontSize: "17px",
-        cursor: "pointer",
-        color: "var(--colorBlack2)",
-        "&:hover": {
-          color: "var(--colorOrange2)",
+    '& ul': {
+      listStyle: 'none',
+      display: 'flex',
+      flexFlow: 'column',
+      alignItems: 'flex-star',
+      justifyContent: 'center',
+      '& li': {
+        marginLeft: '20px',
+        margin: '10px 0px',
+        fontSize: '17px',
+        cursor: 'pointer',
+        color: 'var(--colorBlack2)',
+        '&:hover': {
+          color: 'var(--colorOrange2)',
         },
       },
     },
   },
   actived: {
-    color: "var(--colorOrange2) !important",
+    color: 'var(--colorOrange2) !important',
   },
 }));
 
-function LeftCourse(props) {
+function FilterCategory(props) {
   const classes = useStyles();
   const { categories, onChange, categorie = -1 } = props;
   // console.log("init LeftCourse", categories);
@@ -75,4 +77,4 @@ function LeftCourse(props) {
   );
 }
 
-export default LeftCourse;
+export default FilterCategory;

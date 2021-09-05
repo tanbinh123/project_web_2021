@@ -11,7 +11,8 @@ import {
   colorWhite1,
 } from '../../../../components/color/color';
 import Header from '../../../../components/header/index';
-import LeftCourse from './components/LeftCourse';
+import FilterCategory from './components/FilterCategory';
+import FilterPrice from './components/FilterPrice';
 import RightCoures from './components/RightCoures';
 import SkeletonCourse from './components/SkeletonCourse';
 import TabPrice from './components/TabPrice';
@@ -161,13 +162,12 @@ function ListCourse(props) {
         <Container>
           <Grid container spacing={2}>
             <Grid item className={classes.left} xl={3} lg={3} md={3}>
-              <Paper elevation={0}>
-                <LeftCourse
-                  categories={categories}
-                  onChange={handleCategorieChange}
-                  categorie={queryParams._category}
-                />
-              </Paper>
+              <FilterCategory
+                categories={categories}
+                onChange={handleCategorieChange}
+                categorie={queryParams._category}
+              />
+              <FilterPrice />
             </Grid>
             <Grid
               item
