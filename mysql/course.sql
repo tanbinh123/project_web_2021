@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 05/09/2021 17:36:24
+ Date: 05/09/2021 17:40:19
 */
 
 SET NAMES utf8mb4;
@@ -392,15 +392,18 @@ CREATE TABLE `image_admin`  (
   `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of image_admin
 -- ----------------------------
-INSERT INTO `image_admin` VALUES (4, 119, b'0', '2021-09-01 13:36:55', '2021-09-01 13:36:55', 'background_home', 'Hình để ở trang chủ');
 INSERT INTO `image_admin` VALUES (6, 121, b'0', '2021-09-01 13:47:34', '2021-09-01 13:47:34', 'icon_logo', 'Hình để ở trang chủ');
 INSERT INTO `image_admin` VALUES (7, 122, b'0', '2021-09-02 19:02:43', '2021-09-02 19:02:43', 'icon_logo', 'Hình để ở trang chủ');
 INSERT INTO `image_admin` VALUES (8, 123, b'0', '2021-09-02 19:05:23', '2021-09-02 19:05:23', 'icon_logo', 'Hình để ở trang chủ');
+INSERT INTO `image_admin` VALUES (13, 128, b'0', '2021-09-04 06:13:16', '2021-09-04 06:13:16', 'background_home', '1');
+INSERT INTO `image_admin` VALUES (14, 129, b'0', '2021-09-04 06:13:25', '2021-09-04 06:13:25', 'background_home', '2');
+INSERT INTO `image_admin` VALUES (15, 130, b'0', '2021-09-04 06:13:31', '2021-09-04 06:13:31', 'background_home', '3');
+INSERT INTO `image_admin` VALUES (16, 131, b'0', '2021-09-04 06:13:37', '2021-09-04 06:13:37', 'background_home', '4');
 
 -- ----------------------------
 -- Table structure for learning
@@ -729,7 +732,7 @@ INSERT INTO `resource_image` VALUES (115, 'user/admin/image/1616839149599.jpg', 
 INSERT INTO `resource_image` VALUES (116, 'user/admin/image/1616839149599.jpg', b'0', '2021-07-05 10:22:08', 1, 1, '2021-07-05 10:22:08');
 INSERT INTO `resource_image` VALUES (117, 'user/admin/image/1616839149544.png', b'0', '2021-07-05 10:27:51', 1, 1, '2021-07-05 10:27:51');
 INSERT INTO `resource_image` VALUES (118, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:32:11', 1, 0, '2021-09-01 13:32:11');
-INSERT INTO `resource_image` VALUES (119, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:36:54', 1, 1, '2021-09-01 13:36:54');
+INSERT INTO `resource_image` VALUES (119, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:36:54', 1, 0, '2021-09-01 13:36:54');
 INSERT INTO `resource_image` VALUES (120, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:46:50', 1, 0, '2021-09-01 13:46:50');
 INSERT INTO `resource_image` VALUES (121, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-01 13:47:33', 1, 1, '2021-09-01 13:47:33');
 INSERT INTO `resource_image` VALUES (122, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:02:43', 1, 1, '2021-09-02 19:02:43');
@@ -778,6 +781,11 @@ CREATE TABLE `spring_session`  (
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spring_session
+-- ----------------------------
+INSERT INTO `spring_session` VALUES ('6618664b-37a8-49e5-a9ee-212e6c358c87', '1fe0181a-83bf-4294-b7f7-60e5bb62b0f4', 1630838243784, 1630838243784, 1800, 1630840043784, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
