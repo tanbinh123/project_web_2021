@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 06/09/2021 02:35:56
+ Date: 06/09/2021 02:37:16
 */
 
 SET NAMES utf8mb4;
@@ -788,7 +788,7 @@ CREATE TABLE `spring_session`  (
 -- ----------------------------
 -- Records of spring_session
 -- ----------------------------
-INSERT INTO `spring_session` VALUES ('bccea254-60a6-4293-a05d-8b4a527c34ce', '22ca53ed-c8b0-45cc-bc52-2cc859700aac', 1630869997347, 1630870223036, 1800, 1630872023036, NULL);
+INSERT INTO `spring_session` VALUES ('bccea254-60a6-4293-a05d-8b4a527c34ce', '18fa2bdc-c00f-421f-983c-0a8643f6bc5e', 1630869997347, 1630870561985, 1800, 1630872361985, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
