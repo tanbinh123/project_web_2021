@@ -86,20 +86,14 @@ Tài khoản ngân hàng dùng để test thanh toán
 [Danh sách tài khoản test]( https://sandbox.vnpayment.vn/apis/vnpay-demo/)
 
 
-Google:
-
-- Username
+Google: [Firebase]( https://console.firebase.google.com/u/4/project/my-app-2cf3a/overview)
 
 ```
-> block33015@gmail.com
+Username: block33015@gmail.com
+Password: thanhsang123
 ```
 
-- Password
-
 ```
-> thanhsang123
-```
-[Firebase]( https://console.firebase.google.com/u/4/project/my-app-2cf3a/overview)
 const firebaseConfig = {
   apiKey: "AIzaSyCVpzVM5OzcHGvJNioS8zkgYgWMQgYZDbg",
   authDomain: "my-app-2cf3a.firebaseapp.com",
@@ -109,3 +103,4 @@ const firebaseConfig = {
   appId: "1:410778956131:web:10a7673e68de824131e356",
   measurementId: "G-03NNMCJFSV"
 };
+```
