@@ -35,9 +35,14 @@ const courseApi = {
     return axiosClient.get(url, { params });
   },
 
-  postRating(courseId, data) {
+  postRating(courseId, data, idRating) {
     //const url = `/course/${courseId}/rating/idratingcu`;
-    const url = `/course/${courseId}/rating`;
+    let url;
+    if (idRating) {
+      url = `/course/${courseId}/rating/${idRating}`;
+    } else {
+      url = `/course/${courseId}/rating`;
+    }
     return axiosClient.post(url, data);
   },
 };
