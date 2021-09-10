@@ -22,14 +22,13 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.dao.VideoDAO;
 
-
 @SpringBootApplication
 @RestController
 public class Main extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
-		
+
 	}
 
 	@Override
@@ -43,6 +42,7 @@ public class Main extends SpringBootServletInitializer {
 		System.out.println("Hello");
 		return ResponseEntity.ok("Hello World from Spring Boot Started Web");
 	}
+
 	@Value("${server.port}")
 	private int port;
 	@Autowired
@@ -51,55 +51,54 @@ public class Main extends SpringBootServletInitializer {
 	CourseDAO courseDAO;
 	@Autowired
 	VideoDAO videoDAO;
-	@EventListener({ApplicationReadyEvent.class})
+
+	@EventListener({ ApplicationReadyEvent.class })
 	void applicationReadyEvent() {
-	    System.out.println("Application started ... launching browser now");
-	    System.out.println("http://localhost:"+port+"/admin");
-	    if(videoDAO!=null) {
-	    	try {
+		System.out.println("Application started ... launching browser now");
+		System.out.println("http://localhost:" + port + "/admin");
+		if (videoDAO != null) {
+			try {
 				videoDAO.deleteAllNoLink();
 				System.err.println("Delete All Video Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    }
-	    if(resourceImageDAO!=null) {
-	    	try {
+		}
+		if (resourceImageDAO != null) {
+			try {
 				resourceImageDAO.deleteAllNoLink();
 				System.err.println("Delete All Image Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    }
-	    if(courseDAO!=null) {
-	    	try {
-	    		courseDAO.deleteAllCategoryNoCourse();
-	    		System.err.println("Delete All Category No Course");
-	    	} catch (Exception e) {
-	    		e.printStackTrace();
-	    	}
-	    }
-//	    browse("www.google.com");
-//	    browse("http://localhost:"+port+"/");
-//	    browse("http://localhost:"+port+"/admin");
+		}
+		if (courseDAO != null) {
+			try {
+				courseDAO.deleteAllCategoryNoCourse();
+				System.err.println("Delete All Category No Course");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
+
 	public static void browse(String url) {
-	    if(Desktop.isDesktopSupported()){
-	        Desktop desktop = Desktop.getDesktop();
-	        try {
-	            desktop.browse(new URI(url));
-	        } catch (IOException | URISyntaxException e) {
-	            e.printStackTrace();
-	        }
-	    }else{
-	        Runtime runtime = Runtime.getRuntime();
-	        try {
-	            runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
+		if (Desktop.isDesktopSupported()) {
+			Desktop desktop = Desktop.getDesktop();
+			try {
+				desktop.browse(new URI(url));
+			} catch (IOException | URISyntaxException e) {
+				e.printStackTrace();
+			}
+		} else {
+			Runtime runtime = Runtime.getRuntime();
+			try {
+				runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-	
+
 }
