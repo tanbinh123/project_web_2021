@@ -30,6 +30,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import vn.edu.topedu.AppUserPojo;
 import vn.edu.topedu.payment.vnpay.VNPayConfig;
 import vn.edu.topedu.sendrequest.HttpGetUltis;
 import vn.edu.topedu.utils.WebUtils;
@@ -71,6 +72,18 @@ public class Payment {
 	@Column(name = "transaction_Status", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private TransactionState transactionStatus = TransactionState.UNCOMPLETE;
+	
+	@Column(name = "deleted", length = 1, nullable = false)
+	protected Boolean deleted = false;
+	
+	
+	
+	public Boolean getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 	public long getId() {
 		return id;
 	}
@@ -256,6 +269,12 @@ public class Payment {
 	public void setParamsUrlStatus(String paramsUrlStatus) {
 		this.paramsUrlStatus = paramsUrlStatus;
 	}
+	public AppUserPojo getAppUserPojo() {
+		if(this.appUser!=null)
+		return AppUserPojo.toA(this.appUser);
+		return null;
+	}
+	
 	
 	
 	

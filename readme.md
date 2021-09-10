@@ -85,4 +85,22 @@ Tài khoản ngân hàng dùng để test thanh toán
 
 [Danh sách tài khoản test]( https://sandbox.vnpayment.vn/apis/vnpay-demo/)
 
-![eula](https://upanh.nhatkythuthuat.com/images/2021/05/13/image-1.jpg)
+
+Google: [Firebase]( https://console.firebase.google.com/u/4/project/my-app-2cf3a/overview)
+
+```
+Username: block33015@gmail.com
+Password: thanhsang123
+```
+
+```
+const firebaseConfig = {
+  apiKey: "AIzaSyCVpzVM5OzcHGvJNioS8zkgYgWMQgYZDbg",
+  authDomain: "my-app-2cf3a.firebaseapp.com",
+  projectId: "my-app-2cf3a",
+  storageBucket: "my-app-2cf3a.appspot.com",
+  messagingSenderId: "410778956131",
+  appId: "1:410778956131:web:10a7673e68de824131e356",
+  measurementId: "G-03NNMCJFSV"
+};
+```

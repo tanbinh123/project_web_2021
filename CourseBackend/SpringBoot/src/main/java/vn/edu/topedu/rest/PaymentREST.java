@@ -3,6 +3,7 @@ package vn.edu.topedu.rest;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.NoResultException;
@@ -12,12 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +38,8 @@ import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.response.MessageResponse;
+import vn.edu.topedu.response.PageResponse;
+import vn.edu.topedu.response.PageResponse.Pagination;
 import vn.edu.topedu.utils.WebUtils;
 
 @RestController
@@ -50,7 +56,8 @@ public class PaymentREST {
 
 	@PostMapping
 	@ResponseBody
-	public ResponseEntity<Object> buyCourse(HttpServletRequest httpServletRequest, Authentication authentication,
+	public ResponseEntity<Object> buyCourse(HttpServletRequest httpServletRequest,
+			Authentication authentication,
 			@RequestBody Map<String, Object> body) {
 		if (authentication != null) {
 			authentication.getName();
@@ -182,6 +189,84 @@ public class PaymentREST {
 			}
 			
 		});
+	}
+	
+	@SuppressWarnings("unchecked")
+	@PreAuthorize("hasRole('ADMIN')")
+	@RequestMapping(value = "/statement/list", method = RequestMethod.GET)
+	public ResponseEntity<Object> list(HttpServletRequest httpServletRequest,
+			Authentication authentication,
+			@RequestParam(defaultValue = "-1") int _page,
+			@RequestParam(defaultValue = "-1") int _limit,
+			@RequestParam(defaultValue = "id:asc") String _sort, 
+			@RequestParam(defaultValue = "-1") BigDecimal price_gte,
+			@RequestParam(defaultValue = "-1") BigDecimal price_lt,
+			@RequestParam(defaultValue = "") String _search) {
+
+		_page = (_page <= 0) ? 1 : _page;
+		List<Payment> lstCourse = paymentDAO.getListEntitys(_page, _limit, _sort, _search,price_gte,price_lt);
+		long countRows = paymentDAO.getCount( _search,price_gte,price_lt);
+		// System.out.println(countRows);
+		for (Payment c : lstCourse) {
+			String bf = WebUtils.getUrl(httpServletRequest);
+			//c.setBeforeResource();
+			c.getAppUser().getAvatar().setBeforeResource(bf);
+//			if(c.getPoster()!=null)
+//			c.getPoster().setBeforeResource(bf);
+			
+
+		}
+		final String sort = _sort;
+		@SuppressWarnings("rawtypes")
+		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, new Pagination() {
+			private String _sort = sort;
+
+			public String get_sort() {
+				return _sort;
+			}
+
+			
+		});
+		return ResponseEntity.ok(pageResponse);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@PreAuthorize("hasRole('USER')")
+	@RequestMapping(value = "/my/statement/list", method = RequestMethod.GET)
+	public ResponseEntity<Object> mystatement(HttpServletRequest httpServletRequest,
+			Authentication authentication,
+			@RequestParam(defaultValue = "-1") int _page,
+			@RequestParam(defaultValue = "-1") int _limit,
+			@RequestParam(defaultValue = "id:asc") String _sort, 
+			@RequestParam(defaultValue = "-1") BigDecimal price_gte,
+			@RequestParam(defaultValue = "-1") BigDecimal price_lt,
+			@RequestParam(defaultValue = "") String _search) {
+
+		_page = (_page <= 0) ? 1 : _page;
+		List<Payment> lstCourse = paymentDAO.getListEntitys(_page, _limit, _sort, _search,price_gte,price_lt);
+		long countRows = paymentDAO.getCount( _search,price_gte,price_lt);
+		// System.out.println(countRows);
+		for (Payment c : lstCourse) {
+			String bf = WebUtils.getUrl(httpServletRequest);
+			//c.setBeforeResource();
+			c.getAppUser().getAvatar().setBeforeResource(bf);
+//			if(c.getPoster()!=null)
+//			c.getPoster().setBeforeResource(bf);
+			
+
+		}
+		final String sort = _sort;
+		@SuppressWarnings("rawtypes")
+		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, new Pagination() {
+			private String _sort = sort;
+
+			public String get_sort() {
+				return _sort;
+			}
+
+			
+		});
+		return ResponseEntity.ok(pageResponse);
 	}
 	
 	
