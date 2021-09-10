@@ -8,7 +8,7 @@ function Footer() {
     <div className="footer">
       <div className="center">
         <div className="card">
-          <img className="logo" src="./assets/images/Logo.png" />
+          <img className="logo" src="/./assets/images/Logo.png" />
           <p className="text">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum,
             doloremque?

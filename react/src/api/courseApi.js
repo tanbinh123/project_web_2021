@@ -1,8 +1,8 @@
-import axiosClient from "./axiosClient";
+import axiosClient from './axiosClient';
 
 const courseApi = {
   getAll(params) {
-    const url = "/course/list";
+    const url = '/course/list';
     return axiosClient.get(url, { params });
   },
   get(id) {
@@ -17,27 +17,26 @@ const courseApi = {
     const url = `/course/access/fullcourse`;
     return axiosClient.post(url, data);
   },
-  
-  
 
   payment(data) {
     const url = `/payment`;
     return axiosClient.post(url, data);
   },
   categories(data) {
-    const url = "/course/categories";
+    const url = '/course/categories';
     return axiosClient.get(url, data);
   },
   testGetAll(params) {
-    const url = "/courses";
+    const url = '/courses';
     return axiosClient.get(url, { params });
   },
   getCoursesBought(params) {
-    const url = "/course/course-bought";
+    const url = '/course/course-bought';
     return axiosClient.get(url, { params });
   },
 
   postRating(courseId, data) {
+    //const url = `/course/${courseId}/rating/idratingcu`;
     const url = `/course/${courseId}/rating`;
     return axiosClient.post(url, data);
   },
