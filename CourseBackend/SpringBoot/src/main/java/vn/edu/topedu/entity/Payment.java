@@ -30,8 +30,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import vn.edu.topedu.AppUserPojo;
 import vn.edu.topedu.payment.vnpay.VNPayConfig;
+import vn.edu.topedu.pojo.AppUserPojo;
 import vn.edu.topedu.sendrequest.HttpGetUltis;
 import vn.edu.topedu.utils.WebUtils;
 

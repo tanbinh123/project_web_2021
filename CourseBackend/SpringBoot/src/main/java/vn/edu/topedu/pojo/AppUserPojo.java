@@ -1,4 +1,4 @@
-package vn.edu.topedu;
+package vn.edu.topedu.pojo;
 
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.ResourceImage;
