@@ -4,14 +4,20 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+import vn.edu.topedu.AppUserPojo;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -52,20 +58,30 @@ public class NotificationEntity {
 	private Long userSentId;
 	
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_sent_id", updatable=false, insertable=false)
 	
-	Long getUserId() {
+	private AppUser appUserSent;
+	
+//	
+	public AppUserPojo getAppUserSent() {
+		if(this.appUserSent!=null)
+		return AppUserPojo.toA(this.appUserSent);
+		return null;
+	}
+	public Long getUserId() {
 		return userId;
 	}
 
-	void setUserId(Long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	Long getUserSentId() {
+	public Long getUserSentId() {
 		return userSentId;
 	}
 
-	void setUserSentId(Long userSentId) {
+	public void setUserSentId(Long userSentId) {
 		this.userSentId = userSentId;
 	}
 
@@ -124,7 +140,11 @@ public class NotificationEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	public void setBeforeResource(String beforeResource) {
+		if (this.appUserSent != null)
+			this.appUserSent.setBeforeResource(beforeResource);
+		
+	}
 
 	
 	

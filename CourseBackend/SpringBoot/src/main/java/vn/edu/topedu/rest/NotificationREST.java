@@ -25,6 +25,7 @@ import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.PageResponse.Pagination;
+import vn.edu.topedu.utils.WebUtils;
 @RestController
 @RequestMapping("/notification")
 public class NotificationREST {
@@ -59,6 +60,7 @@ public class NotificationREST {
 					Long count = notificationDAO.countData(appUser.getId(),_search);					
 					for(NotificationEntity e: rs) {						
 						//e.getUserPoster().getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
+						e.setBeforeResource(WebUtils.getUrl(httpServletRequest));
 					}
 					
 					

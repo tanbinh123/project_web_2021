@@ -30,6 +30,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import vn.edu.topedu.AppUserPojo;
 import vn.edu.topedu.payment.vnpay.VNPayConfig;
 import vn.edu.topedu.sendrequest.HttpGetUltis;
 import vn.edu.topedu.utils.WebUtils;
@@ -273,58 +274,7 @@ public class Payment {
 		return AppUserPojo.toA(this.appUser);
 		return null;
 	}
-	public static  class AppUserPojo{
-		private String userName;
-		private String email;
-		private String fullname;
-		private ResourceImage avatar;
-		
-		public static AppUserPojo toA(AppUser appUser) {
-			if(appUser==null)return null;
-			AppUserPojo a = new AppUserPojo();
-			a.setFullname(appUser.getFullname());
-			a.setUserName(appUser.getUsername());
-			a.setEmail(appUser.getEmail());
-			a.setAvatar(appUser.getAvatar());
-			return a;
-		}
-		
-
-		public ResourceImage getAvatar() {
-			return avatar;
-		}
-
-
-		public void setAvatar(ResourceImage avatar) {
-			this.avatar = avatar;
-		}
-
-
-		public String getUserName() {
-			return userName;
-		}
-
-		public void setUserName(String userName) {
-			this.userName = userName;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public void setEmail(String email) {
-			this.email = email;
-		}
-
-		public String getFullname() {
-			return fullname;
-		}
-
-		public void setFullname(String fullname) {
-			this.fullname = fullname;
-		}
-		
-	}
+	
 	
 	
 	
