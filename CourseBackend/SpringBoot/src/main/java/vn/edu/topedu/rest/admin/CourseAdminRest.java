@@ -287,7 +287,7 @@ public class CourseAdminRest {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Object> postNewCourseBase(HttpServletRequest httpServletRequest, 
 			@RequestPart(required=true) String title,
-			@RequestPart(required=true) String description,
+			@RequestPart(required=false) String description,
 			@RequestPart(required=true) String price,
 			@RequestPart(required=true) String categorie,
 			@RequestPart(required=true) MultipartFile imageThumbnail,

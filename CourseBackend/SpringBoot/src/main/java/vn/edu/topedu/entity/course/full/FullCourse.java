@@ -59,7 +59,7 @@ public class FullCourse extends BaseEntity {
 	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private ResourceImage imagePoster;
 
-	@Column(name = "description", length = 255)
+	@Column(name = "description", length = 255,nullable = true)
 	private String description = "";
 	
 	
