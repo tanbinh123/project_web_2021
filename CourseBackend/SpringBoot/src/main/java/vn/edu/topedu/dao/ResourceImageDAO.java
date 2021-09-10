@@ -39,6 +39,15 @@ public class ResourceImageDAO {
 	public ResourceImage findById(Long id) {
 		return this.entityManager.find(ResourceImage.class, id);
 	}
+	
+	public ResourceImage findFirst() {
+		String sql = "Select e from " + ResourceImage.class.getName() + " e "
+				+ " where e.deleted=false  ";
+		Query query = this.entityManager.createQuery(sql, ResourceImage.class);
+		query.setFirstResult(1);
+		query.setMaxResults(1);
+		return (ResourceImage) query.getSingleResult();
+	}
 
 	public List<ResourceImage> getResourceImages(Long userId) {
 		String sql = "Select e from " + ResourceImage.class.getName() + " e "

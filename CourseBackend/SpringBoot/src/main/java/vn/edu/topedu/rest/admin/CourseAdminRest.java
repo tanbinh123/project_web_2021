@@ -154,6 +154,7 @@ public class CourseAdminRest {
 		System.out.println("---------------------------------");
 		String title=body.get("title");
 		String description=body.get("description");
+		if(description==null)description="";
 		String price=body.get("price");
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));

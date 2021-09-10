@@ -2,6 +2,7 @@ package vn.edu.topedu.rest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -58,6 +59,45 @@ public class AuthenticationREST implements IMyHost {
 		AppUser user = appUserDAO.findUserAccount(ar.getUsername());
 		AppRole appRole = appUserDAO.findRoleByRoleName("ROLE_ADMIN");
 		if (user != null && passwordEncoder.encode(ar.getPassword()).equals(user.getEncrytedPassword())) {
+			AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(user));
+			AccountResponse account = new AccountResponse();
+			user.getAvatar().setBeforeResource(getUrl(httpServletRequest));
+			account.setAvatar(user.getAvatar().getImage());
+			// account.setAvatar(VariableConst.SRC_IMAGE_BEFORE +
+			// FileProcess.encodeFileToBase64(user.getAvater()));
+			account.setUsername(user.getUserName());
+			authResponse.setUser(account);
+
+			List<Course> lstCourse = owerCourseDAO.querryAllBought(user.getId());
+			for (Course c : lstCourse) {
+				c.setBeforeResource(this.getUrl(httpServletRequest));
+			}
+			authResponse.setCourses(lstCourse);
+
+			// System.out.println(Arrays.toString(lstCourse.toArray()));
+
+			if (user.getAuthorities().contains(appRole)) {
+				authResponse.getUser().setAdmin(true);
+			}
+			
+			authResponse.setProfile(user);
+			return ResponseEntity.ok(authResponse);
+		} else {
+			MessageResponse messageResponse = new MessageResponse("User not exists.", "Tài khoản không hợp lệ.");
+
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse);
+		}
+
+	}
+	
+	@RequestMapping(value = "/login/email", method = RequestMethod.POST)
+	public ResponseEntity<Object> loginByEmail(
+			@RequestBody Map<String, String> body,
+			HttpServletRequest httpServletRequest,
+			HttpSession httpSession) {
+		AppUser user = appUserDAO.findUserByEmail(body.get("email"));
+		AppRole appRole = appUserDAO.findRoleByRoleName("ROLE_ADMIN");
+		if (user != null && passwordEncoder.encode(body.get("password")).equals(user.getEncrytedPassword())) {
 			AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(user));
 			AccountResponse account = new AccountResponse();
 			user.getAvatar().setBeforeResource(getUrl(httpServletRequest));
