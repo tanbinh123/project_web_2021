@@ -122,6 +122,12 @@ const ListUsers = () => {
                   >
                     <CustomButton title="Chi tiết tài khoản" />
                   </Link>
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={`/list/user-role/${item.id}`}
+                  >
+                    <CustomButton title="Cập nhật quyền" />
+                  </Link>
                   <DeleteUser item={item} />
                 </CCardBody>
               </CCollapse>

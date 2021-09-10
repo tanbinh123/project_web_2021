@@ -8,6 +8,7 @@ import ListUsers from "./views/list/users/ListUsers";
 import UserDetailt from "./views/list/users/userDetailt/UserDetailt";
 import BackgroundHome from "./views/list/backgroundHome/BackgroundHome";
 import FImageBackgroundHome from "./views/form/imageBackgroundHome/FImageBackgroundHome";
+import UserUpdateRole from "./views/list/users/userDetailt/UserUpdateRole";
 
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
@@ -71,12 +72,26 @@ const Users = React.lazy(() => import("./views/users/Users"));
 const User = React.lazy(() => import("./views/users/User"));
 
 const routes = [
-  { path: "/", exact: true, name: "Home" },
+  { path: "/", exact: true, name: "Trang chủ" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/list/course", name: "Course", component: Course, exact: true },
-  { path: "/list/user", name: "List Users", component: ListUsers, exact: true },
+  {
+    path: "/list/user",
+    name: "Danh sách tài khoản",
+    component: ListUsers,
+    exact: true,
+  },
 
-  { path: "/list/user/:id", name: "DetailUsers", component: UserDetailt },
+  {
+    path: "/list/user/:id",
+    name: "Chi tiết tài khoản",
+    component: UserDetailt,
+  },
+  {
+    path: "/list/user-role/:id",
+    name: "DetailUsers",
+    component: UserUpdateRole,
+  },
   { path: "/list/course/:id", name: "DetailCourse", component: DetailCourse },
   {
     path: "/list/categories",

@@ -45,6 +45,14 @@ const userApi = {
     const url = `/api/admin/user/${id}`;
     return axiosClient.get(url);
   },
+  setRoleAdmin(id) {
+    const url = `/api/admin/user/${id}/admin`;
+    return axiosClient.post(url);
+  },
+  removeRoleAdmin(id) {
+    const url = `/api/admin/user/${id}/admin`;
+    return axiosClient.delete(url);
+  },
 };
 
 export default userApi;

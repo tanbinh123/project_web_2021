@@ -121,7 +121,7 @@ function FBaseCourse(props) {
     resolver: yupResolver(schema),
   });
   const handleOnSubmit = (values) => {
-    console.log(values.imageThumbnail);
+    console.log(values);
     if (isEmpty(values.categorie)) {
       enqueueSnackbar("Vui lòng chọn thể loại", { variant: "error" });
       return;
@@ -147,6 +147,8 @@ function FBaseCourse(props) {
           if (nextCurrentStep) nextCurrentStep(1);
           if (updateCourse) updateCourse(rp);
           enqueueSnackbar("Tạo khóa học thành công", { variant: "success" });
+        } else {
+          enqueueSnackbar(rp?.data?.message, { variant: "error" });
         }
       } catch (error) {
         enqueueSnackbar(error.message, { variant: "error" });
@@ -177,12 +179,12 @@ function FBaseCourse(props) {
   };
   const handleOnChangeFile = (event) => {
     const file = event.target.files[0];
-    console.log(file);
+    // console.log(file);
     const tmpImg = URL.createObjectURL(file);
     setImg(tmpImg);
     form.setValue("imageThumbnail", file);
   };
-  console.log(dataCourse);
+  // console.log(dataCourse);
   return (
     <CCard>
       <CCardHeader>

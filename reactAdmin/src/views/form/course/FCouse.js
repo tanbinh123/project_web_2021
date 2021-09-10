@@ -31,8 +31,8 @@ const FCourse = () => {
   const handlePrevStep = () => {
     setStep(step - 1);
   };
-  console.log(step);
-  console.log("currentStep", currentStep);
+  // console.log(step);
+  // console.log("currentStep", currentStep);
   // step={step}
   // prevStep={handlePrevStep}
   // nextStep={handleNextStep}

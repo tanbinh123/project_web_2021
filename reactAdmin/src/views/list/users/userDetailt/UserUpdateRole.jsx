@@ -15,13 +15,14 @@ import categoriesApi from "src/api/categoriesApi";
 import userApi from "src/api/userApi";
 import CustomButton from "src/components/CustomButton";
 import CustomInput from "src/components/CustomInput";
+import CustomSelectForm from "src/components/form/CustomSelectForm";
 import { isEmpty } from "src/Tool/Tools";
 import * as yup from "yup";
 const scheme = yup.object().shape({
-  name: yup.string().required("Vui lòng nhập tên thể loại"),
+  // name: yup.string().required("Vui lòng nhập tên thể loại"),
 });
 
-const UserDetailt = (props) => {
+const UserUpdateRole = (props) => {
   const classes = makeStyles(() => ({
     footer: {
       display: "flex",
@@ -37,6 +38,7 @@ const UserDetailt = (props) => {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      margin: "10px 0px",
       "&>span:first-of-type": {
         width: "200px",
         textAlign: "right",
@@ -48,10 +50,27 @@ const UserDetailt = (props) => {
         marginLeft: "25px",
       },
     },
+    itemFormInput: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "&>span:first-of-type": {
+        width: "200px",
+        textAlign: "right",
+        marginRight: "25px",
+      },
+      "&>div": {
+        width: "200px",
+        marginLeft: "25px",
+      },
+    },
     lastItem: {
       display: "flex",
       justifyContent: "center",
       marginBlock: "20px",
+      "&>button": {
+        margin: "25px",
+      },
     },
   }))();
 
@@ -62,28 +81,72 @@ const UserDetailt = (props) => {
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      name: "",
+      id: 0,
+      role: false,
     },
     resolver: yupResolver(scheme),
   });
 
   useEffect(() => {
     (async () => {
-      const res = await userApi.adminGetOneUser(id);
-      console.log(res);
-      setUser(res);
+      try {
+        const res = await userApi.adminGetOneUser(id);
+        console.log(res);
+        setUser(res);
+        form.setValue("role", res?.isAdmin);
+        form.setValue("id", res?.id);
+      } catch (error) {
+        console.log(error);
+      }
     })();
+    return () => {
+      setUser({});
+    };
   }, [id]);
+  const handleOnSubmit = async (value) => {
+    try {
+      const { role, id } = value;
+      if (user.isAdmin === role) {
+        enqueueSnackbar("Vui lòng chọn khác quyền hiện có", {
+          variant: "error",
+        });
+        return;
+      }
+      if (role) {
+        const res = await userApi.setRoleAdmin(id);
+        if (!res.status) {
+          enqueueSnackbar("Cập nhật quyền thành công", { variant: "success" });
+          setUser({ ...user, isAdmin: role });
+        } else {
+          enqueueSnackbar(res?.data?.message?.en, { variant: "error" });
+        }
+      } else {
+        const res = await userApi.removeRoleAdmin(id);
+        console.log(res);
+        if (!res.status) {
+          enqueueSnackbar("Cập nhật quyền thành công", { variant: "success" });
+          setUser({ ...user, isAdmin: role });
+        } else {
+          enqueueSnackbar(res?.data?.message?.en, { variant: "error" });
+        }
+      }
+    } catch (error) {
+      enqueueSnackbar(error?.message, { variant: "error" });
+    }
+  };
   return (
     <>
       <Grid container className={classes.root} spacing={3}>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
           <CCard>
             <CCardHeader>
-              <span className="title">Chi tiết tài khoản</span>
+              <span className="title">Form thể loại</span>
             </CCardHeader>
             <CCardBody>
-              <div className={classes.form}>
+              <form
+                onSubmit={form.handleSubmit(handleOnSubmit)}
+                className={classes.form}
+              >
                 <div className={classes.itemForm}>
                   <span>ID</span>
                   <span>{user.id}</span>
@@ -92,56 +155,19 @@ const UserDetailt = (props) => {
                   <span>Tài Khoản</span>
                   <span>{user.userName}</span>
                 </div>
-                <div className={classes.itemForm}>
-                  <span>Hình avatar</span>
-                  <span>
-                    <Avatar src={user?.avatar?.image} />
-                  </span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Tên</span>
-                  <span>{user.fullname}</span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Email</span>
-                  <span>{user.userName}</span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Facebook</span>
-                  <span>{user.facebook}</span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Giới tính</span>
-                  <span>{user.gender}</span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Ngày sinh</span>
-                  <span>{user.birthDay}</span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Địa chỉ</span>
-                  <span>{user.location}</span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Số điện thoại</span>
-                  <span>{user.phone}</span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Quyền</span>
-                  <span>{user.isAdmin ? "ADMIN" : "USER"}</span>
-                </div>
-                <div className={classes.itemForm}>
-                  <span>Mô tả</span>
-                  <span>{user.description}</span>
-                </div>
 
-                <div className={classes.itemForm}>
-                  <span>Trạng thái</span>
-                  <span>
-                    {user.actived ? "Đã kích hoạt" : "Chưa kích hoạt"}
-                  </span>
+                <div className={classes.itemFormInput}>
+                  <span>Quyền tài khoản</span>
+                  <CustomSelectForm
+                    form={form}
+                    name="role"
+                    label="Quyền tài khoản"
+                    data={[
+                      { value: true, title: "Admin" },
+                      { value: false, title: "User" },
+                    ]}
+                  />
                 </div>
-
                 <div className={classes.lastItem}>
                   <CustomButton
                     title="Quay Lại"
@@ -149,8 +175,9 @@ const UserDetailt = (props) => {
                       goBack();
                     }}
                   />
+                  <CustomButton title="Xác nhận" type="submit" />
                 </div>
-              </div>
+              </form>
             </CCardBody>
             {/* <CCardFooter></CCardFooter> */}
           </CCard>
@@ -160,4 +187,4 @@ const UserDetailt = (props) => {
   );
 };
 
-export default UserDetailt;
+export default UserUpdateRole;

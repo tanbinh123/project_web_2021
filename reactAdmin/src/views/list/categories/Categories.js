@@ -95,7 +95,7 @@ const Categories = () => {
                     style={{ textDecoration: "none" }}
                     to={`/list/categories/${item.id}`}
                   >
-                    <CustomButton title="Chi tiết phần học" />
+                    <CustomButton title="Cập nhật thể loại" />
                   </Link>
                   <DeleteCategory item={item} />
                 </CCardBody>
