@@ -17,7 +17,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import vn.edu.topedu.AppUserPojo;
+import vn.edu.topedu.pojo.AppUserPojo;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

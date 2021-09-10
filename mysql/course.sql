@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 10/09/2021 14:04:57
+ Date: 10/09/2021 16:37:14
 */
 
 SET NAMES utf8mb4;
@@ -694,7 +694,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 125 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -741,6 +741,10 @@ INSERT INTO `resource_image` VALUES (121, 'user/admin/image/anh-1-16005873018901
 INSERT INTO `resource_image` VALUES (122, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:02:43', 1, 1, '2021-09-02 19:02:43');
 INSERT INTO `resource_image` VALUES (123, 'user/admin/image/anh-1-1600587301890166145683.webp', b'0', '2021-09-02 19:05:23', 1, 1, '2021-09-02 19:05:23');
 INSERT INTO `resource_image` VALUES (124, 'user/admin/image/1616839149572.jpg', b'0', '2021-09-05 10:47:11', 1, 1, '2021-09-05 10:47:11');
+INSERT INTO `resource_image` VALUES (128, 'user/admin/image/dmitry-ratushny-O33IVNPb0RI-unsplash.jpg', b'0', '2021-09-04 06:13:16', 1, 1, '2021-09-04 06:13:16');
+INSERT INTO `resource_image` VALUES (129, 'user/admin/image/element5-digital-OyCl7Y4y0Bk-unsplash.jpg', b'0', '2021-09-04 06:13:25', 1, 1, '2021-09-04 06:13:25');
+INSERT INTO `resource_image` VALUES (130, 'user/admin/image/green-chameleon-s9CC2SKySJM-unsplash.jpg', b'0', '2021-09-04 06:13:31', 1, 1, '2021-09-04 06:13:31');
+INSERT INTO `resource_image` VALUES (131, 'user/admin/image/j-kelly-brito-PeUJyoylfe4-unsplash.jpg', b'0', '2021-09-04 06:13:37', 1, 1, '2021-09-04 06:13:37');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -785,11 +789,6 @@ CREATE TABLE `spring_session`  (
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session
--- ----------------------------
-INSERT INTO `spring_session` VALUES ('fe30376e-8213-48d2-9210-50c387fe2797', '915fafd6-1ab3-4e63-83bc-59fa270cadfd', 1631256392583, 1631257429153, 1800, 1631259229153, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
