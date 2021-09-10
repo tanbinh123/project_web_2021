@@ -1,14 +1,14 @@
-import { Box, Grid } from "@material-ui/core";
-import classNames from "classnames";
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
-import { Link } from "react-router-dom";
-import courseApi from "../../../../../api/courseApi";
-import HeaderLecture from "../../../../../components/HeaderLecture/HeaderLecture";
-import { isEmpty } from "../../../../../components/tools/Tools";
-import CSSLecture from "./CSSLecture";
-import ListAccordion from "./ListLecture/ListAccordion";
-import VideoLecture from "./ListLecture/VideoLecture";
+import { Box, Grid } from '@material-ui/core';
+import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import courseApi from '../../../../../api/courseApi';
+import HeaderLecture from '../../../../../components/HeaderLecture/HeaderLecture';
+import { isEmpty } from '../../../../../components/tools/Tools';
+import CSSLecture from './CSSLecture';
+import ListAccordion from './ListLecture/ListAccordion';
+import VideoLecture from './ListLecture/VideoLecture';
 
 Lecture.propTypes = {};
 
@@ -18,8 +18,8 @@ function Lecture(props) {
   const { url } = useRouteMatch();
   const { push } = useHistory();
   const idCourse = url.slice(
-    url.indexOf("/course/") + 8,
-    url.indexOf("/lecture")
+    url.indexOf('/course/') + 8,
+    url.indexOf('/lecture')
   );
   const [course, setCourse] = useState({});
   const [lesson, setLesson] = useState({});
@@ -91,8 +91,14 @@ function Lecture(props) {
                 showList && classes.fullScreen
               )}
             >
-              <div className={classNames(classes.showList,showList&&classes.showListActive)} onClick={handleToggleList}>
-              <i className="fas fa-angle-double-left"></i> Hiện danh sách
+              <div
+                className={classNames(
+                  classes.showList,
+                  showList && classes.showListActive
+                )}
+                onClick={handleToggleList}
+              >
+                <i className="fas fa-angle-double-left"></i> Hiện danh sách
               </div>
               <VideoLecture video={lesson.video} />
             </div>

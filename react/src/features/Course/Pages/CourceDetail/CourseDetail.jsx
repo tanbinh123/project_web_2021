@@ -9,26 +9,26 @@ import {
   Paper,
   useMediaQuery,
   useTheme,
-} from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
-import { Close } from "@material-ui/icons";
-import React, { useEffect, useState } from "react";
+} from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import { Close } from '@material-ui/icons';
+import React, { useEffect, useState } from 'react';
 import {
   Route,
   Switch,
   useHistory,
   useParams,
   useRouteMatch,
-} from "react-router-dom";
-import { useRecoilState } from "recoil";
-import courseApi from "../../../../api/courseApi";
-import { DataUser } from "../../../../app/DataUser";
-import Header from "../../../../components/header/index";
-import { isEmpty } from "../../../../components/tools/Tools";
-import CourseDetailCSS from "./CSSCourseDetail";
-import Lecture from "./Lecture/Lecture";
-import LeftCD from "./LeftCourseDetail/LeftCD";
-import RightCD from "./RightCourseDetail/RightCD";
+} from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import courseApi from '../../../../api/courseApi';
+import { DataUser } from '../../../../app/DataUser';
+import Header from '../../../../components/header/index';
+import { isEmpty } from '../../../../components/tools/Tools';
+import CourseDetailCSS from './CSSCourseDetail';
+import Lecture from './Lecture/Lecture';
+import LeftCD from './LeftCourseDetail/LeftCD';
+import RightCD from './RightCourseDetail/RightCD';
 
 function CourseDetail(props) {
   const classes = CourseDetailCSS();
@@ -39,7 +39,7 @@ function CourseDetail(props) {
   const { push } = useHistory();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
   const [course, setCourse] = useState({
     isFull: false,
   });
@@ -48,7 +48,7 @@ function CourseDetail(props) {
   }
   function handleOnClickBuy() {
     if (!isEmpty(dataUser.token)) {
-      console.log("Buy");
+      console.log('Buy');
       (async () => {
         // console.log(url);
         //console.log(window.location.href);
@@ -60,39 +60,41 @@ function CourseDetail(props) {
         console.log(res1);
       })();
     } else {
-      push("/auth/login");
+      push('/auth/login');
     }
   }
 
   useEffect(() => {
-    (async () => {
-      try {
-        if (!isEmpty(dataUser.token)) {
-          //const res1 = await courseApi.check({ idCourse: idCourse });
-          const res1 = await courseApi.courseAccess({ idCourse: idCourse });
-          // console.log("check", res1);
-          if (!res1.status) {
-            setCourse(res1);
-          }
-        } else {
-          const res = await courseApi.get(idCourse);
-          console.log("review", res);
-          if (res.status == 500 || res.status == 400) {
-            push("/course");
-          }
-          setCourse({
-            isFull: false,
-            ...res,
-          });
-        }
-
-        // console.log("course", course);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    getDataCourse();
+    return () => {
+      getDataCourse();
+    };
   }, [url, dataUser.token]);
   // console.log("init Detail", course);
+  const getDataCourse = async () => {
+    try {
+      if (!isEmpty(dataUser.token)) {
+        const res1 = await courseApi.courseAccess({ idCourse: idCourse });
+        if (!res1.status) {
+          setCourse(res1);
+        }
+      } else {
+        const res = await courseApi.get(idCourse);
+        console.log('review', res);
+        if (res.status == 500 || res.status == 400) {
+          push('/course');
+        }
+        setCourse({
+          isFull: false,
+          ...res,
+        });
+      }
+
+      // console.log("course", course);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleUpdateCourse = async () => {
     try {
       if (!isEmpty(dataUser.token)) {
@@ -102,7 +104,7 @@ function CourseDetail(props) {
           const res = await courseApi.get(idCourse);
           // console.log("review", res);
           if (res.status == 500) {
-            push("/course");
+            push('/course');
           }
           setCourse({
             isFull: false,
@@ -143,8 +145,6 @@ function CourseDetail(props) {
                   description={course.description}
                   learnings={course.learnings}
                   parts={course.parts}
-                  evaluates={course.evaluates}
-                  onUpdate={handleUpdateCourse}
                 />
               </Paper>
             </Grid>

@@ -1,31 +1,33 @@
-import { Avatar, Grid, makeStyles } from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
-import Pagination from "@material-ui/lab/Pagination";
-import React, { useEffect, useState } from "react";
-import { toDate } from "../../../../../../components/tools/Tools";
+import { Avatar, Grid, makeStyles } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import Pagination from '@material-ui/lab/Pagination';
+import React, { useEffect, useState } from 'react';
+import { toDate } from '../../../../../../components/tools/Tools';
+import ratingApi from '../../../../../../api/ratingApi';
+import { useParams } from 'react-router';
 const useStyles = makeStyles(() => ({
   listRating: {
     marginTop: 50,
   },
   itemRating: {
-    padding: "20px",
-    borderTop: "1px solid var(--colorGray2)",
+    padding: '20px',
+    borderTop: '1px solid var(--colorGray2)',
   },
   headerItem: {
-    display: "flex",
+    display: 'flex',
   },
   headerItemRight: {
-    width: "100%",
-    padding: "0 20px",
-    "&>span": {
+    width: '100%',
+    padding: '0 20px',
+    '&>span': {
       fontSize: 16,
       fontWeight: 600,
-      color: "var(--colorBlack2)",
+      color: 'var(--colorBlack2)',
     },
-    "&>div": {
-      display: "flex",
-      justifyContent: "space-between",
-      "&>span:last-of-type": {
+    '&>div': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      '&>span:last-of-type': {
         fontWeight: 400,
         fontSize: 15,
       },
@@ -38,17 +40,18 @@ const useStyles = makeStyles(() => ({
     padding: 20,
   },
   pagination: {
-    display: "flex",
-    justifyContent: "flex-end",
+    display: 'flex',
+    justifyContent: 'flex-end',
 
-    "& .MuiPaginationItem-page.Mui-selected": {
-      backgroundColor: "var(--colorOrange2)",
-      color: "var(--colorWhite0)",
+    '& .MuiPaginationItem-page.Mui-selected': {
+      backgroundColor: 'var(--colorOrange2)',
+      color: 'var(--colorWhite0)',
     },
   },
 }));
 function ListRating(props) {
-  const { evaluates = [] } = props;
+  const { star = 0, listRating = [] } = props;
+  console.log(star);
   const classes = useStyles();
   const limit = 3;
   const [indexRating, setIndexRating] = useState(0);
@@ -60,10 +63,22 @@ function ListRating(props) {
   useEffect(() => {
     setIndexRating(0);
     setPage(1);
-  }, [evaluates]);
+    return () => {
+      setIndexRating(0);
+      setPage(1);
+    };
+  }, [useParams()?.idCourse]);
+
   return (
     <Grid item className={classes.listRating}>
-      {Array.from(evaluates)
+      {Array.from(listRating)
+        .filter((item) => {
+          if (star != 0) {
+            return item.rating === star;
+          } else {
+            return true;
+          }
+        })
         .splice(indexRating, limit)
         .map((item, index) => (
           <div className={classes.itemRating} key={index}>
@@ -75,6 +90,7 @@ function ListRating(props) {
                   <Rating
                     key={item.id}
                     defaultValue={item.rating}
+                    value={item.rating}
                     precision={0.5}
                     readOnly
                     className={classes.iconRating}
@@ -89,7 +105,15 @@ function ListRating(props) {
           </div>
         ))}
       <Pagination
-        count={Math.ceil(evaluates.length / limit)}
+        count={Math.ceil(
+          Array.from(listRating).filter((item) => {
+            if (star != 0) {
+              return item.rating === star;
+            } else {
+              return true;
+            }
+          }).length / limit
+        )}
         className={classes.pagination}
         onChange={handleOnChange}
         page={page}

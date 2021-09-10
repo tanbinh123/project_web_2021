@@ -201,7 +201,14 @@ function MenuMoblie(props) {
       {Array.from(courses)
         .splice(0, seeMore ? courses.length : 3)
         .map((item, index) => (
-          <Link key={item.id} className="link" to={`/course/${item.id}`}>
+          <Link
+            key={item.id}
+            onClick={() => {
+              setOpenDialog(false);
+            }}
+            className="link"
+            to={`/course/${item.id}`}
+          >
             <ListItem button onClick={() => {}}>
               <Avatar className="avatar" src={item.thumbnail} />
               <div className="content">

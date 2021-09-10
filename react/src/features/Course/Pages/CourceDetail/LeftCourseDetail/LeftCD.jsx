@@ -1,11 +1,11 @@
-import { Grid } from "@material-ui/core";
-import { CheckCircle, FiberManualRecord } from "@material-ui/icons";
-import PropTypes from "prop-types";
-import React from "react";
-import IconBreadcrumbs from "../../../../../components/Breadcrumbs/Breadcrumbs";
-import SimpleAccordion from "../../components/SimpleAccordion/SimpleAccordion";
-import LeftCDCSS from "./CSSLeftCD";
-import RatingCourse from "./RatingCourse";
+import { Grid } from '@material-ui/core';
+import { CheckCircle, FiberManualRecord } from '@material-ui/icons';
+import PropTypes from 'prop-types';
+import React from 'react';
+import IconBreadcrumbs from '../../../../../components/Breadcrumbs/Breadcrumbs';
+import SimpleAccordion from '../../components/SimpleAccordion/SimpleAccordion';
+import LeftCDCSS from './CSSLeftCD';
+import RatingCourse from './RatingCourse';
 
 LeftCD.propTypes = {
   title: PropTypes.string,
@@ -14,21 +14,13 @@ LeftCD.propTypes = {
   parts: PropTypes.array,
 };
 LeftCD.defaultProps = {
-  title: "",
-  description: "",
+  title: '',
+  description: '',
   learnings: [],
   parts: [],
 };
 function LeftCD(props) {
-  const {
-    title,
-    description,
-    learnings,
-    parts,
-    idCourse = null,
-    evaluates = [],
-    onUpdate = null,
-  } = props;
+  const { title, description, learnings, parts } = props;
   const classes = LeftCDCSS();
 
   return (
@@ -71,11 +63,7 @@ function LeftCD(props) {
           {/* render list courses */}
           <SimpleAccordion parts={parts} />
         </Grid>
-        <RatingCourse
-          idCourse={idCourse}
-          evaluates={evaluates}
-          onUpdate={onUpdate}
-        />
+        <RatingCourse />
       </Grid>
     </div>
   );

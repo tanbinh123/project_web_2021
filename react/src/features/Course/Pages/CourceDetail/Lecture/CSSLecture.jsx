@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core';
 const CSSLecture = makeStyles((theme) => ({
   root: {
     fontFamily: "'Open Sans', sans-serif",
+    '&~.footer': {
+      display: 'none',
+    },
   },
   leftRoot: {
     position: 'fixed',
@@ -40,7 +43,7 @@ const CSSLecture = makeStyles((theme) => ({
       position: 'fixed',
       zIndex: 1,
       display: 'flex',
-      justifyContent: "space-between",
+      justifyContent: 'space-between',
       background: 'var(--colorWhite1)',
       padding: '20px',
       fontWeight: 600,
@@ -68,6 +71,7 @@ const CSSLecture = makeStyles((theme) => ({
     },
     '&>.title+div': { marginTop: 75 },
   },
+
   [theme.breakpoints.down('md')]: {
     leftRoot: {
       position: 'relative',
@@ -84,6 +88,7 @@ const CSSLecture = makeStyles((theme) => ({
       width: '100%',
       '&>.title': {
         position: 'relative',
+        width: '100%',
       },
       '&>.title+div': { marginTop: 0 },
     },
@@ -99,29 +104,29 @@ const CSSLecture = makeStyles((theme) => ({
       background: 'var(--colorGray2)',
     },
   },
-  showList:{
-    "right": "0",
-    "width": "200px",
-    "height": "50px",
-    "position": "absolute",
-    "background": "rgba(0,0,0,0.5)",
-    "borderBottomLeftRadius": "15px",
-    "color": "#fff",
-    "display": "flex",
-    "alignItems": "center",
-    "fontSize": "20px",
-    "justifyContent": "space-around",
-    "transform": "translateX(80%)",
-    "cursor": "pointer",
-    "zIndex": "1",
-    "transition": "all 0.5s ease-in",
-    display:'none',
+  showList: {
+    right: '0',
+    width: '200px',
+    height: '50px',
+    position: 'absolute',
+    background: 'rgba(0,0,0,0.5)',
+    borderBottomLeftRadius: '15px',
+    color: '#fff',
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '20px',
+    justifyContent: 'space-around',
+    transform: 'translateX(80%)',
+    cursor: 'pointer',
+    zIndex: '1',
+    transition: 'all 0.5s ease-in',
+    display: 'none',
     '&:hover': {
-      "transform": "translateX(0%)",
+      transform: 'translateX(0%)',
     },
   },
-  showListActive:{
-    "display": "flex",
+  showListActive: {
+    display: 'flex',
   },
 }));
 export default CSSLecture;

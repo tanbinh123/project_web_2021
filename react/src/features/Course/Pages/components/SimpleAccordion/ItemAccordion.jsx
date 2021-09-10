@@ -4,64 +4,64 @@ import {
   AccordionSummary,
   Grid,
   makeStyles,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import React, { useEffect } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
-import PropTypes from "prop-types";
+} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React, { useEffect } from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   heading: {
-    display: "flex",
-    flexFlow: "row nowrap",
-    flex: "1 1 auto",
-    justifyContent: "space-between",
-    "& > div > .heading__title": {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    flex: '1 1 auto',
+    justifyContent: 'space-between',
+    '& > div > .heading__title': {
       fontSize: 18,
       fontWeight: 600,
-      color: "var(--colorBlack2)",
+      color: 'var(--colorBlack2)',
     },
 
-    "& > div > .heading__lesson": {
-      color: "var(--colorBlack1)",
+    '& > div > .heading__lesson': {
+      color: 'var(--colorBlack1)',
 
-      [theme.breakpoints.down("sm")]: {
-        float: "right",
+      [theme.breakpoints.down('sm')]: {
+        float: 'right',
         marginTop: 4,
       },
     },
-    "& > div > .heading__time": {
-      color: "var(--colorBlack1)",
-      display: "flex",
-      [theme.breakpoints.down("sm")]: {
-        display: "none",
+    '& > div > .heading__time': {
+      color: 'var(--colorBlack1)',
+      display: 'flex',
+      [theme.breakpoints.down('sm')]: {
+        display: 'none',
       },
     },
   },
   AccordionSummary: {
-    background: "var(--colorWhite1)",
+    background: 'var(--colorWhite1)',
     marginTop: 10,
   },
   AccordionDetails: {
-    display: "flex",
-    flexFlow: "column nowrap",
-    padding: "0px",
-    background: "rgba(236, 240, 241,0.5)",
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    padding: '0px',
+    background: 'rgba(236, 240, 241,0.5)',
   },
   lesson: {
-    padding: "10px",
+    padding: '10px',
     // boxShadow: "0px 1px #7f8c8d",
-    "& > a": {
-      textDecoration: "none",
-      color: "var(--colorBlack2)",
-      "&:hover": {
-        color: "var(--colorOrange2)",
-        transition: "all 0.1s linear",
+    '& > a': {
+      textDecoration: 'none',
+      color: 'var(--colorBlack2)',
+      '&:hover': {
+        color: 'var(--colorOrange2)',
+        transition: 'all 0.1s linear',
       },
     },
-    "&>.lesson__time": {
-      float: "right",
-      marginRight: "8%",
+    '&>.lesson__time': {
+      float: 'right',
+      marginRight: '8%',
     },
   },
 }));
@@ -72,7 +72,7 @@ ItemAccordion.propTypes = {
 };
 ItemAccordion.defaultProps = {
   id: 0,
-  title: "",
+  title: '',
   lessons: [],
 };
 function ItemAccordion(props) {
@@ -93,11 +93,10 @@ function ItemAccordion(props) {
             <Grid item xl={8} lg={9} md={10} sm={10} xs={10}>
               <span className="heading__title">Phần {title}</span>
             </Grid>
+            <Grid item xl={2} lg={2} md={2} sm={2} xs={2}></Grid>
             <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>
+              {/* <span className="heading__time">30:30</span> */}
               <span className="heading__lesson">{lessons.length} Bài</span>
-            </Grid>
-            <Grid item xl={2} lg={1} md={1}>
-              <span className="heading__time">30:30</span>
             </Grid>
           </div>
         </Grid>
@@ -110,7 +109,7 @@ function ItemAccordion(props) {
                 {indexLecture + index + 1}. {item.description}
               </span>
             </Link>
-            <span className="lesson__time">30:30</span>
+            {/* <span className="lesson__time">30:30</span> */}
           </div>
         ))}
       </AccordionDetails>
