@@ -132,4 +132,46 @@ public class NotificationREST {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
 	}
 	
+	@PostMapping(value="/one/new")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> postNotifOne(
+			HttpServletRequest httpServletRequest, 
+			Authentication authentication	,
+			@RequestBody Map<String,String> body
+			
+			) {
+		System.out.println("---------------------------------");
+		
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null ) {		
+				String content=body.get("content");
+				if(content==null)
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Request field 'content'.", "Thiếu trường 'content'"));
+				String idUser=body.get("userId");
+				if(idUser==null)
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Request field 'idUser'.", "Thiếu trường 'idUser'"));
+				
+				AppUser user = appUserDAO.findById(Long.valueOf(idUser));
+				if(user==null) {
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("User not found.", "KHông tìn thấy người dùng"));
+				}
+				NotificationEntity no= new NotificationEntity();
+				no.setContent(content);
+				no.setUserSentId(appUser.getId());
+				no.setUserId(Long.valueOf(idUser));
+				no=notificationDAO.insertEntity(no);
+				if(no!=null) {
+					no.setAppUserSent(appUser);
+					return ResponseEntity.status(HttpStatus.OK).body(no);
+				}
+				
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
 }
