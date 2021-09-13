@@ -36,6 +36,7 @@ import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.dao.RevenueDAO;
 import vn.edu.topedu.dao.VideoDAO;
 import vn.edu.topedu.dto.RevenueMonth;
+import vn.edu.topedu.dto.RevenueYear;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.ImageAdminEntity;
 import vn.edu.topedu.entity.ResourceImage;
@@ -267,8 +268,8 @@ public class RevenueRest {
 			int max=10;
 			
 			//System.out.println(String.format("%d/%d/%d", day, month,year));
-			List<RevenueMonth> rs = revenueDAO.getRevenueYear(max);
-			Map<String,RevenueMonth> lst= new TreeMap<>();
+			List<RevenueYear> rs = revenueDAO.getRevenueYear(max);
+			Map<String,RevenueYear> lst= new TreeMap<>();
 			SimpleDateFormat s= new SimpleDateFormat("yyyy");
 			for(int i=0;i<max;i++) {
 				Calendar tmp = Calendar.getInstance();
@@ -279,16 +280,16 @@ public class RevenueRest {
 				
 				String key= s.format(tmp.getTime());
 				//System.out.println(key);
-				RevenueMonth a = new RevenueMonth(year,month, BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0));
+				RevenueYear a = new RevenueYear(year, BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0));
 //				a.setYear(year);
 //				a.setMonth(month);
 				
 				lst.put(key, a);
 			}
-			for(RevenueMonth e:rs) {
+			for(RevenueYear e:rs) {
 				Calendar tmp = Calendar.getInstance();
 				tmp.set(Calendar.YEAR, e.getYear());
-				tmp.set(Calendar.MONTH, e.getMonth()-1);
+			//	tmp.set(Calendar.MONTH, e.getMonth()-1);
 				
 				String key= s.format(tmp.getTime());
 				lst.put(key, e);

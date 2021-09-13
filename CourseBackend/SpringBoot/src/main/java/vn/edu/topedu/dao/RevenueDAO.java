@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import vn.edu.topedu.dto.RevenueMonth;
+import vn.edu.topedu.dto.RevenueYear;
 import vn.edu.topedu.entity.NotificationEntity;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.Revenue;
@@ -216,7 +217,7 @@ public class RevenueDAO {
 		query.setParameter("now", now);
 		query.setParameter("before", before);
 		
-		query.setMaxResults(10);
+		query.setMaxResults(max);
 		return query.getResultList();
 	}
 	public List<RevenueMonth> getRevenueMonth(int max)
@@ -237,28 +238,28 @@ public class RevenueDAO {
 		query.setParameter("now", now);
 		query.setParameter("before", before);
 		
-		query.setMaxResults(12);
+		query.setMaxResults(max);
 		return query.getResultList();
 	}
-	public List<RevenueMonth> getRevenueYear( int max)
+	public List<RevenueYear> getRevenueYear( int max)
 			throws NoResultException {
 		
 		Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -max);
         Date before = cal.getTime();    
         Date now = new Date();
-		String sql = "Select new vn.edu.topedu.dto.RevenueMonth(c.year,c.month,sum(c.money),sum(c.courseSell),sum(c.courseUpload),sum(c.newMember)) from " + Revenue.class.getName() + " c where  c.deleted=0 ";
+		String sql = "Select new vn.edu.topedu.dto.RevenueYear(c.year,sum(c.money),sum(c.courseSell),sum(c.courseUpload),sum(c.newMember)) from " + Revenue.class.getName() + " c where  c.deleted=0 ";
 		sql += " and c.createAt >= :before ";
 		sql += " and c.createAt <= :now ";
 		
-		sql += " group by c.year, c.month  order by c.createAt asc ";
+		sql += " group by c.year  order by c.createAt asc ";
 		
 		System.out.println(sql);
-		Query query = this.entityManager.createQuery(sql, RevenueMonth.class);
+		Query query = this.entityManager.createQuery(sql, RevenueYear.class);
 		query.setParameter("now", now);
 		query.setParameter("before", before);
 		
-		query.setMaxResults(12);
+		query.setMaxResults(max);
 		return query.getResultList();
 	}
 }
