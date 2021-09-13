@@ -1,87 +1,87 @@
-import { Avatar, Grid } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import { PeopleAlt } from "@material-ui/icons";
-import Rating from "@material-ui/lab/Rating";
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import ButtonSmall from "../Button/ButtonSmall";
-import { colorBlack1, colorBlack2 } from "../color/color";
-import { convertVND } from "../tools/Tools";
+import { Avatar, Grid } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import { PeopleAlt } from '@material-ui/icons';
+import Rating from '@material-ui/lab/Rating';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import ButtonSmall from '../Button/ButtonSmall';
+import { colorBlack1, colorBlack2 } from '../color/color';
+import { convertVND } from '../tools/Tools';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: 345,
-    "&:hover": {
+    '&:hover': {
       boxShadow:
-        "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 5px 9px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+        '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 5px 9px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
     },
     // height: 500,
   },
   CardActionArea: {
-    "&:hover>img": {
-      transform: " scale(1.1)",
-      transitionDuration: "0.5s",
-      transitionProperty: "transform",
+    '&:hover>img': {
+      transform: ' scale(1.1)',
+      transitionDuration: '0.5s',
+      transitionProperty: 'transform',
     },
   },
   CardActionArea__Content: {
     minHeight: 200,
   },
   linkAuthor: {
-    textDecoration: "none",
+    textDecoration: 'none',
   },
   avatar: {
     width: 35,
     height: 35,
-    float: "left",
+    float: 'left',
   },
   name: {
     fontSize: 18,
     marginLeft: 10,
-    lineHeight: "35px",
+    lineHeight: '35px',
     fontWeight: 600,
     color: colorBlack2,
   },
   money: {
-    display: "flex",
-    height: "100%",
-    alignItems: "center",
-    "&>span": {
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center',
+    '&>span': {
       fontSize: 20,
       fontWeight: 600,
-      color: "#e74c3c",
+      color: '#e74c3c',
     },
   },
   row: {
-    display: "block",
+    display: 'block',
   },
   title: { fontSize: 22, fontWeight: 600, color: colorBlack2 },
   button: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "flex-end",
-    "& > a": {
-      textDecoration: "none",
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'flex-end',
+    '& > a': {
+      textDecoration: 'none',
     },
   },
   bought: {
-    display: "flex",
-    justifyContent: "flex-end",
-    "&>span": {
-      display: "flex",
+    display: 'flex',
+    justifyContent: 'flex-end',
+    '&>span': {
+      display: 'flex',
     },
-    "& .icon": {
+    '& .icon': {
       fontSize: 22,
       color: colorBlack1,
     },
-    "& .number": {
+    '& .number': {
       fontSize: 20,
       marginLeft: 10,
       color: colorBlack1,
@@ -101,12 +101,12 @@ CardCourse.propTypes = {
 };
 
 CardCourse.defaultProps = {
-  id: "",
-  title: "",
-  description: "",
-  image: "",
-  avatar: "",
-  nameAuthor: "",
+  id: '',
+  title: '',
+  description: '',
+  image: '',
+  avatar: '',
+  nameAuthor: '',
   bought: 0,
   price: 0,
   rateStar: 0,
@@ -116,7 +116,7 @@ export default function CardCourse(props) {
   const {
     id,
     title,
-    description,
+    description = '',
     image,
     avatar,
     nameAuthor,
@@ -127,16 +127,19 @@ export default function CardCourse(props) {
   const [tmpDescription, setTmpDescription] = useState(description);
   useEffect(() => {
     (() => {
-      if (description.length > 140) {
-        setTmpDescription(description.slice(0, 140) + "...");
+      if (description?.length > 140) {
+        setTmpDescription(description.slice(0, 140) + '...');
       }
     })();
+    return () => {
+      setTmpDescription();
+    };
   }, []);
   function handleExpand() {
-    if (tmpDescription.length < 144) {
+    if (tmpDescription?.length < 144) {
       setTmpDescription(description);
     } else {
-      setTmpDescription(description.slice(0, 140) + "...");
+      setTmpDescription(description.slice(0, 140) + '...');
     }
   }
   return (

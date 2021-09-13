@@ -9,7 +9,7 @@ import { AccountCircle, ExitToApp } from '@material-ui/icons';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -23,6 +23,7 @@ import {
 } from '../../../../app/DataUser';
 import { isEmpty } from '../../../tools/Tools';
 import CustomDialog from '../../../Dialog/CustomDialog';
+import notificationApi from '../../../../api/notificationApi';
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -74,6 +75,22 @@ function MenuMoblie(props) {
   const classes = useStyles();
   const { push } = useHistory();
   const [isOpenDialog, setOpenDialog] = React.useState(false);
+  const [isOpenDialogNoti, setOpenDialogNoti] = React.useState(false);
+  const [dataNoti, setDataNoti] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await notificationApi.getAll();
+        // console.log(data);
+        setDataNoti(data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    return () => {
+      setDataNoti([]);
+    };
+  }, [isOpenDialogNoti]);
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === 'keydown' &&
@@ -124,6 +141,17 @@ function MenuMoblie(props) {
               <BookmarkIcon />
             </ListItemIcon>
             <span>Khóa học của tôi</span>
+          </ListItem>
+          <ListItem
+            button
+            onClick={(e) => {
+              setOpenDialogNoti(true);
+            }}
+          >
+            <ListItemIcon>
+              <NotificationsIcon />
+            </ListItemIcon>
+            <span>Thông báo</span>
           </ListItem>
           <ListItem
             button
@@ -198,25 +226,38 @@ function MenuMoblie(props) {
   );
   const dataDialog = (
     <div className="dialog-course-bought-mobile">
-      {Array.from(courses)
-        .splice(0, seeMore ? courses.length : 3)
-        .map((item, index) => (
-          <Link
-            key={item.id}
-            onClick={() => {
-              setOpenDialog(false);
-            }}
-            className="link"
-            to={`/course/${item.id}`}
-          >
-            <ListItem button onClick={() => {}}>
-              <Avatar className="avatar" src={item.thumbnail} />
-              <div className="content">
-                <span className="title">{item.title}</span>
-                <span className="description">{item.description}</span>
-              </div>
-            </ListItem>
-          </Link>
+      {Array.from(courses).map((item, index) => (
+        <Link
+          key={item.id}
+          onClick={() => {
+            setOpenDialog(false);
+          }}
+          className="link"
+          to={`/course/${item.id}`}
+        >
+          <ListItem button onClick={() => {}}>
+            <Avatar className="avatar" src={item.thumbnail} />
+            <div className="content">
+              <span className="title">{item.title}</span>
+              <span className="description">{item.description}</span>
+            </div>
+          </ListItem>
+        </Link>
+      ))}
+    </div>
+  );
+  const dataDialogNoti = (
+    <div className="dialog-notification-mobile">
+      {Array.from(dataNoti)
+        .filter((item) => item.actived)
+        .map((item, idx) => (
+          <ListItem key={idx} button>
+            <Avatar className="avatar" src={item?.appUserSent?.avatar?.image} />
+            <div className="content">
+              <span className="title">{item.name}</span>
+              <span className="description">{item.content}</span>
+            </div>
+          </ListItem>
         ))}
     </div>
   );
@@ -232,12 +273,23 @@ function MenuMoblie(props) {
           : unlogin(dataDrawer.anchor)}
       </Drawer>
       <CustomDialog
+        fullScreen={true}
         title="Khóa học của tôi"
         id="my-course-bought"
         open={isOpenDialog}
         content={dataDialog}
         onClose={() => {
           setOpenDialog(false);
+        }}
+      />
+      <CustomDialog
+        fullScreen={true}
+        title="Thông học của tôi"
+        id="my-noticafition-mobile"
+        open={isOpenDialogNoti}
+        content={dataDialogNoti}
+        onClose={() => {
+          setOpenDialogNoti(false);
         }}
       />
     </>

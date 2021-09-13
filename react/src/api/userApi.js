@@ -1,4 +1,4 @@
-import axiosClient from "./axiosClient";
+import axiosClient from './axiosClient';
 
 const userApi = {
   register(data) {
@@ -42,7 +42,7 @@ const userApi = {
     //axiosClient.
     return axiosClient.post(url, data, {
       headers: {
-        "content-type": "multipart/form-data",
+        'content-type': 'multipart/form-data',
       },
     });
   },
@@ -57,6 +57,14 @@ const userApi = {
   },
   checkUsername(data) {
     const url = `/home/username`;
+    return axiosClient.post(url, data);
+  },
+  loginByEmail(data) {
+    const url = `login/email`;
+    return axiosClient.post(url, data);
+  },
+  loginWithFirebase(data) {
+    const url = `api/admin/firebase/verify`;
     return axiosClient.post(url, data);
   },
 };

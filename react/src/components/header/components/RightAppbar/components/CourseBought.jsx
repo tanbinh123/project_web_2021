@@ -15,7 +15,7 @@ import {
   bindTrigger,
   usePopupState,
 } from 'material-ui-popup-state/hooks';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { DataUser } from '../../../../../app/DataUser';
@@ -114,6 +114,11 @@ function CourseBought(props) {
   const { courses } = dataUser;
   // console.log(courses);
   const [seeMore, setSeeMore] = useState(false);
+  useEffect(() => {
+    return () => {
+      setSeeMore(false);
+    };
+  }, [popupState.isOpen]);
   const handleShowMore = () => {
     setSeeMore(!seeMore);
   };

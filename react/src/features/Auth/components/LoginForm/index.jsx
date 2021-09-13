@@ -58,14 +58,18 @@ const useStyles = makeStyles((theme) => ({
       color: 'var(--colorOrange1)',
     },
   },
+  text3Container: {
+    display: 'flex',
+    justifyContent: 'end',
+  },
   text3: {
     fontSize: '16px',
     fontWeight: 600,
     margin: '10px 0px 10px 0px',
-    display: 'block',
     textAlign: 'right',
     textDecoration: 'none',
     color: 'var(--colorBlack2)',
+
     '&:hover': {
       color: 'var(--colorOrange1)',
     },
@@ -85,7 +89,7 @@ const schema = yup.object().shape({
 });
 //function
 function LoginForm(props) {
-  const { onSubmit } = props;
+  const { onSubmit, loginWithSocial = null } = props;
   const { push } = useHistory();
   const classes = useStyles();
   const form = useForm({
@@ -101,6 +105,7 @@ function LoginForm(props) {
     if (!onSubmit) return;
     onSubmit(values);
   }
+
   return (
     <div className={classes.root}>
       <form
@@ -127,10 +132,26 @@ function LoginForm(props) {
           fullWidth={true}
           form={form}
         />
-        <Link to="/forgot-password" className={classes.text3}>
-          <span>Quên mật khẩu ?</span>
-        </Link>
+        <div className={classes.text3Container}>
+          <Link to="/forgot-password" className={classes.text3}>
+            <span>Quên mật khẩu ?</span>
+          </Link>
+        </div>
         <ButtonSubmit title="Đăng nhập" />
+        <div className="login-social-container">
+          <button
+            className="btn-social google"
+            onClick={(e) => {
+              e.preventDefault();
+              if (loginWithSocial) loginWithSocial('google');
+            }}
+          >
+            <img
+              src="https://www.google.com.vn/images/branding/googleg/1x/googleg_standard_color_128dp.png"
+              alt="btn-google"
+            />
+          </button>
+        </div>
         <span className={classes.text1}>Bạn không có tài khoản ?</span>
         <Link to="/auth/register" className={classes.textDK}>
           <span>Đăng ký</span>

@@ -29,3 +29,31 @@
     }
   }
 }
+.dialog-notification-mobile {
+  font-family: 'Open Sans', sans-serif;
+
+  .avatar {
+  }
+  .content {
+    margin-left: 15px;
+    .title {
+      font-size: 15px;
+      font-weight: 600;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+    }
+    .description {
+      font-size: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+    }
+  }
+}

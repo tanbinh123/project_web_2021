@@ -21,6 +21,7 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.22.1",
     "dayjs": "^1.10.5",
+    "firebase": "^9.0.2",
     "luxon": "^1.27.0",
     "material-ui-popup-state": "^1.7.2",
     "moment": "^2.29.1",

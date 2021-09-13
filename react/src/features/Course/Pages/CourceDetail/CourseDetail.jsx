@@ -13,13 +13,6 @@ import {
 import Dialog from '@material-ui/core/Dialog';
 import { Close } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
-import {
-  Route,
-  Switch,
-  useHistory,
-  useParams,
-  useRouteMatch,
-} from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import courseApi from '../../../../api/courseApi';
 import { DataUser } from '../../../../app/DataUser';
@@ -29,6 +22,12 @@ import CourseDetailCSS from './CSSCourseDetail';
 import Lecture from './Lecture/Lecture';
 import LeftCD from './LeftCourseDetail/LeftCD';
 import RightCD from './RightCourseDetail/RightCD';
+import {
+  useHistory,
+  useParams,
+  useRouteMatch,
+  useLocation,
+} from 'react-router-dom';
 
 function CourseDetail(props) {
   const classes = CourseDetailCSS();
@@ -46,19 +45,16 @@ function CourseDetail(props) {
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
   }
-  function handleOnClickBuy() {
+  const { host, pathname, protocol } = window.location;
+  // console.log(`${protocol}//${host}${pathname}`);
+  async function handleOnClickBuy() {
     if (!isEmpty(dataUser.token)) {
-      console.log('Buy');
-      (async () => {
-        // console.log(url);
-        //console.log(window.location.href);
-        const res1 = await courseApi.payment({
-          returnUrl: window.location.href,
-          idCourse: idCourse,
-        });
-        window.location = res1.url;
-        console.log(res1);
-      })();
+      const { paymentId, url } = await courseApi.payment({
+        returnUrl: `${protocol}//${host}${pathname}`,
+        idCourse: idCourse,
+      });
+
+      window.location = url;
     } else {
       push('/auth/login');
     }
@@ -67,7 +63,7 @@ function CourseDetail(props) {
   useEffect(() => {
     getDataCourse();
     return () => {
-      getDataCourse();
+      setCourse({});
     };
   }, [url, dataUser.token]);
   // console.log("init Detail", course);

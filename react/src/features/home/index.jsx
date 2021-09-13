@@ -129,7 +129,7 @@ function Home(props) {
         i++;
         if (i >= imgs.length) i = 0;
         removeClassActive();
-        console.log(i);
+        // console.log(i);
         imgs[i]?.classList.add('active');
       }, 5000);
     })();
@@ -148,8 +148,9 @@ function Home(props) {
       <Header />
       <CssBaseline />
       <div id="bg-home" className={classes.bgHome}>
-        {Array.from(arrImg).map((item) => (
+        {Array.from(arrImg).map((item, idx) => (
           <div
+            key={idx}
             className="img-bg-home"
             style={{
               backgroundImage: `url("${item}")`,
