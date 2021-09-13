@@ -42,7 +42,7 @@ public class NotificationEntity {
 	private Boolean deleted = false;
 	
 	@Column(name = "actived", length = 1, nullable = false)
-	private Boolean actived = false;
+	private Boolean actived = true;
 	
 	@Column(name = "Create_At", nullable = false)
 	@JsonSerialize(using = CustomDateFullSerializer.class)

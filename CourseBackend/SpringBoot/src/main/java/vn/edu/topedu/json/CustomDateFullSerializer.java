@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 public class CustomDateFullSerializer extends StdSerializer<Date> {
 
 //	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	public CustomDateFullSerializer() {
 		this(null);

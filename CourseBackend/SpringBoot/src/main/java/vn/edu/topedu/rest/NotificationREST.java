@@ -47,7 +47,7 @@ public class NotificationREST {
 			Authentication authentication	,
 			@RequestParam(defaultValue = "1") int _page,
 			@RequestParam(defaultValue = "10") int _limit,
-			@RequestParam(defaultValue = "updateAt:asc") String _sort, 
+			@RequestParam(defaultValue = "updateAt:desc") String _sort, 
 			@RequestParam(defaultValue = "") String _search
 			) {
 		System.out.println("---------------------------------");
@@ -118,8 +118,14 @@ public class NotificationREST {
 				String content=body.get("content");
 				if(content==null)
 					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Request field 'content'.", "Thiếu trường 'content'"));
+				String subject=body.get("subject");
+				if(subject==null)
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Request field 'subject'.", "Thiếu trường 'subject'"));
+				
+				
 				NotificationEntity no= new NotificationEntity();
 				no.setContent(content);
+				no.setName(subject);
 				no.setUserSentId(appUser.getId());
 				no=notificationDAO.insertEntity(no);
 				if(no!=null) {
@@ -159,8 +165,14 @@ public class NotificationREST {
 				if(user==null) {
 					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("User not found.", "KHông tìn thấy người dùng"));
 				}
+				String subject=body.get("subject");
+				if(subject==null)
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Request field 'subject'.", "Thiếu trường 'subject'"));
+				
 				NotificationEntity no= new NotificationEntity();
 				no.setContent(content);
+				no.setName(subject);
+				
 				no.setUserSentId(appUser.getId());
 				no.setUserId(Long.valueOf(idUser));
 				no=notificationDAO.insertEntity(no);
