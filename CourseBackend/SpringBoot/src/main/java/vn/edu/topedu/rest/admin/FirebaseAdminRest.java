@@ -1,6 +1,7 @@
 package vn.edu.topedu.rest.admin;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,14 +22,17 @@ import com.google.firebase.auth.FirebaseToken;
 
 import vn.edu.topedu.consts.VariableConst;
 import vn.edu.topedu.dao.AppUserDAO;
+import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.entity.AppRole;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.ImageAdminEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.UserRole;
+import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.jwt.security.JWTUtil;
 import vn.edu.topedu.jwt.security.PBKDF2Encoder;
+import vn.edu.topedu.response.AuthResponse;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.response.SignUpResponse;
 import vn.edu.topedu.response.model.AccountResponse;
@@ -47,6 +51,9 @@ public class FirebaseAdminRest {
 
 	@Autowired
 	private PBKDF2Encoder passwordEncoder;
+	
+	@Autowired
+	private OwerCourseDAO owerCourseDAO;
 
 	@PostMapping(value = "/verify")
 	@ResponseBody
@@ -58,6 +65,8 @@ public class FirebaseAdminRest {
 		// idToken comes from the client app (shown above)
 		String accessToken=body.get("accessToken");
 		FirebaseToken decodedToken;
+		AppRole appRole = appUserDAO.findRoleByRoleName("ROLE_ADMIN");
+		
 		try {
 			decodedToken = FirebaseAuth.getInstance().verifyIdToken(accessToken);
 			//decodedToken.isEmailVerified();
@@ -67,7 +76,21 @@ public class FirebaseAdminRest {
 			AppUser appUser = appUserDAO.findUserByEmail(decodedToken.getEmail());
 			if(appUser!=null) {
 				appUser.getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
-				return ResponseEntity.status(HttpStatus.OK).body(appUser);
+				AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(appUser));
+				AccountResponse account = new AccountResponse();
+				account.setAvatar(appUser.getAvatar().getImage());
+				account.setUsername(appUser.getUserName());
+				authResponse.setUser(account);
+				List<Course> lstCourse = owerCourseDAO.querryAllBought(appUser.getId());
+				for (Course c : lstCourse) {
+					c.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+				}
+				authResponse.setCourses(lstCourse);
+				if (appUser.getAuthorities().contains(appRole)) {
+					authResponse.getUser().setAdmin(true);
+				}				
+				authResponse.setProfile(appUser);
+				return ResponseEntity.ok(authResponse);
 			}
 			
 			
@@ -98,10 +121,10 @@ public class FirebaseAdminRest {
 						.body(new MessageResponse("Email or username is unvalid.", "Tài khoản không hợp lệ."));
 			
 			}
-//			if (user == null) {
-//				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//						.body(new MessageResponse("Email or username is unvalid.", "Tài khoản không hợp lệ."));
-//			}
+			if (user == null) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new MessageResponse("Email or username is unvalid.", "Tài khoản không hợp lệ."));
+			}
 
 			UserRole userRole = new UserRole();
 			userRole.setAppUser(user);
@@ -110,12 +133,22 @@ public class FirebaseAdminRest {
 
 			userRole = appUserDAO.putUserRole(userRole);
 			if (userRole != null) {
-				SignUpResponse authResponse = new SignUpResponse(jwtUtil.generateToken(user));
+				appUser=user;
+				appUser.getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
+				AuthResponse authResponse = new AuthResponse(jwtUtil.generateToken(appUser));
 				AccountResponse account = new AccountResponse();
-				user.getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
-				account.setAvatar(user.getAvatar().getImage());
-				account.setUsername(user.getUserName());
+				account.setAvatar(appUser.getAvatar().getImage());
+				account.setUsername(appUser.getUserName());
 				authResponse.setUser(account);
+				List<Course> lstCourse = owerCourseDAO.querryAllBought(appUser.getId());
+				for (Course c : lstCourse) {
+					c.setBeforeResource(WebUtils.getUrl(httpServletRequest));
+				}
+				authResponse.setCourses(lstCourse);
+				if (appUser.getAuthorities().contains(appRole)) {
+					authResponse.getUser().setAdmin(true);
+				}				
+				authResponse.setProfile(appUser);
 				return ResponseEntity.ok(authResponse);
 			} else {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
