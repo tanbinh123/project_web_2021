@@ -26,7 +26,7 @@ const WidgetsDropdown = () => {
               pointed
               className="c-chart-wrapper mt-3 mx-3"
               style={{height: '70px'}}
-              dataPoints={[65, 59, 84, 84, 51, 55, 40]}
+              dataPoints={[65, 59, 84, 84, 51, 55, 40,10,15,20,30]}
               pointHoverBackgroundColor="primary"
               label="Members"
               labels="months"

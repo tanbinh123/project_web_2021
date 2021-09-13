@@ -90,7 +90,7 @@ public class NotificationDAO {
 	public Long countData(Long userId, String _search) throws NoResultException {
 		
 
-		String sql = "Select count(*)  from " + NotificationEntity.class.getName() + " c where userId=:userId and c.deleted=0 ";
+		String sql = "Select count(*)  from " + NotificationEntity.class.getName() + " c where ( userId=:userId or userId is null )  and c.deleted=0 ";
 		if (_search.length() != 0) {
 					
 			sql += " and ((c.name like CONCAT('%',:search,'%')) or (c.content like CONCAT('%',:search,'%')) ) ";
