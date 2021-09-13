@@ -51,7 +51,7 @@ public class NotificationEntity {
 	@Column(name = "name", nullable = false)
 	private String name ="";
 	
-	@Column(name = "user_id", nullable = false)
+	@Column(name = "user_id", nullable = true)
 	private Long userId;
 	
 	@Column(name = "user_sent_id", nullable = false)
@@ -84,6 +84,7 @@ public class NotificationEntity {
 	public void setUserSentId(Long userSentId) {
 		this.userSentId = userSentId;
 	}
+	
 
 	public String getContent() {
 		return content;
@@ -145,6 +146,10 @@ public class NotificationEntity {
 			this.appUserSent.setBeforeResource(beforeResource);
 		
 	}
+	public void setAppUserSent(AppUser appUserSent) {
+		this.appUserSent = appUserSent;
+	}
+	
 
 	
 	
