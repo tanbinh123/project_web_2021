@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 13/09/2021 19:15:02
+ Date: 13/09/2021 23:42:14
 */
 
 SET NAMES utf8mb4;
@@ -780,8 +780,8 @@ CREATE TABLE `revenue`  (
   `course_upload` decimal(60, 0) NOT NULL DEFAULT 0 COMMENT '`',
   `course_sell` decimal(60, 0) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `unque_key`(`month`, `year`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `unque_key`(`month`, `year`, `day`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of revenue
@@ -793,6 +793,7 @@ INSERT INTO `revenue` VALUES (4, b'0', '2021-04-26 19:09:33', '2021-04-26 19:09:
 INSERT INTO `revenue` VALUES (50, b'0', '2021-05-26 18:37:41', '2021-05-26 18:37:41', 5, 2021, 46516000, 1, 0, 0, 0);
 INSERT INTO `revenue` VALUES (52, b'0', '2021-06-20 06:47:14', '2021-06-20 06:47:14', 6, 2021, 14929000, 1, 0, 0, 0);
 INSERT INTO `revenue` VALUES (53, b'0', '2021-09-13 11:32:41', '2021-09-13 11:32:41', 9, 2021, 1510002, 13, 1, 0, 2);
+INSERT INTO `revenue` VALUES (54, b'0', '2021-09-12 15:38:05', '2021-09-12 15:38:05', 9, 2021, 100000, 12, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for spring_session

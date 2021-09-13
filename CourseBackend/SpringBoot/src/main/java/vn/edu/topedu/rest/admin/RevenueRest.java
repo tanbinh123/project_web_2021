@@ -1,8 +1,14 @@
 package vn.edu.topedu.rest.admin;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,15 +35,19 @@ import vn.edu.topedu.dao.ImageAdminDAO;
 import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.dao.RevenueDAO;
 import vn.edu.topedu.dao.VideoDAO;
+import vn.edu.topedu.dto.RevenueMonth;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.ImageAdminEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.Revenue;
+import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.course.full.Lesson;
 import vn.edu.topedu.entity.course.full.Part;
 import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.response.MessageResponse;
+import vn.edu.topedu.response.PageResponse;
+import vn.edu.topedu.response.PageResponse.Pagination;
 import vn.edu.topedu.service.charts.ChartsService;
 import vn.edu.topedu.service.charts.ChartsService.PieChart;
 import vn.edu.topedu.utils.WebUtils;
@@ -80,8 +90,16 @@ public class RevenueRest {
 		try {
 			//List<Revenue> rs = revenueDAO.getEntitys(-1);
 			List<Revenue> rs = revenueDAO.getData(_page,_limit,_sort,_search,day,month,year );
-			Long count = notificationDAO.countData(_search);	
-			return ResponseEntity.ok(rs);
+			Long count = revenueDAO.countData(day,month,year, _search);	
+			@SuppressWarnings({ "rawtypes", "unchecked" })
+			PageResponse<Course> pageResponse = new PageResponse(rs, _limit, _page, count, new Pagination() {
+				public String get_sort() {
+					return _sort;
+				}
+
+			});
+			
+			return ResponseEntity.ok(pageResponse);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -134,5 +152,157 @@ public class RevenueRest {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
 
 	}
+	
+	
+	@GetMapping(value = "/10day")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> getDay(
+			HttpServletRequest httpServletRequest	
+			) {
+		System.out.println("---------------------------------");
+
+		try {
+			
+			List<Revenue> rs = revenueDAO.getRevenueDay(10);
+			Map<String,Revenue> lst= new TreeMap<>();
+			SimpleDateFormat s= new SimpleDateFormat("yyyy-MM-dd");
+			for(int i=0;i<10;i++) {
+				Calendar tmp = Calendar.getInstance();
+				tmp.add(Calendar.DATE, i-10);				
+				int year=tmp.get(Calendar.YEAR);
+				int month=tmp.get(Calendar.MONTH);
+				int day=tmp.get(Calendar.DAY_OF_MONTH);
+				
+				String key= s.format(tmp.getTime());
+				System.out.println(key);
+				Revenue a = new Revenue();
+				a.setYear(year);
+				a.setMonth(month+1);
+				a.setDay(day);
+				lst.put(key, a);
+			}
+			for(Revenue e:rs) {
+				Calendar tmp = Calendar.getInstance();
+				tmp.set(Calendar.YEAR, e.getYear());
+				tmp.set(Calendar.MONTH, e.getMonth()-1);
+				tmp.set(Calendar.DAY_OF_MONTH, e.getDay());
+				String key= s.format(tmp.getTime());
+				lst.put(key, e);
+			}
+			
+			
+			return ResponseEntity.ok(lst);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new MessageResponse("Error.", "Lỗi không xác định"));
+		}
+
+	}
+	
+	@GetMapping(value = "/12month")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> get12Month(
+			HttpServletRequest httpServletRequest	
+			) {
+		System.out.println("---------------------------------");
+
+		try {
+			
+//			int year = Calendar.getInstance().get(Calendar.YEAR);//+1900;
+//			int month = Calendar.getInstance().get(Calendar.MONTH)+1;
+//			int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+//			
+			int max=12;
+			
+			//System.out.println(String.format("%d/%d/%d", day, month,year));
+			List<RevenueMonth> rs = revenueDAO.getRevenueMonth(max);
+			Map<String,RevenueMonth> lst= new TreeMap<>();
+			SimpleDateFormat s= new SimpleDateFormat("yyyy-MM");
+			for(int i=0;i<max;i++) {
+				Calendar tmp = Calendar.getInstance();
+				tmp.add(Calendar.MONTH, i-max);				
+				int year=tmp.get(Calendar.YEAR);
+				int month=tmp.get(Calendar.MONTH);
+				
+				
+				String key= s.format(tmp.getTime());
+				//System.out.println(key);
+				RevenueMonth a = new RevenueMonth(year,month, BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0));
+//				a.setYear(year);
+//				a.setMonth(month);
+				
+				lst.put(key, a);
+			}
+			for(RevenueMonth e:rs) {
+				Calendar tmp = Calendar.getInstance();
+				tmp.set(Calendar.YEAR, e.getYear());
+				tmp.set(Calendar.MONTH, e.getMonth()-1);
+				
+				String key= s.format(tmp.getTime());
+				lst.put(key, e);
+			}
+			
+			
+			return ResponseEntity.ok(lst);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new MessageResponse("Error.", "Lỗi không xác định"));
+		}
+
+	}
+	
+	@GetMapping(value = "/10year")
+	@ResponseBody
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Object> get10year(
+			HttpServletRequest httpServletRequest	
+			) {
+		System.out.println("---------------------------------");
+
+		try {
+			int max=10;
+			
+			//System.out.println(String.format("%d/%d/%d", day, month,year));
+			List<RevenueMonth> rs = revenueDAO.getRevenueYear(max);
+			Map<String,RevenueMonth> lst= new TreeMap<>();
+			SimpleDateFormat s= new SimpleDateFormat("yyyy");
+			for(int i=0;i<max;i++) {
+				Calendar tmp = Calendar.getInstance();
+				tmp.add(Calendar.YEAR, i-max);				
+				int year=tmp.get(Calendar.YEAR);
+				int month=tmp.get(Calendar.MONTH);
+				
+				
+				String key= s.format(tmp.getTime());
+				//System.out.println(key);
+				RevenueMonth a = new RevenueMonth(year,month, BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0));
+//				a.setYear(year);
+//				a.setMonth(month);
+				
+				lst.put(key, a);
+			}
+			for(RevenueMonth e:rs) {
+				Calendar tmp = Calendar.getInstance();
+				tmp.set(Calendar.YEAR, e.getYear());
+				tmp.set(Calendar.MONTH, e.getMonth()-1);
+				
+				String key= s.format(tmp.getTime());
+				lst.put(key, e);
+			}
+			
+			
+			return ResponseEntity.ok(lst);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new MessageResponse("Error.", "Lỗi không xác định"));
+		}
+
+	}
+
 
 }

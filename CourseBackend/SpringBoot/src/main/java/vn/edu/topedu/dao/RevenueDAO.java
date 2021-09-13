@@ -1,5 +1,7 @@
 package vn.edu.topedu.dao;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import vn.edu.topedu.dto.RevenueMonth;
 import vn.edu.topedu.entity.NotificationEntity;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.Revenue;
@@ -88,7 +91,7 @@ public class RevenueDAO {
 		String sql = "Select c from " + Revenue.class.getName() + " c where  c.deleted=0 ";
 		if (_search.length() != 0) {
 
-			sql += " and ((c.name like CONCAT('%',:search,'%')) or (c.content like CONCAT('%',:search,'%')) ) ";
+			//sql += " and ((c.name like CONCAT('%',:search,'%')) or (c.content like CONCAT('%',:search,'%')) ) ";
 
 		}
 		if (year != -1)
@@ -128,9 +131,9 @@ public class RevenueDAO {
 		if (month != -1)
 			query.setParameter("month", month);
 		if (year != -1)
-			query.setParameter("month", year);
+			query.setParameter("year", year);
 		if (day != -1)
-			query.setParameter("month", day);
+			query.setParameter("day", day);
 		query.setFirstResult(_page * _limit);
 		if (_search.length() != 0) {
 			query.setParameter("search", _search);
@@ -146,7 +149,7 @@ public class RevenueDAO {
 		String sql = "Select count(*)  from " + Revenue.class.getName() + " c where  c.deleted=0 ";
 		if (_search.length() != 0) {
 
-			sql += " and ((c.name like CONCAT('%',:search,'%')) or (c.content like CONCAT('%',:search,'%')) ) ";
+			//sql += " and ((c.name like CONCAT('%',:search,'%')) or (c.content like CONCAT('%',:search,'%')) ) ";
 
 		}
 		if (year != -1)
@@ -155,20 +158,107 @@ public class RevenueDAO {
 			sql += " and c.month = :month ";
 		if (day != -1)
 			sql += " and c.day = :day ";
-		sql += " group by c.id   ";
+		//sql += " group by c.id   ";
 
 		System.out.println(sql);
 		Query query = this.entityManager.createQuery(sql);
 		if (month != -1)
 			query.setParameter("month", month);
 		if (year != -1)
-			query.setParameter("month", year);
+			query.setParameter("year", year);
 		if (day != -1)
-			query.setParameter("month", day);
+			query.setParameter("day", day);
 		if (_search.length() != 0) {
 			query.setParameter("search", _search);
 		}
 
 		return (Long) query.getSingleResult();
+	}
+	
+	public List<Revenue> getRevenue10Day(int day, int month, int year)
+			throws NoResultException {
+		
+
+		String sql = "Select c from " + Revenue.class.getName() + " c where  c.deleted=0 ";
+		sql += " and c.year = :year ";
+		sql += " and c.month = :month ";
+		sql += " and c.day = :day ";
+		sql += " group by c.id  order by c.createAt asc ";
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, Revenue.class);
+		if (month != -1)
+			query.setParameter("month", month);
+		if (year != -1)
+			query.setParameter("year", year);
+		if (day != -1)
+			query.setParameter("day", day);
+		
+		query.setMaxResults(10);
+		return query.getResultList();
+	}
+	
+	public List<Revenue> getRevenueDay(int max)
+			throws NoResultException {
+		
+		Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -max);
+        Date before = cal.getTime();    
+        Date now = new Date();
+		String sql = "Select c from " + Revenue.class.getName() + " c where  c.deleted=0 ";
+		sql += " and c.createAt >= :before ";
+		sql += " and c.createAt <= :now ";
+		
+		sql += " group by c.id  order by c.createAt asc ";
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, Revenue.class);
+		query.setParameter("now", now);
+		query.setParameter("before", before);
+		
+		query.setMaxResults(10);
+		return query.getResultList();
+	}
+	public List<RevenueMonth> getRevenueMonth(int max)
+			throws NoResultException {
+		Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -max);
+        Date before = cal.getTime();    
+        Date now = new Date();
+
+		String sql = "Select new vn.edu.topedu.dto.RevenueMonth(c.year,c.month,sum(c.money),sum(c.courseSell),sum(c.courseUpload),sum(c.newMember)) from " + Revenue.class.getName() + " c where  c.deleted=0 ";
+		sql += " and c.createAt >= :before ";
+		sql += " and c.createAt <= :now ";
+		
+		sql += " group by c.year, c.month  order by c.createAt asc ";
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, RevenueMonth.class);
+		query.setParameter("now", now);
+		query.setParameter("before", before);
+		
+		query.setMaxResults(12);
+		return query.getResultList();
+	}
+	public List<RevenueMonth> getRevenueYear( int max)
+			throws NoResultException {
+		
+		Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -max);
+        Date before = cal.getTime();    
+        Date now = new Date();
+		String sql = "Select new vn.edu.topedu.dto.RevenueMonth(c.year,c.month,sum(c.money),sum(c.courseSell),sum(c.courseUpload),sum(c.newMember)) from " + Revenue.class.getName() + " c where  c.deleted=0 ";
+		sql += " and c.createAt >= :before ";
+		sql += " and c.createAt <= :now ";
+		
+		sql += " group by c.year, c.month  order by c.createAt asc ";
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, RevenueMonth.class);
+		query.setParameter("now", now);
+		query.setParameter("before", before);
+		
+		query.setMaxResults(12);
+		return query.getResultList();
 	}
 }
