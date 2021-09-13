@@ -42,12 +42,12 @@ public class NotificationREST {
 	@GetMapping(value="list")
 	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
-	public ResponseEntity<Object> updateRating(
+	public ResponseEntity<Object> list(
 			HttpServletRequest httpServletRequest, 
 			Authentication authentication	,
 			@RequestParam(defaultValue = "1") int _page,
 			@RequestParam(defaultValue = "10") int _limit,
-			@RequestParam(defaultValue = "id:asc") String _sort, 
+			@RequestParam(defaultValue = "updateAt:asc") String _sort, 
 			@RequestParam(defaultValue = "") String _search
 			) {
 		System.out.println("---------------------------------");

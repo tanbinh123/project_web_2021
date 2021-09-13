@@ -16,7 +16,12 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import vn.edu.topedu.json.CustomDateFullSerializer;
+import vn.edu.topedu.json.CustomDateSerializer;
+import vn.edu.topedu.json.MultiDateDeserializer;
 import vn.edu.topedu.pojo.AppUserPojo;
 
 
@@ -40,9 +45,11 @@ public class NotificationEntity {
 	private Boolean actived = false;
 	
 	@Column(name = "Create_At", nullable = false)
+	@JsonSerialize(using = CustomDateFullSerializer.class)
 	private Date createAt = new Date();
 	
 	@Column(name = "Update_At", nullable = false)
+	@JsonSerialize(using = CustomDateFullSerializer.class)
 	private Date updateAt = new Date();
 
 	@Column(name = "content", nullable = false)
