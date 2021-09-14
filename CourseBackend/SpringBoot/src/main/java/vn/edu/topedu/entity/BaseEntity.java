@@ -8,6 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import vn.edu.topedu.json.CustomDateFullSerializer;
+
 
 @MappedSuperclass
 public class BaseEntity {
@@ -23,9 +27,11 @@ public class BaseEntity {
 	protected Boolean deleted = false;
 	
 	@Column(name = "Create_At", nullable = false)
+	@JsonSerialize(using = CustomDateFullSerializer.class)
 	protected Date createAt = new Date();
 	
 	@Column(name = "Update_At", nullable = false)
+	@JsonSerialize(using = CustomDateFullSerializer.class)
 	protected Date updateAt = new Date();
 
 	

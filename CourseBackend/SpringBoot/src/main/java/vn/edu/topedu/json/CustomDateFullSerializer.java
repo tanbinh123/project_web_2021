@@ -9,16 +9,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
-public class CustomDateSerializer extends StdSerializer<Date> {
+public class CustomDateFullSerializer extends StdSerializer<Date> {
 
-	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-//	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+//	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-	public CustomDateSerializer() {
+	public CustomDateFullSerializer() {
 		this(null);
 	}
 
-	public CustomDateSerializer(Class<Date> t) {
+	public CustomDateFullSerializer(Class<Date> t) {
 		super(t);
 	}
 

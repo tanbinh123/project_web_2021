@@ -1,33 +1,27 @@
-package vn.edu.topedu.entity;
+package vn.edu.topedu.dto;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "revenue")
-public class Revenue  extends BaseEntity {
-	@Column(name="month", updatable = false)
+public class RevenueMonth   {
 	private int month;
-	@Column(name="year", updatable = false)
 	private int year;
-	@Column(name="money", updatable = false)
 	private BigDecimal money=BigDecimal.valueOf(0);
-	@Column(name="day", updatable = false)
-	private int day;
 	
 	
-	@Column(name="course_sell", updatable = false)
 	private BigDecimal courseSell =BigDecimal.valueOf(0);
 	
-	@Column(name="course_upload", updatable = false)
 	private BigDecimal courseUpload =BigDecimal.valueOf(0);
 	
-	@Column(name="new_member", updatable = false)
 	private BigDecimal newMember =BigDecimal.valueOf(0);
 	
+	public RevenueMonth(int year,int month, BigDecimal money, BigDecimal courseSell, BigDecimal courseUpload, BigDecimal newMember) {
+		this.year=year;
+		this.month=month;
+		this.money=money;
+		this.courseSell=courseSell;
+		this.courseUpload=courseUpload;
+		this.newMember=newMember;
+	}
 	
 	public int getMonth() {
 		return month;
@@ -47,12 +41,7 @@ public class Revenue  extends BaseEntity {
 	public void setMoney(BigDecimal money) {
 		this.money = money;
 	}
-	public int getDay() {
-		return day;
-	}
-	public void setDay(int day) {
-		this.day = day;
-	}
+	
 	public BigDecimal getCourseSell() {
 		return courseSell;
 	}

@@ -16,7 +16,12 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import vn.edu.topedu.json.CustomDateFullSerializer;
+import vn.edu.topedu.json.CustomDateSerializer;
+import vn.edu.topedu.json.MultiDateDeserializer;
 import vn.edu.topedu.pojo.AppUserPojo;
 
 
@@ -37,12 +42,14 @@ public class NotificationEntity {
 	private Boolean deleted = false;
 	
 	@Column(name = "actived", length = 1, nullable = false)
-	private Boolean actived = false;
+	private Boolean actived = true;
 	
 	@Column(name = "Create_At", nullable = false)
+	@JsonSerialize(using = CustomDateFullSerializer.class)
 	private Date createAt = new Date();
 	
 	@Column(name = "Update_At", nullable = false)
+	@JsonSerialize(using = CustomDateFullSerializer.class)
 	private Date updateAt = new Date();
 
 	@Column(name = "content", nullable = false)
@@ -51,7 +58,7 @@ public class NotificationEntity {
 	@Column(name = "name", nullable = false)
 	private String name ="";
 	
-	@Column(name = "user_id", nullable = false)
+	@Column(name = "user_id", nullable = true)
 	private Long userId;
 	
 	@Column(name = "user_sent_id", nullable = false)
@@ -84,6 +91,7 @@ public class NotificationEntity {
 	public void setUserSentId(Long userSentId) {
 		this.userSentId = userSentId;
 	}
+	
 
 	public String getContent() {
 		return content;
@@ -145,6 +153,10 @@ public class NotificationEntity {
 			this.appUserSent.setBeforeResource(beforeResource);
 		
 	}
+	public void setAppUserSent(AppUser appUserSent) {
+		this.appUserSent = appUserSent;
+	}
+	
 
 	
 	

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.NotificationEntity;
+import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.utils.WebUtils;
 @Transactional
 @Repository
@@ -39,7 +40,7 @@ public class NotificationDAO {
 		if (sort == "" || sort == null)
 			sort = "id:asc";
 
-		String sql = "Select c from " + NotificationEntity.class.getName() + " c where userId=:userId and c.deleted=0 ";
+		String sql = "Select c from " + NotificationEntity.class.getName() + " c where ( userId=:userId or userId is null )  and c.deleted=0 ";
 		if (_search.length() != 0) {
 					
 			sql += " and ((c.name like CONCAT('%',:search,'%')) or (c.content like CONCAT('%',:search,'%')) ) ";
@@ -89,7 +90,7 @@ public class NotificationDAO {
 	public Long countData(Long userId, String _search) throws NoResultException {
 		
 
-		String sql = "Select count(*)  from " + NotificationEntity.class.getName() + " c where userId=:userId and c.deleted=0 ";
+		String sql = "Select count(*)  from " + NotificationEntity.class.getName() + " c where ( userId=:userId or userId is null )  and c.deleted=0 ";
 		if (_search.length() != 0) {
 					
 			sql += " and ((c.name like CONCAT('%',:search,'%')) or (c.content like CONCAT('%',:search,'%')) ) ";
@@ -107,6 +108,18 @@ public class NotificationDAO {
 		}
 		
 		return (Long) query.getSingleResult();
+	}
+	public NotificationEntity insertEntity(NotificationEntity rrp) {
+		try {
+			entityManager.persist(rrp);
+			entityManager.flush();
+			return rrp;
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
 	}
 	
 
