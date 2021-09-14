@@ -68,7 +68,7 @@ public class PaymentREST {
 				if(appUser.getBlocked())return 
 						ResponseEntity.status(HttpStatus.BAD_REQUEST)
 						.body(new MessageResponse("You are blocked.", "Tài khoản bị block"));
-				if(appUser.getActived())return 
+				if(!appUser.getActived())return 
 						ResponseEntity.status(HttpStatus.BAD_REQUEST)
 						.body(new MessageResponse("You are unactive.", "Tài khoản chưa active"));
 				OwerCourse owerCourse=null;

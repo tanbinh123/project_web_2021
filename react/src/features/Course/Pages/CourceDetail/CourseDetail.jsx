@@ -15,7 +15,7 @@ import { Close } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import courseApi from '../../../../api/courseApi';
-import { DataUser } from '../../../../app/DataUser';
+import { addLocalStorageCourses, DataUser } from '../../../../app/DataUser';
 import Header from '../../../../components/header/index';
 import { isEmpty } from '../../../../components/tools/Tools';
 import CourseDetailCSS from './CSSCourseDetail';
@@ -28,6 +28,7 @@ import {
   useRouteMatch,
   useLocation,
 } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 function CourseDetail(props) {
   const classes = CourseDetailCSS();
@@ -36,6 +37,7 @@ function CourseDetail(props) {
   // console.log(idCourse);
   const { url } = useRouteMatch();
   const { push } = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
@@ -49,12 +51,16 @@ function CourseDetail(props) {
   // console.log(`${protocol}//${host}${pathname}`);
   async function handleOnClickBuy() {
     if (!isEmpty(dataUser.token)) {
-      const { paymentId, url } = await courseApi.payment({
+      const res = await courseApi.payment({
         returnUrl: `${protocol}//${host}${pathname}`,
         idCourse: idCourse,
       });
-
-      window.location = url;
+      if (!!!res?.status) {
+        window.location = res?.url;
+      } else {
+        enqueueSnackbar(res?.data?.message?.en, { variant: 'error' });
+      }
+      // window.location = res.url;
     } else {
       push('/auth/login');
     }
@@ -125,8 +131,12 @@ function CourseDetail(props) {
     (async () => {
       if (transitionSuccess) {
         const res = await courseApi.getCoursesBought();
-        console.log(res);
-        console.log(dataUser);
+        if (!!!res?.status) {
+          setDataUser({ ...dataUser, courses: res });
+          addLocalStorageCourses(res);
+        } else {
+          enqueueSnackbar(res?.data?.message?.en, { variant: 'error' });
+        }
       }
     })();
     return () => {};

@@ -1,14 +1,14 @@
-import { atom } from "recoil";
-import { isEmpty } from "../components/tools/Tools";
-import StorageKeys from "../constants/StorageKeys";
+import { atom } from 'recoil';
+import { isEmpty } from '../components/tools/Tools';
+import StorageKeys from '../constants/StorageKeys';
 
 export const DataUser = atom({
-  key: "DataUser",
+  key: 'DataUser',
   default: {
     user: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
     profile: JSON.parse(localStorage.getItem(StorageKeys.PROFILE)) || {},
     courses: JSON.parse(localStorage.getItem(StorageKeys.COURSES)) || [],
-    token: localStorage.getItem(StorageKeys.TOKEN) || "",
+    token: localStorage.getItem(StorageKeys.TOKEN) || '',
   },
 });
 export const removeLocalStorage = () => {
@@ -31,9 +31,14 @@ export const addLocalStorageProfile = (data) => {
     localStorage.setItem(StorageKeys.PROFILE, JSON.stringify(data));
   }
 };
+export const addLocalStorageCourses = (data) => {
+  if (!isEmpty(data)) {
+    localStorage.setItem(StorageKeys.COURSES, JSON.stringify(data));
+  }
+};
 export const emptyUser = {
   user: {},
   profile: {},
   courses: [],
-  token: "",
+  token: '',
 };
