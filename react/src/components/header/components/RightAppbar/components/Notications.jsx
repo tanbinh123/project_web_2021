@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import notificationApi from '../../../../../api/notificationApi';
 import { DataUser } from '../../../../../app/DataUser';
+import { isEmpty } from '../../../../tools/Tools';
 
 const useStyles = makeStyles((theme) => ({
   buttons: {
@@ -78,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Notications(props) {
   const classes = useStyles();
+  const [dataUser, setDataUser] = useRecoilState(DataUser);
   const popupState = usePopupState({
     variant: 'popover',
     popupId: 'popoverNotications',
@@ -88,15 +90,18 @@ function Notications(props) {
   };
   const [dataNoti, setDataNoti] = useState([]);
   useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await notificationApi.getAll();
-        // console.log(data);
-        setDataNoti(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    if (isEmpty(dataUser?.token)) {
+      console.log('sang');
+      (async () => {
+        try {
+          const { data } = await notificationApi.getAll();
+          // console.log(data);
+          setDataNoti(data);
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }
     return () => {
       // setDataNoti([]);
       setSeeMore(false);
