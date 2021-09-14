@@ -108,6 +108,8 @@ public class FirebaseAdminRest {
 			user.setFullname(decodedToken.getName());
 			user.setAvatar(image);
 			user.setEncrytedPassword(passwordEncoder.encode(decodedToken.getUid()));
+			//decodedToken.
+			//user.setBirthDay(birthDay);
 			//user.setAvatar(resourceImageDAO.findFirst());
 			AppRole role = appUserDAO.findRoleByRoleName("ROLE_USER");
 			if (role == null) {

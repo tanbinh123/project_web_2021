@@ -69,7 +69,7 @@ public class AppUser implements UserDetails {
 	@Column(name = "birth_day")
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@JsonDeserialize(using = MultiDateDeserializer.class)
-	private Date birthDay;
+	private Date birthDay = new Date();
 
 	@Column(name = "Encryted_Password", length = 128, nullable = false)
 	@JsonIgnore
