@@ -16,7 +16,7 @@ public abstract class AHasResource extends BaseEntity {
 	protected String beforeResource;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_poster_id", nullable = false)
+	@JoinColumn(name = "user_poster_id", nullable = true)
 	@JsonIgnore
 	private AppUser appUser;
 	
