@@ -1,13 +1,10 @@
-import { Grid, LinearProgress } from "@material-ui/core";
-import React, { useState } from "react";
-import {
-  useHistory,
-
-  useRouteMatch
-} from "react-router";
-import userApi from "../../../api/userApi";
-import ButtonClick from "../../../components/Button/ButtonClick";
-import ActiveCss from "./css/ActiveCss";
+import { Grid, LinearProgress } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+import React, { useState } from 'react';
+import { useHistory, useRouteMatch } from 'react-router';
+import userApi from '../../../api/userApi';
+import ButtonClick from '../../../components/Button/ButtonClick';
+import ActiveCss from './css/ActiveCss';
 Active.propTypes = {};
 
 function Active(props) {
@@ -16,19 +13,29 @@ function Active(props) {
   const { push } = useHistory();
   const { url } = useRouteMatch();
   const [progress, setProgress] = useState({ isProcessing: false });
-
+  const { enqueueSnackbar } = useSnackbar();
   // useEffect(() => {
   //   if (isEmpty(props?.profile)) {
   //     push("/setting-account/info");
   //   }
   // }, []);
   const handleOnCLick = async () => {
-    setProgress({ isProcessing: true });
-    const payload = {
-      url: `http://localhost:3000/setting-account/active`,
-    };
-    const res = await userApi.active(payload);
-    console.log(res);
+    try {
+      setProgress({ isProcessing: true });
+      const payload = {
+        url: `http://localhost:3000/setting-account/active`,
+      };
+      const res = await userApi.active(payload);
+      // console.log(res);
+      if (!!!res?.status) {
+        enqueueSnackbar(res?.message?.en, { variant: 'success' });
+      } else {
+        enqueueSnackbar(res?.data?.message?.en, { variant: 'error' });
+      }
+    } catch (error) {
+      console.log(error);
+      enqueueSnackbar(error.message, { variant: 'error' });
+    }
     setProgress({ isProcessing: false });
   };
   console.log(url);

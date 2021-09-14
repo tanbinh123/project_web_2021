@@ -61,6 +61,7 @@ function CourseDetail(props) {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getDataCourse();
     return () => {
       setCourse({});
@@ -117,6 +118,19 @@ function CourseDetail(props) {
       console.log(error);
     }
   };
+  //TODO
+  const location = useLocation();
+  let transitionSuccess = location?.search.includes('vnp_TransactionStatus=00');
+  useEffect(() => {
+    (async () => {
+      if (transitionSuccess) {
+        const res = await courseApi.getCoursesBought();
+        console.log(res);
+        console.log(dataUser);
+      }
+    })();
+    return () => {};
+  }, [transitionSuccess]);
   return (
     <>
       <Header />
