@@ -97,6 +97,7 @@ public class FirebaseAdminRest {
 			
 			ResourceImage image= new ResourceImage();
 			image.setPath(decodedToken.getPicture());
+			//image.
 			image=resourceImageDAO.save(image);
 			
 			
