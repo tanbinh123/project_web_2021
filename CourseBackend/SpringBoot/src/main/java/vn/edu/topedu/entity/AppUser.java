@@ -102,7 +102,7 @@ public class AppUser implements UserDetails {
 	@JsonIgnore
 	private List<AppRole> authorities;
 
-	@OneToMany(mappedBy = "appUser", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "appUser")
 	//@JsonProperty(access = Access.READ_ONLY)
 	@JsonIgnore
 	private List<UserRole> userRoles;

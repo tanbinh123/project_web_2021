@@ -61,8 +61,16 @@ public class PaymentREST {
 			@RequestBody Map<String, Object> body) {
 		if (authentication != null) {
 			authentication.getName();
+			
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			
 			if (appUser != null) {
+				if(appUser.getBlocked())return 
+						ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new MessageResponse("You are blocked.", "Tài khoản bị block"));
+				if(appUser.getActived())return 
+						ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new MessageResponse("You are unactive.", "Tài khoản chưa active"));
 				OwerCourse owerCourse=null;
 				Long idCourse=Long.parseLong(String.valueOf(body.get("idCourse")));
 				try {

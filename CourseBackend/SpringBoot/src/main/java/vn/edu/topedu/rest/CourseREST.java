@@ -129,8 +129,8 @@ public class CourseREST implements IMyHost {
 	
 
 	@GetMapping("/course-bought")
-	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
+	@ResponseBody
 	
 	public ResponseEntity<Object> listOwerCourse(Authentication authentication,
 			@RequestParam(defaultValue = "-1") int actived, HttpServletRequest httpServletRequest) {
