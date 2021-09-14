@@ -3,10 +3,19 @@ package vn.edu.topedu.response.model;
 public class AccountResponse {
 	private String avatar;
 	private String username;
+	private String fullname;
 	private boolean isAdmin;
 	
 	
 	
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
 	public boolean isAdmin() {
 		return isAdmin;
 	}

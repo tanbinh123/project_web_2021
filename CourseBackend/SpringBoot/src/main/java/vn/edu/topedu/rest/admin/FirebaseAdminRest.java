@@ -80,6 +80,7 @@ public class FirebaseAdminRest {
 				AccountResponse account = new AccountResponse();
 				account.setAvatar(appUser.getAvatar().getImage());
 				account.setUsername(appUser.getUserName());
+				account.setFullname(appUser.getFullname());
 				authResponse.setUser(account);
 				List<Course> lstCourse = owerCourseDAO.querryAllBought(appUser.getId());
 				for (Course c : lstCourse) {
@@ -140,6 +141,7 @@ public class FirebaseAdminRest {
 				AccountResponse account = new AccountResponse();
 				account.setAvatar(appUser.getAvatar().getImage());
 				account.setUsername(appUser.getUserName());
+				account.setFullname(appUser.getFullname());
 				authResponse.setUser(account);
 				List<Course> lstCourse = owerCourseDAO.querryAllBought(appUser.getId());
 				for (Course c : lstCourse) {
