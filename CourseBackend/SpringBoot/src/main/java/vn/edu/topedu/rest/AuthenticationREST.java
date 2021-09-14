@@ -105,6 +105,7 @@ public class AuthenticationREST implements IMyHost {
 			// account.setAvatar(VariableConst.SRC_IMAGE_BEFORE +
 			// FileProcess.encodeFileToBase64(user.getAvater()));
 			account.setUsername(user.getUserName());
+			account.setFullname(user.getFullname());
 			authResponse.setUser(account);
 
 			List<Course> lstCourse = owerCourseDAO.querryAllBought(user.getId());
@@ -155,6 +156,7 @@ public class AuthenticationREST implements IMyHost {
 				System.out.println(user.getAvatar().getImage());
 				account.setAvatar(user.getAvatar().getImage());
 				account.setUsername(user.getUserName());
+				account.setFullname(user.getFullname());
 				authResponse.setUser(account);
 				return ResponseEntity.ok(authResponse);
 			} else {
@@ -203,6 +205,7 @@ public class AuthenticationREST implements IMyHost {
 			AccountResponse account = new AccountResponse();
 			account.setAvatar(getUrl(serverHttpRequest) + VariableConst.RESOURCE_BEFORE + user.getAvatar());
 			account.setUsername(user.getUserName());
+			account.setFullname(user.getFullname());
 			authResponse.setUser(account);
 			return ResponseEntity.ok(authResponse);
 		} else {
