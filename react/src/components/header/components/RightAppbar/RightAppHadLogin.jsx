@@ -18,6 +18,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { DataUser, removeLocalStorage } from '../../../../app/DataUser';
+import { isEmpty } from '../../../tools/Tools';
 import CourseBought from './components/CourseBought';
 import Notications from './components/Notications';
 
@@ -86,6 +87,7 @@ function RightAppHadLogin(props) {
     popupId: 'demoPopover',
   });
   const [dataUser, setDataUser] = useRecoilState(DataUser);
+  // console.log(dataUser);
   const { push } = useHistory();
   const handleLogOut = () => {
     setDataUser({
@@ -153,7 +155,11 @@ function RightAppHadLogin(props) {
         alt={dataUser.user.username}
         src={dataUser.user.avatar}
       />
-      <span className={classes.username}>{dataUser.user.username}</span>
+      <span className={classes.username}>
+        {!isEmpty(dataUser.user.fullname)
+          ? dataUser.user.fullname
+          : dataUser.user.username}
+      </span>
       <Box className={classes.lineBorder}></Box>
       <CourseBought />
       <Notications />

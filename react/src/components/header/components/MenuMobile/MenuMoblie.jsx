@@ -119,7 +119,11 @@ function MenuMoblie(props) {
                 alt={dataUser.user.username}
                 src={dataUser.user.avatar}
               />
-              <span className={classes.textName}>{dataUser.user.username}</span>
+              <span className={classes.textName}>
+                {isEmpty(dataUser.user.fullname)
+                  ? dataUser.user.username
+                  : dataUser.user.fullname}
+              </span>
             </Link>
           </ListItem>
         </List>

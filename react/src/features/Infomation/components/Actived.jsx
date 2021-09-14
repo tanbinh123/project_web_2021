@@ -1,46 +1,50 @@
-import { Grid, makeStyles } from "@material-ui/core";
-import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
-import { useRecoilState } from "recoil";
-import userApi from "../../../api/userApi";
-import { addLocalStorage, DataUser } from "../../../app/DataUser";
-import ButtonClick from "../../../components/Button/ButtonClick";
-import "././css/Actived.css";
+import { Grid, makeStyles } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
+import { useRecoilState } from 'recoil';
+import userApi from '../../../api/userApi';
+import {
+  addLocalStorage,
+  addLocalStorageProfile,
+  DataUser,
+} from '../../../app/DataUser';
+import ButtonClick from '../../../components/Button/ButtonClick';
+import '././css/Actived.css';
 
 Actived.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: "'Open Sans', sans-serif",
-    color: "var(--colorBlack2)",
-    backgroundColor: "var(--colorBlack1)",
-    height: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    "&>.successful": {
-      backgroundColor: "var(--colorWhite1)",
+    color: 'var(--colorBlack2)',
+    backgroundColor: 'var(--colorBlack1)',
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '&>.successful': {
+      backgroundColor: 'var(--colorWhite1)',
 
-      display: "flex",
-      flexFlow: "column",
-      alignItems: "center",
+      display: 'flex',
+      flexFlow: 'column',
+      alignItems: 'center',
 
-      padding: "50px 70px 50px 70px",
-      borderRadius: "20px",
-      "&>.image": {
-        width: "170px",
+      padding: '50px 70px 50px 70px',
+      borderRadius: '20px',
+      '&>.image': {
+        width: '170px',
         marginBottom: 30,
       },
-      "&>.title": {
-        fontSize: "50px",
-        fontWeight: "600",
+      '&>.title': {
+        fontSize: '50px',
+        fontWeight: '600',
         marginBottom: 10,
-        textAlign: "center",
+        textAlign: 'center',
       },
-      "&>.text": {
-        fontSize: "20px",
-        fontWeight: "300",
-        textAlign: "center",
+      '&>.text': {
+        fontSize: '20px',
+        fontWeight: '300',
+        textAlign: 'center',
         marginBottom: 30,
       },
     },
@@ -55,34 +59,34 @@ function Actived(props) {
   const classes = useStyles();
   const { push } = useHistory();
   const handleOnClick = () => {
-    push("/");
+    push('/');
   };
-  useEffect(async () => {
-    if (dataUser.profile.actived) {
-      push("/");
-    } else {
-      console.log("Goi Api");
-      const payload = {
-        code: `${params?.code}`,
-      };
-      const res = await userApi.actived(payload);
-      console.log(res);
-      if(!!res.status && res.status == 400){
-        enqueueSnackbar(res.data.message.vi, { variant: "error" });
-        console.log("Code InValid",res.data.message.vi);  
-        //TODO
-        push("/");
-        
-      } else{    
-        setDataUser({
-          ...dataUser,       
-          profile: res,
-        });
-        addLocalStorage(null, res);     
+  useEffect(() => {
+    (async () => {
+      if (dataUser.profile.actived) {
+        push('/');
+      } else {
+        console.log('Goi Api');
+        const payload = {
+          code: `${params?.code}`,
+        };
+        const res = await userApi.actived(payload);
+        console.log(res);
+        if (!!res.status && res.status == 400) {
+          enqueueSnackbar(res.data.message.vi, { variant: 'error' });
+          console.log('Code InValid', res.data.message.vi);
+          //TODO
+          push('/');
+        } else {
+          setDataUser({
+            ...dataUser,
+            profile: res,
+          });
+          addLocalStorageProfile(res);
+        }
+        setLoading(false);
       }
-      setLoading(false);
-     
-    }
+    })();
   }, []);
   // console.log(params?.code);
   return (

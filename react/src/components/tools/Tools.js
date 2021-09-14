@@ -35,8 +35,10 @@ export function convertVND(int) {
 }
 
 export function toDate(ddMMyyyy) {
-  const tmp = ddMMyyyy.split('/');
-  return new Date(tmp[2], tmp[1] - 1, tmp[0]);
+  if (!isEmpty(ddMMyyyy)) {
+    const tmp = ddMMyyyy.split('/');
+    return new Date(tmp[2], tmp[1] - 1, tmp[0]);
+  }
 }
 export function validateEmail(email) {
   const re =
