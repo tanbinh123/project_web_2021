@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 15/09/2021 14:16:31
+ Date: 15/09/2021 17:40:17
 */
 
 SET NAMES utf8mb4;
@@ -105,7 +105,7 @@ CREATE TABLE `app_user`  (
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 1, b'0', 'tanhoang99.999@gmail.com', b'1', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '1999-08-25 17:00:00', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Vua phá lưới', 'Am Bình', b'0');
+INSERT INTO `app_user` VALUES (1, 'admin', 'dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=', b'1', 143, b'0', 'tanhoang99.999@gmail.com', b'1', 'Những biên bản cuộc họp phức tạp, những dữ liệu báo cáo lộn xộn... Mỗi ngày công văn chồng chất như núi, đều được một tay cô ấy sắp xếp thành những văn bản rõ ràng và rành mạch, hỗ trợ Thất Tinh trong mọi quyết sách và hiệp định, cho đến các chỉ thị luân chuyển trong các bộ phận đơn vị khác nhau.', '1999-08-25 17:00:00', '0399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Vua phá lưới', 'Am Bình', b'0');
 INSERT INTO `app_user` VALUES (2, 'user', 'cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=', b'1', 84, b'0', 'hearterzouest99.999@gmail.com', b'1', 'Saitama (One punch Man) là một siêu anh hùng dễ dàng đánh bại bất kỳ đối thủ nào với một cú đấm của mình. Anh là một chàng trai cơ bắp 25 tuổi và bị hói đầu, được biết do quá trình tập luyện quá mức của anh gây ra. Saitama thường xuyên cứu những người vô tội khỏi các quái vật xuất hiện trong thế giới của mình. Tuy nhiên, anh không bao giờ nhận được bất kỳ sự công nhận nào từ dân chúng, mặc dù cuối cùng anh gia nhập Hiệp hội siêu Anh hùng và kể từ đó đã tăng lên đến hạng 7 cấp B. Sau khi đánh bại rất nhiều kẻ thù mà không cần dùng đến nhiều sức của mình, anh cảm thấy buồn chán và trống rỗng, không ngừng tìm kiếm đối thủ người thực sự có thể gây ra một thách thức đối với anh ta. Anh bị xem thường bởi hầu hết thành viên của Hiệp hội siêu Anh hùng và những người bình thường, nguyên nhân anh mất danh tiếng và uy tín của mình vì cách đánh bại kẻ thù một cách dễ dàng (đặc biệt là những kẻ thù đã đánh bại nhiều anh hùng cấp cao) và anh không quan tâm đến dư luận hay thiệt hại tài sản. Mặc dù vậy, Saitama là người có đạo đức hơn so với hầu hết các anh hùng trong sê-ri và không ham muốn hư danh, chẳng hạn như khi anh cải trang mình như một cảnh sát để đánh bại một con quái vật đang tàn phá vì người dân mất niềm tin vào cảnh sát (ngoại truyện).', '1999-08-24 17:00:00', '399115950', 'NAM', 'https://www.facebook.com/Hearter.Zouest', 'tanhoang99.999@gmail.com\r\n', '2021-05-19 15:37:37', '2021-05-19 15:37:37', 'Saiama', 'Thành phố Z', b'0');
 INSERT INTO `app_user` VALUES (41, 'sang99', 'U4gf9z4kq0cQ7Yyf9MWgW6Uk+lsZD/riI0dK9+dIWAw=', b'0', 1, b'0', 'anonkill19991@gmail.com', b'0', NULL, '2021-09-07 19:54:29', NULL, 'NAM', NULL, NULL, '2021-05-19 15:37:37', '2021-05-19 15:37:37', NULL, NULL, b'0');
 INSERT INTO `app_user` VALUES (45, 'hoang001', 'fF+0wvfyJWXQLsSpZgtCH/gAaj21CVjBMxI5QppoMkc=', b'0', 1, b'0', 'hoang001@gmail.com', b'0', NULL, '2021-09-28 19:54:33', NULL, 'NAM', NULL, NULL, '2021-05-27 11:45:30', '2021-05-27 11:45:30', NULL, NULL, b'0');
@@ -131,15 +131,16 @@ CREATE TABLE `categories`  (
   `total_money` decimal(30, 0) UNSIGNED NOT NULL DEFAULT 0,
   `total_course_bought` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 174, 0, 41132000, 5);
+INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 173, 0, 41132000, 5);
 INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 5, 500, 32601000, 5);
 INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 3, 0, 0, 0);
 INSERT INTO `categories` VALUES (22, 'Genshin Impact', b'1', b'0', '2021-06-28 06:39:44', '2021-06-28 06:39:44', 11, 0, 3020000, 2);
+INSERT INTO `categories` VALUES (23, 'Phong cách sống', b'1', b'0', '2021-09-15 08:28:55', '2021-09-15 08:28:55', 4, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for course
@@ -169,7 +170,7 @@ CREATE TABLE `course`  (
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 203 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
@@ -366,7 +367,10 @@ INSERT INTO `course` VALUES (195, 115, '34342342', b'0', 'Eula', 437900, 0, 0, '
 INSERT INTO `course` VALUES (196, 116, '34342342', b'0', 'Eula', 588900, 0, 0, '2021-07-05 10:22:08', 1, NULL, 22, '2021-07-05 10:22:08', b'1', 0, 0, 1510000.00, 61);
 INSERT INTO `course` VALUES (197, 117, '34342342', b'0', 'Eula', 770100, 0, 1, '2021-07-05 10:27:51', 1, NULL, 22, '2021-07-05 10:27:51', b'1', 0, 0, 1510000.00, 49);
 INSERT INTO `course` VALUES (198, 124, '123', b'0', 'Khóa học mới', 692580, 0, 0, '2021-09-15 07:05:52', 1, NULL, 1, '2021-09-05 10:47:11', b'1', 0, 0, 989400.00, 30);
-INSERT INTO `course` VALUES (199, 135, '', b'0', 'test 1', 0, 0, 0, '2021-09-15 07:05:23', 1, NULL, 1, '2021-09-15 07:03:00', b'1', 0, 0, 135000.00, 100);
+INSERT INTO `course` VALUES (199, 138, 'Bạn là người yêu thích công việc nội trợ, yêu thích việc làm bánh và quan tâm tới những thực phẩm, đồ ăn vegan (thuần chay)? Bạn hiểu được những tác dụng “thần kỳ” của việc ăn chay đối với sức khoẻ của mình như: tăng cường sức khoẻ, giúp thọ lâu nhờ protein có trong các loại rau củ, ngũ cốc, giúp tâm tính được hiền hoà an vui, giúp giảm cân, giảm thiểu rất nhiều bệnh lý cho con người và giúp làn da trở nên tươi trẻ và đẹp hơn rất nhiều. \n\nBạn muốn mang đến những chiếc bánh thuần chay dinh dưỡng, tốt cho sức khoẻ đến bạn bè người thân như một món quà nhỏ chan chứa đầy tình cảm. Vậy tại sao bạn không thử bắt tay ngay vào với khóa học làm bánh thuần chay của UNICA để thực hiện điều ý nghĩa này.\n\nHãy đến ngay với khóa học 20 công thức bánh thuần chay tốt cho sức khỏe của giảng viên Lê Thủy Xuân tại Unica.vn. \n\nKhóa học làm 20 loại bánh ngọt vegan (bánh ngọt thuần chay) được thiết kế để giúp những người cảm thấy e ngại với công việc bếp núc có thể tự tin thể hiện bản thân, làm ra nhiều loại bánh tuyệt vời cho những người thân yêu. Với cách làm đơn giản, các nguyên liệu tốt cho sức khỏe, dễ dàng tìm mua được ở Việt Nam, khóa học sẽ đem đến cho bạn những kỹ năng làm bánh như những người thợ bánh chuyên nghiệp.\n\nMục đích ăn chay đối với nhiều người có thể chỉ được xem như một niềm tin tôn giáo, tuy nhiên, thực phẩm chay cũng đem lại những lợi ích tuyệt vời đối với sức khỏe.\n\nNgười theo chế độ ăn thuần chay tránh tất cả các sản phẩm từ động vật, kể cả mật ong, phấn ong, nước mắm, sữa, bơ, pho mát... Họ chỉ ăn các sản phẩm từ thực vật như: Các loại rau, củ, trái cây, các loại đậu đỗ, thảo mộc, rong biển, nước ép trái cây hay rau củ, tinh dầu ép lạnh (dầu dừa, dầu olive...), mứt, bơ thực vật, thực phẩm lên men (miso, kimchi...), siro, giấm, chocolate (loại không sữa)...\n\nHãy đăng ký ngay khoá học 20 công thức bánh thuần chay tốt cho sức khỏe của giảng viên Lê Thủy Xuân ngay hôm nay nhé!', b'0', '20 công thức bánh thuần chay tốt cho sức khỏe', 7800, 0, 0, '2021-09-15 10:26:39', 1, 50, 23, '2021-09-15 07:03:00', b'1', 0, 0, 13684.00, 43);
+INSERT INTO `course` VALUES (200, 147, 'hóa học \"Tự làm 18 loại bánh tại nhà không cần lò nướng\" do giảng viên Lê Thủy Xuân hướng dẫn được thiết kế để giúp những người ít tự tin trong bếp hiểu được thuật ngữ và các thành phần được sử dụng trong thế giới làm bánh và tự tin để làm ra nhiều loại bánh tuyệt vời mà không cần sử dụng lò nướng.\r\n\r\nKhóa học bao gồm nhiều bài học làm bánh với các công thức và cách hướng dẫn chi tiết cách làm các loại bánh ngọt không cần lò nướng bằng hình thức video clip. Ví dụ: Bánh Tiramisu, bánh Crepe, bánh Cheesecake...\r\n\r\nKết thúc khóa học bạn hoàn toàn có thể tự mình làm ra 18+ loại bánh ngọt mà không cần lò nướng như các loại bánh ngọt khác, tự mình sáng tạo phần trang trí hấp dẫn choh chiếc bánh của bạn. Thậm chí sau khi thành thạo 18u+ công thức làm bánh mà không cần lò nướng này bạn còn có thể sáng tạo ra những công thức làm bánh của riêng bạn để dành tặng cho gia đình, bạn bè và tạo nên những công thức làm bánh riêng của bản thân!\r\n\r\nVậy còn chờ gì nữa, tham gia khóa học \"Tự làm 18 loại bánh tại nhà không cần lò nướng\" ngay hôm nay tại Unica thôi!', b'0', 'Tự làm 18 loại bánh tại nhà không cần lò nướng', 595000, 0, 0, '2021-09-15 10:35:35', 1, 56, 23, '2021-09-15 08:56:15', b'1', 0, 0, 700000.00, 15);
+INSERT INTO `course` VALUES (201, 145, NULL, b'0', '20 cách làm bánh sinh nhật hiện đại', 630000, 0, 0, '2021-09-15 10:30:29', 1, 52, 23, '2021-09-15 08:57:10', b'1', 0, 0, 700000.00, 10);
+INSERT INTO `course` VALUES (202, 148, NULL, b'0', 'Tự làm bánh mì mềm và pizza tại nhà', 402000, 0, 0, '2021-09-15 10:39:47', 1, NULL, 23, '2021-09-15 10:39:47', b'1', 0, 0, 600000.00, 33);
 
 -- ----------------------------
 -- Table structure for evaluates
@@ -432,7 +436,7 @@ CREATE TABLE `learning`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of learning
@@ -465,6 +469,18 @@ INSERT INTO `learning` VALUES (71, 3, 'Phá Tiên Thức', b'0');
 INSERT INTO `learning` VALUES (72, 3, 'Phá Sách Thức', b'0');
 INSERT INTO `learning` VALUES (73, 187, 'gjyggyjigyig', b'0');
 INSERT INTO `learning` VALUES (74, 187, 'ouhgiyhbiy', b'0');
+INSERT INTO `learning` VALUES (75, 199, 'Biết cách làm hơn 20 loại bánh ngọt thuần chay.', b'0');
+INSERT INTO `learning` VALUES (76, 199, 'Hiểu biết về các thành phần và kĩ thuật cần thiết để làm các loại bánh ngọt thuần chay ', b'0');
+INSERT INTO `learning` VALUES (77, 199, 'Hiểu biết về các thành phần và kĩ thuật cần thiết để làm các loại bánh ngọt thuần chay ', b'0');
+INSERT INTO `learning` VALUES (78, 199, 'Tự tin hơn với công việc bếp núc.', b'0');
+INSERT INTO `learning` VALUES (79, 199, 'Có thể kinh doanh bán bánh thuần chay online tại nhà hoặc mở tiệm sau khi hoàn ', b'0');
+INSERT INTO `learning` VALUES (80, 199, ' Rèn luyện thêm những kỹ năng làm bánh chuyên nghiệp', b'0');
+INSERT INTO `learning` VALUES (81, 201, 'Phương pháp làm bánh kem sinh nhật  với hơn 20 Làm trang trí ', b'0');
+INSERT INTO `learning` VALUES (82, 201, ' Hướng dẫn pha màu, xếp bánh nhiều tầng', b'0');
+INSERT INTO `learning` VALUES (83, 201, 'Tự tay làm bánh tặng những người thân yêu, đồng nghiệp', b'0');
+INSERT INTO `learning` VALUES (84, 201, 'Các kỹ thuật thực tế về làm bánh theo phong cách hiện đại', b'0');
+INSERT INTO `learning` VALUES (85, 201, 'Kỹ thuật trang trí bánh với kem bơ phong cách Hàn Quốc', b'0');
+INSERT INTO `learning` VALUES (86, 201, 'Mở cửa hàng bánh sinh nhật hoặc kinh doanh online thêm thu nhập', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -482,7 +498,7 @@ CREATE TABLE `lesson`  (
   INDEX `part_id`(`part_id`) USING BTREE,
   CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `lesson_ibfk_2` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson
@@ -501,6 +517,8 @@ INSERT INTO `lesson` VALUES (38, 33, 'Làm được gì sau khi khóa học?', N
 INSERT INTO `lesson` VALUES (39, 34, 'Làm quen với DevTooll', NULL, 3, b'0');
 INSERT INTO `lesson` VALUES (48, 33, 'HTML, CSS là gì?', NULL, 1, b'0');
 INSERT INTO `lesson` VALUES (49, 34, 'Cài đặt môi trường', NULL, 1, b'0');
+INSERT INTO `lesson` VALUES (52, 59, 'Bánh ngọt chay vị Vani - Vanilla vegan cake', NULL, 26, b'0');
+INSERT INTO `lesson` VALUES (53, 59, 'Bánh ngọt chay vị Chocolate - Chocolate vegan cake', NULL, 27, b'0');
 
 -- ----------------------------
 -- Table structure for notifications
@@ -599,7 +617,7 @@ CREATE TABLE `part`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `part_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of part
@@ -618,6 +636,9 @@ INSERT INTO `part` VALUES (53, 3, '123', 0, 0, b'0');
 INSERT INTO `part` VALUES (54, 3, '', 0, 0, b'0');
 INSERT INTO `part` VALUES (55, 1, 'Hoàng Test', 0, 0, b'0');
 INSERT INTO `part` VALUES (58, 187, '5478494', 0, 0, b'0');
+INSERT INTO `part` VALUES (59, 199, 'Các loại bánh thuần chay cơ bản', 0, 0, b'0');
+INSERT INTO `part` VALUES (60, 199, 'Các loại bánh phô mai thuần chay (Vegan cheesecakes)', 0, 0, b'0');
+INSERT INTO `part` VALUES (61, 199, 'Các loại bánh thuần chay khác', 0, 0, b'0');
 
 -- ----------------------------
 -- Table structure for payment
@@ -719,12 +740,12 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 136 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 149 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
 -- ----------------------------
-INSERT INTO `resource_image` VALUES (1, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 5, '2021-05-19 22:29:00');
+INSERT INTO `resource_image` VALUES (1, 'image/default/momo.webp', b'0', '2021-04-05 14:48:50', 2, 4, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (2, 'user/user/image/ganyu-h-1.png', b'0', '2021-05-19 01:20:05', 2, 21, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (3, 'user/user/image/ganyu-h-2.jpg', b'0', '2021-04-05 14:48:50', 2, 10, '2021-05-19 22:29:00');
 INSERT INTO `resource_image` VALUES (4, 'user/user/image/ganyu-h-3.png', b'0', '2021-04-05 14:48:50', 2, 23, '2021-05-19 22:29:00');
@@ -773,7 +794,20 @@ INSERT INTO `resource_image` VALUES (131, 'user/admin/image/j-kelly-brito-PeUJyo
 INSERT INTO `resource_image` VALUES (132, 'https://lh3.googleusercontent.com/a-/AOh14GiKJvNAwn2SdzWX2-VJqxSMJ8oJH1_2VxJSC24W3A=s96-c', b'0', '2021-09-10 22:05:49', NULL, 0, '2021-09-10 22:05:49');
 INSERT INTO `resource_image` VALUES (133, 'https://lh3.googleusercontent.com/a-/AOh14GiKJvNAwn2SdzWX2-VJqxSMJ8oJH1_2VxJSC24W3A=s96-c', b'0', '2021-09-10 22:06:13', NULL, 1, '2021-09-10 22:06:13');
 INSERT INTO `resource_image` VALUES (134, 'https://lh3.googleusercontent.com/a/AATXAJxq_tvbmTdiXnJRAPMDf2nQ9_s9cL1Xy9dytWdZ=s96-c', b'0', '2021-09-14 14:04:03', NULL, 1, '2021-09-14 14:04:03');
-INSERT INTO `resource_image` VALUES (135, 'user/admin/image/girl.bmp', b'0', '2021-09-15 07:03:00', 1, 1, '2021-09-15 07:03:00');
+INSERT INTO `resource_image` VALUES (135, 'user/admin/image/girl.bmp', b'0', '2021-09-15 07:03:00', 1, 0, '2021-09-15 07:03:00');
+INSERT INTO `resource_image` VALUES (136, 'user/admin/image/20-cong-thuc-banh-thuan-chay-tot-cho-suc-khoe_m_1561523976.jpg', b'0', '2021-09-15 08:31:29', 1, 0, '2021-09-15 08:31:29');
+INSERT INTO `resource_image` VALUES (137, 'user/admin/image/20-cong-thuc-banh-thuan-chay-tot-cho-suc-khoe_m_1561523976.jpg', b'0', '2021-09-15 08:45:05', 1, 0, '2021-09-15 08:45:05');
+INSERT INTO `resource_image` VALUES (138, 'user/admin/image/ctnauan.jpg', b'0', '2021-09-15 08:47:43', 1, 1, '2021-09-15 08:47:43');
+INSERT INTO `resource_image` VALUES (139, 'user/admin/image/tu-hoc-lam-18-loai-banh-khong-can-lo-nuong_m_1556177753.jpg', b'0', '2021-09-15 08:52:06', 1, 0, '2021-09-15 08:52:06');
+INSERT INTO `resource_image` VALUES (140, 'user/admin/image/_u-hoc-lam-18-loai-banh-khong-can-lo-nuong_m_1556177753.jpg', b'0', '2021-09-15 08:53:06', 1, 0, '2021-09-15 08:53:06');
+INSERT INTO `resource_image` VALUES (141, 'user/admin/image/_u-hoc-lam-18-loai-banh-khong-can-lo-nuong_m_1556177753.jpg', b'0', '2021-09-15 08:53:39', 1, 0, '2021-09-15 08:53:39');
+INSERT INTO `resource_image` VALUES (142, 'user/admin/image/tu_hoc_lam_18_loai_banh_khong_can_lo_nuong_m_1556177753_jpg', b'0', '2021-09-15 08:54:51', 1, 0, '2021-09-15 08:54:51');
+INSERT INTO `resource_image` VALUES (143, 'user/admin/image/anh_1_1600587301890166145683_webp', b'0', '2021-09-15 08:54:56', 1, 1, '2021-09-15 08:54:56');
+INSERT INTO `resource_image` VALUES (144, 'user/admin/image/tu_hoc_lam_18_loai_banh_khong_can_lo_nuong_m_1556177753.jpg', b'0', '2021-09-15 08:56:15', 1, 0, '2021-09-15 08:56:15');
+INSERT INTO `resource_image` VALUES (145, 'user/admin/image/20_cach_lam_banh_sinh_nhat_hien_dai_m_1555657545_jpg', b'0', '2021-09-15 08:57:10', 1, 1, '2021-09-15 08:57:10');
+INSERT INTO `resource_image` VALUES (146, 'user/admin/image/1609745981038_png', b'0', '2021-09-15 10:07:40', 1, 0, '2021-09-15 10:07:40');
+INSERT INTO `resource_image` VALUES (147, 'user/admin/image/tu_hoc_lam_18_loai_banh_khong_can_lo_nuong_m_1556177753_jpg', b'0', '2021-09-15 10:09:20', 1, 1, '2021-09-15 10:09:20');
+INSERT INTO `resource_image` VALUES (148, 'user/admin/image/vlcsnap_2020_03_13_14h08m47s121_m_png', b'0', '2021-09-15 10:39:47', 1, 1, '2021-09-15 10:39:47');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -826,11 +860,6 @@ CREATE TABLE `spring_session`  (
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session
--- ----------------------------
-INSERT INTO `spring_session` VALUES ('95285392-2471-4bb8-a2b3-f5279520d832', '662f973e-4ac2-4da8-b983-af11be76833e', 1631689350868, 1631689350869, 1800, 1631691150869, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -926,7 +955,7 @@ CREATE TABLE `video`  (
   `user_poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`img_poster_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
@@ -939,9 +968,26 @@ INSERT INTO `video` VALUES (5, 'user/admin/video/171/mp4/Mô hình Client - Serv
 INSERT INTO `video` VALUES (6, 'user/admin/video/default/mp4/Character Teaser - Ganyu A Night in Liyue Harbor  Genshin Impact', 11, 10000000, 170, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (8, 'user/admin/video/default/mp4/SƠN TÙNG M-TP  MUỘN RỒI MÀ SAO CÒN  OFFICIAL MUSIC VIDEO', 11, 10000000, 2, b'0', b'0', '2021-05-19 15:41:11', '2021-05-19 15:41:11', 1);
 INSERT INTO `video` VALUES (22, 'user/admin/video/Trailer game Độc Cô Cửu Kiếm mobile.mp4', NULL, 0, 1, b'1', b'0', '2021-06-06 17:28:26', '2021-06-06 17:28:26', 1);
-INSERT INTO `video` VALUES (23, 'user/admin/video/toystory.mp4', NULL, 0, 0, b'1', b'0', '2021-06-10 16:20:39', '2021-06-10 16:20:39', 1);
-INSERT INTO `video` VALUES (24, 'user/admin/video/toystory.mp4', NULL, 0, 0, b'1', b'0', '2021-06-10 16:22:02', '2021-06-10 16:22:02', 1);
-INSERT INTO `video` VALUES (25, 'user/admin/video/toystory.mp4', NULL, 0, 0, b'1', b'0', '2021-06-10 16:30:09', '2021-06-10 16:30:09', 1);
+INSERT INTO `video` VALUES (26, 'user/admin/video/toystory_23.mp4', NULL, 0, 1, b'1', b'0', '2021-09-15 08:37:02', '2021-09-15 08:37:02', 1);
+INSERT INTO `video` VALUES (27, 'user/admin/video/toystory_23.mp4', NULL, 0, 1, b'1', b'0', '2021-09-15 08:38:11', '2021-09-15 08:38:11', 1);
+INSERT INTO `video` VALUES (39, 'user/admin/video/toystory_26_mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:33:33', '2021-09-15 09:33:33', 1);
+INSERT INTO `video` VALUES (40, 'user/admin/video/Mu_n_r_i_m__sao_c_n_ch_a_ng__26_mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:42:56', '2021-09-15 09:42:56', 1);
+INSERT INTO `video` VALUES (41, 'user/admin/video/Mu_n_r_i_m__sao_c_n_ch_a_ng__26_mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:45:00', '2021-09-15 09:45:00', 1);
+INSERT INTO `video` VALUES (42, 'user/admin/video/Mu_n_r_i_m__sao_c_n_ch_a_ng__26_mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:46:23', '2021-09-15 09:46:23', 1);
+INSERT INTO `video` VALUES (43, 'user/admin/video/Mu_n_r_i_m__sao_c_n_ch_a_ng__26_mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:48:45', '2021-09-15 09:48:45', 1);
+INSERT INTO `video` VALUES (44, 'user/admin/video/Mu_n_r_i_m__sao_c_n_ch_a_ng__26_mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:50:20', '2021-09-15 09:50:20', 1);
+INSERT INTO `video` VALUES (45, 'user/admin/video/Mu_n_r_i_m__sao_c_n_ch_a_ng__26_mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:50:57', '2021-09-15 09:50:57', 1);
+INSERT INTO `video` VALUES (46, 'user/admin/video/Mu_n_r_i_m__sao_c_n_ch_a_ng__33.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:51:41', '2021-09-15 09:51:41', 1);
+INSERT INTO `video` VALUES (47, 'user/admin/video/Mu_n_r_i_m__sao_c_n_ch_a_ng__27.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 09:52:20', '2021-09-15 09:52:20', 1);
+INSERT INTO `video` VALUES (48, 'user/admin/video/lambanh.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 10:10:39', '2021-09-15 10:10:39', 1);
+INSERT INTO `video` VALUES (49, 'user/admin/video/lambanh.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 10:11:34', '2021-09-15 10:11:34', 1);
+INSERT INTO `video` VALUES (50, 'user/admin/video/20_c_ng_th_c_b_nh_thu_n_chay_t_t_cho_s_c_kh_e___L__Th_y_Xu_n.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 10:14:35', '2021-09-15 10:14:35', 1);
+INSERT INTO `video` VALUES (51, 'user/admin/video/T__l_m_18_lo_i_b_nh_t_i_nh__kh_ng_c_n_l__n__ng___L__Th_y_Xu_n.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 10:29:27', '2021-09-15 10:29:27', 1);
+INSERT INTO `video` VALUES (52, 'user/admin/video/lambanh.mp4', NULL, 0, 1, b'1', b'0', '2021-09-15 10:30:29', '2021-09-15 10:30:29', 1);
+INSERT INTO `video` VALUES (53, 'user/admin/video/T__l_m_18_lo_i_b_nh_t_i_nh__kh_ng_c_n_l__n__ng___L__Th_y_Xu_n.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 10:30:49', '2021-09-15 10:30:49', 1);
+INSERT INTO `video` VALUES (54, 'user/admin/video/T__l_m_18_lo_i_b_nh_t_i_nh__kh_ng_c_n_l__n__ng___L__Th_y_Xu_n.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 10:32:41', '2021-09-15 10:32:41', 1);
+INSERT INTO `video` VALUES (55, 'user/admin/video/T__l_m_18_lo_i_b_nh_t_i_nh__kh_ng_c_n_l__n__ng___L__Th_y_Xu_n.mp4', NULL, 0, 0, b'1', b'0', '2021-09-15 10:33:48', '2021-09-15 10:33:48', 1);
+INSERT INTO `video` VALUES (56, 'user/admin/video/T__l_m_18_lo_i_b_nh_t_i_nh__kh_ng_c_n_l__n__ng___L__Th_y_Xu_n.mp4', NULL, 0, 1, b'1', b'0', '2021-09-15 10:35:35', '2021-09-15 10:35:35', 1);
 
 -- ----------------------------
 -- Triggers structure for table app_user

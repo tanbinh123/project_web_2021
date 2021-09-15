@@ -157,11 +157,14 @@ public class CourseAdminRest {
 		if(description==null)description="";
 		String price=body.get("price");
 		String discount=body.get("discount");
+		String categoryId=body.get("categoryId");
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));
 		System.out.println(String.format("OriginPrice: %s", price));
 		System.out.println(String.format("discount: %s", discount));
+		System.out.println(String.format("categoryId: %s", categoryId));
 		if(discount==null||!discount.matches("^[0-9]+$"))discount="0";
+		if(categoryId==null||!categoryId.matches("^[0-9]+$"))return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Request 'categoryId'.", "Thiếu 'categoryId'"));
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
@@ -172,6 +175,7 @@ public class CourseAdminRest {
 				fullcourse.setDiscount(Integer.parseInt(discount));
 				fullcourse.setTitle(title);
 				fullcourse.setUpdateAt(new Date());
+				fullcourse.setCategoryId(Integer.parseInt(categoryId));
 				try {
 					FullCourse rs = courseDAO.merge(fullcourse);
 					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
@@ -293,7 +297,7 @@ public class CourseAdminRest {
 			@RequestPart(required=true) String title,
 			@RequestPart(required=false) String description,
 			@RequestPart(required=true) String price,
-			@RequestPart(required=true) String categorie,
+			@RequestPart(required=true) String categoryId,
 			@RequestPart(required=false) String discount,
 			@RequestPart(required=true) MultipartFile imageThumbnail,
 			Authentication authentication
@@ -303,7 +307,7 @@ public class CourseAdminRest {
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));
 		System.out.println(String.format("OriginPrice: %s", price));
-		System.out.println(String.format("categorie: %s", categorie));
+		System.out.println(String.format("categoryId: %s", categoryId));
 		System.out.println(String.format("discount: %s", discount));
 		if(discount==null||!discount.matches("^[0-9]+$"))discount="0";
 		if (authentication != null) {
@@ -325,7 +329,7 @@ public class CourseAdminRest {
 				fullcourse.setUserPosterId(appUser.getId());
 				fullcourse.setUserPoster(appUser);
 				//fullcourse.setImagePosterId(Long.valueOf(2));
-				fullcourse.setCategoryId(Integer.valueOf(categorie));
+				fullcourse.setCategoryId(Integer.valueOf(categoryId));
 				fullcourse.setDescription(description);
 				fullcourse.setOriginPrice(new BigDecimal(price));
 				fullcourse.setDiscount(Integer.parseInt(discount));

@@ -487,7 +487,7 @@ public class CourseDAO {
 				}
 			} else {
 				Learning tmp = entityManager.find(Learning.class, l.getId());
-				if(tmp.getCourseId()==course.getId())
+				if(tmp.getCourseId().equals(course.getId()))
 				entityManager.merge(l);else {
 					throw new Exception("Learning này thuộc về khóa học khác");
 				}

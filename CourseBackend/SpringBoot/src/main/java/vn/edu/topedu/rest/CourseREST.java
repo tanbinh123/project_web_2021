@@ -190,6 +190,7 @@ public class CourseREST implements IMyHost {
 					
 					try {
 						PreviewCourseEntity rs = courseDAO.getPreviewCourse(idCourse );
+						rs.setBeforeResource(httpServletRequest);
 						if(rs!=null) {						
 							
 							

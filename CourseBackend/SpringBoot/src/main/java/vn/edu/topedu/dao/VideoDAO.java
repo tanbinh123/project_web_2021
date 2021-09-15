@@ -128,7 +128,10 @@ public class VideoDAO {
 			try {
 				VideoEntity image = new VideoEntity();
 				pathContain = String.format("user/%s/video", appUser.getUsername());
-				image.setVideo(pathContain + "/" + uploadVideo.getOriginalFilename());
+				String originImage=uploadVideo.getOriginalFilename();
+				originImage=originImage.replaceAll("[^0-9a-zA-Z\\.]", "_");
+				image.setVideo(pathContain + "/" + originImage);
+				
 				image.setAppUser(appUser);
 				newFile=save(image);
 				
@@ -136,7 +139,7 @@ public class VideoDAO {
 				
 				String filename= 
 				newFile.absPath();
-				System.out.println(String.format("File: %s", uploadVideo.getOriginalFilename()));
+				System.out.println(String.format("File: %s", filename));
 				File p = FileProcess.getPath(filename).toFile();
 				System.out.println(p.getAbsolutePath());
 				p.getParentFile().mkdirs();
@@ -158,6 +161,50 @@ public class VideoDAO {
 			}
 		}
 		return newFile;
+	}
+	
+	public String fullName(String filename) {
+		
+		Matcher m = Pattern.compile("^(.+)(_\\d*)\\.([0-9a-zA-Z]+)$").matcher(filename);
+		if (m.find()) {
+			String name = m.group(1) ;//+ "_" + this.getId();
+			String extend = m.group(3);
+
+//			System.err.println(String.format("Name: %s", name));
+//			System.err.println(String.format("Extend: %s", extend));
+			filename = name + "." + extend;
+			return filename;
+
+		}
+		m = Pattern.compile("^(.+)\\.([0-9a-zA-Z]+)$").matcher(filename);
+		if (m.find()) {
+			String name = m.group(1) ;//+ "_" + this.getId();
+			String extend = m.group(2);
+
+//				System.err.println(String.format("Name: %s", name));
+//				System.err.println(String.format("Extend: %s", extend));
+			filename = name + "." + extend;
+			return filename;
+		}
+
+		m = Pattern.compile("^(.+)(_\\d*)$").matcher(filename);
+		if (m.find()) {
+			String name = m.group(1);// + "_" + this.getId();
+			filename = name;
+
+			return filename;
+		}
+
+		m = Pattern.compile("^(.+)$").matcher(filename);
+		if (m.find()) {
+			String name = m.group(1) ;//+ "_" + this.getId();
+//				System.err.println(String.format("Name: %s", name));
+//				System.err.println(String.format("Extend: %s", extend));
+			filename = name;
+
+			return filename;
+		}
+		return filename;
 	}
 
 }

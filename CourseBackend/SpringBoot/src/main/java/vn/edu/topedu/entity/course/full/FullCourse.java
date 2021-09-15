@@ -158,6 +158,8 @@ public class FullCourse extends BaseCourse {
 							x.getVideo().setBeforeResource(beforeResource);
 					});
 			});
+		if (this.demo != null)
+			this.demo.setBeforeResource(beforeResource);
 //		if(this.evaluates!=null)
 //		for(EvaluateEntity e: this.getEvaluates()) {						
 //			e.getUserPoster().getAvatar().setBeforeResource(beforeResource);
@@ -184,7 +186,7 @@ public class FullCourse extends BaseCourse {
 			});
 
 	}
-
+	
 
 	
 }
