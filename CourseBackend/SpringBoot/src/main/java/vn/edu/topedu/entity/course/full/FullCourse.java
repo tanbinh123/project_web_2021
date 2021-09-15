@@ -23,13 +23,14 @@ import vn.edu.topedu.entity.BaseEntity;
 import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.ResourceImage;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.utils.WebUtils;
 
 @Entity
 @Table(name = "Course")
 @DynamicUpdate
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FullCourse extends BaseEntity {
+public class FullCourse extends BaseCourse {
 
 	
 	@Column(name = "demo_id", length = 20, nullable = false)
@@ -40,36 +41,17 @@ public class FullCourse extends BaseEntity {
 	@JoinColumn(name = "demo_id", referencedColumnName = "id" ,insertable = false, updatable = false)
 	private VideoEntity demo;
 
-	@Column(name = "user_poster_id", nullable = false)
-	//@JsonIgnore
-	private Long userPosterId;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_poster_id", nullable = false, insertable = false, updatable = false)
-	@JsonIgnore
-	private AppUser userPoster;
 	
 	
 	
-	@Column(name = "img_poster_id", nullable = false)
-	//@JsonIgnore
-	private Long imagePosterId;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "img_poster_id", referencedColumnName = "id", insertable = false, updatable = false)
-	private ResourceImage imagePoster;
-
-	@Column(name = "description", length = 255,nullable = true)
-	private String description = "";
-	
-	
-	@Column(name = "title", length = 255, nullable = false)
-	private String title = "";
 	
 	
 	
-	@Column(name = "price", length = 15, nullable = false)
-	private BigDecimal price = new BigDecimal(0);
+	
+	
+	
+	
+	
 
 	@OneToMany(mappedBy = "course", cascade= {CascadeType.ALL})
 	private List<Learning> learnings;
@@ -80,15 +62,7 @@ public class FullCourse extends BaseEntity {
 	@JsonIgnore
 	private List<EvaluateEntity> evaluates;
 
-	//@JsonIgnore
-	@Column(name = "category_id", nullable = false)
-	private Integer categoryId;
-	@ManyToOne
-	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
-	private CategoryEntity category;
-
-	@Column(name = "actived", length = 1, nullable = false)
-	protected Boolean actived = true;
+	
 	
 
 
@@ -118,39 +92,8 @@ public class FullCourse extends BaseEntity {
 
 	
 
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-	
-	public AppUser getUserPoster() {
-		return userPoster;
-	}
-
-	public void setUserPoster(AppUser userPoster) {
-		this.userPoster = userPoster;
-	}
-
-	public Long getImagePosterId() {
-		return imagePosterId;
-	}
-
-	public void setImagePosterId(Long imagePosterId) {
-		this.imagePosterId = imagePosterId;
-	}
-
-	public CategoryEntity getCategory() {
-		return category;
-	}
-	
 	
 
-	public void setCategory(CategoryEntity category) {
-		this.category = category;
-	}
 
 	public List<Learning> getLearnings() {
 		return learnings;
@@ -172,14 +115,6 @@ public class FullCourse extends BaseEntity {
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public Boolean getDeleted() {
 		return deleted;
 	}
@@ -188,35 +123,12 @@ public class FullCourse extends BaseEntity {
 		this.deleted = deleted;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
 	
 	
 	
 
 
 
-	public Long getUserPosterId() {
-		return userPosterId;
-	}
-
-	public void setUserPosterId(Long posterId) {
-		this.userPosterId = posterId;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
 
 
 	public VideoEntity getDemo() {
@@ -235,20 +147,9 @@ public class FullCourse extends BaseEntity {
 		this.parts = parts;
 	}
 
-	public ResourceImage getImagePoster() {
-		return imagePoster;
-	}
-
-	public void setImagePoster(ResourceImage poster) {
-		this.imagePoster = poster;
-	}
-
 	
 	public void setBeforeResource(String beforeResource) {
-		if (this.imagePoster != null)
-			this.imagePoster.setBeforeResource(beforeResource);
-		if (this.demo != null)
-			this.demo.setBeforeResource(beforeResource);
+		super.setBeforeResource(beforeResource);
 		if (this.parts != null)
 			this.parts.forEach(e -> {
 				if (e.getLessons() != null)
@@ -268,9 +169,9 @@ public class FullCourse extends BaseEntity {
 		return true;
 	}
 	public void setBeforeResource(HttpServletRequest httpServletRequest) {
+		super.setBeforeResource(httpServletRequest);
 		String beforeResource = WebUtils.getUrl(httpServletRequest);
-		if (this.imagePoster != null)
-			this.imagePoster.setBeforeResource(beforeResource);
+		
 		if (this.demo != null)
 			this.demo.setBeforeResource(beforeResource);
 		if (this.parts != null)

@@ -26,7 +26,7 @@ import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.OwerCourseDAO;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.EvaluateEntity;
-import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
 import vn.edu.topedu.response.MessageResponse;
@@ -172,7 +172,7 @@ public class EvaluateREST {
 					
 					
 					@SuppressWarnings({ "rawtypes", "unchecked" })
-					PageResponse<Course> pageResponse = new PageResponse(rs, _limit, _page, count, new Pagination() {
+					PageResponse<BaseCourse> pageResponse = new PageResponse(rs, _limit, _page, count, new Pagination() {
 						public String get_sort() {
 							return _sort;
 						}
@@ -184,7 +184,7 @@ public class EvaluateREST {
 				catch (NoResultException e) {
 					System.err.println(e.getMessage());
 					@SuppressWarnings({ "rawtypes", "unchecked" })
-					PageResponse<Course> pageResponse = new PageResponse(new ArrayList<>(), 1, 1, 0, new Pagination() {
+					PageResponse<BaseCourse> pageResponse = new PageResponse(new ArrayList<>(), 1, 1, 0, new Pagination() {
 						public String get_sort() {
 							return _sort;
 						}

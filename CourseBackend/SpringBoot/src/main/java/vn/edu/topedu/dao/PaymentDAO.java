@@ -15,7 +15,7 @@ import vn.edu.topedu.entity.ActiveAccount;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.entity.RequestResetPassword;
-import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.utils.WebUtils;
 
 @Repository

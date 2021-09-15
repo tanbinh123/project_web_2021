@@ -25,7 +25,7 @@ import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.entity.RequestResetPassword;
 import vn.edu.topedu.entity.ResourceImage;
-import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.model.Video;

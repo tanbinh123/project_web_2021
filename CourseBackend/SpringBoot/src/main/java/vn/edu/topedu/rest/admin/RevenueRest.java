@@ -41,7 +41,7 @@ import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.ImageAdminEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.Revenue;
-import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.course.full.Lesson;
 import vn.edu.topedu.entity.course.full.Part;
@@ -93,7 +93,7 @@ public class RevenueRest {
 			List<Revenue> rs = revenueDAO.getData(_page,_limit,_sort,_search,day,month,year );
 			Long count = revenueDAO.countData(day,month,year, _search);	
 			@SuppressWarnings({ "rawtypes", "unchecked" })
-			PageResponse<Course> pageResponse = new PageResponse(rs, _limit, _page, count, new Pagination() {
+			PageResponse<BaseCourse> pageResponse = new PageResponse(rs, _limit, _page, count, new Pagination() {
 				public String get_sort() {
 					return _sort;
 				}

@@ -82,9 +82,9 @@ public class CourseREST implements IMyHost {
 		for (Course c : lstCourse) {
 			String bf = getUrl(httpServletRequest);
 			//c.setBeforeResource();
-			c.getAppUser().getAvatar().setBeforeResource(bf);
-			if(c.getPoster()!=null)
-			c.getPoster().setBeforeResource(bf);
+			c.getUserPoster().getAvatar().setBeforeResource(bf);
+			
+			c.setBeforeResource(bf);
 			
 
 		}
@@ -141,8 +141,7 @@ public class CourseREST implements IMyHost {
 				List<Course> lstCourse = owerCourseDAO.querryAllBought(appUser.getId());
 				for (Course c : lstCourse) {
 					String bf = getUrl(httpServletRequest);
-					c.getAppUser().getAvatar().setBeforeResource(bf);
-					c.getPoster().setBeforeResource(bf);
+					c.setBeforeResource(bf);
 				}
 				// System.err.println(lstCategories);
 				return ResponseEntity.ok(lstCourse);

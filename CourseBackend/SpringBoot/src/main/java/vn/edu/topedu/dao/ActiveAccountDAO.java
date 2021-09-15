@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.topedu.entity.ActiveAccount;
 import vn.edu.topedu.entity.RequestResetPassword;
-import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.BaseCourse;
 
 @Repository
 @Transactional

@@ -22,7 +22,7 @@ import vn.edu.topedu.dao.AppUserDAO;
 import vn.edu.topedu.dto.DTOAppRole;
 import vn.edu.topedu.entity.AppRole;
 import vn.edu.topedu.entity.AppUser;
-import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.PageResponse.Pagination;
@@ -63,7 +63,7 @@ public class AppRoleREST {
 					
 //					rs.getUserPoster().getAvatar().setBeforeResource(WebUtils.getUrl(httpServletRequest));
 					 @SuppressWarnings({ "rawtypes", "unchecked" })
-						PageResponse<Course> pageResponse = new PageResponse(rs, _limit, _page, count, new Pagination() {
+						PageResponse<BaseCourse> pageResponse = new PageResponse(rs, _limit, _page, count, new Pagination() {
 							public String get_sort() {
 								return _sort;
 							}
@@ -74,7 +74,7 @@ public class AppRoleREST {
 				} 
 				catch (NoResultException e) {
 					 @SuppressWarnings({ "rawtypes", "unchecked" })
-						PageResponse<Course> pageResponse = new PageResponse(new ArrayList<>(), 1	, 1, 0, new Pagination() {
+						PageResponse<BaseCourse> pageResponse = new PageResponse(new ArrayList<>(), 1	, 1, 0, new Pagination() {
 							public String get_sort() {
 								return _sort;
 							}

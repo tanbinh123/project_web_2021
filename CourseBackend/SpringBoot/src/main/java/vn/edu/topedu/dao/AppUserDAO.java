@@ -16,7 +16,7 @@ import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.UserRole;
-import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.utils.WebUtils;
 
 @Repository
@@ -188,11 +188,11 @@ public class AppUserDAO {
 
 	}
 
-	public List<Course> getCourseFromAccountPost(Long userId) {
-		String sql = "Select c from " + Course.class.getName() + " c " //
+	public List<BaseCourse> getCourseFromAccountPost(Long userId) {
+		String sql = "Select c from " + BaseCourse.class.getName() + " c " //
 				+ " where c.appUser.id = :userId ";
 
-		Query query = this.entityManager.createQuery(sql, Course.class);
+		Query query = this.entityManager.createQuery(sql, BaseCourse.class);
 		query.setParameter("userId", userId);
 		return query.getResultList();
 	}

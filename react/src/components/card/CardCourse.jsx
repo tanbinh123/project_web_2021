@@ -106,6 +106,7 @@ CardCourse.propTypes = {
   nameAuthor: PropTypes.string,
   bought: PropTypes.number,
   price: PropTypes.number,
+  originPrice: PropTypes.number,
   rateStar: PropTypes.number,
 };
 
@@ -118,6 +119,7 @@ CardCourse.defaultProps = {
   nameAuthor: '',
   bought: 0,
   price: 0,
+  originPrice:0,
   rateStar: 0,
 };
 export default function CardCourse(props) {
@@ -132,6 +134,7 @@ export default function CardCourse(props) {
     rateStar,
     bought,
     price,
+    originPrice,
     discount = 0,
   } = props;
   const [tmpDescription, setTmpDescription] = useState(description);
@@ -216,7 +219,7 @@ export default function CardCourse(props) {
               )}
             </div>
             <div className={classes.moneyBefore}>
-              <span>{convertVND(price)}</span>
+              <span>{convertVND(originPrice)}</span>
             </div>
           </Grid>
           <Grid item xl={3} lg={5} md={5} sm={5} xs={5}>

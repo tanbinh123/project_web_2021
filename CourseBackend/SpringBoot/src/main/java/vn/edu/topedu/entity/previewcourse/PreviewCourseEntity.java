@@ -26,6 +26,7 @@ import vn.edu.topedu.entity.AHasResource;
 import vn.edu.topedu.entity.EvaluateEntity;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.ResourceImage;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.entity.course.full.Learning;
 import vn.edu.topedu.entity.course.full.Part;
 import vn.edu.topedu.entity.course.full.VideoEntity;
@@ -33,22 +34,16 @@ import vn.edu.topedu.utils.WebUtils;
 
 @Entity
 @Table(name = "Course")
-public class PreviewCourseEntity extends AHasPoster {
+public class PreviewCourseEntity extends BaseCourse {
 
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "img_poster_id", referencedColumnName = "id")
-	private ResourceImage imagePoster;
 
-	@Column(name = "description", length = 255)
-	private String description = "";
-	@Column(name = "title", length = 255, nullable = false)
-	private String title = "";
+
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "demo_id", referencedColumnName = "id")
 	private VideoEntity demo;
-	@Column(name = "price", length = 15, nullable = false)
-	private BigDecimal price = new BigDecimal(0);
+	
 
 	@OneToMany(mappedBy = "course")
 	private List<Learning> learnings;
@@ -86,13 +81,6 @@ public class PreviewCourseEntity extends AHasPoster {
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public Boolean getDeleted() {
 		return deleted;
@@ -102,31 +90,10 @@ public class PreviewCourseEntity extends AHasPoster {
 		this.deleted = deleted;
 	}
 
-	public String getTitle() {
-		return title;
-	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
 
 	
 
-	public ResourceImage getImagePoster() {
-		return imagePoster;
-	}
-
-	public void setImagePoster(ResourceImage imagePoster) {
-		this.imagePoster = imagePoster;
-	}
 
 	public VideoEntity getDemo() {
 		return demo;
@@ -147,22 +114,19 @@ public class PreviewCourseEntity extends AHasPoster {
 	
 
 	public void setBeforeResource(String bf) {
+		super.setBeforeResource(bf);
 		
-		if (this.imagePoster != null)
-			this.imagePoster.setBeforeResource(bf);
 		if (this.demo != null)
 			this.demo.setBeforeResource(bf);
-		if (this.getAppUser() != null&&this.getAppUser().getAvatar() != null)
-		this.getAppUser().getAvatar().setBeforeResource(bf);
+		
 	}
 	public void setBeforeResource(HttpServletRequest httpServletRequest) {
+		super.setBeforeResource(httpServletRequest);
 		String bf = WebUtils.getUrl(httpServletRequest);
-		if (this.imagePoster != null)
-			this.imagePoster.setBeforeResource(bf);
+		
 		if (this.demo != null)
 			this.demo.setBeforeResource(bf);
-		if (this.getAppUser() != null&&this.getAppUser().getAvatar() != null)
-		this.getAppUser().getAvatar().setBeforeResource(bf);
+	
 	}
 
 }

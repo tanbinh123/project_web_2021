@@ -17,7 +17,7 @@ import vn.edu.topedu.dto.RevenueYear;
 import vn.edu.topedu.entity.NotificationEntity;
 import vn.edu.topedu.entity.OwerCourse;
 import vn.edu.topedu.entity.Revenue;
-import vn.edu.topedu.entity.course.Course;
+import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.utils.WebUtils;
 
 @Repository
