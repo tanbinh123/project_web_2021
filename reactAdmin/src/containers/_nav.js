@@ -53,6 +53,14 @@ const _nav = [
     ),
   },
   {
+    _tag: "CSidebarNavItem",
+    name: "Danh sách thông báo",
+    to: "/list/notification",
+    icon: (
+      <CIcon content={freeSet.cilImage} customClasses="c-sidebar-nav-icon" />
+    ),
+  },
+  {
     _tag: "CSidebarNavTitle",
     _children: ["Form tạo mới"],
   },

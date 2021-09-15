@@ -9,6 +9,7 @@ import UserDetailt from "./views/list/users/userDetailt/UserDetailt";
 import BackgroundHome from "./views/list/backgroundHome/BackgroundHome";
 import FImageBackgroundHome from "./views/form/imageBackgroundHome/FImageBackgroundHome";
 import UserUpdateRole from "./views/list/users/userDetailt/UserUpdateRole";
+import ListNotification from "./views/list/notification/ListNotification";
 
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
@@ -108,6 +109,12 @@ const routes = [
     path: "/list/image-background-home",
     name: "Danh sách hình nền trang chủ",
     component: BackgroundHome,
+    exact: true,
+  },
+  {
+    path: "/list/notification",
+    name: "Danh sách thông báo",
+    component: ListNotification,
     exact: true,
   },
   { path: "/form/course", name: "Form Course", component: FCourse },

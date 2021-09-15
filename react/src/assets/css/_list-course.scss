@@ -62,6 +62,13 @@
   width: 59px;
   border-radius: 0 4px 4px 0;
   margin-left: 12px;
+  &.red {
+    background-color: #e74c3c;
+  }
+
+  &.red:after {
+    border-right-color: #e74c3c;
+  }
 }
 
 .discount-label:after {
@@ -99,51 +106,4 @@
   font-family: 'Raleway', Helvetica;
   margin-left: 5px;
   line-height: 15px;
-}
-
-.red {
-  background-color: #e74c3c;
-}
-
-.red:after {
-  border-right-color: #e74c3c;
-}
-
-.blue {
-  background-color: #1883db;
-}
-.blue:after {
-  border-right-color: #1883db;
-}
-
-.green {
-  background-color: #16b516;
-}
-
-.green:after {
-  border-right-color: #16b516;
-}
-
-.yellow {
-  background-color: #feaa00;
-}
-
-.yellow:after {
-  border-right-color: #feaa00;
-}
-
-.gray {
-  background-color: #737373;
-}
-
-.gray:after {
-  border-right-color: #737373;
-}
-
-.black {
-  background-color: #000;
-}
-
-.black:after {
-  border-right-color: #000;
 }

@@ -1,13 +1,14 @@
-import { Avatar, Grid } from "@material-ui/core";
-import { Camera } from "@material-ui/icons";
-import React from "react";
-import { isEmpty } from "../../../components/tools/Tools";
-import InfoCss from "./css/InfoCss";
+import { Avatar, Grid } from '@material-ui/core';
+import { Camera } from '@material-ui/icons';
+import React from 'react';
+import { isEmpty } from '../../../components/tools/Tools';
+import InfoCss from './css/InfoCss';
 Info.propTypes = {};
 
 function Info(props) {
   const classes = InfoCss();
   //isEmpty(props.profile)||console.log("info", props.profile);
+  console.log(props?.profile);
   return (
     <div className={classes.rightRoot}>
       <Grid container className="backround__header">
@@ -35,7 +36,7 @@ function Info(props) {
             <li>
               <span>
                 Giới tính: {/* <i className="fas fa-mars"></i> */}
-                {props?.profile?.gender === "NAM" ? (
+                {props?.profile?.gender === 'NAM' ? (
                   <i className="fas fa-mars"></i>
                 ) : (
                   <i className="fas fa-venus" title="Nữ"></i>
@@ -44,15 +45,29 @@ function Info(props) {
             </li>
             <li>Ngày sinh: {props?.profile?.birthDay}</li>
             <li>
-              <span>SĐT: {props?.profile?.phone}</span>
+              <a href={`tel:+${props?.profile?.phone}`}>
+                <span>SĐT: {props?.profile?.phone}</span>
+              </a>
             </li>
             <li>
               <ul>
                 <li>
-                  <i className="fab fa-facebook-square"></i>
+                  <a
+                    href={`http://${props?.profile?.facebook}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-facebook-square"></i>
+                  </a>
                 </li>
                 <li>
-                  <i className="fab fa-google"></i>
+                  <a
+                    href={`mailto:${props?.profile?.email}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-google"></i>
+                  </a>
                 </li>
               </ul>
             </li>
