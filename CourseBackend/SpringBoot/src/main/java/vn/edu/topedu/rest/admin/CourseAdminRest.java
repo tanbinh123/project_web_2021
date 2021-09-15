@@ -157,11 +157,14 @@ public class CourseAdminRest {
 		if(description==null)description="";
 		String price=body.get("price");
 		String discount=body.get("discount");
+		String categoryId=body.get("categoryId");
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));
 		System.out.println(String.format("OriginPrice: %s", price));
 		System.out.println(String.format("discount: %s", discount));
+		System.out.println(String.format("categoryId: %s", categoryId));
 		if(discount==null||!discount.matches("^[0-9]+$"))discount="0";
+		if(categoryId==null||!categoryId.matches("^[0-9]+$"))return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Request 'categoryId'.", "Thiếu 'categoryId'"));
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
@@ -172,6 +175,7 @@ public class CourseAdminRest {
 				fullcourse.setDiscount(Integer.parseInt(discount));
 				fullcourse.setTitle(title);
 				fullcourse.setUpdateAt(new Date());
+				fullcourse.setCategoryId(Integer.parseInt(categoryId));
 				try {
 					FullCourse rs = courseDAO.merge(fullcourse);
 					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));

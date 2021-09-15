@@ -86,7 +86,7 @@ function BaseCourseForm(props) {
       price: dataCourse?.price,
       discount: dataCourse?.discount || 0,
       description: dataCourse?.description,
-      categorie: dataCourse?.category?.id,
+      categoryId: dataCourse?.category?.id,
     },
     resolver: yupResolver(schema),
   });
@@ -163,7 +163,7 @@ function BaseCourseForm(props) {
           <div>
             <span>Chọn thể loại</span>
             <CustomSelectForm
-              name={"categorie"}
+              name={"categoryId"}
               label="Chọn thể loại"
               data={dataSelect}
               form={form}

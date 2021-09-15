@@ -136,13 +136,13 @@ function FBaseCourse(props) {
       price: dataCourse?.price || "",
       discount: dataCourse?.discount || 0,
       description: dataCourse?.description || "",
-      categorie: dataCourse?.category?.id || "",
+      categoryId: dataCourse?.categoryId?.id || "",
     },
     resolver: yupResolver(schema),
   });
   const handleOnSubmit = (values) => {
     console.log(values);
-    if (isEmpty(values.categorie)) {
+    if (isEmpty(values.categoryId)) {
       enqueueSnackbar("Vui lòng chọn thể loại", { variant: "error" });
       return;
     }
@@ -156,7 +156,7 @@ function FBaseCourse(props) {
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("imageThumbnail", values.imageThumbnail);
-      formData.append("categorie", values.categorie);
+      formData.append("categoryId", values.categoryId);
       formData.append("price", values.price);
       formData.append("discount", values.discount);
       formData.append("description", values.description);
@@ -266,7 +266,7 @@ function FBaseCourse(props) {
           <div>
             <span>Chọn thể loại</span>
             <CustomSelectForm
-              name={"categorie"}
+              name={"categoryId"}
               label="Chọn thể loại"
               data={dataSelect}
               form={form}

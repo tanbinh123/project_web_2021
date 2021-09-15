@@ -91,6 +91,7 @@ public class VideoEntity extends AHasResource {
 //				||!this.video.contains("HTTP")
 			) {
 				super.setBeforeResource(beforeResource);
+				//if(this.demo!=null)this.de
 			}
 	}
 
@@ -111,18 +112,19 @@ public class VideoEntity extends AHasResource {
 	@JsonIgnore
 	public String absPath() {
 		String filename = this.video;
-		Matcher m = Pattern.compile("^(.+)(_\\d*)\\.(\\w+)$").matcher(filename);
+		System.err.println(filename);
+		Matcher m = Pattern.compile("^(.+)(_\\d*)\\.(mp4)$").matcher(filename);
 		if (m.find()) {
 			String name = m.group(1) + "_" + this.getId();
 			String extend = m.group(3);
 
-//			System.err.println(String.format("Name: %s", name));
-//			System.err.println(String.format("Extend: %s", extend));
+			System.err.println(String.format("Name: %s", name));
+			System.err.println(String.format("Extend: %s", extend));
 			filename = name + "." + extend;
 			return filename;
 
 		}
-		m = Pattern.compile("^(.+)\\.(\\w+)$").matcher(filename);
+		m = Pattern.compile("^(.+)\\.(mp4)$").matcher(filename);
 		if (m.find()) {
 			String name = m.group(1) + "_" + this.getId();
 			String extend = m.group(2);
@@ -144,8 +146,8 @@ public class VideoEntity extends AHasResource {
 		m = Pattern.compile("^(.+)$").matcher(filename);
 		if (m.find()) {
 			String name = m.group(1) + "_" + this.getId();
-//				System.err.println(String.format("Name: %s", name));
-//				System.err.println(String.format("Extend: %s", extend));
+			//System.err.println(String.format("Name: %s", name));
+//			System.err.println(String.format("Extend: %s", extend));
 			filename = name;
 
 			return filename;

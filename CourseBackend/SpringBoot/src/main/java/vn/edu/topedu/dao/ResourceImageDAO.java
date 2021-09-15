@@ -121,19 +121,29 @@ public class ResourceImageDAO {
 
 			List<ResourceImage> a = getResourceImagesNoLinked();
 			for (ResourceImage ri : a) {
+				String str=ri.getAbsPath();
+				if (str != null
+						&& (str.contains("http") || str.contains("data:image"))) {
+					continue;
+				}
 				Path path = FileProcess.getPath(ri.getAbsPath());
+				//if(path.to)
 				if(path.toFile().delete()) {
 					System.err.println(String.format("Delete file: %s", path.toString()));
+					
 				};
 			}
 			String sql = "delete from " + ResourceImage.class.getName() + " where countLinked=0 and deleted=true ";
 			Query query = this.entityManager.createQuery(sql);
+			
 
 			
 			return query.executeUpdate();
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
+		
+		
 	}
 	@Transactional
 	public ResourceImage uploadImage(MultipartFile uploadAvatar, AppUser appUser) throws Exception {
@@ -145,14 +155,16 @@ public class ResourceImageDAO {
 			try {
 				ResourceImage image = new ResourceImage();
 				pathContain = String.format("user/%s/image", appUser.getUsername());
-				image.setPath(pathContain + "/" + uploadAvatar.getOriginalFilename());
+				String originImage=uploadAvatar.getOriginalFilename();
+				originImage=originImage.replaceAll("[^0-9a-zA-Z]", "_");
+				image.setPath(pathContain + "/" + originImage);
 				image.setAppUser(appUser);
 				newAvatar=save(image);
 				
 				pathContain = String.format("user/%s/image", appUser.getUsername());
 				
 				String filename= newAvatar.getAbsPath();
-				System.out.println(String.format("File: %s", uploadAvatar.getOriginalFilename()));
+				System.out.println(String.format("File: %s", originImage));
 				File p = FileProcess.getPath(filename).toFile();				
 				System.out.println(p.getAbsolutePath());
 				p.getParentFile().mkdirs();
