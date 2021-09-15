@@ -77,20 +77,29 @@ function MenuMoblie(props) {
   const [isOpenDialog, setOpenDialog] = React.useState(false);
   const [isOpenDialogNoti, setOpenDialogNoti] = React.useState(false);
   const [dataNoti, setDataNoti] = useState([]);
+  // console.log(dataUser);
   useEffect(() => {
     (async () => {
-      try {
-        const { data } = await notificationApi.getAll();
-        // console.log(data);
-        setDataNoti(data);
-      } catch (error) {
-        console.log(error);
+      if (!isEmpty(dataUser.token) && isOpenDialogNoti === true) {
+        try {
+          const { data } = await notificationApi.getAll();
+          // console.log(data);
+          setDataNoti(data);
+        } catch (error) {
+          console.log(error);
+        }
       }
     })();
     return () => {
       setDataNoti([]);
     };
   }, [isOpenDialogNoti]);
+  // useEffect(() => {
+  //   return () => {
+  //     setDataNoti([]);
+  //     setOpenDialogNoti(false);
+  //   };
+  // }, []);
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === 'keydown' &&
@@ -116,13 +125,13 @@ function MenuMoblie(props) {
             <Link to="/setting-account/info">
               <Avatar
                 className={classes.avatar}
-                alt={dataUser.user.username}
-                src={dataUser.user.avatar}
+                alt={dataUser.profile?.username}
+                src={dataUser.profile?.avatar?.image}
               />
               <span className={classes.textName}>
-                {isEmpty(dataUser.user.fullname)
-                  ? dataUser.user.username
-                  : dataUser.user.fullname}
+                {isEmpty(dataUser?.profile?.fullname)
+                  ? dataUser?.profile?.username
+                  : dataUser?.profile?.fullname}
               </span>
             </Link>
           </ListItem>
@@ -272,7 +281,7 @@ function MenuMoblie(props) {
         open={dataDrawer.isOpen}
         onClose={toggleDrawer(dataDrawer.anchor, !dataDrawer.isOpen)}
       >
-        {!isEmpty(dataUser.user)
+        {!isEmpty(dataUser.token)
           ? login(dataDrawer.anchor)
           : unlogin(dataDrawer.anchor)}
       </Drawer>

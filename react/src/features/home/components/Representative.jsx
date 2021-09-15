@@ -52,6 +52,7 @@ function Representative(props) {
               rateStar={x.rateStar}
               bought={x.bought}
               price={x.price}
+              discount={x?.discount}
             />
           </Grid>
         ))}

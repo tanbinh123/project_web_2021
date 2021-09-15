@@ -152,13 +152,13 @@ function RightAppHadLogin(props) {
     <>
       <Avatar
         className={classes.avatar}
-        alt={dataUser.user.username}
-        src={dataUser.user.avatar}
+        alt={dataUser.profile.username}
+        src={dataUser.profile?.avatar?.image}
       />
       <span className={classes.username}>
         {!isEmpty(dataUser.user.fullname)
-          ? dataUser.user.fullname
-          : dataUser.user.username}
+          ? dataUser.profile.fullname
+          : dataUser.profile.username}
       </span>
       <Box className={classes.lineBorder}></Box>
       <CourseBought />

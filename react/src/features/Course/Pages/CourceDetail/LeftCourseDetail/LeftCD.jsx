@@ -20,7 +20,7 @@ LeftCD.defaultProps = {
   parts: [],
 };
 function LeftCD(props) {
-  const { title, description, learnings, parts } = props;
+  const { title, description, learnings, parts, totalLesson = 0 } = props;
   const classes = LeftCDCSS();
 
   return (
@@ -53,11 +53,11 @@ function LeftCD(props) {
               <li>
                 <FiberManualRecord />
               </li>
-              <li>10 bài học</li>
-              <li>
+              <li>{totalLesson} bài học</li>
+              {/* <li>
                 <FiberManualRecord />
               </li>
-              <li>thời lượng ? giờ ? phút</li>
+              <li>thời lượng ? giờ ? phút</li> */}
             </ul>
           </div>
           {/* render list courses */}

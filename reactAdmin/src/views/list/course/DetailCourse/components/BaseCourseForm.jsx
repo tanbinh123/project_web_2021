@@ -55,6 +55,25 @@ const schema = yup.object().shape({
         return false;
       }
     }),
+  discount: yup
+    .string()
+    .required("Vui lòng nhập đúng % giảm giá")
+    .test(
+      "check number discount",
+      "Vui lòng nhập đúng kiểu giá tiền",
+      (discount) => {
+        const regularExp = /^\d+$/;
+        if (discount.match(regularExp)) {
+          if (discount <= 100) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+    ),
 });
 function BaseCourseForm(props) {
   const classes = useStyles();
@@ -65,6 +84,7 @@ function BaseCourseForm(props) {
     defaultValues: {
       title: dataCourse?.title,
       price: dataCourse?.price,
+      discount: dataCourse?.discount || 0,
       description: dataCourse?.description,
       categorie: dataCourse?.category?.id,
     },
@@ -122,9 +142,23 @@ function BaseCourseForm(props) {
               form={form}
             />
           </div>
+          <div>
+            <span>Giảm giá 0-100%</span>
+            <CustomInput
+              name="discount"
+              title="Giảm giá"
+              label="Giảm giá"
+              form={form}
+            />
+          </div>
           <div className={classes.price}>
             <span>Hiển thị giá tiền</span>
-            <span>{convertVND(form.watch("price"))}</span>
+            <span>
+              {convertVND(
+                form.watch("price") -
+                  (form.watch("price") * form.watch("discount")) / 100
+              )}
+            </span>
           </div>
           <div>
             <span>Chọn thể loại</span>

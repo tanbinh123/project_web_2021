@@ -101,7 +101,7 @@ function RightAppbar(props) {
   return (
     <>
       <div className={classNames(classes.sectionDesktop, classes.floatRight)}>
-        {isEmpty(dataUser.user) ? rightNotLogin : <RightAppHadLogin />}
+        {isEmpty(dataUser.token) ? rightNotLogin : <RightAppHadLogin />}
       </div>
       <div className={classNames(classes.sectionMobile)}>
         <IconButton

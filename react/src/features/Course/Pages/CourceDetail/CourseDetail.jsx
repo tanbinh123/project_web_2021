@@ -44,6 +44,7 @@ function CourseDetail(props) {
   const [course, setCourse] = useState({
     isFull: false,
   });
+  const [totalLesson, setTotalLesson] = React.useState(0);
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
   }
@@ -69,6 +70,7 @@ function CourseDetail(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
     getDataCourse();
+    // totalCourse();
     return () => {
       setCourse({});
     };
@@ -78,19 +80,22 @@ function CourseDetail(props) {
     try {
       if (!isEmpty(dataUser.token)) {
         const res1 = await courseApi.courseAccess({ idCourse: idCourse });
-        if (!res1.status) {
+        if (!!!res1.status) {
           setCourse(res1);
+          totalCourse(res1);
         }
       } else {
         const res = await courseApi.get(idCourse);
-        console.log('review', res);
+        // console.log('review', res);
         if (res.status == 500 || res.status == 400) {
           push('/course');
+        } else {
+          setCourse({
+            isFull: false,
+            ...res,
+          });
+          totalCourse(res);
         }
-        setCourse({
-          isFull: false,
-          ...res,
-        });
       }
 
       // console.log("course", course);
@@ -98,6 +103,18 @@ function CourseDetail(props) {
       console.log(error);
     }
   };
+  const totalCourse = (course) => {
+    let total = 0;
+    if (!isEmpty(course?.parts)) {
+      Array.from(course?.parts).map((item) => {
+        Array.from(item?.lessons).map((item1) => {
+          total++;
+        });
+      });
+    }
+    setTotalLesson(total);
+  };
+
   const handleUpdateCourse = async () => {
     try {
       if (!isEmpty(dataUser.token)) {
@@ -165,6 +182,7 @@ function CourseDetail(props) {
                   description={course.description}
                   learnings={course.learnings}
                   parts={course.parts}
+                  totalLesson={totalLesson}
                 />
               </Paper>
             </Grid>
@@ -183,6 +201,7 @@ function CourseDetail(props) {
                   onClickBuy={handleOnClickBuy}
                   poster={course?.imagePoster?.image}
                   course={course}
+                  totalLesson={totalLesson}
                 />
               </Paper>
             </Grid>

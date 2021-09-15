@@ -77,6 +77,7 @@ function ListCourse(props) {
     };
   }, [location.search]);
   useEffect(() => {
+    window.scrollTo(0, 0);
     (async () => {
       try {
         const rp = await courseApi.categories({});
@@ -87,16 +88,17 @@ function ListCourse(props) {
       }
     })();
     return () => {
-      console.log('return fetch categories');
+      setCategories([]);
     };
   }, []);
   useEffect(() => {
+    window.scrollTo(0, 0);
     (async () => {
       try {
         // console.log(queryParams);
         const { data, pagination } = await courseApi.getAll(queryParams);
-        console.log(data);
-        console.log(pagination);
+        // console.log(data);
+        // console.log(pagination);
         setDataCourse(data);
         setPagination(pagination);
         // console.log("fetch page courses");
@@ -106,7 +108,6 @@ function ListCourse(props) {
       setLoading(false);
     })();
     return () => {
-      // console.log("return fetch page courses");
       setDataCourse([]);
       setPagination({});
     };
@@ -141,7 +142,7 @@ function ListCourse(props) {
     });
   }
   const handleCategorieChange = (values) => {
-    console.log(values);
+    // console.log(values);
     const category = values.id;
 
     const filters = {
@@ -156,7 +157,7 @@ function ListCourse(props) {
     });
   };
   const handleFilterPriceChange = (values) => {
-    console.log(values);
+    // console.log(values);
     const min = values[0];
     const max = values[1];
 
@@ -166,7 +167,7 @@ function ListCourse(props) {
       price_lt: max,
       _page: 1,
     };
-    console.log(filters);
+    // console.log(filters);
     history.push({
       pathname: history.location.pathname,
       search: stringify(filters, null, null, escape()),

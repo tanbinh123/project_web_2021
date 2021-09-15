@@ -2,6 +2,7 @@ import { Container, CssBaseline, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import homeApi from '../../api/homeApi';
 import imageApi from '../../api/imageApi';
 import { DataUser } from '../../app/DataUser';
 import CustomButton from '../../components/Button/CustomButton';
@@ -9,6 +10,7 @@ import CardCourse from '../../components/card/CardCourse';
 import Header from '../../components/header';
 import { isEmpty } from '../../components/tools/Tools';
 import BoughtHome from './components/BoughtHome';
+import CourseRatest from './components/CourseRatest';
 import Representative from './components/Representative';
 
 const useStyles = makeStyles((theme) => ({
@@ -108,7 +110,7 @@ function Home(props) {
     '/assets/images/2.jpg',
     '/assets/images/3.jpg',
   ]);
-
+  const [dataInfoHome, setDataInfoHome] = React.useState();
   useEffect(() => {
     window.scrollTo(0, 0);
     let intervalBgHome;
@@ -137,6 +139,19 @@ function Home(props) {
     return () => {
       clearInterval(intervalBgHome);
     };
+  }, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await homeApi.getInfo();
+        if (!!!res.status) {
+          setDataInfoHome(res);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    return () => {};
   }, []);
   function removeClassActive() {
     const imgs = document.querySelectorAll('.img-bg-home');
@@ -171,11 +186,11 @@ function Home(props) {
           <ul>
             <li>
               <i className="fas fa-users"></i>
-              <span>Có 10+ học viên</span>
+              <span>Có {dataInfoHome?.numberUser}+ học viên</span>
             </li>
             <li>
               <i className="fas fa-book-open"></i>
-              <span>Có ?? Khóa học</span>
+              <span>Có {dataInfoHome?.numberCourse} Khóa học</span>
             </li>
             <li>
               <i className="fas fa-globe-asia"></i>
@@ -184,6 +199,7 @@ function Home(props) {
           </ul>
         </div>
         <Representative />
+        <CourseRatest />
         {!isEmpty(dataUser.courses) && <BoughtHome />}
       </Container>
     </div>

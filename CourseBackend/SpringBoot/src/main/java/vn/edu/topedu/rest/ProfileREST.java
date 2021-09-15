@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -98,7 +99,8 @@ public class ProfileREST {
 		System.out.println(String.format("location: %s", location));
 		System.out.println(String.format("description: %s", description));
 		System.out.println(String.format("birthDay: %s", birthDay.toString()));
-		SimpleDateFormat df = new SimpleDateFormat("E MMM dd yyyy HH:mm:ss 'GMT'z");
+		SimpleDateFormat df = new SimpleDateFormat("E MMM dd yyyy HH:mm:ss 'GMT'z", Locale.ENGLISH);
+		df.setLenient(true);
 		Date birthDate=null;
 		try {
 			birthDate=df.parse(birthDay);

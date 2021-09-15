@@ -51,12 +51,21 @@ const useStyles = makeStyles((theme) => ({
   },
   money: {
     display: 'flex',
-    height: '100%',
     alignItems: 'center',
     '&>span': {
       fontSize: 20,
       fontWeight: 600,
-      color: '#e74c3c',
+      color: '#c0392b',
+    },
+  },
+  moneyBefore: {
+    display: 'flex',
+    alignItems: 'center',
+    '&>span': {
+      textDecorationLine: 'line-through',
+      fontSize: 18,
+      fontWeight: 400,
+      color: '#7f8c8d',
     },
   },
   row: {
@@ -123,6 +132,7 @@ export default function CardCourse(props) {
     rateStar,
     bought,
     price,
+    discount = 0,
   } = props;
   const [tmpDescription, setTmpDescription] = useState(description);
   useEffect(() => {
@@ -179,12 +189,14 @@ export default function CardCourse(props) {
             </Link>
           </Grid>
           <Grid item xl={9} lg={7} md={7} sm={7} xs={7}>
-            <Rating
-              name="half-rating-read"
-              value={rateStar}
-              precision={0.5}
-              readOnly
-            />
+            {rateStar !== 0 && (
+              <Rating
+                name="half-rating-read"
+                value={rateStar}
+                precision={0.5}
+                readOnly
+              />
+            )}
           </Grid>
           <Grid item xl={3} lg={5} md={5} sm={5} xs={5}>
             <div className={classes.bought}>
@@ -196,6 +208,14 @@ export default function CardCourse(props) {
           </Grid>
           <Grid item xl={9} lg={7} md={7} sm={7} xs={7}>
             <div className={classes.money}>
+              <span>{convertVND(price)}</span>
+              {discount !== 0 && (
+                <div class="discount-label red">
+                  <span>-{discount}%</span>
+                </div>
+              )}
+            </div>
+            <div className={classes.moneyBefore}>
               <span>{convertVND(price)}</span>
             </div>
           </Grid>

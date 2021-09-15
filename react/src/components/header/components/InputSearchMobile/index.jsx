@@ -1,11 +1,11 @@
 import Autocomplete, {
   createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import courseApi from "../../../../api/courseApi";
-import courseApiFake from "../../../../api/courseApiFake";
-import TextFieldSearchMobile from "../../../TextField/TextFieldSearchMobile";
+} from '@material-ui/lab/Autocomplete';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import courseApi from '../../../../api/courseApi';
+import courseApiFake from '../../../../api/courseApiFake';
+import TextFieldSearchMobile from '../../../TextField/TextFieldSearchMobile';
 
 const filter = createFilterOptions({
   limit: 7,
@@ -19,11 +19,10 @@ function InputSearchAppbarMobile({ openSearch }) {
   const [dataSearch, setDataSearch] = useState([]);
   const { push } = useHistory();
   const [paramsSearch, setParamsSearch] = useState({
-    _search: "",
+    _search: '',
   });
   useEffect(() => {
     (async () => {
-      
       const { data } = await courseApi.getAll(paramsSearch);
       setDataSearch(data);
     })();
@@ -50,13 +49,13 @@ function InputSearchAppbarMobile({ openSearch }) {
         if (!!newValue.id) {
           push(`/course/${newValue.id}`);
         } else {
-          push(`/course?q=${newValue.inputValue || newValue}`);
+          push(`/course?_search=${newValue.inputValue || newValue}`);
         }
       }}
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
         // Suggest the creation of a new value
-        if (params.inputValue !== "") {
+        if (params.inputValue !== '') {
           filtered.push({
             inputValue: params.inputValue,
             title: `Search "${params.inputValue}"`,
@@ -70,7 +69,7 @@ function InputSearchAppbarMobile({ openSearch }) {
       options={dataSearch}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
-        if (typeof option === "string") {
+        if (typeof option === 'string') {
           return option;
         }
         // Add "xxx" option created dynamically

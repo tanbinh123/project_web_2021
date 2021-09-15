@@ -90,9 +90,8 @@ function Notications(props) {
   };
   const [dataNoti, setDataNoti] = useState([]);
   useEffect(() => {
-    if (isEmpty(dataUser?.token)) {
-      console.log('sang');
-      (async () => {
+    (async () => {
+      if (!isEmpty(dataUser.token) && popupState.isOpen === true) {
         try {
           const { data } = await notificationApi.getAll();
           // console.log(data);
@@ -100,8 +99,9 @@ function Notications(props) {
         } catch (error) {
           console.log(error);
         }
-      })();
-    }
+      }
+    })();
+
     return () => {
       // setDataNoti([]);
       setSeeMore(false);
