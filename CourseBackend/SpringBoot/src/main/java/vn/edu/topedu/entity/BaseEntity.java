@@ -27,7 +27,7 @@ public class BaseEntity {
 	protected Boolean deleted = false;
 	
 	@Column(name = "Create_At", nullable = false)
-	@JsonSerialize(using = CustomDateFullSerializer.class)
+	//@JsonSerialize(using = CustomDateFullSerializer.class)
 	protected Date createAt = new Date();
 	
 	@Column(name = "Update_At", nullable = false)

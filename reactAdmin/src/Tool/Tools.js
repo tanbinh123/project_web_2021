@@ -1,6 +1,20 @@
-export function DateToString(date) {
-  const date1 = new Date(date);
-  return `${date1.getDate()}/${date1.getMonth() + 1}/${date1.getFullYear()}`;
+export function DateToString(dateString) {
+  //const date1 = new Date(date);
+  
+
+var dateParser = /(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2})/;
+var match = dateString.match(dateParser);
+var date = new Date(
+    match[3],  // year
+    match[2]-1,  // monthIndex
+    match[1],  // day
+    match[4],  // hours
+    match[5],  // minutes
+    match[6]  //seconds
+);
+  //return `${date1.getDate()}/${date1.getMonth() + 1}/${date1.getFullYear()}`;
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
 }
 export function isEmpty(obj) {
   if (obj === "") {

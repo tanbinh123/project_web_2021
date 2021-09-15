@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 15/09/2021 13:47:53
+ Date: 15/09/2021 14:16:31
 */
 
 SET NAMES utf8mb4;
@@ -136,7 +136,7 @@ CREATE TABLE `categories`  (
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 173, 0, 41132000, 5);
+INSERT INTO `categories` VALUES (1, 'Game Master', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 174, 0, 41132000, 5);
 INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 5, 500, 32601000, 5);
 INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 3, 0, 0, 0);
 INSERT INTO `categories` VALUES (22, 'Genshin Impact', b'1', b'0', '2021-06-28 06:39:44', '2021-06-28 06:39:44', 11, 0, 3020000, 2);
@@ -169,7 +169,7 @@ CREATE TABLE `course`  (
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 199 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
@@ -365,7 +365,8 @@ INSERT INTO `course` VALUES (194, 114, '34342342', b'0', 'Eula', 1087200, 0, 1, 
 INSERT INTO `course` VALUES (195, 115, '34342342', b'0', 'Eula', 437900, 0, 0, '2021-07-05 10:20:58', 1, NULL, 22, '2021-07-05 10:20:58', b'1', 0, 0, 1510000.00, 71);
 INSERT INTO `course` VALUES (196, 116, '34342342', b'0', 'Eula', 588900, 0, 0, '2021-07-05 10:22:08', 1, NULL, 22, '2021-07-05 10:22:08', b'1', 0, 0, 1510000.00, 61);
 INSERT INTO `course` VALUES (197, 117, '34342342', b'0', 'Eula', 770100, 0, 1, '2021-07-05 10:27:51', 1, NULL, 22, '2021-07-05 10:27:51', b'1', 0, 0, 1510000.00, 49);
-INSERT INTO `course` VALUES (198, 124, '123', b'0', 'Khóa học mới', 989400, 0, 0, '2021-09-05 10:47:11', 1, NULL, 1, '2021-09-05 10:47:11', b'1', 0, 0, 1020000.00, 3);
+INSERT INTO `course` VALUES (198, 124, '123', b'0', 'Khóa học mới', 692580, 0, 0, '2021-09-15 07:05:52', 1, NULL, 1, '2021-09-05 10:47:11', b'1', 0, 0, 989400.00, 30);
+INSERT INTO `course` VALUES (199, 135, '', b'0', 'test 1', 0, 0, 0, '2021-09-15 07:05:23', 1, NULL, 1, '2021-09-15 07:03:00', b'1', 0, 0, 135000.00, 100);
 
 -- ----------------------------
 -- Table structure for evaluates
@@ -718,7 +719,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 135 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 136 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -772,6 +773,7 @@ INSERT INTO `resource_image` VALUES (131, 'user/admin/image/j-kelly-brito-PeUJyo
 INSERT INTO `resource_image` VALUES (132, 'https://lh3.googleusercontent.com/a-/AOh14GiKJvNAwn2SdzWX2-VJqxSMJ8oJH1_2VxJSC24W3A=s96-c', b'0', '2021-09-10 22:05:49', NULL, 0, '2021-09-10 22:05:49');
 INSERT INTO `resource_image` VALUES (133, 'https://lh3.googleusercontent.com/a-/AOh14GiKJvNAwn2SdzWX2-VJqxSMJ8oJH1_2VxJSC24W3A=s96-c', b'0', '2021-09-10 22:06:13', NULL, 1, '2021-09-10 22:06:13');
 INSERT INTO `resource_image` VALUES (134, 'https://lh3.googleusercontent.com/a/AATXAJxq_tvbmTdiXnJRAPMDf2nQ9_s9cL1Xy9dytWdZ=s96-c', b'0', '2021-09-14 14:04:03', NULL, 1, '2021-09-14 14:04:03');
+INSERT INTO `resource_image` VALUES (135, 'user/admin/image/girl.bmp', b'0', '2021-09-15 07:03:00', 1, 1, '2021-09-15 07:03:00');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -791,7 +793,7 @@ CREATE TABLE `revenue`  (
   `course_sell` decimal(60, 0) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `unque_key`(`month`, `year`, `day`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of revenue
@@ -805,6 +807,7 @@ INSERT INTO `revenue` VALUES (52, b'0', '2021-06-20 06:47:14', '2021-06-20 06:47
 INSERT INTO `revenue` VALUES (53, b'0', '2021-09-13 11:32:41', '2021-09-13 11:32:41', 9, 2021, 1510002, 13, 1, 0, 2);
 INSERT INTO `revenue` VALUES (54, b'0', '2021-09-12 15:38:05', '2021-09-12 15:38:05', 9, 2021, 100000, 12, 0, 0, 0);
 INSERT INTO `revenue` VALUES (55, b'0', '2021-09-14 14:04:03', '2021-09-14 14:04:03', 9, 2021, 0, 14, 1, 0, 0);
+INSERT INTO `revenue` VALUES (56, b'0', '2021-09-15 07:03:00', '2021-09-15 07:03:00', 9, 2021, 0, 15, 1, 0, 0);
 
 -- ----------------------------
 -- Table structure for spring_session
@@ -823,6 +826,11 @@ CREATE TABLE `spring_session`  (
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spring_session
+-- ----------------------------
+INSERT INTO `spring_session` VALUES ('95285392-2471-4bb8-a2b3-f5279520d832', '662f973e-4ac2-4da8-b983-af11be76833e', 1631689350868, 1631689350869, 1800, 1631691150869, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes

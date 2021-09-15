@@ -156,16 +156,20 @@ public class CourseAdminRest {
 		String description=body.get("description");
 		if(description==null)description="";
 		String price=body.get("price");
+		String discount=body.get("discount");
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));
-		System.out.println(String.format("Price: %s", price));
+		System.out.println(String.format("OriginPrice: %s", price));
+		System.out.println(String.format("discount: %s", discount));
+		if(discount==null||!discount.matches("^[0-9]+$"))discount="0";
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {				
 				
 				fullcourse.setDescription(description);
-				fullcourse.setPrice(new BigDecimal(price));
+				fullcourse.setOriginPrice(new BigDecimal(price));
+				fullcourse.setDiscount(Integer.parseInt(discount));
 				fullcourse.setTitle(title);
 				fullcourse.setUpdateAt(new Date());
 				try {
@@ -290,6 +294,7 @@ public class CourseAdminRest {
 			@RequestPart(required=false) String description,
 			@RequestPart(required=true) String price,
 			@RequestPart(required=true) String categorie,
+			@RequestPart(required=false) String discount,
 			@RequestPart(required=true) MultipartFile imageThumbnail,
 			Authentication authentication
 			) {
@@ -297,8 +302,10 @@ public class CourseAdminRest {
 	
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));
-		System.out.println(String.format("Price: %s", price));
+		System.out.println(String.format("OriginPrice: %s", price));
 		System.out.println(String.format("categorie: %s", categorie));
+		System.out.println(String.format("discount: %s", discount));
+		if(discount==null||!discount.matches("^[0-9]+$"))discount="0";
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
@@ -320,7 +327,8 @@ public class CourseAdminRest {
 				//fullcourse.setImagePosterId(Long.valueOf(2));
 				fullcourse.setCategoryId(Integer.valueOf(categorie));
 				fullcourse.setDescription(description);
-				fullcourse.setPrice(new BigDecimal(price));
+				fullcourse.setOriginPrice(new BigDecimal(price));
+				fullcourse.setDiscount(Integer.parseInt(discount));
 				fullcourse.setTitle(title);
 				fullcourse.setUpdateAt(new Date());
 				try {
