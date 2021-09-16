@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "space-between",
       alignItems: "center",
       fontWeight: "600",
-      "&>svg": {
+      "&>i": {
         color: "var(--colorBlack2)",
         cursor: "pointer",
         "&:hover": {
@@ -63,7 +63,8 @@ function CustomDialogAction(props) {
       open={isOpen}
     >
       <DialogTitle className={classes.title} id={`custom-dialog-${id}`}>
-        {title} <Close onClick={handleClose} />
+        <span>{title}</span>
+        <i className="fas fa-times" onClick={handleClose}></i>
       </DialogTitle>
       <DialogContent className={classes.content}>
         {!isEmpty(content) && content}

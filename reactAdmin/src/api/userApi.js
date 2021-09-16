@@ -53,6 +53,14 @@ const userApi = {
     const url = `/api/admin/user/${id}/admin`;
     return axiosClient.delete(url);
   },
+  blockUser(id) {
+    const url = `/api/admin/user/${id}/block`;
+    return axiosClient.post(url);
+  },
+  unBlockUser(id) {
+    const url = `/api/admin/user/${id}/unblock`;
+    return axiosClient.post(url);
+  },
 };
 
 export default userApi;

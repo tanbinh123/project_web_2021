@@ -10,6 +10,8 @@ import * as yup from "yup";
 import { useSnackbar } from "notistack";
 import { convertVND, format1 } from "src/Tool/Tools";
 import CustomSelectForm from "src/components/form/CustomSelectForm";
+import CustomDialog from "src/components/CustomDialog";
+import FCategorie from "src/views/form/categorie/FCategorie";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -79,6 +81,15 @@ function BaseCourseForm(props) {
   const classes = useStyles();
   const { dataCourse = {}, changeDataCourse = null } = props;
   const { enqueueSnackbar } = useSnackbar();
+  const [dataSelect, setDataSelect] = useState([]);
+  //dialog
+  const [isOpenDialogCategory, setIsOpenDialogCategory] = React.useState();
+  React.useEffect(() => {
+    getCategories();
+    return () => {
+      setDataSelect([]);
+    };
+  }, []);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -105,7 +116,7 @@ function BaseCourseForm(props) {
       }
     })();
   };
-  const [dataSelect, setDataSelect] = useState(async () => {
+  const getCategories = async () => {
     const res = await courseApi.categories();
     setDataSelect(
       Array.from(res).map((item, index) => ({
@@ -113,7 +124,7 @@ function BaseCourseForm(props) {
         title: item.name,
       }))
     );
-  });
+  };
   return (
     <CCard>
       <CCardHeader>
@@ -160,13 +171,19 @@ function BaseCourseForm(props) {
               )}
             </span>
           </div>
-          <div>
+          <div className="FBaseCourse-item__category">
             <span>Chọn thể loại</span>
             <CustomSelectForm
               name={"categoryId"}
               label="Chọn thể loại"
               data={dataSelect}
               form={form}
+            />
+            <CustomButton
+              title="Thêm"
+              onClick={() => {
+                setIsOpenDialogCategory(true);
+              }}
             />
           </div>
           <div>
@@ -186,6 +203,21 @@ function BaseCourseForm(props) {
         </form>
       </CCardBody>
       {/* <CCardFooter></CCardFooter> */}
+      <CustomDialog
+        closeDialog={() => {
+          setIsOpenDialogCategory(false);
+        }}
+        isOpen={isOpenDialogCategory}
+        id="category"
+        title=""
+        content={
+          <FCategorie
+            onUpdate={() => {
+              getCategories();
+            }}
+          />
+        }
+      />
     </CCard>
   );
 }

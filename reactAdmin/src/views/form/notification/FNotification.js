@@ -1,67 +1,36 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import categoriesApi from "src/api/categoriesApi";
+import notificationApi from "src/api/notificationApi";
 import CustomButton from "src/components/CustomButton";
 import CustomInput from "src/components/CustomInput";
 import * as yup from "yup";
 const scheme = yup.object().shape({
-  name: yup.string().required("Vui lòng nhập tên thể loại"),
+  subject: yup.string().required("Vui lòng nhập tiêu đề"),
+  content: yup.string().required("Vui lòng nhập nội dung thông báo"),
 });
 
-const FCategorie = (props) => {
-  const { onUpdate } = props;
+const FNotification = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const classes = makeStyles((theme) => ({
-    footer: {
-      display: "flex",
-      justifyContent: "space-between",
-    },
-    visiable: {
-      visibility: "hidden",
-    },
-    form: {
-      marginBlock: "20px",
-    },
-    itemForm: {
-      display: "flex",
-      alignItems: "center",
-      "&>span": {
-        minWidth: "150px",
-        textAlign: "right",
-        marginRight: "20px",
-        fontSize: 16,
-      },
-    },
-    lastItem: {
-      display: "flex",
-      justifyContent: "center",
-      marginBlock: "20px",
-    },
-    [theme.breakpoints.down("md")]: {
-      itemForm: {
-        display: "unset",
-      },
-    },
-  }))();
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
-      name: "",
+      subject: "",
+      content: "",
     },
     resolver: yupResolver(scheme),
   });
 
   const handleOnSubmit = async (values) => {
     try {
-      const res = await categoriesApi.add(values);
+      const res = await notificationApi.new(values);
       console.log(res);
-      if (!res.status) {
+      if (!!!res.status) {
         enqueueSnackbar("Tạo thể loại thành công", { variant: "success" });
-        if (onUpdate) onUpdate();
         form.reset();
       }
     } catch (error) {
@@ -70,28 +39,37 @@ const FCategorie = (props) => {
   };
   return (
     <>
-      <Grid container className={classes.root} spacing={3}>
+      <Grid container className="form-notification" spacing={3}>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
           <CCard>
             <CCardHeader>
-              <span className="title">Form thể loại</span>
+              <span className="title">Form tạo mới thông báo</span>
             </CCardHeader>
             <CCardBody>
               <form
-                className={classes.form}
+                className="form"
                 onSubmit={form.handleSubmit(handleOnSubmit)}
               >
-                <div className={classes.itemForm}>
-                  <span>Tên thể loại</span>
+                <div className="itemForm">
+                  <span>Tiêu đề *</span>
                   <CustomInput
-                    name="name"
-                    title="Tên thể loại"
-                    label="Tên thể loại"
+                    name="subject"
+                    title="Tiêu đề"
+                    label="Tiêu đề"
+                    form={form}
+                  />
+                </div>
+                <div className="itemForm">
+                  <span>Nội dung thông báo *</span>
+                  <CustomInput
+                    name="content"
+                    title="Nội dung thông báo"
+                    label="Nội dung thông báo"
                     form={form}
                   />
                 </div>
 
-                <div className={classes.lastItem}>
+                <div className="lastItemForm">
                   <CustomButton type="submit" title="Gửi" />
                 </div>
               </form>
@@ -104,4 +82,4 @@ const FCategorie = (props) => {
   );
 };
 
-export default FCategorie;
+export default FNotification;

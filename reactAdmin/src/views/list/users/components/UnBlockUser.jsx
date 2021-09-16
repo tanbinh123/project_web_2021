@@ -1,27 +1,24 @@
-import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
-import categoriesApi from "src/api/categoriesApi";
 import userApi from "src/api/userApi";
-import CustomButtonRed from "src/components/CustomButtonRed";
+import CustomButton from "src/components/CustomButton";
 import CustomDialogAction from "src/components/CustomDialogAction";
 
-function DeleteUser(props) {
+function UnBlockUser(props) {
   const { item, onUpdate = null } = props;
   const [isOpenDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => {
     setOpenDialog(!isOpenDialog);
   };
-  // console.log(item);
   const handleBlockCourse = async () => {
-    const res = await userApi.blockUser(item?.id);
-    // console.log(res);
+    const res = await userApi.unBlockUser(item?.id);
+    console.log(res);
     if (!!!res.status) {
       if (onUpdate) onUpdate();
     }
   };
   return (
     <>
-      <CustomButtonRed title="Chặn" onClick={handleOpenDialog} />
+      <CustomButton title="Bỏ chặn" onClick={handleOpenDialog} />
       <CustomDialogAction
         title={`Chặn tài khoản : ${item.userName}`}
         id={item.id}
@@ -30,8 +27,8 @@ function DeleteUser(props) {
         accepct={handleBlockCourse}
         content={
           <div>
-            Bạn có thực sự muốn chặn tài khoản <b>{item.userName}</b> này không
-            ?
+            Bạn có thực sự muốn bỏ chặn tài khoản <b>{item.userName}</b> này
+            không ?
           </div>
         }
       />
@@ -39,4 +36,4 @@ function DeleteUser(props) {
   );
 }
 
-export default DeleteUser;
+export default UnBlockUser;

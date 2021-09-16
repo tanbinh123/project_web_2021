@@ -57,3 +57,28 @@
     }
   }
 }
+.custom-dialog {
+  .custom-dialog__title {
+    h2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      i {
+        cursor: pointer;
+        color: #2c3e50;
+        font-size: 25px;
+        &:hover {
+          color: #34495e;
+          transform: scale(1.05);
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}

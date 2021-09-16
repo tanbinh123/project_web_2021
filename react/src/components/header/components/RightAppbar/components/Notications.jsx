@@ -94,7 +94,7 @@ function Notications(props) {
       if (!isEmpty(dataUser.token) && popupState.isOpen === true) {
         try {
           const { data } = await notificationApi.getAll();
-          // console.log(data);
+          console.log(data);
           setDataNoti(data);
         } catch (error) {
           console.log(error);

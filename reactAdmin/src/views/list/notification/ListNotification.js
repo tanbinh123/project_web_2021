@@ -1,7 +1,7 @@
 import { CButton, CCardBody, CCollapse, CDataTable } from "@coreui/react";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import userApi from "src/api/userApi";
+import { Link, useHistory } from "react-router-dom";
+import notificationApi from "src/api/notificationApi";
 import CustomButton from "src/components/CustomButton";
 import DeleteUser from "./components/DeleteUser";
 import "./ListNotification.scss";
@@ -10,14 +10,16 @@ import "./ListNotification.scss";
 
 const ListNotification = () => {
   const [details, setDetails] = useState([]);
-  const [dataUsers, setDataUsers] = useState([]);
+  const [dataNoti, setDataNoti] = useState([]);
+  const { push } = useHistory();
 
   useEffect(() => {
     (async () => {
-      const res = await userApi.getListAccount();
+      const res = await notificationApi.getAll();
       const { data, pagination } = res;
-      setDataUsers(data);
-      console.log(res);
+      console.log(data);
+      setDataNoti(data);
+      // console.log(res);
     })();
   }, []);
   const toggleDetails = (index) => {
@@ -33,25 +35,22 @@ const ListNotification = () => {
 
   const fields = [
     { key: "id", label: "ID" },
-    { key: "userName", label: "Tên tài khoản" },
-    { key: "gmail", label: "Email" },
-    { key: "birthDay", label: "Ngày sinh" },
-    { key: "gender", label: "Giới Tính" },
-    { key: "phone", label: "Số điện thoại" },
-    { key: "isAdmin", label: "Quyền tài khoản" },
-    {
-      key: "show_details",
-      label: "Chi Tiết",
-      //   _style: { width: "1%" },
-      sorter: false,
-      filter: false,
-    },
+    { key: "name", label: "Tiêu đề" },
+    { key: "content", label: "Nội dung" },
   ];
 
   return (
     <>
+      <div className="btn-add-container">
+        <CustomButton
+          title="Thêm"
+          onClick={() => {
+            push("/form/categorie");
+          }}
+        />
+      </div>
       <CDataTable
-        items={dataUsers}
+        items={dataNoti}
         fields={fields}
         columnFilter
         tableFilter
@@ -62,39 +61,6 @@ const ListNotification = () => {
         sorter
         pagination
         scopedSlots={{
-          gender: (item) => (
-            <td className="tdCenter">
-              {item.gender === "NAM" ? (
-                <div className="sex">
-                  <span>Nam</span>
-                  <i className="fas fa-mars blue"></i>
-                </div>
-              ) : (
-                <div className="sex">
-                  <span>Nữ</span>
-                  <i className="fas fa-mars blue"></i>
-                </div>
-              )}
-            </td>
-          ),
-          gmail: (item) => (
-            <td className="tdCenter">
-              {item.gmail ? item.gmail : "Không có dữ liệu"}
-            </td>
-          ),
-          birthDay: (item) => (
-            <td className="tdCenter">
-              {item.birthDay ? item.birthDay : "Không có dữ liệu"}
-            </td>
-          ),
-          phone: (item) => (
-            <td className="tdCenter">
-              {item.phone ? item.phone : "Không có dữ liệu"}
-            </td>
-          ),
-          isAdmin: (item) => (
-            <td className="tdCenter">{item.isAdmin ? "Admin" : "User"}</td>
-          ),
           show_details: (item, index) => {
             return (
               <td className="py-2">
@@ -110,27 +76,6 @@ const ListNotification = () => {
                   {details.includes(index) ? "Ẩn" : "Hiện"}
                 </CButton>
               </td>
-            );
-          },
-          details: (item, index) => {
-            return (
-              <CCollapse show={details.includes(index)}>
-                <CCardBody className="detailBody">
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    to={`/list/user/${item.id}`}
-                  >
-                    <CustomButton title="Chi tiết tài khoản" />
-                  </Link>
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    to={`/list/user-role/${item.id}`}
-                  >
-                    <CustomButton title="Cập nhật quyền" />
-                  </Link>
-                  <DeleteUser item={item} />
-                </CCardBody>
-              </CCollapse>
             );
           },
         }}

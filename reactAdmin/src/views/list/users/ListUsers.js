@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import userApi from "src/api/userApi";
 import CustomButton from "src/components/CustomButton";
 import DeleteUser from "./components/DeleteUser";
+import SendNotification from "./components/SendNotification";
+import UnBlockUser from "./components/UnBlockUser";
 import "./ListUsers.scss";
 
 // const fields = ["id", "userName", "gmail", "birthDay", "gender", "phone"];
@@ -13,13 +15,17 @@ const ListUsers = () => {
   const [dataUsers, setDataUsers] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const res = await userApi.getListAccount();
-      const { data, pagination } = res;
-      setDataUsers(data);
-      console.log(res);
-    })();
+    getDataUser();
+    return () => {
+      setDataUsers([]);
+    };
   }, []);
+  const getDataUser = async () => {
+    const res = await userApi.getListAccount();
+    console.log(res);
+    const { data, pagination } = res;
+    setDataUsers(data);
+  };
   const toggleDetails = (index) => {
     const position = details.indexOf(index);
     let newDetails = details.slice();
@@ -38,6 +44,8 @@ const ListUsers = () => {
     { key: "birthDay", label: "Ngày sinh" },
     { key: "gender", label: "Giới Tính" },
     { key: "phone", label: "Số điện thoại" },
+    { key: "blocked", label: "Chặn" },
+    { key: "actived", label: "Trạng thái" },
     { key: "isAdmin", label: "Quyền tài khoản" },
     {
       key: "show_details",
@@ -77,9 +85,14 @@ const ListUsers = () => {
               )}
             </td>
           ),
+          userName: (item) => (
+            <td className="list-user__username">
+              <span>{item.userName}</span>
+            </td>
+          ),
           gmail: (item) => (
             <td className="tdCenter">
-              {item.gmail ? item.gmail : "Không có dữ liệu"}
+              {item.email ? item.email : "Không có dữ liệu"}
             </td>
           ),
           birthDay: (item) => (
@@ -90,6 +103,24 @@ const ListUsers = () => {
           phone: (item) => (
             <td className="tdCenter">
               {item.phone ? item.phone : "Không có dữ liệu"}
+            </td>
+          ),
+          blocked: (item) => (
+            <td className="tdCenter">
+              {item.blocked ? (
+                <i className="fas fa-circle red"></i>
+              ) : (
+                <i className="fas fa-circle green"></i>
+              )}
+            </td>
+          ),
+          actived: (item) => (
+            <td className="tdCenter">
+              {item.actived ? (
+                <i className="fas fa-circle green"></i>
+              ) : (
+                <i className="fas fa-circle red"></i>
+              )}
             </td>
           ),
           isAdmin: (item) => (
@@ -128,7 +159,12 @@ const ListUsers = () => {
                   >
                     <CustomButton title="Cập nhật quyền" />
                   </Link>
-                  <DeleteUser item={item} />
+                  {item.blocked ? (
+                    <UnBlockUser item={item} onUpdate={getDataUser} />
+                  ) : (
+                    <DeleteUser item={item} onUpdate={getDataUser} />
+                  )}
+                  <SendNotification item={item} />
                 </CCardBody>
               </CCollapse>
             );

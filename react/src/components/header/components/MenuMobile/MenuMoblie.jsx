@@ -297,7 +297,7 @@ function MenuMoblie(props) {
       />
       <CustomDialog
         fullScreen={true}
-        title="Thông học của tôi"
+        title="Thông báo của tôi"
         id="my-noticafition-mobile"
         open={isOpenDialogNoti}
         content={dataDialogNoti}

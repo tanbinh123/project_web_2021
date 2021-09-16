@@ -16,12 +16,16 @@ const Categories = () => {
   const [dataCourse, setDataCourse] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const res = await categoriesApi.getAll();
-      setDataCourse(res);
-      console.log(res);
-    })();
+    getDataCategories();
+    return () => {
+      setDataCourse([]);
+    };
   }, []);
+  const getDataCategories = async () => {
+    const res = await categoriesApi.getAll();
+    setDataCourse(res);
+    console.log(res);
+  };
   const toggleDetails = (index) => {
     const position = details.indexOf(index);
     let newDetails = details.slice();
@@ -97,7 +101,12 @@ const Categories = () => {
                   >
                     <CustomButton title="Cập nhật thể loại" />
                   </Link>
-                  <DeleteCategory item={item} />
+                  <DeleteCategory
+                    item={item}
+                    onUpdate={() => {
+                      getDataCategories();
+                    }}
+                  />
                 </CCardBody>
               </CCollapse>
             );

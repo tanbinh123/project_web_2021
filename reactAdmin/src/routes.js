@@ -10,6 +10,7 @@ import BackgroundHome from "./views/list/backgroundHome/BackgroundHome";
 import FImageBackgroundHome from "./views/form/imageBackgroundHome/FImageBackgroundHome";
 import UserUpdateRole from "./views/list/users/userDetailt/UserUpdateRole";
 import ListNotification from "./views/list/notification/ListNotification";
+import FNotification from "./views/form/notification/FNotification";
 
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
@@ -127,6 +128,11 @@ const routes = [
     path: "/form/image-background-home",
     name: "Form upload hình nền trang chủ",
     component: FImageBackgroundHome,
+  },
+  {
+    path: "/form/notification",
+    name: "Form tạo thông báo mới",
+    component: FNotification,
   },
 
   // { path: "/theme", name: "Theme", component: Colors, exact: true },

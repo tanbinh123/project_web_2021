@@ -26,8 +26,15 @@ export default function CustomDialog(props) {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         fullScreen={fullScreen}
+        className="custom-dialog"
       >
-        <DialogTitle id={id}>{title}</DialogTitle>
+        <DialogTitle
+          id={`custom-dialog-${id}`}
+          className="custom-dialog__title"
+        >
+          <span>{title}</span>
+          <i className="fas fa-times" onClick={handleClose}></i>
+        </DialogTitle>
         <DialogContent>{content}</DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

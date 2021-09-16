@@ -7,10 +7,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import courseApi from "src/api/courseApi";
 import CustomButton from "src/components/CustomButton";
+import CustomDialog from "src/components/CustomDialog";
 import CustomInput from "src/components/CustomInput";
 import CustomSelectForm from "src/components/form/CustomSelectForm";
 import { convertVND, isEmpty } from "src/Tool/Tools";
 import * as yup from "yup";
+import FCategorie from "../../categorie/FCategorie";
 import SimpleDialog from "./SimpleDialog";
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -129,6 +131,15 @@ function FBaseCourse(props) {
     updateCourse = null,
   } = props;
   const { enqueueSnackbar } = useSnackbar();
+  const [dataSelect, setDataSelect] = useState([]);
+  //dialog
+  const [isOpenDialogCategory, setIsOpenDialogCategory] = React.useState();
+  React.useEffect(() => {
+    getCategories();
+    return () => {
+      setDataSelect([]);
+    };
+  }, []);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -176,7 +187,8 @@ function FBaseCourse(props) {
       }
     })();
   };
-  const [dataSelect, setDataSelect] = useState(async () => {
+
+  const getCategories = async () => {
     const res = await courseApi.categories();
     setDataSelect(
       Array.from(res).map((item, index) => ({
@@ -184,7 +196,7 @@ function FBaseCourse(props) {
         title: item.name,
       }))
     );
-  });
+  };
   const [img, setImg] = useState(dataCourse?.imagePoster?.image);
   const [open, setOpen] = useState(false);
 
@@ -206,6 +218,7 @@ function FBaseCourse(props) {
     form.setValue("imageThumbnail", file);
   };
   // console.log(dataCourse);
+
   return (
     <CCard>
       <CCardHeader>
@@ -263,13 +276,19 @@ function FBaseCourse(props) {
               form={form}
             />
           </div>
-          <div>
+          <div className="FBaseCourse-item__category">
             <span>Chọn thể loại</span>
             <CustomSelectForm
               name={"categoryId"}
               label="Chọn thể loại"
               data={dataSelect}
               form={form}
+            />
+            <CustomButton
+              title="Thêm thể loại"
+              onClick={() => {
+                setIsOpenDialogCategory(true);
+              }}
             />
           </div>
 
@@ -330,6 +349,21 @@ function FBaseCourse(props) {
           />
         </div>
       </CCardFooter>
+      <CustomDialog
+        closeDialog={() => {
+          setIsOpenDialogCategory(false);
+        }}
+        isOpen={isOpenDialogCategory}
+        id="category"
+        title=""
+        content={
+          <FCategorie
+            onUpdate={() => {
+              getCategories();
+            }}
+          />
+        }
+      />
     </CCard>
   );
 }

@@ -94,6 +94,17 @@ const _nav = [
       />
     ),
   },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Form tạo mới thông báo",
+    to: "/form/notification",
+    icon: (
+      <CIcon
+        content={freeSet.cilMediaPlay}
+        customClasses="c-sidebar-nav-icon"
+      />
+    ),
+  },
 ];
 
 export default _nav;

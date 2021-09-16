@@ -25,3 +25,11 @@
   justify-content: flex-end;
   margin-bottom: 15px;
 }
+.fas.fa-circle {
+  &.red {
+    color: #c0392b;
+  }
+  &.green {
+    color: #2ecc71;
+  }
+}
