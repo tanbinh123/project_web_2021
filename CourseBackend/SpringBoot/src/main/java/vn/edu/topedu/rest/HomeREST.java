@@ -87,7 +87,7 @@ public class HomeREST {
 		System.out.println("---------------------------------");
 		
 		Long countAppUser = appUserDAO.countAppUser(null);
-		Long countCourse = courseDAO.getCount(-1, null, BigDecimal.valueOf(-1), BigDecimal.valueOf(-1));
+		Long countCourse = courseDAO.getCount(-1, null, BigDecimal.valueOf(-1), BigDecimal.valueOf(-1),-1);
 		
 		return ResponseEntity.ok(new Object() {
 			public Object numberUser=countAppUser;

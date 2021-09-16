@@ -143,7 +143,7 @@ public class BaseCourse extends BaseEntity implements JsonResponse {
 	public void setBought(int bought) {
 		this.bought = bought;
 	}
-	public double getRateStar() {
+	public int getRateStar() {
 		return this.rateStar;
 	}
 	

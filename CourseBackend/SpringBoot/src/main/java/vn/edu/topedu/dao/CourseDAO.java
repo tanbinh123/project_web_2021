@@ -29,7 +29,7 @@ public class CourseDAO {
 	@Autowired
 	private EntityManager entityManager;
 
-	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search, BigDecimal price_gte, BigDecimal price_lt) {
+	public List<Course> getListCourse(int _page, int _limit, String sort, int category, String _search, BigDecimal price_gte, BigDecimal price_lt,int rateStar) {
 		--_page;
 		if(_page<0)_page=0;
 		if (sort == "" || sort == null)
@@ -46,7 +46,8 @@ public class CourseDAO {
 		}
 		if (category != -1)
 			sql += String.format(" and c.category.id = %d ", category);
-		
+		if (rateStar != -1)
+			sql += String.format(" and c.rateStar = %d ", rateStar);
 		if (!price_gte.equals(BigDecimal.valueOf(-1)))
 			sql += String.format(" and c.price >= %s ", price_gte.toString());
 		if (!price_lt.equals(BigDecimal.valueOf(-1)))
@@ -96,7 +97,7 @@ public class CourseDAO {
 		return query.getResultList();
 	}
 
-	public long getCount(int category, String _search,BigDecimal price_gte, BigDecimal price_lt) {
+	public long getCount(int category, String _search,BigDecimal price_gte, BigDecimal price_lt,int rateStar) {
 		String sql = null;
 		if (_search == null || _search.length() == 0) {
 			sql = "Select count(*) from " + Course.class.getName() + " c " //
@@ -110,6 +111,8 @@ public class CourseDAO {
 
 		if (category != -1)
 			sql += String.format(" and c.category.id = %d ", category);
+		if (rateStar != -1)
+			sql += String.format(" and c.rateStar = %d ", rateStar);
 		
 		if (!price_gte.equals(BigDecimal.valueOf(-1)))
 			sql += String.format(" and c.price >= %s ", price_gte.toString());

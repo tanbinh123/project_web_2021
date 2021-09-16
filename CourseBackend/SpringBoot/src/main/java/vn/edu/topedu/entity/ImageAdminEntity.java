@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import vn.edu.topedu.json.CustomDateFullSerializer;
 
 @Entity
 @Table(name = "image_admin")
@@ -40,9 +43,11 @@ public class ImageAdminEntity {
 	private Boolean deleted = false;
 
 	@Column(name = "Create_At", nullable = false)
+	@JsonSerialize(using = CustomDateFullSerializer.class)
 	private Date createTime = new Date();
 
 	@Column(name = "Update_At", nullable = false)
+	@JsonSerialize(using = CustomDateFullSerializer.class)
 	private Date updateTime = new Date();
 
 	public Date getCreateTime() {

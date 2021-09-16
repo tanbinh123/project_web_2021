@@ -73,11 +73,12 @@ public class CourseREST implements IMyHost {
 			@RequestParam(defaultValue = "") String _search,
 			@RequestParam(defaultValue = "-1") BigDecimal price_gte,
 			@RequestParam(defaultValue = "-1") BigDecimal price_lt,
+			@RequestParam(defaultValue = "-1") int _rateStar,
 			@RequestParam(defaultValue = "-1") int _category) {
 
 		_page = (_page <= 0) ? 1 : _page;
-		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, _category, _search,price_gte,price_lt);
-		long countRows = courseDAO.getCount(_category, _search,price_gte,price_lt);
+		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, _category, _search,price_gte,price_lt,_rateStar);
+		long countRows = courseDAO.getCount(_category, _search,price_gte,price_lt,_rateStar);
 		// System.out.println(countRows);
 		for (Course c : lstCourse) {
 			String bf = getUrl(httpServletRequest);
@@ -97,6 +98,9 @@ public class CourseREST implements IMyHost {
 
 			public String get_sort() {
 				return _sort;
+			}
+			public int get_rateStar() {
+				return _rateStar;
 			}
 
 			@SuppressWarnings("unused")

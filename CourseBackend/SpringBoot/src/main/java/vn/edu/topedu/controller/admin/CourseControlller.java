@@ -131,6 +131,7 @@ public class CourseControlller {
 			@RequestParam(defaultValue = "-1") BigDecimal price_gte,
 			@RequestParam(defaultValue = "-1") BigDecimal price_lt,
 			@RequestParam(defaultValue = "-1") int category,
+			@RequestParam(defaultValue = "-1") int _rateStar,
 			Map<String, Object> model) {
 		String _filter = "";
 		if (category != -1)
@@ -142,13 +143,17 @@ public class CourseControlller {
 		}
 
 		_page = (_page <= 0) ? 1 : _page;
-		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category, _search,price_gte,price_lt);
-		long countRows = courseDAO.getCount(category, _search,price_gte,price_lt);
+		List<Course> lstCourse = courseDAO.getListCourse(_page, _limit, _sort, category, _search,price_gte,price_lt,_rateStar);
+		long countRows = courseDAO.getCount(category, _search,price_gte,price_lt,_rateStar);
 		for (Course c : lstCourse) {
 			c.setBeforeResource(WebUtils.getUrl(httpServletRequest));
 
 		}
-		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, null);
+		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, null) {
+			public int get_rateStar() {
+				return _rateStar;
+			}
+		};
 		model.put("pageResponse", pageResponse);
 
 		return "courses";
