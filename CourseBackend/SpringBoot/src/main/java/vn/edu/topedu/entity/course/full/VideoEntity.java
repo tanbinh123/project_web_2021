@@ -31,6 +31,9 @@ public class VideoEntity extends AHasResource {
 	@Column(name = "video", nullable = false)
 	@JsonIgnore
 	private String video;
+	
+	@Column(name = "duration", nullable = false)	
+	private long duration;
 
 	@OneToMany(mappedBy = "demo")
 	@JsonIgnore
@@ -61,6 +64,14 @@ public class VideoEntity extends AHasResource {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public long getDuration() {
+		return duration;
+	}
+
+	public void setDuration(long duration) {
+		this.duration = duration;
 	}
 
 	public String getVideo() {

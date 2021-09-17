@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.edu.topedu.entity.ActiveAccount;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
+import vn.edu.topedu.entity.NotificationEntity;
 import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.entity.RequestResetPassword;
 import vn.edu.topedu.entity.ResourceImage;
@@ -287,6 +288,26 @@ public class VideoDAO {
 			query.setParameter("search", _search);
 		}
 		return (long) query.getSingleResult();
+	}
+	
+	@Transactional
+	public VideoEntity mergePart(VideoEntity p) {
+		entityManager.merge(p);
+		entityManager.flush();
+		return  p;
+	}
+	
+	public VideoEntity getEntity(Long id) {
+		try {
+			
+			String sql = "Select c from " + VideoEntity.class.getName() + " c " //
+					+ " where  c.id= :id ";
+			Query query = this.entityManager.createQuery(sql, VideoEntity.class);
+			query.setParameter("id", id);
+			return (VideoEntity) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

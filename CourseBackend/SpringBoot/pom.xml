@@ -28,9 +28,12 @@
     <id>xuggle repo</id>
     <url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
   </repository>
-</repositories> 
+</repositories>
+
+ 
 	<dependencies>
 	
+
 	 <dependency>
     <groupId>xuggle</groupId>
     <artifactId>xuggle-xuggler</artifactId>
@@ -211,6 +214,7 @@
 
 		<finalName>${artifactId}</finalName>
 		<plugins>
+		
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -237,6 +241,8 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			
 		</plugins>
 	</build>
 </project>
