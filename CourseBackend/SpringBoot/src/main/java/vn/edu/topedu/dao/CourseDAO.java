@@ -78,6 +78,9 @@ public class CourseDAO {
 			case "updateat":
 				sqlSort += WebUtils.sort(_order, "c.updateAt", started);
 				break;
+			case "discount":
+				sqlSort += WebUtils.sort(_order, "c.discount", started);
+				break;
 			default:
 				break;
 			}
@@ -125,6 +128,40 @@ public class CourseDAO {
 		return (long) query.getSingleResult();
 	}
 //	
+	public List<Course> getRandomListCourse(int _limit,  int category, String _search, BigDecimal price_gte, BigDecimal price_lt,int rateStar) {
+		
+		
+
+		String sql = null;
+		if (_search.length() == 0) {
+			sql = "Select c from " + Course.class.getName() + " c " //
+					+ " where c.deleted=0 ";
+		} else {
+			sql = "Select c from " + Course.class.getName() + " c " //
+					+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+
+		}
+		if (category != -1)
+			sql += String.format(" and c.category.id = %d ", category);
+		if (rateStar != -1)
+			sql += String.format(" and c.rateStar = %d ", rateStar);
+		if (!price_gte.equals(BigDecimal.valueOf(-1)))
+			sql += String.format(" and c.price >= %s ", price_gte.toString());
+		if (!price_lt.equals(BigDecimal.valueOf(-1)))
+			sql += String.format(" and c.price < %s ", price_lt.toString());
+		sql += " group by c.id  order by  rand() ";
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, Course.class);
+		
+		if (_search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		if (_limit != -1) {
+			query.setMaxResults(_limit);
+		}
+		return query.getResultList();
+	}
 
 	public PreviewCourseEntity getPreviewCourse(Long idCourse) {
 		String sql = "Select c from " + PreviewCourseEntity.class.getName() + " c " //

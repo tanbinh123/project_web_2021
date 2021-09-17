@@ -22,6 +22,8 @@ public class PageResponse<T> implements JsonResponse {
 		this.pagination.set_page(_page);
 		this.pagination.set_totalRows(countRows);
 	}
+	
+	
 
 	public PageResponse() {
 		super();

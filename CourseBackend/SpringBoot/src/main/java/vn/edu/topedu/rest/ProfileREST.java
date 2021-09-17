@@ -123,7 +123,7 @@ public class ProfileREST {
 				appUser.setLocation(location);
 				appUser.setFacebook(facebook);
 				appUser.setDescription(description);
-				
+				appUser.setActived(false);
 				ResourceImage newAvatar=null;
 				try {
 					newAvatar = resourceImageDAO.uploadImage(uploadAvatar, appUser);

@@ -157,11 +157,15 @@ public class BaseCourse extends BaseEntity implements JsonResponse {
 	
 	
 	public String getImgAvatar() {
+		if(userPoster!=null&&userPoster.getAvatar()!=null)
 		return userPoster.getAvatar().getImage();
+		return null;
 	}
 	
 	public String getNameAuthor() {
+		if(userPoster!=null)
 		return userPoster.getUsername();
+		return null;
 	}
 	
 	public String getCategoryName() {

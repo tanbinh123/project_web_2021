@@ -21,7 +21,7 @@ const ListPayment = () => {
     };
   }, []);
   const getDataListPayment = async () => {
-    const res = await paymentApi.getAll();
+    const res = await paymentApi.getAllStatement();
     if (!!!res.status) {
       const { data, pagination } = res;
       setDataListPayment(data);
@@ -35,8 +35,9 @@ const ListPayment = () => {
     { key: "id", label: "ID" },
     { key: "appUserPojo", label: "Tên" },
     { key: "urReturn", label: "ID Khóa học" },
-    { key: "amount", label: "Tổng tiền" },
-    { key: "createTime", label: "Tổng tiền" },
+    { key: "title", label: "Tên Khóa học" },
+    { key: "amount", label: "Số tiền" },
+    { key: "createTime", label: "Thời gian tạo" },
   ];
   const { push } = useHistory();
 
@@ -53,8 +54,8 @@ const ListPayment = () => {
       <CDataTable
         items={Array.from(dataListPayment).filter((item) => {
           return (
-            item.transactionStatus === "COMPLETE" &&
-            item?.urReturn !== "http://localhost:25001/test/returnurl"
+            item?.payment?.transactionStatus === "COMPLETE" &&
+            item?.payment?.urReturn !== "http://localhost:25001/test/returnurl"
           );
         })}
         fields={fields}
@@ -67,20 +68,31 @@ const ListPayment = () => {
         sorter
         pagination
         scopedSlots={{
-          appUserPojo: (item) => <td>{item?.appUserPojo?.userName}</td>,
+          appUserPojo: (item) => <td>{item?.payment?.appUserPojo?.userName}</td>,
           urReturn: (item) => (
             <td className="td">
               <a
-                href={item?.urReturn}
+                href={item?.payment?.urReturn}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {item?.urReturn.split("/course/")[1]}
+                {item?.payment?.urReturn.split("/course/")[1]}
               </a>
             </td>
           ),
-          amount: (item) => <td>{convertVND(item?.amount/100)}</td>,
-          createTime: (item) => <td>{DateToString2(item.createTime)}</td>,
+          title: (item) => (
+            <td className="td">
+              <a
+                href={item?.payment?.urReturn}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {item?.coursePojo?.title}
+              </a>
+            </td>
+          ),
+          amount: (item) => <td>{convertVND(item?.payment?.amount/100)}</td>,
+          createTime: (item) => <td>{DateToString2(item?.payment?.createTime)}</td>,
         }}
       />
     </div>

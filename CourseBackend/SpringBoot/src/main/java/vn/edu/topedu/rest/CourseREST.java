@@ -111,6 +111,48 @@ public class CourseREST implements IMyHost {
 		});
 		return ResponseEntity.ok(pageResponse);
 	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/list/random", method = RequestMethod.GET)
+	public ResponseEntity<Object> getRandom(HttpServletRequest httpServletRequest,
+			
+			@RequestParam(defaultValue = "-1") int _limit,			
+			@RequestParam(defaultValue = "") String _search,
+			@RequestParam(defaultValue = "-1") BigDecimal price_gte,
+			@RequestParam(defaultValue = "-1") BigDecimal price_lt,
+			@RequestParam(defaultValue = "-1") int _rateStar,
+			@RequestParam(defaultValue = "-1") int _category) {		
+		List<Course> lstCourse = courseDAO.getRandomListCourse( _limit, _category, _search,price_gte,price_lt,_rateStar);
+		
+		for (Course c : lstCourse) {
+			String bf = getUrl(httpServletRequest);
+			//c.setBeforeResource();
+			c.getUserPoster().getAvatar().setBeforeResource(bf);
+			
+			c.setBeforeResource(bf);
+			
+
+		}
+		
+	
+		@SuppressWarnings("rawtypes")
+		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, 1, _limit, new Pagination() {
+			
+			@SuppressWarnings("unused")
+			public int get_rateStar() {
+				return _rateStar;
+			}
+
+			@SuppressWarnings("unused")
+			public int get_category() {
+				return _category;
+			}
+
+		});
+		return ResponseEntity.ok(pageResponse);
+	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Object> getCourse(@PathVariable Long id, HttpServletRequest httpServletRequest) {

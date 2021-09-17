@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
+import vn.edu.topedu.pojo.CoursePojo;
  
 @Entity
 @Table(name = "Ower_Course")
@@ -154,7 +155,13 @@ public class OwerCourse {
 		this.durationLearned = durationLearned;
 	}
 	
-	
+	public CoursePojo getCoursePojo() {
+		//CoursePojo a = new CoursePojo();
+		if(this.course!=null)
+		return CoursePojo.co(this.course);else {
+			return null;
+		}
+	}
 
 
 	
