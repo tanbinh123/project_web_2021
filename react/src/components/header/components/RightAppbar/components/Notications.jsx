@@ -16,6 +16,7 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useRecoilState } from 'recoil';
 import notificationApi from '../../../../../api/notificationApi';
 import { DataUser } from '../../../../../app/DataUser';
@@ -80,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
 function Notications(props) {
   const classes = useStyles();
   const [dataUser, setDataUser] = useRecoilState(DataUser);
+  const { push } = useHistory();
   const popupState = usePopupState({
     variant: 'popover',
     popupId: 'popoverNotications',
@@ -152,8 +154,13 @@ function Notications(props) {
               </ListItem>
             ))}
         </List>
-        <Box className={classes.seeMore} onClick={handleShowMore}>
-          {seeMore ? 'Ẩn bớt' : 'Xem tất cả'}
+        <Box
+          className={classes.seeMore}
+          onClick={() => {
+            push('/setting-account/notification');
+          }}
+        >
+          Xem tất cả
         </Box>
       </Box>
     </Popover>

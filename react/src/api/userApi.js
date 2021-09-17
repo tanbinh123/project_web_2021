@@ -67,6 +67,10 @@ const userApi = {
     const url = `api/admin/firebase/verify`;
     return axiosClient.post(url, data);
   },
+  getPayment(params) {
+    const url = `/payment/my/statement/course/list`;
+    return axiosClient.get(url, { params });
+  },
 };
 
 export default userApi;

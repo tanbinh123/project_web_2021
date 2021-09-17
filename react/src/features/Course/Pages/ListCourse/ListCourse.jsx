@@ -174,6 +174,20 @@ function ListCourse(props) {
       search: stringify(filters, null, null, escape()),
     });
   };
+  const handleFilterRateChange = (values) => {
+    // console.log(values);
+
+    const filters = {
+      ...queryParams,
+      _rateStar: values,
+      _page: 1,
+    };
+    // console.log(filters);
+    history.push({
+      pathname: history.location.pathname,
+      search: stringify(filters, null, null, escape()),
+    });
+  };
   const [isOpenMenuFilterMobile, setOpenMenuFilterMobile] =
     React.useState(false);
   const contentMenuFilterMobile = (
@@ -191,6 +205,10 @@ function ListCourse(props) {
             Number(queryParams?.price_lt),
           ]
         }
+      />
+      <FilterRate
+        onChange={handleFilterRateChange}
+        queryRate={queryParams._rateStar}
       />
     </>
   );
@@ -216,7 +234,10 @@ function ListCourse(props) {
                   ]
                 }
               />
-              <FilterRate />
+              <FilterRate
+                onChange={handleFilterRateChange}
+                queryRate={queryParams._rateStar}
+              />
             </Grid>
             <Grid
               item

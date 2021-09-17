@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import classNames from 'classnames';
 import React from 'react';
+import CustomButton from '../../../../../components/Button/CustomButton';
 
 //LeftCourse.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -38,11 +39,17 @@ const useStyles = makeStyles((theme) => ({
   actived: {
     color: 'var(--colorOrange2) !important',
   },
+  footer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: '20px',
+  },
 }));
 
 function FilterCategory(props) {
   const classes = useStyles();
-  const { categories, onChange, categorie = -1 } = props;
+  const { categories = [], onChange, categorie = -1 } = props;
+  const [isShow, setIsShow] = React.useState(false);
   // console.log("init LeftCourse", categories);
   const handleOnClickCategory = (value) => {
     onChange(value);
@@ -53,17 +60,19 @@ function FilterCategory(props) {
     <div className={classes.root}>
       <h3 className="__title">Danh Mục</h3>
       <ul>
-        {Array.from(categories).map((item, index) => (
-          <li
-            key={item.id}
-            onClick={() => {
-              handleOnClickCategory(item);
-            }}
-            className={classNames(categorie == item.id && classes.actived)}
-          >
-            {item.name}
-          </li>
-        ))}
+        {Array.from(categories)
+          .splice(0, isShow ? categories.length : 3)
+          .map((item, index) => (
+            <li
+              key={item.id}
+              onClick={() => {
+                handleOnClickCategory(item);
+              }}
+              className={classNames(categorie == item.id && classes.actived)}
+            >
+              {item.name}
+            </li>
+          ))}
         <li
           onClick={() => {
             handleOnClickCategory({ id: -1 });
@@ -73,6 +82,14 @@ function FilterCategory(props) {
           Tất cả
         </li>
       </ul>
+      <div className={classes.footer}>
+        <CustomButton
+          title={isShow ? 'Ẩn bớt' : 'Hiện tất cả'}
+          onClick={() => {
+            setIsShow(!isShow);
+          }}
+        />
+      </div>
     </div>
   );
 }

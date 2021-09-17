@@ -4,6 +4,7 @@ const InfoCss = makeStyles((theme) => ({
   avatar: {},
   //Info
   rightRoot: {
+    marginBottom: 50,
     //o tren
     '&>div:first-of-type': {
       // backgroundImage:

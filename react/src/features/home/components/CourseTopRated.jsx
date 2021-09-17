@@ -52,6 +52,7 @@ function CourseTopRated(props) {
               rateStar={x.rateStar}
               bought={x.bought}
               price={x.price}
+              originPrice={x.originPrice}
               discount={x?.discount}
             />
           </Grid>

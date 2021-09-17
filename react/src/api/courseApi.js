@@ -45,6 +45,10 @@ const courseApi = {
     }
     return axiosClient.post(url, data);
   },
+  getRandomCourse(params) {
+    const url = '/course/list/random';
+    return axiosClient.get(url, { params });
+  },
 };
 
 export default courseApi;

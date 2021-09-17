@@ -16,6 +16,7 @@ function Login(props) {
   // check redirect
   const GGProvider = new GoogleAuthProvider();
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!isEmpty(dataUser.user)) {
       push('/');
     }

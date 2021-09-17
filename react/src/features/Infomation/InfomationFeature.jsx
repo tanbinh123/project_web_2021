@@ -1,19 +1,21 @@
-import { Avatar, Box, Container, Grid } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
-import { Link, NavLink } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import userApi from "../../api/userApi";
-import { DataUser, removeLocalStorage } from "../../app/DataUser";
-import Header from "../../components/header";
-import NotFound404 from "../NotFound";
-import Active from "./components/Active";
-import Actived from "./components/Actived";
-import ChangePassword from "./components/ChangePassword";
-import CourseBoughtFull from "./components/CourseBoughtFull";
-import Edit from "./components/Edit";
-import Info from "./components/Info";
-import CSSInfomationFeature from "./css/CSSInfomationFeature";
+import { Avatar, Box, Container, Grid } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import userApi from '../../api/userApi';
+import { DataUser, removeLocalStorage } from '../../app/DataUser';
+import Header from '../../components/header';
+import NotFound404 from '../NotFound';
+import Active from './components/Active';
+import Actived from './components/Actived';
+import ChangePassword from './components/ChangePassword';
+import CourseBoughtFull from './components/CourseBoughtFull';
+import Edit from './components/Edit';
+import HistoryPayment from './components/HistoryPayment';
+import Info from './components/Info';
+import Notification from './components/Notification';
+import CSSInfomationFeature from './css/CSSInfomationFeature';
 InfomationFeature.propTypes = {};
 function InfomationFeature(props) {
   const classes = CSSInfomationFeature();
@@ -30,10 +32,10 @@ function InfomationFeature(props) {
       user: {},
       profile: {},
       courses: {},
-      token: "",
+      token: '',
     });
     removeLocalStorage();
-    push("/");
+    push('/');
   }
 
   return (
@@ -65,7 +67,7 @@ function InfomationFeature(props) {
                         <Link to={`${url}/info`}>
                           <span>
                             {dataUser?.profile?.fullname ||
-                              dataUser?.profile?.userName}{" "}
+                              dataUser?.profile?.userName}{' '}
                             {dataUser?.profile?.actived ? (
                               <i className="fas fa-check-circle green"></i>
                             ) : (
@@ -88,6 +90,12 @@ function InfomationFeature(props) {
                     </NavLink>
                     <NavLink to={`${url}/change-password`}>
                       <li> Đổi mật khẩu</li>
+                    </NavLink>
+                    <NavLink to={`${url}/payment`}>
+                      <li>Lịch sử thanh toán</li>
+                    </NavLink>
+                    <NavLink to={`${url}/notification`}>
+                      <li>Thông báo</li>
                     </NavLink>
                     {/* <NavLink to={`${url}/courses-bought`}>
                       <li>Khóa học đã mua</li>
@@ -124,6 +132,16 @@ function InfomationFeature(props) {
                   <Route
                     path={`${url}/change-password`}
                     component={() => <ChangePassword />}
+                    exact
+                  />
+                  <Route
+                    path={`${url}/payment`}
+                    component={() => <HistoryPayment />}
+                    exact
+                  />
+                  <Route
+                    path={`${url}/notification`}
+                    component={() => <Notification />}
                     exact
                   />
                   {/* <Route

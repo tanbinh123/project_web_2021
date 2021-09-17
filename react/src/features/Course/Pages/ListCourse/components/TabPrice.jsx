@@ -6,10 +6,10 @@ import {
   Select,
   Tab,
   Tabs,
-} from "@material-ui/core";
-import { parse } from "query-string";
-import React, { useEffect, useState } from "react";
-import { colorOrange2 } from "../../../../../components/color/color";
+} from '@material-ui/core';
+import { parse } from 'query-string';
+import React, { useEffect, useState } from 'react';
+import { colorOrange2 } from '../../../../../components/color/color';
 
 //TabPrice.propTypes = {};
 
@@ -18,25 +18,28 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 10,
   },
   customTab: {
-    "& > div  > span ": {
+    '& > div  > div>button ': {
+      minWidth: 120,
+    },
+    '& > div  > span ': {
       backgroundColor: colorOrange2,
     },
-    "& .MuiTab-textColorPrimary.Mui-selected": {
+    '& .MuiTab-textColorPrimary.Mui-selected': {
       color: colorOrange2,
     },
-    display: "block",
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
+    display: 'block',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
   formControl: {
     //display: "flex",
-    justifyContent: "center",
-    margin: "15px 20px 0px 20px",
+    justifyContent: 'center',
+    margin: '15px 20px 0px 20px',
 
-    display: "none",
-    [theme.breakpoints.down("sm")]: {
-      display: "flex",
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
     },
   },
 }));
@@ -44,12 +47,12 @@ const useStyles = makeStyles((theme) => ({
 function TabPrice(props) {
   const classes = useStyles();
   const { onChange, value } = props;
-  const [values, setValues] = useState("updateAt:desc");
+  const [values, setValues] = useState('updateAt:desc');
 
   useEffect(() => {
     const tmpValue = parse(value);
 
-    setValues(tmpValue._sort || "updateAt:desc");
+    setValues(tmpValue._sort || 'updateAt:desc');
   }, [value]);
   function handleOnChangeValue(e, value) {
     setValues(value);
@@ -80,6 +83,8 @@ function TabPrice(props) {
           <MenuItem value="rateStar:desc">Đánh giá cao</MenuItem>
           <MenuItem value="price:desc">Giá cao</MenuItem>
           <MenuItem value="price:asc">Giá thấp</MenuItem>
+          <MenuItem value="discount:desc">Giảm giá cao</MenuItem>
+          <MenuItem value="discount:asc">Giảm giá thấp</MenuItem>
         </Select>
       </FormControl>
       <Tabs
@@ -94,6 +99,8 @@ function TabPrice(props) {
         <Tab label="Đánh giá cao" value="rateStar:desc" />
         <Tab label="Giá cao" value="price:desc" />
         <Tab label="Giá thấp" value="price:asc" />
+        <Tab label="Giảm giá cao" value="discount:desc" />
+        <Tab label="Giảm giá thấp" value="discount:asc" />
       </Tabs>
     </div>
   );

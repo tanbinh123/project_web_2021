@@ -1,9 +1,9 @@
 import axiosClient from './axiosClient';
 
 const notificationApi = {
-  getAll() {
+  getAll(params) {
     const url = `/notification/list`;
-    return axiosClient.get(url);
+    return axiosClient.get(url, { params });
   },
 };
 

@@ -28,7 +28,7 @@ function CourseRandom(props) {
   const [dataCourse, setDataCourse] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await courseApi.getAll({ _limit: 6, _sort: 'bought:desc' });
+      const res = await courseApi.getRandomCourse({ _limit: 3 });
       const { data, pagination } = res;
       setDataCourse(data);
     })();
@@ -52,6 +52,7 @@ function CourseRandom(props) {
               rateStar={x.rateStar}
               bought={x.bought}
               price={x.price}
+              originPrice={x.originPrice}
               discount={x?.discount}
             />
           </Grid>
