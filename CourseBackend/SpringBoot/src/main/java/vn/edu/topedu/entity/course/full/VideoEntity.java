@@ -1,6 +1,8 @@
 package vn.edu.topedu.entity.course.full;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +36,8 @@ public class VideoEntity extends AHasResource {
 	
 	@Column(name = "duration", nullable = false)	
 	private long duration;
+	
+	
 
 	@OneToMany(mappedBy = "demo")
 	@JsonIgnore
@@ -164,5 +168,17 @@ public class VideoEntity extends AHasResource {
 			return filename;
 		}
 		return filename;
+	}
+	
+	public String getStrDuration() {
+		 long minutes
+         = TimeUnit.MILLISECONDS.toMinutes(this.duration/1000);
+
+     // This method uses this formula seconds =
+     // (milliseconds / 1000);
+     long seconds
+         = (TimeUnit.MILLISECONDS.toSeconds(this.duration/1000)
+            % 60);
+		return String.format("%s min %s s", minutes, seconds);
 	}
 }

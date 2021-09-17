@@ -1,5 +1,7 @@
 package vn.edu.topedu.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -20,9 +22,8 @@ public abstract class AHasResource extends BaseEntity {
 	@JsonIgnore
 	private AppUser appUser;
 	
-	@Column(name = "count_linked", nullable = false, updatable = false)
-	private Long countLinked = Long.valueOf(0);
-	
+	@Column(name = "count_linked", nullable = false, updatable=false)	
+	private BigDecimal countLinked=BigDecimal.ZERO;
 	
 	public AppUser getAppUser() {
 		return appUser;
@@ -41,11 +42,11 @@ public abstract class AHasResource extends BaseEntity {
 		this.beforeResource = beforeResource;
 	}
 
-	public Long getCountLinked() {
+	public BigDecimal getCountLinked() {
 		return countLinked;
 	}
 
-	public void setCountLinked(Long countLinked) {
+	public void setCountLinked(BigDecimal countLinked) {
 		this.countLinked = countLinked;
 	}
 	

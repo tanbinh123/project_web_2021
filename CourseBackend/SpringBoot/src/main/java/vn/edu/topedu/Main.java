@@ -2,8 +2,6 @@ package vn.edu.topedu;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,9 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.dao.VideoDAO;
-import vn.edu.topedu.entity.course.full.VideoEntity;
-import vn.edu.topedu.fileprocess.FileProcess;
-import vn.edu.topedu.xuggler.VideoInfo;
+import vn.edu.topedu.humble.VideoInfo;
 
 @SpringBootApplication
 @RestController
@@ -66,7 +62,7 @@ public class Main extends SpringBootServletInitializer {
 		System.out.println("http://localhost:" + port + "/admin");
 		if (videoDAO != null) {
 			try {
-				videoDAO.deleteAllNoLink();
+				videoDAO.deleteAllNoLink(-1);
 				System.err.println("Delete All Video Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -74,7 +70,7 @@ public class Main extends SpringBootServletInitializer {
 		}
 		if (resourceImageDAO != null) {
 			try {
-				resourceImageDAO.deleteAllNoLink();
+				resourceImageDAO.deleteAllNoLink(-1);
 				System.err.println("Delete All Image Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -89,38 +85,6 @@ public class Main extends SpringBootServletInitializer {
 			}
 		}
 
-//		
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				String[] inputs = {
-//						
-//						"D:\\Github\\CDW\\tmp\\project_web_2021\\CourseBackend\\SpringBoot\\static-file\\user\\admin\\video\\lambanh_52.mp4",
-//						"D:\\Github\\CDW\\\\tmp\\project_web_2021\\CourseBackend\\SpringBoot\\static-file\\user\\admin\\video\\videodemo_58.mp4" };
-//		//
-//				for (String i : inputs) {
-//					// VideoEntity c=lstCourse.get(0);
-//					try {
-//						File f = new File(i);
-//						if (f.exists()) {
-//							String ajp = f.getAbsolutePath();
-//							
-//							System.err.println(i);
-//							
-//							long a = videoService.getDuration(ajp);
-//							System.err.println(a);
-//							//fis.close();
-//							// Thread.sleep(100);
-//
-//						}
-//					} catch (Exception e) {
-//						// TODO: handle exception
-//					}
-//				}
-//
-//			}
-//		}).start();
 	}
 
 	public static void browse(String url) {

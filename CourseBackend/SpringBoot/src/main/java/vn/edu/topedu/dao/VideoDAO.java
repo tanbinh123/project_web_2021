@@ -96,15 +96,18 @@ public class VideoDAO {
 		return deleted;
 
 	}
-	public List<VideoEntity> getResourceImagesNoLinked() {
-		String sql = "Select e from "+VideoEntity.class.getName()+" e " + " where e.countLinked=0  and deleted=true ";
+	public List<VideoEntity> getVideoNoLinked(int deleted) {
+		String sql = "Select e from "+VideoEntity.class.getName()+" e " + " where e.countLinked=0   ";
+		if(deleted!=-1)sql+=" and e.deleted= :deleted ";
 		Query query = this.entityManager.createQuery(sql, VideoEntity.class);
+		if(deleted!=-1) query.setParameter("deleted", deleted==1);
 		return query.getResultList();
 	}
+	
 	@Transactional
-	public int deleteAllNoLink() throws Exception {
+	public int deleteAllNoLink(int deleted) throws Exception {
 		try {
-			List<VideoEntity> a = getResourceImagesNoLinked();
+			List<VideoEntity> a = getVideoNoLinked(deleted);
 			for(VideoEntity ri:a) {
 				Path path = FileProcess.getPath(ri.absPath());
 				if(path.toFile().delete()) {
@@ -112,8 +115,11 @@ public class VideoDAO {
 				};
 			}
 			
-			String sql = "delete from " + VideoEntity.class.getName() +  " where countLinked=0 and deleted=true ";
+			String sql = "delete from " + VideoEntity.class.getName() +  " where countLinked=0 ";
+			if(deleted!=-1)sql+=" and e.deleted= :deleted ";
+			
 			Query query = this.entityManager.createQuery(sql);
+			if(deleted!=-1) query.setParameter("deleted", deleted==1);
 			return  query.executeUpdate();
 			
 		} catch (Exception e) {

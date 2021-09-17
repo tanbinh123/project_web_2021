@@ -108,18 +108,20 @@ public class ResourceImageDAO {
 
 	}
 
-	public List<ResourceImage> getResourceImagesNoLinked() {
+	public List<ResourceImage> getResourceImagesNoLinked(int deleted) {
 		String sql = "Select e from " + ResourceImage.class.getName() + " e "
-				+ " where e.countLinked=0  and deleted=true ";
+				+ " where e.countLinked=0   ";
+		if(deleted!=-1)sql+=" and e.deleted= :deleted ";
 		Query query = this.entityManager.createQuery(sql, ResourceImage.class);
+		if(deleted!=-1) query.setParameter("deleted", deleted==1);
 		return query.getResultList();
 	}
 
 	@Transactional
-	public int deleteAllNoLink() throws Exception {
+	public int deleteAllNoLink(int deleted) throws Exception {
 		try {
 
-			List<ResourceImage> a = getResourceImagesNoLinked();
+			List<ResourceImage> a = getResourceImagesNoLinked(deleted);
 			for (ResourceImage ri : a) {
 				String str=ri.getAbsPath();
 				if (str != null
@@ -134,7 +136,9 @@ public class ResourceImageDAO {
 				};
 			}
 			String sql = "delete from " + ResourceImage.class.getName() + " where countLinked=0 and deleted=true ";
+			if(deleted!=-1)sql+=" and e.deleted= :deleted ";
 			Query query = this.entityManager.createQuery(sql);
+			if(deleted!=-1) query.setParameter("deleted", deleted==1);
 			
 
 			

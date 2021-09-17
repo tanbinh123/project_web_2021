@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import vn.edu.topedu.dao.VideoDAO;
-import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.fileprocess.FileProcess;
+import vn.edu.topedu.humble.VideoInfo;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.PageResponse.Pagination;
 import vn.edu.topedu.utils.WebUtils;
-import vn.edu.topedu.xuggler.VideoInfo;
 
 @RestController
 @RequestMapping("/video")
@@ -50,45 +49,45 @@ public class VideoREST {
 
 		}
 
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				for (VideoEntity c : lstCourse) {
-					// VideoEntity c=lstCourse.get(0);
-					try {
-						File f = FileProcess.getPath(c.absPath()).toFile();
-						if (f.exists()) {
-							String ajp = f.getAbsolutePath();							
-							System.err.println(c.getUrlVideo());
-							long a = videoService.getDuration(ajp);
-							c.setDuration(a);
-							
-							System.err.println(a);
-							//videoDAO.mergePart(c);
-							//fis.close();
-							// Thread.sleep(100);
-
-						}
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-			}
-		}).start();
-		return ResponseEntity.ok().build();
-//		final String sort = _sort;
-//		@SuppressWarnings("rawtypes")
-//		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, new Pagination() {
-//			private String _sort = sort;
+//		new Thread(new Runnable() {
 //
-//			public String get_sort() {
-//				return _sort;
+//			@Override
+//			public void run() {
+//				for (VideoEntity c : lstCourse) {
+//					// VideoEntity c=lstCourse.get(0);
+//					try {
+//						File f = FileProcess.getPath(c.absPath()).toFile();
+//						if (f.exists()) {
+//							String ajp = f.getAbsolutePath();							
+//							System.err.println(c.getUrlVideo());
+//							long a = videoService.getDuration(f);
+//							c.setDuration(a);
+//							
+//							System.err.println(a);
+//							videoDAO.mergePart(c);
+//							//fis.close();
+//							// Thread.sleep(100);
+//
+//						}
+//					} catch (Exception e) {
+//						// TODO: handle exception
+//					}
+//				}
+//
 //			}
-//
-//		});
-//		return ResponseEntity.ok(pageResponse);
+//		}).start();
+		//return ResponseEntity.ok().build();
+		final String sort = _sort;
+		@SuppressWarnings("rawtypes")
+		PageResponse<List<VideoEntity>> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, new Pagination() {
+			private String _sort = sort;
+
+			public String get_sort() {
+				return _sort;
+			}
+
+		});
+		return ResponseEntity.ok(pageResponse);
 	}
 
 }

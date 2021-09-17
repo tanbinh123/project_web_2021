@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 17/09/2021 20:12:50
+ Date: 18/09/2021 03:46:15
 */
 
 SET NAMES utf8mb4;
@@ -141,7 +141,7 @@ INSERT INTO `categories` VALUES (1, 'Chưa phân loại', b'1', b'0', '2021-05-2
 INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 5, 500, 32601000, 5);
 INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 3, 0, 0, 0);
 INSERT INTO `categories` VALUES (22, 'Genshin Impact', b'1', b'0', '2021-06-28 06:39:44', '2021-06-28 06:39:44', 11, 0, 3020000, 2);
-INSERT INTO `categories` VALUES (23, 'Phong cách sống', b'1', b'0', '2021-09-15 08:28:55', '2021-09-15 08:28:55', 4, 0, 630000, 1);
+INSERT INTO `categories` VALUES (23, 'Phong cách sống', b'1', b'0', '2021-09-15 08:28:55', '2021-09-15 08:28:55', 7, 0, 630000, 1);
 INSERT INTO `categories` VALUES (24, 'Kĩ năng sống', b'1', b'0', '2021-09-15 20:09:51', '2021-09-15 20:09:51', 0, 0, 0, 0);
 INSERT INTO `categories` VALUES (25, 'Kinh tế', b'1', b'0', '2021-09-15 22:03:55', '2021-09-15 22:03:55', 0, 0, 0, 0);
 INSERT INTO `categories` VALUES (28, 'Ngoại ngữ', b'1', b'0', '2021-09-15 22:10:06', '2021-09-15 22:10:06', 0, 0, 0, 0);
@@ -177,7 +177,7 @@ CREATE TABLE `course`  (
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `course_ibfk_1` FOREIGN KEY (`img_poster_id`) REFERENCES `resource_image` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 203 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 206 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
@@ -375,9 +375,12 @@ INSERT INTO `course` VALUES (196, 116, '34342342', b'0', 'Eula', 588900, 0, 0, '
 INSERT INTO `course` VALUES (197, 117, '34342342', b'0', 'Eula', 770100, 0, 1, '2021-07-05 10:27:51', 1, NULL, 22, '2021-07-05 10:27:51', b'1', 0, 0, 1510000.00, 49);
 INSERT INTO `course` VALUES (198, 149, 'Khóa học chứng khoán online giúp bạn nắm bắt được kiến thức đầu tư chứng khoán đầy đủ, bài bản và chi tiết nhất dành cho người mới bắt đầu tham gia. Bí quyết để nhanh chóng có được nguồn lợi nhuận khổng lồ từ thị trường chứng khoán', b'0', 'Nhập môn chứng khoán', 300000, 0, 0, '2021-09-15 22:50:09', 1, 57, 1, '2021-09-05 10:47:11', b'1', 0, 0, 600000.00, 50);
 INSERT INTO `course` VALUES (199, 138, 'Bạn là người yêu thích công việc nội trợ, yêu thích việc làm bánh và quan tâm tới những thực phẩm, đồ ăn vegan (thuần chay)? Bạn hiểu được những tác dụng “thần kỳ” của việc ăn chay đối với sức khoẻ của mình như: tăng cường sức khoẻ, giúp thọ lâu nhờ protein có trong các loại rau củ, ngũ cốc, giúp tâm tính được hiền hoà an vui, giúp giảm cân, giảm thiểu rất nhiều bệnh lý cho con người và giúp làn da trở nên tươi trẻ và đẹp hơn rất nhiều. \n\nBạn muốn mang đến những chiếc bánh thuần chay dinh dưỡng, tốt cho sức khoẻ đến bạn bè người thân như một món quà nhỏ chan chứa đầy tình cảm. Vậy tại sao bạn không thử bắt tay ngay vào với khóa học làm bánh thuần chay của UNICA để thực hiện điều ý nghĩa này.\n\nHãy đến ngay với khóa học 20 công thức bánh thuần chay tốt cho sức khỏe của giảng viên Lê Thủy Xuân tại Unica.vn. \n\nKhóa học làm 20 loại bánh ngọt vegan (bánh ngọt thuần chay) được thiết kế để giúp những người cảm thấy e ngại với công việc bếp núc có thể tự tin thể hiện bản thân, làm ra nhiều loại bánh tuyệt vời cho những người thân yêu. Với cách làm đơn giản, các nguyên liệu tốt cho sức khỏe, dễ dàng tìm mua được ở Việt Nam, khóa học sẽ đem đến cho bạn những kỹ năng làm bánh như những người thợ bánh chuyên nghiệp.\n\nMục đích ăn chay đối với nhiều người có thể chỉ được xem như một niềm tin tôn giáo, tuy nhiên, thực phẩm chay cũng đem lại những lợi ích tuyệt vời đối với sức khỏe.\n\nNgười theo chế độ ăn thuần chay tránh tất cả các sản phẩm từ động vật, kể cả mật ong, phấn ong, nước mắm, sữa, bơ, pho mát... Họ chỉ ăn các sản phẩm từ thực vật như: Các loại rau, củ, trái cây, các loại đậu đỗ, thảo mộc, rong biển, nước ép trái cây hay rau củ, tinh dầu ép lạnh (dầu dừa, dầu olive...), mứt, bơ thực vật, thực phẩm lên men (miso, kimchi...), siro, giấm, chocolate (loại không sữa)...\n\nHãy đăng ký ngay khoá học 20 công thức bánh thuần chay tốt cho sức khỏe của giảng viên Lê Thủy Xuân ngay hôm nay nhé!', b'0', '20 công thức bánh thuần chay tốt cho sức khỏe', 7800, 0, 0, '2021-09-15 10:26:39', 1, 50, 23, '2021-09-15 07:03:00', b'1', 0, 0, 13684.00, 43);
-INSERT INTO `course` VALUES (200, 147, 'hóa học \"Tự làm 18 loại bánh tại nhà không cần lò nướng\" do giảng viên Lê Thủy Xuân hướng dẫn được thiết kế để giúp những người ít tự tin trong bếp hiểu được thuật ngữ và các thành phần được sử dụng trong thế giới làm bánh và tự tin để làm ra nhiều loại bánh tuyệt vời mà không cần sử dụng lò nướng.\r\n\r\nKhóa học bao gồm nhiều bài học làm bánh với các công thức và cách hướng dẫn chi tiết cách làm các loại bánh ngọt không cần lò nướng bằng hình thức video clip. Ví dụ: Bánh Tiramisu, bánh Crepe, bánh Cheesecake...\r\n\r\nKết thúc khóa học bạn hoàn toàn có thể tự mình làm ra 18+ loại bánh ngọt mà không cần lò nướng như các loại bánh ngọt khác, tự mình sáng tạo phần trang trí hấp dẫn choh chiếc bánh của bạn. Thậm chí sau khi thành thạo 18u+ công thức làm bánh mà không cần lò nướng này bạn còn có thể sáng tạo ra những công thức làm bánh của riêng bạn để dành tặng cho gia đình, bạn bè và tạo nên những công thức làm bánh riêng của bản thân!\r\n\r\nVậy còn chờ gì nữa, tham gia khóa học \"Tự làm 18 loại bánh tại nhà không cần lò nướng\" ngay hôm nay tại Unica thôi!', b'0', 'Tự làm 18 loại bánh tại nhà không cần lò nướng', 595000, 0, 0, '2021-09-15 10:35:35', 1, 58, 23, '2021-09-15 08:56:15', b'1', 0, 0, 700000.00, 15);
+INSERT INTO `course` VALUES (200, 153, 'Cung cấp 18+ công thức làm bánh và cách hướng dẫn chi tiết cách làm các loại bánh ngọt không cần lò nướng để chiêu đãi gia đình và bạn bè, tự tạo làm nên những món quà tặng ý nghĩa dành cho người thân ', b'0', 'Tự làm 18 loại bánh tại nhà không cần lò nướng', 505750, 0, 0, '2021-09-17 20:38:11', 1, 58, 23, '2021-09-15 08:56:15', b'1', 0, 0, 595000.00, 15);
 INSERT INTO `course` VALUES (201, 145, NULL, b'0', '20 cách làm bánh sinh nhật hiện đại', 630000, 0, 1, '2021-09-15 10:30:29', 1, 52, 23, '2021-09-15 08:57:10', b'1', 0, 0, 700000.00, 10);
 INSERT INTO `course` VALUES (202, 148, NULL, b'0', 'Tự làm bánh mì mềm và pizza tại nhà', 402000, 0, 0, '2021-09-15 10:39:47', 1, NULL, 23, '2021-09-15 10:39:47', b'1', 0, 0, 600000.00, 33);
+INSERT INTO `course` VALUES (203, 151, 'Tự tay làm được những chiếc bánh Nerikiri xinh xắn với vô vàn hình dạng, màu sắc đẹp mắt, thỏa mãn đam mê, tiết kiệm tài chính và an toàn thực phẩm ', b'0', 'Kỹ thuật làm bánh Nerikiri (Wagashi) cơ bản', 599000, 0, 0, '2021-09-17 20:11:01', 1, 59, 23, '2021-09-17 20:10:12', b'1', 0, 0, 599000.00, 0);
+INSERT INTO `course` VALUES (204, 152, 'Mở rộng hiểu biết về văn hóa ẩm thực Nhật Bản, tự tay làm các loại bánh Mochi và Yatsuhashi nổi tiếng của Nhật cho người thân, bạn bè hay kinh doanh ', b'0', 'Tự làm các loại bánh Mochi Nhật Bản', 599000, 0, 0, '2021-09-17 20:26:46', 1, 64, 23, '2021-09-17 20:16:02', b'1', 0, 0, 599000.00, 0);
+INSERT INTO `course` VALUES (205, 154, NULL, b'0', 'Tự tay làm 20 loại bánh bổ dưỡng cho con tại nhà', 499000, 0, 0, '2021-09-17 20:39:40', 1, 65, 23, '2021-09-17 20:39:31', b'1', 0, 0, 499000.00, 0);
 
 -- ----------------------------
 -- Table structure for evaluates
@@ -443,7 +446,7 @@ CREATE TABLE `learning`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 99 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of learning
@@ -494,6 +497,12 @@ INSERT INTO `learning` VALUES (89, 198, 'Nhanh chóng biết cách đầu tư ch
 INSERT INTO `learning` VALUES (90, 198, 'Có được tư duy đúng trong đầu tư cổ phiếu hiệu quả, thông minh', b'0');
 INSERT INTO `learning` VALUES (91, 198, 'Tránh được những rủi ro thua lỗ, cạm bẫy trên TTCK', b'0');
 INSERT INTO `learning` VALUES (92, 198, 'Đầy đủ những hướng dẫn \"cầm tay chỉ việc\" để có thể tự tin tham gia TTCK', b'0');
+INSERT INTO `learning` VALUES (93, 203, 'Hiểu đúng ý nghĩa, nguồn gốc, lịch sử phát triển của dòng bánh', b'0');
+INSERT INTO `learning` VALUES (94, 203, 'Làm được mứt đậu trắng, đậu đỏ, vỏ bánh, một số loại nhân bánh truyền thống của ', b'0');
+INSERT INTO `learning` VALUES (95, 203, 'Thực hiện được các kỹ thuật tạo hình Wagashi cơ bản và một số tạo hình nâng', b'0');
+INSERT INTO `learning` VALUES (96, 203, 'Cách chọn nguyên liệu, các loại dụng cụ (Nhật và thay thế), cách bảo quản sản phẩm', b'0');
+INSERT INTO `learning` VALUES (97, 203, 'Biết cách sử dụng một số loại dụng cụ tạo hình Wagashi cơ bản của Nhật Bản và dụng ', b'0');
+INSERT INTO `learning` VALUES (98, 203, ' Trình bày sản phẩm đẹp mắt và mang đậm phong cách Nhật Bản (trên đĩa, hộp sơn mài, gói sản phẩm để mang đi biếu tặng)', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -776,7 +785,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 151 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 155 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -842,10 +851,14 @@ INSERT INTO `resource_image` VALUES (143, 'user/admin/image/anh_1_16005873018901
 INSERT INTO `resource_image` VALUES (144, 'user/admin/image/tu_hoc_lam_18_loai_banh_khong_can_lo_nuong_m_1556177753.jpg', b'0', '2021-09-15 08:56:15', 1, 0, '2021-09-15 08:56:15');
 INSERT INTO `resource_image` VALUES (145, 'user/admin/image/20_cach_lam_banh_sinh_nhat_hien_dai_m_1555657545_jpg', b'0', '2021-09-15 08:57:10', 1, 1, '2021-09-15 08:57:10');
 INSERT INTO `resource_image` VALUES (146, 'user/admin/image/1609745981038_png', b'0', '2021-09-15 10:07:40', 1, 0, '2021-09-15 10:07:40');
-INSERT INTO `resource_image` VALUES (147, 'user/admin/image/tu_hoc_lam_18_loai_banh_khong_can_lo_nuong_m_1556177753_jpg', b'0', '2021-09-15 10:09:20', 1, 1, '2021-09-15 10:09:20');
+INSERT INTO `resource_image` VALUES (147, 'user/admin/image/tu_hoc_lam_18_loai_banh_khong_can_lo_nuong_m_1556177753_jpg', b'0', '2021-09-15 10:09:20', 1, 0, '2021-09-15 10:09:20');
 INSERT INTO `resource_image` VALUES (148, 'user/admin/image/vlcsnap_2020_03_13_14h08m47s121_m_png', b'0', '2021-09-15 10:39:47', 1, 1, '2021-09-15 10:39:47');
 INSERT INTO `resource_image` VALUES (149, 'user/admin/image/khoa_hoc_nhap_mon_chung_khoan_m_1555570756_jpg', b'0', '2021-09-15 22:22:55', 1, 1, '2021-09-15 22:22:55');
 INSERT INTO `resource_image` VALUES (150, 'user/admin/image/images_png', b'0', '2021-09-16 23:39:52', 1, 1, '2021-09-16 23:39:52');
+INSERT INTO `resource_image` VALUES (151, 'user/admin/image/ky_thuat_lam_banh_nerikiri_co_ban_m_1561428959_jpg', b'0', '2021-09-17 20:10:12', 1, 1, '2021-09-17 20:10:12');
+INSERT INTO `resource_image` VALUES (152, 'user/admin/image/tu_lam_cac_loai_banh_mochi_nhat_ban_m_1561437748_jpg', b'0', '2021-09-17 20:16:02', 1, 1, '2021-09-17 20:16:02');
+INSERT INTO `resource_image` VALUES (153, 'user/admin/image/tu_hoc_lam_18_loai_banh_khong_can_lo_nuong_m_1556177753_jpg', b'0', '2021-09-17 20:37:19', 1, 1, '2021-09-17 20:37:19');
+INSERT INTO `resource_image` VALUES (154, 'user/admin/image/20_loai_banh_bo_duong_m_1561523591_jpg', b'0', '2021-09-17 20:39:30', 1, 1, '2021-09-17 20:39:30');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -865,7 +878,7 @@ CREATE TABLE `revenue`  (
   `course_sell` decimal(60, 0) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `unque_key`(`month`, `year`, `day`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of revenue
@@ -881,6 +894,7 @@ INSERT INTO `revenue` VALUES (54, b'0', '2021-09-12 15:38:05', '2021-09-12 15:38
 INSERT INTO `revenue` VALUES (55, b'0', '2021-09-14 14:04:03', '2021-09-14 14:04:03', 9, 2021, 630000, 14, 1, 0, 1);
 INSERT INTO `revenue` VALUES (56, b'0', '2021-09-15 07:03:00', '2021-09-15 07:03:00', 9, 2021, 630000, 15, 1, 0, 1);
 INSERT INTO `revenue` VALUES (57, b'0', '2021-09-17 00:01:40', '2021-09-17 00:01:40', 9, 2021, 630000, 17, 0, 0, 1);
+INSERT INTO `revenue` VALUES (58, b'0', '2021-09-17 20:10:12', '2021-09-17 20:10:12', 9, 2021, 0, 18, 1, 0, 0);
 
 -- ----------------------------
 -- Table structure for spring_session
@@ -986,7 +1000,7 @@ CREATE TABLE `video`  (
   `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `img_poster_id` bigint(20) NULL DEFAULT NULL,
   `duration` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `count_linked` decimal(20, 0) NOT NULL DEFAULT 0,
   `actived` bit(1) NOT NULL DEFAULT b'0',
   `deleted` bit(1) NULL DEFAULT b'0',
   `create_at` datetime(0) NULL DEFAULT utc_timestamp,
@@ -994,13 +1008,15 @@ CREATE TABLE `video`  (
   `user_poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`img_poster_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
-INSERT INTO `video` VALUES (52, 'user/admin/video/lambanh.mp4', NULL, 0, 1, b'1', b'0', '2021-09-15 10:30:29', '2021-09-15 10:30:29', 1);
-INSERT INTO `video` VALUES (58, 'user/admin/video/videodemo.mp4', NULL, 0, 190, b'1', b'0', '2021-09-16 01:03:42', '2021-09-16 01:03:42', 1);
+INSERT INTO `video` VALUES (52, 'user/admin/video/lambanh.mp4', NULL, 65316667, 1, b'1', b'0', '2021-09-15 10:30:29', '2021-09-15 10:30:29', 1);
+INSERT INTO `video` VALUES (58, 'user/admin/video/videodemo.mp4', NULL, 21158000, 190, b'1', b'0', '2021-09-16 01:03:42', '2021-09-16 01:03:42', 1);
+INSERT INTO `video` VALUES (59, 'user/admin/video/1.mp4', NULL, 9867000, 1, b'1', b'0', '2021-09-17 20:10:58', '2021-09-17 20:10:58', 1);
+INSERT INTO `video` VALUES (64, 'user/admin/video/2.mp4', NULL, 11000000, 1, b'1', b'0', '2021-09-17 20:26:46', '2021-09-17 20:26:46', 1);
 
 -- ----------------------------
 -- Triggers structure for table app_user
