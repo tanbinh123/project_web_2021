@@ -1,5 +1,6 @@
 package vn.edu.topedu.rest.admin;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -46,26 +47,34 @@ public class VideoREST {
 		for (VideoEntity c : lstCourse) {
 			String bf = WebUtils.getUrl(httpServletRequest);
 			c.setBeforeResource(bf);
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					try {
-						
-						String ajp=FileProcess.getPath(c.absPath()).toFile().getAbsolutePath();
-						long a = VideoInfo.getDuration(ajp);
-						System.err.println(ajp);
-						System.err.println(a);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-					
-				}
-			}).start();
+			
 			//System.err.println(c.);
 
 		}
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				for (VideoEntity c : lstCourse) {				
+					
+					try {
+						File f=FileProcess.getPath(c.absPath()).toFile();
+						if(f.exists()) {
+							String ajp=f.getAbsolutePath();
+							System.err.println(ajp);
+							long a = VideoInfo.getDuration(ajp);
+							System.err.println(a);
+							Thread.sleep(100);
+							
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+
+				}
+				
+			}
+		}).start();
 		final String sort = _sort;
 		@SuppressWarnings("rawtypes")
 		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, new Pagination() {
