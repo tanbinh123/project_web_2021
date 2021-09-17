@@ -1,16 +1,15 @@
 package vn.edu.topedu.xuggler;
 
-import com.xuggle.xuggler.IContainer;
-
 public class VideoInfo {
 	//private static final String filename = "c:/myvideo.mp4";
 	
 	public static long getDuration(String filename) {
-		IContainer container = IContainer.make();
-		int result = container.open(filename, IContainer.Type.READ, null);
-		long duration = container.getDuration();
-		long fileSize = container.getFileSize();
-		return duration;
+//		IContainer container = IContainer.make();
+//		int result = container.open(filename, IContainer.Type.READ, null);
+//		long duration = container.getDuration();
+//		long fileSize = container.getFileSize();
+//		return duration;
+		return 0;
 		
 	}
 	public static void main(String[] args) {
