@@ -23,20 +23,20 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-<!-- <repositories>
+ <repositories>
   <repository>
     <id>xuggle repo</id>
     <url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
   </repository>
-</repositories> -->
+</repositories> 
 	<dependencies>
 	
-	<!-- <dependency>
+	 <dependency>
     <groupId>xuggle</groupId>
     <artifactId>xuggle-xuggler</artifactId>
     <version>5.4</version>
     <scope>compile</scope>
-</dependency> -->
+</dependency> 
 	
 <!-- https://mvnrepository.com/artifact/io.grpc/grpc-all -->
 <dependency>

@@ -18,6 +18,7 @@ import vn.edu.topedu.dao.VideoDAO;
 import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.VideoEntity;
+import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.PageResponse.Pagination;
 import vn.edu.topedu.utils.WebUtils;
@@ -45,8 +46,24 @@ public class VideoREST {
 		for (VideoEntity c : lstCourse) {
 			String bf = WebUtils.getUrl(httpServletRequest);
 			c.setBeforeResource(bf);
-			long a = VideoInfo.getDuration(c.absPath());
-			System.err.println(a);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					try {
+						
+						String ajp=FileProcess.getPath(c.absPath()).toFile().getAbsolutePath();
+						long a = VideoInfo.getDuration(ajp);
+						System.err.println(ajp);
+						System.err.println(a);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					
+				}
+			}).start();
+			//System.err.println(c.);
 
 		}
 		final String sort = _sort;
