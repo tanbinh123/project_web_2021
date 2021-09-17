@@ -1,6 +1,7 @@
 package vn.edu.topedu;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vn.edu.topedu.dao.CourseDAO;
 import vn.edu.topedu.dao.ResourceImageDAO;
 import vn.edu.topedu.dao.VideoDAO;
+import vn.edu.topedu.humble.VideoInfo;
 
 @SpringBootApplication
 @RestController
@@ -51,6 +53,8 @@ public class Main extends SpringBootServletInitializer {
 	CourseDAO courseDAO;
 	@Autowired
 	VideoDAO videoDAO;
+	@Autowired
+	VideoInfo videoService;
 
 	@EventListener({ ApplicationReadyEvent.class })
 	void applicationReadyEvent() {
@@ -58,7 +62,7 @@ public class Main extends SpringBootServletInitializer {
 		System.out.println("http://localhost:" + port + "/admin");
 		if (videoDAO != null) {
 			try {
-				videoDAO.deleteAllNoLink();
+				videoDAO.deleteAllNoLink(-1);
 				System.err.println("Delete All Video Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -66,7 +70,7 @@ public class Main extends SpringBootServletInitializer {
 		}
 		if (resourceImageDAO != null) {
 			try {
-				resourceImageDAO.deleteAllNoLink();
+				resourceImageDAO.deleteAllNoLink(-1);
 				System.err.println("Delete All Image Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -80,8 +84,8 @@ public class Main extends SpringBootServletInitializer {
 				e.printStackTrace();
 			}
 		}
-	}
 
+	}
 
 	public static void browse(String url) {
 		if (Desktop.isDesktopSupported()) {

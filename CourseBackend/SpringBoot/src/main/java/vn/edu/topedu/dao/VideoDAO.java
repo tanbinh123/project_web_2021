@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.edu.topedu.entity.ActiveAccount;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.CategoryEntity;
+import vn.edu.topedu.entity.NotificationEntity;
 import vn.edu.topedu.entity.Payment;
 import vn.edu.topedu.entity.RequestResetPassword;
 import vn.edu.topedu.entity.ResourceImage;
@@ -95,15 +96,18 @@ public class VideoDAO {
 		return deleted;
 
 	}
-	public List<VideoEntity> getResourceImagesNoLinked() {
-		String sql = "Select e from "+VideoEntity.class.getName()+" e " + " where e.countLinked=0  and deleted=true ";
+	public List<VideoEntity> getVideoNoLinked(int deleted) {
+		String sql = "Select e from "+VideoEntity.class.getName()+" e " + " where e.countLinked=0   ";
+		if(deleted!=-1)sql+=" and e.deleted= :deleted ";
 		Query query = this.entityManager.createQuery(sql, VideoEntity.class);
+		if(deleted!=-1) query.setParameter("deleted", deleted==1);
 		return query.getResultList();
 	}
+	
 	@Transactional
-	public int deleteAllNoLink() throws Exception {
+	public int deleteAllNoLink(int deleted) throws Exception {
 		try {
-			List<VideoEntity> a = getResourceImagesNoLinked();
+			List<VideoEntity> a = getVideoNoLinked(deleted);
 			for(VideoEntity ri:a) {
 				Path path = FileProcess.getPath(ri.absPath());
 				if(path.toFile().delete()) {
@@ -111,8 +115,11 @@ public class VideoDAO {
 				};
 			}
 			
-			String sql = "delete from " + VideoEntity.class.getName() +  " where countLinked=0 and deleted=true ";
+			String sql = "delete from " + VideoEntity.class.getName() +  " where countLinked=0 ";
+			if(deleted!=-1)sql+=" and e.deleted= :deleted ";
+			
 			Query query = this.entityManager.createQuery(sql);
+			if(deleted!=-1) query.setParameter("deleted", deleted==1);
 			return  query.executeUpdate();
 			
 		} catch (Exception e) {
@@ -287,6 +294,26 @@ public class VideoDAO {
 			query.setParameter("search", _search);
 		}
 		return (long) query.getSingleResult();
+	}
+	
+	@Transactional
+	public VideoEntity mergePart(VideoEntity p) {
+		entityManager.merge(p);
+		entityManager.flush();
+		return  p;
+	}
+	
+	public VideoEntity getEntity(Long id) {
+		try {
+			
+			String sql = "Select c from " + VideoEntity.class.getName() + " c " //
+					+ " where  c.id= :id ";
+			Query query = this.entityManager.createQuery(sql, VideoEntity.class);
+			query.setParameter("id", id);
+			return (VideoEntity) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

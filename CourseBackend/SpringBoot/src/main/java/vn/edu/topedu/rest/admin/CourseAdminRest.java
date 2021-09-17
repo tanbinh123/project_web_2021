@@ -1,5 +1,6 @@
 package vn.edu.topedu.rest.admin;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -35,12 +36,16 @@ import vn.edu.topedu.entity.course.full.Learning;
 import vn.edu.topedu.entity.course.full.Lesson;
 import vn.edu.topedu.entity.course.full.Part;
 import vn.edu.topedu.entity.course.full.VideoEntity;
+import vn.edu.topedu.fileprocess.FileProcess;
+import vn.edu.topedu.humble.VideoInfo;
 import vn.edu.topedu.response.MessageResponse;
 import vn.edu.topedu.utils.WebUtils;
 
 @RestController
 @RequestMapping("/api/admin/course")
 public class CourseAdminRest {
+	@Autowired
+	private VideoInfo videoService;
 	@Autowired
 	private CourseDAO courseDAO;
 	
@@ -129,6 +134,16 @@ public class CourseAdminRest {
 				if(newPoster!=null) {
 					fullcourse.setVideoDemoId(newPoster.getId());
 					fullcourse.setDemo(newPoster);
+					
+					try {
+						File f = FileProcess.getPath(newPoster.absPath()).toFile();
+						if (f.exists()) {
+							newPoster.setDuration(videoService.getDuration(f));
+							videoDAO.mergePart(newPoster);
+						}
+					} catch (Exception e) {
+					}
+
 				}
 				try {
 					fullcourse.setUpdateAt(new Date());

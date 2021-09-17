@@ -1,6 +1,6 @@
 package vn.edu.topedu.rest.admin;
 
-import java.math.BigDecimal;
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,29 +15,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import vn.edu.topedu.dao.VideoDAO;
-import vn.edu.topedu.entity.Payment;
-import vn.edu.topedu.entity.course.Course;
 import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.fileprocess.FileProcess;
+import vn.edu.topedu.humble.VideoInfo;
 import vn.edu.topedu.response.PageResponse;
 import vn.edu.topedu.response.PageResponse.Pagination;
 import vn.edu.topedu.utils.WebUtils;
-import vn.edu.topedu.xuggler.VideoInfo;
 
 @RestController
 @RequestMapping("/video")
 public class VideoREST {
 	@Autowired
+	VideoInfo videoService;
+	@Autowired
 	private VideoDAO videoDAO;
+
 	@SuppressWarnings("unchecked")
 	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity<Object> list(HttpServletRequest httpServletRequest, 
-			Authentication authentication,
-			@RequestParam(defaultValue = "-1") int _page, 
-			@RequestParam(defaultValue = "-1") int _limit,
-			@RequestParam(defaultValue = "id:asc") String _sort,		
-			@RequestParam(defaultValue = "") String _search) {
+	public ResponseEntity<Object> list(HttpServletRequest httpServletRequest, Authentication authentication,
+			@RequestParam(defaultValue = "-1") int _page, @RequestParam(defaultValue = "-1") int _limit,
+			@RequestParam(defaultValue = "id:asc") String _sort, @RequestParam(defaultValue = "") String _search) {
 
 		_page = (_page <= 0) ? 1 : _page;
 		List<VideoEntity> lstCourse = videoDAO.getListEntitys(_page, _limit, _sort, _search);
@@ -46,29 +44,42 @@ public class VideoREST {
 		for (VideoEntity c : lstCourse) {
 			String bf = WebUtils.getUrl(httpServletRequest);
 			c.setBeforeResource(bf);
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					try {
-						
-						String ajp=FileProcess.getPath(c.absPath()).toFile().getAbsolutePath();
-						long a = VideoInfo.getDuration(ajp);
-						System.err.println(ajp);
-						System.err.println(a);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-					
-				}
-			}).start();
-			//System.err.println(c.);
+
+			// System.err.println(c.);
 
 		}
+
+//		new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				for (VideoEntity c : lstCourse) {
+//					// VideoEntity c=lstCourse.get(0);
+//					try {
+//						File f = FileProcess.getPath(c.absPath()).toFile();
+//						if (f.exists()) {
+//							String ajp = f.getAbsolutePath();							
+//							System.err.println(c.getUrlVideo());
+//							long a = videoService.getDuration(f);
+//							c.setDuration(a);
+//							
+//							System.err.println(a);
+//							videoDAO.mergePart(c);
+//							//fis.close();
+//							// Thread.sleep(100);
+//
+//						}
+//					} catch (Exception e) {
+//						// TODO: handle exception
+//					}
+//				}
+//
+//			}
+//		}).start();
+		//return ResponseEntity.ok().build();
 		final String sort = _sort;
 		@SuppressWarnings("rawtypes")
-		PageResponse<Course> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, new Pagination() {
+		PageResponse<List<VideoEntity>> pageResponse = new PageResponse(lstCourse, _limit, _page, countRows, new Pagination() {
 			private String _sort = sort;
 
 			public String get_sort() {
