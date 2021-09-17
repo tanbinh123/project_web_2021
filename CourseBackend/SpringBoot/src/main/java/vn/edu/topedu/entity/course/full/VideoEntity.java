@@ -112,14 +112,14 @@ public class VideoEntity extends AHasResource {
 	@JsonIgnore
 	public String absPath() {
 		String filename = this.video;
-		System.err.println(filename);
+		//System.err.println(filename);
 		Matcher m = Pattern.compile("^(.+)(_\\d*)\\.(mp4)$").matcher(filename);
 		if (m.find()) {
 			String name = m.group(1) + "_" + this.getId();
 			String extend = m.group(3);
 
-			System.err.println(String.format("Name: %s", name));
-			System.err.println(String.format("Extend: %s", extend));
+//			System.err.println(String.format("Name: %s", name));
+//			System.err.println(String.format("Extend: %s", extend));
 			filename = name + "." + extend;
 			return filename;
 

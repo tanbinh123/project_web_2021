@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -29,6 +30,7 @@ import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.entity.course.full.VideoEntity;
 import vn.edu.topedu.fileprocess.FileProcess;
 import vn.edu.topedu.model.Video;
+import vn.edu.topedu.utils.WebUtils;
 
 @Repository
 @Transactional
@@ -205,6 +207,86 @@ public class VideoDAO {
 			return filename;
 		}
 		return filename;
+	}
+	
+	
+	public List<VideoEntity> getListEntitys(int _page, int _limit, String sort, String _search) {
+		--_page;
+		if(_page<0)_page=0;
+		if (sort == "" || sort == null)
+			sort = "id:asc";
+
+		String sql = null;
+		if (_search.length() == 0) {
+			sql = "Select c from " + VideoEntity.class.getName() + " c " //
+					+ " where c.deleted=0 ";
+		} else {
+			sql = "Select c from " + VideoEntity.class.getName() + " c " //
+					+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+
+		}
+		
+		
+		
+		sql += " group by c.id  order by  ";
+		String sqlSort = "";
+		sort = sort.toLowerCase();
+
+		String[] a = sort.split(",");
+		boolean started = true;
+		for (String str : a) {
+			int index = str.indexOf(':');
+			String _order = str.substring(index + 1);
+			String tmpSort = str.substring(0, index);
+			switch (tmpSort) {
+			case "id":
+				sqlSort += WebUtils.sort(_order, "c.id", started);
+				break;
+			
+			case "price":
+				sqlSort += WebUtils.sort(_order, "c.price", started);
+				break;
+			case "updateat":
+				sqlSort += WebUtils.sort(_order, "c.updateAt", started);
+				break;
+			default:
+				break;
+			}
+			started = false;
+			sql += sqlSort;
+			sqlSort = "";
+		}
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, VideoEntity.class);
+		query.setFirstResult(_page * _limit);
+		if (_search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		if (_limit != -1) {
+			query.setMaxResults(_limit);
+		}
+		return query.getResultList();
+	}
+
+	public long getCount(String _search) {
+		String sql = null;
+		if (_search == null || _search.length() == 0) {
+			sql = "Select count(*) from " + VideoEntity.class.getName() + " c " //
+					+ " where c.deleted=0 ";
+
+		} else {
+			sql = "Select count(*) from " + VideoEntity.class.getName() + " c " //
+					+ " where c.deleted=0 and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
+
+		}
+
+		
+		
+		Query query = this.entityManager.createQuery(sql, Long.class);
+		if (_search != null && _search.length() != 0) {
+			query.setParameter("search", _search);
+		}
+		return (long) query.getSingleResult();
 	}
 
 }
