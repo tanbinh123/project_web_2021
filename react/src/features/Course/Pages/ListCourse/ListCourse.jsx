@@ -14,6 +14,7 @@ import CustomDialog from '../../../../components/Dialog/CustomDialog';
 import Header from '../../../../components/header/index';
 import FilterCategory from './components/FilterCategory';
 import FilterPrice from './components/FilterPrice';
+import FilterRate from './components/FilterRate';
 import RightCoures from './components/RightCoures';
 import SkeletonCourse from './components/SkeletonCourse';
 import TabPrice from './components/TabPrice';
@@ -215,6 +216,7 @@ function ListCourse(props) {
                   ]
                 }
               />
+              <FilterRate />
             </Grid>
             <Grid
               item

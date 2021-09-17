@@ -17,6 +17,12 @@
       justify-content: center;
       align-items: center;
       margin-top: 30px;
+      button {
+        margin-left: 20px;
+        &:first-of-type {
+          margin-left: 0px;
+        }
+      }
     }
   }
 }

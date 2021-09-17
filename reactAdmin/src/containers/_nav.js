@@ -57,7 +57,18 @@ const _nav = [
     name: "Danh sách thông báo",
     to: "/list/notification",
     icon: (
-      <CIcon content={freeSet.cilImage} customClasses="c-sidebar-nav-icon" />
+      <CIcon content={freeSet.cilBell} customClasses="c-sidebar-nav-icon" />
+    ),
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Danh sách thanh toán",
+    to: "/list/payment",
+    icon: (
+      <CIcon
+        content={freeSet.cilCreditCard}
+        customClasses="c-sidebar-nav-icon"
+      />
     ),
   },
   {
@@ -88,10 +99,7 @@ const _nav = [
     name: "Form upload hình nền trang chủ",
     to: "/form/image-background-home",
     icon: (
-      <CIcon
-        content={freeSet.cilMediaPlay}
-        customClasses="c-sidebar-nav-icon"
-      />
+      <CIcon content={freeSet.cilImage} customClasses="c-sidebar-nav-icon" />
     ),
   },
   {
@@ -99,10 +107,7 @@ const _nav = [
     name: "Form tạo mới thông báo",
     to: "/form/notification",
     icon: (
-      <CIcon
-        content={freeSet.cilMediaPlay}
-        customClasses="c-sidebar-nav-icon"
-      />
+      <CIcon content={freeSet.cilBell} customClasses="c-sidebar-nav-icon" />
     ),
   },
 ];

@@ -50,3 +50,8 @@ export function toDate(ddMMyyyy) {
   const tmp = ddMMyyyy.split("/");
   return new Date(tmp[2], tmp[1] - 1, tmp[0]);
 }
+export function DateToString2(dateString) {
+  const date1 = new Date(dateString);
+
+  return `${date1.getDate()}/${date1.getMonth() + 1}/${date1.getFullYear()}`;
+}

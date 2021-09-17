@@ -32,6 +32,7 @@ const TheSidebar = () => {
           className="c-sidebar-brand-full"
           name="logo-negative"
           height={35}
+          alt="logo"
         />
       </CSidebarBrand>
       <CSidebarNav>

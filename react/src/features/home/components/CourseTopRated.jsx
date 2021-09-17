@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function CourseRatest(props) {
+function CourseTopRated(props) {
   // http://localhost:25001/course/list?_limit=9&_sort=bought:desc
   const classes = useStyles();
   const [dataCourse, setDataCourse] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await courseApi.getAll({ _limit: 6, _sort: 'bought:desc' });
+      const res = await courseApi.getAll({ _limit: 6, _sort: 'rateStar:desc' });
       const { data, pagination } = res;
       setDataCourse(data);
     })();
@@ -61,4 +61,4 @@ function CourseRatest(props) {
   );
 }
 
-export default CourseRatest;
+export default CourseTopRated;

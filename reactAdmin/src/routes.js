@@ -11,6 +11,8 @@ import FImageBackgroundHome from "./views/form/imageBackgroundHome/FImageBackgro
 import UserUpdateRole from "./views/list/users/userDetailt/UserUpdateRole";
 import ListNotification from "./views/list/notification/ListNotification";
 import FNotification from "./views/form/notification/FNotification";
+import ListPayment from "./views/list/payment/ListPayment";
+import NotificationDetailt from "./views/list/notification/notificationDetailt/NotificationDetailt";
 
 const Toaster = React.lazy(() =>
   import("./views/notifications/toaster/Toaster")
@@ -116,6 +118,17 @@ const routes = [
     path: "/list/notification",
     name: "Danh sách thông báo",
     component: ListNotification,
+    exact: true,
+  },
+  {
+    path: "/list/notification/:id",
+    name: "Chi tiết thể loại",
+    component: NotificationDetailt,
+  },
+  {
+    path: "/list/payment",
+    name: "Danh sách thanh toán",
+    component: ListPayment,
     exact: true,
   },
   { path: "/form/course", name: "Form Course", component: FCourse },

@@ -119,7 +119,7 @@ CardCourse.defaultProps = {
   nameAuthor: '',
   bought: 0,
   price: 0,
-  originPrice:0,
+  originPrice: 0,
   rateStar: 0,
 };
 export default function CardCourse(props) {
@@ -213,7 +213,7 @@ export default function CardCourse(props) {
             <div className={classes.money}>
               <span>{convertVND(price)}</span>
               {discount !== 0 && (
-                <div class="discount-label red">
+                <div className="discount-label red">
                   <span>-{discount}%</span>
                 </div>
               )}

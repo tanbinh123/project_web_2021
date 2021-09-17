@@ -10,7 +10,9 @@ import CardCourse from '../../components/card/CardCourse';
 import Header from '../../components/header';
 import { isEmpty } from '../../components/tools/Tools';
 import BoughtHome from './components/BoughtHome';
-import CourseRatest from './components/CourseRatest';
+import CourseRandom from './components/CourseRandom';
+import CourseSale from './components/CourseSale';
+import CourseTopRated from './components/CourseTopRated';
 import Representative from './components/Representative';
 
 const useStyles = makeStyles((theme) => ({
@@ -199,7 +201,9 @@ function Home(props) {
           </ul>
         </div>
         <Representative />
-        <CourseRatest />
+        <CourseTopRated />
+        <CourseSale />
+        <CourseRandom />
         {!isEmpty(dataUser.courses) && <BoughtHome />}
       </Container>
     </div>

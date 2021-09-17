@@ -94,11 +94,6 @@ div#bg-home::before {
 
 .dialog-notification-mobile .content .description {
   font-size: 15px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
   word-break: break-word;
 }
 
@@ -135,6 +130,10 @@ div#bg-home::before {
   outline: none;
 }
 
+.show-all-text .content {
+  word-break: break-word;
+}
+
 .filter-price {
   font-family: 'Open sans', sans-serif;
   color: #34495e;
@@ -148,6 +147,7 @@ div#bg-home::before {
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .filter-price .price {
@@ -175,6 +175,36 @@ div#bg-home::before {
 
 .menu-filter-mobile {
   display: none;
+}
+
+.filter-rate {
+  font-family: 'Open sans', sans-serif;
+  color: #34495e;
+  padding: 40px 28px 30px 28px;
+  margin-top: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.filter-rate .title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.filter-rate .rating {
+  margin: 30px 0;
+  font-size: 32px;
+}
+
+.filter-rate .bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 @media (max-width: 800px) {

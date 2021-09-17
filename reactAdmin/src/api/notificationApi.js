@@ -15,10 +15,10 @@ const notificationApi = {
     const url = `/notification/one/new`;
     return axiosClient.post(url, data);
   },
-  updateNotification(notificationId,data) {
+  updateNotification(notificationId, data) {
     // {content,subject,userId}
     const url = `/notification/update/${notificationId}`;
-    return axiosClient.post(url, data);
+    return axiosClient.put(url, data);
   },
   deleteNotification(notificationId) {
     // {content,subject,userId}

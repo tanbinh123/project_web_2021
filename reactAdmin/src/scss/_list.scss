@@ -35,3 +35,17 @@
     }
   }
 }
+.list-payment {
+  .td-center {
+    display: flex;
+    justify-content: center;
+    a {
+      text-decoration: none;
+    }
+  }
+  .td {
+    a {
+      text-decoration: none;
+    }
+  }
+}

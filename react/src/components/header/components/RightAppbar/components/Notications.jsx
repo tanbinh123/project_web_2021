@@ -70,9 +70,9 @@ const useStyles = makeStyles((theme) => ({
       overflow: 'hidden',
     },
     '&>.content': {
-      display: '-webkit-box',
       '-webkit-box-orient': 'vertical',
       '-webkit-line-clamp': 3,
+      textOverflow: 'ellipsis',
       overflow: 'hidden',
     },
   },
@@ -132,7 +132,15 @@ function Notications(props) {
                 : 3
             )
             .map((item, idx) => (
-              <ListItem key={idx} button onClick={popupState.close}>
+              <ListItem
+                key={idx}
+                button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const tmp = e.target.parentNode;
+                  tmp.classList.toggle('show-all-text');
+                }}
+              >
                 <Avatar
                   className={classes.avatarSmall}
                   src={item?.appUserSent?.avatar?.image}

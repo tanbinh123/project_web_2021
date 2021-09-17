@@ -1,27 +1,37 @@
 import { CButton, CCardBody, CCollapse, CDataTable } from "@coreui/react";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import notificationApi from "src/api/notificationApi";
 import CustomButton from "src/components/CustomButton";
-import DeleteUser from "./components/DeleteUser";
+import DeleteNotification from "./components/DeleteNotification";
 import "./ListNotification.scss";
 
 // const fields = ["id", "userName", "gmail", "birthDay", "gender", "phone"];
 
 const ListNotification = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [details, setDetails] = useState([]);
   const [dataNoti, setDataNoti] = useState([]);
   const { push } = useHistory();
 
   useEffect(() => {
-    (async () => {
-      const res = await notificationApi.getAll();
-      const { data, pagination } = res;
-      console.log(data);
-      setDataNoti(data);
-      // console.log(res);
-    })();
+    getDataNotification();
+    return () => {
+      setDataNoti([]);
+    };
   }, []);
+  const getDataNotification = async () => {
+    const res = await notificationApi.getAll();
+    // console.log(res);
+    if (!!!res.status) {
+      const { data, pagination } = res;
+      setDataNoti(data);
+      // console.log(data);
+    } else {
+      enqueueSnackbar(res?.data?.message?.en, { variant: "error" });
+    }
+  };
   const toggleDetails = (index) => {
     const position = details.indexOf(index);
     let newDetails = details.slice();
@@ -37,6 +47,13 @@ const ListNotification = () => {
     { key: "id", label: "ID" },
     { key: "name", label: "Tiêu đề" },
     { key: "content", label: "Nội dung" },
+    {
+      key: "show_details",
+      label: "Chi Tiết",
+      //   _style: { width: "1%" },
+      sorter: false,
+      filter: false,
+    },
   ];
 
   return (
@@ -45,7 +62,7 @@ const ListNotification = () => {
         <CustomButton
           title="Thêm"
           onClick={() => {
-            push("/form/categorie");
+            push("/form/notification");
           }}
         />
       </div>
@@ -76,6 +93,30 @@ const ListNotification = () => {
                   {details.includes(index) ? "Ẩn" : "Hiện"}
                 </CButton>
               </td>
+            );
+          },
+
+          details: (item, index) => {
+            return (
+              <CCollapse show={details.includes(index)}>
+                <CCardBody className="detailBody">
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={{
+                      pathname: `/list/notification/${item.id}`,
+                      state: { name: item?.name, content: item?.content },
+                    }}
+                  >
+                    <CustomButton title="Cập nhật thông báo" />
+                  </Link>
+                  <DeleteNotification
+                    item={item}
+                    onUpdate={() => {
+                      getDataNotification();
+                    }}
+                  />
+                </CCardBody>
+              </CCollapse>
             );
           },
         }}

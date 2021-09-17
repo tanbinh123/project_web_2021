@@ -77,6 +77,7 @@ function MenuMoblie(props) {
   const [isOpenDialog, setOpenDialog] = React.useState(false);
   const [isOpenDialogNoti, setOpenDialogNoti] = React.useState(false);
   const [dataNoti, setDataNoti] = useState([]);
+  // const [showText, setShowText] = React.useState(false);
   // console.log(dataUser);
   useEffect(() => {
     (async () => {
