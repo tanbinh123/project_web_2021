@@ -51,11 +51,11 @@ public class ActiveAccountREST {
 						 ActiveAccount id = activeAccountDAO.insert(requestResetPassword);
 						 if(id==null)return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Can't gender code.",""));;
 						 String to= appUser.getEmail();
-						 String subject= "Active Account";
+						 String subject= "TopEdu: Active Account";
 						 if(requestBody.url.charAt(requestBody.url.length()-1)!='/') {
 							 requestBody.url+='/';
 						 }
-						 String text=  String.format( "Link: %s%s", requestBody.url,requestResetPassword.getCode());
+						 String text=  String.format( "Link active account: %s%s", requestBody.url,requestResetPassword.getCode());
 						 //System.out.println(text);
 						 boolean isBackground= false;	
 						 try {

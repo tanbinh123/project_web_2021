@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import vn.edu.topedu.dao.AppUserDAO;
 import vn.edu.topedu.dao.NotificationDAO;
+import vn.edu.topedu.email.EmailService;
 import vn.edu.topedu.entity.AppUser;
 import vn.edu.topedu.entity.NotificationEntity;
 import vn.edu.topedu.entity.course.BaseCourse;
@@ -38,6 +39,9 @@ import vn.edu.topedu.utils.WebUtils;
 public class NotificationREST {
 	@Autowired
 	private AppUserDAO appUserDAO;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@Autowired
 	private NotificationDAO notificationDAO;
@@ -194,6 +198,24 @@ public class NotificationREST {
 				no=notificationDAO.insertEntity(no);
 				if(no!=null) {
 					no.setAppUserSent(appUser);
+					
+					//send mail
+					String[] to = (String[]) appUserDAO.getAllEmailActive().toArray();
+					
+					String subjectEmail= "TopEdu: Notification";					 
+					String text=  subject+System.getProperty("line.separator")+ content;
+					 //System.out.println(text);
+					boolean isBackground= true;	
+					try {
+						 emailService.sendSimpleMessageMultiRecipients(to, subjectEmail, text, isBackground);
+						 //return ResponseEntity.ok(new MessageResponse("Send Mail Success.","Gửi mail thành công."));
+						 
+					 } catch (Exception e) {
+						 e.printStackTrace();
+						 //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Not send mail",""));
+					 }
+					
+					
 					return ResponseEntity.status(HttpStatus.OK).body(no);
 				}
 				
@@ -242,6 +264,27 @@ public class NotificationREST {
 				no=notificationDAO.insertEntity(no);
 				if(no!=null) {
 					no.setAppUserSent(appUser);
+					
+					
+					String to= user.getEmail();
+					String subjectEmail= "TopEdu: Notification";					 
+					String text=  subject+System.getProperty("line.separator")+ content;
+					 //System.out.println(text);
+					boolean isBackground= true;	
+					try {
+						 emailService.sendSimpleMessage(to, subjectEmail, text, isBackground);
+						 //return ResponseEntity.ok(new MessageResponse("Send Mail Success.","Gửi mail thành công."));
+						 
+					 } catch (Exception e) {
+						 e.printStackTrace();
+						 //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponse("Not send mail",""));
+					 }
+					 
+					
+					
+					
+					
+					
 					return ResponseEntity.status(HttpStatus.OK).body(no);
 				}
 				

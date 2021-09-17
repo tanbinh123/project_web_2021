@@ -354,6 +354,18 @@ public class AppUserDAO {
 		return query.executeUpdate();
 	}
 
+	public List<String> getAllEmailActive() {
+		String sql = "Select c.email from " + AppUser.class.getName() + " c where  c.deleted=0 and c.actived=1 ";
+		
+		
+		
+		System.out.println(sql);
+		Query query = this.entityManager.createQuery(sql, String.class);	
+		
+		return query.getResultList();
+		
+	}
+
 
 
 }

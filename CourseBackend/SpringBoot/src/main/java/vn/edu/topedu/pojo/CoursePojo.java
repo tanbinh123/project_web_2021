@@ -10,6 +10,10 @@ public class CoursePojo extends Course {
 		a.setCreateAt(course.getCreateAt());
 		a.setActived(course.getActived());
 		a.setBought(course.getBought());
+		a.setPrice(course.getPrice());
+		a.setOriginPrice(course.getOriginPrice());
+		a.setImagePoster(course.getImagePoster());
+		
 		return a;
 	}
 
