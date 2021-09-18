@@ -51,6 +51,9 @@ public class PreviewCourseEntity extends BaseCourse {
 	
 	@OneToMany(mappedBy = "course")
 	private List<PartReview> parts;
+	
+	@Column(name = "long_description", length = 255)
+    private String longDescription="";
 //	@OneToMany(mappedBy = "detailCourseEntity")
 //	@JsonIgnore
 //	private List<OwerCourse> owerCourse;
@@ -59,6 +62,14 @@ public class PreviewCourseEntity extends BaseCourse {
 
 	public List<Learning> getLearnings() {
 		return learnings;
+	}
+
+	public String getLongDescription() {
+		return longDescription;
+	}
+
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
 	}
 
 	public boolean getIsFull() {
