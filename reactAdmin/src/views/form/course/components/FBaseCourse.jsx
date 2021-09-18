@@ -4,11 +4,12 @@ import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import courseApi from "src/api/courseApi";
 import CustomButton from "src/components/CustomButton";
 import CustomDialog from "src/components/CustomDialog";
 import CustomInput from "src/components/CustomInput";
+import CustomRichEditor from "src/components/CustomRichEditor";
 import CustomSelectForm from "src/components/form/CustomSelectForm";
 import { convertVND, isEmpty } from "src/Tool/Tools";
 import * as yup from "yup";
@@ -133,9 +134,14 @@ function FBaseCourse(props) {
   const { enqueueSnackbar } = useSnackbar();
   const [dataSelect, setDataSelect] = useState([]);
   //dialog
-  const [isOpenDialogCategory, setIsOpenDialogCategory] = React.useState();
+  const [isOpenDialogCategory, setIsOpenDialogCategory] = React.useState(false);
+  const [richText, setRichText] = React.useState(
+    dataCourse?.longDescription || ""
+  );
+  // console.log(richText);
   React.useEffect(() => {
     getCategories();
+
     return () => {
       setDataSelect([]);
     };
@@ -144,15 +150,17 @@ function FBaseCourse(props) {
     mode: "onBlur",
     defaultValues: {
       title: dataCourse?.title || "",
-      price: dataCourse?.price || "",
+      longDescription: dataCourse?.longDescription || "",
+      price: dataCourse?.originPrice || "",
       discount: dataCourse?.discount || 0,
       description: dataCourse?.description || "",
-      categoryId: dataCourse?.categoryId?.id || "",
+      categoryId: dataCourse?.categoryId || "",
     },
     resolver: yupResolver(schema),
   });
   const handleOnSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
+    // console.log(richText);
     if (isEmpty(values.categoryId)) {
       enqueueSnackbar("Vui lòng chọn thể loại", { variant: "error" });
       return;
@@ -171,6 +179,7 @@ function FBaseCourse(props) {
       formData.append("price", values.price);
       formData.append("discount", values.discount);
       formData.append("description", values.description);
+      formData.append("longDescription", richText);
       try {
         const rp = await courseApi.postNewCourse(formData);
         console.log(rp);
@@ -217,8 +226,6 @@ function FBaseCourse(props) {
     setImg(tmpImg);
     form.setValue("imageThumbnail", file);
   };
-  // console.log(dataCourse);
-
   return (
     <CCard>
       <CCardHeader>
@@ -266,7 +273,7 @@ function FBaseCourse(props) {
             </span>
           </div>
           <div>
-            <span>Mô tả</span>
+            <span>Mô tả ngắn</span>
             <CustomInput
               name="description"
               title="Mô tả khóa học"
@@ -275,6 +282,17 @@ function FBaseCourse(props) {
               rows={4}
               form={form}
             />
+          </div>
+          <div>
+            <span>Mô tả dài</span>
+            <div>
+              <CustomRichEditor
+                value={richText}
+                onChange={(value) => {
+                  setRichText(value);
+                }}
+              />
+            </div>
           </div>
           <div className="FBaseCourse-item__category">
             <span>Chọn thể loại</span>

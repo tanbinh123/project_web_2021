@@ -12,6 +12,7 @@ import { convertVND, format1 } from "src/Tool/Tools";
 import CustomSelectForm from "src/components/form/CustomSelectForm";
 import CustomDialog from "src/components/CustomDialog";
 import FCategorie from "src/views/form/categorie/FCategorie";
+import CustomRichEditor from "src/components/CustomRichEditor";
 const useStyles = makeStyles((theme) => ({
   form: {
     "& > div": {
@@ -83,7 +84,8 @@ function BaseCourseForm(props) {
   const { enqueueSnackbar } = useSnackbar();
   const [dataSelect, setDataSelect] = useState([]);
   //dialog
-  const [isOpenDialogCategory, setIsOpenDialogCategory] = React.useState();
+  const [isOpenDialogCategory, setIsOpenDialogCategory] = React.useState(false);
+  const [richText, setRichText] = React.useState("");
   React.useEffect(() => {
     getCategories();
     return () => {
@@ -94,10 +96,11 @@ function BaseCourseForm(props) {
     mode: "onBlur",
     defaultValues: {
       title: dataCourse?.title,
-      price: dataCourse?.price,
+      price: dataCourse?.originPrice,
       discount: dataCourse?.discount || 0,
-      description: dataCourse?.description,
-      categoryId: dataCourse?.category?.id,
+      description: dataCourse?.description || "",
+      longDescription: dataCourse?.longDescription || "",
+      categoryId: dataCourse?.categoryId,
     },
     resolver: yupResolver(schema),
   });
@@ -106,8 +109,12 @@ function BaseCourseForm(props) {
     (async () => {
       // const formData = new FormData();
       // formData.append("image", values.image);
+      // formData.append("longDescription", richText);
       try {
-        const rp = await courseApi.post(dataCourse?.id, values);
+        const rp = await courseApi.post(dataCourse?.id, {
+          ...values,
+          longDescription: richText,
+        });
         console.log(rp);
         if (changeDataCourse) changeDataCourse(rp);
         enqueueSnackbar("Cập nhật thành công", { variant: "success" });
@@ -196,6 +203,17 @@ function BaseCourseForm(props) {
               rows={4}
               form={form}
             />
+          </div>
+          <div>
+            <span>Mô tả dài</span>
+            <div>
+              <CustomRichEditor
+                value={richText}
+                onChange={(value) => {
+                  setRichText(value);
+                }}
+              />
+            </div>
           </div>
           <div>
             <CustomButton type="submit" title="Gửi" />

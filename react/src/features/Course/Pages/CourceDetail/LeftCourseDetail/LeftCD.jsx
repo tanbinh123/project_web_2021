@@ -2,6 +2,7 @@ import { Grid } from '@material-ui/core';
 import { CheckCircle, FiberManualRecord } from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import IconBreadcrumbs from '../../../../../components/Breadcrumbs/Breadcrumbs';
 import SimpleAccordion from '../../components/SimpleAccordion/SimpleAccordion';
 import LeftCDCSS from './CSSLeftCD';
@@ -20,7 +21,14 @@ LeftCD.defaultProps = {
   parts: [],
 };
 function LeftCD(props) {
-  const { title, description, learnings, parts, totalLesson = 0 } = props;
+  const {
+    title,
+    description,
+    learnings,
+    parts,
+    totalLesson = 0,
+    longDescription = '',
+  } = props;
   const classes = LeftCDCSS();
 
   return (
@@ -43,6 +51,8 @@ function LeftCD(props) {
                 </li>
               ))}
             </ul>
+            {longDescription && <h2>Giới thiệu khóa học</h2>}
+            {ReactHtmlParser(longDescription)}
           </div>
         </Grid>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>

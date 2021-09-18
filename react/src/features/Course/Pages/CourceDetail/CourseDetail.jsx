@@ -180,6 +180,7 @@ function CourseDetail(props) {
                   idCourse={course.id}
                   title={course.title}
                   description={course.description}
+                  longDescription={course.longDescription}
                   learnings={course.learnings}
                   parts={course.parts}
                   totalLesson={totalLesson}
