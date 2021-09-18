@@ -16,19 +16,28 @@
 ## 2.Khởi tạo
 
 1. git clone https://github.com/thanhsang1999/project_web_2021.git
-2. Cài đặt MySQL bằng [Xampp](https://www.apachefriends.org/index.html) tạo database tên là : Course
+2. Cài đặt MySQL bằng [Xampp](https://www.apachefriends.org/index.html) tạo database tên là : course
 3. Cài đặt [eclipse](https://www.eclipse.org/downloads/) và import forder CourseBackend
 4. Chạy project backend bằng cách chạy file main trong project
-5. Chuyển đến phía Frontend bằng cách vào thư mục react
-6. Mở Git Bash và chạy lệnh
-   > npm start
+5. Mở CMD và chạy lệnh
+   ```
+   cd react
+   npm i
+   npm start
+    ``` 
+6. Mở mới 1 cmd khác ở thư mục gốc và chạy lệnh
+     ``` 
+    cd reactAdmin
+    npm i
+    npm start
+      ``` 
 7. Web được chạy tại
-   > [localhost:3000](http://localhost:3000/)
+     ``` 
+    [localhost:3000](http://localhost:3000/)
+    TK: admin
+    MK: admin
+      ``` 
 8. Thành Công
-
-- [x] Write the press release
-- [x] Update the website
-- [ ] Contact the media 
 
 
 [Merchant Admin]( https://sandbox.vnpayment.vn/merchantv2/)
