@@ -117,7 +117,7 @@ function FormRating(props) {
       setDefaultStar(5);
     };
   }, [userRating, idCourse]);
-  // console.log(deffaultStar);
+  console.log(dataUser);
   return (
     <form className={classes.form} onSubmit={form.handleSubmit(handleOnSubmit)}>
       <div>
@@ -125,7 +125,11 @@ function FormRating(props) {
           <span className={classes.title}>Form đánh giá</span>
           <div>
             <Avatar src={dataUser.user.avatar} />
-            <span>{dataUser.user.username}</span>
+            <span>
+              {isEmpty(dataUser?.user?.fullname)
+                ? dataUser?.user?.username
+                : dataUser?.user?.fullname}
+            </span>
           </div>
         </div>
         <Rating

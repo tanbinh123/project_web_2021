@@ -9,6 +9,7 @@ import { isEmpty } from '../../../../../components/tools/Tools';
 import CSSLecture from './CSSLecture';
 import ListAccordion from './ListLecture/ListAccordion';
 import VideoLecture from './ListLecture/VideoLecture';
+import ReactHtmlParser from 'react-html-parser';
 
 Lecture.propTypes = {};
 
@@ -33,7 +34,7 @@ function Lecture(props) {
     (async () => {
       try {
         const res = await courseApi.check({ idCourse: idCourse });
-        // console.log(res);
+        console.log(res);
         if (res.status == 400) {
           push(`/course/${idCourse}`);
         } else {
@@ -101,6 +102,18 @@ function Lecture(props) {
                 <i className="fas fa-angle-double-left"></i> Hiện danh sách
               </div>
               <VideoLecture video={lesson.video} />
+              <div className="lecture-detail">
+                <div className="title">
+                  <h1>{course.title}</h1>
+                </div>
+                <div className="description">
+                  <p>{course.description}</p>
+                </div>
+                <div className="long-description">
+                  {course.longDescription && <h2>Giới thiệu khóa học</h2>}
+                  {ReactHtmlParser(course.longDescription)}
+                </div>
+              </div>
             </div>
           </Grid>
           <Grid

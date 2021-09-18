@@ -198,9 +198,10 @@ public class NotificationREST {
 				no=notificationDAO.insertEntity(no);
 				if(no!=null) {
 					no.setAppUserSent(appUser);
-					
+			List<String> q = appUserDAO.getAllEmailActive();
 					//send mail
-					String[] to = (String[]) appUserDAO.getAllEmailActive().toArray();
+					String[] to = new String[q.size()];
+							q.toArray(to);
 					
 					String subjectEmail= "TopEdu: Notification";					 
 					String text=  subject+System.getProperty("line.separator")+ content;

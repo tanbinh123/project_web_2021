@@ -115,7 +115,7 @@ public class VideoDAO {
 				};
 			}
 			
-			String sql = "delete from " + VideoEntity.class.getName() +  " where countLinked=0 ";
+			String sql = "delete from " + VideoEntity.class.getName() +  "  e where e.countLinked=0 ";
 			if(deleted!=-1)sql+=" and e.deleted= :deleted ";
 			
 			Query query = this.entityManager.createQuery(sql);

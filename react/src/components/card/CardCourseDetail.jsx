@@ -138,7 +138,7 @@ export default function CardCourseDetail(props) {
               {convertVND(course?.originPrice || 0)}
             </span>
             {course?.discount !== 0 && (
-              <div class="discount-label red">
+              <div className="discount-label red">
                 <span>-{course?.discount}%</span>
               </div>
             )}

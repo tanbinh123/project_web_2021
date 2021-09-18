@@ -23,6 +23,7 @@ LeftCD.defaultProps = {
 function LeftCD(props) {
   const {
     title,
+    rateStar = 0,
     description,
     learnings,
     parts,
@@ -51,8 +52,10 @@ function LeftCD(props) {
                 </li>
               ))}
             </ul>
-            {longDescription && <h2>Giới thiệu khóa học</h2>}
-            {ReactHtmlParser(longDescription)}
+            <div className="course-long-description">
+              {longDescription && <h2>Giới thiệu khóa học</h2>}
+              {ReactHtmlParser(longDescription)}
+            </div>
           </div>
         </Grid>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -73,7 +76,7 @@ function LeftCD(props) {
           {/* render list courses */}
           <SimpleAccordion parts={parts} />
         </Grid>
-        <RatingCourse />
+        <RatingCourse rateStar={rateStar} />
       </Grid>
     </div>
   );

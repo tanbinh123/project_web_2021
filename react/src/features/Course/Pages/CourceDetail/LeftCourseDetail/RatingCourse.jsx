@@ -13,6 +13,7 @@ import { useState } from 'react';
 import ratingApi from '../../../../../api/ratingApi';
 import { useParams, useRouteMatch } from 'react-router';
 function RatingCourse(props) {
+  const { rateStar = 0 } = props;
   const idCourse = Number(useParams()?.idCourse);
   const classes = makeStyles(() => ({
     root: {
@@ -71,7 +72,10 @@ function RatingCourse(props) {
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.root}>
       <div className={classes.contentCourse}>
         <h2>Đánh giá</h2>
-        <MenuRatting onChangeSelected={handleOnChangeSelected} />
+        <MenuRatting
+          onChangeSelected={handleOnChangeSelected}
+          rateStar={rateStar}
+        />
         {bought && (
           <FormRating
             idCourse={idCourse}

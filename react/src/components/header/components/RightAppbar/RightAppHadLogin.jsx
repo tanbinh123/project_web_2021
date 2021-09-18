@@ -156,7 +156,7 @@ function RightAppHadLogin(props) {
         src={dataUser.profile?.avatar?.image}
       />
       <span className={classes.username}>
-        {!isEmpty(dataUser.user.fullname)
+        {!isEmpty(dataUser.profile.fullname)
           ? dataUser.profile.fullname
           : dataUser.profile.username}
       </span>

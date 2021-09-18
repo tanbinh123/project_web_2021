@@ -84,9 +84,9 @@ function CourseDetail(props) {
           setCourse(res1);
           totalCourse(res1);
         }
+        // console.log(res1);
       } else {
         const res = await courseApi.get(idCourse);
-        // console.log('review', res);
         if (res.status == 500 || res.status == 400) {
           push('/course');
         } else {
@@ -177,12 +177,13 @@ function CourseDetail(props) {
               <Paper elevation={0}>
                 {/* --------------------- Left Data --------------------------- */}
                 <LeftCD
-                  idCourse={course.id}
-                  title={course.title}
-                  description={course.description}
-                  longDescription={course.longDescription}
-                  learnings={course.learnings}
-                  parts={course.parts}
+                  idCourse={course?.id}
+                  rateStar={course?.rateStar}
+                  title={course?.title}
+                  description={course?.description}
+                  longDescription={course?.longDescription}
+                  learnings={course?.learnings}
+                  parts={course?.parts}
                   totalLesson={totalLesson}
                 />
               </Paper>

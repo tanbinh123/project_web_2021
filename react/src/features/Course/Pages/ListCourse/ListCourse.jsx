@@ -209,6 +209,7 @@ function ListCourse(props) {
       <FilterRate
         onChange={handleFilterRateChange}
         queryRate={queryParams._rateStar}
+        name={'mobile'}
       />
     </>
   );
@@ -237,6 +238,7 @@ function ListCourse(props) {
               <FilterRate
                 onChange={handleFilterRateChange}
                 queryRate={queryParams._rateStar}
+                name={'desktop'}
               />
             </Grid>
             <Grid

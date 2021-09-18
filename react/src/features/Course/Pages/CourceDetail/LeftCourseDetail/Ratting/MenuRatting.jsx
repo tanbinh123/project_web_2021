@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function MenuRatting(props) {
-  const { onChangeSelected = null } = props;
+  const { onChangeSelected = null, rateStar = 0 } = props;
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
   const handleChangeSelected = (value) => {
@@ -110,8 +110,13 @@ function MenuRatting(props) {
   return (
     <Grid className={classes.menuRating}>
       <Grid className={classes.leftMenu}>
-        <span>4.5 trên 5</span>
-        <Rating defaultValue={4.5} precision={0.5} readOnly />
+        <span>{rateStar} trên 5</span>
+        <Rating
+          key={rateStar}
+          defaultValue={rateStar}
+          precision={0.5}
+          readOnly
+        />
       </Grid>
       <Grid className={classes.rightMenu}>
         <ul>
