@@ -24,10 +24,11 @@ function Register(props) {
   const handleOnSubmit = async (values) => {
     const data = await userApi.register(values);
     if (!!!data.status) {
-      addLocalStorage(data);
-      setDataUser(data);
-      addLocalStorage(data);
-      console.log('localStorage', data);
+      const login = await userApi.login(values);
+      addLocalStorage(login);
+      setDataUser(login);
+      addLocalStorage(login);
+      console.log('localStorage', login);
     } else {
       enqueueSnackbar(data.data.message.vi, { variant: 'error' });
     }

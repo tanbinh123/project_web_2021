@@ -49,6 +49,8 @@ const CSSLecture = makeStyles((theme) => ({
       fontWeight: 600,
       borderBottom: '2px var(--colorGray2) solid',
       minHeight: '70px',
+      maxHeight: '75px',
+      overflow: 'hidden',
       boxShadow: '0px 5px 6px rgba(0,0,0,0.3)',
       '&>a': {
         textDecoration: 'none',

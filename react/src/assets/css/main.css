@@ -587,6 +587,12 @@ div#bg-home::before {
   margin-bottom: 15px;
 }
 
+@media (max-width: 900px) {
+  .lecture-detail {
+    display: none;
+  }
+}
+
 .login-social-container {
   display: -webkit-box;
   display: -ms-flexbox;

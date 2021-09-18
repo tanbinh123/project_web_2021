@@ -126,12 +126,12 @@ function MenuMoblie(props) {
             <Link to="/setting-account/info">
               <Avatar
                 className={classes.avatar}
-                alt={dataUser.profile?.username}
+                alt={dataUser.profile?.userName}
                 src={dataUser.profile?.avatar?.image}
               />
               <span className={classes.textName}>
                 {isEmpty(dataUser?.profile?.fullname)
-                  ? dataUser?.profile?.username
+                  ? dataUser?.profile?.userName
                   : dataUser?.profile?.fullname}
               </span>
             </Link>

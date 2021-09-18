@@ -83,6 +83,7 @@ function Edit(props) {
         profile: res,
       });
       addLocalStorageProfile(res);
+      enqueueSnackbar('Cập nhật tài khoản thành công', { variant: 'success' });
     }
   };
   // console.log(dataUser);

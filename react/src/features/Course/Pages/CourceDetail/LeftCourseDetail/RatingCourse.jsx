@@ -42,7 +42,7 @@ function RatingCourse(props) {
       getDataRating();
       Array.from(dataUser.courses).map((item) => {
         if (item.id === idCourse) {
-          console.log(item);
+          // console.log(item);
           setBought(true);
         }
       });
@@ -56,6 +56,7 @@ function RatingCourse(props) {
   const getDataRating = async () => {
     try {
       const { data, pagination } = await ratingApi.get(idCourse);
+      // console.log(data);
       setListRating(data);
       if (!isEmpty(dataUser.token)) {
         Array.from(data).map((item) => {

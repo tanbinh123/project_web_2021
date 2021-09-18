@@ -44,6 +44,7 @@ function CourseDetail(props) {
   const [course, setCourse] = useState({
     isFull: false,
   });
+  console.log(course);
   const [totalLesson, setTotalLesson] = React.useState(0);
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);
@@ -51,6 +52,10 @@ function CourseDetail(props) {
   const { host, pathname, protocol } = window.location;
   // console.log(`${protocol}//${host}${pathname}`);
   async function handleOnClickBuy() {
+    if (course?.actived === false) {
+      enqueueSnackbar('Khóa học đã bị khóa', { variant: 'error' });
+      return;
+    }
     if (!isEmpty(dataUser.token)) {
       const res = await courseApi.payment({
         returnUrl: `${protocol}//${host}${pathname}`,
@@ -185,6 +190,7 @@ function CourseDetail(props) {
                   learnings={course?.learnings}
                   parts={course?.parts}
                   totalLesson={totalLesson}
+                  isFull={course?.isFull}
                 />
               </Paper>
             </Grid>

@@ -114,5 +114,9 @@ public class EvaluateEntity extends BaseEntity {
 		if(userPoster==null) return null; else return userPoster.getAvatar().getImage();
 	}
 	
+	public boolean getBlocked() {
+		if(userPoster==null) return false; else return userPoster.getBlocked();
+	}
+	
 
 }

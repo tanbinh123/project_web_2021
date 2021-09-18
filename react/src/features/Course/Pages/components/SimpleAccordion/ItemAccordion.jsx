@@ -77,7 +77,7 @@ ItemAccordion.defaultProps = {
 };
 function ItemAccordion(props) {
   const { url } = useRouteMatch();
-  const { id, title, lessons, indexLecture } = props;
+  const { id, title, lessons, indexLecture, isFull = false } = props;
   const classes = useStyles();
 
   return (
@@ -104,11 +104,18 @@ function ItemAccordion(props) {
       <AccordionDetails className={classes.AccordionDetails}>
         {Array.from(lessons).map((item, index) => (
           <div key={index} className={classes.lesson}>
-            <Link to={`${url}/lecture/${indexLecture + index + 1}`}>
+            {isFull ? (
+              <Link to={`${url}/lecture/${indexLecture + index + 1}`}>
+                <span>
+                  {indexLecture + index + 1}. {item.description}
+                </span>
+              </Link>
+            ) : (
               <span>
                 {indexLecture + index + 1}. {item.description}
               </span>
-            </Link>
+            )}
+
             {/* <span className="lesson__time">30:30</span> */}
           </div>
         ))}

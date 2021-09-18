@@ -29,6 +29,7 @@ function LeftCD(props) {
     parts,
     totalLesson = 0,
     longDescription = '',
+    isFull = false,
   } = props;
   const classes = LeftCDCSS();
 
@@ -74,7 +75,7 @@ function LeftCD(props) {
             </ul>
           </div>
           {/* render list courses */}
-          <SimpleAccordion parts={parts} />
+          <SimpleAccordion parts={parts} isFull={isFull} />
         </Grid>
         <RatingCourse rateStar={rateStar} />
       </Grid>

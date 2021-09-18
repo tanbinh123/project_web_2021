@@ -51,7 +51,7 @@ const useStyles = makeStyles(() => ({
 }));
 function ListRating(props) {
   const { star = 0, listRating = [] } = props;
-  // console.log(star);
+  // console.log(listRating);
   const classes = useStyles();
   const limit = 3;
   const [indexRating, setIndexRating] = useState(0);

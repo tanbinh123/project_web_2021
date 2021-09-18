@@ -105,7 +105,7 @@ CardCourseDetail.defaultProps = {
 export default function CardCourseDetail(props) {
   const classes = useStyles();
   const { onClickOpenVideo, poster, course, totalLesson = 0 } = props;
-  console.log(course);
+  // console.log(course);
   var background1 = `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) no-repeat center center / cover,url("${poster}") no-repeat center center / cover`;
 
   function handleOnClickOpenVideo() {

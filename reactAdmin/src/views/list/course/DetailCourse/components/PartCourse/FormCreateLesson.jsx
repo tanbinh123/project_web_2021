@@ -12,7 +12,7 @@ import CustomSelectForm from "src/components/form/CustomSelectForm";
 import { isEmpty } from "src/Tool/Tools";
 import * as yup from "yup";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   formAddPart: {
     marginTop: 30,
     marginBottom: 20,
@@ -56,6 +56,22 @@ const useStyles = makeStyles(() => ({
   },
   hidden: {
     display: "none",
+  },
+  [theme.breakpoints.down("md")]: {
+    divVideo: {
+      "&>div": {
+        display: "flex",
+        flexFlow: "column",
+        alignItems: "flex-start",
+        justifyContent: "space-around",
+      },
+      marginTop: "30px",
+      marginBottom: "30px",
+    },
+    videoPlay: {
+      width: "90%",
+      marginBottom: 15,
+    },
   },
 }));
 const schema = yup.object().shape({
@@ -140,14 +156,7 @@ function FormCreateLesson(props) {
             onChange={handleOnChangeFile}
             hidden
           />
-          <CustomButton
-            className={classes.buttonUpload}
-            title="Upload"
-            color="secondary"
-            variant="contained"
-            onClick={handleChangeVideo}
-            css={false}
-          />
+
           <video
             key={demoVideo}
             // autoPlay
@@ -161,6 +170,14 @@ function FormCreateLesson(props) {
           >
             <source src={demoVideo} type="video/mp4"></source>
           </video>
+          <CustomButton
+            className={classes.buttonUpload}
+            title="Upload"
+            color="secondary"
+            variant="contained"
+            onClick={handleChangeVideo}
+            css={false}
+          />
         </div>
       </div>
 

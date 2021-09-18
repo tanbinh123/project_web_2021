@@ -597,7 +597,7 @@ public class CourseDAO {
 		if (sort == "" || sort == null)
 			sort = "id:asc";
 
-		String sql = "Select c from " + EvaluateEntity.class.getName() + " c where courseId=:courseId and c.deleted=0 ";
+		String sql = "Select c from " + EvaluateEntity.class.getName() + " c where courseId=:courseId and c.deleted=0 and c.userPoster.blocked = 0 ";
 		if (_search.length() != 0) {
 					
 			sql += " and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";
@@ -649,7 +649,7 @@ public class CourseDAO {
 	public Long countEvaluates(Long courseId, String _search) throws NoResultException {
 		
 
-		String sql = "Select count(*)  from " + EvaluateEntity.class.getName() + " c where courseId=:courseId and c.deleted=0 ";
+		String sql = "Select count(*)  from " + EvaluateEntity.class.getName() + " c where courseId=:courseId and c.deleted=0 and c.userPoster.blocked = 0 ";
 		if (_search.length() != 0) {
 					
 			sql += " and ((c.title like CONCAT('%',:search,'%')) or (c.description like CONCAT('%',:search,'%')) ) ";

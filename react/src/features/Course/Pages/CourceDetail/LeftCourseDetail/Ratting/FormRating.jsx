@@ -74,15 +74,15 @@ function FormRating(props) {
     },
     resolver: yupResolver(schema),
   });
-  console.log(userRating);
+  // console.log(userRating);
   const handleOnSubmit = (values) => {
-    console.log('Post Ratings:', values);
+    // console.log('Post Ratings:', values);
     if (isEmpty(userRating)) {
       (async () => {
         const rp = await courseApi.postRating(idCourse, values);
-        console.log(rp);
+        // console.log(rp);
         if (!rp.status) {
-          console.log(rp);
+          // console.log(rp);
           enqueueSnackbar('Đánh giá thành công', { variant: 'success' });
           form.reset();
           if (onUpdate) onUpdate();
@@ -91,9 +91,9 @@ function FormRating(props) {
     } else {
       (async () => {
         const rp = await courseApi.postRating(idCourse, values, userRating.id);
-        console.log(rp);
+        // console.log(rp);
         if (!rp.status) {
-          console.log(rp);
+          // console.log(rp);
           enqueueSnackbar('Cập nhật đánh giá thành công', {
             variant: 'success',
           });
@@ -117,7 +117,7 @@ function FormRating(props) {
       setDefaultStar(5);
     };
   }, [userRating, idCourse]);
-  console.log(dataUser);
+  // console.log(dataUser);
   return (
     <form className={classes.form} onSubmit={form.handleSubmit(handleOnSubmit)}>
       <div>
