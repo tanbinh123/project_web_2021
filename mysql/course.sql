@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 18/09/2021 16:02:08
+ Date: 18/09/2021 19:00:51
 */
 
 SET NAMES utf8mb4;
@@ -808,7 +808,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 173 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 177 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -862,6 +862,9 @@ INSERT INTO `resource_image` VALUES (169, 'user/admin/image/images.png', b'0', '
 INSERT INTO `resource_image` VALUES (170, 'user/admin/image/10_mon_banh_su_12_mon_cookie_m_1561518923.jpg', b'0', '2021-09-18 08:32:57', 1, 1, '2021-09-18 08:32:57');
 INSERT INTO `resource_image` VALUES (171, 'user/admin/image/banh_thach_trung_thu_m_1565925718.jpg', b'0', '2021-09-18 08:37:46', 1, 1, '2021-09-18 08:37:46');
 INSERT INTO `resource_image` VALUES (172, 'user/admin/image/KH_A_H_C_PHUN_X_M_TH_M_M__C__B_N_m_1627909013.jpg', b'0', '2021-09-18 08:52:46', 1, 1, '2021-09-18 08:52:46');
+INSERT INTO `resource_image` VALUES (174, 'user/default/image/2020_12_07_001420.jpg', b'0', '2021-09-18 11:53:18', NULL, 0, '2021-09-18 11:53:18');
+INSERT INTO `resource_image` VALUES (175, 'user/default/image/girl.bmp', b'0', '2021-09-18 11:57:14', NULL, 0, '2021-09-18 11:57:14');
+INSERT INTO `resource_image` VALUES (176, 'user/default/image/2020_12_07_001420.jpg', b'0', '2021-09-18 11:59:24', NULL, 0, '2021-09-18 11:59:24');
 
 -- ----------------------------
 -- Table structure for revenue

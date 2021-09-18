@@ -28,14 +28,22 @@
 			<id>xuggle repo</id>
 			<url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
 		</repository>
+
+<repository>
+    <id>cksource-mvn-repo</id>
+    <name>CKSource Maven Repository</name>
+    <url>https://maven.cksource.com/</url>
+</repository>
 	</repositories>
-
-
 	<dependencies>
 
 
-
-
+		
+		<!-- <dependency>
+		    <groupId>com.cksource</groupId>
+		    <artifactId>ckfinder3</artifactId>
+		    <version>3.5.1.1</version>
+		</dependency> -->
 		<dependency>
 			<groupId>io.humble</groupId>
 			<artifactId>humble-video-all</artifactId>

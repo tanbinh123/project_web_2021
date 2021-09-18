@@ -127,9 +127,10 @@ public class ProfileREST {
 				appUser.setDescription(description);
 				ResourceImage newAvatar=null;
 				try {
-					newAvatar = resourceImageDAO.uploadImage(uploadAvatar, appUser);
+					newAvatar = resourceImageDAO.uploadImage(uploadAvatar, appUser, true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
 				}
 				if(newAvatar!=null)appUser.setAvatar(newAvatar);
 				appUserDAO.updateAppUser(appUser);

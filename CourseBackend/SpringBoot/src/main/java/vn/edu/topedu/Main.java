@@ -62,7 +62,7 @@ public class Main extends SpringBootServletInitializer {
 		System.out.println("http://localhost:" + port + "/admin");
 		if (videoDAO != null) {
 			try {
-				videoDAO.deleteAllNoLink(-1);
+				videoDAO.deleteAllNoLink(1);
 				System.err.println("Delete All Video Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -70,7 +70,7 @@ public class Main extends SpringBootServletInitializer {
 		}
 		if (resourceImageDAO != null) {
 			try {
-				resourceImageDAO.deleteAllNoLink(-1);
+				resourceImageDAO.deleteAllNoLink(1);
 				System.err.println("Delete All Image Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();

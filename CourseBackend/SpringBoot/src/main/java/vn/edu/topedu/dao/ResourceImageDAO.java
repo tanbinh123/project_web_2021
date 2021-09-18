@@ -152,7 +152,8 @@ public class ResourceImageDAO {
 		
 	}
 	@Transactional
-	public ResourceImage uploadImage(MultipartFile uploadAvatar, AppUser appUser) throws Exception {
+	public ResourceImage uploadImage(MultipartFile uploadAvatar, AppUser appUser,boolean deleted ) throws Exception {
+		String userName= (appUser!=null)?appUser.getUsername():"default";
 		ResourceImage newAvatar = null;
 		if(uploadAvatar!=null) {
 			System.err.println("Avatar upload");
@@ -160,14 +161,15 @@ public class ResourceImageDAO {
 			String pathContain = null;
 			try {
 				ResourceImage image = new ResourceImage();
-				pathContain = String.format("user/%s/image", appUser.getUsername());
+				image.setDeleted(deleted);
+				pathContain = String.format("user/%s/image", userName);
 				String originImage=uploadAvatar.getOriginalFilename();
 				originImage=originImage.replaceAll("[^0-9a-zA-Z\\.]", "_");
 				image.setPath(pathContain + "/" + originImage);
 				image.setAppUser(appUser);
 				newAvatar=save(image);
 				
-				pathContain = String.format("user/%s/image", appUser.getUsername());
+				pathContain = String.format("user/%s/image", userName);
 				
 				String filename= newAvatar.getAbsPath();
 				System.out.println(String.format("File: %s", originImage));

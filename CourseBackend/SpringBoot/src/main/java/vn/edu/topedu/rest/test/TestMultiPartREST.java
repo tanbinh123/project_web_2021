@@ -47,5 +47,39 @@ public class TestMultiPartREST {
 		}
 
 	}
+	
+	@PostMapping(value = "/test/upload/finder", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> finder(@RequestPart("upload") MultipartFile file) {
+		String pathContain = "test";
+		try {
+//			System.out.println(String.format("File: %s", file.getOriginalFilename()));
+//			File p = FileProcess.getPath(pathContain, file.getOriginalFilename()).toFile();
+//			System.out.println(p.getAbsolutePath());
+//			p.getParentFile().mkdirs();
+//			InputStream initialStream = file.getInputStream();
+//			OutputStream outStream = new FileOutputStream(p);
+//
+//			byte[] buffer = new byte[8 * 1024];
+//			int bytesRead;
+//			while ((bytesRead = initialStream.read(buffer)) != -1) {
+//				outStream.write(buffer, 0, bytesRead);
+//			}
+//			IOUtils.closeQuietly(initialStream);
+//			IOUtils.closeQuietly(outStream);
+			return ResponseEntity.ok(new Object() {
+				public boolean getUploaded() {
+					return true;
+				}
+				public String getUrl() {
+					return "http://localhost:25001/resource/user/admin/image/images_169.png";
+				}
+			});
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+
+	}
 
 }
