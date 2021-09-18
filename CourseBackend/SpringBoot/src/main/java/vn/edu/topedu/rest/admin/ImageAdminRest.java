@@ -181,7 +181,7 @@ public class ImageAdminRest {
 				
 				ResourceImage newPoster=null;
 				try {
-					newPoster = resourceImageDAO.uploadImage(image, appUser);
+					newPoster = resourceImageDAO.uploadImage(image, appUser, true);
 				} catch (Exception e) {
 					return ResponseEntity.badRequest().body(new MessageResponse("Image not upload", "Hình không thể tải lên"));
 				}
