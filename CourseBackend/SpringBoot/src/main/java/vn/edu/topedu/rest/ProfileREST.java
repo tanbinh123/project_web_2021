@@ -114,6 +114,8 @@ public class ProfileREST {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {
+				if(!appUser.getEmail().equals(email))
+					appUser.setActived(false);
 				
 				appUser.setPhone(phone);
 				appUser.setEmail(email);
@@ -123,7 +125,6 @@ public class ProfileREST {
 				appUser.setLocation(location);
 				appUser.setFacebook(facebook);
 				appUser.setDescription(description);
-				appUser.setActived(false);
 				ResourceImage newAvatar=null;
 				try {
 					newAvatar = resourceImageDAO.uploadImage(uploadAvatar, appUser);

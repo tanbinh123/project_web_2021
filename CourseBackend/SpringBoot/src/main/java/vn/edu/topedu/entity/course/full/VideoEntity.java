@@ -171,13 +171,15 @@ public class VideoEntity extends AHasResource {
 	}
 	
 	public String getStrDuration() {
+		 long seconds
+         =this.duration/1000;
 		 long minutes
-         = TimeUnit.MILLISECONDS.toMinutes(this.duration/1000);
+         = TimeUnit.MILLISECONDS.toMinutes(seconds);
 
      // This method uses this formula seconds =
      // (milliseconds / 1000);
-     long seconds
-         = (TimeUnit.MILLISECONDS.toSeconds(this.duration/1000)
+      seconds
+         = (TimeUnit.MILLISECONDS.toSeconds(seconds)
             % 60);
 		return String.format("%s min %s s", minutes, seconds);
 	}

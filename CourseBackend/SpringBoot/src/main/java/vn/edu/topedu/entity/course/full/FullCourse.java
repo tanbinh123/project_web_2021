@@ -40,19 +40,25 @@ public class FullCourse extends BaseCourse {
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "demo_id", referencedColumnName = "id" ,insertable = false, updatable = false)
 	private VideoEntity demo;
-
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Column(name = "long_description", length = 255)
+    private String longDescription="";
 	
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 	@OneToMany(mappedBy = "course", cascade= {CascadeType.ALL})
 	private List<Learning> learnings;
 	@OneToMany(mappedBy = "course")
@@ -64,7 +70,13 @@ public class FullCourse extends BaseCourse {
 
 	
 	
+	public String getLongDescription() {
+		return longDescription;
+	}
 
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
+	}
 
 	public List<EvaluateEntity> getEvaluates() {
 		return evaluates;

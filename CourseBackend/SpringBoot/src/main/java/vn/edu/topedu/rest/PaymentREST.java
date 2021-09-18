@@ -204,7 +204,8 @@ public class PaymentREST {
 			@RequestParam(defaultValue = "-1") int _page, @RequestParam(defaultValue = "-1") int _limit,
 			@RequestParam(defaultValue = "id:asc") String _sort,
 			@RequestParam(defaultValue = "-1") BigDecimal price_gte,
-			@RequestParam(defaultValue = "-1") BigDecimal price_lt, @RequestParam(defaultValue = "") String _search) {
+			@RequestParam(defaultValue = "-1") BigDecimal price_lt,
+			@RequestParam(defaultValue = "") String _search) {
 
 		_page = (_page <= 0) ? 1 : _page;
 		List<Payment> lstCourse = paymentDAO.getListEntitys(_page, _limit, _sort, _search, price_gte, price_lt);
@@ -321,7 +322,7 @@ public class PaymentREST {
 			if (appUser != null) {
 				_page = (_page <= 0) ? 1 : _page;
 				List<OwerCourse> lstCourse = owerCourseDAO.getListEntitys(_page, _limit, _sort, _search, price_gte, price_lt,appUser);
-				long countRows = paymentDAO.getCount(_search, price_gte, price_lt,appUser);
+				long countRows = owerCourseDAO.getCount(_search, price_gte, price_lt,appUser);
 				// System.out.println(countRows);
 				for (OwerCourse c : lstCourse) {
 					String bf = WebUtils.getUrl(httpServletRequest);

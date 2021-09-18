@@ -68,7 +68,7 @@ public class CourseAdminRest {
 	@PostMapping(value="/{fullcourse}/img-poster", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseBody
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> postProfile(HttpServletRequest httpServletRequest, 
+	public ResponseEntity<Object> postImagePoster(HttpServletRequest httpServletRequest, 
 			Authentication authentication,	
 			@PathVariable FullCourse fullcourse,
 			@RequestPart(required=false) MultipartFile image			
@@ -170,11 +170,14 @@ public class CourseAdminRest {
 		String title=body.get("title");
 		String description=body.get("description");
 		if(description==null)description="";
+		String longDescription=body.get("longDescription");
+		if(longDescription==null)longDescription="";
 		String price=body.get("price");
 		String discount=body.get("discount");
 		String categoryId=body.get("categoryId");
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));
+		System.out.println(String.format("longDescription: %s", longDescription));
 		System.out.println(String.format("OriginPrice: %s", price));
 		System.out.println(String.format("discount: %s", discount));
 		System.out.println(String.format("categoryId: %s", categoryId));
@@ -191,6 +194,7 @@ public class CourseAdminRest {
 				fullcourse.setTitle(title);
 				fullcourse.setUpdateAt(new Date());
 				fullcourse.setCategoryId(Integer.parseInt(categoryId));
+				fullcourse.setLongDescription(longDescription);
 				try {
 					FullCourse rs = courseDAO.merge(fullcourse);
 					rs.setBeforeResource(WebUtils.getUrl(httpServletRequest));
@@ -311,6 +315,7 @@ public class CourseAdminRest {
 	public ResponseEntity<Object> postNewCourseBase(HttpServletRequest httpServletRequest, 
 			@RequestPart(required=true) String title,
 			@RequestPart(required=false) String description,
+			@RequestPart(required=false) String longDescription,
 			@RequestPart(required=true) String price,
 			@RequestPart(required=true) String categoryId,
 			@RequestPart(required=false) String discount,
@@ -321,6 +326,7 @@ public class CourseAdminRest {
 	
 		System.out.println(String.format("Title: %s", title));
 		System.out.println(String.format("Description: %s", description));
+		System.out.println(String.format("longDescription: %s", longDescription));
 		System.out.println(String.format("OriginPrice: %s", price));
 		System.out.println(String.format("categoryId: %s", categoryId));
 		System.out.println(String.format("discount: %s", discount));
@@ -346,6 +352,7 @@ public class CourseAdminRest {
 				//fullcourse.setImagePosterId(Long.valueOf(2));
 				fullcourse.setCategoryId(Integer.valueOf(categoryId));
 				fullcourse.setDescription(description);
+				fullcourse.setLongDescription(longDescription);
 				fullcourse.setOriginPrice(new BigDecimal(price));
 				fullcourse.setDiscount(Integer.parseInt(discount));
 				fullcourse.setTitle(title);

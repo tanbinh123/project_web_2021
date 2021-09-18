@@ -38,6 +38,7 @@ public class BaseCourse extends BaseEntity implements JsonResponse {
     
     @Column(name = "description", length = 255)
     protected String description="";
+    
     @Column(name = "title", length = 255, nullable = false)
     protected String title="";
     @Column(name = "price", length = 15, nullable = false, updatable = false,insertable = false)

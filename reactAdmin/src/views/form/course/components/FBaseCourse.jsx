@@ -138,7 +138,7 @@ function FBaseCourse(props) {
   const [richText, setRichText] = React.useState(
     dataCourse?.longDescription || ""
   );
-  // console.log(richText);
+   console.log(richText);
   React.useEffect(() => {
     getCategories();
 
@@ -154,6 +154,7 @@ function FBaseCourse(props) {
       price: dataCourse?.originPrice || "",
       discount: dataCourse?.discount || 0,
       description: dataCourse?.description || "",
+      longDescription: dataCourse?.longDescription || "",
       categoryId: dataCourse?.categoryId || "",
     },
     resolver: yupResolver(schema),
@@ -287,6 +288,7 @@ function FBaseCourse(props) {
             <span>Mô tả dài</span>
             <div>
               <CustomRichEditor
+                name="longDescription"
                 value={richText}
                 onChange={(value) => {
                   setRichText(value);

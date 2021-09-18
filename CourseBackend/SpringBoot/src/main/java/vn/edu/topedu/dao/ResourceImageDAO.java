@@ -124,6 +124,7 @@ public class ResourceImageDAO {
 			List<ResourceImage> a = getResourceImagesNoLinked(deleted);
 			for (ResourceImage ri : a) {
 				String str=ri.getAbsPath();
+				System.err.println(str);
 				if (str != null
 						&& (str.contains("http") || str.contains("data:image"))) {
 					continue;
@@ -133,9 +134,10 @@ public class ResourceImageDAO {
 				if(path.toFile().delete()) {
 					System.err.println(String.format("Delete file: %s", path.toString()));
 					
+					
 				};
 			}
-			String sql = "delete from " + ResourceImage.class.getName() + " where countLinked=0 and deleted=true ";
+			String sql = "delete from " + ResourceImage.class.getName() + " where countLinked=0 ";
 			if(deleted!=-1)sql+=" and e.deleted= :deleted ";
 			Query query = this.entityManager.createQuery(sql);
 			if(deleted!=-1) query.setParameter("deleted", deleted==1);
@@ -160,7 +162,7 @@ public class ResourceImageDAO {
 				ResourceImage image = new ResourceImage();
 				pathContain = String.format("user/%s/image", appUser.getUsername());
 				String originImage=uploadAvatar.getOriginalFilename();
-				originImage=originImage.replaceAll("[^0-9a-zA-Z]", "_");
+				originImage=originImage.replaceAll("[^0-9a-zA-Z\\.]", "_");
 				image.setPath(pathContain + "/" + originImage);
 				image.setAppUser(appUser);
 				newAvatar=save(image);

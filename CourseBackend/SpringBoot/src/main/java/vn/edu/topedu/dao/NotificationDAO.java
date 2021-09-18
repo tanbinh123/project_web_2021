@@ -99,7 +99,7 @@ public class NotificationDAO {
 
 		}
 		
-		sql += " group by c.id   ";
+		//sql += " group by c.id   ";
 		
 		System.out.println(sql);
 		Query query = this.entityManager.createQuery(sql);

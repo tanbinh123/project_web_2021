@@ -85,7 +85,10 @@ function BaseCourseForm(props) {
   const [dataSelect, setDataSelect] = useState([]);
   //dialog
   const [isOpenDialogCategory, setIsOpenDialogCategory] = React.useState(false);
-  const [richText, setRichText] = React.useState("");
+  const [richText, setRichText] = React.useState(
+    
+    dataCourse?.longDescription || ""
+  );
   React.useEffect(() => {
     getCategories();
     return () => {
@@ -208,6 +211,7 @@ function BaseCourseForm(props) {
             <span>Mô tả dài</span>
             <div>
               <CustomRichEditor
+                name="longDescription"
                 value={richText}
                 onChange={(value) => {
                   setRichText(value);
