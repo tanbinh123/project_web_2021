@@ -14,6 +14,23 @@ export function DateToString(dateString) {
   //return `${date1.getDate()}/${date1.getMonth() + 1}/${date1.getFullYear()}`;
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
+export function DateToString3(dateString) {
+  // const date1 = new Date(dateString);
+
+  var dateParser = /(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2})/;
+  var match = dateString.match(dateParser);
+  var date = new Date(
+    match[3], // year
+    match[2] - 1, // monthIndex
+    match[1], // day
+    match[4], // hours
+    match[5], // minutes
+    match[6] //seconds
+  );
+  //return `${date1.getDate()}/${date1.getMonth() + 1}/${date1.getFullYear()}`;
+  // `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+}
 export function isEmpty(obj) {
   if (obj === "") {
     return true;

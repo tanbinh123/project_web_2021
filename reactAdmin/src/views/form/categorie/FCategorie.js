@@ -60,7 +60,10 @@ const FCategorie = (props) => {
       const res = await categoriesApi.add(values);
       console.log(res);
       if (!res.status) {
-        enqueueSnackbar("Tạo thể loại thành công", { variant: "success" });
+        enqueueSnackbar("Tạo thể loại thành công", {
+          variant: "success",
+          autoHideDuration: 1000,
+        });
         if (onUpdate) onUpdate();
         form.reset();
       }
