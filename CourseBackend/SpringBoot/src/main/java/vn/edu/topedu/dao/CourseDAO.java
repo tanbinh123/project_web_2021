@@ -675,6 +675,20 @@ public class CourseDAO {
 		return this.entityManager.find(EvaluateEntity.class, id);
 		
 	}
+	public EvaluateEntity getEvaluate(Long courseId, Long userId) {
+		try {
+			
+			String sql = "Select c  from " + EvaluateEntity.class.getName() + " c where courseId=:courseId and  c.userPoster.id = :userId ";
+			Query query = this.entityManager.createQuery(sql, EvaluateEntity.class);
+			query.setParameter("courseId", courseId);
+			query.setParameter("userId", userId);
+			
+			return (EvaluateEntity) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+		
+	}
 	
 	public CategoryEntity getCategoryEntity(Integer id) {
 		if (id == null)

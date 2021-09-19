@@ -147,6 +147,37 @@ public class EvaluateREST {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
 	}
 	
+	@GetMapping(value="/{fullcourse}/rating")
+	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<Object> getRating(
+			HttpServletRequest httpServletRequest, 
+			@PathVariable FullCourse fullcourse,
+			
+			@RequestBody Map<String, String> body,			
+			Authentication authentication	
+			) {
+		System.out.println("---------------------------------");
+		
+		
+		if (authentication != null) {
+			authentication.getName();
+			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
+			if (appUser != null) {				
+				
+				try {
+					EvaluateEntity rs = courseDAO.getEvaluate(fullcourse.getId(),appUser.getId());				
+					rs.setBeforeResource(httpServletRequest);
+					return ResponseEntity.ok(rs);
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+					return ResponseEntity.badRequest().body(new MessageResponse("User not evalute", "Người dùng chưa evalute"));
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Error.", "Lỗi không xác định"));
+	}
+	
 	@GetMapping(value="/{previewCourse}/ratings")
 	@ResponseBody
 	//@PreAuthorize("hasRole('USER')")
@@ -200,6 +231,8 @@ public class EvaluateREST {
 			
 		
 	}
+	
+	
 	
 	
 	

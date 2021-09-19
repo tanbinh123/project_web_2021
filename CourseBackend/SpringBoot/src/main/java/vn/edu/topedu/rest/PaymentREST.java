@@ -157,13 +157,17 @@ public class PaymentREST {
 	@PostMapping("/access")
 	@ResponseBody
 	public ResponseEntity<Object> checkBought(HttpServletRequest httpServletRequest, Authentication authentication,
-			@RequestBody Map<String, Object> body) {
+			@RequestBody Map<String, String> body) {
+		String str=body.get("idCourse");
+		if(str==null)  
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Request idCourse","Thiếu idCourse"));
+		Long idCourse = Long.parseLong(String.valueOf(str));
 		if (authentication != null) {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {
 				OwerCourse owerCourse = null;
-				Long idCourse = Long.parseLong(String.valueOf(body.get("idCourse")));
+				
 				try {
 					owerCourse = owerCourseDAO.querryBought(appUser.getId(), idCourse);
 					if (owerCourse != null) {
@@ -183,18 +187,23 @@ public class PaymentREST {
 			}
 		}
 
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Object() {
-			String message = "Bạn chưa mua khóa học này";
-
-			public String getMessage() {
-				return message;
-			}
-
-			public void setMessage(String message) {
-				this.message = message;
-			}
-
-		});
+		PreviewCourseEntity course = courseDAO.getPreviewCourse(idCourse);
+		String bf = WebUtils.getUrl(httpServletRequest);
+		course.setBeforeResource(bf);
+		
+		return ResponseEntity.ok(course);
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Object() {
+//			String message = "Bạn chưa mua khóa học này";
+//
+//			public String getMessage() {
+//				return message;
+//			}
+//
+//			public void setMessage(String message) {
+//				this.message = message;
+//			}
+//
+//		});
 	}
 
 	@SuppressWarnings("unchecked")

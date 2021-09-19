@@ -1,6 +1,5 @@
 package vn.edu.topedu.entity.course.full;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,11 +17,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import vn.edu.topedu.entity.AppUser;
-import vn.edu.topedu.entity.BaseEntity;
-import vn.edu.topedu.entity.CategoryEntity;
 import vn.edu.topedu.entity.EvaluateEntity;
-import vn.edu.topedu.entity.ResourceImage;
 import vn.edu.topedu.entity.course.BaseCourse;
 import vn.edu.topedu.utils.WebUtils;
 

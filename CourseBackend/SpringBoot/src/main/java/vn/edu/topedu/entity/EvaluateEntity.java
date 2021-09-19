@@ -6,11 +6,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import vn.edu.topedu.entity.course.full.FullCourse;
 import vn.edu.topedu.entity.previewcourse.PreviewCourseEntity;
+import vn.edu.topedu.utils.WebUtils;
 
 @Entity
 @Table(name = "evaluates")
@@ -116,6 +118,22 @@ public class EvaluateEntity extends BaseEntity {
 	
 	public boolean getBlocked() {
 		if(userPoster==null) return false; else return userPoster.getBlocked();
+	}
+	public void setBeforeResource(HttpServletRequest httpServletRequest) {
+		
+		String beforeResource = WebUtils.getUrl(httpServletRequest);
+		
+		if (this.userPoster != null)
+			this.userPoster.setBeforeResource(beforeResource);
+//		if (this.parts != null)
+//			this.parts.forEach(e -> {
+//				if (e.getLessons() != null)
+//					e.getLessons().forEach(x -> {
+//						if (x.getVideo() != null)
+//							x.getVideo().setBeforeResource(beforeResource);
+//					});
+//			});
+
 	}
 	
 
