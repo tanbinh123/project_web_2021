@@ -1,6 +1,7 @@
 package vn.edu.topedu.entity.course.full;
 
 import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +41,7 @@ public class Lesson  {
 	private Long videoId;
 	
 	@Column(name = "duration", nullable = false)
-	private BigDecimal duration;
+	private long duration;
 	
 	
 	@Column(name = "deleted", length = 1, nullable = false)
@@ -48,11 +49,11 @@ public class Lesson  {
 
 	
 	
-	public BigDecimal getDuration() {
+	public long getDuration() {
 		return duration;
 	}
 
-	public void setDuration(BigDecimal duration) {
+	public void setDuration(long duration) {
 		this.duration = duration;
 	}
 
@@ -118,6 +119,19 @@ public class Lesson  {
 				+ partId + ", videoId=" + videoId + ", deleted=" + deleted + "]";
 	}
 	
+	public String getStrDuration() {
+		 long seconds
+        =this.duration/1000;
+		 long minutes
+        = TimeUnit.MILLISECONDS.toMinutes(seconds);
+
+    // This method uses this formula seconds =
+    // (milliseconds / 1000);
+     seconds
+        = (TimeUnit.MILLISECONDS.toSeconds(seconds)
+           % 60);
+		return String.format("%s min %s s", minutes, seconds);
+	}
  
 	
 

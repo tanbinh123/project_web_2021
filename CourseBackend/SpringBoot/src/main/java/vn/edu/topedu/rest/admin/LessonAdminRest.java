@@ -128,11 +128,11 @@ public class LessonAdminRest {
 						if (f.exists()) {
 							newPoster.setDuration(videoService.getDuration(f));
 							videoDAO.mergePart(newPoster);
-							lesson.setDuration(BigDecimal.valueOf(newPoster.getDuration()));
+							lesson.setDuration(newPoster.getDuration());
 						}
 					} catch (Exception e) {
 					}
-					lesson.setDuration(BigDecimal.valueOf(newPoster.getDuration()));
+					lesson.setDuration(newPoster.getDuration());
 
 				}
 //				part.set
@@ -197,7 +197,7 @@ public class LessonAdminRest {
 							if (f.exists()) {
 								newPoster.setDuration(videoService.getDuration(f));
 								videoDAO.mergePart(newPoster);
-								lesson.setDuration(BigDecimal.valueOf(newPoster.getDuration()));
+								lesson.setDuration(newPoster.getDuration());
 							}
 						} catch (Exception e) {
 						}
