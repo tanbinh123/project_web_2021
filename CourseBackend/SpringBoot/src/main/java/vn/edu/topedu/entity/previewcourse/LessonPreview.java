@@ -1,5 +1,7 @@
 package vn.edu.topedu.entity.previewcourse;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +35,18 @@ public class LessonPreview  {
 	@JoinColumn(name = "part_id")
 	@JsonIgnore
 	private PartReview part;
+	
+	@Column(name = "duration", nullable = false)
+	private BigDecimal duration;
+	
+
+	public BigDecimal getDuration() {
+		return duration;
+	}
+
+	public void setDuration(BigDecimal duration) {
+		this.duration = duration;
+	}
 
 	public Long getId() {
 		return id;

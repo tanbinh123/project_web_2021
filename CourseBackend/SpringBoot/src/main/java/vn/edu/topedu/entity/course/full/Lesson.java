@@ -1,5 +1,7 @@
 package vn.edu.topedu.entity.course.full;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,10 +39,22 @@ public class Lesson  {
 	@Column(name = "video_id", nullable = false)
 	private Long videoId;
 	
+	@Column(name = "duration", nullable = false)
+	private BigDecimal duration;
+	
+	
 	@Column(name = "deleted", length = 1, nullable = false)
 	private Boolean deleted = false;
 
 	
+	
+	public BigDecimal getDuration() {
+		return duration;
+	}
+
+	public void setDuration(BigDecimal duration) {
+		this.duration = duration;
+	}
 
 	public Long getVideoId() {
 		return videoId;

@@ -11,7 +11,7 @@
  Target Server Version : 100417
  File Encoding         : 65001
 
- Date: 19/09/2021 15:11:57
+ Date: 19/09/2021 15:46:54
 */
 
 SET NAMES utf8mb4;
@@ -138,12 +138,12 @@ CREATE TABLE `categories`  (
   `total_money` decimal(30, 0) UNSIGNED NOT NULL DEFAULT 0,
   `total_course_bought` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (1, 'Chưa phân loại', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 167, 0, 47850050, 6);
+INSERT INTO `categories` VALUES (1, 'Chưa phân loại', b'1', b'0', '2021-05-25 09:53:03', '2021-05-25 09:53:03', 164, 0, 47850050, 6);
 INSERT INTO `categories` VALUES (2, 'Lập trình', b'1', b'0', '2021-05-19 10:57:38', '2021-05-19 10:57:38', 5, 500, 32601000, 5);
 INSERT INTO `categories` VALUES (19, 'Kiểm thử', b'1', b'0', '2021-05-25 09:52:33', '2021-05-25 09:52:33', 3, 0, 0, 0);
 INSERT INTO `categories` VALUES (22, 'Genshin Impact', b'1', b'0', '2021-06-28 06:39:44', '2021-06-28 06:39:44', 11, 0, 3020000, 2);
@@ -156,6 +156,7 @@ INSERT INTO `categories` VALUES (30, 'Tiếng Trung', b'1', b'0', '2021-09-15 22
 INSERT INTO `categories` VALUES (31, 'Tin học', b'1', b'0', '2021-09-15 22:12:31', '2021-09-15 22:12:31', 0, 0, 0, 0);
 INSERT INTO `categories` VALUES (32, 'Thiết kế', b'1', b'0', '2021-09-18 19:02:37', '2021-09-18 19:02:37', 3, 0, 504000, 1);
 INSERT INTO `categories` VALUES (33, 'Nuội dạy con', b'1', b'0', '2021-09-19 06:51:10', '2021-09-19 06:51:10', 4, 0, 599000, 1);
+INSERT INTO `categories` VALUES (34, 'Nghệ thuật bán hàng', b'1', b'0', '2021-09-19 08:14:31', '2021-09-19 08:14:31', 3, 0, 400000, 1);
 
 -- ----------------------------
 -- Table structure for course
@@ -195,13 +196,13 @@ INSERT INTO `course` VALUES (1, 181, 'Video ngắn và TikTok đang ngày càng 
 INSERT INTO `course` VALUES (2, 192, 'Dinh dưỡng cho trẻ nhỏ, cách cho ăn dặm, chăm sóc con từ 6 - 12 tháng tuổi thông minh, khoẻ mạnh, lớn nhanh. ', b'0', 'Bí quyết cho trẻ ăn dặm lớn nhanh, khỏe mạnh', 399000, 0, 1, '2021-09-19 06:58:30', 1, 58, 33, '2021-05-19 15:35:12', b'1', 0, 0, 700000.00, 43, '<h3><strong>Mẹ có biết:</strong>&nbsp;</h3>\n<p>6 -12 tháng tuổi là giai đoạn vô cùng quan trọng trong quá trình phát<br> triển của con. Vai trò của dinh dưỡng quyết định đến sự phát triển về <br>trí não và thể chất của bé. &nbsp;</p>\n<p>Đó cũng là giai đoạn trẻ dễ mắc bệnh suy dinh dưỡng nhất. Nếu bố mẹ, <br>người chăm trẻ không đủ kiến thức để chăm sóc con thì việc trẻ bị suy <br>dinh dưỡng rất dễ xảy ra.&nbsp;</p>\n<h3><strong>Tuy nhiên, mẹ cần chú ý:</strong>&nbsp;</h3>\n<p>⚠️ Để cung cấp đầy đủ chất dinh dưỡng cho trẻ và cho con ăn đúng <br>cách, mẹ cần có kiến thức về dinh dưỡng, phương pháp chế biến thức ăn, <br>cách cho con ăn hợp lý về không gian thời gian.&nbsp;</p>\n<p>⚠️ Hiểu được nhu cầu và tính cách của từng trẻ để có phương pháp phù <br>hợp. Tránh tình trạng cho trẻ ăn theo công thức chung mà không quan tâm <br>đến sức khỏe, nhu cầu, tính cách của bé.&nbsp;</p>\n<p>⚠️Khi chăm sóc trẻ cần hiểu được tầm quan trọng, vai trò các thành <br>phần dinh dưỡng trong khẩu ăn cho bé. Hiểu được những dấu hiệu trẻ có <br>nhu cầu ăn dặm. &nbsp;</p>\n<p>⚠️Nắm được những nguyên tắc cơ bản của việc chế thức ăn để tránh tình<br> trạng mất cân đối trong khẩu phần ăn, khiến cho trẻ không có hứng thú <br>ăn uống.&nbsp;</p>\n<p>⚠️ Việc cho ăn cũng rất cần đến phương pháp và cách tiếp cận trẻ, <br>biết cách tính toán hợp lý giữa sữa mẹ và thức ăn bổ sung trên từng trẻ <br>cụ thể, tạo tâm lý thoải mái để trẻ hứng thú với việc ăn uống.&nbsp;</p>\n<p>Chính vì thế, khóa học nuôi dạy con “<strong>Bí quyết cho trẻ ăn dặm lớn nhanh, khỏe mạnh”</strong><br> của giảng viên Đào Ngọc Cường chuyên gia đào tạo hàng đầu Việt Nam về <br>phát triển con người và tạo động lực sẽ giúp các bậc cha mẹ nắm bắt được<br> từng giai đoạn để có cách bổ sung thức ăn hợp lý, phù hợp với độ tuổi <br>của trẻ. Nắm được những điều nên và không nên làm trong quá trình cho ăn<br> dặm.      &nbsp;</p>\n<p>Ngay hôm nay, bạn hãy đăng ký để sở hữu những bí quyết chưa bật mí của khóa học “<strong>Bí quyết cho trẻ ăn dặm lớn nhanh, khỏe mạnh</strong>” ngay nhé!&nbsp;</p>\n');
 INSERT INTO `course` VALUES (3, 99, 'Độc cô cửu kiếm được coi là triết lý đặc sắc của Đạo gia đề cao việc sử dụng kiếm thuật một cách linh hoạt, người luyện kiếm pháp này sẽ trở thành một cao thủ kiếm khách, có thể phá giải hết tất cả võ học trong thiên hạ. Luyện đến cảnh giới cuối cùng có thể dùng bất cứ thứ gì làm kiếm, đạt tới cảnh giới \"vô chiêu thắng hữu chiêu\". ', b'0', 'Độc cô cửu kiếm', 6718050, 4, 2, '2021-06-20 06:58:19', 1, 58, 1, '2021-05-19 15:35:12', b'1', 2, 2, 14929000.00, 55, NULL);
 INSERT INTO `course` VALUES (4, 194, 'Khóa học dành cho các bậc cha mẹ đang muốn xây dựng con thành một đứa trẻ thành công, dạy con tư duy, kiến thức nền tảng để mạnh mẽ bước vào đời giúp trẻ phát triển toàn diện trogn tương lai', b'0', 'Nuôi dạy con kiệt xuất theo phương pháp người Do Thái', 599000, 0, 0, '2021-09-19 07:12:32', 1, 58, 33, '2021-05-19 15:35:12', b'1', 0, 0, 599000.00, 0, '<p>Tại sao những thiên tài Do Thái lại nhiều hàng đầu thế <br>giới? Các bậc cha mẹ Do Thái có bí quyết nào để giáo dục con cái thành <br>công?&nbsp;</p>\n<p>Nhắc đến dân tộc Do Thái người ta nghĩ ngay đến một dân tộc<br> thông minh, giàu có và kiệt xuất trên mọi lĩnh vực. Vậy người Do Thái <br>đã vận dụng công nghệ giáo dục để tạo ra những bộ óc thông minh như thế <br>nào? Những bí quyết giáo dục con của người Do Thái? Sự khác biệt của <br>giáo dục Do Thái với các cách giáo dục khác?&nbsp;</p>\n<p>Ở một khía cạnh khác chúng ta cần phải nhìn nhận lại cách <br>dạy con của người Việt Nam. Chủ yếu phương pháp, cách thức nuôi dạy con <br>rất lạc hậu và sai lầm. Tạo lên hậu quả rất lớn đó chính là những đứa bé<br> tuổi 30. Tình trạng quẫn trí, thậm chí đến mức tìm đến con đường tự vẫn<br> của các em bé và cuộc sống không còn vui tươi. &nbsp;</p>\n<p>Vậy đâu mới là giải pháp tối ưu nhất giúp trẻ phát triển khoẻ mạnh và thông minh?&nbsp;</p>\n<p>Hãy tìm lời giải đáp tại khoá học <strong>Nuôi dạy con kiệt xuất theo phương pháp người Do Thái đến từ chuyên gia Phạm Quỳnh Liên</strong>&nbsp;</p>\n<h3>Nội dung khoá học Nuôi dạy con kiệt xuất theo phương pháp người Do Thái&nbsp;</h3>\n<p>Khóa học \"<strong>Nuôi dạy con kiệt xuất theo phương pháp người Do Thái</strong>\"<br> sẽ chia sẻ bí quyết để giúp cha mẹ Việt học dạy con trở thành những đứa<br> trẻ Thông minh, Kiệt xuất. Khoá học sẽ giúp bạn thay đổi toàn bộ hệ <br>thống phương pháp và định hình lại cách nào là chuẩn mực, cách nào là <br>tốt đẹp nhất dành cho bé. &nbsp;</p>\n<p>Thường xuyên cập nhập toàn bộ hệ thống phương pháp nuôi dạy<br> con đúng đắn theo người Do Thái để sửa chữa và thay thế tất cả. Và <br>chúng ta sẽ biết cách nuôi dạy con chúng ta để trở thành nhân vật thành <br>công, thông minh kiệt suất. Các bé sẽ có cơ hội được là chính mình và <br>toả sáng&nbsp;</p>\n<p>Hãy đăng ký khoá học<strong> Nuôi dạy con kiệt xuất theo phương pháp người Do Thái </strong>ngay hôm nay!&nbsp;</p>\n');
-INSERT INTO `course` VALUES (5, 179, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 5', 458920, 0, 0, '2019-11-19 04:34:37', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 4172000.00, 89, NULL);
+INSERT INTO `course` VALUES (5, 195, 'Khóa học cung cấp cho bạn 4 bước xây dựng kịch bản bán hàng và 7 chiến lược chốt sale khiến khách hàng không thể cưỡng lại được. Tăng tỉ lệ chốt đơn lên 90%. ', b'0', 'Bí quyết chốt đơn thành công 90% - Telesale, Bán hàng online', 350000, 0, 0, '2021-09-19 08:20:26', 1, 58, 34, '2021-05-19 15:35:12', b'1', 0, 0, 500000.00, 30, '<h3><strong>Bạn có biết:</strong>&nbsp;</h3>\n<p>70% người bán hàng gặp khó khăn vào giai đoạn chốt đơn, đó <br>là bởi họ thiếu những kỹ năng cần thiết để khai thác tâm lý khách hàng <br>từ đó tăng tỷ lệ chốt sales thành công.&nbsp;</p>\n<p>Ngay cả những chủ doanh nghiệp hay những người làm kinh <br>doanh lâu năm vẫn còn gặp khó khăn để nhận được sự đồng ý của khách hàng<br> bởi sự thay đổi của thị trường đòi hỏi chú trọng những kỹ năng đặc biệt<br> phục vụ cho việc chốt đơn và tăng doanh thu.&nbsp;</p>\n<h3><strong>Vậy:</strong>&nbsp;</h3>\n<p>Để tăng tỉ lệ chốt đơn cao thì doanh nghiệp, cá nhân cần <br>làm gì để chuyển đổi đơn hàng cho mình. Việc trang bị các kỹ năng bán <br>hàng, kỹ năng giao tiếp… rất quan trọng.&nbsp;</p>\n<p><strong>❗ Khi gọi điện chốt đơn hàng</strong>&nbsp;</p>\n<p>Kỹ năng gọi điện của bạn diễn ra theo 3 bước đó là “Bạn - <br>bàn - bán”. Có nghĩa là bạn cần điều chỉnh âm thanh thật dễ nghe, cuốn <br>hút để duy trì cuộc nói chuyện thuận lợi. Hãy cố gắng điều chỉnh màn <br>giới thiệu trong 15 đến 30 giây đầu tiên. Nếu khách hàng từ chối thay vì<br> nản lòng thì bạn nên vui vẻ đưa ra thêm một số câu hỏi khác liên quan <br>tới quyền lợi của khách hàng.&nbsp;</p>\n<p><strong>❗</strong> <strong>Phân tích sản phẩm</strong>&nbsp;</p>\n<p>Khi khách hàng đã lắng nghe, hãy đưa ra những lợi ích sản <br>phẩm, đồng thời chuẩn bị trước hững câu trả lời cho những câu hỏi bất <br>ngờ của khách hàng. Bạn nên lưu ý thời gian gọi, tránh cảm giác làm <br>phiền cho khách hàng và hạn chế gọi trong thời gian ăn cơm hay thời gian<br> nghỉ ngơi.&nbsp;</p>\n<p>Chình vì vậy, khoá học <strong>Bí quyết chốt đơn thành công 90% - Telesale, Bán hàng online </strong>thành<br> công 90% của Giảng viên Trần Văn Tuấn - CEO Tasa sẽ giúp bạn chốt được <br>sale ngay trong cuộc gọi điện thoại hoặc chat với khách hàng khi bán <br>hàng online. Đồng thời cung cấp cho bạn 4 bước xây dựng kịch bản bán <br>hàng và 7 chiến lược chốt sale khiến khách hàng không thể cưỡng lại <br>được. Giúp bạn, doanh thu công ty của bạn Tăng Vọt với tỷ lệ chốt sale <br>lên 90%.&nbsp;</p>\n<p>Bạn hãy nhanh tay đăng ký khóa học “<strong>Bí quyết chốt đơn thành công 90% - Telesale, Bán hàng online</strong>” để được hưởng nhiều ưu đãi lớn!&nbsp;</p>\n');
 INSERT INTO `course` VALUES (6, 179, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Demo 6', 3237330, 0, 0, '2019-05-17 05:12:53', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 5487000.00, 41, NULL);
 INSERT INTO `course` VALUES (7, 179, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 7', 3513390, 0, 0, '2020-09-20 15:11:21', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 4233000.00, 17, NULL);
 INSERT INTO `course` VALUES (8, 179, 'Trong mắt của cô gái nửa người nửa tiên Ganyu, rốt cuộc giữa biển người tấp nập và những ngọn núi tĩnh mịch nơi đâu mới được gọi là nhà?', b'0', 'Demo 8', 2415050, 0, 0, '2019-07-18 22:46:10', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 4391000.00, 45, NULL);
 INSERT INTO `course` VALUES (9, 179, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 9', 4814600, 0, 0, '2020-07-18 23:15:11', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 13756000.00, 65, NULL);
 INSERT INTO `course` VALUES (10, 179, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 10', 3877020, 0, 0, '2020-12-27 16:51:58', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 6154000.00, 37, NULL);
-INSERT INTO `course` VALUES (11, 179, 'Trong mắt của cô gái nửa người nửa tiên Ganyu, rốt cuộc giữa biển người tấp nập và những ngọn núi tĩnh mịch nơi đâu mới được gọi là nhà?', b'0', 'Demo 11', 344680, 0, 0, '2019-08-09 23:43:09', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 2462000.00, 86, NULL);
+INSERT INTO `course` VALUES (11, 197, 'Bí quyết để trở thành Sát thủ bán hàng qua điện thoại, có trong tay chiến lược xây dựng danh sách khách hàng, cùng hàng loạt tuyệt chiêu để có được những kịch bản tele ưng ý ', b'0', 'Nghệ thuật bán hàng qua điện thoại', 498000, 0, 0, '2021-09-19 08:41:44', 1, 58, 34, '2021-05-19 15:35:12', b'1', 0, 0, 600000.00, 17, '<p>Telesale là gì?&nbsp;</p>\n<p>Telesale hình thức marketing - bán hàng qua điện thoại tới khách hàng<br> của doanh nghiệp để tìm kiếm khách hàng tiềm năng và chất lượng <br>nhằm giới thiệu sản phẩm/dịch vụ của doanh nghiệp, tư vấn thuyết phục <br>mua hàng và chốt đơn hàng mang lại doanh thu cho doanh nghiệp.&nbsp;</p>\n<p>Bộ phận Telesale ngày nay có một vị trí vô cùng quan trọng trong các <br>hoạt động kinh doanh của công ty, doanh nghiệp lớn nhỏ. So với các kênh <br>tìm kiếm và tiếp cận khách hàng khác, kênh Telesale có khả năng đem về <br>nguồn khách hàng tiềm năng nhất và chất lượng trung thực nhất.&nbsp;</p>\n<p>Và nếu bạn là: &nbsp;&nbsp;</p>\n<ul>\n<li>Telesales của một doanh nghiệp và thường xuyên kết thúc cuộc gọi với sự khó chịu của khách hàng?&nbsp;</li>\n<li>Nhân viên kinh doanh nhưng lại không biết cách tư vấn khách hàng về sản phẩm dịch vụ của mình dù bạn nắm rất rõ&nbsp;</li>\n<li>Người kinh doanh tự do và cần tự tìm khách hàng qua điện thoại để kinh doanh tốt&nbsp;</li>\n<li>Sinh viên, học viên muốn làm telesale chưa có kỹ năng tư vấn, kỹ <br>năng lên kịch bản trước khi gọi để nắm bắt tâm lý khách hàng hiệu quả&nbsp;</li>\n<li>Làm quản lý đội telesale muốn đi tìm những chiến lược xây dựng danh<br> sách khách hàng chất lượng nhất và lên kịch bản cho đội telesale của <br>bạn&nbsp;</li>\n</ul>\n<p>Vậy thì bạn không nên bỏ lỡ khóa học trực tuyến này: <strong>\"Nghệ thuật bán hàng qua điện thoại\"</strong> của giảng viên <a href=\"https://unica.vn/teacher/han-quang-du\" target=\"_self\">Hán Quang Dự</a>!&nbsp;</p>\n<p>Khóa học có gì dành cho bạn?&nbsp;</p>\n<p>Đây không đơn thuần chỉ giúp bạn HIỂU THÊM về cách thức bán hàng qua <br>điện thoại mà có một điều chắc chắn rằng: Ngay khi tham dự khóa học bạn <br>sẽ có toàn bộ các kịch bản để gọi điện cho bất kỳ ai.&nbsp;&nbsp;</p>\n<ul>\n<li>Kich bản đặt lịch hẹn với khách hàng&nbsp;</li>\n<li>Kịch bản để nhận diện khách hàng tiềm năng&nbsp;</li>\n<li>Kịch bản CHỐT SALES&nbsp;</li>\n<li>Kịch bản chăm sóc khách hàng sau chốt&nbsp;</li>\n<li>Các kịch bản liên quan đến giao tiếp với khách hàng qua điện thoại khác.&nbsp;</li>\n</ul>\n<p>...&nbsp;</p>\n<p>Tất cả sẽ được tùy biến để áp dụng ngay vào công việc kinh doanh hiện<br> tại của bạn. Và quan trọng nhất: Bạn sẽ được nhận lộ trình để từ 01 <br>người bán hàng qua điện thoại bình thường trở thành sát thủ bán hàng qua<br> điện thoại.&nbsp;</p>\n<p>Nhanh tay đăng ký khóa học <strong>\"Nghệ thuật bán hàng qua điện thoại\" </strong>ngay hôm nay để trở thành một Sale Master ngay tại nhà!&nbsp;</p>\n');
 INSERT INTO `course` VALUES (12, 179, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 12', 861120, 0, 0, '2019-11-03 13:48:52', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 3312000.00, 74, NULL);
 INSERT INTO `course` VALUES (13, 179, 'Bên cạnh sức mạnh và khả năng phối hợp đội hình gần như hoàn hảo của Cocogoat, chuỗi nhiệm vụ cốt truyện của Ganyu được đánh giá khá nhàm chán và thiếu đi những giây phút cao trào hoành tráng. Tuy nhiên theo Cái Bang tôi thì cốt truyện của Ganyu cũng giống như một cuốn sách, khi bạn đọc xong và gấp lại thì những eater eggs thú vị trong game mới lần lượt lộ rõ. Hãy cùng 2game điểm qua những chi tiết thú vị trong cốt truyện của Ganyu và những pha bẻ cua thú vị của nhà phát triển nhé.', b'0', 'Demo 13', 7413280, 0, 0, '2019-11-10 16:24:45', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 13238000.00, 44, NULL);
 INSERT INTO `course` VALUES (14, 179, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 14', 365000, 0, 0, '2020-04-08 12:19:46', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 7300000.00, 95, NULL);
@@ -343,7 +344,7 @@ INSERT INTO `course` VALUES (149, 179, 'Đối với Thất Tinh cư trú tại 
 INSERT INTO `course` VALUES (150, 179, 'Trong mắt của cô gái nửa người nửa tiên Ganyu, rốt cuộc giữa biển người tấp nập và những ngọn núi tĩnh mịch nơi đâu mới được gọi là nhà?', b'0', 'Demo 150', 704100, 0, 0, '2020-06-03 13:40:56', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 11735000.00, 94, NULL);
 INSERT INTO `course` VALUES (151, 179, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 151', 13058480, 0, 0, '2020-03-07 13:32:40', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 13892000.00, 6, NULL);
 INSERT INTO `course` VALUES (152, 179, 'Trong mắt của cô gái nửa người nửa tiên Ganyu, rốt cuộc giữa biển người tấp nập và những ngọn núi tĩnh mịch nơi đâu mới được gọi là nhà?', b'0', 'Demo 152', 10831940, 0, 0, '2019-01-13 00:42:54', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 11053000.00, 2, NULL);
-INSERT INTO `course` VALUES (153, 179, 'Dòng máu \"con người\" chảy trong huyết quản khiến cô lưu luyến ánh đèn thành phố rực rỡ, nhưng bản chất \"tiên\" lại khiến cô hoài niệm những tháng ngày nhàn nhã thong dong nơi tiên sơn động phủ.', b'0', 'Demo 153', 2035370, 0, 0, '2019-07-28 06:37:36', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 5501000.00, 63, NULL);
+INSERT INTO `course` VALUES (153, 196, 'Khóa học giúp bạn đập tan mọi rào cản khó khăn từ khách hàng, nâng cao khả năng giao tiếp, đọc vị tâm lý khách hàng trong 60s. ', b'0', 'Chiến binh bán hàng', 400000, 0, 1, '2021-09-19 08:35:24', 1, 58, 34, '2021-05-19 15:35:12', b'1', 0, 0, 500000.00, 20, '<p style=\"text-align:justify;\"><strong><em>\"Phi thương bất phú\" - Muốn giàu thì phải kinh doanh!</em></strong>&nbsp;</p>\n<h3 style=\"text-align:justify;\"><span style=\"font-size: 14px;\"><strong>Thế nhưng,</strong></span>&nbsp;</h3>\n<p style=\"text-align:justify;\">Muốn kinh doanh thì bắt đầu từ <br>đâu, học bán hàng online như thế nào, làm thế nào để tăng doanh số, tăng<br> hiệu quả bán hàng? Kể cả khi bạn tự kinh doanh hay là nhân viên bán <br>hàng, trưởng phòng kinh doanh đến chủ doanh nghiệp cũng vướng phải ít <br>nhất một trong những vấn đề này.&nbsp;</p>\n<p style=\"text-align:justify;\">Vậy thì bạn không thể bỏ qua khóa học này - <strong><em>Chiến binh bán hàng</em></strong> của Chuyên gia đào tạo Bùi Quang Dương. &nbsp;</p>\n<p style=\"text-align:justify;\">Giảng viên <strong><em>Nguyễn Quang Dương</em></strong><br> là nhà huấn luyện bán hàng có trên 8 năm kinh nghiệm trong vai trò <br>chuyên gia huấn luyện Sales ở Hà Nội và từng là lãnh đạo của rất nhiều <br>đội ngũ kinh doanh xuất chúng với doanh số gấp 2-5 lần trong nhiều năm <br>liền. &nbsp;</p>\n<h3 style=\"text-align:justify;\"><span style=\"font-size: 14px;\"><strong>Nội dung và lợi ích khóa học</strong></span>&nbsp;</h3>\n<p style=\"text-align:justify;\">Khóa học gồm có 18 bài giảng <br>cung cấp giải pháp, chiến thuật, kỹ thuật bán từ những best seller sẽ <br>giúp bạn có được nền tảng để đột phá doanh số lên gấp 2-5 lần hiện tại. <br>Cụ thể:&nbsp;</p>\n<p style=\"text-align:justify;\">Phần 1: Tư duy bán hàng đỉnh cao&nbsp;</p>\n<p style=\"text-align:justify;\">Phần 2: Công thức tìm kiếm tập khách hàng Vàng&nbsp;</p>\n<p style=\"text-align:justify;\">Phần 3: Cách thức tiếp cận khách hàng&nbsp;</p>\n<p style=\"text-align:justify;\">Phần 4: Gợi mở nhu cầu&nbsp;</p>\n<p style=\"text-align:justify;\">Phần 5: Trình bày sản phẩm&nbsp;</p>\n<p style=\"text-align:justify;\">Phần 6: Xử lý từ chối&nbsp;</p>\n<p style=\"text-align:justify;\">Phần 7: Nghệ thuật chốt sales đỉnh cao&nbsp;</p>\n<p style=\"text-align:justify;\">Phần 8: Chăm sóc khách hàng và biến họ thành đối tác.&nbsp;</p>\n<p style=\"text-align:justify;\">✔️ Khóa học sẽ giúp bạn xóa tan <br>rào cản, tâm lý sợ bán hàng, sợ bị từ chối và giúp bạn biến mọi lời từ <br>chối thành lý do khiến khách hàng không thể cưỡng lại việc mua hàng&nbsp;</p>\n<p style=\"text-align:justify;\">✔️ Ngoài ra, sau khóa học bạn <br>cũng sẽ nắm được các kỹ thuật bán hàng đỉnh cao đột phá nhanh và tăng <br>nhanh doanh số, bán hàng hiệu quả hơn.&nbsp;</p>\n<p style=\"text-align:justify;\">Còn chần chừ gì nữa, hãy đăng ký tham gia ngay khóa học để trở thành những <strong><em>Chiến binh bán hàng</em></strong> đỉnh cao!&nbsp;</p>\n');
 INSERT INTO `course` VALUES (154, 179, 'Đối với Thất Tinh cư trú tại \"Ngọc Kinh Đài\" cao vời vợi kia mà nói, Ganyu tuyệt không phải là \"hộ tinh\" phục vụ họ, mà là người điều phối mạng lưới thông tin phức tạp khắp cảng Liyue, cũng là người xây dựng nền tảng hiệu quả hành chính của cảng Liyue.', b'0', 'Demo 154', 1374880, 0, 0, '2020-08-13 13:29:43', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 8593000.00, 84, NULL);
 INSERT INTO `course` VALUES (155, 179, 'Trải qua hàng nghìn năm, người lên đảm nhiệm chức vụ Thất Tinh không ngừng thay đổi, chỉ có Ganyu vẫn luôn ở đây chứng kiến cảnh phồn hoa náo nhiệt của cảng Liyue.', b'0', 'Demo 155', 109950, 0, 0, '2020-12-06 20:49:25', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 2199000.00, 95, NULL);
 INSERT INTO `course` VALUES (156, 179, 'Trong mắt của cô gái nửa người nửa tiên Ganyu, rốt cuộc giữa biển người tấp nập và những ngọn núi tĩnh mịch nơi đâu mới được gọi là nhà?', b'0', 'Demo 156', 2827170, 0, 0, '2020-05-14 21:26:24', 1, 58, 1, '2021-05-19 15:35:12', b'1', 0, 0, 10471000.00, 73, NULL);
@@ -461,7 +462,7 @@ CREATE TABLE `learning`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `learning_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 152 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 163 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of learning
@@ -571,6 +572,17 @@ INSERT INTO `learning` VALUES (148, 4, 'Cho con tư duy, kiến thức nền t�
 INSERT INTO `learning` VALUES (149, 4, 'Giúp trẻ tự lập và thông minh hơn một cách tự nhiên', b'0');
 INSERT INTO `learning` VALUES (150, 4, 'Cho con hạnh phúc và tự do', b'0');
 INSERT INTO `learning` VALUES (151, 4, 'Cho con được là chính mình', b'0');
+INSERT INTO `learning` VALUES (152, 5, 'Biết cách thức bán hàng mới', b'0');
+INSERT INTO `learning` VALUES (153, 5, 'Tăng tỷ lệ chốt đơn, giảm tỷ lệ hoàn đơn', b'0');
+INSERT INTO `learning` VALUES (154, 5, 'Thu nhập tăng gấp 2 lần', b'0');
+INSERT INTO `learning` VALUES (155, 5, 'Tiết kiệm thời gian khi chốt đơn', b'0');
+INSERT INTO `learning` VALUES (156, 153, 'Sở hữu vô số tư duy và chiến thuật của những best seller', b'0');
+INSERT INTO `learning` VALUES (157, 153, 'Nâng cao khả năng giao tiếp, đọc vị tâm lý khách hàng ', b'0');
+INSERT INTO `learning` VALUES (158, 153, 'Nâng cao khả năng giao tiếp, đọc vị tâm lý khách hàng ', b'0');
+INSERT INTO `learning` VALUES (159, 153, 'Xây dựng tập khách hàng \"Vàng\"', b'0');
+INSERT INTO `learning` VALUES (160, 153, 'Nắm được công thức bán hàng trong 60s', b'0');
+INSERT INTO `learning` VALUES (161, 153, 'Có thể bán hàng cho bất kỳ ai và bán bất kỳ sản phẩm nào', b'0');
+INSERT INTO `learning` VALUES (162, 153, 'Tăng doanh số bán hàng gấp 2-5 lần', b'0');
 
 -- ----------------------------
 -- Table structure for lesson
@@ -588,50 +600,73 @@ CREATE TABLE `lesson`  (
   INDEX `part_id`(`part_id`) USING BTREE,
   CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `lesson_ibfk_2` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 77 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson
 -- ----------------------------
-INSERT INTO `lesson` VALUES (1, 1, '8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 387, 58, b'0');
-INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập trình của Sơn Đặng', 1445, 58, b'0');
-INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 1539, 58, b'0');
-INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 695, 58, b'0');
-INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 633, 58, b'0');
-INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 1252, 58, b'0');
-INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 709, 58, b'0');
-INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 1449, 58, b'0');
-INSERT INTO `lesson` VALUES (19, 27, 'Tại sao bạn cần phải làm Tik Tok ngay bây giờ ?', NULL, 59, b'0');
-INSERT INTO `lesson` VALUES (20, 27, 'Thiết kế mô hình kiếm tiền của bạn – Đừng làm TikTok khi chưa có điều này !', NULL, 64, b'0');
-INSERT INTO `lesson` VALUES (38, 33, 'Làm được gì sau khi khóa học?', NULL, 58, b'0');
-INSERT INTO `lesson` VALUES (39, 34, 'Làm quen với DevTooll', NULL, 58, b'0');
-INSERT INTO `lesson` VALUES (48, 33, 'HTML, CSS là gì?', NULL, 58, b'0');
-INSERT INTO `lesson` VALUES (49, 34, 'Cài đặt môi trường', NULL, 58, b'0');
-INSERT INTO `lesson` VALUES (52, 59, 'Bánh ngọt chay vị Vani - Vanilla vegan cake', NULL, 58, b'0');
-INSERT INTO `lesson` VALUES (53, 59, 'Bánh ngọt chay vị Chocolate - Chocolate vegan cake', NULL, 58, b'0');
-INSERT INTO `lesson` VALUES (54, 67, 'Giới thiệu chung về khóa học', NULL, 59, b'0');
-INSERT INTO `lesson` VALUES (55, 55, 'Bẻ khoá thuật toán – để liên tục có clip triệu view', NULL, 77, b'0');
-INSERT INTO `lesson` VALUES (56, 68, 'Tìm hiểu về giao diện và các thanh công cụ', NULL, 59, b'0');
-INSERT INTO `lesson` VALUES (57, 69, 'Giới thiệu mẫu lệnh và thực hành các lệnh trên các đối tượng', NULL, 64, b'0');
-INSERT INTO `lesson` VALUES (58, 71, 'Giới thiệu về nghành in ấn - quảng cáo thiết kế trong CorelDRAW P.1', NULL, 70, b'0');
-INSERT INTO `lesson` VALUES (59, 72, 'Vẽ Logo Adidas p.1', NULL, 72, b'0');
-INSERT INTO `lesson` VALUES (60, 73, 'Thiết kế bảng hiệu quảng cáo đơn giản p.1', NULL, 83, b'0');
-INSERT INTO `lesson` VALUES (61, 74, 'Tìm hiểu các chức năng cơ bản của phần mềm', NULL, 85, b'0');
-INSERT INTO `lesson` VALUES (62, 74, 'Phân biệt 2 dạng ảnh Vector và Bitmap', NULL, 86, b'0');
-INSERT INTO `lesson` VALUES (63, 75, 'Nhóm công cụ lựa chọn đối tượng Pick, Freehand pick', NULL, 87, b'0');
-INSERT INTO `lesson` VALUES (64, 75, 'Nhóm công cụ tạo ra các hình cơ bản Rectangle, Elipse, Polygon', NULL, 86, b'0');
-INSERT INTO `lesson` VALUES (65, 76, 'Nhóm công cụ sửa điểm, sửa cạnh, làm biến dạng hình', NULL, 87, b'0');
-INSERT INTO `lesson` VALUES (66, 76, ' Công cụ Trasparency làm trong suốt đối tượng', NULL, 90, b'0');
-INSERT INTO `lesson` VALUES (67, 77, 'Dạy con từ thuở còn thơ ', NULL, 59, b'0');
-INSERT INTO `lesson` VALUES (68, 77, 'Làm bạn và lắng nghe con để khi mình nói, con mình nghe ', NULL, 64, b'0');
-INSERT INTO `lesson` VALUES (69, 78, ' Vai trò của dinh dưỡng trong việc nuôi dạy con ', NULL, 72, b'0');
-INSERT INTO `lesson` VALUES (70, 78, ' Muốn con lớn hãy biết cách cho con ăn ', NULL, 83, b'0');
-INSERT INTO `lesson` VALUES (71, 79, ' Bài 1: Tầm quan trọng của dinh dưỡng trong quá trình phát triển của trẻ ', NULL, 59, b'0');
-INSERT INTO `lesson` VALUES (72, 81, 'Vì sao hiện nay cách dạy con theo kiểu Do Thái được nhiều người chọn ', NULL, 59, b'0');
-INSERT INTO `lesson` VALUES (73, 81, '3 nét khác biệt trong cách dạy con của người Việt Nam với con theo kiểu Do Thái ', NULL, 64, b'0');
-INSERT INTO `lesson` VALUES (74, 81, 'Dạy con phát triển tư duy ', NULL, 72, b'0');
-INSERT INTO `lesson` VALUES (75, 81, 'Dạy con cách ghi nhớ ', NULL, 83, b'0');
-INSERT INTO `lesson` VALUES (76, 81, 'Con học ngoại ngữ từ nhỏ ', NULL, 87, b'0');
+INSERT INTO `lesson` VALUES (1, 1, '8 lời khuyên giúp học lập trình tại F8 hiệu quả hơn!', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (2, 1, 'Phương pháp & quan điểm học lập trình của Sơn Đặng', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (3, 2, 'Làm sao để có thu nhập cao và đi xa hơn trong ngành IT?', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (4, 3, 'Mô hình Client - Server', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (5, 3, 'Domain là gì? Bạn đã thật sự hiểu về domain?', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (6, 4, 'Trang web này sử dụng những công nghệ gì?', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (7, 4, 'Quản lý thư mục dự án trên máy tính và VSCode hiệu quả hơn', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (8, 4, 'Học IT cần tố chất gì?', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (19, 27, 'Tại sao bạn cần phải làm Tik Tok ngay bây giờ ?', 9867000, 59, b'0');
+INSERT INTO `lesson` VALUES (20, 27, 'Thiết kế mô hình kiếm tiền của bạn – Đừng làm TikTok khi chưa có điều này !', 9867000, 64, b'0');
+INSERT INTO `lesson` VALUES (38, 33, 'Làm được gì sau khi khóa học?', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (39, 34, 'Làm quen với DevTooll', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (48, 33, 'HTML, CSS là gì?', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (49, 34, 'Cài đặt môi trường', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (52, 59, 'Bánh ngọt chay vị Vani - Vanilla vegan cake', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (53, 59, 'Bánh ngọt chay vị Chocolate - Chocolate vegan cake', 9867000, 58, b'0');
+INSERT INTO `lesson` VALUES (54, 67, 'Giới thiệu chung về khóa học', 9867000, 59, b'0');
+INSERT INTO `lesson` VALUES (55, 55, 'Bẻ khoá thuật toán – để liên tục có clip triệu view', 9867000, 77, b'0');
+INSERT INTO `lesson` VALUES (56, 68, 'Tìm hiểu về giao diện và các thanh công cụ', 9867000, 59, b'0');
+INSERT INTO `lesson` VALUES (57, 69, 'Giới thiệu mẫu lệnh và thực hành các lệnh trên các đối tượng', 9867000, 64, b'0');
+INSERT INTO `lesson` VALUES (58, 71, 'Giới thiệu về nghành in ấn - quảng cáo thiết kế trong CorelDRAW P.1', 9867000, 70, b'0');
+INSERT INTO `lesson` VALUES (59, 72, 'Vẽ Logo Adidas p.1', 9867000, 72, b'0');
+INSERT INTO `lesson` VALUES (60, 73, 'Thiết kế bảng hiệu quảng cáo đơn giản p.1', 9867000, 83, b'0');
+INSERT INTO `lesson` VALUES (61, 74, 'Tìm hiểu các chức năng cơ bản của phần mềm', 9867000, 85, b'0');
+INSERT INTO `lesson` VALUES (62, 74, 'Phân biệt 2 dạng ảnh Vector và Bitmap', 9867000, 86, b'0');
+INSERT INTO `lesson` VALUES (63, 75, 'Nhóm công cụ lựa chọn đối tượng Pick, Freehand pick', 9867000, 87, b'0');
+INSERT INTO `lesson` VALUES (64, 75, 'Nhóm công cụ tạo ra các hình cơ bản Rectangle, Elipse, Polygon', 9867000, 86, b'0');
+INSERT INTO `lesson` VALUES (65, 76, 'Nhóm công cụ sửa điểm, sửa cạnh, làm biến dạng hình', 9867000, 87, b'0');
+INSERT INTO `lesson` VALUES (66, 76, ' Công cụ Trasparency làm trong suốt đối tượng', 9867000, 90, b'0');
+INSERT INTO `lesson` VALUES (67, 77, 'Dạy con từ thuở còn thơ ', 9867000, 59, b'0');
+INSERT INTO `lesson` VALUES (68, 77, 'Làm bạn và lắng nghe con để khi mình nói, con mình nghe ', 9867000, 64, b'0');
+INSERT INTO `lesson` VALUES (69, 78, ' Vai trò của dinh dưỡng trong việc nuôi dạy con ', 9867000, 72, b'0');
+INSERT INTO `lesson` VALUES (70, 78, ' Muốn con lớn hãy biết cách cho con ăn ', 9867000, 83, b'0');
+INSERT INTO `lesson` VALUES (71, 79, ' Bài 1: Tầm quan trọng của dinh dưỡng trong quá trình phát triển của trẻ ', 9867000, 59, b'0');
+INSERT INTO `lesson` VALUES (72, 81, 'Vì sao hiện nay cách dạy con theo kiểu Do Thái được nhiều người chọn ', 9867000, 59, b'0');
+INSERT INTO `lesson` VALUES (73, 81, '3 nét khác biệt trong cách dạy con của người Việt Nam với con theo kiểu Do Thái ', 9867000, 64, b'0');
+INSERT INTO `lesson` VALUES (74, 81, 'Dạy con phát triển tư duy ', 9867000, 72, b'0');
+INSERT INTO `lesson` VALUES (75, 81, 'Dạy con cách ghi nhớ ', 9867000, 83, b'0');
+INSERT INTO `lesson` VALUES (76, 81, 'Con học ngoại ngữ từ nhỏ ', 9867000, 87, b'0');
+INSERT INTO `lesson` VALUES (77, 93, '4 lý do thất bại Telesale ', 9867000, 59, b'0');
+INSERT INTO `lesson` VALUES (78, 94, 'Bước 1: Trở thành chuyên gia khách hàng mục tiêu ', 9867000, 83, b'0');
+INSERT INTO `lesson` VALUES (79, 94, 'Bước 2: Trở thành chuyên gia sản phẩm ', 9867000, 87, b'0');
+INSERT INTO `lesson` VALUES (80, 93, '10 Đặc điểm thành công của Top 20% người bán hàng giỏi nhất ', 9867000, 64, b'0');
+INSERT INTO `lesson` VALUES (81, 93, '2 Cách thức bán hàng ', 9867000, 72, b'0');
+INSERT INTO `lesson` VALUES (82, 94, ' Bước 3: Hành động liên tục', 9867000, 86, b'0');
+INSERT INTO `lesson` VALUES (83, 95, 'Xây dựng Kịch bản telesales - Bán hàng chuyên nghiệp ', 9867000, 91, b'0');
+INSERT INTO `lesson` VALUES (84, 95, 'Ngôn từ, ngữ điệu, phát âm ', 9867000, 77, b'0');
+INSERT INTO `lesson` VALUES (85, 96, 'Tâm lý khách hàng ', 9867000, 70, b'0');
+INSERT INTO `lesson` VALUES (86, 96, '7 Kỹ thuật chốt đơn siêu hàng ', 9867000, 70, b'0');
+INSERT INTO `lesson` VALUES (87, 97, 'Bí quyết xử lý từ chối ', 9867000, 90, b'0');
+INSERT INTO `lesson` VALUES (88, 97, '2 Kịch bản chốt đơn hàng: dưới 500 nghìn/đơn và trên 1 triệu/đơn ', 9867000, 85, b'0');
+INSERT INTO `lesson` VALUES (89, 98, 'Tư duy vượt trên sự mong đợi ', 9867000, 59, b'0');
+INSERT INTO `lesson` VALUES (90, 98, 'Chủ động và chịu trách nhiệm 100% ', 9867000, 64, b'0');
+INSERT INTO `lesson` VALUES (91, 98, ' Trung thực, ngay thẳng', 9867000, 72, b'0');
+INSERT INTO `lesson` VALUES (92, 98, 'Quý trọng công việc bán hàng và tiền bạc ', 9867000, 83, b'0');
+INSERT INTO `lesson` VALUES (93, 98, 'Từ chối = Sắp bán được hàng', 9867000, 87, b'0');
+INSERT INTO `lesson` VALUES (94, 99, '5 yếu tố của khách hàng vàng ', 9867000, 86, b'0');
+INSERT INTO `lesson` VALUES (95, 100, 'Công thức bán hàng 60s', 9867000, 91, b'0');
+INSERT INTO `lesson` VALUES (96, 100, 'Cách tiếp cận khách hàng qua điện thoại', 9867000, 77, b'0');
+INSERT INTO `lesson` VALUES (97, 101, 'Nghệ thuật phân tích tâm lý khách hàng ', 9867000, 70, b'0');
+INSERT INTO `lesson` VALUES (98, 101, 'Kỹ năng đặt câu hỏi gợi mở nhu cầu', 9867000, 69, b'0');
+INSERT INTO `lesson` VALUES (99, 106, 'Ý nghĩa cao cả của nghề bán hàng ', 9867000, 59, b'0');
 
 -- ----------------------------
 -- Table structure for notifications
@@ -719,7 +754,7 @@ CREATE TABLE `ower_course`  (
   CONSTRAINT `ower_course_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `ower_course_ibfk_4` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ower_course
@@ -745,6 +780,7 @@ INSERT INTO `ower_course` VALUES (52, 69, 181, 80, b'0', b'0', '2021-09-18 20:32
 INSERT INTO `ower_course` VALUES (53, 69, 211, 81, b'0', b'0', '2021-09-18 20:40:57', '2021-09-18 20:40:57', 0);
 INSERT INTO `ower_course` VALUES (54, 2, 3, 82, b'1', b'0', '2021-09-19 06:47:58', '2021-09-19 06:47:58', 0);
 INSERT INTO `ower_course` VALUES (55, 1, 145, 83, b'1', b'0', '2021-09-19 08:04:37', '2021-09-19 08:04:37', 0);
+INSERT INTO `ower_course` VALUES (56, 1, 153, 84, b'1', b'0', '2021-09-19 08:37:06', '2021-09-19 08:37:06', 0);
 
 -- ----------------------------
 -- Table structure for part
@@ -760,7 +796,7 @@ CREATE TABLE `part`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id`) USING BTREE,
   CONSTRAINT `part_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of part
@@ -813,6 +849,20 @@ INSERT INTO `part` VALUES (89, 4, 'Tinh thần cha mẹ', 0, 0, b'0');
 INSERT INTO `part` VALUES (90, 4, 'Quản lý tài chính - Dạy con về tiền', 0, 0, b'0');
 INSERT INTO `part` VALUES (91, 4, 'Kỹ năng sinh tồn', 0, 0, b'0');
 INSERT INTO `part` VALUES (92, 4, 'Đạo đức', 0, 0, b'0');
+INSERT INTO `part` VALUES (93, 5, '10 Đặc điểm của người bán hàng thành công', 0, 0, b'0');
+INSERT INTO `part` VALUES (94, 5, '3 Bước trở thành chuyên gia bán hàng', 0, 0, b'0');
+INSERT INTO `part` VALUES (95, 5, 'Xây dựng kịch bản bán hàng chuyên nghiệp', 0, 0, b'0');
+INSERT INTO `part` VALUES (96, 5, '7 Kỹ thuật chốt đơn siêu hạng', 0, 0, b'0');
+INSERT INTO `part` VALUES (97, 5, 'Bí quyết xử lý từ chối', 0, 0, b'0');
+INSERT INTO `part` VALUES (98, 153, 'Tư duy bán hàng đỉnh cao', 0, 0, b'0');
+INSERT INTO `part` VALUES (99, 153, 'Tư duy bán hàng đỉnh cao', 0, 0, b'0');
+INSERT INTO `part` VALUES (100, 153, 'Cách thức tiếp cận khách hàng', 0, 0, b'0');
+INSERT INTO `part` VALUES (101, 153, 'Gợi mở nhu cầu', 0, 0, b'0');
+INSERT INTO `part` VALUES (102, 153, 'Trình bày sản phẩm', 0, 0, b'0');
+INSERT INTO `part` VALUES (103, 153, 'Xử lý từ chối', 0, 0, b'0');
+INSERT INTO `part` VALUES (104, 153, 'Nghệ thuật chốt sales đỉnh cao', 0, 0, b'0');
+INSERT INTO `part` VALUES (105, 153, 'Chăm sóc khách hàng và biến họ thành đối tác', 0, 0, b'0');
+INSERT INTO `part` VALUES (106, 11, 'Các kiến thức cần biết trước khi sales', 0, 0, b'0');
 
 -- ----------------------------
 -- Table structure for payment
@@ -833,7 +883,7 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 85 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of payment
@@ -878,6 +928,7 @@ INSERT INTO `payment` VALUES (80, 69, '2021-09-18 20:32:56', 34790000, '0:0:0:0:
 INSERT INTO `payment` VALUES (81, 69, '2021-09-18 20:40:57', 38935000, '0:0:0:0:0:0:0:1', 'VND', 'UNCOMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=38935000&vnp_Command=pay&vnp_CreateDate=20210919034057&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F81&vnp_TmnCode=67LF6OWG&vnp_TxnRef=81&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=b2bea81bd32da80a125c79d9b111688e88a37197b594285d948949c96061ac27', NULL, 'http://localhost:3000/course/211', b'0');
 INSERT INTO `payment` VALUES (82, 2, '2021-09-19 06:47:58', 671805000, '127.0.0.1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=671805000&vnp_Command=pay&vnp_CreateDate=20210919134758&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F82&vnp_TmnCode=67LF6OWG&vnp_TxnRef=82&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=77fb2965d792efcd6e34b31980f14883ca7d48ebbee370bd618738db3b5d3ef3', 'vnp_Amount=671805000&vnp_BankCode=NCB&vnp_CardHolder=nguyen+van+a&vnp_CardNumber=970419xxxxxxxxx2198&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210919134821&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_Trace=271630&vnp_TransactionNo=13586495&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=82&vnp_SecureHash=ada72db35269ac46ca82d222a0b14ef78035c8f1b5bb04fd66a17cf7808e50c5', 'http://localhost:3000/course/3', b'0');
 INSERT INTO `payment` VALUES (83, 1, '2021-09-19 08:04:37', 59900000, '127.0.0.1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=59900000&vnp_Command=pay&vnp_CreateDate=20210919150438&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F83&vnp_TmnCode=67LF6OWG&vnp_TxnRef=83&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=f2c6c2bb853f769743a38de31c6bedfc7ac7381948cffb0986ffd4dec33490d2', 'vnp_Amount=59900000&vnp_BankCode=NCB&vnp_CardHolder=nguyen+van+a&vnp_CardNumber=970419xxxxxxxxx2198&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210919150503&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_Trace=271662&vnp_TransactionNo=13586511&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=83&vnp_SecureHash=cd6cc4db61defca132af99834e973dc6fc65f093125725c82719fe5238be4ec9', 'http://localhost:3000/course/145', b'0');
+INSERT INTO `payment` VALUES (84, 1, '2021-09-19 08:37:06', 40000000, '127.0.0.1', 'VND', 'COMPLETE', 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=40000000&vnp_Command=pay&vnp_CreateDate=20210919153706&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=SpringBoot&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A25001%2Fpayment%2Fbuycourse%2Fcheck%2F84&vnp_TmnCode=67LF6OWG&vnp_TxnRef=84&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=bd961dc22a344a9e78292546c360db73bf3cb35a618fd5095e5979b469f67f35', 'vnp_Amount=40000000&vnp_BankCode=NCB&vnp_CardHolder=nguyen+van+a&vnp_CardNumber=970419xxxxxxxxx2198&vnp_Message=QueryDR+Success&vnp_OrderInfo=SpringBoot&vnp_PayDate=20210919153730&vnp_ResponseCode=00&vnp_TmnCode=67LF6OWG&vnp_Trace=271666&vnp_TransactionNo=13586513&vnp_TransactionStatus=00&vnp_TransactionType=01&vnp_TxnRef=84&vnp_SecureHash=7464cd25635cd54c3e31f18cbe1b49e44d8731e734b309a7f9b55942e782fb6e', 'http://localhost:3000/course/153', b'0');
 
 -- ----------------------------
 -- Table structure for queue_check_payment
@@ -927,7 +978,7 @@ CREATE TABLE `resource_image`  (
   `count_linked` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `create_at` datetime(0) NOT NULL DEFAULT utc_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 195 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 198 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resource_image
@@ -956,7 +1007,7 @@ INSERT INTO `resource_image` VALUES (169, 'user/admin/image/images.png', b'1', '
 INSERT INTO `resource_image` VALUES (170, 'user/admin/image/10_mon_banh_su_12_mon_cookie_m_1561518923.jpg', b'1', '2021-09-18 08:32:57', 1, 1, '2021-09-18 08:32:57');
 INSERT INTO `resource_image` VALUES (171, 'user/admin/image/banh_thach_trung_thu_m_1565925718.jpg', b'1', '2021-09-18 08:37:46', 1, 1, '2021-09-18 08:37:46');
 INSERT INTO `resource_image` VALUES (172, 'user/admin/image/KH_A_H_C_PHUN_X_M_TH_M_M__C__B_N_m_1627909013.jpg', b'1', '2021-09-18 08:52:46', 1, 1, '2021-09-18 08:52:46');
-INSERT INTO `resource_image` VALUES (179, 'user/admin/image/photo_1631847560046_32bc5ae736e5.jpg', b'1', '2021-09-18 17:09:21', 1, 179, '2021-09-18 17:09:21');
+INSERT INTO `resource_image` VALUES (179, 'user/admin/image/photo_1631847560046_32bc5ae736e5.jpg', b'1', '2021-09-18 17:09:21', 1, 176, '2021-09-18 17:09:21');
 INSERT INTO `resource_image` VALUES (180, 'user/admin/image/kinh_nghiem_ke_khai_va_quyet_toan_thu_nhap_ca_nhan_tu_a_z_m_1555577651.jpg', b'1', '2021-09-18 17:27:51', 1, 1, '2021-09-18 17:27:51');
 INSERT INTO `resource_image` VALUES (181, 'user/admin/image/Banner_UNICA_FINAL_m_1602667897.jpg', b'1', '2021-09-18 17:28:13', 1, 1, '2021-09-18 17:28:13');
 INSERT INTO `resource_image` VALUES (182, 'user/admin/image/2.jpeg', b'1', '2021-09-18 17:33:07', 1, 1, '2021-09-18 17:33:07');
@@ -970,6 +1021,9 @@ INSERT INTO `resource_image` VALUES (191, 'user/admin/image/19tuyet_chieu_day_co
 INSERT INTO `resource_image` VALUES (192, 'user/admin/image/ANdam_m.jpg', b'1', '2021-09-19 06:57:55', 1, 1, '2021-09-19 06:57:55');
 INSERT INTO `resource_image` VALUES (193, 'user/admin/image/day_con_phat_trien_toan_dien_theo_phuong_phap_do_thai_m_1555659245.jpg', b'1', '2021-09-19 07:07:42', 1, 1, '2021-09-19 07:07:42');
 INSERT INTO `resource_image` VALUES (194, 'user/admin/image/hoc_nuoi_day_con_kiet_suot_theo_phuong_phap_nguoi_do_thai_m_1555657021.jpg', b'1', '2021-09-19 07:12:01', 1, 1, '2021-09-19 07:12:01');
+INSERT INTO `resource_image` VALUES (195, 'user/admin/image/bi_quyet_chot_sale_thanh_cong_m_1555572889.jpg', b'1', '2021-09-19 08:15:25', 1, 1, '2021-09-19 08:15:25');
+INSERT INTO `resource_image` VALUES (196, 'user/admin/image/chienbinhbanhang_11_m.jpg', b'1', '2021-09-19 08:30:15', 1, 1, '2021-09-19 08:30:15');
+INSERT INTO `resource_image` VALUES (197, 'user/admin/image/kich_ban_telesale_m_1555569937.jpg', b'1', '2021-09-19 08:41:20', 1, 1, '2021-09-19 08:41:20');
 
 -- ----------------------------
 -- Table structure for revenue
@@ -1000,13 +1054,13 @@ INSERT INTO `revenue` VALUES (3, b'0', '2021-03-26 19:10:41', '2021-03-26 19:10:
 INSERT INTO `revenue` VALUES (4, b'0', '2021-04-26 19:09:33', '2021-04-26 19:09:33', 4, 2021, 27000000, 1, 0, 0, 0);
 INSERT INTO `revenue` VALUES (50, b'0', '2021-05-26 18:37:41', '2021-05-26 18:37:41', 5, 2021, 46516000, 1, 0, 0, 0);
 INSERT INTO `revenue` VALUES (52, b'0', '2021-06-20 06:47:14', '2021-06-20 06:47:14', 6, 2021, 14929000, 1, 0, 0, 0);
-INSERT INTO `revenue` VALUES (53, b'0', '2021-09-13 11:32:41', '2021-09-13 11:32:41', 9, 2021, 10457552, 13, 1, 0, 8);
-INSERT INTO `revenue` VALUES (54, b'0', '2021-09-12 15:38:05', '2021-09-12 15:38:05', 9, 2021, 9047550, 12, 0, 0, 6);
-INSERT INTO `revenue` VALUES (55, b'0', '2021-09-14 14:04:03', '2021-09-14 14:04:03', 9, 2021, 8947550, 14, 1, 0, 6);
-INSERT INTO `revenue` VALUES (56, b'0', '2021-09-15 07:03:00', '2021-09-15 07:03:00', 9, 2021, 8947550, 15, 1, 0, 6);
-INSERT INTO `revenue` VALUES (57, b'0', '2021-09-17 00:01:40', '2021-09-17 00:01:40', 9, 2021, 8947550, 17, 0, 0, 6);
-INSERT INTO `revenue` VALUES (58, b'0', '2021-09-17 20:10:12', '2021-09-17 20:10:12', 9, 2021, 8317550, 18, 1, 0, 5);
-INSERT INTO `revenue` VALUES (59, b'0', '2021-09-18 18:27:18', '2021-09-18 18:27:18', 9, 2021, 7821050, 19, 1, 0, 3);
+INSERT INTO `revenue` VALUES (53, b'0', '2021-09-13 11:32:41', '2021-09-13 11:32:41', 9, 2021, 10857552, 13, 1, 0, 9);
+INSERT INTO `revenue` VALUES (54, b'0', '2021-09-12 15:38:05', '2021-09-12 15:38:05', 9, 2021, 9447550, 12, 0, 0, 7);
+INSERT INTO `revenue` VALUES (55, b'0', '2021-09-14 14:04:03', '2021-09-14 14:04:03', 9, 2021, 9347550, 14, 1, 0, 7);
+INSERT INTO `revenue` VALUES (56, b'0', '2021-09-15 07:03:00', '2021-09-15 07:03:00', 9, 2021, 9347550, 15, 1, 0, 7);
+INSERT INTO `revenue` VALUES (57, b'0', '2021-09-17 00:01:40', '2021-09-17 00:01:40', 9, 2021, 9347550, 17, 0, 0, 7);
+INSERT INTO `revenue` VALUES (58, b'0', '2021-09-17 20:10:12', '2021-09-17 20:10:12', 9, 2021, 8717550, 18, 1, 0, 6);
+INSERT INTO `revenue` VALUES (59, b'0', '2021-09-18 18:27:18', '2021-09-18 18:27:18', 9, 2021, 8221050, 19, 1, 0, 4);
 
 -- ----------------------------
 -- Table structure for spring_session
@@ -1025,11 +1079,6 @@ CREATE TABLE `spring_session`  (
   INDEX `SPRING_SESSION_IX2`(`EXPIRY_TIME`) USING BTREE,
   INDEX `SPRING_SESSION_IX3`(`PRINCIPAL_NAME`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of spring_session
--- ----------------------------
-INSERT INTO `spring_session` VALUES ('a2f87d54-3f80-4b3e-8e93-86b637e9d242', '26016684-221e-43c6-a96e-fd92e2b8e0ff', 1632037917411, 1632037917411, 1800, 1632039717411, NULL);
 
 -- ----------------------------
 -- Table structure for spring_session_attributes
@@ -1090,8 +1139,8 @@ CREATE TABLE `tmp_id`  (
 -- ----------------------------
 -- Records of tmp_id
 -- ----------------------------
-INSERT INTO `tmp_id` VALUES (73);
-INSERT INTO `tmp_id` VALUES (78);
+INSERT INTO `tmp_id` VALUES (117);
+INSERT INTO `tmp_id` VALUES (118);
 
 -- ----------------------------
 -- Table structure for user_role
@@ -1142,25 +1191,25 @@ CREATE TABLE `video`  (
   `user_poster_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `poster`(`img_poster_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 130 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of video
 -- ----------------------------
 INSERT INTO `video` VALUES (52, 'user/admin/video/lambanh.mp4', NULL, 65316667, 1, b'1', b'1', '2021-09-15 10:30:29', '2021-09-15 10:30:29', 1);
 INSERT INTO `video` VALUES (58, 'user/admin/video/videodemo.mp4', NULL, 21158000, 190, b'1', b'1', '2021-09-16 01:03:42', '2021-09-16 01:03:42', 1);
-INSERT INTO `video` VALUES (59, 'user/admin/video/1.mp4', NULL, 9867000, 9, b'1', b'1', '2021-09-17 20:10:58', '2021-09-17 20:10:58', 1);
-INSERT INTO `video` VALUES (64, 'user/admin/video/2.mp4', NULL, 11000000, 6, b'1', b'1', '2021-09-17 20:26:46', '2021-09-17 20:26:46', 1);
-INSERT INTO `video` VALUES (69, 'user/admin/video/10.mp4', NULL, 10167000, 1, b'1', b'1', '2021-09-18 08:27:31', '2021-09-18 08:27:31', 1);
-INSERT INTO `video` VALUES (70, 'user/admin/video/9.mp4', NULL, 11552000, 2, b'1', b'1', '2021-09-18 08:33:46', '2021-09-18 08:33:46', 1);
-INSERT INTO `video` VALUES (72, 'user/admin/video/3.mp4', NULL, 11467000, 5, b'1', b'1', '2021-09-18 09:00:51', '2021-09-18 09:00:51', 1);
-INSERT INTO `video` VALUES (77, 'user/admin/video/8.mp4', NULL, 0, 1, b'1', b'1', '2021-09-18 13:48:14', '2021-09-18 13:48:14', 1);
-INSERT INTO `video` VALUES (83, 'user/admin/video/4.mp4', NULL, 0, 3, b'1', b'1', '2021-09-18 19:36:09', '2021-09-18 19:36:09', 1);
-INSERT INTO `video` VALUES (85, 'user/admin/video/12.mp4', NULL, 0, 1, b'1', b'1', '2021-09-18 19:39:43', '2021-09-18 19:39:43', 1);
-INSERT INTO `video` VALUES (86, 'user/admin/video/6.mp4', NULL, 0, 2, b'1', b'1', '2021-09-18 19:39:53', '2021-09-18 19:39:53', 1);
-INSERT INTO `video` VALUES (87, 'user/admin/video/5.mp4', NULL, 0, 3, b'1', b'1', '2021-09-18 19:40:09', '2021-09-18 19:40:09', 1);
-INSERT INTO `video` VALUES (90, 'user/admin/video/11.mp4', NULL, 0, 1, b'1', b'1', '2021-09-18 19:40:44', '2021-09-18 19:40:44', 1);
-INSERT INTO `video` VALUES (91, 'user/admin/video/7.mp4', NULL, 15900000, 1, b'1', b'1', '2021-09-18 19:40:51', '2021-09-18 19:40:51', 1);
+INSERT INTO `video` VALUES (59, 'user/admin/video/1.mp4', NULL, 9867000, 12, b'1', b'1', '2021-09-17 20:10:58', '2021-09-17 20:10:58', 1);
+INSERT INTO `video` VALUES (64, 'user/admin/video/2.mp4', NULL, 11000000, 8, b'1', b'1', '2021-09-17 20:26:46', '2021-09-17 20:26:46', 1);
+INSERT INTO `video` VALUES (69, 'user/admin/video/10.mp4', NULL, 10167000, 2, b'1', b'1', '2021-09-18 08:27:31', '2021-09-18 08:27:31', 1);
+INSERT INTO `video` VALUES (70, 'user/admin/video/9.mp4', NULL, 11552000, 5, b'1', b'1', '2021-09-18 08:33:46', '2021-09-18 08:33:46', 1);
+INSERT INTO `video` VALUES (72, 'user/admin/video/3.mp4', NULL, 11467000, 7, b'1', b'1', '2021-09-18 09:00:51', '2021-09-18 09:00:51', 1);
+INSERT INTO `video` VALUES (77, 'user/admin/video/8.mp4', NULL, 0, 3, b'1', b'1', '2021-09-18 13:48:14', '2021-09-18 13:48:14', 1);
+INSERT INTO `video` VALUES (83, 'user/admin/video/4.mp4', NULL, 0, 5, b'1', b'1', '2021-09-18 19:36:09', '2021-09-18 19:36:09', 1);
+INSERT INTO `video` VALUES (85, 'user/admin/video/12.mp4', NULL, 0, 2, b'1', b'1', '2021-09-18 19:39:43', '2021-09-18 19:39:43', 1);
+INSERT INTO `video` VALUES (86, 'user/admin/video/6.mp4', NULL, 0, 4, b'1', b'1', '2021-09-18 19:39:53', '2021-09-18 19:39:53', 1);
+INSERT INTO `video` VALUES (87, 'user/admin/video/5.mp4', NULL, 0, 5, b'1', b'1', '2021-09-18 19:40:09', '2021-09-18 19:40:09', 1);
+INSERT INTO `video` VALUES (90, 'user/admin/video/11.mp4', NULL, 0, 2, b'1', b'1', '2021-09-18 19:40:44', '2021-09-18 19:40:44', 1);
+INSERT INTO `video` VALUES (91, 'user/admin/video/7.mp4', NULL, 15900000, 3, b'1', b'1', '2021-09-18 19:40:51', '2021-09-18 19:40:51', 1);
 
 -- ----------------------------
 -- Triggers structure for table app_user

@@ -1,6 +1,7 @@
 package vn.edu.topedu.rest.admin;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -114,7 +115,7 @@ public class LessonAdminRest {
 				lesson.setDescription(description);
 				VideoEntity newPoster = null;
 				try {
-					newPoster = videoDAO.uploadVideo(videoCourse, appUser);
+					newPoster = videoDAO.uploadVideo(videoCourse, appUser, true);
 				} catch (Exception e) {
 					return ResponseEntity.badRequest()
 							.body(new MessageResponse("Video not upload", "Video không thể tải lên"));
@@ -122,6 +123,16 @@ public class LessonAdminRest {
 				if (newPoster != null) {
 					lesson.setVideoId(newPoster.getId());
 					lesson.setVideo(newPoster);
+					try {
+						File f = FileProcess.getPath(newPoster.absPath()).toFile();
+						if (f.exists()) {
+							newPoster.setDuration(videoService.getDuration(f));
+							videoDAO.mergePart(newPoster);
+							lesson.setDuration(BigDecimal.valueOf(newPoster.getDuration()));
+						}
+					} catch (Exception e) {
+					}
+					lesson.setDuration(BigDecimal.valueOf(newPoster.getDuration()));
 
 				}
 //				part.set
@@ -172,7 +183,7 @@ public class LessonAdminRest {
 				if (videoCourse != null) {
 					VideoEntity newPoster = null;
 					try {
-						newPoster = videoDAO.uploadVideo(videoCourse, appUser);
+						newPoster = videoDAO.uploadVideo(videoCourse, appUser, true);
 					} catch (Exception e) {
 						return ResponseEntity.badRequest()
 								.body(new MessageResponse("Video not upload", "Video không thể tải lên"));
@@ -186,6 +197,7 @@ public class LessonAdminRest {
 							if (f.exists()) {
 								newPoster.setDuration(videoService.getDuration(f));
 								videoDAO.mergePart(newPoster);
+								lesson.setDuration(BigDecimal.valueOf(newPoster.getDuration()));
 							}
 						} catch (Exception e) {
 						}

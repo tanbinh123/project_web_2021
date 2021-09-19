@@ -127,7 +127,7 @@ public class CourseAdminRest {
 				
 				VideoEntity newPoster=null;
 				try {
-					newPoster = videoDAO.uploadVideo(video, appUser);
+					newPoster = videoDAO.uploadVideo(video, appUser, true);
 				} catch (Exception e) {
 					return ResponseEntity.badRequest().body(new MessageResponse("Video not upload", "Video không thể tải lên"));
 				}

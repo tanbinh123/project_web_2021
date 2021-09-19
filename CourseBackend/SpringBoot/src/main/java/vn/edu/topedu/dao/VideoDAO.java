@@ -128,7 +128,7 @@ public class VideoDAO {
 	}
 	
 	@Transactional
-	public VideoEntity uploadVideo(MultipartFile uploadVideo, AppUser appUser) throws Exception {
+	public VideoEntity uploadVideo(MultipartFile uploadVideo, AppUser appUser, boolean deleted) throws Exception {
 		VideoEntity newFile = null;
 		if(uploadVideo!=null) {
 			System.err.println("Video upload");
@@ -140,7 +140,7 @@ public class VideoDAO {
 				String originImage=uploadVideo.getOriginalFilename();
 				originImage=originImage.replaceAll("[^0-9a-zA-Z\\.]", "_");
 				image.setVideo(pathContain + "/" + originImage);
-				
+				image.setDeleted(deleted);
 				image.setAppUser(appUser);
 				newFile=save(image);
 				
