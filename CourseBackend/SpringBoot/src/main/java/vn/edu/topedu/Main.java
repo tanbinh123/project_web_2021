@@ -74,6 +74,9 @@ public class Main extends SpringBootServletInitializer {
 				System.err.println("Delete All Image Not Link");
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				
+				
 			}
 		}
 		if (courseDAO != null) {
