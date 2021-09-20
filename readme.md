@@ -44,7 +44,7 @@
 
 ```
 email: tanhoang99.999@gmail.com
-password: aA@123456
+password: aA@12345678
 ``` 
 
 VNPAY:
@@ -58,7 +58,7 @@ VNPAY:
 - Password
 
 ```
-> aA@123456
+> aA@12345678
 ```
 
 Tài khoản ngân hàng dùng để test thanh toán
