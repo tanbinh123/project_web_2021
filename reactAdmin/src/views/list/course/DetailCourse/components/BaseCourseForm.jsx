@@ -80,13 +80,12 @@ const schema = yup.object().shape({
 });
 function BaseCourseForm(props) {
   const classes = useStyles();
-  const { dataCourse = {}, changeDataCourse = null } = props;
+  const { dataCourse, changeDataCourse = null } = props;
   const { enqueueSnackbar } = useSnackbar();
   const [dataSelect, setDataSelect] = useState([]);
   //dialog
   const [isOpenDialogCategory, setIsOpenDialogCategory] = React.useState(false);
   const [richText, setRichText] = React.useState(
-    
     dataCourse?.longDescription || ""
   );
   React.useEffect(() => {
@@ -118,9 +117,13 @@ function BaseCourseForm(props) {
           ...values,
           longDescription: richText,
         });
-        console.log(rp);
-        if (changeDataCourse) changeDataCourse(rp);
-        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+        if (!!!rp.status) {
+          // console.log(rp);
+          if (changeDataCourse) changeDataCourse(rp);
+          enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+        } else {
+          enqueueSnackbar(rp?.data?.message?.en, { variant: "error" });
+        }
       } catch (error) {
         enqueueSnackbar(error.message, { variant: "error" });
       }

@@ -84,9 +84,13 @@ function DemoCourseForm(props) {
         setProgress(true);
         const rp = await courseApi.uploadNewVideoDemo(dataCourse?.id, formData);
         setProgress(false);
-        console.log(rp);
-        if (changeDataCourse) changeDataCourse(rp);
-        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+        // console.log(rp);
+        if (!!!rp.status) {
+          if (changeDataCourse) changeDataCourse(rp);
+          enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+        } else {
+          enqueueSnackbar(rp?.data?.message?.en, { variant: "error" });
+        }
       } catch (error) {
         enqueueSnackbar(error.message, { variant: "error" });
         setProgress(false);

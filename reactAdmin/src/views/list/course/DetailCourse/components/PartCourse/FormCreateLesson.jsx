@@ -82,6 +82,7 @@ function FormCreateLesson(props) {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const [demoVideo, setDemoVideo] = useState();
+  // console.log(part);
   const form = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -93,7 +94,7 @@ function FormCreateLesson(props) {
   });
   const handleOnSubmit = (values) => {
     //todo hoang todo
-    console.log("Post  Lesson: ", values);
+    // console.log("Post  Lesson: ", values);
 
     if (isEmpty(values?.videoCourse?.name)) {
       enqueueSnackbar("Vui lòng tải lên video bài học", { variant: "error" });
@@ -107,7 +108,7 @@ function FormCreateLesson(props) {
         //  setProgress(true);
         const rp = await courseApi.postLesson(part.courseId, part.id, formData);
         //setProgress(false);
-        console.log(rp);
+        // console.log(rp);
         form.reset();
         setDemoVideo({});
         if (changeDataCourse) changeDataCourse(rp);
@@ -124,7 +125,7 @@ function FormCreateLesson(props) {
   };
   const handleOnChangeFile = (event) => {
     const file = event.target.files[0];
-    console.log(file);
+    // console.log(file);
     const tmpImg = URL.createObjectURL(file);
     setDemoVideo(tmpImg);
     form.setValue("videoCourse", file);

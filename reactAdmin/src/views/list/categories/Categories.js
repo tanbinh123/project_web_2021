@@ -40,7 +40,7 @@ const Categories = () => {
   const fields = [
     { key: "id", label: "ID" },
     { key: "name", label: "Tên" },
-    { key: "total", label: "Tổng bài học" },
+    { key: "total", label: "Tổng khóa học" },
     { key: "totalMoney", label: "Tổng tiền" },
     {
       key: "show_details",

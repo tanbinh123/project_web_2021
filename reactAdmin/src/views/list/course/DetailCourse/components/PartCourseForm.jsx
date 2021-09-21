@@ -73,7 +73,7 @@ function PartCourseForm(props) {
     (async () => {
       try {
         const rp = await courseApi.postPart(dataCourse.id, values);
-        if (!rp.status) {
+        if (!!!rp.status) {
           console.log(rp);
           if (changeDataCourse) changeDataCourse(rp);
           enqueueSnackbar("Cập nhật thành công", { variant: "success" });

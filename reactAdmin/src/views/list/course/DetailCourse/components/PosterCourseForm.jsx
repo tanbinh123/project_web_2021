@@ -92,8 +92,12 @@ function PosterCourseForm(props) {
         formData.append("image", values.image);
         const rp = await courseApi.uploadNewPoster(dataCourse?.id, formData);
         // console.log(rp);
-        if (changeDataCourse) changeDataCourse(rp);
-        enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+        if (!!!rp.status) {
+          if (changeDataCourse) changeDataCourse(rp);
+          enqueueSnackbar("Cập nhật thành công", { variant: "success" });
+        } else {
+          enqueueSnackbar(rp?.data?.message?.en, { variant: "error" });
+        }
       } catch (error) {
         enqueueSnackbar(error.message, { variant: "error" });
       }
@@ -114,7 +118,7 @@ function PosterCourseForm(props) {
   const handleOnChangeFile = (event) => {
     const file = event.target.files[0];
     console.log(file);
-    const tmpImg = URL.createObjectURL(file);
+    let tmpImg = URL.createObjectURL(file);
     setImg(tmpImg);
     form.setValue("image", file);
   };

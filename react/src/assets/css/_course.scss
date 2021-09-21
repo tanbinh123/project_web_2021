@@ -63,8 +63,21 @@
   b,
   u,
   i,
-  strong {
+  strong,
+  ul,
+  ol,
+  li {
+    font-family: 'Open Sans', sans-serif !important;
     line-height: 1.5;
+    font-size: 16px !important;
+    padding: 10px 0;
+    text-align: justify;
+  }
+  ol {
+    list-style-type: decimal;
+  }
+  ul {
+    list-style-type: disc;
   }
   h2 {
     margin-bottom: 20px;

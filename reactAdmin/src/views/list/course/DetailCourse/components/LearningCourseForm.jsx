@@ -64,7 +64,7 @@ function LearningCourseForm(props) {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const { dataCourse = {}, changeDataCourse = null } = props;
-  const [dataLearning, setDataLearning] = useState(dataCourse.learnings);
+  const [dataLearning, setDataLearning] = useState(dataCourse?.learnings || []);
   const [isUpdate, setUpdate] = useState(false);
   // console.log(dataLearning);
   const form = useForm({
@@ -88,7 +88,7 @@ function LearningCourseForm(props) {
 
     (async () => {
       const rp = await courseApi.postLearnings(dataCourse.id, values.data);
-      if (!rp.status) {
+      if (!!!rp.status) {
         // console.log(rp);
         if (changeDataCourse) changeDataCourse(rp);
         enqueueSnackbar("Cập nhật thành công", { variant: "success" });

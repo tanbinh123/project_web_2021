@@ -15,9 +15,12 @@ const DetailCourse = () => {
   useEffect(() => {
     (async () => {
       const res = await courseApi.get(id);
-      console.log(res);
+      // console.log(res);
       setDataCourse(res);
     })();
+    return () => {
+      setDataCourse();
+    };
   }, []);
   const handleChangeDataCourse = (value) => {
     setDataCourse(value);
@@ -33,18 +36,17 @@ const DetailCourse = () => {
             />
           )}
         </Grid>
-
         <Grid item xl={6} lg={6} md={6} xs={12} sm={12}>
           {dataCourse && (
-            <PosterCourseForm
+            <LearningCourseForm
               dataCourse={dataCourse}
               changeDataCourse={handleChangeDataCourse}
             />
           )}
         </Grid>
-        <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
+        <Grid item xl={6} lg={6} md={6} xs={12} sm={12}>
           {dataCourse && (
-            <PartCourseForm
+            <PosterCourseForm
               dataCourse={dataCourse}
               changeDataCourse={handleChangeDataCourse}
             />
@@ -58,9 +60,10 @@ const DetailCourse = () => {
             />
           )}
         </Grid>
-        <Grid item xl={6} lg={6} md={6} xs={12} sm={12}>
+
+        <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
           {dataCourse && (
-            <LearningCourseForm
+            <PartCourseForm
               dataCourse={dataCourse}
               changeDataCourse={handleChangeDataCourse}
             />

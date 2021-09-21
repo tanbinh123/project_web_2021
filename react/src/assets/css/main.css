@@ -550,8 +550,23 @@ div#bg-home::before {
 .course-long-description b,
 .course-long-description u,
 .course-long-description i,
-.course-long-description strong {
+.course-long-description strong,
+.course-long-description ul,
+.course-long-description ol,
+.course-long-description li {
+  font-family: 'Open Sans', sans-serif !important;
   line-height: 1.5;
+  font-size: 16px !important;
+  padding: 10px 0;
+  text-align: justify;
+}
+
+.course-long-description ol {
+  list-style-type: decimal;
+}
+
+.course-long-description ul {
+  list-style-type: disc;
 }
 
 .course-long-description h2 {
@@ -572,19 +587,36 @@ div#bg-home::before {
   margin-bottom: 30px;
 }
 
+.lecture-detail .long-description {
+  margin-bottom: 50px;
+}
+
 .lecture-detail .long-description span,
 .lecture-detail .long-description p,
 .lecture-detail .long-description b,
 .lecture-detail .long-description u,
 .lecture-detail .long-description i,
-.lecture-detail .long-description strong {
+.lecture-detail .long-description strong,
+.lecture-detail .long-description ul,
+.lecture-detail .long-description ol,
+.lecture-detail .long-description li {
+  font-family: 'Open Sans', sans-serif !important;
   line-height: 1.5;
+  font-size: 16px !important;
+  padding: 10px 0;
+  text-align: justify;
+}
+
+.lecture-detail .long-description ol {
+  list-style-type: decimal;
+}
+
+.lecture-detail .long-description ul {
+  list-style-type: disc;
 }
 
 .lecture-detail .long-description h2 {
-  color: #2c3e50;
-  margin: 30px 0px 20px 0px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 900px) {

@@ -33,14 +33,18 @@ const Course = () => {
     (async () => {
       const res = await courseApi.getAll();
       setDataCourse(res.data);
-      console.log(res);
+      // console.log(res);
     })();
+    return () => {
+      setDataCourse();
+      setDetails([]);
+    };
   }, []);
   function reloadData() {
     (async () => {
       const res = await courseApi.getAll();
       setDataCourse(res.data);
-      console.log(res);
+      // console.log(res);
     })();
   }
   const toggleDetails = (index) => {
@@ -145,7 +149,7 @@ const Course = () => {
             );
           },
           details: (item, index) => {
-            console.log(item);
+            // console.log(item);
             return (
               <CCollapse show={details.includes(index)}>
                 <CCardBody className="detailBody">
