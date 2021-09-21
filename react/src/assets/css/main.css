@@ -999,6 +999,50 @@ div#bg-home::before {
   opacity: 1;
 }
 
+.button-up-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin: 30px 50px;
+}
+
+.button-up-container .button-up {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 0px;
+  font-size: 20px;
+  cursor: pointer;
+  background: #ecf0f1;
+  color: #2c3e50;
+  -webkit-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.3);
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.button-up-container .button-up:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.button-up-container .button-up:hover i {
+  -webkit-transform: translateY(-40%);
+          transform: translateY(-40%);
+}
+
+.button-up-container .button-up:focus {
+  outline: none;
+}
+
+.button-up-container .button-up i {
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
 @media (max-width: 900px) {
   .footer .center {
     display: -webkit-box;

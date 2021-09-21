@@ -77,6 +77,10 @@ function FormRating(props) {
   // console.log(userRating);
   const handleOnSubmit = (values) => {
     // console.log('Post Ratings:', values);
+    if (isEmpty(values.rating)) {
+      enqueueSnackbar('Vui lòng không để trống số sao', { variant: 'error' });
+      return;
+    }
     if (isEmpty(userRating)) {
       (async () => {
         const rp = await courseApi.postRating(idCourse, values);
@@ -124,11 +128,11 @@ function FormRating(props) {
         <div>
           <span className={classes.title}>Form đánh giá</span>
           <div>
-            <Avatar src={dataUser.user.avatar} />
+            <Avatar src={dataUser?.profile?.avatar?.image} />
             <span>
-              {isEmpty(dataUser?.user?.fullname)
-                ? dataUser?.user?.username
-                : dataUser?.user?.fullname}
+              {isEmpty(dataUser?.profile?.fullname)
+                ? dataUser?.profile?.userName
+                : dataUser?.profile?.fullname}
             </span>
           </div>
         </div>

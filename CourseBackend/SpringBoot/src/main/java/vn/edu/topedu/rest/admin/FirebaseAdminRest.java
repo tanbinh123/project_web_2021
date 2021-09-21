@@ -1,6 +1,8 @@
 package vn.edu.topedu.rest.admin;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -81,6 +83,7 @@ public class FirebaseAdminRest {
 				account.setAvatar(appUser.getAvatar().getImage());
 				account.setUsername(appUser.getUserName());
 				account.setFullname(appUser.getFullname());
+				//appUser
 				authResponse.setUser(account);
 				List<Course> lstCourse = owerCourseDAO.querryAllBought(appUser.getId());
 				for (Course c : lstCourse) {
@@ -104,9 +107,11 @@ public class FirebaseAdminRest {
 			
 			AppUser user = new AppUser();
 			user.setEmail(decodedToken.getEmail());
-			user.setUserName(decodedToken.getUid());
+			SimpleDateFormat sdf=new SimpleDateFormat("HHmmssddMMyyyy");
+			user.setUserName(decodedToken.getUid()+sdf.format(new Date()));
 			user.setFullname(decodedToken.getName());
 			user.setAvatar(image);
+			user.setActived(true);
 			user.setEncrytedPassword(passwordEncoder.encode(decodedToken.getUid()));
 			//decodedToken.
 			//user.setBirthDay(birthDay);

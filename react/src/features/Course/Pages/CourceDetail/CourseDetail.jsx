@@ -44,7 +44,7 @@ function CourseDetail(props) {
   const [course, setCourse] = useState({
     isFull: false,
   });
-  console.log(course);
+  // console.log(course);
   const [totalLesson, setTotalLesson] = React.useState(0);
   function handleToggleDialog() {
     setIsOpenDialog(!isOpenDialog);

@@ -95,6 +95,16 @@ function Footer() {
           </div>
         </div>
       </div>
+      <div className="button-up-container">
+        <button
+          className="button-up"
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+        >
+          <i className="fas fa-chevron-up"></i>
+        </button>
+      </div>
       <div className="bottom">
         <div className="copyright">
           Copyright @2021. Đây là sản phẩm học tập

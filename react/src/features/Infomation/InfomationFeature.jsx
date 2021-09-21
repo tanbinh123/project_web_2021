@@ -21,7 +21,7 @@ function InfomationFeature(props) {
   const classes = CSSInfomationFeature();
 
   const [dataUser, setDataUser] = useRecoilState(DataUser);
-  console.log(dataUser);
+  // console.log(dataUser);
 
   //!isEmpty(profile)&&console.log("profile", profile);
 

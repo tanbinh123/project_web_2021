@@ -39,7 +39,7 @@ function Notification(props) {
   }, [location.search]);
   const getDataNotification = async () => {
     const res = await notificationApi.getAll(queryParams);
-    console.log(res);
+    // console.log(res);
     if (!!!res.status) {
       const { data, pagination } = res;
       setDatNotification(data);

@@ -21,8 +21,8 @@ const ListUsers = () => {
     };
   }, []);
   const getDataUser = async () => {
-    const res = await userApi.getListAccount();
-    console.log(res);
+    const res = await userApi.getListAccount({ _limit: 9999 });
+    // console.log(res);
     const { data, pagination } = res;
     setDataUsers(data);
   };

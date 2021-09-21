@@ -1,11 +1,11 @@
 import Autocomplete, {
   createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import courseApi from "../../../../api/courseApi";
-import courseApiFake from "../../../../api/courseApiFake";
-import InputSearch from "../../../TextField/InputSearch";
+} from '@material-ui/lab/Autocomplete';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import courseApi from '../../../../api/courseApi';
+import courseApiFake from '../../../../api/courseApiFake';
+import InputSearch from '../../../TextField/InputSearch';
 
 const filter = createFilterOptions({
   limit: 7,
@@ -19,12 +19,16 @@ function InputSearchAppbar({ openSearch }) {
   const [dataSearch, setDataSearch] = useState([]);
   const { push } = useHistory();
   const [paramsSearch, setParamsSearch] = useState({
-    _search: "",
+    _search: '',
   });
   useEffect(() => {
     (async () => {
       const { data } = await courseApi.getAll(paramsSearch);
-      setDataSearch(data);
+      setDataSearch(
+        data
+          .filter((f) => f.deleted === false)
+          .filter((f) => f.actived === true)
+      );
     })();
     return () => {
       setDataSearch([]);
@@ -45,7 +49,7 @@ function InputSearchAppbar({ openSearch }) {
     <Autocomplete
       value={value}
       onChange={(event, newValue) => {
-        console.log("newValue", newValue);
+        console.log('newValue', newValue);
         if (!!newValue.id) {
           push(`/course/${newValue.id}`);
         } else {
@@ -55,7 +59,7 @@ function InputSearchAppbar({ openSearch }) {
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
         // Suggest the creation of a new value
-        if (params.inputValue !== "") {
+        if (params.inputValue !== '') {
           filtered.push({
             inputValue: params.inputValue,
             title: `Search "${params.inputValue}"`,
@@ -69,7 +73,7 @@ function InputSearchAppbar({ openSearch }) {
       options={dataSearch}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
-        if (typeof option === "string") {
+        if (typeof option === 'string') {
           return option;
         }
         // Add "xxx" option created dynamically

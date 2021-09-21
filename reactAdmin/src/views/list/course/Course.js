@@ -28,10 +28,10 @@ const Course = () => {
   const { push } = useHistory();
   const [details, setDetails] = useState([]);
   const [dataCourse, setDataCourse] = useState();
-
+  const params = { _sort: "updateAt:desc" };
   useEffect(() => {
     (async () => {
-      const res = await courseApi.getAll();
+      const res = await courseApi.getAll(params);
       setDataCourse(res.data);
       // console.log(res);
     })();
@@ -42,7 +42,7 @@ const Course = () => {
   }, []);
   function reloadData() {
     (async () => {
-      const res = await courseApi.getAll();
+      const res = await courseApi.getAll(params);
       setDataCourse(res.data);
       // console.log(res);
     })();

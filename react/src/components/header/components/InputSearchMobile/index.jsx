@@ -45,7 +45,7 @@ function InputSearchAppbarMobile({ openSearch }) {
     <Autocomplete
       value={value}
       onChange={(event, newValue) => {
-        console.log(newValue);
+        // console.log(newValue);
         if (!!newValue.id) {
           push(`/course/${newValue.id}`);
         } else {

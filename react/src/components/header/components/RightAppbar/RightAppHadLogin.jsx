@@ -86,6 +86,8 @@ function RightAppHadLogin(props) {
     variant: 'popover',
     popupId: 'demoPopover',
   });
+  const { host, pathname, protocol, hostname } = window.location;
+
   const [dataUser, setDataUser] = useRecoilState(DataUser);
   // console.log(dataUser);
   const { push } = useHistory();
@@ -125,7 +127,7 @@ function RightAppHadLogin(props) {
           </Link>
           {dataUser.user?.admin ? (
             <a
-              href="http://localhost:26001/login"
+              href={`${protocol}//${hostname}:26001/login`}
               target="_blank"
               rel="noreferrer"
               className={classes.linkNone}

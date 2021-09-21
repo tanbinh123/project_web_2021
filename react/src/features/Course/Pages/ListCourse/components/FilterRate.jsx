@@ -14,7 +14,7 @@ export default function FilterRate(props) {
       // setValueStar(-1);
     };
   }, [queryRate]);
-  console.log('value', valueStar);
+  // console.log('value', valueStar);
   return (
     <div className="filter-rate">
       <p className="title">Lọc theo đánh giá</p>

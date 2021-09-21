@@ -1,8 +1,8 @@
 import axios from "axios";
 import { removeLocalStorage } from "../app/DataUser";
 const axiosClient = axios.create({
-   baseURL: "http://localhost:25001/",
-  // baseURL: "http://192.168.0.222:25001/",
+  //  baseURL: "http://localhost:25001/",
+  baseURL: "http://192.168.0.4:25001/",
   // baseURL: "http://192.168.0.111:25001/",
   // baseURL: "http://192.168.0.222:80/",
   //  baseURL: "http://192.168.0.111:80/",

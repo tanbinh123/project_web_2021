@@ -19,11 +19,14 @@ function Active(props) {
   //     push("/setting-account/info");
   //   }
   // }, []);
+  const { host, pathname, protocol } = window.location;
+  // console.log(`${protocol}//${host}/setting-account/active`);
+  // returnUrl: `${protocol}//${host}${pathname}`,
   const handleOnCLick = async () => {
     try {
       setProgress({ isProcessing: true });
       const payload = {
-        url: `http://localhost:3000/setting-account/active`,
+        url: `${protocol}//${host}/setting-account/active`,
       };
       const res = await userApi.active(payload);
       // console.log(res);
@@ -38,7 +41,7 @@ function Active(props) {
     }
     setProgress({ isProcessing: false });
   };
-  console.log(url);
+  // console.log(url);
 
   return (
     <Grid container className={classes.rightRoot}>

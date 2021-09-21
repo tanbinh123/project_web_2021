@@ -17,11 +17,13 @@ const useStyles = makeStyles((theme) => ({
 function RightCoures(props) {
   const classes = useStyles();
   const { dataCourse } = props;
+  // console.log(dataCourse);
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
         {Array.from(dataCourse)
           .filter((f) => f.deleted === false)
+          .filter((f) => f.actived === true)
           .map((x, index) => (
             <Grid key={index} item xl={4} lg={4} md={6} sm={6} xs={12}>
               <CardCourse

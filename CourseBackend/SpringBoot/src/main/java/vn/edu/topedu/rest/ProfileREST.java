@@ -92,6 +92,8 @@ public class ProfileREST {
 			@RequestPart(required=false) String email
 			) {
 		System.out.println("---------------------------------");
+		
+		
 		System.out.println(String.format("email: %s", email));
 		System.out.println(String.format("phone: %s", phone));
 		System.out.println(String.format("fullname: %s", fullname));
@@ -114,6 +116,12 @@ public class ProfileREST {
 			authentication.getName();
 			AppUser appUser = appUserDAO.findUserAccount(authentication.getName());
 			if (appUser != null) {
+				
+				AppUser a = appUserDAO.findUserByEmail(email);
+				if(a!=null&&!appUser.getEmail().equals(email)) {
+					
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Email exist.", "Email tồn tại trong hệ thống."));
+				}
 				if(!appUser.getEmail().equals(email))
 					appUser.setActived(false);
 				

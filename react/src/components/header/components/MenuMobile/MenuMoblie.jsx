@@ -16,6 +16,7 @@ import { useRecoilState } from 'recoil';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ListIcon from '@material-ui/icons/List';
+import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 import {
   DataUser,
   emptyUser,
@@ -52,6 +53,17 @@ const useStyles = makeStyles({
         alignItems: 'center',
       },
     },
+    '&>ul>a': {
+      textDecoration: 'none',
+      '&>div': {
+        fontFamily: "'Open Sans', sans-serif",
+        fontSize: 18,
+        fontWeight: 500,
+        color: 'var(--colorBlack1)',
+        display: 'flex',
+        alignItems: 'center',
+      },
+    },
   },
 });
 MenuMoblie.propTypes = {
@@ -77,6 +89,7 @@ function MenuMoblie(props) {
   const [isOpenDialog, setOpenDialog] = React.useState(false);
   const [isOpenDialogNoti, setOpenDialogNoti] = React.useState(false);
   const [dataNoti, setDataNoti] = useState([]);
+  const { host, pathname, protocol, hostname } = window.location;
   // const [showText, setShowText] = React.useState(false);
   // console.log(dataUser);
   useEffect(() => {
@@ -139,12 +152,22 @@ function MenuMoblie(props) {
         </List>
         <Divider />
         <List>
-          {/* <ListItem button>
-            <ListItemIcon>
-              <NotificationsIcon />
-            </ListItemIcon>
-            <span>Thông báo</span>
-          </ListItem> */}
+          {dataUser.user?.admin && (
+            <a
+              href={`${protocol}//${hostname}:26001/login`}
+              target="_blank"
+              rel="noreferrer"
+              className={classes.linkNone}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <PhonelinkSetupIcon />
+                </ListItemIcon>
+
+                <span>Admin</span>
+              </ListItem>
+            </a>
+          )}
           <ListItem
             button
             onClick={(e) => {
