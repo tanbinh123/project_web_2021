@@ -6,7 +6,7 @@
 
 - Sản phẩm là thành quả của nhóm 2 người là Thành Sang và Tấn Hoàng nhằm mục đích nghiên cứu và học tập
 - Đây là website về bán khóa học trực tuyến
-- Link video demo: https://www.youtube.com/watch?v=zt7FL3AxP-A
+- Link video demo: https://youtu.be/1i04DNCRslM
 
 - | Công việc | Người Làm | Công Nghệ   |
   | --------- | --------- | ----------- |
